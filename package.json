@@ -15,8 +15,10 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@gorhom/bottom-sheet": "^4",
+    "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/drawer": "^6.6.6",
     "@react-navigation/native": "^6.0.2",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "expo": "~49.0.15",
     "expo-blur": "~12.4.1",
@@ -40,8 +42,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
-    "tailwind-merge": "^2.1.0",
-    "@react-native-async-storage/async-storage": "1.18.2"
+    "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
