@@ -18,7 +18,7 @@ export const NAV_THEME = {
 };
 
 export const COMPONENTS = [
-  'accordian',
+  'accordion',
   'alert',
   'alert-dialog',
   'avatar',
