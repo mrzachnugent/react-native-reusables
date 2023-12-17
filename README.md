@@ -2,6 +2,8 @@
 
 Inspired by [ui.shadcn.com](ui.shadcn.com)
 
+https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2b952a36-d164-4ac3-bfe1-5c64d139fc47
+
 ## WIP
 
 Work in progress...
