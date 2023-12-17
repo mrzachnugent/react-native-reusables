@@ -13,9 +13,9 @@ import {
 
 export default function AlertDialogScreen() {
   return (
-    <View className='flex-1 justify-center items-center'>
+    <View className='flex-1 justify-center p-6'>
       <AlertDialog>
-        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogTrigger size='wide'>Open</AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

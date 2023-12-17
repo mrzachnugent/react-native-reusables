@@ -1,3 +1,4 @@
+import * as Haptics from 'expo-haptics';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
 import {
@@ -9,9 +10,7 @@ import {
   View,
 } from 'react-native';
 import { cn } from '~/lib/utils';
-import * as Haptics from 'expo-haptics';
-
-// TODO: Use Button or button variants when added
+import { Button } from './button';
 
 interface AlertDialogProps {
   children: React.ReactNode;
@@ -57,12 +56,12 @@ function useAlertDialogContext() {
 }
 
 const AlertDialogTrigger = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  React.ComponentPropsWithoutRef<typeof Pressable> & {
+  React.ElementRef<typeof Button>,
+  React.ComponentPropsWithoutRef<typeof Button> & {
     textClass?: string;
     children: React.ReactNode;
   }
->(({ className, textClass, children, ...props }, ref) => {
+>(({ textClass, children, ...props }, ref) => {
   const { setVisible } = useAlertDialogContext();
   function onPress() {
     setVisible(true);
@@ -70,18 +69,13 @@ const AlertDialogTrigger = React.forwardRef<
   }
 
   return (
-    <Pressable
-      ref={ref}
-      className={cn('bg-primary rounded-lg p-4', className)}
-      onPress={onPress}
-      {...props}
-    >
+    <Button ref={ref} onPress={onPress} {...props}>
       <Text
         className={cn('text-lg text-primary-foreground font-bold', textClass)}
       >
         {children}
       </Text>
-    </Pressable>
+    </Button>
   );
 });
 
@@ -198,16 +192,16 @@ const AlertDialogFooter = React.forwardRef<
 AlertDialogFooter.displayName = 'AlertDialogFooter';
 
 const AlertDialogCancel = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  React.ComponentPropsWithoutRef<typeof Pressable> & {
+  React.ElementRef<typeof Button>,
+  React.ComponentPropsWithoutRef<typeof Button> & {
     children: React.ReactNode;
     textClass?: string;
   }
->(({ className, textClass, children, ...props }, ref) => {
+>(({ variant = 'outline', textClass, children, ...props }, ref) => {
   const { setVisible } = useAlertDialogContext();
   return (
-    <Pressable
-      className={cn('border border-border rounded-lg px-5 py-3', className)}
+    <Button
+      variant={variant}
       onPress={() => {
         setVisible(false);
       }}
@@ -219,17 +213,17 @@ const AlertDialogCancel = React.forwardRef<
       >
         {children}
       </Text>
-    </Pressable>
+    </Button>
   );
 });
 
 AlertDialogCancel.displayName = 'AlertDialogCancel';
 
-type PressableProps = React.ComponentPropsWithoutRef<typeof Pressable>;
+type ButtonProps = React.ComponentPropsWithoutRef<typeof Button>;
 
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  Omit<PressableProps, 'onPress'> & {
+  Omit<ButtonProps, 'onPress'> & {
     children: React.ReactNode;
     onPress?:
       | ((event: GestureResponderEvent) => void)
@@ -243,16 +237,11 @@ const AlertDialogAction = React.forwardRef<
   }
 
   return (
-    <Pressable
-      className={cn('bg-primary rounded-lg px-5 py-3', className)}
-      onPress={onPressAction}
-      ref={ref}
-      {...props}
-    >
+    <Button onPress={onPressAction} ref={ref} {...props}>
       <Text className='text-lg text-primary-foreground font-bold'>
         {children}
       </Text>
-    </Pressable>
+    </Button>
   );
 });
 
