@@ -70,11 +70,7 @@ const AlertDialogTrigger = React.forwardRef<
 
   return (
     <Button ref={ref} onPress={onPress} {...props}>
-      <Text
-        className={cn('text-lg text-primary-foreground font-bold', textClass)}
-      >
-        {children}
-      </Text>
+      {children}
     </Button>
   );
 });
@@ -183,7 +179,7 @@ const AlertDialogFooter = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <View
-      className={cn('flex-row justify-end gap-5 pt-8', className)}
+      className={cn('flex-row justify-end gap-3 pt-8', className)}
       ref={ref}
       {...props}
     />
@@ -209,11 +205,7 @@ const AlertDialogCancel = React.forwardRef<
       ref={ref}
       {...props}
     >
-      <Text
-        className={cn('text-lg text-muted-foreground font-medium', textClass)}
-      >
-        {children}
-      </Text>
+      {children}
     </Button>
   );
 });
@@ -239,9 +231,7 @@ const AlertDialogAction = React.forwardRef<
 
   return (
     <Button onPress={onPressAction} ref={ref} {...props}>
-      <Text className='text-lg text-primary-foreground font-bold'>
-        {children}
-      </Text>
+      {children}
     </Button>
   );
 });

@@ -13,6 +13,7 @@ import { useColorScheme } from 'nativewind';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import { NAV_THEME } from '~/lib/constants';
+import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -69,11 +70,14 @@ export default function RootLayout() {
     (async () => {
       const theme = await AsyncStorage.getItem('theme');
       if (!theme) {
+        setAndroidNavigationBar(theme === 'dark' ? 'dark' : 'light');
         AsyncStorage.setItem('theme', colorScheme);
         return;
       }
+      setAndroidNavigationBar(theme === 'dark' ? 'dark' : 'light');
       if (theme !== colorScheme) {
         toggleColorScheme();
+        return;
       }
     })();
   }, []);

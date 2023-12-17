@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "example",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "runtimeVersion": {
       "policy": "appVersion"
     },

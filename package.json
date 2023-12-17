@@ -43,7 +43,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
-    "tailwind-merge": "^2.1.0"
+    "tailwind-merge": "^2.1.0",
+    "expo-navigation-bar": "~2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -54,14 +54,14 @@ const buttonTextVariants = cva('font-medium', {
   },
 });
 
-// TODO: Check on Android
+// TODO: Fix android ripple overflow on corners
 const rippleColor = (isThemeDark: boolean) => {
   const secondary = isThemeDark ? 'hsl(240 4% 16%)' : 'hsl(240 5% 96%)';
   return {
-    default: 'black',
-    destructive: 'red',
+    default: isThemeDark ? '#d4d4d8' : '#3f3f46',
+    destructive: isThemeDark ? '#b91c1c' : '#f87171',
     outline: secondary,
-    secondary: isThemeDark ? 'hsl(240 5% 96%)' : 'hsl(240 4% 16%)',
+    secondary: isThemeDark ? '#3f3f46' : '#e4e4e7',
     ghost: secondary,
     link: secondary,
   };
@@ -93,7 +93,7 @@ const Button = React.forwardRef<
         {({ pressed }) => (
           <Text
             className={cn(
-              pressed ? 'opacity-70' : '',
+              pressed ? 'opacity-70' : 'to-zinc-200',
               buttonTextVariants({ variant, size, className: textClass })
             )}
           >

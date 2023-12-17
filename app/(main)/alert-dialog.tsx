@@ -31,7 +31,9 @@ export default function AlertDialogScreen() {
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog>
-        <AlertDialogTrigger size='wide'>Slide In</AlertDialogTrigger>
+        <AlertDialogTrigger size='wide' variant='secondary'>
+          Slide In
+        </AlertDialogTrigger>
         <AlertDialogContent animationType='slide'>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -40,9 +42,9 @@ export default function AlertDialogScreen() {
               account and remove your data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogFooter className='flex-col'>
+            <AlertDialogAction size='wide'>Continue</AlertDialogAction>
+            <AlertDialogCancel size='wide'>Cancel</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

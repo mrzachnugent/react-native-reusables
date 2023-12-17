@@ -9,10 +9,10 @@ export function DrawerToggle() {
 
   return (
     <TouchableOpacity onPress={navigation.toggleDrawer}>
-      <View className='flex-1 aspect-square justify-center items-end'>
+      <View className='flex-1 aspect-square justify-center items-end pt-0.5'>
         <AlignJustify
           className='text-foreground'
-          size={27}
+          size={24}
           strokeWidth={1.25}
         />
       </View>

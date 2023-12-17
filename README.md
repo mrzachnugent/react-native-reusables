@@ -14,3 +14,4 @@ Work in progress...
 - Will require additional libraries
 - Most components to be compatible with Expo Go, while others will require [expo-dev-client](https://docs.expo.dev/develop/development-builds/introduction/)
 - Might offer alternatives for components that cannot be used in Expo Go
+- Focused on mobile development, for web components you can use ui by shadcn. Here's a great example of https://github.com/EvanBacon/expo-shadcn-ui-demo
