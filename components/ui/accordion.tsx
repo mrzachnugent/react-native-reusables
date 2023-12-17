@@ -150,7 +150,7 @@ const AccordionTrigger = React.forwardRef<
           <ChevronDown className='text-foreground' />
         </Animated.View>
       </Pressable>
-      <View className='h-[1] bg-border' />
+      <View className='h-[1] bg-border' role='separator' />
     </>
   );
 });

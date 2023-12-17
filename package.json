@@ -44,7 +44,8 @@
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
     "tailwind-merge": "^2.1.0",
-    "expo-navigation-bar": "~2.3.0"
+    "expo-navigation-bar": "~2.3.0",
+    "@shopify/flash-list": "1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

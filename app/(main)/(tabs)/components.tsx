@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 /**
- * @excludes Aspect-ratio, Hover card
+ * @excludes Aspect-ratio (use `aspect-{n}` class instead ), Hover card (cannot hover on mobile)
  */
 export default function Components() {
   const insets = useSafeAreaInsets();

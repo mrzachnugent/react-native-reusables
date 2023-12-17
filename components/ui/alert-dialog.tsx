@@ -121,7 +121,7 @@ const AlertDialogContent = React.forwardRef<
               'bg-background rounded-2xl p-8 border border-border',
               className
             )}
-            role={'alert'}
+            role={'alertdialog'}
           >
             {children}
           </Pressable>
