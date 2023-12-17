@@ -202,6 +202,7 @@ const AccordionContent = React.forwardRef<
           ref={ref}
           className={cn('pb-4 pt-0', className, 'flex-1')}
           onLayout={onLayout}
+          role='summary'
           {...props}
         >
           {children}
