@@ -6,7 +6,7 @@ import { Pressable, Text } from 'react-native';
 import { useColorScheme } from 'nativewind';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background disabled:opacity-50',
+  'items-center justify-center rounded-md text-sm font-medium ring-offset-background disabled:opacity-50',
   {
     variants: {
       variant: {

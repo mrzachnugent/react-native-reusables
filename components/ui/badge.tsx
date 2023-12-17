@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils';
 import { View, Text } from 'react-native';
 
 const badgeRootVariants = cva(
-  'inline-flex items-center rounded-full border px-2.5 py-0.5',
+  'items-center rounded-full border px-2.5 py-0.5',
   {
     variants: {
       variant: {
