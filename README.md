@@ -2,6 +2,8 @@
 
 Inspired by [ui.shadcn.com](ui.shadcn.com)
 
+https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/blob/main/video/first-demo.mp4
+
 ## WIP
 
 Work in progress...
