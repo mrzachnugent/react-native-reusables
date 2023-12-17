@@ -112,7 +112,8 @@ const AlertDialogContent = React.forwardRef<
               : undefined
           }
           className={cn(
-            'flex-1 bg-zinc-50/80 dark:bg-zinc-900/80 justify-center items-center p-2',
+            'flex-1  justify-center items-center p-2',
+            animationType !== 'slide' && 'bg-zinc-50/80 dark:bg-zinc-900/80',
             overlayClass
           )}
         >
