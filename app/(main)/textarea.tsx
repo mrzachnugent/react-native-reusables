@@ -37,6 +37,7 @@ export default function TextareaScreen() {
       <Label
         className={cn(err && 'text-destructive')}
         onPress={handleOnLabelPress}
+        nativeID='textareaLabel'
       >
         Label
       </Label>
@@ -46,12 +47,15 @@ export default function TextareaScreen() {
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
+        accessibilityLabel='textarea'
+        accessibilityLabelledBy='textareaLabel'
       />
       {err && (
         <Animated.Text
           entering={FadeInDown}
           exiting={FadeOutUp.duration(275)}
           className={'text-destructive text-sm px-0.5 py-2'}
+          role='alert'
         >
           {err}
         </Animated.Text>
