@@ -4,6 +4,7 @@ import { Check } from 'lucide-react-native';
 import { cn } from '~/lib/utils';
 import { Pressable, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 interface CheckboxProps {
   value?: boolean;
@@ -11,6 +12,8 @@ interface CheckboxProps {
   iconClass?: string;
   iconSize?: number;
 }
+
+const AnimatedCheck = Animated.createAnimatedComponent(Check);
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -43,7 +46,12 @@ const Checkbox = React.forwardRef<
       >
         <View />
         {(value || checked) && (
-          <Check size={iconSize} className={cn('text-foreground', iconClass)} />
+          <AnimatedCheck
+            entering={FadeIn.duration(200)}
+            exiting={FadeOut.duration(200)}
+            size={iconSize}
+            className={cn('text-foreground', iconClass)}
+          />
         )}
       </Pressable>
     );
