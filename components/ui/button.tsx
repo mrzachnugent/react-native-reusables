@@ -93,7 +93,7 @@ const Button = React.forwardRef<
         {({ pressed }) => (
           <Text
             className={cn(
-              pressed ? 'opacity-70' : 'to-zinc-200',
+              pressed ? 'opacity-70' : '',
               buttonTextVariants({ variant, size, className: textClass })
             )}
           >

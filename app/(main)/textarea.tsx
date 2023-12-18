@@ -35,7 +35,7 @@ export default function TextareaScreen() {
   return (
     <View className='flex-1 justify-center p-6'>
       <Label
-        className={cn(err && 'text-destructive')}
+        className={cn(err && 'text-destructive', 'pb-2.5')}
         onPress={handleOnLabelPress}
         nativeID='textareaLabel'
       >

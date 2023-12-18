@@ -15,6 +15,9 @@ import { Button } from './button';
 interface AlertDialogProps {
   children: React.ReactNode;
   closeOnOverlayPress?: boolean;
+  defaultOpen?: boolean;
+  open?: boolean;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface AlertDialogContext {
   visible: boolean;
@@ -30,18 +33,34 @@ const AlertDialogContext = React.createContext<AlertDialogContext>(
 const AlertDialog = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> & AlertDialogProps
->(({ closeOnOverlayPress = true, ...props }, ref) => {
-  const nativeID = React.useId();
-  const [visible, setVisible] = React.useState(false);
-  return (
-    <AlertDialogContext.Provider
-      key={`alert-dialog-provider-${nativeID}`}
-      value={{ visible, setVisible, closeOnOverlayPress, nativeID }}
-    >
-      <View ref={ref} {...props} />
-    </AlertDialogContext.Provider>
-  );
-});
+>(
+  (
+    {
+      open,
+      setOpen,
+      closeOnOverlayPress = true,
+      defaultOpen = false,
+      ...props
+    },
+    ref
+  ) => {
+    const nativeID = React.useId();
+    const [visible, setVisible] = React.useState(defaultOpen ?? false);
+    return (
+      <AlertDialogContext.Provider
+        key={`alert-dialog-provider-${nativeID}`}
+        value={{
+          visible: open ?? visible,
+          setVisible: setOpen ?? setVisible,
+          closeOnOverlayPress,
+          nativeID,
+        }}
+      >
+        <View ref={ref} {...props} />
+      </AlertDialogContext.Provider>
+    );
+  }
+);
 
 AlertDialog.displayName = 'AlertDialog';
 

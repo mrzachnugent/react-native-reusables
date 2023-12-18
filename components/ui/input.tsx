@@ -11,7 +11,7 @@ const Input = React.forwardRef<
     <TextInput
       ref={ref}
       className={cn(
-        'rounded-md border border-input bg-muted px-3 text-lg h-12 leading-6 text-foreground items-center  placeholder:text-muted-foreground disabled:opacity-50',
+        'rounded-md border border-input bg-background px-3 text-lg h-12 leading-[1.25] text-foreground items-center  placeholder:text-muted-foreground disabled:opacity-50',
         className
       )}
       placeholderClassName={cn('text-muted-foreground', placeholderClassName)}

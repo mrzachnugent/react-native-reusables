@@ -24,28 +24,33 @@ const CollapsibleContext = React.createContext({} as CollapsibleContext);
 const Collapsible = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> & CollapsibleProps
->(({ open, setOpen, defaultOpen, className, disabled, ...props }, ref) => {
-  const [visible, setVisible] = React.useState(defaultOpen ?? false);
-  const nativeID = React.useId();
+>(
+  (
+    { open, setOpen, defaultOpen, className, disabled = false, ...props },
+    ref
+  ) => {
+    const [visible, setVisible] = React.useState(defaultOpen ?? false);
+    const nativeID = React.useId();
 
-  return (
-    <CollapsibleContext.Provider
-      value={{
-        nativeID,
-        visible: open ?? visible,
-        setVisible: setOpen ?? setVisible,
-        disabled: disabled ?? false,
-      }}
-    >
-      <View
-        ref={ref}
-        role='presentation'
-        className={cn('gap-3', className)}
-        {...props}
-      />
-    </CollapsibleContext.Provider>
-  );
-});
+    return (
+      <CollapsibleContext.Provider
+        value={{
+          nativeID,
+          visible: open ?? visible,
+          setVisible: setOpen ?? setVisible,
+          disabled: disabled ?? false,
+        }}
+      >
+        <View
+          ref={ref}
+          role='presentation'
+          className={cn('gap-3', className)}
+          {...props}
+        />
+      </CollapsibleContext.Provider>
+    );
+  }
+);
 
 function useCollapsibleContext() {
   const context = React.useContext(CollapsibleContext);
