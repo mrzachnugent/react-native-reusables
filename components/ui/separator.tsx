@@ -1,5 +1,21 @@
-import { Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import { cn } from '~/lib/utils';
 
-export function Separator() {
-  return <Text className='text-foreground'>Separator</Text>;
-}
+const Separator = React.forwardRef<
+  React.ElementRef<typeof View>,
+  React.ComponentPropsWithoutRef<typeof View>
+>(({ className, children, ...props }, ref) => {
+  return (
+    <View
+      ref={ref}
+      className={cn('h-[1] bg-border', className)}
+      role='separator'
+      {...props}
+    />
+  );
+});
+
+Separator.displayName = 'Separator';
+
+export { Separator };

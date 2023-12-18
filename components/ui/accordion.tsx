@@ -12,6 +12,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { Separator } from '~/components/ui/separator';
 import { cn } from '~/lib/utils';
 
 const Accordion = React.forwardRef<
@@ -150,7 +151,7 @@ const AccordionTrigger = React.forwardRef<
           <ChevronDown className='text-foreground' />
         </Animated.View>
       </Pressable>
-      <View className='h-[1] bg-border' role='separator' />
+      <Separator />
     </>
   );
 });

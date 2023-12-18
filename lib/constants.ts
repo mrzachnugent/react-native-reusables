@@ -43,7 +43,6 @@ export const COMPONENTS = [
   'popover',
   'progress',
   'radio-group',
-  'scroll-area',
   'select',
   'separator',
   'sheet',
