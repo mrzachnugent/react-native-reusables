@@ -42,7 +42,7 @@ export default function InputScreen() {
       </Label>
       <Input
         ref={inputRef}
-        placeholder='Write some stuff'
+        placeholder='Write some stuff...'
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
