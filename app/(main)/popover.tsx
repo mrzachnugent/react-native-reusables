@@ -15,8 +15,8 @@ const { height } = Dimensions.get('window');
 
 export default function PopoverScreen() {
   return (
-    <ScrollView className='flex-1'>
-      <View style={{ height: height / 3 }} className='pt-32 p-6'>
+    <ScrollView>
+      <View style={{ height: height / 3 }} className='pt-4 p-6'>
         <Popover>
           <PopoverTrigger className='w-full'>
             {({ pressed }) => (
@@ -26,14 +26,11 @@ export default function PopoverScreen() {
                   buttonTextVariants({})
                 )}
               >
-                Open (full width)
+                Bottom-Y (trigger width)
               </Text>
             )}
           </PopoverTrigger>
-          <PopoverContent
-            className='gap-6 '
-            overlayClass='bg-zinc-50/30 dark:bg-zinc-900/30'
-          >
+          <PopoverContent className='gap-6 ' position='bottom'>
             <View>
               <Text className='text-2xl font-bold text-foreground'>
                 Dimensions
@@ -63,7 +60,7 @@ export default function PopoverScreen() {
                   buttonTextVariants({ variant: 'secondary' })
                 )}
               >
-                Open (to the right)
+                Auto-Y (right 300)
               </Text>
             )}
           </PopoverTrigger>

@@ -4,12 +4,13 @@ import { useColorScheme } from 'nativewind';
 import React, { useImperativeHandle } from 'react';
 import {
   GestureResponderEvent,
+  LayoutRectangle,
   Modal,
   Pressable,
   StyleSheet,
   View,
 } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
 import { buttonVariants } from './button';
 
@@ -114,14 +115,13 @@ const PopoverTrigger = React.forwardRef<
 
 PopoverTrigger.displayName = 'PopoverTrigger';
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof Modal>,
   Omit<React.ComponentPropsWithoutRef<typeof Modal>, 'width'> & {
     overlayClass?: string;
     width?: 'auto' | number;
     align?: 'left' | 'right';
+    position?: 'auto' | 'top' | 'bottom';
   }
 >(
   (
@@ -131,13 +131,18 @@ const PopoverContent = React.forwardRef<
       animationType = 'fade',
       width = 'auto',
       align = 'left',
+      position = 'auto',
       overlayClass,
+      style,
       ...props
     },
     ref
   ) => {
+    const insets = useSafeAreaInsets();
     const { colorScheme } = useColorScheme();
     const { triggerPosition, setTriggerPosition } = usePopoverContext();
+    const [contentLayout, setContentLayout] =
+      React.useState<LayoutRectangle | null>(null);
 
     return (
       <Modal
@@ -148,6 +153,7 @@ const PopoverContent = React.forwardRef<
         aria-modal
         onRequestClose={() => {
           setTriggerPosition(null);
+          setContentLayout(null);
         }}
         {...props}
       >
@@ -155,33 +161,38 @@ const PopoverContent = React.forwardRef<
           aria-hidden={!!triggerPosition}
           onPressOut={() => {
             setTriggerPosition(null);
+            setContentLayout(null);
           }}
-          className={cn('flex-1', overlayClass)}
+          className={cn(
+            'flex-1 bg-zinc-50/30 dark:bg-zinc-900/30',
+            overlayClass
+          )}
         >
           {!!triggerPosition && (
-            <AnimatedPressable
-              entering={FadeIn}
+            <Pressable
+              onLayout={(event) => {
+                setContentLayout(event.nativeEvent.layout);
+              }}
               style={[
-                {
-                  top: triggerPosition.pageY + triggerPosition.height + 6,
-                  left:
-                    align === 'left'
-                      ? triggerPosition.pageX
-                      : triggerPosition.pageX +
-                        triggerPosition.width -
-                        (width === 'auto' ? triggerPosition.width : width),
-                  width: width === 'auto' ? triggerPosition.width : width,
-                  maxWidth: width,
-                },
+                getContentPosition({
+                  align,
+                  contentLayout,
+                  insetsTop: insets.top,
+                  position,
+                  triggerPosition,
+                  width,
+                }),
                 colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+                style,
               ]}
               className={cn(
                 'bg-popover rounded-2xl p-8 border border-border',
+                !contentLayout && 'opacity-0',
                 className
               )}
             >
               {children}
-            </AnimatedPressable>
+            </Pressable>
           )}
         </Pressable>
       </Modal>
@@ -192,6 +203,45 @@ const PopoverContent = React.forwardRef<
 PopoverContent.displayName = 'PopoverContent';
 
 export { Popover, PopoverContent, PopoverTrigger };
+
+interface GetContentPositionArgs {
+  position: 'auto' | 'top' | 'bottom';
+  align: 'left' | 'right';
+  triggerPosition: LayoutPosition;
+  contentLayout: LayoutRectangle | null;
+  insetsTop: number;
+  width: number | 'auto';
+}
+
+function getContentPosition({
+  align,
+  contentLayout,
+  insetsTop,
+  position,
+  triggerPosition,
+  width,
+}: GetContentPositionArgs) {
+  const positionTop = triggerPosition?.pageY - 6 - (contentLayout?.height ?? 0);
+  const positionBottom = triggerPosition.pageY + triggerPosition.height + 6;
+  return {
+    top:
+      position === 'auto'
+        ? triggerPosition.pageY > (contentLayout?.height ?? 0) + insetsTop
+          ? positionTop
+          : positionBottom
+        : position === 'top'
+        ? positionTop
+        : positionBottom,
+    left:
+      align === 'left'
+        ? triggerPosition?.pageX
+        : triggerPosition?.pageX +
+          triggerPosition?.width -
+          (width === 'auto' ? triggerPosition?.width : width),
+    width: width === 'auto' ? triggerPosition?.width : width,
+    maxWidth: width,
+  };
+}
 
 const styles = StyleSheet.create({
   shadowLight: {
