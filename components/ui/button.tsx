@@ -90,16 +90,20 @@ const Button = React.forwardRef<
         }}
         {...props}
       >
-        {({ pressed }) => (
-          <Text
-            className={cn(
-              pressed ? 'opacity-70' : '',
-              buttonTextVariants({ variant, size, className: textClass })
-            )}
-          >
-            {children}
-          </Text>
-        )}
+        {({ pressed }) =>
+          typeof children === 'string' ? (
+            <Text
+              className={cn(
+                pressed ? 'opacity-70' : '',
+                buttonTextVariants({ variant, size, className: textClass })
+              )}
+            >
+              {children}
+            </Text>
+          ) : (
+            children
+          )
+        }
       </Pressable>
     );
   }
