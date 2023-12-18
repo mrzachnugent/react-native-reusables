@@ -1,10 +1,24 @@
-import { View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Slider } from '~/components/ui/slider';
 
 export default function SliderScreen() {
+  const [value, setValue] = React.useState(0.5);
+
   return (
-    <View className='flex-1 justify-center items-center'>
-      <Slider />
+    <View className='flex-1 justify-center p-6 gap-5'>
+      <Slider
+        accessibilityRole='adjustable'
+        value={value}
+        onValueChange={setValue}
+        aria-labelledby='sliderLabel'
+      />
+      <Text
+        nativeID='sliderLabel'
+        className='text-5xl text-center text-foreground'
+      >
+        {Math.round(value * 100)}
+      </Text>
     </View>
   );
 }
