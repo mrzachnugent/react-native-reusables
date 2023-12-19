@@ -4,14 +4,21 @@ import { ListRenderItemInfo, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   BottomSheet,
+  BottomSheetContent,
   BottomSheetFlatList,
+  BottomSheetHeader,
+  BottomSheetOpenTrigger,
   BottomSheetTextInput,
   useBottomSheet,
 } from '~/components/ui/bottom-sheet';
-import { Button, buttonTextVariants } from '~/components/ui/button';
+import {
+  Button,
+  buttonTextVariants,
+  buttonVariants,
+} from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
-const HEADER_HEIGHT = 56;
+const HEADER_HEIGHT = 130;
 
 interface Option {
   label: string;
@@ -65,7 +72,7 @@ const Combobox = React.forwardRef<
           <Button
             variant='ghost'
             size='lg'
-            className='items-center flex-row justify-between px-3 py-5'
+            className='items-center flex-row justify-between px-3 py-4'
             style={{ minHeight: 70 }}
             onPress={() => {
               setSelectedItem((prev) => {
@@ -84,7 +91,7 @@ const Combobox = React.forwardRef<
               </Text>
             </View>
             {selectedItem?.value === listItem.value && (
-              <Check size={27} className={'text-foreground px-6 mt-1.5'} />
+              <Check size={24} className={'text-foreground px-6 mt-1.5'} />
             )}
           </Button>
         );
@@ -97,7 +104,6 @@ const Combobox = React.forwardRef<
       if (!firstItem) return;
       setSelectedItem(firstItem);
       bottomSheet.close();
-      setSearch('');
     }
 
     function onSearchIconPress() {
@@ -110,73 +116,89 @@ const Combobox = React.forwardRef<
 
     return (
       <View className='flex-1 justify-center items-center'>
-        <Button
-          ref={ref}
-          onPress={() => {
-            bottomSheet.open();
-          }}
-          variant={variant}
-          className={cn('flex-row', className)}
-          role='combobox'
-          {...props}
-        >
-          <View className='flex-1 flex-row justify-between'>
-            <Text
-              className={buttonTextVariants({
-                variant,
-                size,
-                className: cn(!selectedItem && 'opacity-80', textClass),
-              })}
-              numberOfLines={1}
-            >
-              {selectedItem ? selectedItem.label : placeholder}
-            </Text>
-            <ChevronsUpDown className='text-foreground ml-2 opacity-50' />
-          </View>
-        </Button>
-        <BottomSheet ref={bottomSheet.ref}>
-          <View className='relative  mx-4 mt-4'>
-            <BottomSheetTextInput
-              role='searchbox'
-              ref={inputRef}
-              className='pl-12'
-              value={search}
-              onChangeText={setSearch}
-              autoFocus
-              onSubmitEditing={onSubmitEditing}
-              returnKeyType='next'
-              clearButtonMode='while-editing'
-              {...inputProps}
+        <BottomSheet>
+          <BottomSheetOpenTrigger
+            ref={ref}
+            className={buttonVariants({
+              variant,
+              size,
+              className: cn('flex-row w-full', className),
+            })}
+            role='combobox'
+            {...props}
+          >
+            <View className='flex-1 flex-row justify-between'>
+              <Text
+                className={buttonTextVariants({
+                  variant,
+                  size,
+                  className: cn(!selectedItem && 'opacity-80', textClass),
+                })}
+                numberOfLines={1}
+              >
+                {selectedItem ? selectedItem.label : placeholder}
+              </Text>
+              <ChevronsUpDown className='text-foreground ml-2 opacity-50' />
+            </View>
+          </BottomSheetOpenTrigger>
+          <BottomSheetContent
+            ref={bottomSheet.ref}
+            onDismiss={() => {
+              setSearch('');
+            }}
+          >
+            <BottomSheetHeader className='border-b-0'>
+              <Text className='text-foreground text-xl font-bold text-center px-0.5'>
+                {placeholder}
+              </Text>
+            </BottomSheetHeader>
+            <View className='relative px-4 border-b border-border pb-4'>
+              <BottomSheetTextInput
+                role='searchbox'
+                ref={inputRef}
+                className='pl-12'
+                value={search}
+                onChangeText={setSearch}
+                onSubmitEditing={onSubmitEditing}
+                returnKeyType='next'
+                clearButtonMode='while-editing'
+                placeholder='Search...'
+                {...inputProps}
+              />
+              <Button
+                variant={'ghost'}
+                size='sm'
+                className='absolute left-4 top-2.5'
+                onPress={onSearchIconPress}
+              >
+                <Search size={18} className='text-foreground opacity-50' />
+              </Button>
+            </View>
+            <BottomSheetFlatList
+              data={listItems}
+              contentContainerStyle={{
+                paddingBottom: insets.bottom + HEADER_HEIGHT,
+              }}
+              renderItem={renderItem}
+              keyExtractor={(item) => (item as Option).value}
+              className={'px-4'}
+              keyboardShouldPersistTaps='handled'
+              ListEmptyComponent={() => {
+                return (
+                  <View
+                    className='items-center flex-row justify-center flex-1  px-3 py-5'
+                    style={{ minHeight: 70 }}
+                  >
+                    <Text
+                      className={'text-muted-foreground text-xl text-center'}
+                    >
+                      {emptyText}
+                    </Text>
+                  </View>
+                );
+              }}
             />
-            <Button
-              variant={'ghost'}
-              size='sm'
-              className='absolute left-1 top-2.5'
-              onPress={onSearchIconPress}
-            >
-              <Search size={18} className='text-foreground opacity-50' />
-            </Button>
-          </View>
-          <BottomSheetFlatList
-            data={listItems}
-            contentContainerStyle={{
-              paddingBottom: insets.bottom + HEADER_HEIGHT,
-            }}
-            renderItem={renderItem}
-            className={'px-4'}
-            ListEmptyComponent={() => {
-              return (
-                <View
-                  className='items-center flex-row justify-center flex-1  px-3 py-5'
-                  style={{ minHeight: 70 }}
-                >
-                  <Text className={'text-muted-foreground text-xl text-center'}>
-                    {emptyText}
-                  </Text>
-                </View>
-              );
-            }}
-          />
+          </BottomSheetContent>
         </BottomSheet>
       </View>
     );

@@ -6,6 +6,7 @@ import {
   GestureResponderEvent,
   LayoutRectangle,
   Modal,
+  Platform,
   Pressable,
   StyleSheet,
   View,
@@ -221,8 +222,16 @@ function getContentPosition({
   triggerPosition,
   width,
 }: GetContentPositionArgs) {
-  const positionTop = triggerPosition?.pageY - 6 - (contentLayout?.height ?? 0);
-  const positionBottom = triggerPosition.pageY + triggerPosition.height + 6;
+  const positionTop =
+    triggerPosition?.pageY -
+    6 -
+    (contentLayout?.height ?? 0) -
+    (Platform.OS === 'android' ? insetsTop : 0);
+  const positionBottom =
+    triggerPosition.pageY +
+    triggerPosition.height +
+    6 -
+    (Platform.OS === 'android' ? insetsTop : 0);
   return {
     top:
       position === 'auto'

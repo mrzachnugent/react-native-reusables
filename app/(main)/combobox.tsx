@@ -27,11 +27,7 @@ const frameworks = [
 export default function ComboboxScreen() {
   return (
     <View className='flex-1 justify-center items-center p-6'>
-      <Combobox
-        placeholder='Select framework'
-        items={frameworks}
-        inputProps={{ placeholder: 'Search a framework...' }}
-      />
+      <Combobox placeholder='Select framework' items={frameworks} />
     </View>
   );
 }

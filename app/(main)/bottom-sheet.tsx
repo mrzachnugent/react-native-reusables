@@ -1,16 +1,19 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import {
   BottomSheet,
+  BottomSheetCloseTrigger,
+  BottomSheetContent,
+  BottomSheetHeader,
+  BottomSheetOpenTrigger,
   BottomSheetTextInput,
   BottomSheetView,
-  useBottomSheet,
 } from '~/components/ui/bottom-sheet';
-import { Button } from '~/components/ui/button';
+import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
 import { Label } from '~/components/ui/label';
+import { cn } from '~/lib/utils';
 
 export default function BottomSheetScreen() {
-  const bottomSheet = useBottomSheet();
   const nameInputRef =
     React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
   const usernameInputRef =
@@ -28,54 +31,52 @@ export default function BottomSheetScreen() {
 
   return (
     <View className='flex-1 justify-center items-center'>
-      <Button
-        onPress={() => {
-          bottomSheet.open();
-        }}
-      >
-        Open
-      </Button>
-      <BottomSheet ref={bottomSheet.ref}>
-        <BottomSheetView className='gap-5'>
-          <View className='pt-2'>
-            <Text className='text-foreground text-3xl font-bold text-center pb-1'>
+      <BottomSheet>
+        <BottomSheetOpenTrigger className={buttonVariants()}>
+          <Text className={buttonTextVariants()}>Open</Text>
+        </BottomSheetOpenTrigger>
+        <BottomSheetContent>
+          <BottomSheetHeader>
+            <Text className='text-foreground text-xl font-bold text-center pb-1'>
               Edit your profile
             </Text>
-            <Text className='text-base text-muted-foreground text-center px-12'>
-              Make changes to your profile here. Click save when you're done.
-            </Text>
-          </View>
-          <View className='pb-2 gap-6'>
-            <View>
-              <Label
-                className={'pb-2.5'}
-                onPress={handleOnLabelPress(nameInputRef)}
-              >
-                Name
-              </Label>
-              <BottomSheetTextInput
-                defaultValue='Pedro Duarte'
-                autoFocus
-                ref={nameInputRef}
-              />
+          </BottomSheetHeader>
+          <BottomSheetView className='gap-5 pt-6'>
+            <View className='pb-2 gap-6'>
+              <View>
+                <Label
+                  className={'pb-2.5'}
+                  onPress={handleOnLabelPress(nameInputRef)}
+                >
+                  Name
+                </Label>
+                <BottomSheetTextInput
+                  defaultValue='Pedro Duarte'
+                  ref={nameInputRef}
+                />
+              </View>
+              <View>
+                <Label
+                  className={'pb-2.5'}
+                  onPress={handleOnLabelPress(usernameInputRef)}
+                >
+                  Username
+                </Label>
+                <BottomSheetTextInput
+                  defaultValue='@peduarte'
+                  ref={usernameInputRef}
+                />
+              </View>
             </View>
-            <View>
-              <Label
-                className={'pb-2.5'}
-                onPress={handleOnLabelPress(usernameInputRef)}
+            <View className={cn(Platform.OS === 'android' && 'pb-2')}>
+              <BottomSheetCloseTrigger
+                className={buttonVariants({ size: 'sm' })}
               >
-                Username
-              </Label>
-              <BottomSheetTextInput
-                defaultValue='@peduarte'
-                ref={usernameInputRef}
-              />
+                <Text className={buttonTextVariants()}>Save Changes</Text>
+              </BottomSheetCloseTrigger>
             </View>
-          </View>
-          <View className='py-4'>
-            <Button size='sm'>Save Changes</Button>
-          </View>
-        </BottomSheetView>
+          </BottomSheetView>
+        </BottomSheetContent>
       </BottomSheet>
     </View>
   );

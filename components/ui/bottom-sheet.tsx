@@ -1,23 +1,62 @@
-import type { BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
+import type {
+  BottomSheetBackdropProps,
+  BottomSheetFooterProps as GBottomSheetFooterProps,
+} from '@gorhom/bottom-sheet';
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetFlatList as GBottomSheetFlatList,
   BottomSheetView as GBottomSheetView,
   BottomSheetTextInput as GBottomSheetTextInput,
+  BottomSheetFooter as GBottomSheetFooter,
+  useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
-import { View } from 'react-native';
+import { GestureResponderEvent, Pressable, View } from 'react-native';
 import { useColorScheme } from 'nativewind';
-import React, { useCallback } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { useCallback, useImperativeHandle } from 'react';
+import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NAV_THEME } from '~/lib/constants';
 import { cn } from '~/lib/utils';
+import { Button } from './button';
+import { X } from 'lucide-react-native';
+import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+
+type BottomSheetRef = React.ElementRef<typeof View>;
+type BottomSheetProps = React.ComponentPropsWithoutRef<typeof View>;
+
+interface BottomSheetContext {
+  sheetRef: React.RefObject<BottomSheetModal>;
+}
+
+const BottomSheetContext = React.createContext({} as BottomSheetContext);
+
+const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
+  ({ ...props }, ref) => {
+    const sheetRef = React.useRef<BottomSheetModal>(null);
+
+    return (
+      <BottomSheetContext.Provider value={{ sheetRef: sheetRef }}>
+        <View ref={ref} {...props} />
+      </BottomSheetContext.Provider>
+    );
+  }
+);
+
+function useBottomSheetContext() {
+  const context = React.useContext(BottomSheetContext);
+  if (!context) {
+    throw new Error(
+      'BottomSheet compound components cannot be rendered outside the BottomSheet component'
+    );
+  }
+  return context;
+}
 
 const CLOSED_INDEX = -1;
 
-type BottomSheetRef = React.ElementRef<typeof BottomSheetModal>;
+type BottomSheetContentRef = React.ElementRef<typeof BottomSheetModal>;
 
-type BottomSheetProps = Omit<
+type BottomSheetContentProps = Omit<
   React.ComponentPropsWithoutRef<typeof BottomSheetModal>,
   'backdropComponent'
 > & {
@@ -26,7 +65,10 @@ type BottomSheetProps = Omit<
   >;
 };
 
-const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
+const BottomSheetContent = React.forwardRef<
+  BottomSheetContentRef,
+  BottomSheetContentProps
+>(
   (
     {
       enablePanDownToClose = true,
@@ -34,12 +76,26 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
       index = 0,
       backdropProps,
       backgroundStyle,
+      android_keyboardInputMode = 'adjustResize',
       ...props
     },
     ref
   ) => {
     const insets = useSafeAreaInsets();
     const { colorScheme } = useColorScheme();
+    const { sheetRef } = useBottomSheetContext();
+
+    useImperativeHandle(
+      ref,
+      () => {
+        if (!sheetRef.current) {
+          return {} as BottomSheetModalMethods;
+        }
+        return sheetRef.current;
+      },
+      [sheetRef.current]
+    );
+
     const renderBackdrop = useCallback(
       (props: BottomSheetBackdropProps) => {
         const {
@@ -67,7 +123,7 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
 
     return (
       <BottomSheetModal
-        ref={ref}
+        ref={sheetRef}
         index={0}
         enablePanDownToClose={enablePanDownToClose}
         backdropComponent={renderBackdrop}
@@ -80,11 +136,38 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
           backgroundColor: NAV_THEME[colorScheme].text,
         }}
         topInset={insets.top}
+        android_keyboardInputMode={android_keyboardInputMode}
         {...props}
       />
     );
   }
 );
+
+const BottomSheetOpenTrigger = React.forwardRef<
+  React.ElementRef<typeof Pressable>,
+  React.ComponentPropsWithoutRef<typeof Pressable>
+>(({ onPress, ...props }, ref) => {
+  const { sheetRef } = useBottomSheetContext();
+  function handleOnPress(ev: GestureResponderEvent) {
+    sheetRef.current?.present();
+    onPress?.(ev);
+  }
+  return <Pressable ref={ref} onPress={handleOnPress} {...props} />;
+});
+
+const BottomSheetCloseTrigger = React.forwardRef<
+  React.ElementRef<typeof Pressable>,
+  React.ComponentPropsWithoutRef<typeof Pressable>
+>(({ onPress, ...props }, ref) => {
+  const { dismiss } = useBottomSheetModal();
+  function handleOnPress(ev: GestureResponderEvent) {
+    dismiss();
+    onPress?.(ev);
+  }
+  return <Pressable ref={ref} onPress={handleOnPress} {...props} />;
+});
+
+const ADDED_INSET = 60; // https://github.com/gorhom/react-native-bottom-sheet/issues/294
 
 type BottomSheetViewProps = React.ComponentPropsWithoutRef<
   typeof GBottomSheetView
@@ -93,15 +176,16 @@ type BottomSheetViewProps = React.ComponentPropsWithoutRef<
 function BottomSheetView({
   className,
   children,
-  insetBottom,
   ...props
-}: BottomSheetViewProps & { insetBottom?: number }) {
+}: BottomSheetViewProps) {
   const insets = useSafeAreaInsets();
-
   return (
-    <GBottomSheetView className={cn(`p-4`, className)} {...props}>
+    <GBottomSheetView
+      style={{ paddingBottom: insets.bottom + ADDED_INSET }}
+      className={cn(`px-4`, className)}
+      {...props}
+    >
       {children}
-      <View style={{ height: insetBottom ?? insets.bottom }} />
     </GBottomSheetView>
   );
 }
@@ -141,13 +225,69 @@ const BottomSheetFlatList = React.forwardRef<
       ref={ref}
       contentContainerStyle={[{ paddingBottom: insets.bottom }]}
       className={cn('py-4', className)}
+      keyboardShouldPersistTaps='handled'
       {...props}
     />
   );
 });
 
+type BottomSheetHeaderRef = React.ElementRef<typeof View>;
+type BottomSheetHeaderProps = React.ComponentPropsWithoutRef<typeof View>;
+const BottomSheetHeader = React.forwardRef<
+  BottomSheetHeaderRef,
+  BottomSheetHeaderProps
+>(({ className, children, ...props }, ref) => {
+  const { dismiss } = useBottomSheetModal();
+  function close() {
+    dismiss();
+  }
+  return (
+    <View
+      ref={ref}
+      className={cn(
+        'border-b border-border flex-row items-center justify-between pl-4',
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <Button onPress={close} variant='ghost' className='pr-4'>
+        <X className='text-muted-foreground' size={24} />
+      </Button>
+    </View>
+  );
+});
+
+type BottomSheetFooterRef = React.ElementRef<typeof View>;
+type BottomSheetFooterProps = React.ComponentPropsWithoutRef<typeof View> & {
+  bottomSheetFooterProps: GBottomSheetFooterProps;
+  children?: React.ReactNode;
+};
+
+/**
+ * To be used in a useCallback function as a props to BottomSheetContent
+ */
+const BottomSheetFooter = React.forwardRef<
+  BottomSheetFooterRef,
+  BottomSheetFooterProps
+>(({ bottomSheetFooterProps, children, className, ...props }, ref) => {
+  const insets = useSafeAreaInsets();
+  return (
+    <GBottomSheetFooter {...bottomSheetFooterProps}>
+      <View
+        ref={ref}
+        style={{ paddingBottom: insets.bottom + 6 }}
+        className={cn('px-4 pt-1.5', className)}
+        {...props}
+      >
+        {children}
+      </View>
+    </GBottomSheetFooter>
+  );
+});
+
 function useBottomSheet() {
-  const ref = React.useRef<BottomSheetRef>(null);
+  const ref = React.useRef<BottomSheetContentRef>(null);
 
   const open = useCallback(() => {
     ref.current?.present();
@@ -162,7 +302,12 @@ function useBottomSheet() {
 
 export {
   BottomSheet,
+  BottomSheetOpenTrigger,
+  BottomSheetCloseTrigger,
+  BottomSheetContent,
   BottomSheetFlatList,
+  BottomSheetHeader,
+  BottomSheetFooter,
   BottomSheetView,
   BottomSheetTextInput,
   useBottomSheet,

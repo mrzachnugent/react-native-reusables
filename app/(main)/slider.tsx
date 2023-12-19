@@ -7,18 +7,18 @@ export default function SliderScreen() {
 
   return (
     <View className='flex-1 justify-center p-6 gap-5'>
-      <Slider
-        accessibilityRole='adjustable'
-        value={value}
-        onValueChange={setValue}
-        aria-labelledby='sliderLabel'
-      />
       <Text
         nativeID='sliderLabel'
         className='text-5xl text-center text-foreground'
       >
         {Math.round(value * 100)}
       </Text>
+      <Slider
+        accessibilityRole='adjustable'
+        value={value}
+        onValueChange={setValue}
+        aria-labelledby='sliderLabel'
+      />
     </View>
   );
 }
