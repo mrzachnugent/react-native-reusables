@@ -7,7 +7,7 @@ export default function CheckboxScreen() {
   const [isChecked, setIsChecked] = React.useState(false);
   return (
     <View className='flex-1 justify-center items-center gap-8'>
-      <View className='flex-row gap-3 items-center'>
+      <View className='flex-row gap-6 items-center'>
         <Label
           onPress={() => {
             setIsChecked((prev) => !prev);

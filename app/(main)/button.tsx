@@ -12,13 +12,13 @@ export default function ButtonScreen() {
         Secondary
       </Button>
       <Button variant='outline' size='lg'>
-        Outline
+        Outline lg
       </Button>
       <Button variant='ghost' size='lg'>
-        Ghost
+        Ghost lg
       </Button>
       <Button variant='link' size='sm'>
-        Link
+        Link sm
       </Button>
     </View>
   );
