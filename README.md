@@ -17,6 +17,7 @@ Inspired by [ui.shadcn.com](ui.shadcn.com) with the purpose to be used as a refe
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/23e3ea79-9745-4e71-8fa8-820c33cd6d92" width="250px" />
 - Alert Dialog
   <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8f-bbfb-4bce-ae6f-05b448f218ab
 - Avatar
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/3637197a-497d-4c41-b497-89d0da54bef2" width="250px" />
