@@ -1,5 +1,6 @@
+import React from 'react';
 import { View } from 'react-native';
-import { Combobox } from '~/components/ui/combobox';
+import { Combobox, ComboboxOption } from '~/components/ui/combobox';
 
 const frameworks = [
   {
@@ -25,9 +26,17 @@ const frameworks = [
 ];
 
 export default function ComboboxScreen() {
+  const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
+    null
+  );
   return (
     <View className='flex-1 justify-center items-center p-6'>
-      <Combobox placeholder='Select framework' items={frameworks} />
+      <Combobox
+        selectedItem={selectedItem}
+        onSelectedItemChange={setSelectedItem}
+        placeholder='Select framework'
+        items={frameworks}
+      />
     </View>
   );
 }

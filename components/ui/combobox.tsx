@@ -20,7 +20,7 @@ import { cn } from '~/lib/utils';
 
 const HEADER_HEIGHT = 130;
 
-interface Option {
+interface ComboboxOption {
   label: string;
   value: string;
 }
@@ -28,10 +28,15 @@ interface Option {
 const Combobox = React.forwardRef<
   React.ElementRef<typeof Button>,
   Omit<React.ComponentPropsWithoutRef<typeof Button>, 'children'> & {
-    items: Option[];
+    items: ComboboxOption[];
     placeholder?: string;
     inputProps?: React.ComponentPropsWithoutRef<typeof BottomSheetTextInput>;
     emptyText?: string;
+    defaultSelectedItem?: ComboboxOption | null;
+    selectedItem?: ComboboxOption | null;
+    onSelectedItemChange?: React.Dispatch<
+      React.SetStateAction<ComboboxOption | null>
+    >;
   }
 >(
   (
@@ -44,13 +49,17 @@ const Combobox = React.forwardRef<
       placeholder,
       items,
       emptyText = 'Nothing found...',
+      defaultSelectedItem = null,
+      selectedItem: selectedItemProp,
+      onSelectedItemChange,
       ...props
     },
     ref
   ) => {
     const insets = useSafeAreaInsets();
     const [search, setSearch] = React.useState('');
-    const [selectedItem, setSelectedItem] = React.useState<Option | null>(null);
+    const [selectedItem, setSelectedItem] =
+      React.useState<ComboboxOption | null>(defaultSelectedItem);
     const bottomSheet = useBottomSheet();
     const inputRef =
       React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
@@ -65,9 +74,23 @@ const Combobox = React.forwardRef<
         : items;
     }, [items, search]);
 
+    function onItemChange(listItem: ComboboxOption) {
+      return (prev: ComboboxOption | null) => {
+        if (prev?.value === listItem.value) {
+          return null;
+        }
+        setSearch('');
+        bottomSheet.close();
+        return listItem;
+      };
+    }
+
     const renderItem = React.useCallback(
       ({ item }: ListRenderItemInfo<unknown>) => {
-        const listItem = item as Option;
+        const listItem = item as ComboboxOption;
+        const isSelected = onSelectedItemChange
+          ? selectedItemProp?.value === listItem.value
+          : selectedItem?.value === listItem.value;
         return (
           <Button
             variant='ghost'
@@ -75,14 +98,11 @@ const Combobox = React.forwardRef<
             className='items-center flex-row justify-between px-3 py-4'
             style={{ minHeight: 70 }}
             onPress={() => {
-              setSelectedItem((prev) => {
-                if (prev?.value === listItem.value) {
-                  return null;
-                }
-                setSearch('');
-                bottomSheet.close();
-                return listItem;
-              });
+              if (onSelectedItemChange) {
+                onSelectedItemChange(onItemChange(listItem));
+                return;
+              }
+              setSelectedItem(onItemChange(listItem));
             }}
           >
             <View className='flex-row flex-1'>
@@ -90,19 +110,23 @@ const Combobox = React.forwardRef<
                 {listItem.label}
               </Text>
             </View>
-            {selectedItem?.value === listItem.value && (
+            {isSelected && (
               <Check size={24} className={'text-foreground px-6 mt-1.5'} />
             )}
           </Button>
         );
       },
-      [selectedItem]
+      [selectedItem, selectedItemProp]
     );
 
     function onSubmitEditing() {
       const firstItem = listItems[0];
       if (!firstItem) return;
-      setSelectedItem(firstItem);
+      if (onSelectedItemChange) {
+        onSelectedItemChange(firstItem);
+      } else {
+        setSelectedItem(firstItem);
+      }
       bottomSheet.close();
     }
 
@@ -113,6 +137,8 @@ const Combobox = React.forwardRef<
         input.focus();
       }
     }
+
+    const itemSelected = onSelectedItemChange ? selectedItemProp : selectedItem;
 
     return (
       <View className='flex-1 justify-center items-center'>
@@ -132,11 +158,11 @@ const Combobox = React.forwardRef<
                 className={buttonTextVariants({
                   variant,
                   size,
-                  className: cn(!selectedItem && 'opacity-80', textClass),
+                  className: cn(!itemSelected && 'opacity-80', textClass),
                 })}
                 numberOfLines={1}
               >
-                {selectedItem ? selectedItem.label : placeholder}
+                {itemSelected ? itemSelected.label : placeholder}
               </Text>
               <ChevronsUpDown className='text-foreground ml-2 opacity-50' />
             </View>
@@ -180,7 +206,7 @@ const Combobox = React.forwardRef<
                 paddingBottom: insets.bottom + HEADER_HEIGHT,
               }}
               renderItem={renderItem}
-              keyExtractor={(item) => (item as Option).value}
+              keyExtractor={(item) => (item as ComboboxOption).value}
               className={'px-4'}
               keyboardShouldPersistTaps='handled'
               ListEmptyComponent={() => {
@@ -207,4 +233,4 @@ const Combobox = React.forwardRef<
 
 Combobox.displayName = 'Combobox';
 
-export { Combobox };
+export { Combobox, type ComboboxOption };

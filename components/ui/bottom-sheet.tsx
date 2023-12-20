@@ -6,20 +6,20 @@ import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetFlatList as GBottomSheetFlatList,
-  BottomSheetView as GBottomSheetView,
-  BottomSheetTextInput as GBottomSheetTextInput,
   BottomSheetFooter as GBottomSheetFooter,
+  BottomSheetTextInput as GBottomSheetTextInput,
+  BottomSheetView as GBottomSheetView,
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
+import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { X } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import React, { useCallback, useImperativeHandle } from 'react';
-import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { GestureResponderEvent, Pressable, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NAV_THEME } from '~/lib/constants';
 import { cn } from '~/lib/utils';
 import { Button } from './button';
-import { X } from 'lucide-react-native';
-import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 
 type BottomSheetRef = React.ElementRef<typeof View>;
 type BottomSheetProps = React.ComponentPropsWithoutRef<typeof View>;
@@ -302,13 +302,13 @@ function useBottomSheet() {
 
 export {
   BottomSheet,
-  BottomSheetOpenTrigger,
   BottomSheetCloseTrigger,
   BottomSheetContent,
   BottomSheetFlatList,
-  BottomSheetHeader,
   BottomSheetFooter,
-  BottomSheetView,
+  BottomSheetHeader,
+  BottomSheetOpenTrigger,
   BottomSheetTextInput,
+  BottomSheetView,
   useBottomSheet,
 };
