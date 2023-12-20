@@ -10,8 +10,8 @@ export default function TabsLayout() {
         name='index'
         options={{
           title: 'Example',
-          tabBarIcon(props) {
-            return <LayoutPanelLeft {...props} />;
+          tabBarIcon({color, size}) {
+            return <LayoutPanelLeft color={color} size={size} />;
           },
         }}
       />
@@ -19,8 +19,8 @@ export default function TabsLayout() {
         name='components'
         options={{
           title: 'Components',
-          tabBarIcon(props) {
-            return <MenuSquare {...props} />;
+          tabBarIcon({color, size}) {
+            return <MenuSquare color={color} size={size} />;
           },
         }}
       />
