@@ -15,7 +15,7 @@ export default function AlertDialogScreen() {
   return (
     <View className='flex-1 justify-center p-8 gap-12'>
       <AlertDialog>
-        <AlertDialogTrigger size='wide'>Fade In</AlertDialogTrigger>
+        <AlertDialogTrigger className='w-full'>Fade In</AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -31,7 +31,7 @@ export default function AlertDialogScreen() {
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog>
-        <AlertDialogTrigger size='wide' variant='secondary'>
+        <AlertDialogTrigger className='w-full' variant='secondary'>
           Slide In
         </AlertDialogTrigger>
         <AlertDialogContent animationType='slide'>
@@ -43,8 +43,8 @@ export default function AlertDialogScreen() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className='flex-col'>
-            <AlertDialogAction size='wide'>Continue</AlertDialogAction>
-            <AlertDialogCancel size='wide'>Cancel</AlertDialogCancel>
+            <AlertDialogAction className='w-full'>Continue</AlertDialogAction>
+            <AlertDialogCancel className='w-full'>Cancel</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -6,7 +6,7 @@ import { Pressable, Text } from 'react-native';
 import { useColorScheme } from 'nativewind';
 
 const buttonVariants = cva(
-  'items-center justify-center rounded-md text-sm font-medium ring-offset-background disabled:opacity-50',
+  'flex-row items-center justify-center rounded-md text-sm font-medium ring-offset-background disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -21,7 +21,6 @@ const buttonVariants = cva(
         default: 'px-6 py-3.5',
         sm: 'rounded-md px-3 py-2',
         lg: 'rounded-md px-8 py-4',
-        wide: 'w-full px-6 py-3.5',
       },
     },
     defaultVariants: {
@@ -45,7 +44,6 @@ const buttonTextVariants = cva('font-medium', {
       default: 'text-xl',
       sm: 'text-lg',
       lg: 'text-2xl',
-      wide: 'text-xl',
     },
   },
   defaultVariants: {

@@ -164,6 +164,7 @@ function CommandModal<T extends Data>(
       aria-modal
       onRequestClose={toggleIsOpen}
       onDismiss={() => {
+        // TODO: check if works on Android
         handleOnSearch('');
       }}
       {...props}

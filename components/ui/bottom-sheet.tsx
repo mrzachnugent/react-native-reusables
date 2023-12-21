@@ -167,21 +167,27 @@ const BottomSheetCloseTrigger = React.forwardRef<
   return <Pressable ref={ref} onPress={handleOnPress} {...props} />;
 });
 
-const ADDED_INSET = 60; // https://github.com/gorhom/react-native-bottom-sheet/issues/294
+const BOTTOM_SHEET_HEADER_HEIGHT = 60; // BottomSheetHeader height
 
 type BottomSheetViewProps = React.ComponentPropsWithoutRef<
   typeof GBottomSheetView
->;
+> & {
+  hadHeader?: boolean;
+};
 
 function BottomSheetView({
   className,
   children,
+  hadHeader = true,
   ...props
 }: BottomSheetViewProps) {
   const insets = useSafeAreaInsets();
   return (
     <GBottomSheetView
-      style={{ paddingBottom: insets.bottom + ADDED_INSET }}
+      style={{
+        paddingBottom:
+          insets.bottom + (hadHeader ? BOTTOM_SHEET_HEADER_HEIGHT : 0),
+      }}
       className={cn(`px-4`, className)}
       {...props}
     >
