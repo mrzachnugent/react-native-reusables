@@ -57,6 +57,8 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
 - Context Menu
 - Data Table
 - Date Picker
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1feb89ed-c598-4eb3-b56c-fa30d2b49cfd
 - Dialog
 - Dropdown Menu
 - Form

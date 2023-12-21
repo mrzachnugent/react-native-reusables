@@ -1,23 +1,23 @@
 import { CalendarIcon } from 'lucide-react-native';
 import React from 'react';
-import { View, Text } from 'react-native';
-import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
+import { Text, View } from 'react-native';
 import {
-  DatePicker,
-  DatePickerTrigger,
-  DatePickerContent,
-} from '~/components/ui/date-picker';
+  BottomSheet,
+  BottomSheetCloseTrigger,
+  BottomSheetContent,
+  BottomSheetOpenTrigger,
+  BottomSheetView,
+} from '~/components/ui/bottom-sheet';
+import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
+import { Calendar } from '~/components/ui/calendar';
+import { cn } from '~/lib/utils';
 
 export default function DatePickerScreen() {
   const [selectedDate, setSelectedDate] = React.useState('');
   return (
-    <View className='flex-1 justify-center p-6'>
-      <DatePicker
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-        className='px-6'
-      >
-        <DatePickerTrigger
+    <View className='flex-1 justify-center items-center'>
+      <BottomSheet className='px-6'>
+        <BottomSheetOpenTrigger
           className={buttonVariants({
             variant: 'outline',
             className: 'gap-3',
@@ -42,9 +42,41 @@ export default function DatePickerScreen() {
               </Text>
             </>
           )}
-        </DatePickerTrigger>
-        <DatePickerContent />
-      </DatePicker>
+        </BottomSheetOpenTrigger>
+        <BottomSheetContent>
+          <BottomSheetView hadHeader={false} className='pt-2'>
+            <Calendar
+              style={{ height: 358 }}
+              onDayPress={(day) => {
+                setSelectedDate((prev) =>
+                  day.dateString === prev ? '' : day.dateString
+                );
+              }}
+              markedDates={{
+                [selectedDate]: {
+                  selected: true,
+                },
+              }}
+              current={selectedDate} // opens calendar on selected date
+            />
+            <View className={'pb-2 pt-4'}>
+              <BottomSheetCloseTrigger
+                className={buttonVariants({ size: 'sm' })}
+              >
+                {({ pressed }) => (
+                  <Text
+                    className={buttonTextVariants({
+                      className: cn(pressed && 'opacity-70'),
+                    })}
+                  >
+                    Close
+                  </Text>
+                )}
+              </BottomSheetCloseTrigger>
+            </View>
+          </BottomSheetView>
+        </BottomSheetContent>
+      </BottomSheet>
     </View>
   );
 }
