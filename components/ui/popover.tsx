@@ -28,7 +28,6 @@ interface PopoverContext {
   setTriggerPosition: React.Dispatch<
     React.SetStateAction<LayoutPosition | null>
   >;
-  nativeID: string;
 }
 
 const PopoverContext = React.createContext({} as PopoverContext);
@@ -37,19 +36,16 @@ const Popover = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>
 >((props, ref) => {
-  const nativeID = React.useId();
   const triggerRef = React.useRef<View>(null);
   const [triggerPosition, setTriggerPosition] =
     React.useState<LayoutPosition | null>(null);
 
   return (
     <PopoverContext.Provider
-      key={`popover-provider-${nativeID}`}
       value={{
         triggerRef,
         triggerPosition,
         setTriggerPosition,
-        nativeID,
       }}
     >
       <View ref={ref} {...props} />

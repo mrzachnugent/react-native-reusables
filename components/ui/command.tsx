@@ -13,13 +13,14 @@ import { cn } from '~/lib/utils';
 import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';
+import { type ListRenderItemInfo } from '@shopify/flash-list';
 
 type Data = Record<string, unknown> | string;
 
 interface CommandProps<T extends Data> {
   data: T[];
-  onItemSelected: (item: T | string) => void;
-  filterFn: (search: string, item: T) => boolean;
+  onItemSelected: (item: Exclude<T, string>) => void;
+  filterFn: (search: string, item: Exclude<T, string>) => boolean;
   defaultOpen?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
   onSearch?: (search: string) => void;
@@ -27,7 +28,7 @@ interface CommandProps<T extends Data> {
 
 interface CommandContext<T extends Data> {
   data: T[];
-  onItemSelected: (item: T) => void;
+  onItemSelected: (item: Exclude<T, string>) => void;
   isOpen: boolean;
   toggleIsOpen: () => void;
   search: string;
@@ -38,6 +39,11 @@ const CommandContext = React.createContext<CommandContext<any>>(
   {} as CommandContext<any>
 );
 
+type CommandWrapperProps<T extends Data> = React.ComponentPropsWithoutRef<
+  typeof View
+> &
+  CommandProps<T>;
+
 function CommandWrapper<T extends Data>(
   {
     data: dataFromProps,
@@ -47,7 +53,7 @@ function CommandWrapper<T extends Data>(
     onItemSelected,
     filterFn,
     ...props
-  }: React.ComponentPropsWithoutRef<typeof View> & CommandProps<T>,
+  }: CommandWrapperProps<T>,
   ref?: React.ForwardedRef<View>
 ) {
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
@@ -56,7 +62,7 @@ function CommandWrapper<T extends Data>(
   const data = React.useMemo(() => {
     const items = dataFromProps.filter((item) => {
       if (typeof item === 'string') return true;
-      return filterFn(search, item);
+      return filterFn(search, item as Exclude<T, string>);
     });
     return items.filter((item, index) => {
       if (typeof item === 'string') {
@@ -96,14 +102,9 @@ function CommandWrapper<T extends Data>(
   );
 }
 
-interface WithForwardRefCommand
-  extends React.FC<
-    React.ComponentPropsWithoutRef<typeof View> & CommandProps<Data>
-  > {
-  <T extends Data>(
-    props: React.ComponentPropsWithoutRef<typeof View> & CommandProps<T>
-  ): ReturnType<
-    React.FC<React.ComponentPropsWithoutRef<typeof View> & CommandProps<T>>
+interface WithForwardRefCommand extends React.FC<CommandWrapperProps<Data>> {
+  <T extends Data>(props: CommandWrapperProps<T>): ReturnType<
+    React.FC<CommandWrapperProps<T>>
   >;
 }
 
@@ -217,7 +218,7 @@ function CommandTextInput<T extends Data>(
   function onSubmitEditing() {
     const firstItem = data.find((item) => typeof item !== 'string');
     if (firstItem && typeof firstItem !== 'string') {
-      onItemSelected(firstItem);
+      onItemSelected(firstItem as Exclude<T, string>);
     }
     toggleIsOpen();
   }
@@ -267,6 +268,14 @@ function CommandTextInput<T extends Data>(
 const CommandInput = React.forwardRef(CommandTextInput);
 CommandInput.displayName = 'CommandInput';
 
+type CommandSectionListProps<T extends Data> = Omit<
+  React.ComponentPropsWithoutRef<typeof SectionList<T>>,
+  'data'
+> & {
+  headerHeight?: number;
+  itemHeight?: number;
+};
+
 function CommandSectionList<T extends Data>(
   {
     headerHeight = 43,
@@ -274,10 +283,7 @@ function CommandSectionList<T extends Data>(
     className,
     extraData,
     ...props
-  }: Omit<React.ComponentPropsWithoutRef<typeof SectionList<T>>, 'data'> & {
-    headerHeight?: number;
-    itemHeight?: number;
-  },
+  }: CommandSectionListProps<T>,
   ref: React.ForwardedRef<React.ElementRef<typeof SectionList<T>>>
 ) {
   const { data, search } = useCommandContext<T>();
@@ -302,27 +308,15 @@ function CommandSectionList<T extends Data>(
         estimatedItemSize={itemHeight}
         overrideItemLayout={overrideItemLayout}
         keyboardShouldPersistTaps='handled'
+        accessibilityRole='menu'
         {...props}
       />
     </View>
   );
 }
 interface WithForwardRefCommandList
-  extends React.FC<
-    Omit<React.ComponentPropsWithoutRef<typeof SectionList<Data>>, 'data'> & {
-      headerHeight?: number;
-      itemHeight?: number;
-    }
-  > {
-  <T extends Data>(
-    props: Omit<
-      React.ComponentPropsWithoutRef<typeof SectionList<T>>,
-      'data'
-    > & {
-      headerHeight?: number;
-      itemHeight?: number;
-    }
-  ): ReturnType<
+  extends React.FC<CommandSectionListProps<Data>> {
+  <T extends Data>(props: CommandSectionListProps<T>): ReturnType<
     React.FC<
       Omit<React.ComponentPropsWithoutRef<typeof SectionList<T>>, 'data'> & {
         headerHeight?: number;
@@ -365,6 +359,8 @@ const CommandListHeader = React.forwardRef<
   );
 });
 
+type CommandListHeaderProps = ListRenderItemInfo<string>;
+
 CommandListHeader.displayName = 'CommandListHeader';
 
 function CommandSectionListItem<T extends Data>(
@@ -386,7 +382,7 @@ function CommandSectionListItem<T extends Data>(
   function handleOnPress(event: GestureResponderEvent) {
     const item = data[index];
     if (typeof item === 'string' || !item) return;
-    onItemSelected(item);
+    onItemSelected(item as Exclude<T, string>);
     onPress?.(event);
     toggleIsOpen();
   }
@@ -404,6 +400,7 @@ function CommandSectionListItem<T extends Data>(
         variant={index === 1 ? 'secondary' : 'ghost'}
         className={cn('flex-row items-center justify-start px-2 gap-3')}
         onPress={handleOnPress}
+        accessibilityRole='menuitem'
         {...props}
       >
         {children}
@@ -411,6 +408,8 @@ function CommandSectionListItem<T extends Data>(
     </Pressable>
   );
 }
+
+type CommandListItemProps<T extends Data> = ListRenderItemInfo<T>;
 
 const CommandListItem = React.forwardRef(CommandSectionListItem);
 
@@ -424,4 +423,6 @@ export {
   CommandListHeader,
   CommandListItem,
   CommandTrigger,
+  type CommandListHeaderProps,
+  type CommandListItemProps,
 };

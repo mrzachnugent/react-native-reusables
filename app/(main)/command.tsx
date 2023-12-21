@@ -1,7 +1,4 @@
-import { ListRenderItemInfo } from '@shopify/flash-list';
 import {
-  Calendar,
-  Accessibility,
   Activity,
   Airplay,
   AlarmClockIcon,
@@ -9,14 +6,16 @@ import {
   AlignRight,
   Baby,
   BadgeAlert,
+  Calendar,
   Database,
-  Fan,
-  Table,
-  Lamp,
   Ear,
+  Fan,
+  GalleryHorizontal,
+  Lamp,
+  Table,
 } from 'lucide-react-native';
 import React from 'react';
-import { View, Text, Alert } from 'react-native';
+import { Alert, Pressable, Text, View } from 'react-native';
 import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
 import {
   Command,
@@ -24,48 +23,22 @@ import {
   CommandInput,
   CommandList,
   CommandListHeader,
+  CommandListHeaderProps,
   CommandListItem,
+  CommandListItemProps,
   CommandTrigger,
 } from '~/components/ui/command';
 import { cn } from '~/lib/utils';
 
-const data = [
-  'HTML Basics',
-  { title: 'Introduction to HTML', id: 'htmlIntro', icon: Calendar },
-  { title: 'HTML Tags and Elements', id: 'htmlTags', icon: Accessibility },
-  'CSS Fundamentals',
-  { title: 'CSS Selectors', id: 'cssSelectors', icon: Activity },
-  { title: 'Box Model', id: 'boxModel', icon: Airplay },
-  'JavaScript Essentials',
-  {
-    title: 'Variables and Data Types',
-    id: 'jsVariables',
-    icon: AlarmClockIcon,
-  },
-  { title: 'Functions and Scope', id: 'jsFunctions', icon: AlertCircle },
-  'React Framework',
-  { title: 'React Components', id: 'reactComponents', icon: AlignRight },
-  { title: 'State and Props', id: 'reactStateProps', icon: Baby },
-  'Responsive Web Design',
-  { title: 'Media Queries', id: 'mediaQueries', icon: BadgeAlert },
-  { title: 'Flexbox and Grid', id: 'flexboxGrid', icon: Database },
-  'Backend Development',
-  { title: 'Node.js Basics', id: 'nodeBasics', icon: Fan },
-  { title: 'RESTful APIs', id: 'restAPIs', icon: Table },
-  'Version Control (Git)',
-  { title: 'Git Workflow', id: 'gitWorkflow', icon: Lamp },
-  { title: 'Branches and Merging', id: 'gitBranches', icon: Ear },
-];
-
 export default function CommandScreen() {
   const renderSectionHeader = React.useCallback(
-    (props: ListRenderItemInfo<string>) => {
+    (props: CommandListHeaderProps) => {
       return <CommandListHeader>{props.item}</CommandListHeader>;
     },
     []
   );
   const renderItem = React.useCallback(
-    ({ index, item }: ListRenderItemInfo<(typeof data)[number]>) => {
+    ({ index, item }: CommandListItemProps<(typeof data)[number]>) => {
       if (typeof item === 'string') return null;
       return (
         <CommandListItem index={index}>
@@ -98,11 +71,9 @@ export default function CommandScreen() {
       <Command
         data={data}
         filterFn={(search, item) => {
-          if (typeof item === 'string') return true;
           return item.title.toLowerCase().includes(search.toLowerCase());
         }}
         onItemSelected={(item) => {
-          if (typeof item === 'string') return;
           Alert.alert(item.title);
         }}
       >
@@ -113,7 +84,7 @@ export default function CommandScreen() {
                 className: pressed ? 'opacity-70' : '',
               })}
             >
-              Open Commannd
+              Open Command
             </Text>
           )}
         </CommandTrigger>
@@ -122,9 +93,46 @@ export default function CommandScreen() {
           <CommandList
             renderSectionHeader={renderSectionHeader}
             renderItem={renderItem}
+            ListEmptyComponent={() => {
+              return (
+                <Pressable className='bg-background items-center p-6 rounded-b-2xl'>
+                  <Text className='text-foreground text-lg font-semibold'>
+                    No Results...
+                  </Text>
+                </Pressable>
+              );
+            }}
           />
         </CommandContent>
       </Command>
     </View>
   );
 }
+
+const data = [
+  'HTML Basics',
+  { title: 'Introduction to HTML', id: 'htmlIntro', icon: Calendar },
+  { title: 'HTML Tags and Elements', id: 'htmlTags', icon: GalleryHorizontal },
+  'CSS Fundamentals',
+  { title: 'CSS Selectors', id: 'cssSelectors', icon: Activity },
+  { title: 'Box Model', id: 'boxModel', icon: Airplay },
+  'JavaScript Essentials',
+  {
+    title: 'Variables and Data Types',
+    id: 'jsVariables',
+    icon: AlarmClockIcon,
+  },
+  { title: 'Functions and Scope', id: 'jsFunctions', icon: AlertCircle },
+  'React Framework',
+  { title: 'React Components', id: 'reactComponents', icon: AlignRight },
+  { title: 'State and Props', id: 'reactStateProps', icon: Baby },
+  'Responsive Web Design',
+  { title: 'Media Queries', id: 'mediaQueries', icon: BadgeAlert },
+  { title: 'Flexbox and Grid', id: 'flexboxGrid', icon: Database },
+  'Backend Development',
+  { title: 'Node.js Basics', id: 'nodeBasics', icon: Fan },
+  { title: 'RESTful APIs', id: 'restAPIs', icon: Table },
+  'Version Control (Git)',
+  { title: 'Git Workflow', id: 'gitWorkflow', icon: Lamp },
+  { title: 'Branches and Merging', id: 'gitBranches', icon: Ear },
+];
