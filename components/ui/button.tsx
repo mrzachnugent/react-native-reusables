@@ -71,7 +71,6 @@ const Button = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   React.ComponentPropsWithoutRef<typeof Pressable> &
     VariantProps<typeof buttonVariants> & {
-      children: React.ReactNode;
       textClass?: string;
     }
 >(
@@ -90,20 +89,18 @@ const Button = React.forwardRef<
         }}
         {...props}
       >
-        {({ pressed }) =>
-          typeof children === 'string' ? (
-            <Text
-              className={cn(
-                pressed ? 'opacity-70' : '',
-                buttonTextVariants({ variant, size, className: textClass })
-              )}
-            >
-              {children}
-            </Text>
-          ) : (
-            children
-          )
-        }
+        {typeof children === 'string'
+          ? ({ pressed }) => (
+              <Text
+                className={cn(
+                  pressed ? 'opacity-70' : '',
+                  buttonTextVariants({ variant, size, className: textClass })
+                )}
+              >
+                {children}
+              </Text>
+            )
+          : children}
       </Pressable>
     );
   }

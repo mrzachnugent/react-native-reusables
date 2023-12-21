@@ -25,7 +25,7 @@ export default function SkeletonScreen() {
       <Skeleton
         key={`skeleton-${isLoading}`} // key is not needed if loading only goes one way (not toggled)
         show={isLoading}
-        radius={5}
+        radius={4}
         width={200}
       >
         <Button

@@ -44,6 +44,7 @@ export const COMPONENTS = [
   'popover',
   'progress',
   'radio-group',
+  'section-list',
   'select',
   'separator',
   'skeleton',
