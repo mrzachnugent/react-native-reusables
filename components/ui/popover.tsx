@@ -13,7 +13,8 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
-import { buttonVariants } from './button';
+import { PressableSlot } from '../primitives/pressable-slot';
+import { Button, buttonVariants } from './button';
 
 interface LayoutPosition {
   pageY: number;
@@ -66,49 +67,36 @@ function usePopoverContext() {
 }
 
 const PopoverTrigger = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  React.ComponentPropsWithoutRef<typeof Pressable> &
+  React.ElementRef<typeof Button>,
+  React.ComponentPropsWithoutRef<typeof Button> &
     VariantProps<typeof buttonVariants> & {
-      textClass?: string;
+      asChild?: boolean;
     }
->(
-  (
-    { textClass, children, variant, size, className, onPress, ...props },
-    ref
-  ) => {
-    const { triggerRef, setTriggerPosition } = usePopoverContext();
+>(({ asChild, onPress, ...props }, ref) => {
+  const { triggerRef, setTriggerPosition } = usePopoverContext();
 
-    function handleOnPress(event: GestureResponderEvent) {
-      triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-        setTriggerPosition({ width, pageX, pageY: pageY, height });
-      });
-      onPress?.(event);
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    }
-
-    useImperativeHandle(
-      ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
-      },
-      [triggerRef.current]
-    );
-
-    return (
-      <Pressable
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={triggerRef}
-        onPress={handleOnPress}
-        {...props}
-      >
-        {children}
-      </Pressable>
-    );
+  function handleOnPress(event: GestureResponderEvent) {
+    triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+      setTriggerPosition({ width, pageX, pageY: pageY, height });
+    });
+    onPress?.(event);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   }
-);
+
+  useImperativeHandle(
+    ref,
+    () => {
+      if (!triggerRef.current) {
+        return new View({});
+      }
+      return triggerRef.current;
+    },
+    [triggerRef.current]
+  );
+
+  const Trigger = asChild ? PressableSlot : Button;
+  return <Trigger ref={triggerRef} onPress={handleOnPress} {...props} />;
+});
 
 PopoverTrigger.displayName = 'PopoverTrigger';
 

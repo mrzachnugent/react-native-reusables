@@ -14,8 +14,13 @@ interface ToggleProps {
 
 const Toggle = React.forwardRef<
   React.ElementRef<typeof Button>,
-  Omit<React.ComponentPropsWithoutRef<typeof Button>, 'variant' | 'onPress'> &
-    ToggleProps
+  Omit<
+    React.ComponentPropsWithoutRef<typeof Button>,
+    'variant' | 'onPress' | 'children'
+  > &
+    ToggleProps & {
+      children?: React.ReactNode;
+    }
 >(
   (
     {

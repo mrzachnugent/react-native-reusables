@@ -1,7 +1,8 @@
 import { VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { GestureResponderEvent, Pressable, View } from 'react-native';
 import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
+import { PressableSlot } from '~/components/primitives/pressable-slot';
 import { buttonVariants } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
@@ -82,27 +83,43 @@ const CollapsibleHeader = React.forwardRef<
 const CollapsibleTrigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   React.ComponentPropsWithoutRef<typeof Pressable> &
-    VariantProps<typeof buttonVariants>
->(({ className, variant = 'outline', size = 'sm', ...props }, ref) => {
-  const { nativeID, visible, setVisible, disabled } = useCollapsibleContext();
+    VariantProps<typeof buttonVariants> & {
+      asChild?: boolean;
+    }
+>(
+  (
+    {
+      className,
+      onPress,
+      variant = 'outline',
+      size = 'sm',
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
+    const { nativeID, visible, setVisible, disabled } = useCollapsibleContext();
 
-  function onPress() {
-    setVisible((prev) => !prev);
+    function handleOnPress(event: GestureResponderEvent) {
+      setVisible((prev) => !prev);
+      onPress?.(event);
+    }
+
+    const Trigger = asChild ? PressableSlot : Pressable;
+    return (
+      <Trigger
+        key={`collapsible-trigger-${nativeID}`}
+        onPress={handleOnPress}
+        disabled={disabled}
+        aria-expanded={visible}
+        nativeID={nativeID}
+        ref={ref}
+        className={cn(buttonVariants({ variant, size, className }))}
+        {...props}
+      />
+    );
   }
-
-  return (
-    <Pressable
-      key={`collapsible-trigger-${nativeID}`}
-      onPress={onPress}
-      disabled={disabled}
-      aria-expanded={visible}
-      nativeID={nativeID}
-      ref={ref}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  );
-});
+);
 
 const CollapsibleContent = React.forwardRef<
   React.ElementRef<typeof Animated.View>,

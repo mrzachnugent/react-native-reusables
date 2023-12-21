@@ -17,9 +17,10 @@ import { useColorScheme } from 'nativewind';
 import React, { useCallback, useImperativeHandle } from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PressableSlot } from '~/components/primitives/pressable-slot';
+import { Button } from '~/components/ui/button';
 import { NAV_THEME } from '~/lib/constants';
 import { cn } from '~/lib/utils';
-import { Button } from './button';
 
 type BottomSheetRef = React.ElementRef<typeof View>;
 type BottomSheetProps = React.ComponentPropsWithoutRef<typeof View>;
@@ -145,26 +146,32 @@ const BottomSheetContent = React.forwardRef<
 
 const BottomSheetOpenTrigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  React.ComponentPropsWithoutRef<typeof Pressable>
->(({ onPress, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof Pressable> & {
+    asChild?: boolean;
+  }
+>(({ onPress, asChild = false, ...props }, ref) => {
   const { sheetRef } = useBottomSheetContext();
   function handleOnPress(ev: GestureResponderEvent) {
     sheetRef.current?.present();
     onPress?.(ev);
   }
-  return <Pressable ref={ref} onPress={handleOnPress} {...props} />;
+  const Trigger = asChild ? PressableSlot : Pressable;
+  return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 
 const BottomSheetCloseTrigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  React.ComponentPropsWithoutRef<typeof Pressable>
->(({ onPress, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof Pressable> & {
+    asChild?: boolean;
+  }
+>(({ onPress, asChild = false, ...props }, ref) => {
   const { dismiss } = useBottomSheetModal();
   function handleOnPress(ev: GestureResponderEvent) {
     dismiss();
     onPress?.(ev);
   }
-  return <Pressable ref={ref} onPress={handleOnPress} {...props} />;
+  const Trigger = asChild ? PressableSlot : Pressable;
+  return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 
 const BOTTOM_SHEET_HEADER_HEIGHT = 60; // BottomSheetHeader height

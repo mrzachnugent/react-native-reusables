@@ -1,3 +1,4 @@
+import { type ListRenderItemInfo } from '@shopify/flash-list';
 import { Search, X } from 'lucide-react-native';
 import React, { useImperativeHandle } from 'react';
 import {
@@ -9,11 +10,11 @@ import {
 } from 'react-native';
 import Animated, { FadeInUp, SlideInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PressableSlot } from '~/components/primitives/pressable-slot';
 import { cn } from '~/lib/utils';
 import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';
-import { type ListRenderItemInfo } from '@shopify/flash-list';
 
 type Data = Record<string, unknown> | string;
 
@@ -123,7 +124,13 @@ function useCommandContext<T extends Data>() {
 }
 
 function CommandPressable<T extends Data>(
-  { onPress, ...props }: React.ComponentPropsWithoutRef<typeof Pressable>,
+  {
+    onPress,
+    asChild = false,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof Pressable> & {
+    asChild?: boolean;
+  },
   ref: React.ForwardedRef<React.ElementRef<typeof Pressable>>
 ) {
   const { toggleIsOpen } = useCommandContext<T>();
@@ -132,7 +139,9 @@ function CommandPressable<T extends Data>(
     toggleIsOpen();
     onPress?.(event);
   }
-  return <Pressable onPress={handleOnPress} ref={ref} {...props} />;
+
+  const Trigger = asChild ? PressableSlot : Pressable;
+  return <Trigger onPress={handleOnPress} ref={ref} {...props} />;
 }
 
 const CommandTrigger = React.forwardRef(CommandPressable);
