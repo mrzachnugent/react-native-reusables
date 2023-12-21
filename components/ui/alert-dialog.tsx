@@ -10,7 +10,8 @@ import {
   View,
 } from 'react-native';
 import { cn } from '~/lib/utils';
-import { Button } from './button';
+import { Button } from '~/components/ui/button';
+import { PressableSlot } from '~/components/primitives/pressable-slot';
 
 interface AlertDialogProps {
   children: React.ReactNode;
@@ -23,7 +24,6 @@ interface AlertDialogContext {
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   closeOnOverlayPress: boolean;
-  nativeID: string;
 }
 
 const AlertDialogContext = React.createContext<AlertDialogContext>(
@@ -44,16 +44,13 @@ const AlertDialog = React.forwardRef<
     },
     ref
   ) => {
-    const nativeID = React.useId();
     const [visible, setVisible] = React.useState(defaultOpen ?? false);
     return (
       <AlertDialogContext.Provider
-        key={`alert-dialog-provider-${nativeID}`}
         value={{
           visible: open ?? visible,
           setVisible: setOpen ?? setVisible,
           closeOnOverlayPress,
-          nativeID,
         }}
       >
         <View ref={ref} {...props} />
@@ -77,21 +74,18 @@ function useAlertDialogContext() {
 const AlertDialogTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentPropsWithoutRef<typeof Button> & {
-    textClass?: string;
-    children: React.ReactNode;
+    asChild?: boolean;
   }
->(({ textClass, children, ...props }, ref) => {
+>(({ onPress, asChild = false, ...props }, ref) => {
   const { setVisible } = useAlertDialogContext();
-  function onPress() {
+  function handleOnPress(event: GestureResponderEvent) {
     setVisible(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    onPress?.(event);
   }
 
-  return (
-    <Button ref={ref} onPress={onPress} {...props}>
-      {children}
-    </Button>
-  );
+  const Trigger = asChild ? PressableSlot : Button;
+  return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 
 AlertDialogTrigger.displayName = 'AlertDialogTrigger';
@@ -210,22 +204,20 @@ AlertDialogFooter.displayName = 'AlertDialogFooter';
 const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentPropsWithoutRef<typeof Button> & {
-    children: React.ReactNode;
-    textClass?: string;
+    asChild?: boolean;
   }
->(({ variant = 'outline', textClass, children, ...props }, ref) => {
+>(({ variant = 'outline', asChild = false, ...props }, ref) => {
   const { setVisible } = useAlertDialogContext();
+  const Trigger = asChild ? PressableSlot : Button;
   return (
-    <Button
+    <Trigger
       variant={variant}
       onPress={() => {
         setVisible(false);
       }}
       ref={ref}
       {...props}
-    >
-      {children}
-    </Button>
+    />
   );
 });
 
@@ -236,23 +228,20 @@ type ButtonProps = React.ComponentPropsWithoutRef<typeof Button>;
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   Omit<ButtonProps, 'onPress'> & {
-    children: React.ReactNode;
+    asChild?: boolean;
     onPress?:
       | ((event: GestureResponderEvent) => void)
       | ((event: GestureResponderEvent) => Promise<void>);
   }
->(({ className, children, onPress, ...props }, ref) => {
+>(({ onPress, asChild, ...props }, ref) => {
   const { setVisible } = useAlertDialogContext();
   async function onPressAction(ev: GestureResponderEvent) {
     await onPress?.(ev);
     setVisible(false);
   }
 
-  return (
-    <Button onPress={onPressAction} ref={ref} {...props}>
-      {children}
-    </Button>
-  );
+  const Trigger = asChild ? PressableSlot : Button;
+  return <Trigger onPress={onPressAction} ref={ref} {...props} />;
 });
 
 AlertDialogAction.displayName = 'AlertDialogAction';

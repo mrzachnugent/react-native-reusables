@@ -47,7 +47,8 @@
     "expo-navigation-bar": "~2.3.0",
     "@shopify/flash-list": "1.4.3",
     "expo-linear-gradient": "~12.3.0",
-    "@react-native-community/slider": "4.4.2"
+    "@react-native-community/slider": "4.4.2",
+    "expo-clipboard": "~4.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
