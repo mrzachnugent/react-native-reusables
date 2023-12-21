@@ -2,7 +2,7 @@ Work in progress...
 
 # Re-usable UI
 
-Inspired by [ui.shadcn.com](ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
+Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
 
 **Progress**: 23 / 38 components
 
