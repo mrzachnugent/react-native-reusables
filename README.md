@@ -4,7 +4,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
 
-**Progress**: 23 / 38 components
+**Progress**: 27 ✅ / 37 components
 
 ## Components
 
@@ -54,22 +54,23 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
 - Command
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/eb366b71-e225-4828-be15-1fab9b76ae7f
-- Context Menu
-- Data Table
+- Context Menu (soon)
+- Data Table (soon)
 - Date Picker
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1feb89ed-c598-4eb3-b56c-fa30d2b49cfd
 - Dialog
-- Dropdown Menu
-- Form
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a96-34ad-4f5f-bd19-250c2749932f
+- Dropdown Menu (soon)
+- Form (soon)
 - Input
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4e59752a-5751-4644-88ab-c30d336c961d" width="250px" />
 - Label
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/54273fc2-36a8-4942-949c-91f36ee55334" width="250px" />
-- Menubar
-- Mavigation Menu
+- Menubar (soon)
 - Popover
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/835891c6-ea60-44c5-846d-76729a91f12c
@@ -77,7 +78,11 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/b23d9ea7-81ca-41be-b35d-344df5a56bde
 - Radio-group
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1dcd6059-971f-4c1f-b278-3a23ae527bdf
 - Select
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a17487-739d-4c24-8682-113562b44c91
 - Separator
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1d7fce13-6e69-4e69-8877-d52565b4c2ae" width="250px" />
@@ -92,18 +97,18 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/60b9f622-d150-489f-bc0b-fe35b9dc1624" width="250px" />
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/a86829b2-d617-4182-9af1-12eab14a1fc0" width="250px" />
-- Table
-- Tabs
+- Table (soon)
+- Tabs (soon)
 - Textarea
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/31197419-295b-4c12-9f19-b5f9b28f5814" width="250px" />
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/82e1de9f-37ba-449e-a108-1b29d23adb41" width="250px" />
-- Toast
+- Toast (soon)
 - Toggle
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5b-bed4-4489-99be-e4369c659713
-- Toggle-group
-- Tooltip
+- Toggle-group (soon)
+- Tooltip (soon)
 
 ### Plan
 
@@ -111,4 +116,4 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
 - Will require additional libraries
 - Most components to be compatible with Expo Go, while others will require [expo-dev-client](https://docs.expo.dev/develop/development-builds/introduction/)
 - Might offer alternatives for components that cannot be used in Expo Go
-- Focused on mobile development, for web components you can use ui by shadcn. Here's a great example of https://github.com/EvanBacon/expo-shadcn-ui-demo
+- Focused on mobile development, for web components you can use ui by shadcn. Here's a great example: https://github.com/EvanBacon/expo-shadcn-ui-demo

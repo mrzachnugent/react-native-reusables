@@ -29,6 +29,10 @@ interface PopoverContext {
   setTriggerPosition: React.Dispatch<
     React.SetStateAction<LayoutPosition | null>
   >;
+  contentLayout: LayoutRectangle | null;
+  setContentLayout: React.Dispatch<
+    React.SetStateAction<LayoutRectangle | null>
+  >;
 }
 
 const PopoverContext = React.createContext({} as PopoverContext);
@@ -40,6 +44,8 @@ const Popover = React.forwardRef<
   const triggerRef = React.useRef<View>(null);
   const [triggerPosition, setTriggerPosition] =
     React.useState<LayoutPosition | null>(null);
+  const [contentLayout, setContentLayout] =
+    React.useState<LayoutRectangle | null>(null);
 
   return (
     <PopoverContext.Provider
@@ -47,6 +53,8 @@ const Popover = React.forwardRef<
         triggerRef,
         triggerPosition,
         setTriggerPosition,
+        contentLayout,
+        setContentLayout,
       }}
     >
       <View ref={ref} {...props} />
@@ -100,6 +108,27 @@ const PopoverTrigger = React.forwardRef<
 
 PopoverTrigger.displayName = 'PopoverTrigger';
 
+const PopoverClose = React.forwardRef<
+  React.ElementRef<typeof Button>,
+  React.ComponentPropsWithoutRef<typeof Button> &
+    VariantProps<typeof buttonVariants> & {
+      asChild?: boolean;
+    }
+>(({ asChild, onPress, ...props }, ref) => {
+  const { setTriggerPosition, setContentLayout } = usePopoverContext();
+
+  function handleOnPress(event: GestureResponderEvent) {
+    setTriggerPosition(null);
+    setContentLayout(null);
+    onPress?.(event);
+  }
+
+  const Trigger = asChild ? PressableSlot : Button;
+  return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
+});
+
+PopoverClose.displayName = 'PopoverClose';
+
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof Modal>,
   Omit<React.ComponentPropsWithoutRef<typeof Modal>, 'width'> & {
@@ -125,9 +154,12 @@ const PopoverContent = React.forwardRef<
   ) => {
     const insets = useSafeAreaInsets();
     const { colorScheme } = useColorScheme();
-    const { triggerPosition, setTriggerPosition } = usePopoverContext();
-    const [contentLayout, setContentLayout] =
-      React.useState<LayoutRectangle | null>(null);
+    const {
+      triggerPosition,
+      setTriggerPosition,
+      contentLayout,
+      setContentLayout,
+    } = usePopoverContext();
 
     return (
       <Modal
@@ -187,7 +219,7 @@ const PopoverContent = React.forwardRef<
 
 PopoverContent.displayName = 'PopoverContent';
 
-export { Popover, PopoverContent, PopoverTrigger };
+export { Popover, PopoverContent, PopoverTrigger, PopoverClose };
 
 interface GetContentPositionArgs {
   position: 'auto' | 'top' | 'bottom';
@@ -253,7 +285,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.03,
     shadowRadius: 8,
     elevation: 2,
   },
