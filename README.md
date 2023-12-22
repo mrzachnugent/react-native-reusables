@@ -4,7 +4,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
 
-**Progress**: 27 ✅ / 37 components
+**Progress**: 28 ✅ / 37 components
 
 ## Components
 
@@ -108,7 +108,10 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5b-bed4-4489-99be-e4369c659713
 - Toggle-group (soon)
-- Tooltip (soon)
+- Tooltip
+  <br>
+  <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/9b126131-dbac-4f96-8f3f-ae61afa9c607" width="250px" />
+  <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1c60edbb-c64d-4e5d-83a7-8d13c599e6b3" width="250px" />
 
 ### Plan
 

@@ -50,7 +50,7 @@ export default function PopoverScreen() {
           </PopoverContent>
         </Popover>
       </View>
-      <View style={{ height: height }} className='pt-32 p-6'>
+      <View style={{ height: height }} className='p-6 gap-24'>
         <Popover>
           <PopoverTrigger className='w-full' variant={'secondary'}>
             {({ pressed }) => (
@@ -65,6 +65,38 @@ export default function PopoverScreen() {
             )}
           </PopoverTrigger>
           <PopoverContent className='gap-6' width={300} align='right'>
+            <View>
+              <Text className='text-2xl font-bold text-foreground'>
+                Dimensions
+              </Text>
+              <Text className='text-lg text-muted-foreground'>
+                Set the dimensions for the layer.
+              </Text>
+            </View>
+            <View className='flex-row gap-5 items-center'>
+              <Label className='pt-3 font-semibold w-20'>Width:</Label>
+              <Input className='flex-1' defaultValue='100%' />
+            </View>
+            <View className='flex-row gap-5 items-center'>
+              <Label className='pt-3 font-semibold w-20'>Height:</Label>
+              <Input className='flex-1' defaultValue='25px' />
+            </View>
+          </PopoverContent>
+        </Popover>
+        <Popover>
+          <PopoverTrigger className='w-full' variant={'secondary'}>
+            {({ pressed }) => (
+              <Text
+                className={cn(
+                  pressed ? 'opacity-70' : '',
+                  buttonTextVariants({ variant: 'secondary' })
+                )}
+              >
+                Auto-Y (center 300)
+              </Text>
+            )}
+          </PopoverTrigger>
+          <PopoverContent className='gap-6' width={300} align='center'>
             <View>
               <Text className='text-2xl font-bold text-foreground'>
                 Dimensions

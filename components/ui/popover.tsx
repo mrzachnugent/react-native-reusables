@@ -10,12 +10,16 @@ import {
   Pressable,
   StyleSheet,
   View,
+  Dimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
 import { PressableSlot } from '../primitives/pressable-slot';
 import { Button, buttonVariants } from './button';
 
+const windowWidth = Dimensions.get('window').width;
+
+const MARGIN_X = 12;
 interface LayoutPosition {
   pageY: number;
   pageX: number;
@@ -134,7 +138,7 @@ const PopoverContent = React.forwardRef<
   Omit<React.ComponentPropsWithoutRef<typeof Modal>, 'width'> & {
     overlayClass?: string;
     width?: 'auto' | number;
-    align?: 'left' | 'right';
+    align?: 'left' | 'right' | 'center';
     position?: 'auto' | 'top' | 'bottom';
   }
 >(
@@ -202,6 +206,7 @@ const PopoverContent = React.forwardRef<
                 }),
                 colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
                 style,
+                { maxWidth: windowWidth - MARGIN_X * 2 },
               ]}
               className={cn(
                 'bg-popover rounded-2xl p-8 border border-border',
@@ -224,7 +229,7 @@ export { Popover, PopoverContent, PopoverTrigger, PopoverClose };
 
 interface GetContentPositionArgs {
   position: 'auto' | 'top' | 'bottom';
-  align: 'left' | 'right';
+  align: 'left' | 'right' | 'center';
   triggerPosition: LayoutPosition;
   contentLayout: LayoutRectangle | null;
   insetsTop: number;
@@ -249,6 +254,15 @@ function getContentPosition({
     triggerPosition.height +
     6 -
     (Platform.OS === 'android' ? insetsTop : 0);
+
+  const alignCenter =
+    triggerPosition?.pageX +
+    triggerPosition?.width / 2 -
+    (width === 'auto' ? triggerPosition?.width : width) / 2;
+
+  const maxLeft =
+    windowWidth - (width === 'auto' ? triggerPosition.width : width);
+
   return {
     top:
       position === 'auto'
@@ -259,7 +273,11 @@ function getContentPosition({
         ? positionTop
         : positionBottom,
     left:
-      align === 'left'
+      align === 'center'
+        ? alignCenter > maxLeft
+          ? MARGIN_X
+          : alignCenter
+        : align === 'left'
         ? triggerPosition?.pageX
         : triggerPosition?.pageX +
           triggerPosition?.width -
