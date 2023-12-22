@@ -29,7 +29,7 @@ export default function CollapsibleScreen() {
           </CollapsibleTrigger>
         </CollapsibleHeader>
         <View className='rounded-md bg-secondary border border-border px-4 py-3'>
-          <Text className='font-mono text-base text-foreground'>
+          <Text className='ios:font-mono text-base text-foreground'>
             @radix-ui/primitives
           </Text>
         </View>
@@ -38,7 +38,7 @@ export default function CollapsibleScreen() {
             entering={FadeInDown.delay(150)}
             className='rounded-md bg-secondary border border-border px-4 py-3'
           >
-            <Text className='font-mono text-base text-foreground'>
+            <Text className='ios:font-mono text-base text-foreground'>
               @radix-ui/colors
             </Text>
           </Animated.View>
@@ -46,7 +46,7 @@ export default function CollapsibleScreen() {
             entering={FadeInDown.delay(250)}
             className='rounded-md bg-secondary border border-border px-4 py-3'
           >
-            <Text className='font-mono text-base text-foreground'>
+            <Text className='ios:font-mono text-base text-foreground'>
               @stitches/react
             </Text>
           </Animated.View>

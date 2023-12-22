@@ -107,6 +107,7 @@ const DialogContent = React.forwardRef<
         onRequestClose={() => {
           setVisible((prev) => !prev);
         }}
+        statusBarTranslucent
         {...props}
       >
         <Pressable

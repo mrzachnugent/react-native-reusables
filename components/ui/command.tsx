@@ -80,6 +80,9 @@ function CommandWrapper<T extends Data>(
       onOpenChange?.(newVal);
       return newVal;
     });
+    if (search) {
+      setSearch('');
+    }
   }
 
   function handleOnSearch(search: string) {
@@ -162,7 +165,7 @@ function CommandModal<T extends Data>(
   ref: React.ForwardedRef<React.ElementRef<typeof Modal>>
 ) {
   const insets = useSafeAreaInsets();
-  const { toggleIsOpen, isOpen, handleOnSearch } = useCommandContext<T>();
+  const { toggleIsOpen, isOpen } = useCommandContext<T>();
 
   return (
     <Modal
@@ -172,10 +175,7 @@ function CommandModal<T extends Data>(
       visible={isOpen}
       aria-modal
       onRequestClose={toggleIsOpen}
-      onDismiss={() => {
-        // TODO: check if works on Android
-        handleOnSearch('');
-      }}
+      statusBarTranslucent
       {...props}
     >
       <View aria-hidden={isOpen} className={cn('flex-1 ', overlayClass)}>

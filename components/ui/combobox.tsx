@@ -170,7 +170,6 @@ const Combobox = React.forwardRef<
           <BottomSheetContent
             ref={bottomSheet.ref}
             onDismiss={() => {
-              // TODO: check if works on Android
               setSearch('');
             }}
           >

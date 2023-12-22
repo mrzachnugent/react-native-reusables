@@ -48,8 +48,8 @@ export default function DialogScreen() {
             <View className='flex-row gap-3'>
               <Input
                 className='flex-1'
+                autoFocus
                 defaultValue='https://github.com/mrzachnugent'
-                editable={false}
               />
               <Button size='sm' className='px-4' onPress={copyLink}>
                 {({ pressed }) =>

@@ -172,6 +172,7 @@ const PopoverContent = React.forwardRef<
           setTriggerPosition(null);
           setContentLayout(null);
         }}
+        statusBarTranslucent
         {...props}
       >
         <Pressable
