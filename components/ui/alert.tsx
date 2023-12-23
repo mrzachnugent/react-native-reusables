@@ -2,8 +2,9 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '~/lib/utils';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import * as LucideIcon from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
 
 const alertVariants = cva(
   'bg-background relative w-full rounded-lg border p-5',
@@ -27,25 +28,30 @@ const Alert = React.forwardRef<
     VariantProps<typeof alertVariants> & {
       icon?: keyof typeof LucideIcon;
     }
->(({ children, icon, className, variant, ...props }, ref) => {
+>(({ children, icon, className, variant, style, ...props }, ref) => {
+  const { colorScheme } = useColorScheme();
   const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.Icon;
   return (
     <View
       ref={ref}
       role='alert'
-      className={cn(alertVariants({ variant }), icon && 'pl-12', className)}
+      className={cn(alertVariants({ variant }), icon && 'pl-[50]', className)}
+      style={[
+        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+        style,
+      ]}
       {...props}
     >
       {icon && (
         <Icon
-          size={18}
+          size={21}
           className={cn(
             variant === 'destructive'
               ? 'text-destructive'
               : variant === 'success'
               ? 'text-emerald-500'
               : 'text-foreground',
-            'translate-y-[-3px] absolute left-3.5 top-[19]'
+            'translate-y-[-3px] absolute left-[16] top-[18]'
           )}
         />
       )}
@@ -62,7 +68,7 @@ const AlertTitle = React.forwardRef<
   <Text
     ref={ref}
     className={cn(
-      'mb-1 text-lg font-medium leading-none tracking-tight text-foreground',
+      'mb-1.5 text-xl font-medium leading-none tracking-tight text-foreground',
       className
     )}
     {...props}
@@ -76,10 +82,33 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Text
     ref={ref}
-    className={cn('text-secondary-foreground', className)}
+    className={cn('text-muted-foreground', className)}
     {...props}
   />
 ));
 AlertDescription.displayName = 'AlertDescription';
 
 export { Alert, AlertTitle, AlertDescription };
+
+const styles = StyleSheet.create({
+  shadowLight: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  shadowDark: {
+    shadowColor: '#FFFFFF',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 1,
+  },
+});

@@ -14,6 +14,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
+import Toast from 'react-native-toast-message';
+import { ToastProvider } from '~/components/ui/toast';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -111,6 +113,7 @@ function RootLayoutNav() {
             />
           </Stack>
         </BottomSheetModalProvider>
+        <ToastProvider />
       </SafeAreaProvider>
     </ThemeProvider>
   );
