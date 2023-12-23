@@ -23,7 +23,7 @@ const TOAST_CONFIG: ToastConfig = {
       </Alert>
     </Pressable>
   ),
-  base: ({ text1, text2, onPress, props: { icon = 'Terminal' } }) => (
+  base: ({ text1, text2, onPress, props: { icon = 'Info' } }) => (
     <Pressable onPress={onPress} className='px-8 w-full'>
       <Alert icon={icon} variant='default'>
         <AlertTitle>{text1}</AlertTitle>

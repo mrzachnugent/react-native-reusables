@@ -3,14 +3,13 @@ import * as Haptics from 'expo-haptics';
 import { useColorScheme } from 'nativewind';
 import React, { useImperativeHandle } from 'react';
 import {
+  Dimensions,
   GestureResponderEvent,
   LayoutRectangle,
   Modal,
-  Platform,
   Pressable,
   StyleSheet,
   View,
-  Dimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
@@ -225,7 +224,7 @@ const PopoverContent = React.forwardRef<
 
 PopoverContent.displayName = 'PopoverContent';
 
-export { Popover, PopoverContent, PopoverTrigger, PopoverClose };
+export { Popover, PopoverClose, PopoverContent, PopoverTrigger };
 
 interface GetContentPositionArgs {
   position: 'auto' | 'top' | 'bottom';
@@ -244,16 +243,8 @@ function getContentPosition({
   triggerPosition,
   width,
 }: GetContentPositionArgs) {
-  const positionTop =
-    triggerPosition?.pageY -
-    6 -
-    (contentLayout?.height ?? 0) -
-    (Platform.OS === 'android' ? insetsTop : 0);
-  const positionBottom =
-    triggerPosition.pageY +
-    triggerPosition.height +
-    6 -
-    (Platform.OS === 'android' ? insetsTop : 0);
+  const positionTop = triggerPosition?.pageY - 6 - (contentLayout?.height ?? 0);
+  const positionBottom = triggerPosition.pageY + triggerPosition.height + 6;
 
   const alignCenter =
     triggerPosition?.pageX +

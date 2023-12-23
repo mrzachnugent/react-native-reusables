@@ -24,6 +24,9 @@ export default function ToastScreen() {
       type: 'base',
       text1: 'Heads up!',
       text2: 'You can use a terminal to run commands on your computer.',
+      props: {
+        icon: 'Terminal',
+      },
     });
   }
   return (

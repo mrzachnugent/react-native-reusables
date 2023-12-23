@@ -105,7 +105,10 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/31197419-295b-4c12-9f19-b5f9b28f5814" width="250px" />
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/82e1de9f-37ba-449e-a108-1b29d23adb41" width="250px" />
-- Toast (soon)
+- Toast
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/6a3dd0fb-4d9e-4dda-8769-bd2d424e6fb9
+
 - Toggle
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5b-bed4-4489-99be-e4369c659713
