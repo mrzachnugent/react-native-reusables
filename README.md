@@ -4,7 +4,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
 
-**Progress**: 30 ✅ / 37 components
+**Progress**: 31 ✅ / 37 components
 
 ## Components
 
