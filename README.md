@@ -1,10 +1,10 @@
 Work in progress...
 
-# Re-usable UI
+# Re-usable React Native UI
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
 
-**Progress**: 28 ✅ / 37 components
+**Progress**: 29 ✅ / 37 components
 
 ## Components
 
@@ -107,7 +107,9 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
 - Toggle
   <br>
   https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5b-bed4-4489-99be-e4369c659713
-- Toggle-group (soon)
+- Toggle-group
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e42-54d5-46b5-9302-ec05ace55f5f
 - Tooltip
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/9b126131-dbac-4f96-8f3f-ae61afa9c607" width="250px" />
@@ -120,3 +122,10 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
 - Most components to be compatible with Expo Go, while others will require [expo-dev-client](https://docs.expo.dev/develop/development-builds/introduction/)
 - Might offer alternatives for components that cannot be used in Expo Go
 - Focused on mobile development, for web components you can use ui by shadcn. Here's a great example: https://github.com/EvanBacon/expo-shadcn-ui-demo
+- Standardize components API (ex: value/set value, root component props VS sub-components props)
+
+#### Brainstorming (all maybes)
+
+- Use https://jotai.org/docs/core/provider instead of useContext
+- Make primitives then style them for re-usable components
+- Name repo to rrn-ui (Re-usable React Native UI)
