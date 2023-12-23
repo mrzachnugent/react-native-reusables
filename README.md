@@ -4,7 +4,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used as a reference to build your own component libraries.
 
-**Progress**: 29 ✅ / 37 components
+**Progress**: 30 ✅ / 37 components
 
 ## Components
 
@@ -98,7 +98,9 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used a
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/60b9f622-d150-489f-bc0b-fe35b9dc1624" width="250px" />
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/a86829b2-d617-4182-9af1-12eab14a1fc0" width="250px" />
 - Table (soon)
-- Tabs (soon)
+- Tabs
+  <br>
+  https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5f40bba1-9184-46fd-b915-0f9e43f11606
 - Textarea
   <br>
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/31197419-295b-4c12-9f19-b5f9b28f5814" width="250px" />
