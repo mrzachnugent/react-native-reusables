@@ -37,8 +37,9 @@ const Tabs = React.forwardRef<
     onTabChange?: (
       index: OnViewableItemsChangedInfo['changed'][number]
     ) => void;
+    initialIndex?: number;
   }
->(({ tabs, renderTabs, onTabChange, ...props }, ref) => {
+>(({ tabs, renderTabs, onTabChange, initialIndex = 0, ...props }, ref) => {
   const headerListRef =
     React.useRef<React.ElementRef<typeof FlashList<any>>>(null);
   const tabsListRef =
@@ -50,12 +51,7 @@ const Tabs = React.forwardRef<
       const changed = info.changed[0];
       const index = changed?.index;
 
-      if (
-        !changed ||
-        typeof index !== 'number' ||
-        info.viewableItems.length !== 1
-      )
-        return;
+      if (!changed || typeof index !== 'number') return;
       setCurrentIndex(index);
       headerListRef.current?.scrollToIndex({
         index,
@@ -124,6 +120,7 @@ const Tabs = React.forwardRef<
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 4 }}
           renderItem={renderItem}
+          initialScrollIndex={initialIndex}
         />
       </View>
       <FlashList
@@ -139,6 +136,7 @@ const Tabs = React.forwardRef<
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
         renderItem={renderTabs}
+        initialScrollIndex={initialIndex}
       />
     </View>
   );
