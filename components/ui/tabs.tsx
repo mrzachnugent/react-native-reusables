@@ -51,15 +51,15 @@ const Tabs = React.forwardRef<
       const changed = info.changed[0];
       const index = changed?.index;
 
-      if (!changed || typeof index !== 'number') return;
+      if (!changed || !changed.isViewable || typeof index !== 'number') return;
       setCurrentIndex(index);
       headerListRef.current?.scrollToIndex({
-        index,
+        index: currentIndex,
         animated: true,
       });
       onTabChange?.(changed);
     },
-    [onTabChange]
+    []
   );
 
   const renderItem = React.useCallback(
