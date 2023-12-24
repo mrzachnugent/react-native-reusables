@@ -115,6 +115,7 @@ const Tabs = React.forwardRef<
           data={tabs}
           ref={headerListRef}
           horizontal
+          keyExtractor={(item) => item}
           estimatedItemSize={100}
           extraData={currentIndex}
           showsHorizontalScrollIndicator={false}
