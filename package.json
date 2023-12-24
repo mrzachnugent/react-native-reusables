@@ -1,5 +1,5 @@
 {
-  "name": "rn-ui-inspired-by-shadcn",
+  "name": "re-usable-rn-ui",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
