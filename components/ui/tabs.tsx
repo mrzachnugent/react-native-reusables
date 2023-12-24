@@ -46,7 +46,7 @@ const Tabs = React.forwardRef<
     React.useRef<React.ElementRef<typeof FlashList<any>>>(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  const onViewableItemsChanged = React.useCallback(
+  const onViewableItemsChanged = React.useRef(
     (info: OnViewableItemsChangedInfo) => {
       const changed = info.changed[0];
       const index = changed?.index;
@@ -54,12 +54,11 @@ const Tabs = React.forwardRef<
       if (!changed || !changed.isViewable || typeof index !== 'number') return;
       setCurrentIndex(index);
       headerListRef.current?.scrollToIndex({
-        index: currentIndex,
+        index: index,
         animated: true,
       });
       onTabChange?.(changed);
-    },
-    []
+    }
   );
 
   const renderItem = React.useCallback(
@@ -134,7 +133,7 @@ const Tabs = React.forwardRef<
         pagingEnabled
         bounces={false}
         keyExtractor={(item) => item}
-        onViewableItemsChanged={onViewableItemsChanged}
+        onViewableItemsChanged={onViewableItemsChanged.current}
         viewabilityConfig={viewabilityConfig}
         renderItem={renderTabs}
         initialScrollIndex={initialIndex}
