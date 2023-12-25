@@ -1,6 +1,6 @@
 Work in progress...
 
-# Re-usable React Native UI
+# React Native Re-usable UI
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
@@ -178,6 +178,4 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e4
 
 #### Brainstorming (all maybes)
 
-- Use https://jotai.org/docs/core/provider instead of useContext
 - Make primitives then style them for re-usable components
-- Name repo to rrn-ui (Re-usable React Native UI)
