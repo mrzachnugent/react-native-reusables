@@ -9,6 +9,7 @@ import {
   Pressable,
   StyleSheet,
   View,
+  ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
@@ -132,11 +133,12 @@ PopoverClose.displayName = 'PopoverClose';
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof Modal>,
-  Omit<React.ComponentPropsWithoutRef<typeof Modal>, 'width'> & {
+  Omit<React.ComponentPropsWithoutRef<typeof Modal>, 'width' | 'style'> & {
     overlayClass?: string;
     width?: 'auto' | number;
     align?: 'left' | 'right' | 'center';
     position?: 'auto' | 'top' | 'bottom';
+    style?: ViewStyle;
   }
 >(
   (

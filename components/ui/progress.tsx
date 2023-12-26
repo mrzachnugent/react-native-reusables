@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import Animated, {
   Extrapolate,
   SharedValue,
@@ -11,12 +11,13 @@ import { cn } from '~/lib/utils';
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof Animated.View>,
-  React.ComponentPropsWithoutRef<typeof Animated.View> & {
+  Omit<React.ComponentPropsWithoutRef<typeof Animated.View>, 'style'> & {
     /**
      * Value between 0 and 100
      */
     progress: SharedValue<number>;
     rootClass?: string;
+    style?: ViewStyle;
   }
 >(({ progress, rootClass, className, style, ...props }, ref) => {
   const stylez = useAnimatedStyle(() => {

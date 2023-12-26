@@ -5,6 +5,7 @@ import {
   Pressable,
   StyleSheet,
   View,
+  ViewStyle,
 } from 'react-native';
 import { cn } from '~/lib/utils';
 import { Button, buttonVariants } from '~/components/ui/button';
@@ -82,10 +83,11 @@ function useToggleGroupContext() {
 
 const ToggleGroupItem = React.forwardRef<
   React.ElementRef<typeof Button>,
-  Omit<React.ComponentPropsWithoutRef<typeof Button>, 'disabled'> & {
+  Omit<React.ComponentPropsWithoutRef<typeof Button>, 'disabled' | 'style'> & {
     name: string;
     buttonClass?: string;
     children?: React.ReactNode;
+    style?: ViewStyle;
   }
 >(
   (
@@ -97,6 +99,7 @@ const ToggleGroupItem = React.forwardRef<
       children,
       variant = 'default',
       size,
+      style,
       ...props
     },
     ref
@@ -155,7 +158,10 @@ const ToggleGroupItem = React.forwardRef<
                 className,
               })
             )}
-            style={isSelected && colorScheme === 'dark' && styles.shadowDark}
+            style={[
+              isSelected && colorScheme === 'dark' && styles.shadowDark,
+              style,
+            ]}
           >
             {children}
           </View>

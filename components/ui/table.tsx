@@ -1,6 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
 import React from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PressableSlot } from '~/components/primitives/pressable-slot';
 import { cn, isTextChildren } from '~/lib/utils';
@@ -25,7 +25,9 @@ TableHeader.displayName = 'TableHeader';
 
 const TableBody = React.forwardRef<
   React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
+  Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> & {
+    style?: ViewStyle;
+  }
 >(({ className, style, ...props }, ref) => (
   <View
     ref={ref}
@@ -105,9 +107,10 @@ TableRow.displayName = 'TableRow';
 
 const TableHead = React.forwardRef<
   React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View> & {
+  Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> & {
     width: number;
     textClass?: string;
+    style?: ViewStyle;
   }
 >(({ children, width, style, className, textClass, ...props }, ref) => (
   <View
@@ -132,10 +135,11 @@ TableHead.displayName = 'TableHead';
 
 const TableCell = React.forwardRef<
   React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View> & {
+  Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> & {
     width: number;
     textClass?: string;
     numberOfLines?: number;
+    style?: ViewStyle;
   }
 >(
   (

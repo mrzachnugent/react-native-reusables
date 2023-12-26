@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '~/lib/utils';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 import * as LucideIcon from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 
@@ -24,9 +24,10 @@ const alertVariants = cva(
 
 const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View> &
+  Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> &
     VariantProps<typeof alertVariants> & {
       icon?: keyof typeof LucideIcon;
+      style?: ViewStyle;
     }
 >(({ children, icon, className, variant, style, ...props }, ref) => {
   const { colorScheme } = useColorScheme();

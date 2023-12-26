@@ -1,13 +1,15 @@
 import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ViewStyle } from 'react-native';
 
 import { cn } from '~/lib/utils';
 
 const Card = React.forwardRef<
   React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
->(({ className, ...props }, ref) => {
+  Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> & {
+    style?: ViewStyle;
+  }
+>(({ className, style, ...props }, ref) => {
   const { colorScheme } = useColorScheme();
   return (
     <View
@@ -16,7 +18,10 @@ const Card = React.forwardRef<
         'rounded-lg border border-border bg-card px-0.5 py-2',
         className
       )}
-      style={colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight}
+      style={[
+        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+        style,
+      ]}
       {...props}
     />
   );

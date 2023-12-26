@@ -15,7 +15,12 @@ import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescrip
 import { X } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import React, { useCallback, useImperativeHandle } from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
+import {
+  GestureResponderEvent,
+  Pressable,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PressableSlot } from '~/components/primitives/pressable-slot';
 import { Button } from '~/components/ui/button';
@@ -176,25 +181,31 @@ const BottomSheetCloseTrigger = React.forwardRef<
 
 const BOTTOM_SHEET_HEADER_HEIGHT = 60; // BottomSheetHeader height
 
-type BottomSheetViewProps = React.ComponentPropsWithoutRef<
-  typeof GBottomSheetView
+type BottomSheetViewProps = Omit<
+  React.ComponentPropsWithoutRef<typeof GBottomSheetView>,
+  'style'
 > & {
   hadHeader?: boolean;
+  style?: ViewStyle;
 };
 
 function BottomSheetView({
   className,
   children,
   hadHeader = true,
+  style,
   ...props
 }: BottomSheetViewProps) {
   const insets = useSafeAreaInsets();
   return (
     <GBottomSheetView
-      style={{
-        paddingBottom:
-          insets.bottom + (hadHeader ? BOTTOM_SHEET_HEADER_HEIGHT : 0),
-      }}
+      style={[
+        {
+          paddingBottom:
+            insets.bottom + (hadHeader ? BOTTOM_SHEET_HEADER_HEIGHT : 0),
+        },
+        style,
+      ]}
       className={cn(`px-4`, className)}
       {...props}
     >
@@ -272,9 +283,13 @@ const BottomSheetHeader = React.forwardRef<
 });
 
 type BottomSheetFooterRef = React.ElementRef<typeof View>;
-type BottomSheetFooterProps = React.ComponentPropsWithoutRef<typeof View> & {
+type BottomSheetFooterProps = Omit<
+  React.ComponentPropsWithoutRef<typeof View>,
+  'style'
+> & {
   bottomSheetFooterProps: GBottomSheetFooterProps;
   children?: React.ReactNode;
+  style?: ViewStyle;
 };
 
 /**
@@ -283,13 +298,13 @@ type BottomSheetFooterProps = React.ComponentPropsWithoutRef<typeof View> & {
 const BottomSheetFooter = React.forwardRef<
   BottomSheetFooterRef,
   BottomSheetFooterProps
->(({ bottomSheetFooterProps, children, className, ...props }, ref) => {
+>(({ bottomSheetFooterProps, children, className, style, ...props }, ref) => {
   const insets = useSafeAreaInsets();
   return (
     <GBottomSheetFooter {...bottomSheetFooterProps}>
       <View
         ref={ref}
-        style={{ paddingBottom: insets.bottom + 6 }}
+        style={[{ paddingBottom: insets.bottom + 6 }, style]}
         className={cn('px-4 pt-1.5', className)}
         {...props}
       >

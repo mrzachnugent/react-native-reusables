@@ -1,7 +1,7 @@
 import { useHeaderHeight } from '@react-navigation/elements';
 import { FlashList } from '@shopify/flash-list';
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
 import { Button } from './button';
@@ -30,7 +30,7 @@ const Tabs = React.forwardRef<
   React.ElementRef<typeof FlashList<string>>,
   Omit<
     React.ComponentPropsWithoutRef<typeof FlashList>,
-    'renderItem' | 'data'
+    'renderItem' | 'data' | 'style'
   > & {
     tabs: string[];
     renderTabs: (props: RenderTabsViewProps) => React.JSX.Element | null;
@@ -38,109 +38,118 @@ const Tabs = React.forwardRef<
       index: OnViewableItemsChangedInfo['changed'][number]
     ) => void;
     initialIndex?: number;
+    style?: ViewStyle;
   }
->(({ tabs, renderTabs, onTabChange, initialIndex = 0, ...props }, ref) => {
-  const headerListRef =
-    React.useRef<React.ElementRef<typeof FlashList<any>>>(null);
-  const tabsListRef =
-    React.useRef<React.ElementRef<typeof FlashList<any>>>(null);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+>(
+  (
+    { tabs, renderTabs, onTabChange, initialIndex = 0, style, ...props },
+    ref
+  ) => {
+    const headerListRef =
+      React.useRef<React.ElementRef<typeof FlashList<any>>>(null);
+    const tabsListRef =
+      React.useRef<React.ElementRef<typeof FlashList<any>>>(null);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  const onViewableItemsChanged = React.useRef(
-    (info: OnViewableItemsChangedInfo) => {
-      const changed = info.changed[0];
-      const index = changed?.index;
+    const onViewableItemsChanged = React.useRef(
+      (info: OnViewableItemsChangedInfo) => {
+        const changed = info.changed[0];
+        const index = changed?.index;
 
-      if (!changed || !changed.isViewable || typeof index !== 'number') return;
-      setCurrentIndex(index);
-      headerListRef.current?.scrollToIndex({
-        index: index,
-        animated: true,
-      });
-      onTabChange?.(changed);
-    }
-  );
-
-  const renderItem = React.useCallback(
-    ({ index, item }: RenderTabsViewProps) => {
-      return (
-        <Button
-          variant={'ghost'}
-          onPress={() => {
-            setCurrentIndex(index);
-            tabsListRef.current?.scrollToIndex({
-              index,
-              animated: false,
-            });
-            headerListRef.current?.scrollToIndex({
-              index,
-              animated: true,
-            });
-          }}
-          className={cn(
-            'border-b-2 px-8 py-4',
-            currentIndex === index ? 'border-foreground' : 'border-transparent'
-          )}
-          textClass={cn(
-            'text-base font-semibold tracking-wider text-foreground',
-            currentIndex !== index && 'opacity-70'
-          )}
-        >
-          {item}
-        </Button>
-      );
-    },
-    [currentIndex]
-  );
-
-  React.useImperativeHandle(
-    ref,
-    () => {
-      if (!tabsListRef.current) {
-        return {} as React.ComponentRef<typeof FlashList<string>>;
+        if (!changed || !changed.isViewable || typeof index !== 'number')
+          return;
+        setCurrentIndex(index);
+        headerListRef.current?.scrollToIndex({
+          index: index,
+          animated: true,
+        });
+        onTabChange?.(changed);
       }
-      return tabsListRef.current;
-    },
-    [tabsListRef.current]
-  );
+    );
 
-  return (
-    <View style={{ height }} {...props}>
-      <View
-        style={[{ height: HEADER_HEIGHT }]}
-        className='border-b-hairline border-border'
-      >
+    const renderItem = React.useCallback(
+      ({ index, item }: RenderTabsViewProps) => {
+        return (
+          <Button
+            variant={'ghost'}
+            onPress={() => {
+              setCurrentIndex(index);
+              tabsListRef.current?.scrollToIndex({
+                index,
+                animated: false,
+              });
+              headerListRef.current?.scrollToIndex({
+                index,
+                animated: true,
+              });
+            }}
+            className={cn(
+              'border-b-2 px-8 py-4',
+              currentIndex === index
+                ? 'border-foreground'
+                : 'border-transparent'
+            )}
+            textClass={cn(
+              'text-base font-semibold tracking-wider text-foreground',
+              currentIndex !== index && 'opacity-70'
+            )}
+          >
+            {item}
+          </Button>
+        );
+      },
+      [currentIndex]
+    );
+
+    React.useImperativeHandle(
+      ref,
+      () => {
+        if (!tabsListRef.current) {
+          return {} as React.ComponentRef<typeof FlashList<string>>;
+        }
+        return tabsListRef.current;
+      },
+      [tabsListRef.current]
+    );
+
+    return (
+      <View style={[{ height }, style]} {...props}>
+        <View
+          style={[{ height: HEADER_HEIGHT }]}
+          className='border-b-hairline border-border'
+        >
+          <FlashList
+            data={tabs}
+            ref={headerListRef}
+            horizontal
+            keyExtractor={(item) => item}
+            estimatedItemSize={100}
+            extraData={currentIndex}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 4 }}
+            renderItem={renderItem}
+            initialScrollIndex={initialIndex}
+          />
+        </View>
         <FlashList
+          role='tab'
+          ref={tabsListRef}
           data={tabs}
-          ref={headerListRef}
           horizontal
-          keyExtractor={(item) => item}
-          estimatedItemSize={100}
-          extraData={currentIndex}
+          estimatedItemSize={width}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 4 }}
-          renderItem={renderItem}
+          pagingEnabled
+          bounces={false}
+          keyExtractor={(item) => item}
+          onViewableItemsChanged={onViewableItemsChanged.current}
+          viewabilityConfig={viewabilityConfig}
+          renderItem={renderTabs}
           initialScrollIndex={initialIndex}
         />
       </View>
-      <FlashList
-        role='tab'
-        ref={tabsListRef}
-        data={tabs}
-        horizontal
-        estimatedItemSize={width}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        bounces={false}
-        keyExtractor={(item) => item}
-        onViewableItemsChanged={onViewableItemsChanged.current}
-        viewabilityConfig={viewabilityConfig}
-        renderItem={renderTabs}
-        initialScrollIndex={initialIndex}
-      />
-    </View>
-  );
-});
+    );
+  }
+);
 
 Tabs.displayName = 'Tabs';
 
