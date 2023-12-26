@@ -22,7 +22,7 @@ export default function DialogScreen() {
 
   async function copyLink() {
     await Promise.all([
-      Clipboard.setStringAsync('hello world'),
+      Clipboard.setStringAsync('https://github.com/mrzachnugent'),
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light),
     ]);
     setWasCopied(true);
@@ -50,6 +50,7 @@ export default function DialogScreen() {
                 className='flex-1'
                 autoFocus
                 defaultValue='https://github.com/mrzachnugent'
+                selectTextOnFocus
               />
               <Button size='sm' className='px-4' onPress={copyLink}>
                 {({ pressed }) =>

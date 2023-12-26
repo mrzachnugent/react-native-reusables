@@ -1,5 +1,4 @@
 import { VariantProps } from 'class-variance-authority';
-import * as Haptics from 'expo-haptics';
 import { useColorScheme } from 'nativewind';
 import React, { useImperativeHandle } from 'react';
 import {
@@ -91,7 +90,6 @@ const PopoverTrigger = React.forwardRef<
       setTriggerPosition({ width, pageX, pageY: pageY, height });
     });
     onPress?.(event);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   }
 
   useImperativeHandle(

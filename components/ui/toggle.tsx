@@ -1,4 +1,3 @@
-import * as Haptics from 'expo-haptics';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
@@ -42,7 +41,6 @@ const Toggle = React.forwardRef<
       <Pressable
         ref={ref}
         onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           if (onChange) {
             onChange((prev) => !prev);
             return;

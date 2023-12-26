@@ -3,7 +3,6 @@ import { Check } from 'lucide-react-native';
 
 import { cn } from '~/lib/utils';
 import { Pressable, View } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 interface CheckboxProps {
@@ -35,7 +34,6 @@ const Checkbox = React.forwardRef<
           className
         )}
         onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           if (onChange) {
             onChange((prev) => !prev);
             return;

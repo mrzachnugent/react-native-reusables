@@ -1,4 +1,3 @@
-import * as Haptics from 'expo-haptics';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
 import {
@@ -78,7 +77,6 @@ const DialogTrigger = React.forwardRef<
   const { setVisible } = useDialogContext();
   function handleOnPress(event: GestureResponderEvent) {
     setVisible(true);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     onPress?.(event);
   }
 
