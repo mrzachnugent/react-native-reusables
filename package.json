@@ -15,6 +15,7 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@gorhom/bottom-sheet": "^4",
+    "@hookform/resolvers": "^3.3.3",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/slider": "4.4.2",
     "@react-navigation/drawer": "^6.6.6",
@@ -40,6 +41,7 @@
     "nativewind": "^4.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.49.2",
     "react-native": "0.72.6",
     "react-native-calendars": "^1.1302.0",
     "react-native-gesture-handler": "~2.12.0",
@@ -49,7 +51,8 @@
     "react-native-svg": "13.9.0",
     "react-native-toast-message": "^2.2.0",
     "react-native-web": "~0.19.6",
-    "tailwind-merge": "^2.1.0"
+    "tailwind-merge": "^2.1.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
