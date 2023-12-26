@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Alert, View } from 'react-native';
 import * as z from 'zod';
 import { Button } from '~/components/ui/button';
-import { Form, FormField, FormInput } from '~/components/ui/form';
+import { Form, FormCheckbox, FormField, FormInput } from '~/components/ui/form';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -14,6 +14,9 @@ const formSchema = z.object({
   }),
   password: z.string().min(8, {
     message: 'Password must be at least 8 characters.',
+  }),
+  tos: z.literal(true, {
+    errorMap: () => ({ message: 'You must accept the terms & conditions' }),
   }),
 });
 
@@ -73,6 +76,18 @@ export default function FormScreen() {
                 secureTextEntry
                 autoComplete='password'
                 {...field}
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='tos'
+            render={({ field: { value, onChange, ...rest } }) => (
+              <FormCheckbox
+                label='Accept terms & conditions'
+                value={!!value}
+                onChange={(value) => onChange(!!value)}
+                {...rest}
               />
             )}
           />

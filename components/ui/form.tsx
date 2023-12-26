@@ -12,11 +12,11 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { Text, View } from 'react-native';
-
-import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { cn } from '~/lib/utils';
+import { Checkbox } from './checkbox';
 
 const Form = FormProvider;
 
@@ -138,7 +138,7 @@ const FormMessage = React.forwardRef<
   return (
     <Animated.Text
       entering={FadeInDown}
-      exiting={FadeOutUp.duration(275)}
+      exiting={FadeOut.duration(275)}
       ref={ref}
       id={formMessageNativeID}
       className={cn('text-sm font-medium text-destructive', className)}
@@ -189,11 +189,15 @@ const FormInput = React.forwardRef<
 
   return (
     <FormItem>
-      {!!label && <FormLabel onPress={handleOnLabelPress}>{label}</FormLabel>}
+      {!!label && (
+        <FormLabel nativeID={formItemNativeID} onPress={handleOnLabelPress}>
+          {label}
+        </FormLabel>
+      )}
 
       <Input
         ref={inputRef}
-        nativeID={formItemNativeID}
+        accessibilityLabelledBy={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -211,8 +215,67 @@ const FormInput = React.forwardRef<
 
 FormInput.displayName = 'FormInput';
 
+const FormCheckbox = React.forwardRef<
+  React.ElementRef<typeof Checkbox>,
+  React.ComponentPropsWithoutRef<typeof Checkbox> & {
+    label?: string;
+    description?: string;
+  }
+>(({ label, description, value, onChange, ...props }, ref) => {
+  const checkboxRef = React.useRef<React.ComponentRef<typeof Checkbox>>(null);
+  const {
+    error,
+    formItemNativeID,
+    formDescriptionNativeID,
+    formMessageNativeID,
+  } = useFormField();
+
+  React.useImperativeHandle(
+    ref,
+    () => {
+      if (!checkboxRef.current) {
+        return {} as React.ComponentRef<typeof Checkbox>;
+      }
+      return checkboxRef.current;
+    },
+    [checkboxRef.current]
+  );
+
+  function handleOnLabelPress() {
+    onChange?.(!value);
+  }
+
+  return (
+    <FormItem>
+      <View className='flex-row gap-3 items-center bg-background'>
+        <Checkbox
+          ref={checkboxRef}
+          accessibilityLabelledBy={formItemNativeID}
+          aria-describedby={
+            !error
+              ? `${formDescriptionNativeID}`
+              : `${formDescriptionNativeID} ${formMessageNativeID}`
+          }
+          aria-invalid={!!error}
+          onChange={onChange}
+          value={value}
+          {...props}
+        />
+        {!!label && (
+          <FormLabel nativeID={formItemNativeID} onPress={handleOnLabelPress}>
+            {label}
+          </FormLabel>
+        )}
+      </View>
+      {!!description && <FormDescription>{description}</FormDescription>}
+      <FormMessage />
+    </FormItem>
+  );
+});
+
+FormCheckbox.displayName = 'FormCheckbox';
+
 // TODO: add Form components for:
-// Checkbox
 // Date Picker
 // Radio Group
 // Select
@@ -222,6 +285,7 @@ FormInput.displayName = 'FormInput';
 
 export {
   Form,
+  FormCheckbox,
   FormDescription,
   FormField,
   FormInput,
