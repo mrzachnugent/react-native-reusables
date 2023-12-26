@@ -1,17 +1,16 @@
-import { Pressable, ScrollView, Text, View } from 'react-native';
-import * as React from 'react';
-
-import { cn } from '~/lib/utils';
 import { FlashList } from '@shopify/flash-list';
+import React from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PressableSlot } from '../primitives/pressable-slot';
+import { PressableSlot } from '~/components/primitives/pressable-slot';
+import { cn, isTextChildren } from '~/lib/utils';
 
 const Table = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, ...props }, ref) => (
   <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
-    <View ref={ref} className={className} {...props} />
+    <View role='table' ref={ref} className={className} {...props} />
   </ScrollView>
 ));
 Table.displayName = 'Table';
@@ -20,48 +19,58 @@ const TableHeader = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, ...props }, ref) => (
-  <View ref={ref} className={className} {...props} />
+  <View role='rowheader' ref={ref} className={className} {...props} />
 ));
 TableHeader.displayName = 'TableHeader';
 
-type TableBodyListProps<T> = React.ComponentPropsWithoutRef<
+const TableBody = React.forwardRef<
+  React.ElementRef<typeof View>,
+  React.ComponentPropsWithoutRef<typeof View>
+>(({ className, style, ...props }, ref) => (
+  <View
+    ref={ref}
+    className={cn('flex-1', className)}
+    style={[{ minHeight: 2 }, style]}
+    role='rowgroup'
+    {...props}
+  />
+));
+TableBody.displayName = 'TableBody';
+
+type TableRowsFlashListProps<T> = React.ComponentPropsWithoutRef<
   typeof FlashList<T>
 > & {
   rootClass?: string;
 };
 
-function TableBodyList<T>(
-  { rootClass, ...props }: TableBodyListProps<T>,
+function TableRowsFlashList<T>(
+  { contentContainerStyle, ...props }: TableRowsFlashListProps<T>,
   ref: React.ForwardedRef<React.ElementRef<typeof FlashList<T>>>
 ) {
   const insets = useSafeAreaInsets();
   return (
-    <View
-      className={cn('flex-1', rootClass)}
-      style={{ minHeight: 2 }}
+    <FlashList<T>
+      ref={ref}
+      contentContainerStyle={{
+        paddingBottom: insets.bottom,
+        ...contentContainerStyle,
+      }}
+      showsVerticalScrollIndicator={false}
       {...props}
-    >
-      <FlashList<T>
-        ref={ref}
-        contentContainerStyle={{ paddingBottom: insets.bottom }}
-        showsVerticalScrollIndicator={false}
-        {...props}
-      />
-    </View>
+    />
   );
 }
 
-interface WithForwardRefTableBody
-  extends React.FC<TableBodyListProps<unknown>> {
-  <T>(props: TableBodyListProps<T>): ReturnType<
-    React.FC<TableBodyListProps<T>>
+interface WithForwardRefTableRowsList
+  extends React.FC<TableRowsFlashListProps<unknown>> {
+  <T>(props: TableRowsFlashListProps<T>): ReturnType<
+    React.FC<TableRowsFlashListProps<T>>
   >;
 }
 
-const TableBody: WithForwardRefTableBody = React.forwardRef(TableBodyList);
-TableBody.displayName = 'TableBody';
-
-TableBody.displayName = 'TableBody';
+const TableRowsList: WithForwardRefTableRowsList =
+  React.forwardRef(TableRowsFlashList);
+TableRowsList.displayName = 'TableRowsList';
 
 const TableFooter = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -70,6 +79,7 @@ const TableFooter = React.forwardRef<
   <View
     ref={ref}
     className={cn('bg-muted font-medium', className)}
+    role='rowgroup'
     {...props}
   />
 ));
@@ -86,6 +96,7 @@ const TableRow = React.forwardRef<
     <Row
       ref={ref}
       className={cn('flex-row border-border border-b', className)}
+      role='row'
       {...props}
     />
   );
@@ -95,15 +106,18 @@ TableRow.displayName = 'TableRow';
 const TableHead = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> & {
+    width: number;
     textClass?: string;
   }
->(({ children, className, textClass, ...props }, ref) => (
+>(({ children, width, style, className, textClass, ...props }, ref) => (
   <View
     ref={ref}
-    className={cn('h-12 justify-center px-4', className)}
+    className={cn('h-12 flex-1 justify-center px-4', className)}
+    role='columnheader'
+    style={[{ width }, style]}
     {...props}
   >
-    {typeof children === 'string' ? (
+    {isTextChildren(children) ? (
       <Text
         className={cn('text-left font-medium text-muted-foreground', textClass)}
       >
@@ -119,21 +133,43 @@ TableHead.displayName = 'TableHead';
 const TableCell = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> & {
+    width: number;
     textClass?: string;
+    numberOfLines?: number;
   }
->(({ children, className, textClass, ...props }, ref) => (
-  <View
-    ref={ref}
-    className={cn('flex-1 justify-center p-4', className)}
-    {...props}
-  >
-    {typeof children === 'string' ? (
-      <Text className={cn('text-foreground', textClass)}>{children}</Text>
-    ) : (
-      children
-    )}
-  </View>
-));
+>(
+  (
+    {
+      width,
+      style,
+      children,
+      className,
+      textClass,
+      numberOfLines = 1,
+      ...props
+    },
+    ref
+  ) => (
+    <View
+      ref={ref}
+      className={cn('justify-center p-4', className)}
+      role='cell'
+      style={[{ width }, style]}
+      {...props}
+    >
+      {isTextChildren(children) ? (
+        <Text
+          className={cn('text-foreground', textClass)}
+          numberOfLines={numberOfLines}
+        >
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
+    </View>
+  )
+);
 TableCell.displayName = 'TableCell';
 
 const TableCaption = React.forwardRef<
@@ -143,7 +179,7 @@ const TableCaption = React.forwardRef<
   }
 >(({ children, className, textClass, ...props }, ref) => (
   <View ref={ref} className={cn('pt-6', className)} {...props}>
-    {typeof children === 'string' ? (
+    {isTextChildren(children) ? (
       <Text className={cn('text-sm text-muted-foreground', textClass)}>
         {children}
       </Text>
@@ -156,11 +192,12 @@ TableCaption.displayName = 'TableCaption';
 
 export {
   Table,
-  TableHeader,
   TableBody,
+  TableCaption,
+  TableCell,
   TableFooter,
   TableHead,
+  TableHeader,
   TableRow,
-  TableCell,
-  TableCaption,
+  TableRowsList,
 };

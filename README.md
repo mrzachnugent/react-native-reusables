@@ -4,7 +4,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
-**Progress**: 31 ✅ / 37 components
+**Progress**: 32 ✅ / 37 components
 
 ## Components
 
@@ -139,7 +139,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5
 
 ### Table
 
-(soon)
+https://github.com/mrzachnugent/rnr-ui-inspired-by-shadcn/assets/63797719/32b0d075-213f-477e-a1c7-c05b7a7645e2
 
 ### Tabs
 

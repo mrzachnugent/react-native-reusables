@@ -1,10 +1,17 @@
 import Drawer from 'expo-router/drawer';
-import { Alert, Text } from 'react-native';
+import { ChevronDown } from 'lucide-react-native';
+import { Alert, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { Button } from '~/components/ui/button';
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '~/components/ui/popover';
+import {
   Table,
   TableBody,
+  TableRowsList,
   TableCaption,
   TableCell,
   TableFooter,
@@ -14,126 +21,171 @@ import {
 } from '~/components/ui/table';
 import { cn } from '~/lib/utils';
 
+const COLUMN_WIDTHS = [120, 120, 100, 160] as const;
+
 export default function TableScreen() {
   return (
     <>
       <Drawer.Screen
         options={{ headerStyle: { shadowColor: 'transparent' } }}
       />
-      <Table>
-        <TableHeader className=''>
+      <Table nativeID='invoice-table'>
+        <TableHeader>
           <TableRow>
-            <TableHead className='w-40'>Invoice</TableHead>
-            <TableHead className='w-40'>Status</TableHead>
-            <TableHead className='w-40'>Method</TableHead>
-            <TableHead className='w-40' textClass='text-center'>
+            <TableHead className='px-0.5' width={COLUMN_WIDTHS[0]}>
+              <Popover>
+                <PopoverTrigger
+                  variant='ghost'
+                  size='sm'
+                  className='justify-start'
+                >
+                  {({ pressed }) => (
+                    <>
+                      <Text
+                        className={cn(
+                          pressed && 'opacity-70',
+                          'text-base text-muted-foreground font-medium'
+                        )}
+                      >
+                        Invoice
+                      </Text>
+                      <ChevronDown
+                        className={cn(
+                          pressed && 'opacity-70',
+                          'text-muted-foreground'
+                        )}
+                        size={18}
+                      />
+                    </>
+                  )}
+                </PopoverTrigger>
+                <PopoverContent width={300} className='p-5'>
+                  <View className='gap-1.5'>
+                    <Text className='text-2xl font-bold text-foreground'>
+                      Table Head
+                    </Text>
+                    <Text className='text-lg text-muted-foreground'>
+                      This is the Invoice column. Just an example of a popover.
+                    </Text>
+                  </View>
+                </PopoverContent>
+              </Popover>
+            </TableHead>
+            <TableHead width={COLUMN_WIDTHS[1]}>Status</TableHead>
+            <TableHead width={COLUMN_WIDTHS[2]}>Method</TableHead>
+            <TableHead width={COLUMN_WIDTHS[3]} textClass='text-center'>
               Amount
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody
-          data={invoices}
-          estimatedItemSize={45}
-          renderItem={({ item: invoice, index }) => {
-            return (
-              <TableRow
-                key={invoice.invoice}
-                className={cn(
-                  index % 2 && 'bg-zinc-100/50 dark:bg-zinc-900/50'
-                )}
-                onPress={() => {
-                  Alert.alert(`Row for invoice ${invoice.invoice} pressed`);
-                }}
-              >
-                {({ pressed }) => (
-                  <>
-                    <TableCell
-                      className={cn('w-40', pressed && 'bg-secondary')}
-                      textClass='font-medium text-foreground'
-                    >
-                      {invoice.invoice}
-                    </TableCell>
-                    <TableCell
-                      className={cn('w-40', pressed && 'bg-secondary')}
-                      textClass='text-foreground'
-                    >
-                      {invoice.paymentStatus}
-                    </TableCell>
-                    <TableCell
-                      className={cn('w-40', pressed && 'bg-secondary')}
-                      textClass='text-foreground'
-                    >
-                      {invoice.paymentMethod}
-                    </TableCell>
-                    <TableCell
-                      className={cn('w-40', pressed && 'bg-secondary')}
-                      textClass='text-foreground text-right'
-                    >
-                      <Button
-                        variant='secondary'
-                        size='sm'
-                        onPress={() => {
-                          Toast.show({
-                            type: 'base',
-                            text1: 'Added to cart!',
-                            text2: 'Some description of that this could do.',
-                            props: {
-                              icon: 'ShoppingCart',
-                            },
-                          });
-                        }}
+        <TableBody>
+          <TableRowsList
+            data={INVOICES}
+            estimatedItemSize={45}
+            renderItem={({ item: invoice, index }) => {
+              return (
+                <TableRow
+                  key={invoice.invoice}
+                  className={cn(
+                    index % 2 && 'bg-zinc-100/50 dark:bg-zinc-900/50'
+                  )}
+                  onPress={() => {
+                    Toast.show({
+                      type: 'base',
+                      text1: `${invoice.invoice}`,
+                      text2: 'The row was pressed.',
+                      props: {
+                        icon: 'Rows',
+                      },
+                      visibilityTime: 1500,
+                    });
+                  }}
+                >
+                  {({ pressed }) => (
+                    <>
+                      <TableCell
+                        className={cn(pressed && 'bg-secondary')}
+                        textClass='font-medium text-foreground'
+                        width={COLUMN_WIDTHS[0]}
                       >
-                        {invoice.totalAmount}
-                      </Button>
-                    </TableCell>
-                  </>
-                )}
-              </TableRow>
-            );
-          }}
-          ListFooterComponent={() => {
-            return (
-              <>
-                <TableFooter>
-                  <TableRow>
-                    <TableCell>
-                      <Text className='text-foreground'>Total</Text>
-                    </TableCell>
-                    <TableCell className='items-end pr-6'>
-                      <Button
-                        size='sm'
-                        variant='ghost'
-                        onPress={() => {
-                          Toast.show({
-                            type: 'base',
-                            text1: 'Added to cart!',
-                            text2: 'Some description of that this could do.',
-                            props: {
-                              icon: 'ShoppingCart',
-                            },
-                          });
-                        }}
+                        {invoice.invoice}
+                      </TableCell>
+                      <TableCell
+                        className={cn(pressed && 'bg-secondary')}
+                        textClass='text-foreground'
+                        width={COLUMN_WIDTHS[1]}
                       >
-                        $2,500.00
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                </TableFooter>
-                <TableCaption className=''>
-                  <Text className='text-muted-foreground text-center '>
-                    A list of your recent invoices.
-                  </Text>
-                </TableCaption>
-              </>
-            );
-          }}
-        />
+                        {invoice.paymentStatus}
+                      </TableCell>
+                      <TableCell
+                        className={cn(pressed && 'bg-secondary')}
+                        textClass='text-foreground'
+                        width={COLUMN_WIDTHS[2]}
+                      >
+                        {invoice.paymentMethod}
+                      </TableCell>
+                      <TableCell
+                        className={cn(pressed && 'bg-secondary ')}
+                        width={COLUMN_WIDTHS[3]}
+                      >
+                        <Button
+                          variant='secondary'
+                          size='sm'
+                          onPress={() => {
+                            Alert.alert(
+                              invoice.totalAmount,
+                              `You pressed the price button on invoice ${invoice.invoice}.`
+                            );
+                          }}
+                        >
+                          {invoice.totalAmount}
+                        </Button>
+                      </TableCell>
+                    </>
+                  )}
+                </TableRow>
+              );
+            }}
+            ListFooterComponent={() => {
+              return (
+                <>
+                  <TableFooter>
+                    <TableRow>
+                      <TableCell className='flex-1' width={200}>
+                        <Text className='text-foreground'>Total</Text>
+                      </TableCell>
+                      <TableCell className='items-end pr-8' width={200}>
+                        <Button
+                          size='sm'
+                          variant='ghost'
+                          onPress={() => {
+                            Alert.alert(
+                              'Total Amount',
+                              `You pressed the total amount price button.`
+                            );
+                          }}
+                        >
+                          $2,500.00
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  </TableFooter>
+                  <TableCaption accessibilityLabelledBy='invoice-table'>
+                    <Text className='text-muted-foreground text-center '>
+                      A list of your recent invoices.
+                    </Text>
+                  </TableCaption>
+                </>
+              );
+            }}
+          />
+        </TableBody>
       </Table>
     </>
   );
 }
 
-const invoices = [
+const INVOICES = [
   {
     invoice: 'INV001',
     paymentStatus: 'Paid',

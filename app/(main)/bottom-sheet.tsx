@@ -9,7 +9,11 @@ import {
   BottomSheetTextInput,
   BottomSheetView,
 } from '~/components/ui/bottom-sheet';
-import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
+import {
+  Button,
+  buttonTextVariants,
+  buttonVariants,
+} from '~/components/ui/button';
 import { Label } from '~/components/ui/label';
 import { cn } from '~/lib/utils';
 
@@ -32,8 +36,8 @@ export default function BottomSheetScreen() {
   return (
     <View className='flex-1 justify-center items-center'>
       <BottomSheet>
-        <BottomSheetOpenTrigger className={buttonVariants()}>
-          <Text className={buttonTextVariants()}>Open</Text>
+        <BottomSheetOpenTrigger asChild>
+          <Button>Open</Button>
         </BottomSheetOpenTrigger>
         <BottomSheetContent>
           <BottomSheetHeader>

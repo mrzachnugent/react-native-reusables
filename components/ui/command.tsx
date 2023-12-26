@@ -11,7 +11,7 @@ import {
 import Animated, { FadeInUp, SlideInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PressableSlot } from '~/components/primitives/pressable-slot';
-import { cn } from '~/lib/utils';
+import { cn, isTextChildren } from '~/lib/utils';
 import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';
@@ -353,7 +353,7 @@ const CommandListHeader = React.forwardRef<
       )}
       {...props}
     >
-      {typeof children === 'string' ? (
+      {isTextChildren(children) ? (
         <Text
           className={cn(
             'text-muted-foreground text-base font-semibold px-0.5',

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { composeRefs, mergeProps } from '~/components/primitives/utils';
+import { isTextChildren } from '~/lib/utils';
 
 type PressableSlotProps = React.ComponentPropsWithoutRef<typeof Pressable>;
 
@@ -17,7 +18,7 @@ const PressableSlot = React.forwardRef<
   return React.cloneElement<
     React.ComponentPropsWithoutRef<typeof Pressable>,
     React.ElementRef<typeof Pressable>
-  >(typeof children === 'string' ? <Pressable /> : children, {
+  >(isTextChildren(children) ? <Pressable /> : children, {
     ...mergeProps(PressableslotProps, children.props),
     ref: forwardedRef
       ? composeRefs(forwardedRef, (children as any).ref)

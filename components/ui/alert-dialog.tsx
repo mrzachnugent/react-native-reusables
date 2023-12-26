@@ -38,7 +38,7 @@ const AlertDialog = React.forwardRef<
     {
       open,
       setOpen,
-      closeOnOverlayPress = true,
+      closeOnOverlayPress = false,
       defaultOpen = false,
       ...props
     },

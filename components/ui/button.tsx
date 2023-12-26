@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '~/lib/utils';
+import { cn, isTextChildren } from '~/lib/utils';
 import { Pressable, Text } from 'react-native';
 import { useColorScheme } from 'nativewind';
 
@@ -87,7 +87,7 @@ const Button = React.forwardRef<
         }}
         {...props}
       >
-        {typeof children === 'string'
+        {isTextChildren(children)
           ? ({ pressed }) => (
               <Text
                 className={cn(
@@ -95,7 +95,7 @@ const Button = React.forwardRef<
                   buttonTextVariants({ variant, size, className: textClass })
                 )}
               >
-                {children}
+                {children as string | string[]}
               </Text>
             )
           : children}
