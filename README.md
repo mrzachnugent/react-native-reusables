@@ -4,13 +4,53 @@ Work in progress...
 
 ![banner](https://github.com/mrzachnugent/react-native-reusables/assets/63797719/0eef0a6d-d8eb-4b52-a97d-fa3b1e534215)
 
-## Powered by [Expo](https://docs.expo.dev/) and styled with [Nativeind v4](https://www.nativewind.dev/v4/overview)
+## Powered by [Expo](https://docs.expo.dev/) and styled with [NativeWind v4](https://www.nativewind.dev/v4/overview)
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own **mobile** component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
 **Progress**: 32 ✅ / 37 components
 
-## Components
+<details>
+<summary>Table of contents</summary>
+
+1. [Accordion](#accordion)
+2. [Alert](#alert)
+3. [Alert Dialog](#alert-dialog)
+4. [Avatar](#avatar)
+5. [Badge](#badge)
+6. [Bottom Sheet](#bottom-sheet)
+7. [Button](#button)
+8. [Calendar](#calendar)
+9. [Card](#card)
+10. [Checkbox](#checkbox)
+11. [Combobox](#combobox)
+12. [Collapsible](#collapsible)
+13. [Command](#command)
+14. [Context Menu](#context-menu) 🔜
+15. [Data Table](#data-table) 🔜
+16. [Date Picker](#date-picker)
+17. [Dialog](#dialog)
+18. [Dropdown Menu](#dropdown-menu) 🔜
+19. [Form](#form) 🚧
+20. [Input](#input)
+21. [Label](#label)
+22. [Menubar](#menubar) 🔜
+23. [Popover](#popover)
+24. [Progress](#progress)
+25. [Radio-group](#radio-group)
+26. [Select](#select)
+27. [Separator](#separator)
+28. [Skeleton](#skeleton)
+29. [Slider](#slider)
+30. [Switch](#switch)
+31. [Table](#table)
+32. [Tabs](#tabs)
+33. [Textarea](#textarea)
+34. [Toast](#toast)
+35. [Toggle](#toggle)
+36. [Toggle Group](#toggle-group)
+37. [Tooltip](#tooltip)
+</details>
 
 ### Accordion
 
