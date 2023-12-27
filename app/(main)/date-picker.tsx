@@ -8,7 +8,7 @@ import {
   BottomSheetOpenTrigger,
   BottomSheetView,
 } from '~/components/ui/bottom-sheet';
-import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
+import { Button, buttonTextVariants } from '~/components/ui/button';
 import { Calendar } from '~/components/ui/calendar';
 import { cn } from '~/lib/utils';
 
@@ -17,31 +17,28 @@ export default function DatePickerScreen() {
   return (
     <View className='flex-1 justify-center items-center'>
       <BottomSheet className='px-6'>
-        <BottomSheetOpenTrigger
-          className={buttonVariants({
-            variant: 'outline',
-            className: 'gap-3',
-          })}
-        >
-          {({ pressed }) => (
-            <>
-              <CalendarIcon
-                className={buttonTextVariants({
-                  variant: 'outline',
-                  className: pressed ? 'opacity-70' : '',
-                })}
-                size={21}
-              />
-              <Text
-                className={buttonTextVariants({
-                  variant: 'outline',
-                  className: pressed ? 'opacity-70' : '',
-                })}
-              >
-                {selectedDate ? selectedDate : 'Pick a date'}
-              </Text>
-            </>
-          )}
+        <BottomSheetOpenTrigger asChild>
+          <Button variant='outline' className='gap-3'>
+            {({ pressed }) => (
+              <>
+                <CalendarIcon
+                  className={buttonTextVariants({
+                    variant: 'outline',
+                    className: pressed ? 'opacity-70' : '',
+                  })}
+                  size={21}
+                />
+                <Text
+                  className={buttonTextVariants({
+                    variant: 'outline',
+                    className: pressed ? 'opacity-70' : '',
+                  })}
+                >
+                  {selectedDate ? selectedDate : 'Pick a date'}
+                </Text>
+              </>
+            )}
+          </Button>
         </BottomSheetOpenTrigger>
         <BottomSheetContent>
           <BottomSheetView hadHeader={false} className='pt-2'>
@@ -60,18 +57,18 @@ export default function DatePickerScreen() {
               current={selectedDate} // opens calendar on selected date
             />
             <View className={'pb-2 pt-4'}>
-              <BottomSheetCloseTrigger
-                className={buttonVariants({ size: 'sm' })}
-              >
-                {({ pressed }) => (
-                  <Text
-                    className={buttonTextVariants({
-                      className: cn(pressed && 'opacity-70'),
-                    })}
-                  >
-                    Close
-                  </Text>
-                )}
+              <BottomSheetCloseTrigger asChild>
+                <Button size='sm'>
+                  {({ pressed }) => (
+                    <Text
+                      className={buttonTextVariants({
+                        className: cn(pressed && 'opacity-70'),
+                      })}
+                    >
+                      Close
+                    </Text>
+                  )}
+                </Button>
               </BottomSheetCloseTrigger>
             </View>
           </BottomSheetView>

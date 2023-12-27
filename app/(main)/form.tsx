@@ -1,22 +1,41 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Alert, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 import * as z from 'zod';
 import { Button } from '~/components/ui/button';
-import { Form, FormCheckbox, FormField, FormInput } from '~/components/ui/form';
+import {
+  Form,
+  FormCheckbox,
+  FormDatePicker,
+  FormField,
+  FormInput,
+} from '~/components/ui/form';
 
 const formSchema = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address.',
   }),
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
   password: z.string().min(8, {
     message: 'Password must be at least 8 characters.',
   }),
-  tos: z.literal(true, {
-    errorMap: () => ({ message: 'You must accept the terms & conditions' }),
+  dob: z
+    .string()
+    .min(1, { message: 'Please enter your date of birth' })
+    .refine(
+      (dob) => {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const today = `${year}-${month}-${day}`;
+        return new Date(today).getTime() !== new Date(dob).getTime();
+      },
+      {
+        message: 'You cannot be born today.',
+      }
+    ),
+  tos: z.boolean().refine((value) => value, {
+    message: 'You must accept the terms & conditions',
   }),
 });
 
@@ -25,8 +44,8 @@ export default function FormScreen() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      username: '',
       password: '',
+      tos: false,
     },
   });
 
@@ -36,7 +55,7 @@ export default function FormScreen() {
   }
 
   return (
-    <View className='flex-1 justify-center p-6'>
+    <ScrollView contentContainerClassName='flex-1 justify-center p-6'>
       <Form {...form}>
         <View className='gap-6'>
           <FormField
@@ -46,21 +65,9 @@ export default function FormScreen() {
               <FormInput
                 label='Email'
                 placeholder='hello@zachnugent.ca'
+                description='This will not be shared.'
                 autoCapitalize='none'
                 autoComplete='email'
-                {...field}
-              />
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='username'
-            render={({ field }) => (
-              <FormInput
-                label='Username'
-                placeholder='mrzachnugent'
-                description='This is your public display name.'
-                autoCapitalize='none'
                 {...field}
               />
             )}
@@ -81,20 +88,35 @@ export default function FormScreen() {
           />
           <FormField
             control={form.control}
-            name='tos'
-            render={({ field: { value, onChange, ...rest } }) => (
-              <FormCheckbox
-                label='Accept terms & conditions'
-                value={!!value}
-                onChange={(value) => onChange(!!value)}
-                {...rest}
+            name='dob'
+            render={({ field }) => (
+              <FormDatePicker
+                label='Date of birth'
+                maxDate={new Date().toDateString()}
+                {...field}
               />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='tos'
+            render={({ field }) => (
+              <FormCheckbox label='Accept terms & conditions' {...field} />
             )}
           />
           <View />
           <Button onPress={form.handleSubmit(onSubmit)}>Submit</Button>
+          <Button
+            variant='ghost'
+            size='sm'
+            onPress={() => {
+              form.clearErrors();
+            }}
+          >
+            Clear errors
+          </Button>
         </View>
       </Form>
-    </View>
+    </ScrollView>
   );
 }

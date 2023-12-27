@@ -2,6 +2,7 @@
 // The code is licensed under the MIT License.
 // https://github.com/shadcn-ui/ui
 
+import { CalendarIcon, X } from 'lucide-react-native';
 import React from 'react';
 import {
   Controller,
@@ -13,6 +14,15 @@ import {
 } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
+import {
+  BottomSheet,
+  BottomSheetCloseTrigger,
+  BottomSheetContent,
+  BottomSheetOpenTrigger,
+  BottomSheetView,
+} from '~/components/ui/bottom-sheet';
+import { Button, buttonTextVariants } from '~/components/ui/button';
+import { Calendar } from '~/components/ui/calendar';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { cn } from '~/lib/utils';
@@ -117,7 +127,7 @@ const FormDescription = React.forwardRef<
     <Text
       ref={ref}
       id={formDescriptionNativeID}
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-sm text-muted-foreground pt-1', className)}
       {...props}
     />
   );
@@ -246,7 +256,7 @@ const FormCheckbox = React.forwardRef<
   }
 
   return (
-    <FormItem>
+    <FormItem className='px-1'>
       <View className='flex-row gap-3 items-center bg-background'>
         <Checkbox
           ref={checkboxRef}
@@ -275,8 +285,126 @@ const FormCheckbox = React.forwardRef<
 
 FormCheckbox.displayName = 'FormCheckbox';
 
+const FormDatePicker = React.forwardRef<
+  React.ElementRef<typeof Button>,
+  Omit<React.ComponentPropsWithoutRef<typeof Calendar>, 'onChange'> & {
+    label?: string;
+    description?: string;
+    value?: string;
+    onChange?: ((text: string) => void) | undefined;
+  }
+>(({ label, description, value, onChange, ...props }, ref) => {
+  const {
+    error,
+    formItemNativeID,
+    formDescriptionNativeID,
+    formMessageNativeID,
+  } = useFormField();
+
+  return (
+    <FormItem>
+      {!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
+      <BottomSheet>
+        <BottomSheetOpenTrigger asChild>
+          <Button
+            variant='outline'
+            className='gap-3 justify-start px-4 relative'
+            ref={ref}
+            accessibilityLabelledBy={formItemNativeID}
+            aria-describedby={
+              !error
+                ? `${formDescriptionNativeID}`
+                : `${formDescriptionNativeID} ${formMessageNativeID}`
+            }
+            aria-invalid={!!error}
+          >
+            {({ pressed }) => (
+              <>
+                <CalendarIcon
+                  className={buttonTextVariants({
+                    variant: 'outline',
+                    className: cn(
+                      !value && 'opacity-80',
+                      pressed && 'opacity-50'
+                    ),
+                  })}
+                  size={21}
+                />
+                <Text
+                  className={buttonTextVariants({
+                    variant: 'outline',
+                    className: cn(
+                      !value && 'opacity-80',
+                      pressed && 'opacity-50'
+                    ),
+                  })}
+                >
+                  {value ? value : 'Pick a date'}
+                </Text>
+                {!!value && (
+                  <Button
+                    className='absolute right-0 px-3'
+                    variant='ghost'
+                    onPress={() => {
+                      onChange?.('');
+                    }}
+                  >
+                    {({ pressed }) => (
+                      <X
+                        className={cn(
+                          'text-muted-foreground',
+                          pressed && 'opacity-70'
+                        )}
+                      />
+                    )}
+                  </Button>
+                )}
+              </>
+            )}
+          </Button>
+        </BottomSheetOpenTrigger>
+        <BottomSheetContent>
+          <BottomSheetView hadHeader={false} className='pt-2'>
+            <Calendar
+              style={{ height: 358 }}
+              onDayPress={(day) => {
+                onChange?.(day.dateString === value ? '' : day.dateString);
+              }}
+              markedDates={{
+                [value ?? '']: {
+                  selected: true,
+                },
+              }}
+              current={value} // opens calendar on selected date
+              {...props}
+            />
+            <View className={'pb-2 pt-4'}>
+              <BottomSheetCloseTrigger asChild>
+                <Button size='sm'>
+                  {({ pressed }) => (
+                    <Text
+                      className={buttonTextVariants({
+                        className: cn(pressed && 'opacity-70'),
+                      })}
+                    >
+                      Close
+                    </Text>
+                  )}
+                </Button>
+              </BottomSheetCloseTrigger>
+            </View>
+          </BottomSheetView>
+        </BottomSheetContent>
+      </BottomSheet>
+      {!!description && <FormDescription>{description}</FormDescription>}
+      <FormMessage />
+    </FormItem>
+  );
+});
+
+FormCheckbox.displayName = 'FormCheckbox';
+
 // TODO: add Form components for:
-// Date Picker
 // Radio Group
 // Select
 // Switch
@@ -286,11 +414,13 @@ FormCheckbox.displayName = 'FormCheckbox';
 export {
   Form,
   FormCheckbox,
+  FormDatePicker,
   FormDescription,
   FormField,
   FormInput,
   FormItem,
   FormLabel,
   FormMessage,
-  useFormField,
+  useFormField
 };
+
