@@ -62,7 +62,7 @@ export default function TabsScreen() {
         tabs={DATA}
         renderTabs={renderTabs}
         onTabChange={(tab) => {
-          console.log('Set New Params', { tab: tab.item });
+          console.log('Active tab:', tab.item);
         }}
         initialIndex={DATA.indexOf(params.tab ?? 'Blue')}
       />

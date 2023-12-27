@@ -17,6 +17,7 @@ import { useColorScheme } from 'nativewind';
 import React, { useCallback, useImperativeHandle } from 'react';
 import {
   GestureResponderEvent,
+  Keyboard,
   Pressable,
   View,
   ViewStyle,
@@ -109,6 +110,7 @@ const BottomSheetContent = React.forwardRef<
           opacity = colorScheme === 'dark' ? 0.3 : 0.7,
           disappearsOnIndex = CLOSED_INDEX,
           style,
+          onPress,
           ...rest
         } = {
           ...props,
@@ -120,6 +122,12 @@ const BottomSheetContent = React.forwardRef<
             disappearsOnIndex={disappearsOnIndex}
             pressBehavior={pressBehavior}
             style={[{ backgroundColor: NAV_THEME[colorScheme].border }, style]}
+            onPress={() => {
+              if (Keyboard.isVisible()) {
+                Keyboard.dismiss();
+              }
+              onPress?.();
+            }}
             {...rest}
           />
         );
@@ -173,6 +181,9 @@ const BottomSheetCloseTrigger = React.forwardRef<
   const { dismiss } = useBottomSheetModal();
   function handleOnPress(ev: GestureResponderEvent) {
     dismiss();
+    if (Keyboard.isVisible()) {
+      Keyboard.dismiss();
+    }
     onPress?.(ev);
   }
   const Trigger = asChild ? PressableSlot : Pressable;
@@ -263,6 +274,9 @@ const BottomSheetHeader = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const { dismiss } = useBottomSheetModal();
   function close() {
+    if (Keyboard.isVisible()) {
+      Keyboard.dismiss();
+    }
     dismiss();
   }
   return (

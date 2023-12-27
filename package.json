@@ -1,5 +1,5 @@
 {
-  "name": "re-usable-rn-ui",
+  "name": "react-native-reusables",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {

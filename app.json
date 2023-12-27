@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RN UI inspired by shadcn",
-    "slug": "rn-ui-inspired-by-shadcn",
+    "name": "React Native Reusables",
+    "slug": "react-native-reusables",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

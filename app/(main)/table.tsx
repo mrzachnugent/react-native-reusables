@@ -1,6 +1,6 @@
 import Drawer from 'expo-router/drawer';
 import { ChevronDown } from 'lucide-react-native';
-import { Alert, Text, View } from 'react-native';
+import { Alert, Dimensions, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { Button } from '~/components/ui/button';
 import {
@@ -21,7 +21,18 @@ import {
 } from '~/components/ui/table';
 import { cn } from '~/lib/utils';
 
-const COLUMN_WIDTHS = [120, 120, 100, 160] as const;
+const { width } = Dimensions.get('window');
+
+const MIN_COLUMN_WIDTHS = [120, 120, 100, 160];
+
+function getColumnWidth(minWidths: number[]) {
+  return minWidths.map((minWidth) => {
+    const evenWidth = width / minWidths.length;
+    return evenWidth > minWidth ? evenWidth : minWidth;
+  });
+}
+
+const columnWidths = getColumnWidth(MIN_COLUMN_WIDTHS);
 
 export default function TableScreen() {
   return (
@@ -32,7 +43,7 @@ export default function TableScreen() {
       <Table nativeID='invoice-table'>
         <TableHeader>
           <TableRow>
-            <TableHead className='px-0.5' width={COLUMN_WIDTHS[0]}>
+            <TableHead className='px-0.5' width={columnWidths[0] as number}>
               <Popover>
                 <PopoverTrigger
                   variant='ghost'
@@ -71,9 +82,12 @@ export default function TableScreen() {
                 </PopoverContent>
               </Popover>
             </TableHead>
-            <TableHead width={COLUMN_WIDTHS[1]}>Status</TableHead>
-            <TableHead width={COLUMN_WIDTHS[2]}>Method</TableHead>
-            <TableHead width={COLUMN_WIDTHS[3]} textClass='text-center'>
+            <TableHead width={columnWidths[1] as number}>Status</TableHead>
+            <TableHead width={columnWidths[2] as number}>Method</TableHead>
+            <TableHead
+              width={columnWidths[3] as number}
+              textClass='text-center'
+            >
               Amount
             </TableHead>
           </TableRow>
@@ -106,27 +120,27 @@ export default function TableScreen() {
                       <TableCell
                         className={cn(pressed && 'bg-secondary')}
                         textClass='font-medium text-foreground'
-                        width={COLUMN_WIDTHS[0]}
+                        width={columnWidths[0] as number}
                       >
                         {invoice.invoice}
                       </TableCell>
                       <TableCell
                         className={cn(pressed && 'bg-secondary')}
                         textClass='text-foreground'
-                        width={COLUMN_WIDTHS[1]}
+                        width={columnWidths[1] as number}
                       >
                         {invoice.paymentStatus}
                       </TableCell>
                       <TableCell
                         className={cn(pressed && 'bg-secondary')}
                         textClass='text-foreground'
-                        width={COLUMN_WIDTHS[2]}
+                        width={columnWidths[2] as number}
                       >
                         {invoice.paymentMethod}
                       </TableCell>
                       <TableCell
                         className={cn(pressed && 'bg-secondary ')}
-                        width={COLUMN_WIDTHS[3]}
+                        width={columnWidths[3] as number}
                       >
                         <Button
                           variant='secondary'

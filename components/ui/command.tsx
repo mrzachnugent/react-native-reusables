@@ -249,7 +249,8 @@ function CommandTextInput<T extends Data>(
         value={search}
         onChangeText={handleOnSearch}
         onSubmitEditing={onSubmitEditing}
-        returnKeyType='next'
+        returnKeyType='go'
+        returnKeyLabel='Select'
         clearButtonMode='while-editing'
         placeholder='Type a command or search...'
         autoFocus

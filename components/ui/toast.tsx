@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
  */
 const TOAST_CONFIG: ToastConfig = {
   success: ({ text1, text2, onPress, props: { icon = 'CheckSquare' } }) => (
-    <Pressable onPress={onPress} className='px-8 w-full'>
+    <Pressable onPress={onPress} className='px-6 w-full max-w-xl'>
       <Alert icon={icon} variant='success'>
         <AlertTitle>{text1}</AlertTitle>
         <AlertDescription>{text2}</AlertDescription>
@@ -16,7 +16,7 @@ const TOAST_CONFIG: ToastConfig = {
     </Pressable>
   ),
   error: ({ text1, text2, onPress, props: { icon = 'AlertTriangle' } }) => (
-    <Pressable onPress={onPress} className='px-8 w-full'>
+    <Pressable onPress={onPress} className='px-6 w-full max-w-xl'>
       <Alert icon={icon} variant='destructive'>
         <AlertTitle>{text1}</AlertTitle>
         <AlertDescription>{text2}</AlertDescription>
@@ -24,7 +24,7 @@ const TOAST_CONFIG: ToastConfig = {
     </Pressable>
   ),
   base: ({ text1, text2, onPress, props: { icon = 'Info' } }) => (
-    <Pressable onPress={onPress} className='px-8 w-full'>
+    <Pressable onPress={onPress} className='px-6 w-full max-w-xl'>
       <Alert icon={icon} variant='default'>
         <AlertTitle>{text1}</AlertTitle>
         <AlertDescription>{text2}</AlertDescription>
