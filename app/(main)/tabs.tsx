@@ -1,3 +1,4 @@
+import { useLocalSearchParams } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
@@ -10,6 +11,7 @@ const params = { tab: 'Blue' };
 
 export default function TabsScreen() {
   const tabsRef = React.useRef<React.ElementRef<typeof Tabs>>(null);
+  const params = useLocalSearchParams<{ active?: string }>();
 
   const renderTabs = React.useCallback(
     (props: RenderTabsViewProps) => {
@@ -64,7 +66,7 @@ export default function TabsScreen() {
         onTabChange={(tab) => {
           console.log('Active tab:', tab.item);
         }}
-        initialIndex={DATA.indexOf(params.tab ?? 'Blue')}
+        initialIndex={DATA.indexOf(params?.active ?? 'Blue')}
       />
     </>
   );

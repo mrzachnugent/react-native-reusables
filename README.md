@@ -2,7 +2,11 @@ Work in progress...
 
 # React Native Reusables
 
-Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
+![banner](https://github.com/mrzachnugent/react-native-reusables/assets/63797719/0eef0a6d-d8eb-4b52-a97d-fa3b1e534215)
+
+## Powered by [Expo](https://docs.expo.dev/) and styled with [Nativeind v4](https://www.nativewind.dev/v4/overview)
+
+Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own **mobile** component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
 **Progress**: 32 ✅ / 37 components
 
