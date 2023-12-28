@@ -132,7 +132,7 @@ const Tabs = React.forwardRef<
           />
         </View>
         <FlashList
-          accessibilityRole='tablist'
+          role='tablist'
           ref={tabsListRef}
           data={tabs}
           horizontal
@@ -158,7 +158,7 @@ function TabsView({ children }: { children: React.ReactNode }) {
   const insets = useSafeAreaInsets();
   return (
     <View
-      accessibilityRole='tab'
+      role='tab'
       style={{
         height: height - HEADER_HEIGHT - drawerHaderHeight,
         width,

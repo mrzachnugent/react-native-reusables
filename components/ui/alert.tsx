@@ -36,7 +36,11 @@ const Alert = React.forwardRef<
     <View
       ref={ref}
       role='alert'
-      className={cn(alertVariants({ variant }), icon && 'pl-[50]', className)}
+      className={cn(
+        alertVariants({ variant }),
+        icon && 'ios:pl-[50] android:pl-[50] pl-[50px]',
+        className
+      )}
       style={[
         colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
         style,
@@ -52,7 +56,7 @@ const Alert = React.forwardRef<
               : variant === 'success'
               ? 'text-emerald-500'
               : 'text-foreground',
-            'translate-y-[-3px] absolute left-[16] top-[18]'
+            'absolute web:left-[16px] web:top-[18px] ios:left-[16] ios:top-[18] android:left-[16] android:top-[18]'
           )}
         />
       )}

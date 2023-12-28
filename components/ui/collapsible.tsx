@@ -136,7 +136,7 @@ const CollapsibleContent = React.forwardRef<
       ref={ref}
       className={cn('gap-3', className)}
       key={`collapsible-content-${nativeID}`}
-      accessibilityLabelledBy={nativeID}
+      aria-labelledbyledBy={nativeID}
       {...props}
     />
   );

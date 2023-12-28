@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import {
   Accordion,
   AccordionItem,
@@ -8,8 +8,14 @@ import {
 
 export default function AccordionScreen() {
   return (
-    <View className='flex-1 justify-center'>
-      <Accordion>
+    <ScrollView
+      contentContainerStyle={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Accordion className='w-full max-w-xl'>
         <AccordionItem>
           <AccordionTrigger>
             <Text className='text-foreground text-xl pb-1.5'>Item #1</Text>
@@ -24,7 +30,7 @@ export default function AccordionScreen() {
             <Text className='text-foreground text-xl'>Item #2</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <View className='p-10 bg-red-500'></View>
+            <View className='p-12 bg-red-500'></View>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem>
@@ -32,7 +38,7 @@ export default function AccordionScreen() {
             <Text className='text-foreground text-xl'>Item #3</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <View className='p-10 bg-purple-500'></View>
+            <View className='p-24 bg-purple-500'></View>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem>
@@ -40,10 +46,10 @@ export default function AccordionScreen() {
             <Text className='text-foreground text-xl'>Item #4</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <View className='p-10 bg-orange-500'></View>
+            <View className='p-8 bg-orange-500'></View>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </View>
+    </ScrollView>
   );
 }

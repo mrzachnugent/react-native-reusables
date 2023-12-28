@@ -319,7 +319,7 @@ function CommandSectionList<T extends Data>(
         estimatedItemSize={itemHeight}
         overrideItemLayout={overrideItemLayout}
         keyboardShouldPersistTaps='handled'
-        accessibilityRole='menu'
+        role='menu'
         {...props}
       />
     </View>
@@ -411,7 +411,7 @@ function CommandSectionListItem<T extends Data>(
         variant={index === 1 ? 'secondary' : 'ghost'}
         className={cn('flex-row items-center justify-start px-2 gap-3')}
         onPress={handleOnPress}
-        accessibilityRole='menuitem'
+        role='menuitem'
         {...props}
       >
         {children}

@@ -47,7 +47,7 @@ const Toggle = React.forwardRef<
           }
           setChecked((prev) => !prev);
         }}
-        accessibilityRole='togglebutton'
+        role='switch'
         accessibilityState={{ selected: value || isChecked }}
         {...props}
       >

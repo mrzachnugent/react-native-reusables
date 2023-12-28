@@ -47,8 +47,8 @@ export default function InputScreen() {
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
-        accessibilityLabel='input'
-        accessibilityLabelledBy='inputLabel'
+        aria-labelledby='input'
+        aria-labelledbyledBy='inputLabel'
       />
       {err && (
         <Animated.Text

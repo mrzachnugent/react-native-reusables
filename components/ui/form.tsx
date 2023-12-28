@@ -207,7 +207,7 @@ const FormInput = React.forwardRef<
 
       <Input
         ref={inputRef}
-        accessibilityLabelledBy={formItemNativeID}
+        aria-labelledbyledBy={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -260,7 +260,7 @@ const FormCheckbox = React.forwardRef<
       <View className='flex-row gap-3 items-center bg-background'>
         <Checkbox
           ref={checkboxRef}
-          accessibilityLabelledBy={formItemNativeID}
+          aria-labelledbyledBy={formItemNativeID}
           aria-describedby={
             !error
               ? `${formDescriptionNativeID}`
@@ -310,7 +310,7 @@ const FormDatePicker = React.forwardRef<
             variant='outline'
             className='gap-3 justify-start px-4 relative'
             ref={ref}
-            accessibilityLabelledBy={formItemNativeID}
+            aria-labelledbyledBy={formItemNativeID}
             aria-describedby={
               !error
                 ? `${formDescriptionNativeID}`
@@ -421,6 +421,5 @@ export {
   FormItem,
   FormLabel,
   FormMessage,
-  useFormField
+  useFormField,
 };
-

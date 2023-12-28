@@ -138,7 +138,7 @@ const ToggleGroupItem = React.forwardRef<
         onPress={handleOnPress}
         className={buttonClass}
         accessibilityState={{ selected: value === name }}
-        accessibilityRole={typeof name === 'string' ? 'radio' : 'togglebutton'}
+        role={typeof name === 'string' ? 'radio' : 'switch'}
         ref={ref}
         {...props}
       >

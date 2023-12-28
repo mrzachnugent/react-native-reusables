@@ -14,7 +14,6 @@ export default function SliderScreen() {
         {Math.round(value * 100)}
       </Text>
       <Slider
-        accessibilityRole='adjustable'
         value={value}
         onValueChange={setValue}
         aria-labelledby='sliderLabel'

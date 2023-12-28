@@ -38,7 +38,7 @@ const RadioGroup = React.forwardRef<
         }}
       >
         <View
-          accessibilityRole='radiogroup'
+          role='radiogroup'
           ref={ref}
           className={cn('gap-3', className)}
           {...props}
@@ -100,9 +100,9 @@ const RadioGroupItem = React.forwardRef<
             'h-7 w-7 border-primary [borderWidth:1.5] rounded-full items-center justify-center',
             buttonClass
           )}
-          accessibilityLabelledBy={name}
+          aria-labelledbyledBy={name}
           accessibilityState={{ selected: value === name }}
-          accessibilityRole='radio'
+          role='radio'
           {...props}
         >
           {value === name && (

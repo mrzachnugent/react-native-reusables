@@ -1,21 +1,20 @@
 import '~/global.css';
+
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { ThemeProvider, Theme } from '@react-navigation/native';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Theme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { useEffect, useRef } from 'react';
-
-import * as Updates from 'expo-updates';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { AppState } from 'react-native';
-import { useColorScheme } from 'nativewind';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
-import { NAV_THEME } from '~/lib/constants';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import Toast from 'react-native-toast-message';
+import * as Updates from 'expo-updates';
+import { useColorScheme } from 'nativewind';
+import React, { useEffect, useRef } from 'react';
+import { AppState } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from '~/components/ui/toast';
+import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
+import { NAV_THEME } from '~/lib/constants';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -53,7 +52,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
   useAppForground(onFetchUpdateAsync, true);
   const [loaded, error] = useFonts(FontAwesome.font);
 
@@ -72,13 +71,14 @@ export default function RootLayout() {
     (async () => {
       const theme = await AsyncStorage.getItem('theme');
       if (!theme) {
-        setAndroidNavigationBar(theme === 'dark' ? 'dark' : 'light');
+        setAndroidNavigationBar(colorScheme);
         AsyncStorage.setItem('theme', colorScheme);
         return;
       }
-      setAndroidNavigationBar(theme === 'dark' ? 'dark' : 'light');
-      if (theme !== colorScheme) {
-        toggleColorScheme();
+      const colorTheme = theme === 'dark' ? 'dark' : 'light';
+      setAndroidNavigationBar(colorTheme);
+      if (colorTheme !== colorScheme) {
+        setColorScheme(colorTheme);
         return;
       }
     })();
@@ -91,6 +91,7 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+// TODO(web): Fix BottomSheetModalProvider hydration issue
 function RootLayoutNav() {
   const { colorScheme } = useColorScheme();
 

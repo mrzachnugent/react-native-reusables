@@ -9,7 +9,7 @@ export default function SwitchScreen() {
     <View className='flex-1 justify-center items-center'>
       <View className='flex-row items-center gap-5'>
         <Switch
-          accessibilityLabelledBy='switchLabel'
+          aria-labelledbyledBy='switchLabel'
           value={value}
           onValueChange={setValue}
         />

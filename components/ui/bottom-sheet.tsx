@@ -10,6 +10,7 @@ import {
   BottomSheetTextInput as GBottomSheetTextInput,
   BottomSheetView as GBottomSheetView,
   useBottomSheetModal,
+  BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { X } from 'lucide-react-native';
@@ -42,9 +43,11 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
     const sheetRef = React.useRef<BottomSheetModal>(null);
 
     return (
-      <BottomSheetContext.Provider value={{ sheetRef: sheetRef }}>
-        <View ref={ref} {...props} />
-      </BottomSheetContext.Provider>
+      <BottomSheetModalProvider>
+        <BottomSheetContext.Provider value={{ sheetRef: sheetRef }}>
+          <View ref={ref} {...props} />
+        </BottomSheetContext.Provider>
+      </BottomSheetModalProvider>
     );
   }
 );

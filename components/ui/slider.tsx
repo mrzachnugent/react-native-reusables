@@ -17,6 +17,7 @@ function Slider(props: React.ComponentProps<typeof RNCSlider>) {
   } = props;
   return (
     <RNCSlider
+      role='slider'
       minimumValue={minimumValue}
       maximumValue={maximumValue}
       minimumTrackTintColor={minimumTrackTintColor}

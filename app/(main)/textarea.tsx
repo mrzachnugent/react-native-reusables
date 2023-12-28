@@ -47,8 +47,8 @@ export default function TextareaScreen() {
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
-        accessibilityLabel='textarea'
-        accessibilityLabelledBy='textareaLabel'
+        aria-labelledby='textarea'
+        aria-labelledbyledBy='textareaLabel'
       />
       {err && (
         <Animated.Text

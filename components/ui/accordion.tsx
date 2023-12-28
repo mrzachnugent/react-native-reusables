@@ -59,7 +59,6 @@ const AccordionItem = React.forwardRef<
     );
     return (
       <AccordionItemContext.Provider
-        key={`accordion-provider-${nativeID}`}
         value={{
           disabled,
           onChange,
@@ -72,7 +71,6 @@ const AccordionItem = React.forwardRef<
       >
         <View
           role='heading'
-          key={`accordion-item-${nativeID}`}
           ref={ref}
           className={cn('', className, 'overflow-hidden')}
           {...props}
@@ -137,14 +135,13 @@ const AccordionTrigger = React.forwardRef<
   return (
     <>
       <Pressable
-        {...props}
-        key={`accordion-trigger-${nativeID}`}
         onPress={onPress}
         disabled={disabled}
         aria-expanded={isOpen}
         nativeID={nativeID}
         ref={ref}
         className={cn('flex-row justify-between items-center p-4', className)}
+        {...props}
       >
         <View className={'flex-1'}>{children}</View>
         <Animated.View style={chevronAnimationStyle}>
@@ -188,18 +185,9 @@ const AccordionContent = React.forwardRef<
   );
 
   return (
-    <Animated.View
-      key={`accordion-outter-content-${nativeID}`}
-      style={heightAnimationStyle}
-      accessibilityLabelledBy={nativeID}
-    >
-      <View
-        className='absolute top-0 w-full'
-        ref={innerContentRef}
-        key={`accordion-inner-content-${nativeID}`}
-      >
+    <Animated.View style={heightAnimationStyle} aria-labelledbyledBy={nativeID}>
+      <View className='absolute top-0 w-full' ref={innerContentRef}>
         <Animated.View
-          key={`accordion-inner-inner-content-${nativeID}`}
           ref={ref}
           className={cn('pb-4 pt-0', className, 'flex-1')}
           onLayout={onLayout}

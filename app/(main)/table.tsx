@@ -184,7 +184,7 @@ export default function TableScreen() {
                       </TableCell>
                     </TableRow>
                   </TableFooter>
-                  <TableCaption accessibilityLabelledBy='invoice-table'>
+                  <TableCaption aria-labelledbyledBy='invoice-table'>
                     <Text className='text-muted-foreground text-center '>
                       A list of your recent invoices.
                     </Text>

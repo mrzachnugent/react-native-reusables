@@ -18,7 +18,7 @@ export default function CheckboxScreen() {
           Accept terms & conditions
         </Label>
         <Checkbox
-          accessibilityLabelledBy='checkLabel'
+          aria-labelledby='checkLabel'
           value={isChecked}
           onChange={setIsChecked}
         />
