@@ -115,7 +115,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/bottom-sheet.tsx)
+  - [UI](/components/ui/bottom-sheet.native.tsx)
   - [Example](/app/(main)/bottom-sheet.tsx)
 </details>
 

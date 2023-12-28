@@ -12,11 +12,15 @@ const Label = React.forwardRef<
     >;
   }
 >(({ className, onPress, rootProps, ...props }, ref) => (
-  <Pressable onPress={onPress} {...rootProps}>
+  <Pressable
+    onPress={onPress}
+    className='rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+    {...rootProps}
+  >
     <Text
       ref={ref}
       className={cn(
-        'text-lg text-foreground font-medium px-0.5 py-1.5 leading-none',
+        'native:text-lg text-foreground font-medium px-0.5 py-1.5 leading-none ',
         className
       )}
       {...props}

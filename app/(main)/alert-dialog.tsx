@@ -13,10 +13,10 @@ import {
 
 export default function AlertDialogScreen() {
   return (
-    <View className='flex-1 justify-center p-8 gap-12'>
-      <AlertDialog>
-        <AlertDialogTrigger className='w-full'>Fade In</AlertDialogTrigger>
-        <AlertDialogContent>
+    <View className='flex-1 justify-center items-center p-8 gap-12'>
+      <AlertDialog className='w-full max-w-xl'>
+        <AlertDialogTrigger>Fade In</AlertDialogTrigger>
+        <AlertDialogContent className='w-full max-w-xl'>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
@@ -30,11 +30,9 @@ export default function AlertDialogScreen() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <AlertDialog>
-        <AlertDialogTrigger className='w-full' variant='secondary'>
-          Slide In
-        </AlertDialogTrigger>
-        <AlertDialogContent animationType='slide'>
+      <AlertDialog className='w-full max-w-xl'>
+        <AlertDialogTrigger variant='secondary'>Slide In</AlertDialogTrigger>
+        <AlertDialogContent animationType='slide' className='w-full max-w-xl'>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>

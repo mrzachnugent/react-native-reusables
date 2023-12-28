@@ -13,7 +13,7 @@ export default function CheckboxScreen() {
             setIsChecked((prev) => !prev);
           }}
           nativeID='checkLabel'
-          className='pt-2 text-xl'
+          className='pt-2 native:text-xl'
         >
           Accept terms & conditions
         </Label>

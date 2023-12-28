@@ -1,15 +1,17 @@
+import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Calendar, LocaleConfig } from '~/components/ui/calendar';
 
 LocaleConfig.defaultLocale = 'en';
 
 export default function CalendarScreen() {
+  const { colorScheme } = useColorScheme();
   const [selectedDate, setSelectedDate] = React.useState('');
   const [selectedDates, setSelectedDates] = React.useState<string[]>([]);
 
   return (
-    <View className='flex-1 py-4 gap-8'>
+    <ScrollView contentContainerStyle={{ flex: 1, padding: 16, gap: 32 }}>
       <Calendar
         onDayPress={(day) => {
           setSelectedDate(day.dateString);
@@ -18,6 +20,7 @@ export default function CalendarScreen() {
           [selectedDate]: {
             selected: true,
             disableTouchEvent: true,
+            selectedColor: colorScheme === 'dark' ? '#0ea5e9' : '#0284c7',
           },
         }}
       />
@@ -36,7 +39,7 @@ export default function CalendarScreen() {
           arrowColor: 'orange',
         }}
       />
-    </View>
+    </ScrollView>
   );
 }
 

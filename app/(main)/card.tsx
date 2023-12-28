@@ -10,14 +10,14 @@ import {
 
 export default function CardScreen() {
   return (
-    <View className='flex-1 justify-center p-6'>
-      <Card>
+    <View className='flex-1 justify-center items-center p-6'>
+      <Card className='w-full max-w-xl'>
         <CardHeader>
           <CardTitle>Card Title</CardTitle>
           <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardContent>
-          <Text className='text-foreground text-xl'>Card Content</Text>
+          <Text className='text-foreground native:text-xl'>Card Content</Text>
         </CardContent>
         <CardFooter>
           <Text className='text-muted-foreground'>Card Footer</Text>

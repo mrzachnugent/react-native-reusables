@@ -37,7 +37,9 @@ export default function BottomSheetScreen() {
     <View className='flex-1 justify-center items-center'>
       <BottomSheet>
         <BottomSheetOpenTrigger asChild>
-          <Button>Open</Button>
+          <Button>
+            {Platform.OS === 'web' ? 'Not implemented for web yet' : 'Open'}
+          </Button>
         </BottomSheetOpenTrigger>
         <BottomSheetContent>
           <BottomSheetHeader>

@@ -7,21 +7,21 @@ import { cn, isTextChildren } from '~/lib/utils';
 import { PressableSlot } from '../primitives/pressable-slot';
 
 const buttonVariants = cva(
-  'flex-row items-center justify-center rounded-md text-sm font-medium ring-offset-background disabled:opacity-50',
+  'flex-row items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 web:disabled:pointer-events-none',
   {
     variants: {
       variant: {
         default: 'bg-primary',
         destructive: 'bg-destructive',
         outline: 'border border-input bg-background',
-        secondary: 'bg-secondary ',
+        secondary: 'bg-secondary',
         ghost: '',
         link: '',
       },
       size: {
-        default: 'px-6 py-3.5',
-        sm: 'px-3 py-2',
-        lg: 'px-8 py-4',
+        default: 'px-4 py-2 native:px-6 native:py-3.5',
+        sm: 'px-3 py-1 native:px-3 native:py-2',
+        lg: 'px-8 py-1.5 native:px-8 native:py-4',
       },
     },
     defaultVariants: {
@@ -42,9 +42,9 @@ const buttonTextVariants = cva('font-medium', {
       link: 'text-primary underline',
     },
     size: {
-      default: 'text-xl',
-      sm: 'text-lg',
-      lg: 'text-2xl',
+      default: 'text-sm native:text-xl',
+      sm: 'text-xs native:text-lg',
+      lg: 'text-base native:text-2xl',
     },
   },
   defaultVariants: {
@@ -81,6 +81,7 @@ const Button = React.forwardRef<
       size,
       children,
       androidRootClass,
+      disabled,
       ...props
     },
     ref
@@ -89,14 +90,19 @@ const Button = React.forwardRef<
     const Root = Platform.OS === 'android' ? View : PressableSlot;
     return (
       <Root
-        className={
-          Platform.OS === 'android'
-            ? cn('flex-row rounded-md overflow-hidden', androidRootClass)
-            : ''
-        }
+        className={cn(
+          Platform.OS === 'android' && 'flex-row rounded-md overflow-hidden',
+          Platform.OS === 'android' && androidRootClass
+        )}
       >
         <Pressable
-          className={cn(buttonVariants({ variant, size, className }))}
+          className={cn(
+            buttonVariants({
+              variant,
+              size,
+              className: cn(className, disabled && 'opacity-50'),
+            })
+          )}
           ref={ref}
           android_ripple={{
             color: rippleColor(colorScheme === 'dark')[variant as 'default'],
@@ -105,10 +111,11 @@ const Button = React.forwardRef<
           {...props}
         >
           {isTextChildren(children)
-            ? ({ pressed }) => (
+            ? ({ pressed, hovered }) => (
                 <Text
                   className={cn(
-                    pressed ? 'opacity-70' : '',
+                    hovered && 'opacity-90',
+                    pressed && 'opacity-70',
                     buttonTextVariants({ variant, size, className: textClass })
                   )}
                 >

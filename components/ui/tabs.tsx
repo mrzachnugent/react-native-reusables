@@ -84,7 +84,7 @@ const Tabs = React.forwardRef<
               });
             }}
             className={cn(
-              'border-b-2 px-8 py-4',
+              'border-b-2 px-8 py-4 rounded-none',
               currentIndex === index
                 ? 'border-foreground'
                 : 'border-transparent'

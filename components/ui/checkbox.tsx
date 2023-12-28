@@ -18,14 +18,14 @@ const Checkbox = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'> &
     CheckboxProps
->(({ className, value, onChange, iconClass, iconSize = 18, ...props }, ref) => {
+>(({ className, value, onChange, iconClass, iconSize = 16, ...props }, ref) => {
   return (
     <Pressable
       ref={ref}
       role='checkbox'
       accessibilityState={{ checked: value }}
       className={cn(
-        'peer h-8 w-8 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50',
+        'peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50',
         className
       )}
       onPress={() => {

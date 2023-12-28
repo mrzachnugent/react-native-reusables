@@ -9,7 +9,7 @@ const Separator = React.forwardRef<
   return (
     <View
       ref={ref}
-      className={cn('ios:h-[1] android:h-[1] web:h-[1px] bg-border', className)}
+      className={cn('native:h-[1] web:h-[1px] bg-border', className)}
       role='separator'
       {...props}
     />

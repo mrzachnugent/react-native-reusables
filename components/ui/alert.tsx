@@ -56,7 +56,7 @@ const Alert = React.forwardRef<
               : variant === 'success'
               ? 'text-emerald-500'
               : 'text-foreground',
-            'absolute web:left-[16px] web:top-[18px] ios:left-[16] ios:top-[18] android:left-[16] android:top-[18]'
+            'absolute web:left-[16px] web:top-[18px] native:left-[16] native:top-[18]'
           )}
         />
       )}
