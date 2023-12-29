@@ -6,7 +6,7 @@ export default function ButtonScreen() {
     <View className='flex-1 justify-center items-center gap-5 p-6'>
       <Button className='native:w-full'>Default</Button>
       <Button disabled variant='destructive' className='native:w-full'>
-        Destructive
+        Destructive disabled
       </Button>
       <Button variant='secondary' className='native:w-full'>
         Secondary

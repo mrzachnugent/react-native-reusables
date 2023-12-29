@@ -40,7 +40,7 @@ const RadioGroup = React.forwardRef<
         <View
           role='radiogroup'
           ref={ref}
-          className={cn('gap-3', className)}
+          className={cn('gap-2', className)}
           {...props}
         />
       </RadioGroupContext.Provider>
@@ -97,7 +97,7 @@ const RadioGroupItem = React.forwardRef<
           disabled={disabled}
           onPress={handleOnPress}
           className={cn(
-            'h-7 w-7 border-primary [borderWidth:1.5] rounded-full items-center justify-center',
+            'h-6 w-6 border-primary [borderWidth:1.5] rounded-full items-center justify-center',
             buttonClass
           )}
           aria-labelledbyledBy={name}
@@ -109,7 +109,7 @@ const RadioGroupItem = React.forwardRef<
             <View
               ref={ref}
               className={cn(
-                'h-4 w-4 bg-primary rounded-full',
+                'h-3 w-3 bg-primary rounded-full',
                 innerButtonClass
               )}
             />

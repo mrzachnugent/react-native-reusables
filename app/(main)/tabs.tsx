@@ -7,8 +7,6 @@ import { Tabs, TabsView, type RenderTabsViewProps } from '~/components/ui/tabs';
 
 const DATA = ['Blue', 'Red', 'Green', 'Orange', 'Purple', 'Fuchsia'];
 
-const params = { tab: 'Blue' };
-
 export default function TabsScreen() {
   const tabsRef = React.useRef<React.ElementRef<typeof Tabs>>(null);
   const params = useLocalSearchParams<{ active?: string }>();

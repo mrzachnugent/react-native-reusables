@@ -15,6 +15,7 @@ import { cn, isTextChildren } from '~/lib/utils';
 import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';
+import { useKeyboard } from '~/lib/keyboard';
 
 type Data = Record<string, unknown> | string;
 
@@ -165,6 +166,7 @@ function CommandModal<T extends Data>(
   ref: React.ForwardedRef<React.ElementRef<typeof Modal>>
 ) {
   const insets = useSafeAreaInsets();
+  const { keyboardHeight } = useKeyboard();
   const { toggleIsOpen, isOpen } = useCommandContext<T>();
 
   return (
@@ -191,7 +193,10 @@ function CommandModal<T extends Data>(
             className='flex-1 bg-zinc-900/30'
           >
             {children}
-            <Pressable onPressOut={toggleIsOpen} className='flex-1 ' />
+            <Pressable
+              onPressOut={toggleIsOpen}
+              style={{ height: keyboardHeight }}
+            />
           </Animated.View>
         </Pressable>
       </View>

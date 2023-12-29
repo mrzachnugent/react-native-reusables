@@ -7,7 +7,7 @@ import { cn, isTextChildren } from '~/lib/utils';
 import { PressableSlot } from '../primitives/pressable-slot';
 
 const buttonVariants = cva(
-  'flex-row items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 web:disabled:pointer-events-none',
+  'flex-row items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
@@ -100,7 +100,10 @@ const Button = React.forwardRef<
             buttonVariants({
               variant,
               size,
-              className: cn(className, disabled && 'opacity-50'),
+              className: cn(
+                className,
+                disabled && 'opacity-50 web:cursor-default'
+              ),
             })
           )}
           ref={ref}
@@ -116,7 +119,8 @@ const Button = React.forwardRef<
                   className={cn(
                     hovered && 'opacity-90',
                     pressed && 'opacity-70',
-                    buttonTextVariants({ variant, size, className: textClass })
+                    buttonTextVariants({ variant, size, className: textClass }),
+                    disabled && 'opacity-100'
                   )}
                 >
                   {children as string | string[]}

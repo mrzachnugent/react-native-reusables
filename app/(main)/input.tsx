@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput, View } from 'react-native';
-import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
+import { ScrollView, TextInput, View } from 'react-native';
+import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { cn } from '~/lib/utils';
@@ -33,7 +33,7 @@ export default function InputScreen() {
   }
 
   return (
-    <View className='flex-1 justify-center p-6'>
+    <ScrollView contentContainerClassName='flex-1 justify-center p-6'>
       <Label
         className={cn(err && 'text-destructive', 'pb-2.5')}
         onPress={handleOnLabelPress}
@@ -53,13 +53,14 @@ export default function InputScreen() {
       {err && (
         <Animated.Text
           entering={FadeInDown}
-          exiting={FadeOutUp.duration(275)}
+          exiting={FadeOut.duration(275)}
           className={'text-destructive text-sm px-0.5 py-2'}
           role='alert'
         >
           {err}
         </Animated.Text>
       )}
-    </View>
+      <View className='h-20' />
+    </ScrollView>
   );
 }

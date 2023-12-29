@@ -1,20 +1,23 @@
 import React from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, KeyboardEvent } from 'react-native';
 
-export function useIsKeyboardVisible() {
+export function useKeyboard() {
   const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
+  const [keyboardHeight, setKeyboardHeight] = React.useState(0);
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true); // or some other action
+      (e: KeyboardEvent) => {
+        setKeyboardVisible(true);
+        setKeyboardHeight(e.endCoordinates.height);
       }
     );
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
+        setKeyboardHeight(0);
       }
     );
 
@@ -24,5 +27,8 @@ export function useIsKeyboardVisible() {
     };
   }, []);
 
-  return isKeyboardVisible;
+  return {
+    isKeyboardVisible,
+    keyboardHeight,
+  };
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput, View } from 'react-native';
-import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
+import { ScrollView, TextInput, View } from 'react-native';
+import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
 import { Label } from '~/components/ui/label';
 import { Textarea } from '~/components/ui/textarea';
 import { cn } from '~/lib/utils';
@@ -33,9 +33,9 @@ export default function TextareaScreen() {
   }
 
   return (
-    <View className='flex-1 justify-center p-6'>
+    <ScrollView contentContainerClassName='flex-1 justify-center p-6'>
       <Label
-        className={cn(err && 'text-destructive', 'pb-2.5')}
+        className={cn(err && 'text-destructive', 'pb-1')}
         onPress={handleOnLabelPress}
         nativeID='textareaLabel'
       >
@@ -53,13 +53,14 @@ export default function TextareaScreen() {
       {err && (
         <Animated.Text
           entering={FadeInDown}
-          exiting={FadeOutUp.duration(275)}
+          exiting={FadeOut.duration(275)}
           className={'text-destructive text-sm px-0.5 py-2'}
           role='alert'
         >
           {err}
         </Animated.Text>
       )}
-    </View>
+      <View className='h-32' />
+    </ScrollView>
   );
 }

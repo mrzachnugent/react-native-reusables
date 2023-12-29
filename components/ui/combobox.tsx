@@ -18,6 +18,8 @@ import {
 } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
+// TODO: Fix bottom sheet content UI - Too big/too much space
+
 const HEADER_HEIGHT = 130;
 
 interface ComboboxOption {
@@ -34,9 +36,7 @@ const Combobox = React.forwardRef<
     emptyText?: string;
     defaultSelectedItem?: ComboboxOption | null;
     selectedItem?: ComboboxOption | null;
-    onSelectedItemChange?: React.Dispatch<
-      React.SetStateAction<ComboboxOption | null>
-    >;
+    onSelectedItemChange?: (option: ComboboxOption | null) => void;
   }
 >(
   (
@@ -44,7 +44,7 @@ const Combobox = React.forwardRef<
       className,
       textClass,
       variant = 'outline',
-      size,
+      size = 'sm',
       inputProps,
       placeholder,
       items,
@@ -75,14 +75,12 @@ const Combobox = React.forwardRef<
     }, [items, search]);
 
     function onItemChange(listItem: ComboboxOption) {
-      return (prev: ComboboxOption | null) => {
-        if (prev?.value === listItem.value) {
-          return null;
-        }
-        setSearch('');
-        bottomSheet.close();
-        return listItem;
-      };
+      if (selectedItemProp?.value === listItem.value) {
+        return null;
+      }
+      setSearch('');
+      bottomSheet.close();
+      return listItem;
     }
 
     const renderItem = React.useCallback(
@@ -94,7 +92,6 @@ const Combobox = React.forwardRef<
         return (
           <Button
             variant='ghost'
-            size='lg'
             className='items-center flex-row justify-between px-3 py-4'
             style={{ minHeight: 70 }}
             onPress={() => {
@@ -141,92 +138,88 @@ const Combobox = React.forwardRef<
     const itemSelected = onSelectedItemChange ? selectedItemProp : selectedItem;
 
     return (
-      <View className='flex-1 justify-center items-center'>
-        <BottomSheet>
-          <BottomSheetOpenTrigger
-            ref={ref}
-            className={buttonVariants({
-              variant,
-              size,
-              className: cn('flex-row w-full', className),
-            })}
-            role='combobox'
-            {...props}
-          >
-            <View className='flex-1 flex-row justify-between'>
-              <Text
-                className={buttonTextVariants({
-                  variant,
-                  size,
-                  className: cn(!itemSelected && 'opacity-80', textClass),
-                })}
-                numberOfLines={1}
-              >
-                {itemSelected ? itemSelected.label : placeholder}
-              </Text>
-              <ChevronsUpDown className='text-foreground ml-2 opacity-50' />
-            </View>
-          </BottomSheetOpenTrigger>
-          <BottomSheetContent
-            ref={bottomSheet.ref}
-            onDismiss={() => {
-              setSearch('');
-            }}
-          >
-            <BottomSheetHeader className='border-b-0'>
-              <Text className='text-foreground text-xl font-bold text-center px-0.5'>
-                {placeholder}
-              </Text>
-            </BottomSheetHeader>
-            <View className='relative px-4 border-b border-border pb-4'>
-              <BottomSheetTextInput
-                role='searchbox'
-                ref={inputRef}
-                className='pl-12'
-                value={search}
-                onChangeText={setSearch}
-                onSubmitEditing={onSubmitEditing}
-                returnKeyType='next'
-                clearButtonMode='while-editing'
-                placeholder='Search...'
-                {...inputProps}
-              />
-              <Button
-                variant={'ghost'}
-                size='sm'
-                className='absolute left-4 top-2.5'
-                onPress={onSearchIconPress}
-              >
-                <Search size={18} className='text-foreground opacity-50' />
-              </Button>
-            </View>
-            <BottomSheetFlatList
-              data={listItems}
-              contentContainerStyle={{
-                paddingBottom: insets.bottom + HEADER_HEIGHT,
-              }}
-              renderItem={renderItem}
-              keyExtractor={(item) => (item as ComboboxOption).value}
-              className={'px-4'}
-              keyboardShouldPersistTaps='handled'
-              ListEmptyComponent={() => {
-                return (
-                  <View
-                    className='items-center flex-row justify-center flex-1  px-3 py-5'
-                    style={{ minHeight: 70 }}
-                  >
-                    <Text
-                      className={'text-muted-foreground text-xl text-center'}
-                    >
-                      {emptyText}
-                    </Text>
-                  </View>
-                );
-              }}
+      <BottomSheet>
+        <BottomSheetOpenTrigger
+          ref={ref}
+          className={buttonVariants({
+            variant,
+            size,
+            className: cn('flex-row w-full', className),
+          })}
+          role='combobox'
+          {...props}
+        >
+          <View className='flex-1 flex-row justify-between '>
+            <Text
+              className={buttonTextVariants({
+                variant,
+                size,
+                className: cn(!itemSelected && 'opacity-50', textClass),
+              })}
+              numberOfLines={1}
+            >
+              {itemSelected ? itemSelected.label : placeholder ?? ''}
+            </Text>
+            <ChevronsUpDown className='text-foreground ml-2 opacity-50' />
+          </View>
+        </BottomSheetOpenTrigger>
+        <BottomSheetContent
+          ref={bottomSheet.ref}
+          onDismiss={() => {
+            setSearch('');
+          }}
+        >
+          <BottomSheetHeader className='border-b-0'>
+            <Text className='text-foreground text-xl font-bold text-center px-0.5'>
+              {placeholder}
+            </Text>
+          </BottomSheetHeader>
+          <View className='relative px-4 border-b border-border pb-4'>
+            <BottomSheetTextInput
+              role='searchbox'
+              ref={inputRef}
+              className='pl-12'
+              value={search}
+              onChangeText={setSearch}
+              onSubmitEditing={onSubmitEditing}
+              returnKeyType='next'
+              clearButtonMode='while-editing'
+              placeholder='Search...'
+              {...inputProps}
             />
-          </BottomSheetContent>
-        </BottomSheet>
-      </View>
+            <Button
+              variant={'ghost'}
+              size='sm'
+              className='absolute left-4 top-2.5'
+              onPress={onSearchIconPress}
+            >
+              <Search size={18} className='text-foreground opacity-50' />
+            </Button>
+          </View>
+          <BottomSheetFlatList
+            data={listItems}
+            contentContainerStyle={{
+              paddingBottom: insets.bottom + HEADER_HEIGHT,
+            }}
+            renderItem={renderItem}
+            keyExtractor={(item) => (item as ComboboxOption).value}
+            className={'px-4'}
+            keyboardShouldPersistTaps='handled'
+            ListEmptyComponent={() => {
+              return (
+                <View
+                  className='items-center flex-row justify-center flex-1  px-3 py-5'
+                  style={{ minHeight: 70 }}
+                >
+                  <Text className={'text-muted-foreground text-xl text-center'}>
+                    {emptyText}
+                  </Text>
+                </View>
+              );
+            }}
+          />
+        </BottomSheetContent>
+      </BottomSheet>
     );
   }
 );

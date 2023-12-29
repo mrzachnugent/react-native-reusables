@@ -73,15 +73,17 @@ const SelectTrigger = React.forwardRef<
 >(({ variant = 'outline', placeholder = 'Select...', ...props }, ref) => {
   const { selected } = useSelectContext();
   return (
-    <PopoverTrigger ref={ref} variant='outline' {...props}>
+    <PopoverTrigger ref={ref} size='sm' variant='outline' {...props}>
       {({ pressed }) => (
         <View className='flex-1 flex-row justify-between items-center'>
           <Text
             className={buttonTextVariants({
               variant: 'outline',
+              size: 'sm',
               className: cn(
-                !selected?.value && 'opacity-90',
-                pressed && 'opacity-70'
+                !selected?.value && 'opacity-50',
+                !selected?.value && pressed && 'opacity-30',
+                selected?.value && pressed && 'opacity-70'
               ),
             })}
           >
@@ -90,7 +92,7 @@ const SelectTrigger = React.forwardRef<
           <ChevronDown
             className={buttonTextVariants({
               variant: 'outline',
-              className: 'opacity-70',
+              className: 'opacity-50',
             })}
           />
         </View>
@@ -127,7 +129,6 @@ const SelectList = React.forwardRef<
       <FlashList<SelectData>
         ref={ref}
         data={items}
-        contentContainerStyle={{ padding: 8 }}
         estimatedItemSize={SELECT_ITEM_HEIGHT}
         initialScrollIndex={initialScrollIndex}
         extraData={[selected, extraData]}

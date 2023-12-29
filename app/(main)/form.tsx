@@ -6,10 +6,50 @@ import { Button } from '~/components/ui/button';
 import {
   Form,
   FormCheckbox,
+  FormCombobox,
   FormDatePicker,
   FormField,
   FormInput,
+  FormRadioGroup,
+  FormSelect,
+  FormSwitch,
+  FormTextarea,
 } from '~/components/ui/form';
+import { RadioGroupItem } from '~/components/ui/radio-group';
+
+const frameworks = [
+  {
+    value: 'next.js',
+    label: 'Next.js',
+  },
+  {
+    value: 'sveltekit',
+    label: 'SvelteKit',
+  },
+  {
+    value: 'nuxt.js',
+    label: 'Nuxt.js',
+  },
+  {
+    value: 'remix',
+    label: 'Remix',
+  },
+  {
+    value: 'astro',
+    label: 'Astro',
+  },
+];
+
+const emails = [
+  { value: 'tom@cruise.com', label: 'tom@cruise.com' },
+  { value: 'napoleon@dynamite.com', label: 'napoleon@dynamite.com' },
+  { value: 'kunfu@panda.com', label: 'kunfu@panda.com' },
+  { value: 'bruce@lee.com', label: 'bruce@lee.com' },
+  { value: 'harry@potter.com', label: 'harry@potter.com' },
+  { value: 'jane@doe.com', label: 'jane@doe.com' },
+  { value: 'elon@musk.com', label: 'elon@musk.com' },
+  { value: 'lara@croft.com', label: 'lara@croft.com' },
+];
 
 const formSchema = z.object({
   email: z.string().email({
@@ -18,6 +58,23 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: 'Password must be at least 8 characters.',
   }),
+  about: z.string().min(1, {
+    message: 'We need to know.',
+  }),
+  accountType: z.enum(['staff', 'admin', 'owner']),
+  framework: z.object(
+    { value: z.string(), label: z.string() },
+    {
+      invalid_type_error: 'Please select a framework.',
+    }
+  ),
+  favoriteEmail: z.object(
+    { value: z.string(), label: z.string() },
+    {
+      invalid_type_error: 'Please select a favorite email.',
+    }
+  ),
+  enableNotifications: z.boolean(),
   dob: z
     .string()
     .min(1, { message: 'Please enter your date of birth' })
@@ -45,6 +102,8 @@ export default function FormScreen() {
     defaultValues: {
       email: '',
       password: '',
+      about: '',
+      enableNotifications: false,
       tos: false,
     },
   });
@@ -55,7 +114,10 @@ export default function FormScreen() {
   }
 
   return (
-    <ScrollView contentContainerClassName='flex-1 justify-center p-6'>
+    <ScrollView
+      contentContainerClassName='p-6'
+      showsVerticalScrollIndicator={false}
+    >
       <Form {...form}>
         <View className='gap-6'>
           <FormField
@@ -88,6 +150,75 @@ export default function FormScreen() {
           />
           <FormField
             control={form.control}
+            name='about'
+            render={({ field }) => (
+              <FormTextarea
+                label='Tell me about yourself'
+                placeholder='I am ...'
+                description='This will be used by AI.'
+                {...field}
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='accountType'
+            render={({ field: { onChange, ...rest } }) => (
+              <FormRadioGroup
+                defaultValue='white'
+                label='Account Type'
+                description='Select your account type.'
+                onValueChange={onChange}
+                {...rest}
+              >
+                <RadioGroupItem name='staff'>Staff</RadioGroupItem>
+                <RadioGroupItem name='admin'>Admin</RadioGroupItem>
+                <RadioGroupItem name='owner'>Owner</RadioGroupItem>
+              </FormRadioGroup>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='framework'
+            render={({ field: { value, onChange, ...rest } }) => (
+              <FormCombobox
+                selectedItem={value}
+                onSelectedItemChange={onChange}
+                label='Favorite Framework'
+                description='More important than your skills.'
+                items={frameworks}
+                {...rest}
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='favoriteEmail'
+            render={({ field: { value, onChange, ...rest } }) => (
+              <FormSelect
+                items={emails}
+                onValueChange={onChange}
+                label='If you were an email, which one would you be?'
+                description='Hint: it is not the one you use.'
+                placeholder='Select a verified email'
+                {...rest}
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='enableNotifications'
+            render={({ field: { onChange, ...rest } }) => (
+              <FormSwitch
+                onValueChange={onChange}
+                label='Enable notifications'
+                description='We will send you spam.'
+                {...rest}
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
             name='dob'
             render={({ field }) => (
               <FormDatePicker
@@ -114,6 +245,15 @@ export default function FormScreen() {
             }}
           >
             Clear errors
+          </Button>
+          <Button
+            variant='ghost'
+            size='sm'
+            onPress={() => {
+              form.reset();
+            }}
+          >
+            Clear form values
           </Button>
         </View>
       </Form>
