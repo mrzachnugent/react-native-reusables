@@ -8,7 +8,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own **mobile** component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
-**Progress**: 32 ✅ / 37 components
+**Progress**: 33 ✅ / 37 components
 
 <details>
 <summary>Table of contents</summary>
