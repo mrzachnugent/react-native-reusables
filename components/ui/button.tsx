@@ -111,6 +111,7 @@ const Button = React.forwardRef<
             color: rippleColor(colorScheme === 'dark')[variant as 'default'],
             borderless: false,
           }}
+          disabled={disabled}
           {...props}
         >
           {isTextChildren(children)
