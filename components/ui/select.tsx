@@ -13,21 +13,20 @@ import { Button, buttonTextVariants } from './button';
 
 const SELECT_ITEM_HEIGHT = 50;
 
-interface SelectData {
+interface SelectOption {
   value: string;
   label: string;
 }
 
 interface SelectProps {
-  items: SelectData[];
-  defaultValue?: SelectData;
-  onValueChange?: (value: SelectData | null) => void;
+  items: SelectOption[];
+  value: SelectOption | null;
+  onValueChange?: (value: SelectOption | null) => void;
 }
 interface SelectContext {
-  items: SelectData[];
-  selected: SelectData | null;
-  setSelected: React.Dispatch<React.SetStateAction<SelectData | null>>;
-  onValueChange?: (value: SelectData | null) => void;
+  items: SelectOption[];
+  selected: SelectOption | null;
+  onValueChange?: (value: SelectOption | null) => void;
 }
 
 const SelectContext = React.createContext<SelectContext>({} as SelectContext);
@@ -35,16 +34,12 @@ const SelectContext = React.createContext<SelectContext>({} as SelectContext);
 const Select = React.forwardRef<
   React.ElementRef<typeof Popover>,
   React.ComponentPropsWithoutRef<typeof Popover> & SelectProps
->(({ onValueChange, defaultValue = null, items, ...props }, ref) => {
-  const [selected, setSelected] = React.useState<SelectData | null>(
-    defaultValue
-  );
+>(({ onValueChange, value, items, ...props }, ref) => {
   return (
     <SelectContext.Provider
       value={{
         items,
-        selected,
-        setSelected,
+        selected: value,
         onValueChange,
       }}
     >
@@ -104,9 +99,9 @@ const SelectTrigger = React.forwardRef<
 SelectTrigger.displayName = 'SelectTrigger';
 
 const SelectList = React.forwardRef<
-  React.ElementRef<typeof FlashList<SelectData>>,
+  React.ElementRef<typeof FlashList<SelectOption>>,
   Omit<
-    React.ComponentPropsWithoutRef<typeof FlashList<SelectData>>,
+    React.ComponentPropsWithoutRef<typeof FlashList<SelectOption>>,
     'data' | 'estimatedItemSize' | 'initialScrollIndex'
   > & {
     containerProps?: React.ComponentPropsWithoutRef<typeof PopoverContent>;
@@ -122,14 +117,14 @@ const SelectList = React.forwardRef<
 
   return (
     <PopoverContent
-      style={{ height: items.length * SELECT_ITEM_HEIGHT + 12 }}
+      style={{ height: items.length * SELECT_ITEM_HEIGHT }}
       className='p-0 max-h-[30%]'
       {...containerProps}
     >
-      <FlashList<SelectData>
+      <FlashList<SelectOption>
         ref={ref}
         data={items}
-        estimatedItemSize={SELECT_ITEM_HEIGHT}
+        estimatedItemSize={SELECT_ITEM_HEIGHT - 1}
         initialScrollIndex={initialScrollIndex}
         extraData={[selected, extraData]}
         {...props}
@@ -140,7 +135,7 @@ const SelectList = React.forwardRef<
 
 SelectList.displayName = 'SelectList';
 
-type RenderSelectItem = ListRenderItem<SelectData>;
+type RenderSelectItem = ListRenderItem<SelectOption>;
 
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof PopoverClose>,
@@ -149,7 +144,7 @@ const SelectItem = React.forwardRef<
     'children' | 'style' | 'asChild'
   > & {
     index: number;
-    item: SelectData;
+    item: SelectOption;
     style?: ViewStyle;
   }
 >(
@@ -157,18 +152,14 @@ const SelectItem = React.forwardRef<
     { variant = 'outline', index, item, onPress, style, className, ...props },
     ref
   ) => {
-    const { selected, setSelected, onValueChange } = useSelectContext();
+    const { selected, onValueChange } = useSelectContext();
 
     function handleOnPress(ev: GestureResponderEvent) {
       onPress?.(ev);
-      setSelected((prev) => {
-        if (prev?.value === item.value) {
-          onValueChange?.(null);
-          return null;
-        }
-        onValueChange?.(item);
-        return item;
-      });
+      if (selected?.value === item.value) {
+        onValueChange?.(null);
+      }
+      onValueChange?.(item);
     }
     return (
       <PopoverClose asChild style={[{ height: SELECT_ITEM_HEIGHT }, style]}>
@@ -191,7 +182,8 @@ const SelectItem = React.forwardRef<
                     'text-primary',
                     buttonTextVariants({
                       variant: 'ghost',
-                      className: selected === item ? '' : 'opacity-0',
+                      className:
+                        selected?.value === item.value ? '' : 'opacity-0',
                     })
                   )}
                 />
@@ -220,5 +212,5 @@ export {
   SelectList,
   SelectItem,
   type RenderSelectItem,
-  type SelectData,
+  type SelectOption,
 };

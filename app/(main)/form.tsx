@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, ScrollView, View } from 'react-native';
 import * as z from 'zod';
@@ -97,6 +98,7 @@ const formSchema = z.object({
 });
 
 export default function FormScreen() {
+  const scrollRef = React.useRef<ScrollView>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -109,12 +111,20 @@ export default function FormScreen() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    Alert.alert('Submitted!', JSON.stringify(values, null, 2));
-    form.reset();
+    Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
+      {
+        text: 'OK',
+        onPress: () => {
+          scrollRef.current?.scrollTo({ y: 0 });
+          form.reset();
+        },
+      },
+    ]);
   }
 
   return (
     <ScrollView
+      ref={scrollRef}
       contentContainerClassName='p-6'
       showsVerticalScrollIndicator={false}
     >
@@ -163,13 +173,12 @@ export default function FormScreen() {
           <FormField
             control={form.control}
             name='accountType'
-            render={({ field: { onChange, ...rest } }) => (
+            render={({ field }) => (
               <FormRadioGroup
                 defaultValue='white'
                 label='Account Type'
                 description='Select your account type.'
-                onValueChange={onChange}
-                {...rest}
+                {...field}
               >
                 <RadioGroupItem name='staff'>Staff</RadioGroupItem>
                 <RadioGroupItem name='admin'>Admin</RadioGroupItem>
@@ -180,40 +189,36 @@ export default function FormScreen() {
           <FormField
             control={form.control}
             name='framework'
-            render={({ field: { value, onChange, ...rest } }) => (
+            render={({ field }) => (
               <FormCombobox
-                selectedItem={value}
-                onSelectedItemChange={onChange}
                 label='Favorite Framework'
                 description='More important than your skills.'
                 items={frameworks}
-                {...rest}
+                {...field}
               />
             )}
           />
           <FormField
             control={form.control}
             name='favoriteEmail'
-            render={({ field: { value, onChange, ...rest } }) => (
+            render={({ field }) => (
               <FormSelect
                 items={emails}
-                onValueChange={onChange}
                 label='If you were an email, which one would you be?'
                 description='Hint: it is not the one you use.'
                 placeholder='Select a verified email'
-                {...rest}
+                {...field}
               />
             )}
           />
           <FormField
             control={form.control}
             name='enableNotifications'
-            render={({ field: { onChange, ...rest } }) => (
+            render={({ field }) => (
               <FormSwitch
-                onValueChange={onChange}
                 label='Enable notifications'
                 description='We will send you spam.'
-                {...rest}
+                {...field}
               />
             )}
           />

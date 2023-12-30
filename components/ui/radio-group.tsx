@@ -5,14 +5,14 @@ import { Label } from './label';
 
 interface RadioGroupProps {
   defaultValue?: string;
-  onValueChange?: React.Dispatch<React.SetStateAction<string>>;
+  onValueChange?: (val: string) => void;
   disabled?: boolean;
 }
 
 interface RadioGroupContext {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  onValueChange?: React.Dispatch<React.SetStateAction<string>>;
+  onValueChange?: (val: string) => void;
   disabled: boolean;
 }
 

@@ -238,7 +238,14 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a9
 
 ### Form
 
-(soon)
+<details>
+<summary>Code</summary>
+  
+  - [UI](/components/ui/form.tsx)
+  - [Example](/app/(main)/form.tsx)
+</details>
+
+https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-7614-43e9-afbb-44646ea63a26
 
 ### Input
 

@@ -10,6 +10,7 @@ import {
   FieldPath,
   FieldValues,
   FormProvider,
+  Noop,
   useFormContext,
 } from 'react-hook-form';
 import { Text, View } from 'react-native';
@@ -23,7 +24,7 @@ import {
 } from '~/components/ui/bottom-sheet';
 import { Button, buttonTextVariants } from '~/components/ui/button';
 import { Calendar } from '~/components/ui/calendar';
-import { Combobox } from '~/components/ui/combobox';
+import { Combobox, ComboboxOption } from '~/components/ui/combobox';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { RadioGroup } from '~/components/ui/radio-group';
@@ -32,14 +33,13 @@ import {
   Select,
   SelectItem,
   SelectList,
+  SelectOption,
   SelectTrigger,
 } from '~/components/ui/select';
 import { Switch } from '~/components/ui/switch';
 import { Textarea } from '~/components/ui/textarea';
 import { cn } from '~/lib/utils';
 import { Checkbox } from './checkbox';
-
-// TODO: standardize items api
 
 const Form = FormProvider;
 
@@ -173,12 +173,27 @@ const FormMessage = React.forwardRef<
 });
 FormMessage.displayName = 'FormMessage';
 
+type Override<T, U> = Omit<T, keyof U> & U;
+
+interface FormFieldFieldProps<T> {
+  name: string;
+  onBlur: Noop;
+  onChange: (val: T) => void;
+  value: T;
+  disabled?: boolean;
+}
+
+type FormItemProps<T extends React.ElementType<any>, U> = Override<
+  React.ComponentPropsWithoutRef<T>,
+  FormFieldFieldProps<U>
+> & {
+  label?: string;
+  description?: string;
+};
+
 const FormInput = React.forwardRef<
   React.ElementRef<typeof Input>,
-  React.ComponentPropsWithoutRef<typeof Input> & {
-    label?: string;
-    description?: string;
-  }
+  FormItemProps<typeof Input, string>
 >(({ label, description, onChange, ...props }, ref) => {
   const inputRef = React.useRef<React.ComponentRef<typeof Input>>(null);
   const {
@@ -227,7 +242,7 @@ const FormInput = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
-        onChangeText={onChange as ((text: string) => void) | undefined}
+        onChangeText={onChange}
         {...props}
       />
       {!!description && <FormDescription>{description}</FormDescription>}
@@ -240,10 +255,7 @@ FormInput.displayName = 'FormInput';
 
 const FormTextarea = React.forwardRef<
   React.ElementRef<typeof Textarea>,
-  React.ComponentPropsWithoutRef<typeof Textarea> & {
-    label?: string;
-    description?: string;
-  }
+  FormItemProps<typeof Textarea, string>
 >(({ label, description, onChange, ...props }, ref) => {
   const textareaRef = React.useRef<React.ComponentRef<typeof Textarea>>(null);
   const {
@@ -292,7 +304,7 @@ const FormTextarea = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
-        onChangeText={onChange as ((text: string) => void) | undefined}
+        onChangeText={onChange}
         {...props}
       />
       {!!description && <FormDescription>{description}</FormDescription>}
@@ -305,10 +317,7 @@ FormTextarea.displayName = 'FormTextarea';
 
 const FormCheckbox = React.forwardRef<
   React.ElementRef<typeof Checkbox>,
-  React.ComponentPropsWithoutRef<typeof Checkbox> & {
-    label?: string;
-    description?: string;
-  }
+  FormItemProps<typeof Checkbox, boolean>
 >(({ label, description, value, onChange, ...props }, ref) => {
   const checkboxRef = React.useRef<React.ComponentRef<typeof Checkbox>>(null);
   const {
@@ -365,12 +374,7 @@ FormCheckbox.displayName = 'FormCheckbox';
 
 const FormDatePicker = React.forwardRef<
   React.ElementRef<typeof Button>,
-  Omit<React.ComponentPropsWithoutRef<typeof Calendar>, 'onChange'> & {
-    label?: string;
-    description?: string;
-    value?: string;
-    onChange?: ((text: string) => void) | undefined;
-  }
+  FormItemProps<typeof Calendar, string>
 >(({ label, description, value, onChange, ...props }, ref) => {
   const {
     error,
@@ -487,11 +491,8 @@ FormDatePicker.displayName = 'FormDatePicker';
 
 const FormRadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
-  React.ComponentPropsWithoutRef<typeof RadioGroup> & {
-    label?: string;
-    description?: string;
-  }
->(({ label, description, defaultValue, onValueChange, ...props }, ref) => {
+  FormItemProps<typeof RadioGroup, string>
+>(({ label, description, defaultValue, onChange, ...props }, ref) => {
   const {
     error,
     formItemNativeID,
@@ -516,7 +517,7 @@ const FormRadioGroup = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
-        onValueChange={onValueChange}
+        onValueChange={onChange}
         defaultValue={defaultValue}
         {...props}
       />
@@ -530,11 +531,8 @@ FormRadioGroup.displayName = 'FormRadioGroup';
 
 const FormCombobox = React.forwardRef<
   React.ElementRef<typeof Combobox>,
-  React.ComponentPropsWithoutRef<typeof Combobox> & {
-    label?: string;
-    description?: string;
-  }
->(({ label, description, ...props }, ref) => {
+  FormItemProps<typeof Combobox, ComboboxOption | null>
+>(({ label, description, value, onChange, ...props }, ref) => {
   const {
     error,
     formItemNativeID,
@@ -555,6 +553,8 @@ const FormCombobox = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
+        selectedItem={value}
+        onSelectedItemChange={onChange}
         {...props}
       />
       {!!description && <FormDescription>{description}</FormDescription>}
@@ -567,12 +567,10 @@ FormCombobox.displayName = 'FormCombobox';
 
 const FormSelect = React.forwardRef<
   React.ElementRef<typeof Select>,
-  React.ComponentPropsWithoutRef<typeof Select> & {
+  FormItemProps<typeof Select, SelectOption | null> & {
     placeholder: string;
-    label?: string;
-    description?: string;
   }
->(({ label, description, placeholder, ...props }, ref) => {
+>(({ label, description, placeholder, onChange, ...props }, ref) => {
   const {
     error,
     formItemNativeID,
@@ -596,6 +594,7 @@ const FormSelect = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
+        onValueChange={onChange}
         {...props}
       >
         <SelectTrigger placeholder={placeholder} />
@@ -611,11 +610,8 @@ FormSelect.displayName = 'FormSelect';
 
 const FormSwitch = React.forwardRef<
   React.ElementRef<typeof Switch>,
-  React.ComponentPropsWithoutRef<typeof Switch> & {
-    label?: string;
-    description?: string;
-  }
->(({ label, description, value, onValueChange, ...props }, ref) => {
+  FormItemProps<typeof Switch, boolean>
+>(({ label, description, value, onChange, ...props }, ref) => {
   const switchRef = React.useRef<React.ComponentRef<typeof Switch>>(null);
   const {
     error,
@@ -636,7 +632,7 @@ const FormSwitch = React.forwardRef<
   );
 
   function handleOnLabelPress() {
-    onValueChange?.(!value);
+    onChange?.(!value);
   }
 
   return (
@@ -651,7 +647,7 @@ const FormSwitch = React.forwardRef<
               : `${formDescriptionNativeID} ${formMessageNativeID}`
           }
           aria-invalid={!!error}
-          onValueChange={onValueChange}
+          onValueChange={onChange}
           value={value}
           {...props}
         />

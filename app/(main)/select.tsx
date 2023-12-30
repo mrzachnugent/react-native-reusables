@@ -6,7 +6,7 @@ import {
   SelectList,
   SelectTrigger,
   type RenderSelectItem,
-  type SelectData,
+  type SelectOption,
 } from '~/components/ui/select';
 
 const DATA = [
@@ -21,18 +21,15 @@ const DATA = [
 ];
 
 export default function SelectScreen() {
+  const [selected, setSelected] = React.useState<SelectOption | null>(null);
   const renderItem: RenderSelectItem = React.useCallback(
     ({ item, index }) => <SelectItem item={item} index={index} />,
     []
   );
 
-  function onValueChange(value: SelectData | null) {
-    if (!value) return;
-    console.log(`Selected ${value.label}`);
-  }
   return (
     <View className='flex-1 justify-center p-6'>
-      <Select items={DATA} onValueChange={onValueChange}>
+      <Select items={DATA} value={selected} onValueChange={setSelected}>
         <SelectTrigger placeholder='Select a verified email' />
         <SelectList renderItem={renderItem} />
       </Select>
