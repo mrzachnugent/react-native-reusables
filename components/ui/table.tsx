@@ -184,7 +184,9 @@ const TableCaption = React.forwardRef<
 >(({ children, className, textClass, ...props }, ref) => (
   <View ref={ref} className={cn('pt-6', className)} {...props}>
     {isTextChildren(children) ? (
-      <Text className={cn('text-sm text-muted-foreground', textClass)}>
+      <Text
+        className={cn('text-sm text-muted-foreground text-center', textClass)}
+      >
         {children}
       </Text>
     ) : (
@@ -204,4 +206,5 @@ export {
   TableHeader,
   TableRow,
   TableRowsList,
+  type TableRowsFlashListProps,
 };

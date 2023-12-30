@@ -8,7 +8,7 @@ Work in progress...
 
 Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own **mobile** component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
-**Progress**: 33 ✅ / 37 components
+**Progress**: 34 ✅ / 37 components (next: Standardizing and uniformizing APIs)
 
 <details>
 <summary>Table of contents</summary>
@@ -27,11 +27,11 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used t
 12. [Collapsible](#collapsible)
 13. [Command](#command)
 14. [Context Menu](#context-menu) 🔜
-15. [Data Table](#data-table) 🔜
+15. [Data Table](#data-table)
 16. [Date Picker](#date-picker)
 17. [Dialog](#dialog)
 18. [Dropdown Menu](#dropdown-menu) 🔜
-19. [Form](#form) 🚧
+19. [Form](#form)
 20. [Input](#input)
 21. [Label](#label)
 22. [Menubar](#menubar) 🔜
@@ -208,7 +208,14 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/eb366b7
 
 ### Data Table
 
-(soon)
+<details>
+<summary>Code</summary>
+  
+  - [UI](/components/ui/data-table.tsx)
+  - [Example](/app/(main)/data-table.tsx)
+</details>
+
+https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ed4b39db-0469-497a-902f-47648915fb5b
 
 ### Date Picker
 

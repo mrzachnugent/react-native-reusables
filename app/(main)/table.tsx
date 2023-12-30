@@ -185,9 +185,7 @@ export default function TableScreen() {
                     </TableRow>
                   </TableFooter>
                   <TableCaption aria-labelledbyledBy='invoice-table'>
-                    <Text className='text-muted-foreground text-center '>
-                      A list of your recent invoices.
-                    </Text>
+                    A list of your recent invoices.
                   </TableCaption>
                 </>
               );
