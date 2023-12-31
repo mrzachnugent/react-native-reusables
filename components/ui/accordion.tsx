@@ -185,7 +185,7 @@ const AccordionContent = React.forwardRef<
   );
 
   return (
-    <Animated.View style={heightAnimationStyle} aria-labelledbyledBy={nativeID}>
+    <Animated.View style={heightAnimationStyle} aria-labelledby={nativeID}>
       <View className='absolute top-0 w-full' ref={innerContentRef}>
         <Animated.View
           ref={ref}

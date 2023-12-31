@@ -11,6 +11,7 @@ const PressableSlot = React.forwardRef<
   const { children, ...pressableslotProps } = props;
 
   if (!React.isValidElement(children)) {
+    console.log('Invalid asChild element', children);
     return null;
   }
 
@@ -34,6 +35,7 @@ const ViewSlot = React.forwardRef<React.ElementRef<typeof View>, ViewSlotProps>(
     const { children, ...viewSlotProps } = props;
 
     if (!React.isValidElement(children)) {
+      console.log('Invalid asChild element', children);
       return null;
     }
 
