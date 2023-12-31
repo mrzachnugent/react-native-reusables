@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { cn } from '~/lib/utils';
-import { PressableSlot } from '../primitives/pressable-slot';
+import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { Button } from './button';
 
 interface DialogProps {

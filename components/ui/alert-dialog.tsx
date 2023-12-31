@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/ui/button';
-import { PressableSlot } from '~/components/primitives/pressable-slot';
+import { PressableSlot } from '~/lib/rn-primitives/slot';
 
 interface AlertDialogProps {
   children: React.ReactNode;

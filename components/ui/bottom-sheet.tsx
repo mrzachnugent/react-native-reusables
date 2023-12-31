@@ -18,7 +18,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PressableSlot } from '~/components/primitives/pressable-slot';
+import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 

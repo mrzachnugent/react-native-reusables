@@ -2,7 +2,7 @@ import { VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
-import { PressableSlot } from '~/components/primitives/pressable-slot';
+import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { buttonVariants } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 

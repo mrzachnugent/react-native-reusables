@@ -1,3 +1,58 @@
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
+import { isTextChildren } from '~/lib/utils';
+
+type PressableSlotProps = React.ComponentPropsWithoutRef<typeof Pressable>;
+
+const PressableSlot = React.forwardRef<
+  React.ElementRef<typeof Pressable>,
+  PressableSlotProps
+>((props, forwardedRef) => {
+  const { children, ...pressableslotProps } = props;
+
+  if (!React.isValidElement(children)) {
+    return null;
+  }
+
+  return React.cloneElement<
+    React.ComponentPropsWithoutRef<typeof Pressable>,
+    React.ElementRef<typeof Pressable>
+  >(isTextChildren(children) ? <Pressable /> : children, {
+    ...mergeProps(pressableslotProps, children.props),
+    ref: forwardedRef
+      ? composeRefs(forwardedRef, (children as any).ref)
+      : (children as any).ref,
+  });
+});
+
+PressableSlot.displayName = 'PressableSlot';
+
+type ViewSlotProps = React.ComponentPropsWithoutRef<typeof View>;
+
+const ViewSlot = React.forwardRef<React.ElementRef<typeof View>, ViewSlotProps>(
+  (props, forwardedRef) => {
+    const { children, ...viewSlotProps } = props;
+
+    if (!React.isValidElement(children)) {
+      return null;
+    }
+
+    return React.cloneElement<
+      React.ComponentPropsWithoutRef<typeof View>,
+      React.ElementRef<typeof View>
+    >(isTextChildren(children) ? <View /> : children, {
+      ...mergeProps(viewSlotProps, children.props),
+      ref: forwardedRef
+        ? composeRefs(forwardedRef, (children as any).ref)
+        : (children as any).ref,
+    });
+  }
+);
+
+ViewSlot.displayName = 'ViewSlot';
+
+export { PressableSlot, ViewSlot };
+
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.
 // https://github.com/radix-ui/primitives/tree/main
@@ -49,5 +104,3 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
 
   return { ...slotProps, ...overrideProps };
 }
-
-export { mergeProps, composeRefs };

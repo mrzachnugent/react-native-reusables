@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Animated, { FadeInUp, SlideInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PressableSlot } from '~/components/primitives/pressable-slot';
+import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { cn, isTextChildren } from '~/lib/utils';
 import { Button } from './button';
 import { Input } from './input';

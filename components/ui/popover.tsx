@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cn } from '~/lib/utils';
-import { PressableSlot } from '../primitives/pressable-slot';
+import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { Button, buttonVariants } from './button';
 
 const windowWidth = Dimensions.get('window').width;
