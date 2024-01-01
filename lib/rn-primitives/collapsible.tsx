@@ -1,4 +1,4 @@
-import { atom, useAtomValue, useSetAtom } from 'jotai';
+import { atom, useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
@@ -61,8 +61,8 @@ const Trigger = React.forwardRef<
     { asChild, onPress: onPressProp, disabled: disabledProp = false, ...props },
     ref
   ) => {
-    const { disabled, open, onOpenChange, nativeID } = useAtomValue(rootAtom);
-    const setRoot = useSetAtom(rootAtom);
+    const [{ disabled, open, onOpenChange, nativeID }, setRoot] =
+      useAtom(rootAtom);
     const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
     useAugmentedRef({
       ref,
@@ -74,7 +74,7 @@ const Trigger = React.forwardRef<
     function onPress(ev: GestureResponderEvent) {
       if (disabled || disabledProp) return;
       const newValue = !open;
-      setRoot((prev) => ({ ...prev, value: newValue }));
+      setRoot((prev) => ({ ...prev, open: newValue }));
       onOpenChange?.(newValue);
       onPressProp?.(ev);
     }

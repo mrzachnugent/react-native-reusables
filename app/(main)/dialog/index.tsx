@@ -1,0 +1,101 @@
+import * as Clipboard from 'expo-clipboard';
+import * as Haptics from 'expo-haptics';
+import { Check, Copy } from 'lucide-react-native';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Button } from '~/components/ui/button';
+import {
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Dialog as RNRDialog,
+} from '~/components/ui/dialog';
+import { Input } from '~/components/ui/input';
+import { cn } from '~/lib/utils';
+
+export default function DialogScreen() {
+  const [wasCopied, setWasCopied] = React.useState(false);
+
+  async function copyLink() {
+    await Promise.all([
+      Clipboard.setStringAsync('https://github.com/mrzachnugent'),
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light),
+    ]);
+    setWasCopied(true);
+
+    setTimeout(() => {
+      setWasCopied(false);
+    }, 1000);
+  }
+  return (
+    <ScrollView
+      contentContainerStyle={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <View style={{ height: 77 }} className='w-full opacity-0' />
+      <RNRDialog>
+        <DialogTrigger asChild>
+          <Button variant='outline'>Share</Button>
+        </DialogTrigger>
+        <DialogContent className='gap-5'>
+          <DialogHeader>
+            <DialogTitle>Share link</DialogTitle>
+            <DialogDescription>
+              Anyone who has this link will be able to view this.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className='flex-col items-start gap-5'>
+            <View className='flex-row gap-3'>
+              <Input
+                className='flex-1'
+                autoFocus
+                defaultValue='https://github.com/mrzachnugent'
+                selectTextOnFocus
+              />
+              <Button size='sm' className='px-4' onPress={copyLink}>
+                {({ pressed }) =>
+                  wasCopied ? (
+                    <Check
+                      size={21}
+                      className={cn(
+                        'text-primary-foreground',
+                        pressed && 'opacity-70'
+                      )}
+                    />
+                  ) : (
+                    <Copy
+                      size={21}
+                      className={cn(
+                        'text-primary-foreground',
+                        pressed && 'opacity-70'
+                      )}
+                    />
+                  )
+                }
+              </Button>
+            </View>
+            <DialogClose asChild>
+              <Button variant='secondary'>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </RNRDialog>
+      <View className='p-4 w-full'>
+        <Alert icon='Code' className='max-w-xl'>
+          <AlertTitle>FYI</AlertTitle>
+          <AlertDescription>
+            This reusable does not use "rn-primitives"
+          </AlertDescription>
+        </Alert>
+      </View>
+    </ScrollView>
+  );
+}

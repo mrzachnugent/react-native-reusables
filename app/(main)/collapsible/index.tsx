@@ -1,6 +1,7 @@
 import { ChevronsUpDown } from 'lucide-react-native';
 import { Platform, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import {
   Collapsible,
   CollapsibleContent,
@@ -11,7 +12,8 @@ import { cn } from '~/lib/utils';
 
 export default function CollapsibleScreen() {
   return (
-    <View className='flex-1 justify-center items-center p-6'>
+    <View className='flex-1 justify-between items-center p-6'>
+      <View style={{ height: 77 }} className='w-full opacity-0' />
       <Collapsible className='w-full max-w-xl'>
         <CollapsibleHeader>
           <Text className='text-lg font-semibold text-foreground'>
@@ -42,6 +44,14 @@ export default function CollapsibleScreen() {
           </CollapsibleChild>
         </CollapsibleContent>
       </Collapsible>
+      <View className='py-4 w-full'>
+        <Alert icon='Code' className='max-w-xl'>
+          <AlertTitle>FYI</AlertTitle>
+          <AlertDescription>
+            This reusable does not use "rn-primitives"
+          </AlertDescription>
+        </Alert>
+      </View>
     </View>
   );
 }

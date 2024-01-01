@@ -56,11 +56,11 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used t
    <br>
    _Quick start for your own components_
 
-2. Unstyled Native-Focused A11y Components (react-native-primitives)
+2. Unstyled Native-Focused A11y Components (rn-primitives)
    <br>
    _Style agnostic accessible like [radix-ui/primitives](https://github.com/radix-ui/primitives) for ios and android components_
 
-3. Look into options to seamlessly combine web primitives from external library and react-native-primitives.
+3. Look into options to seamlessly combine web primitives from external library and rn-primitives.
 
 #### Accordion
 
@@ -68,7 +68,7 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used t
 <summary>Code</summary>
   
   - [UI](/components/ui/accordion.tsx)
-  - [Example](/app/(main)/accordion.tsx)
+  - [Example](/app/(main)/accordion/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca54-7bbb-4a91-8f7f-7fed37901a0f
@@ -196,7 +196,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/a5bf066
 <summary>Code</summary>
   
   - [UI](/components/ui/collapsible.tsx)
-  - [Example](/app/(main)/collapsible.tsx)
+  - [Example](/app/(main)/collapsible/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5e6de7cc-81e4-48d6-9b5d-ce2251c91609
@@ -244,7 +244,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1feb89e
 <summary>Code</summary>
   
   - [UI](/components/ui/dialog.tsx)
-  - [Example](/app/(main)/dialog.tsx)
+  - [Example](/app/(main)/dialog/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a96-34ad-4f5f-bd19-250c2749932f
