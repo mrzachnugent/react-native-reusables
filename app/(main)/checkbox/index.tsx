@@ -1,12 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { Checkbox } from '~/components/ui/checkbox';
 import { Label } from '~/components/ui/label';
 
 export default function CheckboxScreen() {
   const [isChecked, setIsChecked] = React.useState(false);
   return (
-    <View className='flex-1 justify-center items-center gap-8'>
+    <View className='flex-1 justify-between items-center p-6'>
+      <View style={{ height: 105 }} className='w-full opacity-0' />
       <View className='flex-row gap-6 items-center'>
         <Label
           onPress={() => {
@@ -22,6 +24,14 @@ export default function CheckboxScreen() {
           value={isChecked}
           onChange={setIsChecked}
         />
+      </View>
+      <View className='py-4 w-full'>
+        <Alert icon='Code' className='max-w-xl'>
+          <AlertTitle>FYI</AlertTitle>
+          <AlertDescription>
+            This reusable does not use "rn-primitives"
+          </AlertDescription>
+        </Alert>
       </View>
     </View>
   );
