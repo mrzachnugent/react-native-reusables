@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Accordion as RNRAccordion,
+  Accordion,
 } from '~/components/ui/accordion';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
@@ -17,8 +17,7 @@ export default function AccordionScreen() {
         alignItems: 'center',
       }}
     >
-      <View style={{ height: 105 }} className='w-full opacity-0' />
-      <RNRAccordion className='w-full max-w-xl'>
+      <Accordion className='w-full max-w-xl'>
         <AccordionItem>
           <AccordionTrigger>
             <Text className='text-foreground text-xl pb-1.5'>Item #1</Text>
@@ -52,7 +51,7 @@ export default function AccordionScreen() {
             <View className='p-8 bg-orange-500'></View>
           </AccordionContent>
         </AccordionItem>
-      </RNRAccordion>
+      </Accordion>
       <View className='p-4 w-full'>
         <Alert icon='Code' className='max-w-xl'>
           <AlertTitle>FYI</AlertTitle>
