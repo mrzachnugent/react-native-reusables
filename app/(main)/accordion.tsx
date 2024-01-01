@@ -8,12 +8,14 @@ import {
   Accordion as RNRAccordion,
 } from '~/components/ui/accordion';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Button } from '~/components/ui/button';
 import { RenderTabsViewProps, Tabs, TabsView } from '~/components/ui/tabs';
 import * as Accordion from '~/lib/rn-primitives/accordion';
 
 const DATA = ['RN Reusable', 'Primitive'];
 
 export default function AccordionScreen() {
+  const ref = React.useRef<React.ElementRef<typeof Accordion.Trigger>>(null);
   const renderTabs = React.useCallback((props: RenderTabsViewProps) => {
     switch (props.item) {
       case 'RN Reusable':
@@ -86,10 +88,10 @@ export default function AccordionScreen() {
                 alignItems: 'center',
               }}
             >
-              <Accordion.Root type='single' defaultValue={'item-1'}>
+              <Accordion.Root type='multiple' defaultValue={'item-1'}>
                 <Accordion.Item value='item-1'>
                   <Accordion.Header>
-                    <Accordion.Trigger>
+                    <Accordion.Trigger ref={ref}>
                       <Text className='text-foreground text-xl'>Trigger 1</Text>
                     </Accordion.Trigger>
                   </Accordion.Header>
@@ -108,6 +110,15 @@ export default function AccordionScreen() {
                   </Accordion.Content>
                 </Accordion.Item>
               </Accordion.Root>
+              <View className='p-8' />
+              <Button
+                variant='link'
+                onPress={() => {
+                  ref.current?.press?.();
+                }}
+              >
+                Toggle Trigger 1 with ref
+              </Button>
             </ScrollView>
           </TabsView>
         );
@@ -121,7 +132,7 @@ export default function AccordionScreen() {
       <Drawer.Screen
         options={{ headerStyle: { shadowColor: 'transparent' } }}
       />
-      <Tabs tabs={DATA} renderTabs={renderTabs} />
+      <Tabs tabs={DATA} renderTabs={renderTabs} initialIndex={0} />
     </>
   );
 }

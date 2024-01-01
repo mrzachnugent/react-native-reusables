@@ -3,20 +3,17 @@ import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
-import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 
 interface RootProps {
   type: 'single' | 'multiple';
   disabled?: boolean;
   collapsable?: boolean;
+  value?: string | string[];
   defaultValue?: string | string[];
   onValueChange?: (value?: string | string[]) => void;
 }
 
-interface RootAtom extends Omit<RootProps, 'defaultValue'> {
-  value?: string | string[];
-}
-const rootAtom = atom<RootAtom>({} as RootAtom);
+const rootAtom = atom<RootProps>({} as RootProps);
 
 type ComponentPropsWithoutRef<T extends React.ElementType<any>> =
   React.ComponentPropsWithoutRef<T> & { asChild?: boolean };
@@ -31,6 +28,7 @@ const Root = React.forwardRef<
       type,
       disabled,
       collapsable = true,
+      value,
       defaultValue,
       onValueChange,
       ...viewProps
@@ -45,7 +43,7 @@ const Root = React.forwardRef<
           type,
           disabled,
           collapsable,
-          value: defaultValue ?? (type === 'single' ? undefined : []),
+          value: defaultValue ?? value ?? (type === 'single' ? undefined : []),
           onValueChange,
         }}
       >
@@ -112,7 +110,7 @@ const Header = React.forwardRef<
 Header.displayName = 'HeaderAccordion';
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { press?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithoutRef<typeof Pressable>
 >(({ asChild, onPress: onPressProp, ...props }, ref) => {
   const {
@@ -124,13 +122,6 @@ const Trigger = React.forwardRef<
   } = useAtomValue(rootAtom);
   const setRoot = useSetAtom(rootAtom);
   const { nativeID, disabled: itemDisabled, value } = useAtomValue(itemAtom);
-  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-  useAugmentedRef({
-    ref,
-    augmentedRef,
-    methods: { press: onPress },
-    deps: [rootValue, value, type, rootDisabled, collapsable, itemDisabled],
-  });
 
   function onPress(ev: GestureResponderEvent) {
     if (rootDisabled || itemDisabled) return;
@@ -159,7 +150,7 @@ const Trigger = React.forwardRef<
   const Slot = asChild ? PressableSlot : Pressable;
   return (
     <Slot
-      ref={augmentedRef}
+      ref={ref}
       nativeID={nativeID}
       aria-disabled={rootDisabled ?? itemDisabled}
       role='button'
