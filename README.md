@@ -431,7 +431,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/6a3dd0f
 <summary>Code</summary>
   
   - [UI](/components/ui/toggle.tsx)
-  - [Example](/app/(main)/toggle.tsx)
+  - [Example](/app/(main)/toggle/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5b-bed4-4489-99be-e4369c659713
