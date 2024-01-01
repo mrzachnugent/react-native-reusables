@@ -8,9 +8,9 @@ const Root = React.forwardRef<
   ComponentPropsWithAsChild<typeof Pressable> & {
     nativeID: string;
   }
->(({ asChild, nativeID, ...props }, ref) => {
+>(({ asChild, ...props }, ref) => {
   const Slot = asChild ? PressableSlot : Pressable;
-  return <Slot ref={ref} nativeID={nativeID} {...props} />;
+  return <Slot ref={ref} {...props} />;
 });
 
 Root.displayName = 'RootLabel';
