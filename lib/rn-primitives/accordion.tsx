@@ -4,6 +4,7 @@ import { GestureResponderEvent, Pressable, View } from 'react-native';
 import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
+import { PropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
   type: 'single' | 'multiple';
@@ -18,12 +19,9 @@ interface RootAtom extends Omit<RootProps, 'defaultValue'> {
 }
 const rootAtom = atom<RootAtom>({} as RootAtom);
 
-type ComponentPropsWithoutRef<T extends React.ElementType<any>> =
-  React.ComponentPropsWithoutRef<T> & { asChild?: boolean };
-
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithoutRef<typeof View> & RootProps
+  PropsWithAsChild<typeof View> & RootProps
 >(
   (
     {
@@ -69,7 +67,7 @@ const itemAtom = atom<ItemAtom>({} as ItemAtom);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithoutRef<typeof View> & ItemProps
+  PropsWithAsChild<typeof View> & ItemProps
 >(({ asChild, value, disabled, ...viewProps }, ref) => {
   const nativeID = React.useId();
 
@@ -92,7 +90,7 @@ Item.displayName = 'ItemAccordion';
 
 const Header = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithoutRef<typeof View>
+  PropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
   const { disabled: rootDisabled, value: rootValue } = useAtomValue(rootAtom);
   const { disabled: itemDisabled, value } = useAtomValue(itemAtom);
@@ -113,7 +111,7 @@ Header.displayName = 'HeaderAccordion';
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable> & { press?: () => void },
-  ComponentPropsWithoutRef<typeof Pressable>
+  PropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, ...props }, ref) => {
   const {
     disabled: rootDisabled,
@@ -177,21 +175,23 @@ Trigger.displayName = 'TriggerAccordion';
 
 const Content = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithoutRef<typeof View> & { forceMount?: boolean }
+  PropsWithAsChild<typeof View> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
   const { type, value: rootValue } = useAtomValue(rootAtom);
   const { nativeID, value } = useAtomValue(itemAtom);
   const isExpanded = isItemExpanded(rootValue, value);
 
-  if (!forceMount && !isExpanded) {
-    return null;
+  if (!forceMount) {
+    if (!isExpanded) {
+      return null;
+    }
   }
 
   const Slot = asChild ? ViewSlot : View;
   return (
     <Slot
       ref={ref}
-      aria-hidden={!isExpanded}
+      aria-hidden={!(forceMount || isExpanded)}
       aria-labelledby={nativeID}
       role={type === 'single' ? 'region' : 'summary'}
       {...props}
