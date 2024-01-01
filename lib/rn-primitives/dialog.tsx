@@ -11,7 +11,7 @@ import {
 import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
-import { PropsWithAsChild } from '~/lib/rn-primitives/utils';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
   defaultOpen?: boolean;
@@ -26,7 +26,7 @@ const rootAtom = atom<RootAtom>({} as RootAtom);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
-  PropsWithAsChild<typeof View> & RootProps
+  ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, defaultOpen = false, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
   const Slot = asChild ? ViewSlot : View;
@@ -48,7 +48,7 @@ Root.displayName = 'RootDialog';
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable> & { press?: () => void },
-  PropsWithAsChild<typeof Pressable>
+  ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
   const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
   const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
@@ -124,10 +124,12 @@ Portal.displayName = 'PortalDialog';
 
 const Overlay = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  PropsWithAsChild<typeof Pressable> & {
+  ComponentPropsWithAsChild<typeof Pressable> & {
     forceMount?: boolean;
     closeOnPress?: boolean;
-    children: NonNullable<PropsWithAsChild<typeof Pressable>['children']>;
+    children: NonNullable<
+      ComponentPropsWithAsChild<typeof Pressable>['children']
+    >;
   }
 >(
   (
@@ -165,7 +167,7 @@ Overlay.displayName = 'OverlayDialog';
 
 const Content = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  PropsWithAsChild<typeof Pressable> & { forceMount?: boolean }
+  ComponentPropsWithAsChild<typeof Pressable> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
   const { value, nativeID } = useAtomValue(rootAtom);
 
@@ -193,7 +195,7 @@ Content.displayName = 'ContentDialog';
 
 const Close = React.forwardRef<
   React.ElementRef<typeof Pressable> & { press?: () => void },
-  PropsWithAsChild<typeof Pressable>
+  ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
   const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
   const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);

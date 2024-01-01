@@ -4,7 +4,7 @@ import { GestureResponderEvent, Pressable, View } from 'react-native';
 import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
-import { PropsWithAsChild } from '~/lib/rn-primitives/utils';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
   type: 'single' | 'multiple';
@@ -21,7 +21,7 @@ const rootAtom = atom<RootAtom>({} as RootAtom);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
-  PropsWithAsChild<typeof View> & RootProps
+  ComponentPropsWithAsChild<typeof View> & RootProps
 >(
   (
     {
@@ -67,7 +67,7 @@ const itemAtom = atom<ItemAtom>({} as ItemAtom);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof View>,
-  PropsWithAsChild<typeof View> & ItemProps
+  ComponentPropsWithAsChild<typeof View> & ItemProps
 >(({ asChild, value, disabled, ...viewProps }, ref) => {
   const nativeID = React.useId();
 
@@ -90,7 +90,7 @@ Item.displayName = 'ItemAccordion';
 
 const Header = React.forwardRef<
   React.ElementRef<typeof View>,
-  PropsWithAsChild<typeof View>
+  ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
   const { disabled: rootDisabled, value: rootValue } = useAtomValue(rootAtom);
   const { disabled: itemDisabled, value } = useAtomValue(itemAtom);
@@ -111,71 +111,86 @@ Header.displayName = 'HeaderAccordion';
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable> & { press?: () => void },
-  PropsWithAsChild<typeof Pressable>
->(({ asChild, onPress: onPressProp, ...props }, ref) => {
-  const {
-    disabled: rootDisabled,
-    type,
-    onValueChange,
-    value: rootValue,
-    collapsable,
-  } = useAtomValue(rootAtom);
-  const setRoot = useSetAtom(rootAtom);
-  const { nativeID, disabled: itemDisabled, value } = useAtomValue(itemAtom);
-  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-  useAugmentedRef({
-    ref,
-    augmentedRef,
-    methods: { press: onPress },
-    deps: [rootValue, value, type, rootDisabled, collapsable, itemDisabled],
-  });
+  ComponentPropsWithAsChild<typeof Pressable>
+>(
+  (
+    { asChild, onPress: onPressProp, disabled: disabledProp, ...props },
+    ref
+  ) => {
+    const {
+      disabled: rootDisabled,
+      type,
+      onValueChange,
+      value: rootValue,
+      collapsable,
+    } = useAtomValue(rootAtom);
+    const setRoot = useSetAtom(rootAtom);
+    const { nativeID, disabled: itemDisabled, value } = useAtomValue(itemAtom);
+    const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
+    useAugmentedRef({
+      ref,
+      augmentedRef,
+      methods: { press: onPress },
+      deps: [
+        rootValue,
+        value,
+        type,
+        rootDisabled,
+        collapsable,
+        itemDisabled,
+        disabledProp,
+      ],
+    });
 
-  function onPress(ev: GestureResponderEvent) {
-    if (rootDisabled || itemDisabled) return;
-    if (type === 'single') {
-      const newValue = collapsable
-        ? value === rootValue
-          ? undefined
-          : value
-        : value;
-      setRoot((prev) => ({ ...prev, value: newValue }));
-      onValueChange?.(newValue);
+    function onPress(ev: GestureResponderEvent) {
+      if (rootDisabled || itemDisabled) return;
+      if (type === 'single') {
+        const newValue = collapsable
+          ? value === rootValue
+            ? undefined
+            : value
+          : value;
+        setRoot((prev) => ({ ...prev, value: newValue }));
+        onValueChange?.(newValue);
+      }
+      if (type === 'multiple') {
+        const rootToArray = toStringArray(rootValue);
+        const newValue = collapsable
+          ? rootToArray.includes(value)
+            ? rootToArray.filter((val) => val !== value)
+            : rootToArray.concat(value)
+          : [...new Set(rootToArray.concat(value))];
+        setRoot((prev) => ({ ...prev, value: newValue }));
+        onValueChange?.(newValue);
+      }
+      onPressProp?.(ev);
     }
-    if (type === 'multiple') {
-      const rootToArray = toStringArray(rootValue);
-      const newValue = collapsable
-        ? rootToArray.includes(value)
-          ? rootToArray.filter((val) => val !== value)
-          : rootToArray.concat(value)
-        : [...new Set(rootToArray.concat(value))];
-      setRoot((prev) => ({ ...prev, value: newValue }));
-      onValueChange?.(newValue);
-    }
-    onPressProp?.(ev);
+
+    const isDisabled = disabledProp || rootDisabled || itemDisabled;
+    const Slot = asChild ? PressableSlot : Pressable;
+    return (
+      <Slot
+        ref={augmentedRef}
+        nativeID={nativeID}
+        aria-disabled={isDisabled}
+        role='button'
+        onPress={onPress}
+        accessibilityState={{
+          expanded: isItemExpanded(rootValue, value),
+          disabled: isDisabled,
+        }}
+        disabled={isDisabled}
+        {...props}
+      />
+    );
   }
-
-  const Slot = asChild ? PressableSlot : Pressable;
-  return (
-    <Slot
-      ref={augmentedRef}
-      nativeID={nativeID}
-      aria-disabled={rootDisabled ?? itemDisabled}
-      role='button'
-      onPress={onPress}
-      accessibilityState={{
-        expanded: isItemExpanded(rootValue, value),
-        disabled: rootDisabled ?? itemDisabled,
-      }}
-      {...props}
-    />
-  );
-});
+);
 
 Trigger.displayName = 'TriggerAccordion';
 
 const Content = React.forwardRef<
   React.ElementRef<typeof View>,
-  PropsWithAsChild<typeof View> & { forceMount?: boolean }
+  ComponentPropsWithAsChild<typeof View> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
   const { type, value: rootValue } = useAtomValue(rootAtom);
   const { nativeID, value } = useAtomValue(itemAtom);
