@@ -91,7 +91,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca5
 <summary>Code</summary>
   
   - [UI](/components/ui/alert-dialog.tsx)
-  - [Example](/app/(main)/alert-dialog.tsx)
+  - [Example](/app/(main)/alert-dialog/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8f-bbfb-4bce-ae6f-05b448f218ab
@@ -102,7 +102,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <summary>Code</summary>
   
   - [UI](/components/ui/avatar.tsx)
-  - [Example](/app/(main)/avatar.tsx)
+  - [Example](/app/(main)/avatar/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/3637197a-497d-4c41-b497-89d0da54bef2" width="250px" />
@@ -173,7 +173,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <summary>Code</summary>
   
   - [UI](/components/ui/checkbox.tsx)
-  - [Example](/app/(main)/checkbox.tsx)
+  - [Example](/app/(main)/checkbox/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1580db11-d56d-4dab-ab2b-74abe7846144" width="250px" />
@@ -281,7 +281,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <summary>Code</summary>
   
   - [UI](/components/ui/label.tsx)
-  - [Example](/app/(main)/label.tsx)
+  - [Example](/app/(main)/label/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/54273fc2-36a8-4942-949c-91f36ee55334" width="250px" />
@@ -307,7 +307,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/835891c
 <summary>Code</summary>
   
   - [UI](/components/ui/progress.tsx)
-  - [Example](/app/(main)/progress.tsx)
+  - [Example](/app/(main)/progress/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/b23d9ea7-81ca-41be-b35d-344df5a56bde
@@ -318,7 +318,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/b23d9ea
 <summary>Code</summary>
   
   - [UI](/components/ui/radio-group.tsx)
-  - [Example](/app/(main)/radio-group.tsx)
+  - [Example](/app/(main)/radio-group/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1dcd6059-971f-4c1f-b278-3a23ae527bdf

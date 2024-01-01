@@ -5,9 +5,7 @@ import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 const Root = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & {
-    nativeID: string;
-  }
+  ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, ...props }, ref) => {
   const Slot = asChild ? PressableSlot : Pressable;
   return <Slot ref={ref} {...props} />;
@@ -17,7 +15,9 @@ Root.displayName = 'RootLabel';
 
 const Text = React.forwardRef<
   React.ElementRef<typeof RNText>,
-  React.ComponentPropsWithoutRef<typeof RNText>
+  React.ComponentPropsWithoutRef<typeof RNText> & {
+    nativeID: string;
+  }
 >((props, ref) => {
   return <RNText ref={ref} {...props} />;
 });

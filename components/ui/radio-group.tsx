@@ -100,7 +100,7 @@ const RadioGroupItem = React.forwardRef<
             'h-6 w-6 border-primary [borderWidth:1.5] rounded-full items-center justify-center',
             buttonClass
           )}
-          aria-labelledbyledBy={name}
+          aria-labelledby={name}
           accessibilityState={{ selected: value === name }}
           role='radio'
           {...props}
