@@ -40,7 +40,7 @@ export default function DialogScreen() {
         alignItems: 'center',
       }}
     >
-      <View style={{ height: 77 }} className='w-full opacity-0' />
+      <View style={{ height: 105 }} className='w-full opacity-0' />
       <RNRDialog>
         <DialogTrigger asChild>
           <Button variant='outline'>Share</Button>

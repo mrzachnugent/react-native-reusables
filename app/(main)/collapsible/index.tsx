@@ -13,7 +13,7 @@ import { cn } from '~/lib/utils';
 export default function CollapsibleScreen() {
   return (
     <View className='flex-1 justify-between items-center p-6'>
-      <View style={{ height: 77 }} className='w-full opacity-0' />
+      <View style={{ height: 105 }} className='w-full opacity-0' />
       <Collapsible className='w-full max-w-xl'>
         <CollapsibleHeader>
           <Text className='text-lg font-semibold text-foreground'>
