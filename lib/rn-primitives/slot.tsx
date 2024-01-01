@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, Image } from 'react-native';
 import { isTextChildren } from '~/lib/utils';
 
 type PressableSlotProps = React.ComponentPropsWithoutRef<typeof Pressable>;
@@ -53,7 +53,35 @@ const ViewSlot = React.forwardRef<React.ElementRef<typeof View>, ViewSlotProps>(
 
 ViewSlot.displayName = 'ViewSlot';
 
-export { PressableSlot, ViewSlot };
+type ImageSlotProps = React.ComponentPropsWithoutRef<typeof Image> & {
+  children?: React.ReactNode;
+};
+
+const ImageSlot = React.forwardRef<
+  React.ElementRef<typeof Image>,
+  ImageSlotProps
+>((props, forwardedRef) => {
+  const { children, ...imageSlotProps } = props;
+
+  if (!React.isValidElement(children)) {
+    console.log('Invalid asChild element', children);
+    return null;
+  }
+
+  return React.cloneElement<
+    React.ComponentPropsWithoutRef<typeof Image>,
+    React.ElementRef<typeof Image>
+  >(isTextChildren(children) ? <View /> : children, {
+    ...mergeProps(imageSlotProps, children.props),
+    ref: forwardedRef
+      ? composeRefs(forwardedRef, (children as any).ref)
+      : (children as any).ref,
+  });
+});
+
+ImageSlot.displayName = 'ImageSlot';
+
+export { PressableSlot, ViewSlot, ImageSlot };
 
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.

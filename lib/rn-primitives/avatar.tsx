@@ -8,25 +8,31 @@ import {
   View,
 } from 'react-native';
 import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
-import { ViewSlot } from '~/lib/rn-primitives/slot';
+import { ImageSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
-interface RootAtom {
+interface AvatarRootProps {
+  alt: string;
+}
+
+interface RootAtom extends AvatarRootProps {
   status: 'loading' | 'error' | 'loaded';
 }
 const rootAtom = atom({} as RootAtom);
 
-const DEFAULT_ATOM_VALUE = {
-  status: 'loading',
-} as const;
-
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View>
->(({ asChild, ...viewProps }, ref) => {
+  ComponentPropsWithAsChild<typeof View> & AvatarRootProps
+>(({ asChild, alt, ...viewProps }, ref) => {
   const Slot = asChild ? ViewSlot : View;
   return (
-    <AtomScopeProvider atom={rootAtom} value={DEFAULT_ATOM_VALUE}>
+    <AtomScopeProvider
+      atom={rootAtom}
+      value={{
+        status: 'loading',
+        alt,
+      }}
+    >
       <Slot ref={ref} {...viewProps} />
     </AtomScopeProvider>
   );
@@ -34,33 +40,28 @@ const Root = React.forwardRef<
 
 Root.displayName = 'RootAvatar';
 
-interface ImageAtom {
-  alt: string;
-}
-const imageAtom = atom({} as ImageAtom);
-
 const Image = React.forwardRef<
   React.ElementRef<typeof RNImage>,
-  React.ComponentPropsWithoutRef<typeof RNImage> & {
+  Omit<ComponentPropsWithAsChild<typeof RNImage>, 'alt'> & {
+    children?: React.ReactNode;
     onLoadingStatusChange?: (status: 'error' | 'loaded') => void;
-    alt: string;
   }
 >(
   (
     {
+      asChild,
       onLoad: onLoadProps,
       onError: onErrorProps,
       onLoadingStatusChange,
-      alt,
       ...props
     },
     ref
   ) => {
-    const [{ status }, setRoot] = useAtom(rootAtom);
+    const [{ status, alt }, setRoot] = useAtom(rootAtom);
 
     const onLoad = React.useCallback(
       (e: NativeSyntheticEvent<ImageLoadEventData>) => {
-        setRoot({ status: 'loaded' });
+        setRoot((prev) => ({ ...prev, status: 'loaded' }));
         onLoadingStatusChange?.('loaded');
         onLoadProps?.(e);
       },
@@ -69,7 +70,7 @@ const Image = React.forwardRef<
 
     const onError = React.useCallback(
       (e: NativeSyntheticEvent<ImageErrorEventData>) => {
-        setRoot({ status: 'error' });
+        setRoot((prev) => ({ ...prev, status: 'error' }));
         onLoadingStatusChange?.('error');
         onErrorProps?.(e);
       },
@@ -80,16 +81,9 @@ const Image = React.forwardRef<
       return null;
     }
 
+    const Slot = asChild ? ImageSlot : RNImage;
     return (
-      <AtomScopeProvider atom={imageAtom} value={{ alt }}>
-        <RNImage
-          ref={ref}
-          alt={alt}
-          onLoad={onLoad}
-          onError={onError}
-          {...props}
-        />
-      </AtomScopeProvider>
+      <Slot ref={ref} alt={alt} onLoad={onLoad} onError={onError} {...props} />
     );
   }
 );
@@ -100,8 +94,7 @@ const Fallback = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
-  const { status } = useAtomValue(rootAtom);
-  const { alt } = useAtomValue(imageAtom);
+  const { status, alt } = useAtomValue(rootAtom);
 
   if (status !== 'error') {
     return null;

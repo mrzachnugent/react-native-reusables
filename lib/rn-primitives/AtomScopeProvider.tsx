@@ -14,9 +14,10 @@ export function AtomScopeProvider<T>({
   value,
   children,
 }: AtomScopeProviderProps<T>) {
+  const id = React.useId();
   return (
     <ScopeProvider
-      key={__DEV__ ? JSON.stringify(value) : undefined}
+      key={__DEV__ ? `${id}-${JSON.stringify(value)}` : undefined}
       atoms={[atom]}
     >
       <AtomsHydrator atom={atom} value={value}>

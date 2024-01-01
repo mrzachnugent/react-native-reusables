@@ -55,7 +55,8 @@
     "react-native-toast-message": "^2.2.0",
     "react-native-web": "~0.19.6",
     "tailwind-merge": "^2.1.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "expo-image": "~1.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
