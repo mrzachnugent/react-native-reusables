@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Dialog as RNRDialog,
+  Dialog,
 } from '~/components/ui/dialog';
 import { Input } from '~/components/ui/input';
 import { cn } from '~/lib/utils';
@@ -41,7 +41,7 @@ export default function DialogScreen() {
       }}
     >
       <View style={{ height: 105 }} className='w-full opacity-0' />
-      <RNRDialog>
+      <Dialog>
         <DialogTrigger asChild>
           <Button variant='outline'>Share</Button>
         </DialogTrigger>
@@ -87,7 +87,7 @@ export default function DialogScreen() {
             </DialogClose>
           </DialogFooter>
         </DialogContent>
-      </RNRDialog>
+      </Dialog>
       <View className='p-4 w-full'>
         <Alert icon='Code' className='max-w-xl'>
           <AlertTitle>FYI</AlertTitle>

@@ -12,6 +12,7 @@ import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
+import * as Dialog from '~/lib/rn-primitives/dialog';
 
 interface RootProps {
   defaultOpen?: boolean;
@@ -25,8 +26,8 @@ interface RootAtom extends Omit<RootProps, 'defaultOpen'> {
 const rootAtom = atom<RootAtom>({} as RootAtom);
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
+  React.ElementRef<typeof Dialog.Root>,
+  React.ComponentPropsWithoutRef<typeof Dialog.Root>
 >(({ asChild, defaultOpen = false, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
   const Slot = asChild ? ViewSlot : View;
@@ -44,7 +45,7 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootDialog';
+Root.displayName = 'RootAlertDialog';
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable> & { click?: () => void },
@@ -80,7 +81,7 @@ const Trigger = React.forwardRef<
   );
 });
 
-Trigger.displayName = 'TriggerDialog';
+Trigger.displayName = 'TriggerAlertDialog';
 
 const Portal = React.forwardRef<
   React.ElementRef<typeof Modal>,
@@ -120,54 +121,32 @@ const Portal = React.forwardRef<
   }
 );
 
-Portal.displayName = 'PortalDialog';
+Portal.displayName = 'PortalAlertDialog';
 
 const Overlay = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & {
+  React.ElementRef<typeof View>,
+  ComponentPropsWithAsChild<typeof View> & {
     forceMount?: boolean;
     closeOnPress?: boolean;
-    children: NonNullable<
-      ComponentPropsWithAsChild<typeof Pressable>['children']
-    >;
   }
->(
-  (
-    {
-      asChild,
-      forceMount = false,
-      closeOnPress = true,
-      onPress: OnPressProp,
-      ...props
-    },
-    ref
-  ) => {
-    const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
+>(({ asChild, forceMount = false, closeOnPress = true, ...props }, ref) => {
+  const { value } = useAtomValue(rootAtom);
 
-    function onPress(ev: GestureResponderEvent) {
-      if (closeOnPress) {
-        onOpenChange?.(!value);
-        setRoot((prev) => ({ ...prev, value: !prev.value }));
-      }
-      OnPressProp?.(ev);
+  if (!forceMount) {
+    if (!value) {
+      return null;
     }
-
-    if (!forceMount) {
-      if (!value) {
-        return null;
-      }
-    }
-
-    const Slot = asChild ? PressableSlot : Pressable;
-    return <Slot ref={ref} onPress={onPress} {...props} />;
   }
-);
 
-Overlay.displayName = 'OverlayDialog';
+  const Slot = asChild ? ViewSlot : View;
+  return <Slot ref={ref} {...props} />;
+});
+
+Overlay.displayName = 'OverlayAlertDialog';
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & { forceMount?: boolean }
+  React.ElementRef<typeof View>,
+  ComponentPropsWithAsChild<typeof View> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
   const { value, nativeID } = useAtomValue(rootAtom);
 
@@ -177,11 +156,11 @@ const Content = React.forwardRef<
     }
   }
 
-  const Slot = asChild ? PressableSlot : Pressable;
+  const Slot = asChild ? ViewSlot : View;
   return (
     <Slot
       ref={ref}
-      role='dialog'
+      role='alertdialog'
       nativeID={nativeID}
       aria-labelledby={`${nativeID}_label`}
       aria-describedby={`${nativeID}_desc`}
@@ -191,7 +170,7 @@ const Content = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentDialog';
+Content.displayName = 'ContentAlertDialog';
 
 const Close = React.forwardRef<
   React.ElementRef<typeof Pressable> & { click?: () => void },
@@ -226,7 +205,42 @@ const Close = React.forwardRef<
   );
 });
 
-Close.displayName = 'CloseDialog';
+Close.displayName = 'CloseAlertDialog';
+
+const Action = React.forwardRef<
+  React.ElementRef<typeof Pressable> & { click?: () => void },
+  ComponentPropsWithAsChild<typeof Pressable>
+>(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
+  const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
+  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
+  useAugmentedRef({
+    ref,
+    augmentedRef,
+    methods: { click: onPress },
+    deps: [value, disabled],
+  });
+
+  function onPress(ev: GestureResponderEvent) {
+    if (disabled) return;
+    setRoot((prev) => ({ ...prev, value: false }));
+    onOpenChange?.(false);
+    onPressProp?.(ev);
+  }
+
+  const Slot = asChild ? PressableSlot : Pressable;
+  return (
+    <Slot
+      ref={augmentedRef}
+      aria-disabled={disabled ?? undefined}
+      role='button'
+      onPress={onPress}
+      disabled={disabled ?? undefined}
+      {...props}
+    />
+  );
+});
+
+Action.displayName = 'ActionAlertDialog';
 
 const Title = React.forwardRef<
   React.ElementRef<typeof Text>,
@@ -238,7 +252,7 @@ const Title = React.forwardRef<
   );
 });
 
-Title.displayName = 'TitleDialog';
+Title.displayName = 'TitleAlertDialog';
 
 const Description = React.forwardRef<
   React.ElementRef<typeof Text>,
@@ -250,6 +264,16 @@ const Description = React.forwardRef<
   );
 });
 
-Description.displayName = 'DescriptionDialog';
+Description.displayName = 'DescriptionAlertDialog';
 
-export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger };
+export {
+  Action,
+  Close,
+  Content,
+  Description,
+  Overlay,
+  Portal,
+  Root,
+  Title,
+  Trigger,
+};

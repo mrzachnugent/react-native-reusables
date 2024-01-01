@@ -54,7 +54,7 @@ const Root = React.forwardRef<
 Root.displayName = 'RootCollapsible';
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { press?: () => void },
+  React.ElementRef<typeof Pressable> & { click?: () => void },
   ComponentPropsWithAsChild<typeof Pressable>
 >(
   (
@@ -67,7 +67,7 @@ const Trigger = React.forwardRef<
     useAugmentedRef({
       ref,
       augmentedRef,
-      methods: { press: onPress },
+      methods: { click: onPress },
       deps: [disabled, disabledProp, open],
     });
 

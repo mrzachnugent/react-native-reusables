@@ -110,7 +110,7 @@ const Header = React.forwardRef<
 Header.displayName = 'HeaderAccordion';
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { press?: () => void },
+  React.ElementRef<typeof Pressable> & { click?: () => void },
   ComponentPropsWithAsChild<typeof Pressable>
 >(
   (
@@ -130,7 +130,7 @@ const Trigger = React.forwardRef<
     useAugmentedRef({
       ref,
       augmentedRef,
-      methods: { press: onPress },
+      methods: { click: onPress },
       deps: [
         rootValue,
         value,

@@ -40,7 +40,7 @@ export default function AccordionPrimitiveScreen() {
       <Button
         variant='link'
         onPress={() => {
-          ref.current?.press?.();
+          ref.current?.click?.();
         }}
       >
         Toggle Trigger 1 with ref
