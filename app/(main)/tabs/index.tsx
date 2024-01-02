@@ -4,6 +4,7 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Button } from '~/components/ui/button';
 import { Tabs, TabsView, type RenderTabsViewProps } from '~/components/ui/tabs';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 const DATA = ['Blue', 'Red', 'Green', 'Orange', 'Purple', 'Fuchsia'];
 
@@ -87,6 +88,15 @@ function CustomTabsView(
             Scroll to random tab
           </Button>
         </View>
+        <View className='p-4 w-full'>
+          <Alert icon='Code' className='max-w-xl'>
+            <AlertTitle>FYI</AlertTitle>
+            <AlertDescription>
+              This reusable does not use "rn-primitives"
+            </AlertDescription>
+          </Alert>
+        </View>
+        <View style={{ height: 50 }} />
       </ScrollView>
     </TabsView>
   );
