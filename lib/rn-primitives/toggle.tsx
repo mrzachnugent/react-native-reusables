@@ -10,7 +10,7 @@ interface RootProps {
 }
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & RootProps
 >(
   (

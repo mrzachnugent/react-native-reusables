@@ -16,7 +16,7 @@ interface CheckboxContext extends RootProps {
 const CheckboxContext = React.createContext({} as CheckboxContext);
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & RootProps
 >(
   (
