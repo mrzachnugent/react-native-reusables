@@ -1,53 +1,55 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
-import { useAugmentedRef } from './util-hooks';
 
 interface RootProps {
-  defaultValue?: string;
-  onValueChange?: (val: string) => void;
+  value: string | undefined;
+  onValueChange: (val: string) => void;
   disabled?: boolean;
 }
 
-interface RootAtom extends Omit<RootProps, 'defaultValue'> {
-  value: string | undefined;
+interface RadioGroupContext extends RootProps {
   disabled: boolean;
 }
-const rootAtom = atom({} as RootAtom);
+
+const RadioGroupContext = React.createContext({} as RootProps);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
->(
-  (
-    { asChild, defaultValue, onValueChange, disabled = false, ...viewProps },
-    ref
-  ) => {
-    const Slot = asChild ? ViewSlot : View;
-    return (
-      <AtomScopeProvider
-        atom={rootAtom}
-        value={{
-          value: defaultValue,
-          disabled,
-          onValueChange,
-        }}
-      >
-        <Slot ref={ref} role='radiogroup' {...viewProps} />
-      </AtomScopeProvider>
-    );
-  }
-);
+>(({ asChild, value, onValueChange, disabled = false, ...viewProps }, ref) => {
+  const Slot = asChild ? ViewSlot : View;
+  return (
+    <RadioGroupContext.Provider
+      value={{
+        value,
+        disabled,
+        onValueChange,
+      }}
+    >
+      <Slot ref={ref} role='radiogroup' {...viewProps} />
+    </RadioGroupContext.Provider>
+  );
+});
 
 Root.displayName = 'RootRadioGroup';
 
-interface ItemAtom {
-  value: string | undefined;
+function useRadioGroupContext() {
+  const context = React.useContext(RadioGroupContext);
+  if (!context) {
+    throw new Error(
+      'RadioGroup compound components cannot be rendered outside the RadioGroup component'
+    );
+  }
+  return context;
 }
-const itemAtom = atom({} as ItemAtom);
+
+interface RadioItemContext {
+  itemValue: string | undefined;
+}
+
+const RadioItemContext = React.createContext({} as RadioItemContext);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof Pressable> & {
@@ -64,55 +66,56 @@ const Item = React.forwardRef<
   (
     {
       asChild,
-      value: valueProp,
+      value: itemValue,
       disabled: disabledProp = false,
       onPress: onPressProp,
       ...props
     },
     ref
   ) => {
-    const [{ disabled, value, onValueChange }, setRoot] = useAtom(rootAtom);
-    const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-    useAugmentedRef({
-      ref,
-      augmentedRef,
-      methods: { click: onPress },
-      deps: [valueProp, disabled, disabledProp],
-    });
+    const { disabled, value, onValueChange } = useRadioGroupContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled || disabledProp) return;
-      setRoot((prev) => ({ ...prev, value: valueProp }));
-      onValueChange?.(valueProp);
+      onValueChange(itemValue);
       onPressProp?.(ev);
     }
 
     const Slot = asChild ? PressableSlot : Pressable;
     return (
-      <AtomScopeProvider
-        atom={itemAtom}
+      <RadioItemContext.Provider
         value={{
-          value: valueProp,
+          itemValue: itemValue,
         }}
       >
         <Slot
-          ref={augmentedRef}
+          ref={ref}
           role='radio'
           onPress={onPress}
-          aria-checked={value === valueProp}
+          aria-checked={value === itemValue}
           disabled={(disabled || disabledProp) ?? false}
           accessibilityState={{
             disabled: (disabled || disabledProp) ?? false,
-            checked: value === valueProp,
+            checked: value === itemValue,
           }}
           {...props}
         />
-      </AtomScopeProvider>
+      </RadioItemContext.Provider>
     );
   }
 );
 
 Item.displayName = 'ItemRadioGroup';
+
+function useRadioItemContext() {
+  const context = React.useContext(RadioItemContext);
+  if (!context) {
+    throw new Error(
+      'RadioItem compound components cannot be rendered outside the RadioItem component'
+    );
+  }
+  return context;
+}
 
 const Indicator = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -120,8 +123,8 @@ const Indicator = React.forwardRef<
     forceMount?: boolean;
   }
 >(({ asChild, forceMount, ...props }, ref) => {
-  const { value } = useAtomValue(rootAtom);
-  const { value: itemValue } = useAtomValue(itemAtom);
+  const { value } = useRadioGroupContext();
+  const { itemValue } = useRadioItemContext();
 
   if (!forceMount) {
     if (value !== itemValue) {

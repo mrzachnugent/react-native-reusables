@@ -4,9 +4,10 @@ import * as Label from '~/lib/rn-primitives/label';
 import * as RadioGroup from '~/lib/rn-primitives/radio-group';
 
 export default function RadioGroupPrimitiveScreen() {
+  const [value, setValue] = React.useState('Primitive 2');
   return (
     <View className='flex-1 justify-center items-center p-6 gap-12'>
-      <RadioGroup.Root defaultValue='Primitive 2' className='gap-5'>
+      <RadioGroup.Root value={value} onValueChange={setValue} className='gap-5'>
         <RadioGroupItemWithLabel value='Primitive 1' />
         <RadioGroupItemWithLabel value='Primitive 2' />
         <RadioGroupItemWithLabel value='Primitive 3' />

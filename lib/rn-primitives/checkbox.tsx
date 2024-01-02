@@ -1,82 +1,72 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
-import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
   disabled?: boolean;
-  defaultChecked?: boolean;
-  onCheckedChange?: (checked?: boolean) => void;
+  checked: boolean;
+  onCheckedChange: (checked: boolean) => void;
 }
 
-interface RootAtom extends Omit<RootProps, 'defaultChecked'> {
-  checked: boolean;
+interface CheckboxContext extends RootProps {
   nativeID?: string;
 }
-const rootAtom = atom<RootAtom>({} as RootAtom);
+
+const CheckboxContext = React.createContext({} as CheckboxContext);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof Pressable> & { click?: () => void },
   ComponentPropsWithAsChild<typeof Pressable> & RootProps
 >(
   (
-    {
-      asChild,
-      disabled = false,
-      defaultChecked = false,
-      onCheckedChange,
-      nativeID,
-      ...props
-    },
+    { asChild, disabled = false, checked, onCheckedChange, nativeID, ...props },
     ref
   ) => {
     return (
-      <AtomScopeProvider
-        atom={rootAtom}
+      <CheckboxContext.Provider
         value={{
           disabled,
-          checked: defaultChecked,
+          checked,
           onCheckedChange,
           nativeID,
         }}
       >
         <Trigger ref={ref} {...props} />
-      </AtomScopeProvider>
+      </CheckboxContext.Provider>
     );
   }
 );
 
 Root.displayName = 'RootCheckbox';
 
+function useCheckboxContext() {
+  const context = React.useContext(CheckboxContext);
+  if (!context) {
+    throw new Error(
+      'Checkbox compound components cannot be rendered outside the Checkbox component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable> & { click?: () => void },
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, ...props }, ref) => {
-  const [{ disabled, checked, onCheckedChange, nativeID }, setRoot] =
-    useAtom(rootAtom);
-  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-  useAugmentedRef({
-    ref,
-    augmentedRef,
-    methods: { click: onPress },
-    deps: [disabled, checked],
-  });
+  const { disabled, checked, onCheckedChange, nativeID } = useCheckboxContext();
 
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
     const newValue = !checked;
-    setRoot((prev) => ({ ...prev, checked: newValue }));
-    onCheckedChange?.(newValue);
+    onCheckedChange(newValue);
     onPressProp?.(ev);
   }
 
   const Slot = asChild ? PressableSlot : Pressable;
   return (
     <Slot
-      ref={augmentedRef}
+      ref={ref}
       nativeID={nativeID}
       aria-disabled={disabled}
       role='checkbox'
@@ -98,7 +88,7 @@ const Indicator = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
-  const { checked, disabled } = useAtomValue(rootAtom);
+  const { checked, disabled } = useCheckboxContext();
 
   if (!forceMount) {
     if (!checked) {
