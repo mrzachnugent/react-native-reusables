@@ -1,6 +1,13 @@
-import * as React from 'react';
-import { Pressable, View, Image } from 'react-native';
-import { isTextChildren } from '~/lib/utils';
+import React from 'react';
+import {
+  Image,
+  Pressable,
+  PressableProps,
+  PressableStateCallbackType,
+  ImageStyle as RNImageStyle,
+  StyleProp,
+  View,
+} from 'react-native';
 
 type PressableSlotProps = React.ComponentPropsWithoutRef<typeof Pressable>;
 
@@ -11,14 +18,14 @@ const PressableSlot = React.forwardRef<
   const { children, ...pressableslotProps } = props;
 
   if (!React.isValidElement(children)) {
-    console.log('Invalid asChild element', children);
+    console.log('PressableSlot - Invalid asChild element', children);
     return null;
   }
 
   return React.cloneElement<
     React.ComponentPropsWithoutRef<typeof Pressable>,
     React.ElementRef<typeof Pressable>
-  >(isTextChildren(children) ? <Pressable /> : children, {
+  >(isTextChildren(children) ? <></> : children, {
     ...mergeProps(pressableslotProps, children.props),
     ref: forwardedRef
       ? composeRefs(forwardedRef, (children as any).ref)
@@ -35,14 +42,14 @@ const ViewSlot = React.forwardRef<React.ElementRef<typeof View>, ViewSlotProps>(
     const { children, ...viewSlotProps } = props;
 
     if (!React.isValidElement(children)) {
-      console.log('Invalid asChild element', children);
+      console.log('ViewSlot - Invalid asChild element', children);
       return null;
     }
 
     return React.cloneElement<
       React.ComponentPropsWithoutRef<typeof View>,
       React.ElementRef<typeof View>
-    >(isTextChildren(children) ? <View /> : children, {
+    >(isTextChildren(children) ? <></> : children, {
       ...mergeProps(viewSlotProps, children.props),
       ref: forwardedRef
         ? composeRefs(forwardedRef, (children as any).ref)
@@ -64,14 +71,14 @@ const ImageSlot = React.forwardRef<
   const { children, ...imageSlotProps } = props;
 
   if (!React.isValidElement(children)) {
-    console.log('Invalid asChild element', children);
+    console.log('ImageSlot - Invalid asChild element', children);
     return null;
   }
 
   return React.cloneElement<
     React.ComponentPropsWithoutRef<typeof Image>,
     React.ElementRef<typeof Image>
-  >(isTextChildren(children) ? <View /> : children, {
+  >(isTextChildren(children) ? <></> : children, {
     ...mergeProps(imageSlotProps, children.props),
     ref: forwardedRef
       ? composeRefs(forwardedRef, (children as any).ref)
@@ -81,7 +88,7 @@ const ImageSlot = React.forwardRef<
 
 ImageSlot.displayName = 'ImageSlot';
 
-export { PressableSlot, ViewSlot, ImageSlot };
+export { ImageSlot, PressableSlot, ViewSlot };
 
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.
@@ -124,7 +131,7 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
     }
     // if it's `style`, we merge them
     else if (propName === 'style') {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+      overrideProps[propName] = combineStyles(slotPropValue, childPropValue);
     } else if (propName === 'className') {
       overrideProps[propName] = [slotPropValue, childPropValue]
         .filter(Boolean)
@@ -133,4 +140,38 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
   }
 
   return { ...slotProps, ...overrideProps };
+}
+
+type PressableStyle = PressableProps['style'];
+type ImageStyle = StyleProp<RNImageStyle>;
+type Style = PressableStyle | ImageStyle;
+
+function combineStyles(slotStyle?: Style, childValue?: Style) {
+  if (typeof slotStyle === 'function' && typeof childValue === 'function') {
+    return (state: PressableStateCallbackType) => {
+      return [slotStyle(state), childValue(state)];
+    };
+  }
+  if (typeof slotStyle === 'function') {
+    return (state: PressableStateCallbackType) => {
+      return childValue ? [slotStyle(state), childValue] : slotStyle(state);
+    };
+  }
+  if (typeof childValue === 'function') {
+    return (state: PressableStateCallbackType) => {
+      return slotStyle ? [slotStyle, childValue(state)] : childValue(state);
+    };
+  }
+
+  return [slotStyle, childValue].filter(Boolean);
+}
+
+export function isTextChildren(
+  children:
+    | React.ReactNode
+    | ((state: PressableStateCallbackType) => React.ReactNode)
+) {
+  return Array.isArray(children)
+    ? children.every((child) => typeof child === 'string')
+    : typeof children === 'string';
 }

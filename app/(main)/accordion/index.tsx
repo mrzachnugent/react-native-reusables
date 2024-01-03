@@ -1,10 +1,10 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import {
+  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Accordion,
 } from '~/components/ui/accordion';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 

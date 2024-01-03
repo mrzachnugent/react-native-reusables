@@ -29,6 +29,7 @@
     "expo-clipboard": "~4.3.1",
     "expo-font": "~11.4.0",
     "expo-haptics": "~12.4.0",
+    "expo-image": "~1.3.5",
     "expo-linear-gradient": "~12.3.0",
     "expo-linking": "~5.0.2",
     "expo-navigation-bar": "~2.3.0",
@@ -56,7 +57,7 @@
     "react-native-web": "~0.19.6",
     "tailwind-merge": "^2.1.0",
     "zod": "^3.22.4",
-    "expo-image": "~1.3.5"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
