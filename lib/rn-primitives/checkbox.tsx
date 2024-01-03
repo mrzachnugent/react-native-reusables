@@ -4,9 +4,9 @@ import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
-  disabled?: boolean;
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
+  disabled?: boolean;
 }
 
 interface CheckboxContext extends RootProps {
@@ -51,7 +51,7 @@ function useCheckboxContext() {
 }
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, ...props }, ref) => {
   const { disabled, checked, onCheckedChange, nativeID } = useCheckboxContext();

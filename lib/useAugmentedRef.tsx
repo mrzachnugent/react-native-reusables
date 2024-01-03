@@ -3,7 +3,7 @@ import React from 'react';
 interface AugmentRefProps<T> {
   ref: React.Ref<T>;
   augmentedRef: React.ForwardedRef<T>;
-  methods: Record<string, (...args: any[]) => any>;
+  methods?: Record<string, (...args: any[]) => any>;
   deps?: any[];
 }
 

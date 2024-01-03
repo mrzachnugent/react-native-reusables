@@ -1,14 +1,12 @@
+import React from 'react';
 import { Text, View } from 'react-native';
 import * as Collapsible from '~/lib/rn-primitives/collapsible';
 
 export default function CollapsiblePrimitiveScreen() {
+  const [open, setOpen] = React.useState(false);
   return (
     <View className='flex-1 justify-center items-center p-6'>
-      <Collapsible.Root
-        onOpenChange={(newValue) => {
-          console.log('onOpenChange', newValue);
-        }}
-      >
+      <Collapsible.Root open={open} onOpenChange={setOpen}>
         <Collapsible.Trigger>
           <Text className='text-foreground text-xl'>Trigger</Text>
         </Collapsible.Trigger>

@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text } from 'react-native';
 import * as Dialog from '~/lib/rn-primitives/dialog';
 
 export default function DialogPrimitiveScreen() {
+  const [open, setOpen] = React.useState(false);
   return (
     <ScrollView
       contentContainerStyle={{
@@ -11,7 +12,7 @@ export default function DialogPrimitiveScreen() {
         alignItems: 'center',
       }}
     >
-      <Dialog.Root>
+      <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger>
           <Text className='text-foreground text-xl'>Open dialog</Text>
         </Dialog.Trigger>

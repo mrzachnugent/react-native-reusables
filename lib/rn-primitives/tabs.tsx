@@ -1,44 +1,49 @@
-import { atom, useAtomValue, useSetAtom } from 'jotai';
 import React, { useId } from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
-import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
-  defaultValue: string;
-  onValueChange?: (value: string) => void;
+  value: string;
+  onValueChange: (value: string) => void;
 }
 
-interface RootAtom extends Omit<RootProps, 'defaultValue'> {
-  value: string;
+interface RootContext extends RootProps {
   nativeID: string;
 }
 
-const rootAtom = atom<RootAtom>({} as RootAtom);
+const TabsContext = React.createContext({} as RootContext);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
->(({ asChild, defaultValue, onValueChange, ...viewProps }, ref) => {
+>(({ asChild, value, onValueChange, ...viewProps }, ref) => {
   const nativeID = useId();
   const Slot = asChild ? ViewSlot : View;
   return (
-    <AtomScopeProvider
-      atom={rootAtom}
+    <TabsContext.Provider
       value={{
-        value: defaultValue,
+        value,
         onValueChange,
         nativeID,
       }}
     >
       <Slot ref={ref} {...viewProps} />
-    </AtomScopeProvider>
+    </TabsContext.Provider>
   );
 });
 
 Root.displayName = 'RootTabs';
+
+function useTabsContext() {
+  const context = React.useContext(TabsContext);
+  if (!context) {
+    throw new Error(
+      'Tabs compound components cannot be rendered outside the Tabs component'
+    );
+  }
+  return context;
+}
 
 const List = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -51,7 +56,7 @@ const List = React.forwardRef<
 List.displayName = 'ListTabs';
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & {
     value: string;
   }
@@ -60,31 +65,18 @@ const Trigger = React.forwardRef<
     { asChild, onPress: onPressProp, disabled, value: tabValue, ...props },
     ref
   ) => {
-    const {
-      onValueChange,
-      value: rootValue,
-      nativeID,
-    } = useAtomValue(rootAtom);
-    const setRoot = useSetAtom(rootAtom);
-    const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-    useAugmentedRef({
-      ref,
-      augmentedRef,
-      methods: { click: onPress },
-      deps: [tabValue, disabled],
-    });
+    const { onValueChange, value: rootValue, nativeID } = useTabsContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      setRoot((prev) => ({ ...prev, value: tabValue }));
-      onValueChange?.(tabValue);
+      onValueChange(tabValue);
       onPressProp?.(ev);
     }
 
     const Slot = asChild ? PressableSlot : Pressable;
     return (
       <Slot
-        ref={augmentedRef}
+        ref={ref}
         nativeID={`${nativeID}-tab-${tabValue}`}
         aria-disabled={!!disabled}
         aria-selected={rootValue === tabValue}
@@ -110,7 +102,7 @@ const Content = React.forwardRef<
     forceMount?: boolean;
   }
 >(({ asChild, forceMount = false, value: tabValue, ...props }, ref) => {
-  const { value: rootValue, nativeID } = useAtomValue(rootAtom);
+  const { value: rootValue, nativeID } = useTabsContext();
 
   if (!forceMount) {
     if (rootValue !== tabValue) {

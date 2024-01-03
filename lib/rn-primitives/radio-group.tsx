@@ -9,10 +9,6 @@ interface RootProps {
   disabled?: boolean;
 }
 
-interface RadioGroupContext extends RootProps {
-  disabled: boolean;
-}
-
 const RadioGroupContext = React.createContext({} as RootProps);
 
 const Root = React.forwardRef<
@@ -52,9 +48,7 @@ interface RadioItemContext {
 const RadioItemContext = React.createContext({} as RadioItemContext);
 
 const Item = React.forwardRef<
-  React.ElementRef<typeof Pressable> & {
-    click?: () => void;
-  },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & {
     value: string;
     /**

@@ -1,88 +1,73 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
-import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   disabled?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (open?: boolean) => void;
 }
 
-interface RootAtom extends Omit<RootProps, 'defaultOpen'> {
-  open: boolean;
+interface RootContext extends RootProps {
   nativeID: string;
 }
-const rootAtom = atom<RootAtom>({} as RootAtom);
+const CollapsibleContext = React.createContext({} as RootContext);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
->(
-  (
-    {
-      asChild,
-      disabled = false,
-      defaultOpen = false,
-      onOpenChange,
-      ...viewProps
-    },
-    ref
-  ) => {
-    const nativeID = React.useId();
+>(({ asChild, disabled = false, open, onOpenChange, ...viewProps }, ref) => {
+  const nativeID = React.useId();
 
-    const Slot = asChild ? ViewSlot : View;
-    return (
-      <AtomScopeProvider
-        atom={rootAtom}
-        value={{
-          disabled,
-          open: defaultOpen,
-          onOpenChange,
-          nativeID,
-        }}
-      >
-        <Slot ref={ref} {...viewProps} />
-      </AtomScopeProvider>
-    );
-  }
-);
+  const Slot = asChild ? ViewSlot : View;
+  return (
+    <CollapsibleContext.Provider
+      value={{
+        disabled,
+        open,
+        onOpenChange,
+        nativeID,
+      }}
+    >
+      <Slot ref={ref} {...viewProps} />
+    </CollapsibleContext.Provider>
+  );
+});
 
 Root.displayName = 'RootCollapsible';
 
+function useCollapsibleContext() {
+  const context = React.useContext(CollapsibleContext);
+  if (!context) {
+    throw new Error(
+      'Collapsible compound components cannot be rendered outside the Collapsible component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(
   (
     { asChild, onPress: onPressProp, disabled: disabledProp = false, ...props },
     ref
   ) => {
-    const [{ disabled, open, onOpenChange, nativeID }, setRoot] =
-      useAtom(rootAtom);
-    const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-    useAugmentedRef({
-      ref,
-      augmentedRef,
-      methods: { click: onPress },
-      deps: [disabled, disabledProp, open],
-    });
+    const { disabled, open, onOpenChange, nativeID } = useCollapsibleContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled || disabledProp) return;
       const newValue = !open;
-      setRoot((prev) => ({ ...prev, open: newValue }));
-      onOpenChange?.(newValue);
+      onOpenChange(newValue);
       onPressProp?.(ev);
     }
 
     const Slot = asChild ? PressableSlot : Pressable;
     return (
       <Slot
-        ref={augmentedRef}
+        ref={ref}
         nativeID={nativeID}
         aria-disabled={(disabled || disabledProp) ?? undefined}
         role='button'
@@ -104,7 +89,7 @@ const Content = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
-  const { nativeID, open } = useAtomValue(rootAtom);
+  const { nativeID, open } = useCollapsibleContext();
 
   if (!forceMount) {
     if (!open) {

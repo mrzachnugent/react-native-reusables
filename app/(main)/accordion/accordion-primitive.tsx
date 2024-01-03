@@ -1,10 +1,9 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { Button } from '~/components/ui/button';
+import { ScrollView, Text } from 'react-native';
 import * as Accordion from '~/lib/rn-primitives/accordion';
 
 export default function AccordionPrimitiveScreen() {
-  const ref = React.useRef<React.ElementRef<typeof Accordion.Trigger>>(null);
+  const [value, setValue] = React.useState<string[]>(['item-1']);
 
   return (
     <ScrollView
@@ -14,10 +13,10 @@ export default function AccordionPrimitiveScreen() {
         alignItems: 'center',
       }}
     >
-      <Accordion.Root type='multiple' defaultValue={'item-1'}>
+      <Accordion.Root type='multiple' value={value} onValueChange={setValue}>
         <Accordion.Item value='item-1'>
           <Accordion.Header>
-            <Accordion.Trigger ref={ref}>
+            <Accordion.Trigger>
               <Text className='text-foreground text-xl'>Trigger 1</Text>
             </Accordion.Trigger>
           </Accordion.Header>
@@ -36,15 +35,6 @@ export default function AccordionPrimitiveScreen() {
           </Accordion.Content>
         </Accordion.Item>
       </Accordion.Root>
-      <View className='p-8' />
-      <Button
-        variant='link'
-        onPress={() => {
-          ref.current?.click?.();
-        }}
-      >
-        Toggle Trigger 1 with ref
-      </Button>
     </ScrollView>
   );
 }

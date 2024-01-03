@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text } from 'react-native';
 import * as AlertDialog from '~/lib/rn-primitives/alert-dialog';
 
 export default function AlertDialogPrimitiveScreen() {
+  const [open, setOpen] = React.useState(false);
   return (
     <ScrollView
       contentContainerStyle={{
@@ -11,7 +12,7 @@ export default function AlertDialogPrimitiveScreen() {
         alignItems: 'center',
       }}
     >
-      <AlertDialog.Root>
+      <AlertDialog.Root open={open} onOpenChange={setOpen}>
         <AlertDialog.Trigger>
           <Text className='text-foreground text-xl'>Open alert dialog</Text>
         </AlertDialog.Trigger>

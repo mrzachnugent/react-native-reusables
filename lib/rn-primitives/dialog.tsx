@@ -1,4 +1,3 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import {
   GestureResponderEvent,
@@ -8,69 +7,67 @@ import {
   Text,
   View,
 } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
-import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
-  defaultOpen?: boolean;
-  onOpenChange?: (value?: boolean) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
 }
 
-interface RootAtom extends Omit<RootProps, 'defaultOpen'> {
-  value: boolean;
+interface RootContext extends Omit<RootProps, 'defaultOpen'> {
   nativeID: string;
 }
-const rootAtom = atom<RootAtom>({} as RootAtom);
+const DialogContext = React.createContext({} as RootContext);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
->(({ asChild, defaultOpen = false, onOpenChange, ...viewProps }, ref) => {
+>(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
   const Slot = asChild ? ViewSlot : View;
   return (
-    <AtomScopeProvider
-      atom={rootAtom}
+    <DialogContext.Provider
       value={{
-        value: defaultOpen,
+        open,
         onOpenChange,
         nativeID,
       }}
     >
       <Slot ref={ref} {...viewProps} />
-    </AtomScopeProvider>
+    </DialogContext.Provider>
   );
 });
 
 Root.displayName = 'RootDialog';
 
+function useDialogContext() {
+  const context = React.useContext(DialogContext);
+  if (!context) {
+    throw new Error(
+      'Dialog compound components cannot be rendered outside the Dialog component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-  const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
-  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-  useAugmentedRef({
-    ref,
-    augmentedRef,
-    methods: { click: onPress },
-    deps: [value, disabled],
-  });
+  const { open, onOpenChange } = useDialogContext();
 
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
-    const newValue = !value;
-    setRoot((prev) => ({ ...prev, value: newValue }));
-    onOpenChange?.(newValue);
+    const newValue = !open;
+    onOpenChange(newValue);
     onPressProp?.(ev);
   }
 
   const Slot = asChild ? PressableSlot : Pressable;
   return (
     <Slot
-      ref={augmentedRef}
+      ref={ref}
       aria-disabled={disabled ?? undefined}
       role='button'
       onPress={onPress}
@@ -98,22 +95,21 @@ const Portal = React.forwardRef<
     },
     ref
   ) => {
-    const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
+    const { open, onOpenChange } = useDialogContext();
 
     function onRequestClose(ev: NativeSyntheticEvent<any>) {
-      onOpenChange?.(!value);
-      setRoot((prev) => ({ ...prev, value: !prev.value }));
+      onOpenChange(!open);
       onRequestCloseProp?.(ev);
     }
 
     return (
       <Modal
         ref={ref}
-        aria-hidden={!(forceMount || value)}
+        aria-hidden={!(forceMount || open)}
         transparent={transparent}
         statusBarTranslucent={statusBarTranslucent}
         onRequestClose={onRequestClose}
-        visible={forceMount || value}
+        visible={forceMount || open}
         {...props}
       />
     );
@@ -142,18 +138,17 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
+    const { open, onOpenChange } = useDialogContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
-        onOpenChange?.(!value);
-        setRoot((prev) => ({ ...prev, value: !prev.value }));
+        onOpenChange(!open);
       }
       OnPressProp?.(ev);
     }
 
     if (!forceMount) {
-      if (!value) {
+      if (!open) {
         return null;
       }
     }
@@ -169,10 +164,10 @@ const Content = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
-  const { value, nativeID } = useAtomValue(rootAtom);
+  const { open, nativeID } = useDialogContext();
 
   if (!forceMount) {
-    if (!value) {
+    if (!open) {
       return null;
     }
   }
@@ -194,29 +189,21 @@ const Content = React.forwardRef<
 Content.displayName = 'ContentDialog';
 
 const Close = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-  const [{ value, onOpenChange }, setRoot] = useAtom(rootAtom);
-  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-  useAugmentedRef({
-    ref,
-    augmentedRef,
-    methods: { click: onPress },
-    deps: [value, disabled],
-  });
+  const { onOpenChange } = useDialogContext();
 
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
-    setRoot((prev) => ({ ...prev, value: false }));
-    onOpenChange?.(false);
+    onOpenChange(false);
     onPressProp?.(ev);
   }
 
   const Slot = asChild ? PressableSlot : Pressable;
   return (
     <Slot
-      ref={augmentedRef}
+      ref={ref}
       aria-disabled={disabled ?? undefined}
       role='button'
       onPress={onPress}
@@ -232,7 +219,7 @@ const Title = React.forwardRef<
   React.ElementRef<typeof Text>,
   React.ComponentPropsWithoutRef<typeof Text>
 >((props, ref) => {
-  const { nativeID } = useAtomValue(rootAtom);
+  const { nativeID } = useDialogContext();
   return (
     <Text ref={ref} role='heading' nativeID={`${nativeID}_label`} {...props} />
   );
@@ -244,7 +231,7 @@ const Description = React.forwardRef<
   React.ElementRef<typeof Text>,
   React.ComponentPropsWithoutRef<typeof Text>
 >((props, ref) => {
-  const { nativeID } = useAtomValue(rootAtom);
+  const { nativeID } = useDialogContext();
   return (
     <Text ref={ref} role='heading' nativeID={`${nativeID}_desc`} {...props} />
   );

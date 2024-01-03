@@ -1,4 +1,3 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import {
   ImageErrorEventData,
@@ -7,7 +6,6 @@ import {
   Image as RNImage,
   View,
 } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { ImageSlot, ViewSlot } from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
@@ -15,30 +13,45 @@ interface AvatarRootProps {
   alt: string;
 }
 
-interface RootAtom extends AvatarRootProps {
-  status: 'loading' | 'error' | 'loaded';
+type AvatarState = 'loading' | 'error' | 'loaded';
+
+interface RootContext extends AvatarRootProps {
+  status: AvatarState;
+  setStatus: React.Dispatch<React.SetStateAction<AvatarState>>;
 }
-const rootAtom = atom({} as RootAtom);
+
+const AvatarContext = React.createContext({} as RootContext);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & AvatarRootProps
 >(({ asChild, alt, ...viewProps }, ref) => {
+  const [status, setStatus] = React.useState<AvatarState>('loading');
   const Slot = asChild ? ViewSlot : View;
   return (
-    <AtomScopeProvider
-      atom={rootAtom}
+    <AvatarContext.Provider
       value={{
-        status: 'loading',
+        status,
+        setStatus,
         alt,
       }}
     >
       <Slot ref={ref} {...viewProps} />
-    </AtomScopeProvider>
+    </AvatarContext.Provider>
   );
 });
 
 Root.displayName = 'RootAvatar';
+
+function useAvatarContext() {
+  const context = React.useContext(AvatarContext);
+  if (!context) {
+    throw new Error(
+      'Avatar compound components cannot be rendered outside the Avatar component'
+    );
+  }
+  return context;
+}
 
 const Image = React.forwardRef<
   React.ElementRef<typeof RNImage>,
@@ -57,11 +70,11 @@ const Image = React.forwardRef<
     },
     ref
   ) => {
-    const [{ status, alt }, setRoot] = useAtom(rootAtom);
+    const { status, alt, setStatus } = useAvatarContext();
 
     const onLoad = React.useCallback(
       (e: NativeSyntheticEvent<ImageLoadEventData>) => {
-        setRoot((prev) => ({ ...prev, status: 'loaded' }));
+        setStatus('loaded');
         onLoadingStatusChange?.('loaded');
         onLoadProps?.(e);
       },
@@ -70,7 +83,7 @@ const Image = React.forwardRef<
 
     const onError = React.useCallback(
       (e: NativeSyntheticEvent<ImageErrorEventData>) => {
-        setRoot((prev) => ({ ...prev, status: 'error' }));
+        setStatus('error');
         onLoadingStatusChange?.('error');
         onErrorProps?.(e);
       },
@@ -94,7 +107,7 @@ const Fallback = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
-  const { status, alt } = useAtomValue(rootAtom);
+  const { status, alt } = useAvatarContext();
 
   if (status !== 'error') {
     return null;

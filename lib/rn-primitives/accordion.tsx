@@ -1,23 +1,26 @@
-import { atom, useAtomValue, useSetAtom } from 'jotai';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { AtomScopeProvider } from '~/lib/rn-primitives/AtomScopeProvider';
 import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
-import { useAugmentedRef } from '~/lib/rn-primitives/util-hooks';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
-interface RootProps {
-  type: 'single' | 'multiple';
+type SingleRootProps = {
+  type: 'single';
+  value: string | undefined;
+  onValueChange: (value: string | undefined) => void;
+};
+
+type MultipleRootProps = {
+  type: 'multiple';
+  value: string[];
+  onValueChange: (value: string[]) => void;
+};
+
+type RootProps = (SingleRootProps | MultipleRootProps) & {
   disabled?: boolean;
   collapsable?: boolean;
-  defaultValue?: string | string[];
-  onValueChange?: (value?: string | string[]) => void;
-}
+};
 
-interface RootAtom extends Omit<RootProps, 'defaultValue'> {
-  value?: string | string[];
-}
-const rootAtom = atom<RootAtom>({} as RootAtom);
+const AccordionContext = React.createContext({} as RootProps);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -29,7 +32,7 @@ const Root = React.forwardRef<
       type,
       disabled,
       collapsable = true,
-      defaultValue,
+      value,
       onValueChange,
       ...viewProps
     },
@@ -37,23 +40,34 @@ const Root = React.forwardRef<
   ) => {
     const Slot = asChild ? ViewSlot : View;
     return (
-      <AtomScopeProvider
-        atom={rootAtom}
-        value={{
-          type,
-          disabled,
-          collapsable,
-          value: defaultValue ?? (type === 'single' ? undefined : []),
-          onValueChange,
-        }}
+      <AccordionContext.Provider
+        value={
+          {
+            type,
+            disabled,
+            collapsable,
+            value,
+            onValueChange,
+          } as RootProps
+        }
       >
         <Slot ref={ref} {...viewProps} />
-      </AtomScopeProvider>
+      </AccordionContext.Provider>
     );
   }
 );
 
 Root.displayName = 'RootAccordion';
+
+function useAccordionContext() {
+  const context = React.useContext(AccordionContext);
+  if (!context) {
+    throw new Error(
+      'Accordion compound components cannot be rendered outside the Accordion component'
+    );
+  }
+  return context;
+}
 
 interface ItemProps {
   value: string;
@@ -63,7 +77,8 @@ interface ItemProps {
 interface ItemAtom extends ItemProps {
   nativeID: string;
 }
-const itemAtom = atom<ItemAtom>({} as ItemAtom);
+
+const AccordionItemContext = React.createContext({} as ItemAtom);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -73,8 +88,7 @@ const Item = React.forwardRef<
 
   const Slot = asChild ? ViewSlot : View;
   return (
-    <AtomScopeProvider
-      atom={itemAtom}
+    <AccordionItemContext.Provider
       value={{
         value,
         disabled,
@@ -82,18 +96,28 @@ const Item = React.forwardRef<
       }}
     >
       <Slot ref={ref} {...viewProps} />
-    </AtomScopeProvider>
+    </AccordionItemContext.Provider>
   );
 });
 
 Item.displayName = 'ItemAccordion';
 
+function useAccordionItemContext() {
+  const context = React.useContext(AccordionItemContext);
+  if (!context) {
+    throw new Error(
+      'AccordionItem compound components cannot be rendered outside the AccordionItem component'
+    );
+  }
+  return context;
+}
+
 const Header = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
-  const { disabled: rootDisabled, value: rootValue } = useAtomValue(rootAtom);
-  const { disabled: itemDisabled, value } = useAtomValue(itemAtom);
+  const { disabled: rootDisabled, value: rootValue } = useAccordionContext();
+  const { disabled: itemDisabled, value } = useAccordionItemContext();
 
   const Slot = asChild ? ViewSlot : View;
   return (
@@ -110,7 +134,7 @@ const Header = React.forwardRef<
 Header.displayName = 'HeaderAccordion';
 
 const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable> & { click?: () => void },
+  React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(
   (
@@ -123,24 +147,12 @@ const Trigger = React.forwardRef<
       onValueChange,
       value: rootValue,
       collapsable,
-    } = useAtomValue(rootAtom);
-    const setRoot = useSetAtom(rootAtom);
-    const { nativeID, disabled: itemDisabled, value } = useAtomValue(itemAtom);
-    const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
-    useAugmentedRef({
-      ref,
-      augmentedRef,
-      methods: { click: onPress },
-      deps: [
-        rootValue,
-        value,
-        type,
-        rootDisabled,
-        collapsable,
-        itemDisabled,
-        disabledProp,
-      ],
-    });
+    } = useAccordionContext();
+    const {
+      nativeID,
+      disabled: itemDisabled,
+      value,
+    } = useAccordionItemContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (rootDisabled || itemDisabled) return;
@@ -150,8 +162,7 @@ const Trigger = React.forwardRef<
             ? undefined
             : value
           : value;
-        setRoot((prev) => ({ ...prev, value: newValue }));
-        onValueChange?.(newValue);
+        onValueChange(newValue);
       }
       if (type === 'multiple') {
         const rootToArray = toStringArray(rootValue);
@@ -160,8 +171,7 @@ const Trigger = React.forwardRef<
             ? rootToArray.filter((val) => val !== value)
             : rootToArray.concat(value)
           : [...new Set(rootToArray.concat(value))];
-        setRoot((prev) => ({ ...prev, value: newValue }));
-        onValueChange?.(newValue);
+        onValueChange(newValue);
       }
       onPressProp?.(ev);
     }
@@ -170,7 +180,7 @@ const Trigger = React.forwardRef<
     const Slot = asChild ? PressableSlot : Pressable;
     return (
       <Slot
-        ref={augmentedRef}
+        ref={ref}
         nativeID={nativeID}
         aria-disabled={isDisabled}
         role='button'
@@ -192,8 +202,8 @@ const Content = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & { forceMount?: boolean }
 >(({ asChild, forceMount = false, ...props }, ref) => {
-  const { type, value: rootValue } = useAtomValue(rootAtom);
-  const { nativeID, value } = useAtomValue(itemAtom);
+  const { type, value: rootValue } = useAccordionContext();
+  const { nativeID, value } = useAccordionItemContext();
   const isExpanded = isItemExpanded(rootValue, value);
 
   if (!forceMount) {
