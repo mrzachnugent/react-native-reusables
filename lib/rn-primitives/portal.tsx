@@ -1,49 +1,67 @@
 import React from 'react';
 import { create } from 'zustand';
 
-type PortalMap = Map<string, React.ReactNode>;
+const DEFAULT_PORTAL_HOST = 'INTERNAL_PRIMITIVE_DEFAULT_HOST_NAME';
 
-const usePortal = create<{ map: PortalMap }>(() => ({
-  map: new Map(),
+type PortalMap = Map<string, React.ReactNode>;
+type PortalHostMap = Map<string, PortalMap>;
+
+const usePortal = create<{ map: PortalHostMap }>(() => ({
+  map: new Map<string, PortalMap>().set(
+    DEFAULT_PORTAL_HOST,
+    new Map<string, React.ReactNode>()
+  ),
 }));
 
-const updatePortal = (name: string, children: React.ReactNode) => {
+const updatePortal = (
+  hostName: string,
+  name: string,
+  children: React.ReactNode
+) => {
   usePortal.setState((prev) => {
     const next = new Map(prev.map);
-    next.set(name, children);
+    const portal = next.get(hostName) ?? new Map<string, React.ReactNode>();
+    portal.set(name, children);
+    next.set(hostName, portal);
     return { map: next };
   });
 };
-const removePortal = (name: string) => {
+const removePortal = (hostName: string, name: string) => {
   usePortal.setState((prev) => {
     const next = new Map(prev.map);
-    next.delete(name);
+    const portal = next.get(hostName) ?? new Map<string, React.ReactNode>();
+    portal.delete(name);
+    next.set(hostName, portal);
     return { map: next };
   });
 };
 
-export function PortalProvider() {
-  const portalMap = usePortal((state) => state.map);
+export function PortalHost({ name = DEFAULT_PORTAL_HOST }: { name?: string }) {
+  const portalMap =
+    usePortal((state) => state.map).get(name) ??
+    new Map<string, React.ReactNode>();
   if (portalMap.size === 0) return null;
   return <>{Array.from(portalMap.values())}</>;
 }
 
 export function Portal({
   name,
+  hostName = DEFAULT_PORTAL_HOST,
   children,
 }: {
   name: string;
+  hostName?: string;
   children: React.ReactNode;
 }) {
   React.useEffect(() => {
-    updatePortal(name, children);
-  }, [children, name]);
+    updatePortal(hostName, name, children);
+  }, [hostName, name, children]);
 
   React.useEffect(() => {
     return () => {
-      removePortal(name);
+      removePortal(hostName, name);
     };
-  }, [name]);
+  }, [hostName, name]);
 
   return null;
 }

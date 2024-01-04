@@ -296,7 +296,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <summary>Code</summary>
   
   - [UI](/components/ui/popover.tsx)
-  - [Example](/app/(main)/popover.tsx)
+  - [Example](/app/(main)/popover/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/835891c6-ea60-44c5-846d-76729a91f12c
@@ -452,8 +452,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e4
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/tootip.tsx)
-  - [Example](/app/(main)/tootip.tsx)
+  - [UI](/components/ui/tooltip.tsx)
+  - [Example](/app/(main)/tooltip.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/9b126131-dbac-4f96-8f3f-ae61afa9c607" width="250px" />

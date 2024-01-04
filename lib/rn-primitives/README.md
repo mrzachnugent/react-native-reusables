@@ -12,4 +12,4 @@ Accessibility is a significant focus within React Native Primitives. We are dedi
 
 ### External State Control
 
-These components are designed with zero internal state, relying entirely on externally provided state.
+These components are designed with almost zero internal state, relying on externally provided state (internal state is used for things like errors and layouts which you can also monitor).

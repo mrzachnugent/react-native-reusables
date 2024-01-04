@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Dimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, View, ScrollView, Dimensions } from 'react-native';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { buttonTextVariants } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
@@ -16,6 +16,14 @@ const { height } = Dimensions.get('window');
 export default function PopoverScreen() {
   return (
     <ScrollView>
+      <View className='p-6 w-full'>
+        <Alert icon='Code' className='max-w-xl'>
+          <AlertTitle>FYI</AlertTitle>
+          <AlertDescription>
+            This reusable does not use "rn-primitives"
+          </AlertDescription>
+        </Alert>
+      </View>
       <View style={{ height: height / 3 }} className='pt-4 p-6'>
         <Popover>
           <PopoverTrigger className='w-full'>

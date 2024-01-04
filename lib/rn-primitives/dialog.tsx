@@ -15,7 +15,7 @@ interface RootProps {
   onOpenChange: (value: boolean) => void;
 }
 
-interface RootContext extends Omit<RootProps, 'defaultOpen'> {
+interface RootContext extends RootProps {
   nativeID: string;
 }
 const DialogContext = React.createContext({} as RootContext);
