@@ -134,7 +134,9 @@ function getAlignPosition({
     triggerPosition.pageX,
     triggerPosition.width,
     contentWidth,
-    alignOffset
+    alignOffset,
+    insetLeft,
+    insetRight
   );
 
   if (avoidCollisions) {
@@ -166,7 +168,9 @@ function getLeftPosition(
   triggerPageX: number,
   triggerWidth: number,
   contentWidth: number,
-  alignOffset: number
+  alignOffset: number,
+  insetLeft: number,
+  insetRight: number
 ) {
   let left = 0;
   if (align === 'start') {
@@ -178,7 +182,10 @@ function getLeftPosition(
   if (align === 'end') {
     left = triggerPageX + triggerWidth - contentWidth;
   }
-  return Math.min(left + alignOffset, window.width - contentWidth);
+  return Math.max(
+    insetLeft,
+    Math.min(left + alignOffset, window.width - contentWidth - insetRight)
+  );
 }
 
 type GetContentStyleArgs = GetPositionArgs &

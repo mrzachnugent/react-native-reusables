@@ -24,13 +24,13 @@ export default function PopoverPrimitiveScreen() {
             </Text>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Overlay />
+            <Popover.Overlay className='bg-red-500/10' />
             <Popover.Content
               side={side === 'bottom' ? 'top' : 'bottom'}
               align='center'
               sideOffset={3}
               insets={insets}
-              className='bg-secondary'
+              className='bg-background'
             >
               <Text className='text-foreground text-xl'>TITLE</Text>
               <Text className='text-foreground text-xl'>DESCRIPTION</Text>
@@ -47,7 +47,7 @@ export default function PopoverPrimitiveScreen() {
             </Text>
           </Popover.Trigger>
           <Popover.Portal hostName='inner'>
-            <Popover.Overlay />
+            <Popover.Overlay className='bg-red-500/10' />
             <Popover.Content
               side={side}
               align='center'
@@ -55,7 +55,7 @@ export default function PopoverPrimitiveScreen() {
                 side === 'bottom' ? -headerHeight + 3 : headerHeight + 3
               }
               insets={insets}
-              className='bg-secondary'
+              className='bg-background'
             >
               <Text className='text-foreground text-xl'>TITLE</Text>
               <Text className='text-foreground text-xl'>DESCRIPTION</Text>
