@@ -12,7 +12,7 @@ interface RootContext extends RootProps {
   nativeID: string;
 }
 
-const TabsContext = React.createContext({} as RootContext);
+const TabsContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

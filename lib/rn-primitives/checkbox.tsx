@@ -9,11 +9,11 @@ interface RootProps {
   disabled?: boolean;
 }
 
-interface CheckboxContext extends RootProps {
+interface RootContext extends RootProps {
   nativeID?: string;
 }
 
-const CheckboxContext = React.createContext({} as CheckboxContext);
+const CheckboxContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof Pressable>,

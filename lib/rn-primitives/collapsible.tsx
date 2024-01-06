@@ -12,7 +12,7 @@ interface RootProps {
 interface RootContext extends RootProps {
   nativeID: string;
 }
-const CollapsibleContext = React.createContext({} as RootContext);
+const CollapsibleContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

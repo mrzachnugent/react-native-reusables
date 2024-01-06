@@ -19,7 +19,7 @@ interface RootContext extends RootProps {
   nativeID: string;
 }
 
-const AlertDialogContext = React.createContext({} as RootContext);
+const AlertDialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

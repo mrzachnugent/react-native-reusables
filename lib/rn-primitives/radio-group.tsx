@@ -9,7 +9,7 @@ interface RootProps {
   disabled?: boolean;
 }
 
-const RadioGroupContext = React.createContext({} as RootProps);
+const RadioGroupContext = React.createContext<RootProps | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -45,7 +45,7 @@ interface RadioItemContext {
   itemValue: string | undefined;
 }
 
-const RadioItemContext = React.createContext({} as RadioItemContext);
+const RadioItemContext = React.createContext<RadioItemContext | null>(null);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof Pressable>,

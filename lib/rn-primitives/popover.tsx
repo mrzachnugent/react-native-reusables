@@ -35,7 +35,7 @@ interface RootContext extends RootProps {
   nativeID: string;
 }
 
-const PopoverContext = React.createContext({} as RootContext);
+const PopoverContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

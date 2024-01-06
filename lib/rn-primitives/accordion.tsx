@@ -20,7 +20,7 @@ type RootProps = (SingleRootProps | MultipleRootProps) & {
   collapsable?: boolean;
 };
 
-const AccordionContext = React.createContext({} as RootProps);
+const AccordionContext = React.createContext<RootProps | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -39,6 +39,7 @@ const Root = React.forwardRef<
     ref
   ) => {
     const Component = asChild ? Slot.View : View;
+
     return (
       <AccordionContext.Provider
         value={
@@ -78,7 +79,7 @@ interface ItemAtom extends ItemProps {
   nativeID: string;
 }
 
-const AccordionItemContext = React.createContext({} as ItemAtom);
+const AccordionItemContext = React.createContext<ItemAtom | null>(null);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof View>,

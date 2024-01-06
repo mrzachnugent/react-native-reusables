@@ -19,7 +19,7 @@ type RootProps = (SingleRootProps | MultipleRootProps) & {
   disabled?: boolean;
 };
 
-const ToggleGroupContext = React.createContext({} as RootProps);
+const ToggleGroupContext = React.createContext<RootProps | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

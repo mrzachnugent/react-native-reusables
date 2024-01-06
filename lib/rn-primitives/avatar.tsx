@@ -20,7 +20,7 @@ interface RootContext extends AvatarRootProps {
   setStatus: React.Dispatch<React.SetStateAction<AvatarState>>;
 }
 
-const AvatarContext = React.createContext({} as RootContext);
+const AvatarContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

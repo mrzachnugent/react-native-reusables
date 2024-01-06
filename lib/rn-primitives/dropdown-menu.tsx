@@ -37,7 +37,7 @@ interface RootContext extends RootProps {
   nativeID: string;
 }
 
-const DropdownMenuContext = React.createContext({} as RootContext);
+const DropdownMenuContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -394,7 +394,7 @@ type FormItemContext =
       onValueChange: (value: string) => void;
     };
 
-const FormItemContext = React.createContext({} as FormItemContext);
+const FormItemContext = React.createContext<FormItemContext | null>(null);
 
 const CheckboxItem = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -542,11 +542,7 @@ const RadioItem = React.forwardRef<
 RadioItem.displayName = 'RadioItemDropdownMenu';
 
 function useItemIndicatorContext() {
-  const context = React.useContext(RadioItemContext);
-  if (!context) {
-    return { itemValue: null };
-  }
-  return context;
+  return React.useContext(RadioItemContext);
 }
 
 const ItemIndicator = React.forwardRef<
@@ -590,13 +586,11 @@ const Separator = React.forwardRef<
 
 Separator.displayName = 'SeparatorDropdownMenu';
 
-const SubContext = React.createContext(
-  {} as {
-    nativeID: string;
-    open: boolean;
-    onOpenChange: (value: boolean) => void;
-  }
-);
+const SubContext = React.createContext<{
+  nativeID: string;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+} | null>(null);
 const Sub = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & {
