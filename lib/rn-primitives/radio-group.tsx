@@ -129,6 +129,6 @@ const Indicator = React.forwardRef<
   return <Slot ref={ref} role='presentation' {...props} />;
 });
 
-Indicator.displayName = 'IndicatorAvatar';
+Indicator.displayName = 'IndicatorRadioGroup';
 
 export { Indicator, Item, Root };

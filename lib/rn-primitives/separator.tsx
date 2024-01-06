@@ -21,6 +21,6 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootProgress';
+Root.displayName = 'RootSeparator';
 
 export { Root };
