@@ -9,6 +9,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import { StoreApi, createStore, useStore } from 'zustand';
 import { Portal as RNPPortal } from '~/lib/rn-primitives/portal';
 import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
@@ -23,52 +24,51 @@ interface RootProps {
   onOpenChange: (value: boolean) => void;
 }
 
-interface RootContext extends RootProps {
+interface RootStoreContext {
   triggerPosition: LayoutPosition | null;
-  setTriggerPosition: React.Dispatch<
-    React.SetStateAction<LayoutPosition | null>
-  >;
+  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
-  setContentLayout: React.Dispatch<
-    React.SetStateAction<LayoutRectangle | null>
-  >;
+  setContentLayout: (contentLayout: LayoutRectangle | null) => void;
   nativeID: string;
 }
 
-const PopoverContext = React.createContext<RootContext | null>(null);
+const RootContext = React.createContext<RootProps | null>(null);
+const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
+  null
+);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
-  const [triggerPosition, setTriggerPosition] =
-    React.useState<LayoutPosition | null>(null);
-  const [contentLayout, setContentLayout] =
-    React.useState<LayoutRectangle | null>(null);
+  const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
+  if (!storeRef.current) {
+    storeRef.current = createStore((set) => ({
+      triggerPosition: null,
+      setTriggerPosition: (triggerPosition: LayoutPosition | null) =>
+        set({ triggerPosition }),
+      contentLayout: null,
+      setContentLayout: (contentLayout: LayoutRectangle | null) =>
+        set({ contentLayout }),
+      nativeID,
+    }));
+  }
 
   const Component = asChild ? Slot.View : View;
   return (
-    <PopoverContext.Provider
-      value={{
-        open,
-        onOpenChange,
-        nativeID,
-        triggerPosition,
-        setTriggerPosition,
-        contentLayout,
-        setContentLayout,
-      }}
-    >
-      <Component ref={ref} {...viewProps} />
-    </PopoverContext.Provider>
+    <RootStoreContext.Provider value={storeRef.current}>
+      <RootContext.Provider value={{ open, onOpenChange }}>
+        <Component ref={ref} {...viewProps} />
+      </RootContext.Provider>
+    </RootStoreContext.Provider>
   );
 });
 
 Root.displayName = 'RootPopover';
 
 function usePopoverContext() {
-  const context = React.useContext(PopoverContext);
+  const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
       'Popover compound components cannot be rendered outside the Popover component'
@@ -77,12 +77,35 @@ function usePopoverContext() {
   return context;
 }
 
+function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
+  const store = React.useContext(RootStoreContext);
+  if (!store) {
+    throw new Error(
+      'Popover compound components cannot be rendered outside the Popover component'
+    );
+  }
+  return useStore(store, selector);
+}
+
+function useGetRootStore() {
+  const store = React.useContext(RootStoreContext);
+  if (!store) {
+    throw new Error(
+      'Popover compound components cannot be rendered outside the Popover component'
+    );
+  }
+  return store;
+}
+
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
   const triggerRef = React.useRef<View>(null);
-  const { open, onOpenChange, setTriggerPosition } = usePopoverContext();
+  const { open, onOpenChange } = usePopoverContext();
+  const setTriggerPosition = useRootStoreContext(
+    (state) => state.setTriggerPosition
+  );
 
   React.useImperativeHandle(
     ref,
@@ -133,8 +156,11 @@ function Portal({
   forceMount?: boolean;
 }) {
   const value = usePopoverContext();
+  const triggerPosition = useRootStoreContext((state) => state.triggerPosition);
+  const nativeID = useRootStoreContext((state) => state.nativeID);
+  const store = useGetRootStore();
 
-  if (!value.triggerPosition) {
+  if (!triggerPosition) {
     return null;
   }
 
@@ -145,10 +171,10 @@ function Portal({
   }
 
   return (
-    <RNPPortal hostName={hostName} name={`${value.nativeID}_portal`}>
-      <PopoverContext.Provider value={value}>
-        {children}
-      </PopoverContext.Provider>
+    <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
+      <RootStoreContext.Provider value={store}>
+        <RootContext.Provider value={value}>{children}</RootContext.Provider>
+      </RootStoreContext.Provider>
     </RNPPortal>
   );
 }
@@ -172,8 +198,13 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange, setTriggerPosition, setContentLayout } =
-      usePopoverContext();
+    const { open, onOpenChange } = usePopoverContext();
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -238,15 +269,18 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const {
-      open,
-      nativeID,
-      triggerPosition,
-      contentLayout,
-      setContentLayout,
-      onOpenChange,
-      setTriggerPosition,
-    } = usePopoverContext();
+    const { open, onOpenChange } = usePopoverContext();
+    const nativeID = useRootStoreContext((state) => state.nativeID);
+    const triggerPosition = useRootStoreContext(
+      (state) => state.triggerPosition
+    );
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const contentLayout = useRootStoreContext((state) => state.contentLayout);
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
@@ -308,8 +342,13 @@ const Close = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-  const { onOpenChange, setTriggerPosition, setContentLayout } =
-    usePopoverContext();
+  const { onOpenChange } = usePopoverContext();
+  const setTriggerPosition = useRootStoreContext(
+    (state) => state.setTriggerPosition
+  );
+  const setContentLayout = useRootStoreContext(
+    (state) => state.setContentLayout
+  );
 
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;

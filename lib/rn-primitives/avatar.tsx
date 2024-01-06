@@ -6,6 +6,7 @@ import {
   Image as RNImage,
   View,
 } from 'react-native';
+import { StoreApi, createStore, useStore } from 'zustand';
 import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
@@ -15,42 +16,55 @@ interface AvatarRootProps {
 
 type AvatarState = 'loading' | 'error' | 'loaded';
 
-interface RootContext extends AvatarRootProps {
+interface RootStoreContext {
   status: AvatarState;
-  setStatus: React.Dispatch<React.SetStateAction<AvatarState>>;
+  setStatus: (status: AvatarState) => void;
 }
 
-const AvatarContext = React.createContext<RootContext | null>(null);
+const RootContext = React.createContext<AvatarRootProps | null>(null);
+const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
+  null
+);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & AvatarRootProps
 >(({ asChild, alt, ...viewProps }, ref) => {
-  const [status, setStatus] = React.useState<AvatarState>('loading');
+  const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
+  if (!storeRef.current) {
+    storeRef.current = createStore((set) => ({
+      status: 'loading',
+      setStatus: (status: AvatarState) => set({ status }),
+    }));
+  }
   const Component = asChild ? Slot.View : View;
   return (
-    <AvatarContext.Provider
-      value={{
-        status,
-        setStatus,
-        alt,
-      }}
-    >
-      <Component ref={ref} {...viewProps} />
-    </AvatarContext.Provider>
+    <RootStoreContext.Provider value={storeRef.current}>
+      <RootContext.Provider value={{ alt }}>
+        <Component ref={ref} {...viewProps} />
+      </RootContext.Provider>
+    </RootStoreContext.Provider>
   );
 });
 
 Root.displayName = 'RootAvatar';
 
-function useAvatarContext() {
-  const context = React.useContext(AvatarContext);
+function useRootContext() {
+  const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
       'Avatar compound components cannot be rendered outside the Avatar component'
     );
   }
   return context;
+}
+
+function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
+  const store = React.useContext(RootStoreContext);
+  if (!store) {
+    throw new Error('Missing StoreProvider');
+  }
+  return useStore(store, selector);
 }
 
 const Image = React.forwardRef<
@@ -70,7 +84,9 @@ const Image = React.forwardRef<
     },
     ref
   ) => {
-    const { status, alt, setStatus } = useAvatarContext();
+    const { alt } = useRootContext();
+    const status = useRootStoreContext((state) => state.status);
+    const setStatus = useRootStoreContext((state) => state.setStatus);
 
     const onLoad = React.useCallback(
       (e: NativeSyntheticEvent<ImageLoadEventData>) => {
@@ -113,7 +129,8 @@ const Fallback = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
-  const { status, alt } = useAvatarContext();
+  const { alt } = useRootContext();
+  const status = useRootStoreContext((state) => state.status);
 
   if (status !== 'error') {
     return null;

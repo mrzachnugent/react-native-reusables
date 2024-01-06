@@ -10,6 +10,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import { StoreApi, createStore, useStore } from 'zustand';
 import { Portal as RNPPortal } from '~/lib/rn-primitives/portal';
 import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
@@ -24,66 +25,82 @@ interface RootProps {
   onOpenChange: (value: boolean) => void;
 }
 
-interface RootContext extends RootProps {
+interface RootStoreContext {
   triggerPosition: LayoutPosition | null;
-  setTriggerPosition: React.Dispatch<
-    React.SetStateAction<LayoutPosition | null>
-  >;
+  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
-  setContentLayout: React.Dispatch<
-    React.SetStateAction<LayoutRectangle | null>
-  >;
-  close: () => void;
+  setContentLayout: (contentLayout: LayoutRectangle | null) => void;
   nativeID: string;
 }
 
-const DropdownMenuContext = React.createContext<RootContext | null>(null);
+const RootContext = React.createContext<RootProps | null>(null);
+const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
+  null
+);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
-  const [triggerPosition, setTriggerPosition] =
-    React.useState<LayoutPosition | null>(null);
-  const [contentLayout, setContentLayout] =
-    React.useState<LayoutRectangle | null>(null);
-
-  function close() {
-    setTriggerPosition(null);
-    setContentLayout(null);
-    onOpenChange(false);
+  const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
+  if (!storeRef.current) {
+    storeRef.current = createStore((set) => ({
+      triggerPosition: null,
+      setTriggerPosition: (triggerPosition: LayoutPosition | null) =>
+        set({ triggerPosition }),
+      contentLayout: null,
+      setContentLayout: (contentLayout: LayoutRectangle | null) =>
+        set({ contentLayout }),
+      nativeID,
+    }));
   }
 
   const Component = asChild ? Slot.View : View;
   return (
-    <DropdownMenuContext.Provider
-      value={{
-        open,
-        onOpenChange,
-        nativeID,
-        triggerPosition,
-        setTriggerPosition,
-        contentLayout,
-        setContentLayout,
-        close,
-      }}
-    >
-      <Component ref={ref} {...viewProps} />
-    </DropdownMenuContext.Provider>
+    <RootStoreContext.Provider value={storeRef.current}>
+      <RootContext.Provider
+        value={{
+          open,
+          onOpenChange,
+        }}
+      >
+        <Component ref={ref} {...viewProps} />
+      </RootContext.Provider>
+    </RootStoreContext.Provider>
   );
 });
 
 Root.displayName = 'RootDropdownMenu';
 
 function useDropdownMenuContext() {
-  const context = React.useContext(DropdownMenuContext);
+  const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
       'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
     );
   }
   return context;
+}
+
+function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
+  const store = React.useContext(RootStoreContext);
+  if (!store) {
+    throw new Error(
+      'Popover compound components cannot be rendered outside the Popover component'
+    );
+  }
+  return useStore(store, selector);
+}
+
+function useGetRootStore() {
+  const store = React.useContext(RootStoreContext);
+  if (!store) {
+    throw new Error(
+      'Popover compound components cannot be rendered outside the Popover component'
+    );
+  }
+  return store;
 }
 
 const Trigger = React.forwardRef<
@@ -101,7 +118,10 @@ const Trigger = React.forwardRef<
     ref
   ) => {
     const triggerRef = React.useRef<View>(null);
-    const { open, onOpenChange, setTriggerPosition } = useDropdownMenuContext();
+    const { open, onOpenChange } = useDropdownMenuContext();
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
 
     React.useImperativeHandle(
       ref,
@@ -153,10 +173,12 @@ function Portal({
   hostName?: string;
   forceMount?: boolean;
 }) {
-  const id = React.useId();
   const value = useDropdownMenuContext();
+  const triggerPosition = useRootStoreContext((state) => state.triggerPosition);
+  const nativeID = useRootStoreContext((state) => state.nativeID);
+  const store = useGetRootStore();
 
-  if (!value.triggerPosition) {
+  if (!triggerPosition) {
     return null;
   }
 
@@ -167,10 +189,10 @@ function Portal({
   }
 
   return (
-    <RNPPortal hostName={hostName} name={`${id}-${value.nativeID}_portal`}>
-      <DropdownMenuContext.Provider value={value}>
-        {children}
-      </DropdownMenuContext.Provider>
+    <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
+      <RootStoreContext.Provider value={store}>
+        <RootContext.Provider value={value}>{children}</RootContext.Provider>
+      </RootStoreContext.Provider>
     </RNPPortal>
   );
 }
@@ -194,11 +216,19 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { open, close } = useDropdownMenuContext();
+    const { open, onOpenChange } = useDropdownMenuContext();
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
-        close();
+        setTriggerPosition(null);
+        setContentLayout(null);
+        onOpenChange(false);
       }
       OnPressProp?.(ev);
     }
@@ -257,20 +287,26 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const {
-      open,
-      nativeID,
-      triggerPosition,
-      contentLayout,
-      setContentLayout,
-      close,
-    } = useDropdownMenuContext();
+    const { open, onOpenChange } = useDropdownMenuContext();
+    const nativeID = useRootStoreContext((state) => state.nativeID);
+    const triggerPosition = useRootStoreContext(
+      (state) => state.triggerPosition
+    );
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const contentLayout = useRootStoreContext((state) => state.contentLayout);
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
         'hardwareBackPress',
         () => {
-          close();
+          setTriggerPosition(null);
+          setContentLayout(null);
+          onOpenChange(false);
           return true;
         }
       );
@@ -340,10 +376,18 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
-    const { close } = useDropdownMenuContext();
+    const { onOpenChange } = useDropdownMenuContext();
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
-        close();
+        setTriggerPosition(null);
+        setContentLayout(null);
+        onOpenChange(false);
       }
       onSelect?.(ev);
       onPressProp?.(ev);
@@ -420,11 +464,19 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { close } = useDropdownMenuContext();
+    const { onOpenChange } = useDropdownMenuContext();
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
       if (closeOnPress) {
-        close();
+        setTriggerPosition(null);
+        setContentLayout(null);
+        onOpenChange(false);
       }
       onSelect?.(ev);
       onPressProp?.(ev);
@@ -506,13 +558,22 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { close } = useDropdownMenuContext();
+    const { onOpenChange } = useDropdownMenuContext();
+    const setTriggerPosition = useRootStoreContext(
+      (state) => state.setTriggerPosition
+    );
+    const setContentLayout = useRootStoreContext(
+      (state) => state.setContentLayout
+    );
+
     const { value, onValueChange } =
       useFormItemContext() as BothFormItemContext;
     function onPress(ev: GestureResponderEvent) {
       onValueChange(itemValue);
       if (closeOnPress) {
-        close();
+        setTriggerPosition(null);
+        setContentLayout(null);
+        onOpenChange(false);
       }
       onSelect?.(ev);
       onPressProp?.(ev);
