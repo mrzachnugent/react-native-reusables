@@ -388,9 +388,10 @@ Group.displayName = 'GroupContextMenu';
 
 const Label = React.forwardRef<
   React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->((props, ref) => {
-  return <Text ref={ref} role='heading' {...props} />;
+  ComponentPropsWithAsChild<typeof Text>
+>(({ asChild, ...props }, ref) => {
+  const Component = asChild ? Slot.Text : Text;
+  return <Component ref={ref} role='heading' {...props} />;
 });
 
 Label.displayName = 'LabelContextMenu';

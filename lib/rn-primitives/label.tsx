@@ -15,11 +15,12 @@ Root.displayName = 'RootLabel';
 
 const Text = React.forwardRef<
   React.ElementRef<typeof RNText>,
-  React.ComponentPropsWithoutRef<typeof RNText> & {
+  ComponentPropsWithAsChild<typeof RNText> & {
     nativeID: string;
   }
->((props, ref) => {
-  return <RNText ref={ref} {...props} />;
+>(({ asChild, ...props }, ref) => {
+  const Component = asChild ? Slot.Text : RNText;
+  return <Component ref={ref} {...props} />;
 });
 
 Text.displayName = 'TextLabel';

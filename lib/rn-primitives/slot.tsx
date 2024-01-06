@@ -1,14 +1,16 @@
 import React from 'react';
 import {
+  PressableStateCallbackType,
   Image as RNImage,
   ImageProps as RNImageProps,
+  ImageStyle as RNImageStyle,
   Pressable as RNPressable,
   PressableProps as RNPressableprops,
-  PressableStateCallbackType,
-  ImageStyle as RNImageStyle,
-  StyleProp,
+  Text as RNText,
+  TextProps as RNTextProps,
   View as RNView,
   ViewProps as RNViewProps,
+  StyleProp,
 } from 'react-native';
 
 const Pressable = React.forwardRef<
@@ -18,7 +20,7 @@ const Pressable = React.forwardRef<
   const { children, ...pressableslotProps } = props;
 
   if (!React.isValidElement(children)) {
-    console.log('PressableSlot - Invalid asChild element', children);
+    console.log('Slot.Pressable - Invalid asChild element', children);
     return null;
   }
 
@@ -33,14 +35,14 @@ const Pressable = React.forwardRef<
   });
 });
 
-Pressable.displayName = 'SloPressablet';
+Pressable.displayName = 'SlotPressable';
 
 const View = React.forwardRef<React.ElementRef<typeof RNView>, RNViewProps>(
   (props, forwardedRef) => {
     const { children, ...viewSlotProps } = props;
 
     if (!React.isValidElement(children)) {
-      console.log('ViewSlot - Invalid asChild element', children);
+      console.log('Slot.View - Invalid asChild element', children);
       return null;
     }
 
@@ -58,6 +60,29 @@ const View = React.forwardRef<React.ElementRef<typeof RNView>, RNViewProps>(
 
 View.displayName = 'SlotView';
 
+const Text = React.forwardRef<React.ElementRef<typeof RNText>, RNTextProps>(
+  (props, forwardedRef) => {
+    const { children, ...textSlotProps } = props;
+
+    if (!React.isValidElement(children)) {
+      console.log('Slot.Text - Invalid asChild element', children);
+      return null;
+    }
+
+    return React.cloneElement<
+      React.ComponentPropsWithoutRef<typeof RNText>,
+      React.ElementRef<typeof RNText>
+    >(isTextChildren(children) ? <></> : children, {
+      ...mergeProps(textSlotProps, children.props),
+      ref: forwardedRef
+        ? composeRefs(forwardedRef, (children as any).ref)
+        : (children as any).ref,
+    });
+  }
+);
+
+Text.displayName = 'SlotText';
+
 type ImageSlotProps = RNImageProps & {
   children?: React.ReactNode;
 };
@@ -69,7 +94,7 @@ const Image = React.forwardRef<
   const { children, ...imageSlotProps } = props;
 
   if (!React.isValidElement(children)) {
-    console.log('ImageSlot - Invalid asChild element', children);
+    console.log('Slot.Image - Invalid asChild element', children);
     return null;
   }
 
@@ -86,7 +111,7 @@ const Image = React.forwardRef<
 
 Image.displayName = 'SlotImage';
 
-export { Image, Pressable, View };
+export { Image, Pressable, Text, View };
 
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.
