@@ -8,8 +8,8 @@ import {
   Text,
   View,
 } from 'react-native';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { cn } from '~/lib/utils';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { Button } from './button';
 
 interface DialogProps {
@@ -80,7 +80,7 @@ const DialogTrigger = React.forwardRef<
     onPress?.(event);
   }
 
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 
@@ -207,7 +207,7 @@ const DialogClose = React.forwardRef<
   }
 >(({ variant = 'outline', asChild, ...props }, ref) => {
   const { setVisible } = useDialogContext();
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return (
     <Trigger
       variant={variant}

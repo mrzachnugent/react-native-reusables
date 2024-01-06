@@ -2,8 +2,8 @@ import { VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { buttonVariants } from '~/components/ui/button';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { cn } from '~/lib/utils';
 
 interface CollapsibleProps {
@@ -105,7 +105,7 @@ const CollapsibleTrigger = React.forwardRef<
       onPress?.(event);
     }
 
-    const Trigger = asChild ? PressableSlot : Pressable;
+    const Trigger = asChild ? Slot.Pressable : Pressable;
     return (
       <Trigger
         key={`collapsible-trigger-${nativeID}`}

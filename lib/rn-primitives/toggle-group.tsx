@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 type SingleRootProps = {
@@ -29,7 +29,7 @@ const Root = React.forwardRef<
     { asChild, type, value, onValueChange, disabled = false, ...viewProps },
     ref
   ) => {
-    const Slot = asChild ? ViewSlot : View;
+    const Component = asChild ? Slot.View : View;
     return (
       <ToggleGroupContext.Provider
         value={
@@ -41,7 +41,7 @@ const Root = React.forwardRef<
           } as RootProps
         }
       >
-        <Slot ref={ref} role='group' {...viewProps} />
+        <Component ref={ref} role='group' {...viewProps} />
       </ToggleGroupContext.Provider>
     );
   }
@@ -93,9 +93,9 @@ const Item = React.forwardRef<
     const isSelected =
       type === 'multiple' ? getIsSelected(value, itemValue) : undefined;
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         aria-disabled={disabled}
         role={type === 'single' ? 'radio' : 'checkbox'}

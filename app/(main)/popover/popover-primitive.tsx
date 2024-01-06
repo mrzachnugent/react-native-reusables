@@ -12,6 +12,12 @@ function getSide(): 'bottom' | 'top' {
 export default function PopoverPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
   const insets = useSafeAreaInsets();
+  const contentInsets = {
+    top: insets.top,
+    bottom: insets.bottom,
+    left: 12,
+    right: 12,
+  };
   const headerHeight = useHeaderHeight();
   const side = getSide();
   return (
@@ -29,7 +35,7 @@ export default function PopoverPrimitiveScreen() {
               side={side === 'bottom' ? 'top' : 'bottom'}
               align='center'
               sideOffset={3}
-              insets={insets}
+              insets={contentInsets}
               className='bg-background'
             >
               <Text className='text-foreground text-xl'>TITLE</Text>
@@ -54,7 +60,7 @@ export default function PopoverPrimitiveScreen() {
               sideOffset={
                 side === 'bottom' ? -headerHeight + 3 : headerHeight + 3
               }
-              insets={insets}
+              insets={contentInsets}
               className='bg-background'
             >
               <Text className='text-foreground text-xl'>TITLE</Text>

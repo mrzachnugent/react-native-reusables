@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/ui/button';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 
 interface AlertDialogProps {
   children: React.ReactNode;
@@ -82,7 +82,7 @@ const AlertDialogTrigger = React.forwardRef<
     onPress?.(event);
   }
 
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 
@@ -207,7 +207,7 @@ const AlertDialogCancel = React.forwardRef<
   }
 >(({ variant = 'outline', asChild = false, ...props }, ref) => {
   const { setVisible } = useAlertDialogContext();
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return (
     <Trigger
       variant={variant}
@@ -239,7 +239,7 @@ const AlertDialogAction = React.forwardRef<
     setVisible(false);
   }
 
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return <Trigger onPress={onPressAction} ref={ref} {...props} />;
 });
 

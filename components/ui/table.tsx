@@ -2,7 +2,7 @@ import { FlashList } from '@shopify/flash-list';
 import React from 'react';
 import { Pressable, ScrollView, Text, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { cn, isTextChildren } from '~/lib/utils';
 
 const Table = React.forwardRef<
@@ -93,7 +93,7 @@ const TableRow = React.forwardRef<
     asChild?: boolean;
   }
 >(({ className, asChild = false, ...props }, ref) => {
-  const Row = asChild ? PressableSlot : Pressable;
+  const Row = asChild ? Slot.Pressable : Pressable;
   return (
     <Row
       ref={ref}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
@@ -15,7 +15,7 @@ const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, value, onValueChange, disabled = false, ...viewProps }, ref) => {
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <RadioGroupContext.Provider
       value={{
@@ -24,7 +24,7 @@ const Root = React.forwardRef<
         onValueChange,
       }}
     >
-      <Slot ref={ref} role='radiogroup' {...viewProps} />
+      <Component ref={ref} role='radiogroup' {...viewProps} />
     </RadioGroupContext.Provider>
   );
 });
@@ -75,14 +75,14 @@ const Item = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <RadioItemContext.Provider
         value={{
           itemValue: itemValue,
         }}
       >
-        <Slot
+        <Component
           ref={ref}
           role='radio'
           onPress={onPress}
@@ -125,8 +125,8 @@ const Indicator = React.forwardRef<
       return null;
     }
   }
-  const Slot = asChild ? ViewSlot : View;
-  return <Slot ref={ref} role='presentation' {...props} />;
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} role='presentation' {...props} />;
 });
 
 Indicator.displayName = 'IndicatorRadioGroup';

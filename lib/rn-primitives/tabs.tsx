@@ -1,6 +1,6 @@
 import React, { useId } from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
@@ -19,7 +19,7 @@ const Root = React.forwardRef<
   ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, value, onValueChange, ...viewProps }, ref) => {
   const nativeID = useId();
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <TabsContext.Provider
       value={{
@@ -28,7 +28,7 @@ const Root = React.forwardRef<
         nativeID,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </TabsContext.Provider>
   );
 });
@@ -49,8 +49,8 @@ const List = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
-  const Slot = asChild ? ViewSlot : View;
-  return <Slot ref={ref} role='tablist' {...props} />;
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} role='tablist' {...props} />;
 });
 
 List.displayName = 'ListTabs';
@@ -73,9 +73,9 @@ const Trigger = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         nativeID={`${nativeID}-tab-${tabValue}`}
         aria-disabled={!!disabled}
@@ -110,9 +110,9 @@ const Content = React.forwardRef<
     }
   }
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
-    <Slot
+    <Component
       ref={ref}
       aria-hidden={!(forceMount || rootValue === tabValue)}
       aria-labelledby={`${nativeID}-tab-${tabValue}`}

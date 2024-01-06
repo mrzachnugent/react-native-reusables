@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Portal as RNPPortal } from '~/lib/rn-primitives/portal';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 import {
   Insets,
@@ -47,7 +47,7 @@ const Root = React.forwardRef<
   const [contentLayout, setContentLayout] =
     React.useState<LayoutRectangle | null>(null);
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <PopoverContext.Provider
       value={{
@@ -60,7 +60,7 @@ const Root = React.forwardRef<
         setContentLayout,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </PopoverContext.Provider>
   );
 });
@@ -105,9 +105,9 @@ const Trigger = React.forwardRef<
     onPressProp?.(ev);
   }
 
-  const Slot = asChild ? PressableSlot : Pressable;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Slot
+    <Component
       ref={triggerRef}
       aria-disabled={disabled ?? undefined}
       role='button'
@@ -187,9 +187,9 @@ const Overlay = React.forwardRef<
       }
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         onPress={onPress}
         style={[StyleSheet.absoluteFill, style]}
@@ -284,9 +284,9 @@ const Content = React.forwardRef<
       }
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         role='dialog'
         nativeID={nativeID}
@@ -316,9 +316,9 @@ const Close = React.forwardRef<
     onPressProp?.(ev);
   }
 
-  const Slot = asChild ? PressableSlot : Pressable;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Slot
+    <Component
       ref={ref}
       aria-disabled={disabled ?? undefined}
       role='button'

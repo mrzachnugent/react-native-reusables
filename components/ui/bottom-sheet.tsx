@@ -18,7 +18,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
@@ -69,7 +69,7 @@ const BottomSheetOpenTrigger = React.forwardRef<
       'Not implemented for web yet. Check `bottom-sheet.tsx` for more info.'
     );
   }
-  const Trigger = asChild ? PressableSlot : Pressable;
+  const Trigger = asChild ? Slot.Pressable : Pressable;
   return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 
@@ -87,7 +87,7 @@ const BottomSheetCloseTrigger = React.forwardRef<
     }
     onPress?.(ev);
   }
-  const Trigger = asChild ? PressableSlot : Pressable;
+  const Trigger = asChild ? Slot.Pressable : Pressable;
   return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 

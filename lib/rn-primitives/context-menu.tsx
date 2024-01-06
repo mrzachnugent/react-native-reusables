@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import {
   AccessibilityActionEvent,
   BackHandler,
-  Dimensions,
   GestureResponderEvent,
   LayoutChangeEvent,
   LayoutRectangle,
@@ -12,18 +11,15 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { PortalHost, Portal as RNPPortal } from '~/lib/rn-primitives/portal';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import { Portal as RNPPortal } from '~/lib/rn-primitives/portal';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 import {
   Insets,
   LayoutPosition,
   useRelativePosition,
 } from './hooks/useRelativePosition';
-import * as Popover from '~/lib/rn-primitives/popover';
-import { create } from 'zustand';
 
-const window = Dimensions.get('window');
 interface RootProps {
   open: boolean;
   onOpenChange: (value: boolean) => void;
@@ -52,13 +48,13 @@ const Root = React.forwardRef<
   const [contentLayout, setContentLayout] =
     React.useState<LayoutRectangle | null>(null);
 
-  const close = React.useCallback(function close() {
+  function close() {
     setPressPosition(null);
     setContentLayout(null);
     onOpenChange(false);
-  }, []);
+  }
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <ContextMenuContext.Provider
       value={{
@@ -72,7 +68,7 @@ const Root = React.forwardRef<
         close,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </ContextMenuContext.Provider>
   );
 });
@@ -107,9 +103,7 @@ const Trigger = React.forwardRef<
   ) => {
     const { open, onOpenChange, setPressPosition } = useContextMenuContext();
 
-    const onLongPress = React.useCallback(function onLongPress(
-      ev: GestureResponderEvent
-    ) {
+    function onLongPress(ev: GestureResponderEvent) {
       if (disabled) return;
       setPressPosition({
         width: 0,
@@ -120,8 +114,7 @@ const Trigger = React.forwardRef<
       const newValue = !open;
       onOpenChange(newValue);
       onLongPressProp?.(ev);
-    },
-    []);
+    }
 
     function onAccessibilityAction(event: AccessibilityActionEvent) {
       if (disabled) return;
@@ -138,9 +131,9 @@ const Trigger = React.forwardRef<
       onAccessibilityActionProp?.(event);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         aria-disabled={disabled ?? undefined}
         role='button'
@@ -157,6 +150,9 @@ const Trigger = React.forwardRef<
 
 Trigger.displayName = 'TriggerContextMenu';
 
+/**
+ * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
+ */
 function Portal({
   forceMount = false,
   hostName,
@@ -222,9 +218,9 @@ const Overlay = React.forwardRef<
       }
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         onPress={onPress}
         style={[StyleSheet.absoluteFill, style]}
@@ -278,7 +274,6 @@ const Content = React.forwardRef<
       setContentLayout,
       close,
     } = useContextMenuContext();
-    const hasContentLayout = useRef(false);
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
@@ -306,15 +301,10 @@ const Content = React.forwardRef<
       side,
     });
 
-    const onLayout = React.useCallback(function onLayout(
-      event: LayoutChangeEvent
-    ) {
-      if (hasContentLayout.current) return;
+    function onLayout(event: LayoutChangeEvent) {
       setContentLayout(event.nativeEvent.layout);
       onLayoutProp?.(event);
-      hasContentLayout.current = true;
-    },
-    []);
+    }
 
     if (!forceMount) {
       if (!open) {
@@ -322,9 +312,9 @@ const Content = React.forwardRef<
       }
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         role='menu'
         nativeID={nativeID}
@@ -368,9 +358,9 @@ const Item = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         role='menuitem'
         onPress={onPress}
@@ -390,8 +380,8 @@ const Group = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View>
 >(({ asChild, ...props }, ref) => {
-  const Slot = asChild ? ViewSlot : View;
-  return <Slot ref={ref} role='group' {...props} />;
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} role='group' {...props} />;
 });
 
 Group.displayName = 'GroupContextMenu';
@@ -448,10 +438,10 @@ const CheckboxItem = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <FormItemContext.Provider value={{ checked }}>
-        <Slot
+        <Component
           ref={ref}
           role='checkbox'
           aria-checked={checked}
@@ -486,10 +476,10 @@ const RadioGroup = React.forwardRef<
     onValueChange: (value: string) => void;
   }
 >(({ asChild, value, onValueChange, ...props }, ref) => {
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <FormItemContext.Provider value={{ value, onValueChange }}>
-      <Slot ref={ref} role='radiogroup' {...props} />
+      <Component ref={ref} role='radiogroup' {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -536,10 +526,10 @@ const RadioItem = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <RadioItemContext.Provider value={{ itemValue }}>
-        <Slot
+        <Component
           ref={ref}
           onPress={onPress}
           role='radio'
@@ -584,8 +574,8 @@ const ItemIndicator = React.forwardRef<
       return null;
     }
   }
-  const Slot = asChild ? ViewSlot : View;
-  return <Slot ref={ref} role='presentation' {...props} />;
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} role='presentation' {...props} />;
 });
 
 ItemIndicator.displayName = 'ItemIndicatorContextMenu';
@@ -596,9 +586,9 @@ const Separator = React.forwardRef<
     decorative?: boolean;
   }
 >(({ asChild, decorative, ...props }, ref) => {
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
-    <Slot
+    <Component
       role={decorative ? 'presentation' : 'separator'}
       ref={ref}
       {...props}
@@ -612,34 +602,28 @@ const SubContext = React.createContext(
   {} as {
     nativeID: string;
     open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    triggerPosition: LayoutPosition | null;
-    setTriggerPosition: React.Dispatch<
-      React.SetStateAction<LayoutPosition | null>
-    >;
+    onOpenChange: (value: boolean) => void;
   }
 );
 const Sub = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View>
->(({ asChild, ...props }, ref) => {
+  ComponentPropsWithAsChild<typeof View> & {
+    open: boolean;
+    onOpenChange: (value: boolean) => void;
+  }
+>(({ asChild, open, onOpenChange, ...props }, ref) => {
   const nativeID = React.useId();
-  const [triggerPosition, setTriggerPosition] =
-    React.useState<LayoutPosition | null>(null);
-  const [open, setOpen] = React.useState(false);
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <SubContext.Provider
       value={{
         nativeID,
-        triggerPosition,
-        setTriggerPosition,
         open,
-        setOpen,
+        onOpenChange,
       }}
     >
-      <Slot role='group' ref={ref} {...props} />
+      <Component ref={ref} {...props} />
     </SubContext.Provider>
   );
 });
@@ -657,212 +641,79 @@ function useSubContext() {
 }
 
 const SubTrigger = React.forwardRef<
-  React.ElementRef<typeof Popover.Trigger>,
-  React.ComponentPropsWithoutRef<typeof Popover.Trigger> & {
+  React.ElementRef<typeof Pressable>,
+  ComponentPropsWithAsChild<typeof Pressable> & {
     textValue?: string;
   }
->(({ textValue, onLayout: onLayoutProp, ...props }, ref) => {
-  const triggerRef = React.useRef<View>(null);
-  const { nativeID, setTriggerPosition, setOpen } = useSubContext();
-
-  React.useImperativeHandle(
-    ref,
-    () => {
-      if (!triggerRef.current) {
-        return new View({});
-      }
-      return triggerRef.current;
-    },
-    [triggerRef.current]
-  );
-
-  const onLayout = React.useCallback(function onLayout(ev: LayoutChangeEvent) {
-    // setTriggerDimensions({
-    //   height: ev.nativeEvent.layout.height,
-    //   width: ev.nativeEvent.layout.width,
-    // });
-    // triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-    //   setTriggerPosition({ width, pageX, pageY: pageY, height });
-    // });
-    onLayoutProp?.(ev);
-  }, []);
-
-  return (
-    <Pressable
-      ref={triggerRef}
-      aria-valuetext={textValue}
-      role='menu'
-      nativeID={nativeID}
-      onLayout={onLayout}
-      onPress={(ev) => {
-        // console.log('PRESS', Object.keys(ev.target.viewConfig.validAttributes));
-
-        triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-          console.log({
-            _x,
-            _y,
-            width,
-            height,
-            pageX,
-            pageY,
-          });
-          setTriggerPosition({
-            width,
-            height,
-            pageX,
-            pageY,
-          });
-        });
-        setOpen((prev) => !prev);
-      }}
-      {...props}
-    />
-  );
-});
-
-SubTrigger.displayName = 'SubTriggerContextMenu';
-
-const usePortal = create<{
-  contentLayout: LayoutRectangle | null;
-  setContentLayout: (layout: LayoutRectangle | null) => void;
-}>((set) => ({
-  contentLayout: null,
-  setContentLayout: (layout: LayoutRectangle | null) =>
-    set(() => ({ contentLayout: layout })),
-}));
-
-/**
- * @info `position`, `top`, `left`, and `maxWidth` style properties are controlled internally.
- */
-const SubContent = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & ContentProps
 >(
   (
-    {
-      asChild = false,
-      forceMount = false,
-      align = 'start',
-      side = 'bottom',
-      sideOffset = 0,
-      alignOffset = 0,
-      avoidCollisions = true,
-      onLayout: onLayoutProp,
-      insets,
-      style,
-      ...props
-    },
+    { asChild, textValue, onPress: onPressProp, disabled = false, ...props },
     ref
   ) => {
-    // const contentLayout = usePortal((state) => state.contentLayout);
-    // const setContentLayout = usePortal((state) => state.setContentLayout);
+    const { nativeID, open, onOpenChange } = useSubContext();
 
-    const { open, nativeID, triggerPosition, setOpen } = useSubContext();
-    const [contentLayout, setContentLayout] =
-      React.useState<LayoutRectangle | null>(null);
-
-    React.useEffect(() => {
-      const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
-        () => {
-          setOpen(false);
-          return true;
-        }
-      );
-
-      return () => {
-        backHandler.remove();
-      };
-    }, []);
-
-    const isCollision =
-      (triggerPosition?.pageX ?? 0) +
-        (triggerPosition?.width ?? 0) +
-        (contentLayout?.width ?? 0) >
-      window.width;
-
-    const tempStyle =
-      contentLayout && triggerPosition
-        ? isCollision
-          ? {
-              position: 'absolute',
-              top: triggerPosition.height,
-              right: 0,
-            }
-          : {
-              position: 'absolute',
-              top: 0,
-              left: triggerPosition.width,
-            }
-        : { position: 'absolute', opacity: 0 };
-    console.log('tempStyle', tempStyle);
-
-    const onLayout = React.useCallback(function onLayout(
-      event: LayoutChangeEvent
-    ) {
-      setContentLayout(event.nativeEvent.layout);
-      onLayoutProp?.(event);
-    },
-    []);
-
-    if (!forceMount) {
-      if (!open) {
-        return null;
-      }
+    function onPress(ev: GestureResponderEvent) {
+      onOpenChange(!open);
+      onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <View
+      <Component
         ref={ref}
-        role='menu'
+        aria-valuetext={textValue}
+        role='menuitem'
+        aria-expanded={open}
+        accessibilityState={{ expanded: open, disabled: !!disabled }}
         nativeID={nativeID}
-        aria-modal={true}
-        // style={[style, positionStyle]}
-        style={tempStyle}
-        // className='absolute top-32 left-32 h-32 w-32 bg-red-500'
-        onLayout={onLayout}
+        onPress={onPress}
+        disabled={disabled}
+        aria-disabled={!!disabled}
         {...props}
       />
     );
   }
 );
 
+SubTrigger.displayName = 'SubTriggerContextMenu';
+
+const SubContent = React.forwardRef<
+  React.ElementRef<typeof View>,
+  ComponentPropsWithAsChild<typeof View> & {
+    forceMount?: boolean;
+  }
+>(({ asChild = false, forceMount = false, ...props }, ref) => {
+  const { open, nativeID } = useSubContext();
+
+  if (!forceMount) {
+    if (!open) {
+      return null;
+    }
+  }
+
+  const Component = asChild ? Slot.View : View;
+  return (
+    <Component ref={ref} role='group' aria-labelledby={nativeID} {...props} />
+  );
+});
+
 Content.displayName = 'ContentContextMenu';
 
-function getAlignOffset(align: 'start' | 'end', triggerWidth: number) {
-  switch (align) {
-    case 'start':
-      return -triggerWidth + 2;
-    case 'end':
-      return triggerWidth - 2;
-  }
-}
-
-function getSideOffset(side: 'top' | 'bottom', triggerHeight: number) {
-  switch (side) {
-    case 'top':
-      return triggerHeight + 2;
-    case 'bottom':
-      return -triggerHeight - 2;
-  }
-}
-
 export {
+  CheckboxItem,
   Content,
+  Group,
+  Item,
+  ItemIndicator,
+  Label,
   Overlay,
   Portal,
-  Root,
-  Trigger,
-  Item,
-  Group,
-  Label,
-  CheckboxItem,
   RadioGroup,
   RadioItem,
-  ItemIndicator,
+  Root,
   Separator,
   Sub,
-  SubTrigger,
   SubContent,
+  SubTrigger,
+  Trigger,
 };

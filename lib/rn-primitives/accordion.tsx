@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 type SingleRootProps = {
@@ -38,7 +38,7 @@ const Root = React.forwardRef<
     },
     ref
   ) => {
-    const Slot = asChild ? ViewSlot : View;
+    const Component = asChild ? Slot.View : View;
     return (
       <AccordionContext.Provider
         value={
@@ -51,7 +51,7 @@ const Root = React.forwardRef<
           } as RootProps
         }
       >
-        <Slot ref={ref} {...viewProps} />
+        <Component ref={ref} {...viewProps} />
       </AccordionContext.Provider>
     );
   }
@@ -86,7 +86,7 @@ const Item = React.forwardRef<
 >(({ asChild, value, disabled, ...viewProps }, ref) => {
   const nativeID = React.useId();
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <AccordionItemContext.Provider
       value={{
@@ -95,7 +95,7 @@ const Item = React.forwardRef<
         nativeID,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </AccordionItemContext.Provider>
   );
 });
@@ -119,9 +119,9 @@ const Header = React.forwardRef<
   const { disabled: rootDisabled, value: rootValue } = useAccordionContext();
   const { disabled: itemDisabled, value } = useAccordionItemContext();
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
-    <Slot
+    <Component
       ref={ref}
       role='heading'
       aria-expanded={isItemExpanded(rootValue, value)}
@@ -177,9 +177,9 @@ const Trigger = React.forwardRef<
     }
 
     const isDisabled = disabledProp || rootDisabled || itemDisabled;
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         nativeID={nativeID}
         aria-disabled={isDisabled}
@@ -212,9 +212,9 @@ const Content = React.forwardRef<
     }
   }
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
-    <Slot
+    <Component
       ref={ref}
       aria-hidden={!(forceMount || isExpanded)}
       aria-labelledby={nativeID}

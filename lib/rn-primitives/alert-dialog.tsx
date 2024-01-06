@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
@@ -26,7 +26,7 @@ const Root = React.forwardRef<
   ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, open: value, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <AlertDialogContext.Provider
       value={{
@@ -35,7 +35,7 @@ const Root = React.forwardRef<
         nativeID,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </AlertDialogContext.Provider>
   );
 });
@@ -65,9 +65,9 @@ const Trigger = React.forwardRef<
     onPressProp?.(ev);
   }
 
-  const Slot = asChild ? PressableSlot : Pressable;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Slot
+    <Component
       ref={ref}
       aria-disabled={disabled ?? undefined}
       role='button'
@@ -134,8 +134,8 @@ const Overlay = React.forwardRef<
     }
   }
 
-  const Slot = asChild ? ViewSlot : View;
-  return <Slot ref={ref} {...props} />;
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} {...props} />;
 });
 
 Overlay.displayName = 'OverlayAlertDialog';
@@ -152,9 +152,9 @@ const Content = React.forwardRef<
     }
   }
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
-    <Slot
+    <Component
       ref={ref}
       role='alertdialog'
       nativeID={nativeID}
@@ -180,9 +180,9 @@ const Close = React.forwardRef<
     onPressProp?.(ev);
   }
 
-  const Slot = asChild ? PressableSlot : Pressable;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Slot
+    <Component
       ref={ref}
       aria-disabled={disabled ?? undefined}
       role='button'
@@ -208,9 +208,9 @@ const Action = React.forwardRef<
     onPressProp?.(ev);
   }
 
-  const Slot = asChild ? PressableSlot : Pressable;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Slot
+    <Component
       ref={augmentedRef}
       aria-disabled={disabled ?? undefined}
       role='button'

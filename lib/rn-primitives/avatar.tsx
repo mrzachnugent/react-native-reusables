@@ -6,7 +6,7 @@ import {
   Image as RNImage,
   View,
 } from 'react-native';
-import { ImageSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface AvatarRootProps {
@@ -27,7 +27,7 @@ const Root = React.forwardRef<
   ComponentPropsWithAsChild<typeof View> & AvatarRootProps
 >(({ asChild, alt, ...viewProps }, ref) => {
   const [status, setStatus] = React.useState<AvatarState>('loading');
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <AvatarContext.Provider
       value={{
@@ -36,7 +36,7 @@ const Root = React.forwardRef<
         alt,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </AvatarContext.Provider>
   );
 });
@@ -94,9 +94,15 @@ const Image = React.forwardRef<
       return null;
     }
 
-    const Slot = asChild ? ImageSlot : RNImage;
+    const Component = asChild ? Slot.Image : RNImage;
     return (
-      <Slot ref={ref} alt={alt} onLoad={onLoad} onError={onError} {...props} />
+      <Component
+        ref={ref}
+        alt={alt}
+        onLoad={onLoad}
+        onError={onError}
+        {...props}
+      />
     );
   }
 );
@@ -112,8 +118,8 @@ const Fallback = React.forwardRef<
   if (status !== 'error') {
     return null;
   }
-  const Slot = asChild ? ViewSlot : View;
-  return <Slot ref={ref} role={'img'} aria-label={alt} {...props} />;
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} role={'img'} aria-label={alt} {...props} />;
 });
 
 Fallback.displayName = 'FallbackAvatar';

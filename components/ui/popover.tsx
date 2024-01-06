@@ -12,8 +12,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { cn } from '~/lib/utils';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
 import { Button, buttonVariants } from './button';
 
 const windowWidth = Dimensions.get('window').width;
@@ -104,7 +104,7 @@ const PopoverTrigger = React.forwardRef<
     [triggerRef.current]
   );
 
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return <Trigger ref={triggerRef} onPress={handleOnPress} {...props} />;
 });
 
@@ -125,7 +125,7 @@ const PopoverClose = React.forwardRef<
     onPress?.(event);
   }
 
-  const Trigger = asChild ? PressableSlot : Button;
+  const Trigger = asChild ? Slot.Pressable : Button;
   return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
 });
 

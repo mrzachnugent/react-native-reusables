@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 import Animated, { FadeInUp, SlideInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
+import { useKeyboard } from '~/lib/keyboard';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { cn, isTextChildren } from '~/lib/utils';
 import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';
-import { useKeyboard } from '~/lib/keyboard';
 
 type Data = Record<string, unknown> | string;
 
@@ -144,7 +144,7 @@ function CommandPressable<T extends Data>(
     onPress?.(event);
   }
 
-  const Trigger = asChild ? PressableSlot : Pressable;
+  const Trigger = asChild ? Slot.Pressable : Pressable;
   return <Trigger onPress={handleOnPress} ref={ref} {...props} />;
 }
 

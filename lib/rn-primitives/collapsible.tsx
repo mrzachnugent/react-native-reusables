@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { PressableSlot, ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
@@ -20,7 +20,7 @@ const Root = React.forwardRef<
 >(({ asChild, disabled = false, open, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
     <CollapsibleContext.Provider
       value={{
@@ -30,7 +30,7 @@ const Root = React.forwardRef<
         nativeID,
       }}
     >
-      <Slot ref={ref} {...viewProps} />
+      <Component ref={ref} {...viewProps} />
     </CollapsibleContext.Provider>
   );
 });
@@ -64,9 +64,9 @@ const Trigger = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         nativeID={nativeID}
         aria-disabled={(disabled || disabledProp) ?? undefined}
@@ -97,9 +97,9 @@ const Content = React.forwardRef<
     }
   }
 
-  const Slot = asChild ? ViewSlot : View;
+  const Component = asChild ? Slot.View : View;
   return (
-    <Slot
+    <Component
       ref={ref}
       aria-hidden={!(forceMount || open)}
       aria-labelledby={nativeID}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ViewSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 // This project uses code from WorkOS/Radix Primitives.
@@ -32,9 +32,9 @@ const Root = React.forwardRef<
     const max = maxProp ?? DEFAULT_MAX;
     const value = isValidValueNumber(valueProp, max) ? valueProp : 0;
 
-    const Slot = asChild ? ViewSlot : View;
+    const Component = asChild ? Slot.View : View;
     return (
-      <Slot
+      <Component
         role='progressbar'
         ref={ref}
         aria-valuemax={max}

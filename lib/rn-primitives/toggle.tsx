@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable } from 'react-native';
-import { PressableSlot } from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/slot';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 interface RootProps {
@@ -31,9 +31,9 @@ const Root = React.forwardRef<
       onPressProp?.(ev);
     }
 
-    const Slot = asChild ? PressableSlot : Pressable;
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Slot
+      <Component
         ref={ref}
         aria-disabled={disabled}
         role='switch'
