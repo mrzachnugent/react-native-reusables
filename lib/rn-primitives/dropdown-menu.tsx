@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  AccessibilityActionEvent,
   BackHandler,
   GestureResponderEvent,
   LayoutChangeEvent,
@@ -26,8 +25,10 @@ interface RootProps {
 }
 
 interface RootContext extends RootProps {
-  pressPosition: LayoutPosition | null;
-  setPressPosition: React.Dispatch<React.SetStateAction<LayoutPosition | null>>;
+  triggerPosition: LayoutPosition | null;
+  setTriggerPosition: React.Dispatch<
+    React.SetStateAction<LayoutPosition | null>
+  >;
   contentLayout: LayoutRectangle | null;
   setContentLayout: React.Dispatch<
     React.SetStateAction<LayoutRectangle | null>
@@ -36,56 +37,54 @@ interface RootContext extends RootProps {
   nativeID: string;
 }
 
-const ContextMenuContext = React.createContext({} as RootContext);
+const DropdownMenuContext = React.createContext({} as RootContext);
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & RootProps
 >(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
-  const [pressPosition, setPressPosition] =
+  const [triggerPosition, setTriggerPosition] =
     React.useState<LayoutPosition | null>(null);
   const [contentLayout, setContentLayout] =
     React.useState<LayoutRectangle | null>(null);
 
   function close() {
-    setPressPosition(null);
+    setTriggerPosition(null);
     setContentLayout(null);
     onOpenChange(false);
   }
 
   const Component = asChild ? Slot.View : View;
   return (
-    <ContextMenuContext.Provider
+    <DropdownMenuContext.Provider
       value={{
         open,
         onOpenChange,
         nativeID,
-        pressPosition,
-        setPressPosition,
+        triggerPosition,
+        setTriggerPosition,
         contentLayout,
         setContentLayout,
         close,
       }}
     >
       <Component ref={ref} {...viewProps} />
-    </ContextMenuContext.Provider>
+    </DropdownMenuContext.Provider>
   );
 });
 
-Root.displayName = 'RootContextMenu';
+Root.displayName = 'RootDropdownMenu';
 
-function useContextMenuContext() {
-  const context = React.useContext(ContextMenuContext);
+function useDropdownMenuContext() {
+  const context = React.useContext(DropdownMenuContext);
   if (!context) {
     throw new Error(
-      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
     );
   }
   return context;
 }
-
-const accessibilityActions = [{ name: 'longpress' }];
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -94,61 +93,53 @@ const Trigger = React.forwardRef<
   (
     {
       asChild,
-      onLongPress: onLongPressProp,
+      onPress: onPressProp,
       disabled = false,
       onAccessibilityAction: onAccessibilityActionProp,
       ...props
     },
     ref
   ) => {
-    const { open, onOpenChange, setPressPosition } = useContextMenuContext();
+    const triggerRef = React.useRef<View>(null);
+    const { open, onOpenChange, setTriggerPosition } = useDropdownMenuContext();
 
-    function onLongPress(ev: GestureResponderEvent) {
+    React.useImperativeHandle(
+      ref,
+      () => {
+        if (!triggerRef.current) {
+          return new View({});
+        }
+        return triggerRef.current;
+      },
+      [triggerRef.current]
+    );
+
+    function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      setPressPosition({
-        width: 0,
-        pageX: ev.nativeEvent.pageX,
-        pageY: ev.nativeEvent.pageY,
-        height: 0,
+      triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+        setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
       const newValue = !open;
       onOpenChange(newValue);
-      onLongPressProp?.(ev);
-    }
-
-    function onAccessibilityAction(event: AccessibilityActionEvent) {
-      if (disabled) return;
-      if (event.nativeEvent.actionName === 'longpress') {
-        setPressPosition({
-          width: 0,
-          pageX: 0,
-          pageY: 0,
-          height: 0,
-        });
-        const newValue = !open;
-        onOpenChange(newValue);
-      }
-      onAccessibilityActionProp?.(event);
+      onPressProp?.(ev);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={ref}
+        ref={triggerRef}
         aria-disabled={disabled ?? undefined}
         role='button'
-        onLongPress={onLongPress}
+        onPress={onPress}
         disabled={disabled ?? undefined}
         aria-expanded={open}
-        accessibilityActions={accessibilityActions}
-        onAccessibilityAction={onAccessibilityAction}
         {...props}
       />
     );
   }
 );
 
-Trigger.displayName = 'TriggerContextMenu';
+Trigger.displayName = 'TriggerDropdownMenu';
 
 /**
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
@@ -163,9 +154,9 @@ function Portal({
   forceMount?: boolean;
 }) {
   const id = React.useId();
-  const value = useContextMenuContext();
+  const value = useDropdownMenuContext();
 
-  if (!value.pressPosition) {
+  if (!value.triggerPosition) {
     return null;
   }
 
@@ -177,9 +168,9 @@ function Portal({
 
   return (
     <RNPPortal hostName={hostName} name={`${id}-${value.nativeID}_portal`}>
-      <ContextMenuContext.Provider value={value}>
+      <DropdownMenuContext.Provider value={value}>
         {children}
-      </ContextMenuContext.Provider>
+      </DropdownMenuContext.Provider>
     </RNPPortal>
   );
 }
@@ -203,7 +194,7 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { open, close } = useContextMenuContext();
+    const { open, close } = useDropdownMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -230,7 +221,7 @@ const Overlay = React.forwardRef<
   }
 );
 
-Overlay.displayName = 'OverlayContextMenu';
+Overlay.displayName = 'OverlayDropdownMenu';
 
 interface ContentProps {
   forceMount?: boolean;
@@ -269,11 +260,11 @@ const Content = React.forwardRef<
     const {
       open,
       nativeID,
-      pressPosition,
+      triggerPosition,
       contentLayout,
       setContentLayout,
       close,
-    } = useContextMenuContext();
+    } = useDropdownMenuContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
@@ -293,7 +284,7 @@ const Content = React.forwardRef<
     const positionStyle = useRelativePosition({
       align,
       avoidCollisions,
-      triggerPosition: pressPosition,
+      triggerPosition,
       contentLayout,
       alignOffset,
       insets,
@@ -327,7 +318,7 @@ const Content = React.forwardRef<
   }
 );
 
-Content.displayName = 'ContentContextMenu';
+Content.displayName = 'ContentDropdownMenu';
 
 const Item = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -349,7 +340,7 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
-    const { close } = useContextMenuContext();
+    const { close } = useDropdownMenuContext();
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
         close();
@@ -374,7 +365,7 @@ const Item = React.forwardRef<
   }
 );
 
-Item.displayName = 'ItemContextMenu';
+Item.displayName = 'ItemDropdownMenu';
 
 const Group = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -384,7 +375,7 @@ const Group = React.forwardRef<
   return <Component ref={ref} role='group' {...props} />;
 });
 
-Group.displayName = 'GroupContextMenu';
+Group.displayName = 'GroupDropdownMenu';
 
 const Label = React.forwardRef<
   React.ElementRef<typeof Text>,
@@ -393,7 +384,7 @@ const Label = React.forwardRef<
   return <Text ref={ref} role='heading' {...props} />;
 });
 
-Label.displayName = 'LabelContextMenu';
+Label.displayName = 'LabelDropdownMenu';
 
 type FormItemContext =
   | { checked: boolean }
@@ -428,7 +419,7 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { close } = useContextMenuContext();
+    const { close } = useDropdownMenuContext();
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
       if (closeOnPress) {
@@ -457,7 +448,7 @@ const CheckboxItem = React.forwardRef<
   }
 );
 
-CheckboxItem.displayName = 'CheckboxItemContextMenu';
+CheckboxItem.displayName = 'CheckboxItemDropdownMenu';
 
 function useFormItemContext() {
   const context = React.useContext(FormItemContext);
@@ -484,7 +475,7 @@ const RadioGroup = React.forwardRef<
   );
 });
 
-RadioGroup.displayName = 'RadioGroupContextMenu';
+RadioGroup.displayName = 'RadioGroupDropdownMenu';
 
 type BothFormItemContext = Exclude<FormItemContext, { checked: boolean }> & {
   checked: boolean;
@@ -514,7 +505,7 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { close } = useContextMenuContext();
+    const { close } = useDropdownMenuContext();
     const { value, onValueChange } =
       useFormItemContext() as BothFormItemContext;
     function onPress(ev: GestureResponderEvent) {
@@ -547,7 +538,7 @@ const RadioItem = React.forwardRef<
   }
 );
 
-RadioItem.displayName = 'RadioItemContextMenu';
+RadioItem.displayName = 'RadioItemDropdownMenu';
 
 function useItemIndicatorContext() {
   const context = React.useContext(RadioItemContext);
@@ -578,7 +569,7 @@ const ItemIndicator = React.forwardRef<
   return <Component ref={ref} role='presentation' {...props} />;
 });
 
-ItemIndicator.displayName = 'ItemIndicatorContextMenu';
+ItemIndicator.displayName = 'ItemIndicatorDropdownMenu';
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -596,7 +587,7 @@ const Separator = React.forwardRef<
   );
 });
 
-Separator.displayName = 'SeparatorContextMenu';
+Separator.displayName = 'SeparatorDropdownMenu';
 
 const SubContext = React.createContext(
   {} as {
@@ -628,7 +619,7 @@ const Sub = React.forwardRef<
   );
 });
 
-Sub.displayName = 'SubContextMenu';
+Sub.displayName = 'SubDropdownMenu';
 
 function useSubContext() {
   const context = React.useContext(SubContext);
@@ -675,7 +666,7 @@ const SubTrigger = React.forwardRef<
   }
 );
 
-SubTrigger.displayName = 'SubTriggerContextMenu';
+SubTrigger.displayName = 'SubTriggerDropdownMenu';
 
 const SubContent = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -697,7 +688,7 @@ const SubContent = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentContextMenu';
+Content.displayName = 'ContentDropdownMenu';
 
 export {
   CheckboxItem,

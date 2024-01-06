@@ -120,6 +120,9 @@ const Trigger = React.forwardRef<
 
 Trigger.displayName = 'TriggerPopover';
 
+/**
+ * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
+ */
 function Portal({
   forceMount = false,
   hostName,
