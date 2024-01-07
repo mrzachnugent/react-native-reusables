@@ -1,6 +1,7 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot';
+import * as ToggleGroupUtils from '~/lib/rn-primitives/toggle-group-utils';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
 
 const Root = React.forwardRef<
@@ -90,18 +91,22 @@ const ToggleItem = React.forwardRef<
     function onPress(ev: GestureResponderEvent) {
       if (disabled || disabledProp) return;
       if (type === 'single') {
-        onValueChange(getNewSingleValue(value, itemValue));
+        onValueChange(ToggleGroupUtils.getNewSingleValue(value, itemValue));
       }
       if (type === 'multiple') {
-        onValueChange(getNewMultipleValue(value, itemValue));
+        onValueChange(ToggleGroupUtils.getNewMultipleValue(value, itemValue));
       }
       onPressProp?.(ev);
     }
 
     const isChecked =
-      type === 'single' ? getIsSelected(value, itemValue) : undefined;
+      type === 'single'
+        ? ToggleGroupUtils.getIsSelected(value, itemValue)
+        : undefined;
     const isSelected =
-      type === 'multiple' ? getIsSelected(value, itemValue) : undefined;
+      type === 'multiple'
+        ? ToggleGroupUtils.getIsSelected(value, itemValue)
+        : undefined;
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
@@ -165,42 +170,3 @@ const Button = React.forwardRef<
 });
 
 export { Button, Link, Root, Separator, ToggleGroup, ToggleItem };
-
-function getIsSelected(
-  value: string | string[] | undefined,
-  itemValue: string
-) {
-  if (value === undefined) {
-    return false;
-  }
-  if (typeof value === 'string') {
-    return value === itemValue;
-  }
-  return value.includes(itemValue);
-}
-
-function getNewSingleValue(
-  originalValue: string | string[] | undefined,
-  itemValue: string
-) {
-  if (originalValue === itemValue) {
-    return undefined;
-  }
-  return itemValue;
-}
-
-function getNewMultipleValue(
-  originalValue: string | string[] | undefined,
-  itemValue: string
-) {
-  if (originalValue === undefined) {
-    return [itemValue];
-  }
-  if (typeof originalValue === 'string') {
-    return originalValue === itemValue ? [] : [originalValue, itemValue];
-  }
-  if (originalValue.includes(itemValue)) {
-    return originalValue.filter((v) => v !== itemValue);
-  }
-  return [...originalValue, itemValue];
-}
