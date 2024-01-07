@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import {
   Select,
   SelectItem,
@@ -26,13 +27,22 @@ export default function SelectScreen() {
     ({ item, index }) => <SelectItem item={item} index={index} />,
     []
   );
-
   return (
-    <View className='flex-1 justify-center p-6'>
-      <Select items={DATA} value={selected} onValueChange={setSelected}>
-        <SelectTrigger placeholder='Select a verified email' />
-        <SelectList renderItem={renderItem} />
-      </Select>
-    </View>
+    <>
+      <View className='p-6 w-full'>
+        <Alert icon='Code' className='max-w-xl'>
+          <AlertTitle>FYI</AlertTitle>
+          <AlertDescription>
+            This reusable does not use "rn-primitives"
+          </AlertDescription>
+        </Alert>
+      </View>
+      <View className='flex-1 justify-center p-6'>
+        <Select items={DATA} value={selected} onValueChange={setSelected}>
+          <SelectTrigger placeholder='Select a verified email' />
+          <SelectList renderItem={renderItem} />
+        </Select>
+      </View>
+    </>
   );
 }

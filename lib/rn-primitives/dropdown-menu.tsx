@@ -87,7 +87,7 @@ function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
   const store = React.useContext(RootStoreContext);
   if (!store) {
     throw new Error(
-      'Popover compound components cannot be rendered outside the Popover component'
+      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
     );
   }
   return useStore(store, selector);
@@ -97,7 +97,7 @@ function useGetRootStore() {
   const store = React.useContext(RootStoreContext);
   if (!store) {
     throw new Error(
-      'Popover compound components cannot be rendered outside the Popover component'
+      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
     );
   }
   return store;
@@ -244,7 +244,7 @@ Overlay.displayName = 'OverlayDropdownMenu';
 
 interface ContentProps {
   forceMount?: boolean;
-  style?: Omit<ViewStyle, 'position' | 'top' | 'left' | 'maxWidth'>;
+  style?: ViewStyle;
   align?: 'start' | 'center' | 'end';
   side?: 'top' | 'bottom';
   insets?: Insets;
@@ -255,7 +255,7 @@ interface ContentProps {
 }
 
 /**
- * @info `position`, `top`, `left`, and `maxWidth` style properties are controlled internally.
+ * @info `position`, `top`, `left`, and `maxWidth` style properties are controlled internally. Opt out of this behavior by setting `disablePositioningStyle` to `true`.
  */
 const Content = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -418,7 +418,7 @@ const Label = React.forwardRef<
   ComponentPropsWithAsChild<typeof Text>
 >(({ asChild, ...props }, ref) => {
   const Component = asChild ? Slot.Text : Text;
-  return <Component ref={ref} role='heading' {...props} />;
+  return <Component ref={ref} {...props} />;
 });
 
 Label.displayName = 'LabelDropdownMenu';

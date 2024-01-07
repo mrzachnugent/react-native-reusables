@@ -232,9 +232,7 @@ const Description = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Text>
 >((props, ref) => {
   const { nativeID } = useDialogContext();
-  return (
-    <Text ref={ref} role='heading' nativeID={`${nativeID}_desc`} {...props} />
-  );
+  return <Text ref={ref} nativeID={`${nativeID}_desc`} {...props} />;
 });
 
 Description.displayName = 'DescriptionDialog';

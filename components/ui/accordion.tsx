@@ -70,7 +70,6 @@ const AccordionItem = React.forwardRef<
         }}
       >
         <View
-          role='heading'
           ref={ref}
           className={cn(className, 'overflow-hidden')}
           {...props}
