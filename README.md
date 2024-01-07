@@ -368,7 +368,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/58d0ad8
 <summary>Code</summary>
   
   - [UI](/components/ui/slider.tsx)
-  - [Example](/app/(main)/slider.tsx)
+  - [Example](/app/(main)/slider/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5a-50d4-481f-827f-7f422d5a3656
