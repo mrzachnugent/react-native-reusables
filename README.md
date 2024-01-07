@@ -340,7 +340,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a1748
 <summary>Code</summary>
   
   - [UI](/components/ui/separator.tsx)
-  - [Example](/app/(main)/separator.tsx)
+  - [Example](/app/(main)/separator/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1d7fce13-6e69-4e69-8877-d52565b4c2ae" width="250px" />
@@ -397,7 +397,7 @@ https://github.com/mrzachnugent/rnr-ui-inspired-by-shadcn/assets/63797719/32b0d0
 <summary>Code</summary>
   
   - [UI](/components/ui/tabs.tsx)
-  - [Example](/app/(main)/tabs.tsx)
+  - [Example](/app/(main)/tabs/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5f40bba1-9184-46fd-b915-0f9e43f11606
@@ -442,7 +442,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5
 <summary>Code</summary>
   
   - [UI](/components/ui/toggle-group.tsx)
-  - [Example](/app/(main)/toggle-group.tsx)
+  - [Example](/app/(main)/toggle-group/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e42-54d5-46b5-9302-ec05ace55f5f
@@ -453,7 +453,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e4
 <summary>Code</summary>
   
   - [UI](/components/ui/tooltip.tsx)
-  - [Example](/app/(main)/tooltip.tsx)
+  - [Example](/app/(main)/tooltip/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/9b126131-dbac-4f96-8f3f-ae61afa9c607" width="250px" />
