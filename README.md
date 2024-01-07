@@ -379,7 +379,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5
 <summary>Code</summary>
   
   - [UI](/components/ui/switch.tsx)
-  - [Example](/app/(main)/switch.tsx)
+  - [Example](/app/(main)/switch/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/60b9f622-d150-489f-bc0b-fe35b9dc1624" width="250px" />
