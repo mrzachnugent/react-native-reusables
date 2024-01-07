@@ -8,6 +8,7 @@ import { PortalHost } from '~/lib/rn-primitives/portal';
 export default function DropdownMenuPrimitiveScreen() {
   const headerHeight = useHeaderHeight();
   const [open, setOpen] = React.useState(false);
+  const [openInner, setOpenInner] = React.useState(false);
   const [openSub, setOpenSub] = React.useState(false);
   const [openSub2, setOpenSub2] = React.useState(false);
   const [openSub3, setOpenSub3] = React.useState(false);
@@ -154,7 +155,7 @@ export default function DropdownMenuPrimitiveScreen() {
             <PortalHost name={'TEST'} />
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
-        <DropdownMenu.Root open={open} onOpenChange={setOpen}>
+        <DropdownMenu.Root open={openInner} onOpenChange={setOpenInner}>
           <DropdownMenu.Trigger className='p-8 rounded-xl bg-secondary'>
             <Text className='text-foreground text-xl text-center'>
               Open Inner Portal DropdownMenu

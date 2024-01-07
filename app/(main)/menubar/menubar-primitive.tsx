@@ -1,4 +1,5 @@
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useDrawerStatus } from '@react-navigation/drawer';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useNavigation } from 'expo-router';
 import { StyleSheet } from 'nativewind';
@@ -7,7 +8,6 @@ import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Menubar from '~/lib/rn-primitives/menubar';
 import { PortalHost } from '~/lib/rn-primitives/portal';
-import { useDrawerStatus } from '@react-navigation/drawer';
 
 const shouldBlockNavWhenPortalRoot = () => true;
 

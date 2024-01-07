@@ -18,6 +18,7 @@ type UseRelativePositionArgs = Omit<
 > & {
   triggerPosition: LayoutPosition | null;
   contentLayout: LayoutRectangle | null;
+  disablePositioningStyle?: boolean;
 };
 
 export function useRelativePosition({
@@ -29,8 +30,12 @@ export function useRelativePosition({
   insets,
   sideOffset,
   side,
+  disablePositioningStyle,
 }: UseRelativePositionArgs) {
   return React.useMemo(() => {
+    if (disablePositioningStyle) {
+      return {};
+    }
     if (!triggerPosition || !contentLayout) {
       return HIDDEN_CONTENT;
     }

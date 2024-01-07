@@ -1,9 +1,9 @@
+import { useHeaderHeight } from '@react-navigation/elements';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Popover from '~/lib/rn-primitives/popover';
 import { PortalHost } from '~/lib/rn-primitives/portal';
-import { useHeaderHeight } from '@react-navigation/elements';
 
 function getSide(): 'bottom' | 'top' {
   return 'bottom';
@@ -11,6 +11,7 @@ function getSide(): 'bottom' | 'top' {
 
 export default function PopoverPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
+  const [openInner, setOpenInner] = React.useState(false);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -46,7 +47,7 @@ export default function PopoverPrimitiveScreen() {
             </Popover.Content>
           </Popover.Portal>
         </Popover.Root>
-        <Popover.Root open={open} onOpenChange={setOpen}>
+        <Popover.Root open={openInner} onOpenChange={setOpenInner}>
           <Popover.Trigger>
             <Text className='text-foreground text-xl'>
               Open Inner Portal Popover

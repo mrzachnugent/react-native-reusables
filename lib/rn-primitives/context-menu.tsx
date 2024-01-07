@@ -268,6 +268,7 @@ interface ContentProps {
   sideOffset?: number;
   alignOffset?: number;
   avoidCollisions?: boolean;
+  disablePositioningStyle?: boolean;
 }
 
 /**
@@ -289,6 +290,7 @@ const Content = React.forwardRef<
       onLayout: onLayoutProp,
       insets,
       style,
+      disablePositioningStyle,
       ...props
     },
     ref
@@ -330,6 +332,7 @@ const Content = React.forwardRef<
       insets,
       sideOffset,
       side,
+      disablePositioningStyle,
     });
 
     function onLayout(event: LayoutChangeEvent) {
@@ -350,7 +353,7 @@ const Content = React.forwardRef<
         role='menu'
         nativeID={nativeID}
         aria-modal={true}
-        style={[style, positionStyle]}
+        style={[positionStyle, style]}
         onLayout={onLayout}
         {...props}
       />
