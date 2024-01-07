@@ -162,7 +162,7 @@ const Trigger = React.forwardRef<
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
     triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-      setTriggerPosition({ width, pageX, pageY: pageY, height });
+      setTriggerPosition({ width, pageX, pageY, height });
     });
 
     onValueChange(menuValue === value ? undefined : menuValue);

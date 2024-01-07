@@ -1,7 +1,10 @@
 import React from 'react';
-import { LayoutRectangle, Dimensions, ViewStyle } from 'react-native';
-
-const window = Dimensions.get('window');
+import {
+  LayoutRectangle,
+  ScaledSize,
+  ViewStyle,
+  useWindowDimensions,
+} from 'react-native';
 
 const POSITION_ABSOLUTE: ViewStyle = {
   position: 'absolute',
@@ -9,12 +12,13 @@ const POSITION_ABSOLUTE: ViewStyle = {
 
 const HIDDEN_CONTENT: ViewStyle = {
   position: 'absolute',
-  left: window.width,
+  opacity: 0,
+  zIndex: -9999999,
 };
 
 type UseRelativePositionArgs = Omit<
   GetContentStyleArgs,
-  'triggerPosition' | 'contentLayout'
+  'triggerPosition' | 'contentLayout' | 'dimensions'
 > & {
   triggerPosition: LayoutPosition | null;
   contentLayout: LayoutRectangle | null;
@@ -32,6 +36,7 @@ export function useRelativePosition({
   side,
   disablePositioningStyle,
 }: UseRelativePositionArgs) {
+  const dimensions = useWindowDimensions();
   return React.useMemo(() => {
     if (disablePositioningStyle) {
       return {};
@@ -48,8 +53,9 @@ export function useRelativePosition({
       alignOffset,
       insets,
       sideOffset,
+      dimensions,
     });
-  }, [triggerPosition, contentLayout]);
+  }, [triggerPosition, contentLayout, dimensions.width, dimensions.height]);
 }
 
 export interface LayoutPosition {
@@ -67,6 +73,7 @@ export type Insets = {
 };
 
 interface GetPositionArgs {
+  dimensions: ScaledSize;
   avoidCollisions: boolean;
   triggerPosition: LayoutPosition;
   contentLayout: LayoutRectangle;
@@ -85,6 +92,7 @@ function getSidePosition({
   sideOffset,
   insets,
   avoidCollisions,
+  dimensions,
 }: GetSidePositionArgs) {
   const insetTop = insets?.top ?? 0;
   const insetBottom = insets?.bottom ?? 0;
@@ -99,19 +107,22 @@ function getSidePosition({
     };
   }
 
+  const maxTop = Math.max(insetTop, positionTop);
+  const maxBottom = Math.min(dimensions.height - insetBottom, positionBottom);
+
   if (side === 'top') {
     const isCollision =
       triggerPosition.pageY + sideOffset < insetTop + contentLayout.height;
     return {
-      top: isCollision ? positionBottom : positionTop,
+      top: isCollision ? maxBottom : maxTop,
     };
   }
 
   const isCollision =
     triggerPosition.pageY + triggerPosition.height + sideOffset >
-    window.height - insetBottom - contentLayout.height;
+    dimensions.height - insetBottom - contentLayout.height;
   return {
-    top: isCollision ? positionTop : positionBottom,
+    top: isCollision ? maxTop : maxBottom,
   };
 }
 
@@ -127,10 +138,11 @@ function getAlignPosition({
   triggerPosition,
   alignOffset,
   insets,
+  dimensions,
 }: GetAlignPositionArgs) {
   const insetLeft = insets?.left ?? 0;
   const insetRight = insets?.right ?? 0;
-  const maxContentWidth = window.width - insetLeft - insetRight;
+  const maxContentWidth = dimensions.width - insetLeft - insetRight;
 
   const contentWidth = Math.min(contentLayout.width, maxContentWidth);
 
@@ -141,24 +153,25 @@ function getAlignPosition({
     contentWidth,
     alignOffset,
     insetLeft,
-    insetRight
+    insetRight,
+    dimensions
   );
 
   if (avoidCollisions) {
     const doesCollide =
-      left < insetLeft || left + contentWidth > window.width - insetRight;
+      left < insetLeft || left + contentWidth > dimensions.width - insetRight;
     if (doesCollide) {
       const spaceLeft = left - insetLeft;
-      const spaceRight = window.width - insetRight - (left + contentWidth);
+      const spaceRight = dimensions.width - insetRight - (left + contentWidth);
 
       if (spaceLeft > spaceRight && spaceLeft >= contentWidth) {
         left = insetLeft;
       } else if (spaceRight >= contentWidth) {
-        left = window.width - insetRight - contentWidth;
+        left = dimensions.width - insetRight - contentWidth;
       } else {
         const centeredPosition = Math.max(
           insetLeft,
-          (window.width - contentWidth - insetRight) / 2
+          (dimensions.width - contentWidth - insetRight) / 2
         );
         left = centeredPosition;
       }
@@ -175,7 +188,8 @@ function getLeftPosition(
   contentWidth: number,
   alignOffset: number,
   insetLeft: number,
-  insetRight: number
+  insetRight: number,
+  dimensions: ScaledSize
 ) {
   let left = 0;
   if (align === 'start') {
@@ -189,7 +203,7 @@ function getLeftPosition(
   }
   return Math.max(
     insetLeft,
-    Math.min(left + alignOffset, window.width - contentWidth - insetRight)
+    Math.min(left + alignOffset, dimensions.width - contentWidth - insetRight)
   );
 }
 
@@ -206,6 +220,7 @@ function getContentStyle({
   alignOffset,
   insets,
   sideOffset,
+  dimensions,
 }: GetContentStyleArgs) {
   return Object.assign(
     POSITION_ABSOLUTE,
@@ -216,6 +231,7 @@ function getContentStyle({
       sideOffset,
       insets,
       avoidCollisions,
+      dimensions,
     }),
     getAlignPosition({
       align,
@@ -224,6 +240,7 @@ function getContentStyle({
       contentLayout,
       alignOffset,
       insets,
+      dimensions,
     })
   );
 }
