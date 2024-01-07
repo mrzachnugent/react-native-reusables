@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { Button } from '~/components/ui/button';
 import Toast from 'react-native-toast-message';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 export default function ToastScreen() {
   function showSuccessToast() {
@@ -30,14 +31,24 @@ export default function ToastScreen() {
     });
   }
   return (
-    <View className='flex-1 justify-center items-center gap-5'>
-      <Button onPress={showSuccessToast}>Show success toast</Button>
-      <Button variant='destructive' onPress={showErrorToast}>
-        Show error toast
-      </Button>
-      <Button variant='secondary' onPress={showBaseToast}>
-        Show base toast
-      </Button>
-    </View>
+    <>
+      <View className='flex-1 justify-center items-center gap-5'>
+        <Button onPress={showSuccessToast}>Show success toast</Button>
+        <Button variant='destructive' onPress={showErrorToast}>
+          Show error toast
+        </Button>
+        <Button variant='secondary' onPress={showBaseToast}>
+          Show base toast
+        </Button>
+      </View>
+      <View className='p-6 w-full'>
+        <Alert icon='Code' className='max-w-xl'>
+          <AlertTitle>FYI</AlertTitle>
+          <AlertDescription>
+            This reusable does not use "rn-primitives"
+          </AlertDescription>
+        </Alert>
+      </View>
+    </>
   );
 }

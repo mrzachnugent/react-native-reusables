@@ -200,7 +200,6 @@ const Action = React.forwardRef<
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
   const { onOpenChange } = useAlertDialogContext();
-  const augmentedRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
 
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
@@ -211,7 +210,7 @@ const Action = React.forwardRef<
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
     <Component
-      ref={augmentedRef}
+      ref={ref}
       aria-disabled={disabled ?? undefined}
       role='button'
       onPress={onPress}
@@ -240,9 +239,7 @@ const Description = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Text>
 >((props, ref) => {
   const { nativeID } = useAlertDialogContext();
-  return (
-    <Text ref={ref} role='heading' nativeID={`${nativeID}_desc`} {...props} />
-  );
+  return <Text ref={ref} nativeID={`${nativeID}_desc`} {...props} />;
 });
 
 Description.displayName = 'DescriptionAlertDialog';
