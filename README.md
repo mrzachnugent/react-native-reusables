@@ -33,26 +33,27 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used t
 20. [Input](#input)
 21. [Label](#label)
 22. [Menubar](#menubar) 🔜
-23. [Popover](#popover)
-24. [Progress](#progress)
-25. [Radio-group](#radio-group)
-26. [Select](#select)
-27. [Separator](#separator)
-28. [Skeleton](#skeleton)
-29. [Slider](#slider)
-30. [Switch](#switch)
-31. [Table](#table)
-32. [Tabs](#tabs)
-33. [Textarea](#textarea)
-34. [Toast](#toast)
-35. [Toggle](#toggle)
-36. [Toggle Group](#toggle-group)
-37. [Tooltip](#tooltip)
+23. [Navigation Menu](#navigation-menu) 🔜
+24. [Popover](#popover)
+25. [Progress](#progress)
+26. [Radio-group](#radio-group)
+27. [Select](#select)
+28. [Separator](#separator)
+29. [Skeleton](#skeleton)
+30. [Slider](#slider)
+31. [Switch](#switch)
+32. [Table](#table)
+33. [Tabs](#tabs)
+34. [Textarea](#textarea)
+35. [Toast](#toast)
+36. [Toggle](#toggle)
+37. [Toggle Group](#toggle-group)
+38. [Tooltip](#tooltip)
 </details>
 
 ### Roadmap
 
-1. **Styled Native-Focused Expo-Go Components - 34 ✅ / 37**
+1. **Styled Native-Focused Expo-Go Components - 34 ✅ / 38**
    <br>
    _Quick start for your own components_
 
@@ -287,6 +288,10 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/54273fc2-36a8-4942-949c-91f36ee55334" width="250px" />
 
 #### Menubar
+
+(soon)
+
+#### Navigation Menu
 
 (soon)
 

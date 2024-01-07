@@ -40,6 +40,7 @@ export const COMPONENTS = [
   'input',
   'label',
   'menubar',
+  'navigation-menu',
   'popover',
   'progress',
   'radio-group',

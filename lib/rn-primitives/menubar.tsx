@@ -786,7 +786,7 @@ const SubContent = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentMenubar';
+SubContent.displayName = 'SubContentMenubar';
 
 export {
   CheckboxItem,
