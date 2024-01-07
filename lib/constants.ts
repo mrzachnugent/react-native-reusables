@@ -56,5 +56,6 @@ export const COMPONENTS = [
   'toast',
   'toggle',
   'toggle-group',
+  'toolbar',
   'tooltip',
 ];
