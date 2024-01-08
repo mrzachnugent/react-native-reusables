@@ -1,12 +1,15 @@
 import { ChevronDown } from 'lucide-react-native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Select from '~/lib/rn-primitives/select';
 
 export default function SelectPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState<string>();
+  const [value, setValue] = React.useState<Select.Option>({
+    value: 'bmw',
+    label: 'BMW',
+  });
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -20,7 +23,12 @@ export default function SelectPrimitiveScreen() {
       <View className='flex-1 justify-center items-center p-6 gap-12'>
         <Select.Root
           value={value}
-          onValueChange={setValue}
+          onValueChange={(newValue) => {
+            // prevent unselecting
+            if (newValue) {
+              setValue(newValue);
+            }
+          }}
           open={open}
           onOpenChange={setOpen}
         >
@@ -44,29 +52,26 @@ export default function SelectPrimitiveScreen() {
                 </Select.Label>
                 <Select.Item
                   value='volvo'
+                  label='Volvo'
                   className='flex-row justify-between items-center'
                 >
-                  <Select.ItemText className='text-xl text-foreground p-2'>
-                    Volvo
-                  </Select.ItemText>
+                  <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
                 </Select.Item>
                 <Select.Item
                   value='bmw'
+                  label='BMW'
                   className='flex-row justify-between items-center'
                 >
-                  <Select.ItemText className='text-xl text-foreground p-2'>
-                    BMW
-                  </Select.ItemText>
+                  <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
                 </Select.Item>
                 <Select.Item
                   value='honda'
+                  label='Honda'
                   className='flex-row justify-between items-center'
                 >
-                  <Select.ItemText className='text-xl text-foreground p-2'>
-                    Honda
-                  </Select.ItemText>
+                  <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
                 </Select.Item>
               </Select.Group>
@@ -76,29 +81,26 @@ export default function SelectPrimitiveScreen() {
                 </Select.Label>
                 <Select.Item
                   value='red'
+                  label='Red'
                   className='flex-row justify-between items-center'
                 >
-                  <Select.ItemText className='text-xl text-foreground p-2'>
-                    Red
-                  </Select.ItemText>
+                  <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
                 </Select.Item>
                 <Select.Item
                   value='blue'
+                  label='Blue'
                   className='flex-row justify-between items-center'
                 >
-                  <Select.ItemText className='text-xl text-foreground p-2'>
-                    Blue
-                  </Select.ItemText>
+                  <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
                 </Select.Item>
                 <Select.Item
                   value='green'
+                  label='Green'
                   className='flex-row justify-between items-center'
                 >
-                  <Select.ItemText className='text-xl text-foreground p-2'>
-                    Green
-                  </Select.ItemText>
+                  <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
                 </Select.Item>
               </Select.Group>

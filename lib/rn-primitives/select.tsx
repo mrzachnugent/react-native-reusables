@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   BackHandler,
   GestureResponderEvent,
@@ -20,9 +20,16 @@ import {
   useRelativePosition,
 } from './hooks/useRelativePosition';
 
+type Option =
+  | {
+      value: string;
+      label: string;
+    }
+  | undefined;
+
 interface RootProps {
-  value: string | undefined;
-  onValueChange: (value: string | undefined) => void;
+  value: Option;
+  onValueChange: (option: Option) => void;
   open: boolean;
   onOpenChange: (value: boolean) => void;
 }
@@ -33,8 +40,6 @@ interface RootStoreContext {
   contentLayout: LayoutRectangle | null;
   setContentLayout: (contentLayout: LayoutRectangle | null) => void;
   nativeID: string;
-  itemMap: Map<string, string>;
-  setItemMap: (itemMap: Map<string, string>) => void;
 }
 
 const RootContext = React.createContext<RootProps | null>(null);
@@ -61,9 +66,6 @@ const Root = React.forwardRef<
         setContentLayout: (contentLayout: LayoutRectangle | null) =>
           set({ contentLayout }),
         nativeID,
-        itemMap: new Map(),
-        setItemMap: (itemMap: Map<string, string>) =>
-          set({ itemMap: new Map(itemMap) }),
       }));
     }
 
@@ -165,11 +167,10 @@ const Value = React.forwardRef<
   }
 >(({ asChild, placeholder, ...props }, ref) => {
   const { value } = useSelectContext();
-  const itemMap = useRootStoreContext((state) => state.itemMap);
   const Component = asChild ? Slot.Text : Text;
   return (
     <Component ref={ref} {...props}>
-      {value ? itemMap.get(value) ?? value : placeholder}
+      {value?.label ?? placeholder}
     </Component>
   );
 });
@@ -372,13 +373,16 @@ const Content = React.forwardRef<
 
 Content.displayName = 'ContentSelect';
 
-const ItemContext = React.createContext<{ itemValue: string } | null>(null);
+const ItemContext = React.createContext<{
+  itemValue: string;
+  label: string;
+} | null>(null);
 
 const Item = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & {
     value: string;
-    textValue?: string;
+    label: string;
     closeOnPress?: boolean;
   }
 >(
@@ -386,7 +390,7 @@ const Item = React.forwardRef<
     {
       asChild,
       value: itemValue,
-      textValue,
+      label,
       onPress: onPressProp,
       disabled = false,
       closeOnPress = true,
@@ -408,24 +412,27 @@ const Item = React.forwardRef<
         setContentLayout(null);
         onOpenChange(false);
       }
-      onValueChange(value === itemValue ? undefined : itemValue);
+
+      onValueChange(
+        value?.value === itemValue ? undefined : { value: itemValue, label }
+      );
       onPressProp?.(ev);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <ItemContext.Provider value={{ itemValue }}>
+      <ItemContext.Provider value={{ itemValue, label }}>
         <Component
           ref={ref}
           role='option'
           onPress={onPress}
           disabled={disabled}
-          aria-checked={value === itemValue}
-          aria-valuetext={textValue}
+          aria-checked={value?.value === itemValue}
+          aria-valuetext={label}
           aria-disabled={!!disabled}
           accessibilityState={{
             disabled: !!disabled,
-            checked: value === itemValue,
+            checked: value?.value === itemValue,
           }}
           {...props}
         />
@@ -448,22 +455,14 @@ function useItemContext() {
 
 const ItemText = React.forwardRef<
   React.ElementRef<typeof Text>,
-  Omit<ComponentPropsWithAsChild<typeof Text>, 'children'> & {
-    children: string;
-  }
->(({ asChild, children, ...props }, ref) => {
-  const { itemValue } = useItemContext();
-  const itemMap = useRootStoreContext((state) => state.itemMap);
-  const setItemMap = useRootStoreContext((state) => state.setItemMap);
-  useEffect(() => {
-    itemMap.set(itemValue, children);
-    setItemMap(itemMap);
-  }, [itemValue, children]);
+  Omit<ComponentPropsWithAsChild<typeof Text>, 'children'>
+>(({ asChild, ...props }, ref) => {
+  const { label } = useItemContext();
 
   const Component = asChild ? Slot.Text : Text;
   return (
     <Component ref={ref} {...props}>
-      {children}
+      {label}
     </Component>
   );
 });
@@ -480,7 +479,7 @@ const ItemIndicator = React.forwardRef<
   const { value } = useSelectContext();
 
   if (!forceMount) {
-    if (value !== itemValue) {
+    if (value?.value !== itemValue) {
       return null;
     }
   }
@@ -533,6 +532,7 @@ export {
   Group,
   Item,
   ItemIndicator,
+  ItemText,
   Label,
   Overlay,
   Portal,
@@ -540,5 +540,5 @@ export {
   Separator,
   Trigger,
   Value,
-  ItemText,
+  type Option,
 };
