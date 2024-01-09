@@ -25,7 +25,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
 import { NAV_THEME } from '~/lib/constants';
-import * as Slot from '~/lib/rn-primitives/native/slot';
+import * as Slot from '~/lib/rn-primitives/todo/slot';
 import { cn } from '~/lib/utils';
 
 type BottomSheetRef = React.ElementRef<typeof View>;

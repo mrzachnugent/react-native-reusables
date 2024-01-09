@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import * as AlertDialog from '~/lib/rn-primitives/native/alert-dialog';
+import * as AlertDialog from '~/lib/rn-primitives/alert-dialog';
 
 export default function AlertDialogPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
@@ -13,13 +13,13 @@ export default function AlertDialogPrimitiveScreen() {
       }}
     >
       <AlertDialog.Root open={open} onOpenChange={setOpen}>
-        <AlertDialog.Trigger>
+        <AlertDialog.Trigger className='bg-red-500 active:bg-red-900'>
           <Text className='text-foreground text-xl'>Open alert dialog</Text>
         </AlertDialog.Trigger>
         <AlertDialog.Portal className='flex-1 justify-center items-center'>
           <AlertDialog.Overlay
             style={StyleSheet.absoluteFill}
-            className='bg-zinc-50/80 dark:bg-zinc-900/80 justify-center items-center'
+            className='bg-zinc-50/80 dark:bg-zinc-900/80 flex justify-center items-center'
           >
             <AlertDialog.Content className='bg-background'>
               <AlertDialog.Title className='text-foreground text-xl'>
@@ -28,9 +28,9 @@ export default function AlertDialogPrimitiveScreen() {
               <AlertDialog.Description className='text-foreground text-xl'>
                 DESCRIPTION
               </AlertDialog.Description>
-              <AlertDialog.Close>
+              <AlertDialog.Cancel>
                 <Text className='text-foreground text-xl'>Close</Text>
-              </AlertDialog.Close>
+              </AlertDialog.Cancel>
               <AlertDialog.Action>
                 <Text className='text-foreground text-xl'>Action</Text>
               </AlertDialog.Action>

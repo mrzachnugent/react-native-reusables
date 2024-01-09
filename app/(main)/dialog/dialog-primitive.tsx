@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import * as Dialog from '~/lib/rn-primitives/native/dialog';
+import * as Dialog from '~/lib/rn-primitives/todo/dialog';
 
 export default function DialogPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

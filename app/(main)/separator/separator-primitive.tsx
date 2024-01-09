@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import * as Separator from '~/lib/rn-primitives/native/separator';
+import * as Separator from '~/lib/rn-primitives/todo/separator';
 
 export default function SeparatorPrimitiveScreen() {
   return (

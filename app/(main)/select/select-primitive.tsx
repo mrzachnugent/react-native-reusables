@@ -2,7 +2,7 @@ import { ChevronDown } from 'lucide-react-native';
 import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Select from '~/lib/rn-primitives/native/select';
+import * as Select from '~/lib/rn-primitives/todo/select';
 
 export default function SelectPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

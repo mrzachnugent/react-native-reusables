@@ -1,9 +1,10 @@
 import React from 'react';
 import { ScrollView, Text } from 'react-native';
-import * as Accordion from '~/lib/rn-primitives/native/accordion';
+import * as Accordion from '~/lib/rn-primitives/accordion';
 
 export default function AccordionPrimitiveScreen() {
-  const [value, setValue] = React.useState<string[]>(['item-1']);
+  const [value, setValue] = React.useState<string>();
+  const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
 
   return (
     <ScrollView
@@ -13,7 +14,7 @@ export default function AccordionPrimitiveScreen() {
         alignItems: 'center',
       }}
     >
-      <Accordion.Root type='multiple' value={value} onValueChange={setValue}>
+      <Accordion.Root type='single' value={value} onValueChange={setValue}>
         <Accordion.Item value='item-1'>
           <Accordion.Header>
             <Accordion.Trigger>

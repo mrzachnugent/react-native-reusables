@@ -1,7 +1,7 @@
 import { AlignCenter, AlignLeft, Bold, Italic } from 'lucide-react-native';
 import React from 'react';
 import { Text, View } from 'react-native';
-import * as Toolbar from '~/lib/rn-primitives/native/toolbar';
+import * as Toolbar from '~/lib/rn-primitives/todo/toolbar';
 import { cn } from '~/lib/utils';
 
 export default function ToolbarPrimitiveScreen() {
