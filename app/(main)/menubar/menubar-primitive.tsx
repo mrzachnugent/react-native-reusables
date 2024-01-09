@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Menubar from '~/lib/rn-primitives/todo/menubar';
-import { PortalHost } from '~/lib/rn-primitives/todo/portal';
+import { PortalHost } from '~/lib/rn-primitives/todo/portal/portal-native';
 
 const shouldBlockNavWhenPortalRoot = () => false;
 

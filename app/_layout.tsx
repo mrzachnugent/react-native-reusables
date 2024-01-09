@@ -15,7 +15,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from '~/components/ui/toast';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
-import { PortalHost } from '~/lib/rn-primitives/todo/portal';
+import { PortalHost } from '~/lib/rn-primitives/todo/portal/portal-native';
 
 const LIGHT_THEME: Theme = {
   dark: false,
