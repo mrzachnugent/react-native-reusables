@@ -11,21 +11,56 @@ import {
   ViewStyle,
 } from 'react-native';
 import { StoreApi, createStore, useStore } from 'zustand';
-import { Portal as RNPPortal } from '~/lib/rn-primitives/portal';
-import * as Slot from '~/lib/rn-primitives/slot';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
+import { Portal as RNPPortal } from '~/lib/rn-primitives/native/portal';
+import * as Slot from '~/lib/rn-primitives/native/slot';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 import {
   Insets,
   LayoutPosition,
   useRelativePosition,
-} from './hooks/useRelativePosition';
+} from '../hooks/useRelativePosition';
 
 interface RootProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  value: string | undefined;
+  onValueChange: (value: string | undefined) => void;
 }
 
-interface RootStoreContext {
+const RootContext = React.createContext<RootProps | null>(null);
+
+const Root = React.forwardRef<
+  React.ElementRef<typeof View>,
+  ComponentPropsWithAsChild<typeof View> & RootProps
+>(({ asChild, value, onValueChange, ...viewProps }, ref) => {
+  const Component = asChild ? Slot.View : View;
+  return (
+    <RootContext.Provider
+      value={{
+        value,
+        onValueChange,
+      }}
+    >
+      <Component ref={ref} {...viewProps} />
+    </RootContext.Provider>
+  );
+});
+
+Root.displayName = 'RootMenubar';
+
+function useMenubarContext() {
+  const context = React.useContext(RootContext);
+  if (!context) {
+    throw new Error(
+      'Menubar compound components cannot be rendered outside the Menubar component'
+    );
+  }
+  return context;
+}
+
+interface MenuProps {
+  value: string | undefined;
+}
+
+interface MenuStoreContext {
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -33,17 +68,17 @@ interface RootStoreContext {
   nativeID: string;
 }
 
-const RootContext = React.createContext<RootProps | null>(null);
-const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
+const MenuContext = React.createContext<MenuProps | null>(null);
+const MenuStoreContext = React.createContext<StoreApi<MenuStoreContext> | null>(
   null
 );
 
-const Root = React.forwardRef<
+const Menu = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
->(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ComponentPropsWithAsChild<typeof View> & MenuProps
+>(({ asChild, value, ...viewProps }, ref) => {
   const nativeID = React.useId();
-  const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
+  const storeRef = React.useRef<StoreApi<MenuStoreContext> | null>(null);
   if (!storeRef.current) {
     storeRef.current = createStore((set) => ({
       triggerPosition: null,
@@ -58,46 +93,45 @@ const Root = React.forwardRef<
 
   const Component = asChild ? Slot.View : View;
   return (
-    <RootStoreContext.Provider value={storeRef.current}>
-      <RootContext.Provider
+    <MenuStoreContext.Provider value={storeRef.current}>
+      <MenuContext.Provider
         value={{
-          open,
-          onOpenChange,
+          value,
         }}
       >
-        <Component ref={ref} {...viewProps} />
-      </RootContext.Provider>
-    </RootStoreContext.Provider>
+        <Component ref={ref} role='menubar' {...viewProps} />
+      </MenuContext.Provider>
+    </MenuStoreContext.Provider>
   );
 });
 
-Root.displayName = 'RootDropdownMenu';
+Menu.displayName = 'MenuMenubar';
 
-function useDropdownMenuContext() {
-  const context = React.useContext(RootContext);
+function useMenuContext() {
+  const context = React.useContext(MenuContext);
   if (!context) {
     throw new Error(
-      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
+      'Menubar compound components cannot be rendered outside the Menubar component'
     );
   }
   return context;
 }
 
-function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
-  const store = React.useContext(RootStoreContext);
+function useMenuStoreContext<T>(selector: (state: MenuStoreContext) => T): T {
+  const store = React.useContext(MenuStoreContext);
   if (!store) {
     throw new Error(
-      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
+      'Menubar compound components cannot be rendered outside the Menubar component'
     );
   }
   return useStore(store, selector);
 }
 
-function useGetRootStore() {
-  const store = React.useContext(RootStoreContext);
+function useGetMenuStore() {
+  const store = React.useContext(MenuStoreContext);
   if (!store) {
     throw new Error(
-      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
+      'Menubar compound components cannot be rendered outside the Menubar component'
     );
   }
   return store;
@@ -108,8 +142,9 @@ const Trigger = React.forwardRef<
   ComponentPropsWithAsChild<typeof Pressable>
 >(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
   const triggerRef = React.useRef<View>(null);
-  const { open, onOpenChange } = useDropdownMenuContext();
-  const setTriggerPosition = useRootStoreContext(
+  const { value, onValueChange } = useMenubarContext();
+  const { value: menuValue } = useMenuContext();
+  const setTriggerPosition = useMenuStoreContext(
     (state) => state.setTriggerPosition
   );
 
@@ -127,10 +162,10 @@ const Trigger = React.forwardRef<
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
     triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-      setTriggerPosition({ width, pageX, pageY: pageY, height });
+      setTriggerPosition({ width, pageX, pageY, height });
     });
-    const newValue = !open;
-    onOpenChange(newValue);
+
+    onValueChange(menuValue === value ? undefined : menuValue);
     onPressProp?.(ev);
   }
 
@@ -142,13 +177,13 @@ const Trigger = React.forwardRef<
       role='button'
       onPress={onPress}
       disabled={disabled ?? undefined}
-      aria-expanded={open}
+      aria-expanded={value === menuValue}
       {...props}
     />
   );
 });
 
-Trigger.displayName = 'TriggerDropdownMenu';
+Trigger.displayName = 'TriggerMenubar';
 
 /**
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
@@ -162,26 +197,40 @@ function Portal({
   hostName?: string;
   forceMount?: boolean;
 }) {
-  const value = useDropdownMenuContext();
-  const triggerPosition = useRootStoreContext((state) => state.triggerPosition);
-  const nativeID = useRootStoreContext((state) => state.nativeID);
-  const store = useGetRootStore();
+  const menubar = useMenubarContext();
+  const menu = useMenuContext();
+  const triggerPosition = useMenuStoreContext((state) => state.triggerPosition);
+  const nativeID = useMenuStoreContext((state) => state.nativeID);
+  const store = useGetMenuStore();
 
   if (!triggerPosition) {
     return null;
   }
 
   if (!forceMount) {
-    if (!value.open) {
+    if (menubar.value !== menu.value) {
       return null;
     }
   }
 
   return (
     <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
-      <RootStoreContext.Provider value={store}>
-        <RootContext.Provider value={value}>{children}</RootContext.Provider>
-      </RootStoreContext.Provider>
+      <RootContext.Provider
+        value={menubar}
+        key={`RootContex_t${nativeID}_portal`}
+      >
+        <MenuStoreContext.Provider
+          value={store}
+          key={`MenuStoreContext_${nativeID}_portal`}
+        >
+          <MenuContext.Provider
+            value={menu}
+            key={`MenuContext_${nativeID}_portal`}
+          >
+            {children}
+          </MenuContext.Provider>
+        </MenuStoreContext.Provider>
+      </RootContext.Provider>
     </RNPPortal>
   );
 }
@@ -205,11 +254,11 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useDropdownMenuContext();
-    const setTriggerPosition = useRootStoreContext(
+    const { value, onValueChange } = useMenubarContext();
+    const setTriggerPosition = useMenuStoreContext(
       (state) => state.setTriggerPosition
     );
-    const setContentLayout = useRootStoreContext(
+    const setContentLayout = useMenuStoreContext(
       (state) => state.setContentLayout
     );
 
@@ -217,13 +266,13 @@ const Overlay = React.forwardRef<
       if (closeOnPress) {
         setTriggerPosition(null);
         setContentLayout(null);
-        onOpenChange(false);
+        onValueChange(undefined);
       }
       OnPressProp?.(ev);
     }
 
     if (!forceMount) {
-      if (!open) {
+      if (!value) {
         return null;
       }
     }
@@ -240,7 +289,7 @@ const Overlay = React.forwardRef<
   }
 );
 
-Overlay.displayName = 'OverlayDropdownMenu';
+Overlay.displayName = 'OverlayMenubar';
 
 interface ContentProps {
   forceMount?: boolean;
@@ -278,16 +327,17 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useDropdownMenuContext();
-    const nativeID = useRootStoreContext((state) => state.nativeID);
-    const triggerPosition = useRootStoreContext(
+    const { value, onValueChange } = useMenubarContext();
+    const { value: menuValue } = useMenuContext();
+    const nativeID = useMenuStoreContext((state) => state.nativeID);
+    const triggerPosition = useMenuStoreContext(
       (state) => state.triggerPosition
     );
-    const setTriggerPosition = useRootStoreContext(
+    const setTriggerPosition = useMenuStoreContext(
       (state) => state.setTriggerPosition
     );
-    const contentLayout = useRootStoreContext((state) => state.contentLayout);
-    const setContentLayout = useRootStoreContext(
+    const contentLayout = useMenuStoreContext((state) => state.contentLayout);
+    const setContentLayout = useMenuStoreContext(
       (state) => state.setContentLayout
     );
 
@@ -297,7 +347,7 @@ const Content = React.forwardRef<
         () => {
           setTriggerPosition(null);
           setContentLayout(null);
-          onOpenChange(false);
+          onValueChange(undefined);
           return true;
         }
       );
@@ -326,7 +376,7 @@ const Content = React.forwardRef<
     }
 
     if (!forceMount) {
-      if (!open) {
+      if (value !== menuValue) {
         return null;
       }
     }
@@ -346,7 +396,7 @@ const Content = React.forwardRef<
   }
 );
 
-Content.displayName = 'ContentDropdownMenu';
+Content.displayName = 'ContentMenubar';
 
 const Item = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -368,18 +418,18 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange } = useDropdownMenuContext();
-    const setTriggerPosition = useRootStoreContext(
+    const { onValueChange } = useMenubarContext();
+    const setTriggerPosition = useMenuStoreContext(
       (state) => state.setTriggerPosition
     );
-    const setContentLayout = useRootStoreContext(
+    const setContentLayout = useMenuStoreContext(
       (state) => state.setContentLayout
     );
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
         setTriggerPosition(null);
         setContentLayout(null);
-        onOpenChange(false);
+        onValueChange(undefined);
       }
       onSelect?.(ev);
       onPressProp?.(ev);
@@ -401,7 +451,7 @@ const Item = React.forwardRef<
   }
 );
 
-Item.displayName = 'ItemDropdownMenu';
+Item.displayName = 'ItemMenubar';
 
 const Group = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -411,7 +461,7 @@ const Group = React.forwardRef<
   return <Component ref={ref} role='group' {...props} />;
 });
 
-Group.displayName = 'GroupDropdownMenu';
+Group.displayName = 'GroupMenubar';
 
 const Label = React.forwardRef<
   React.ElementRef<typeof Text>,
@@ -421,7 +471,7 @@ const Label = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Label.displayName = 'LabelDropdownMenu';
+Label.displayName = 'LabelMenubar';
 
 type FormItemContext =
   | { checked: boolean }
@@ -456,11 +506,11 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange } = useDropdownMenuContext();
-    const setTriggerPosition = useRootStoreContext(
+    const { onValueChange } = useMenubarContext();
+    const setTriggerPosition = useMenuStoreContext(
       (state) => state.setTriggerPosition
     );
-    const setContentLayout = useRootStoreContext(
+    const setContentLayout = useMenuStoreContext(
       (state) => state.setContentLayout
     );
     function onPress(ev: GestureResponderEvent) {
@@ -468,7 +518,7 @@ const CheckboxItem = React.forwardRef<
       if (closeOnPress) {
         setTriggerPosition(null);
         setContentLayout(null);
-        onOpenChange(false);
+        onValueChange(undefined);
       }
       onSelect?.(ev);
       onPressProp?.(ev);
@@ -493,7 +543,7 @@ const CheckboxItem = React.forwardRef<
   }
 );
 
-CheckboxItem.displayName = 'CheckboxItemDropdownMenu';
+CheckboxItem.displayName = 'CheckboxItemMenubar';
 
 function useFormItemContext() {
   const context = React.useContext(FormItemContext);
@@ -520,7 +570,7 @@ const RadioGroup = React.forwardRef<
   );
 });
 
-RadioGroup.displayName = 'RadioGroupDropdownMenu';
+RadioGroup.displayName = 'RadioGroupMenubar';
 
 type BothFormItemContext = Exclude<FormItemContext, { checked: boolean }> & {
   checked: boolean;
@@ -550,11 +600,11 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange } = useDropdownMenuContext();
-    const setTriggerPosition = useRootStoreContext(
+    const { onValueChange: onRootValueChange } = useMenubarContext();
+    const setTriggerPosition = useMenuStoreContext(
       (state) => state.setTriggerPosition
     );
-    const setContentLayout = useRootStoreContext(
+    const setContentLayout = useMenuStoreContext(
       (state) => state.setContentLayout
     );
 
@@ -565,7 +615,7 @@ const RadioItem = React.forwardRef<
       if (closeOnPress) {
         setTriggerPosition(null);
         setContentLayout(null);
-        onOpenChange(false);
+        onRootValueChange(undefined);
       }
       onSelect?.(ev);
       onPressProp?.(ev);
@@ -592,7 +642,7 @@ const RadioItem = React.forwardRef<
   }
 );
 
-RadioItem.displayName = 'RadioItemDropdownMenu';
+RadioItem.displayName = 'RadioItemMenubar';
 
 function useItemIndicatorContext() {
   return React.useContext(RadioItemContext);
@@ -619,7 +669,7 @@ const ItemIndicator = React.forwardRef<
   return <Component ref={ref} role='presentation' {...props} />;
 });
 
-ItemIndicator.displayName = 'ItemIndicatorDropdownMenu';
+ItemIndicator.displayName = 'ItemIndicatorMenubar';
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -637,7 +687,7 @@ const Separator = React.forwardRef<
   );
 });
 
-Separator.displayName = 'SeparatorDropdownMenu';
+Separator.displayName = 'SeparatorMenubar';
 
 const SubContext = React.createContext<{
   nativeID: string;
@@ -667,7 +717,7 @@ const Sub = React.forwardRef<
   );
 });
 
-Sub.displayName = 'SubDropdownMenu';
+Sub.displayName = 'SubMenubar';
 
 function useSubContext() {
   const context = React.useContext(SubContext);
@@ -714,7 +764,7 @@ const SubTrigger = React.forwardRef<
   }
 );
 
-SubTrigger.displayName = 'SubTriggerDropdownMenu';
+SubTrigger.displayName = 'SubTriggerMenubar';
 
 const SubContent = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -736,7 +786,7 @@ const SubContent = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentDropdownMenu';
+SubContent.displayName = 'SubContentMenubar';
 
 export {
   CheckboxItem,
@@ -745,6 +795,7 @@ export {
   Item,
   ItemIndicator,
   Label,
+  Menu,
   Overlay,
   Portal,
   RadioGroup,

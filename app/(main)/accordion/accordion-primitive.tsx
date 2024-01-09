@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text } from 'react-native';
-import * as Accordion from '~/lib/rn-primitives/accordion';
+import * as Accordion from '~/lib/rn-primitives/native/accordion';
 
 export default function AccordionPrimitiveScreen() {
   const [value, setValue] = React.useState<string[]>(['item-1']);

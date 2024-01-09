@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, Text as RNText } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
+import * as Slot from '~/lib/rn-primitives/native/slot';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 
 const Root = React.forwardRef<
   React.ElementRef<typeof Pressable>,

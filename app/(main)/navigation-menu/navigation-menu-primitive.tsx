@@ -6,8 +6,8 @@ import { StyleSheet } from 'nativewind';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as NavigationMenu from '~/lib/rn-primitives/navigation-menu';
-import { PortalHost } from '~/lib/rn-primitives/portal';
+import * as NavigationMenu from '~/lib/rn-primitives/native/navigation-menu';
+import { PortalHost } from '~/lib/rn-primitives/native/portal';
 
 const shouldBlockNavWhenPortalRoot = () => false;
 

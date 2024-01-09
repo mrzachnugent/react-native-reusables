@@ -1,4 +1,4 @@
-import * as Popover from '~/lib/rn-primitives/popover';
+import * as Popover from '~/lib/rn-primitives/native/popover';
 
 const Root = Popover.Root;
 const Trigger = Popover.Trigger;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import * as Label from '~/lib/rn-primitives/label';
-import * as RadioGroup from '~/lib/rn-primitives/radio-group';
+import * as Label from '~/lib/rn-primitives/native/label';
+import * as RadioGroup from '~/lib/rn-primitives/native/radio-group';
 
 export default function RadioGroupPrimitiveScreen() {
   const [value, setValue] = React.useState('Primitive 2');

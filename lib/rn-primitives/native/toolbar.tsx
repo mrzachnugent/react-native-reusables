@@ -1,8 +1,8 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot';
-import * as ToggleGroupUtils from '~/lib/rn-primitives/toggle-group-utils';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
+import * as Slot from '~/lib/rn-primitives/native/slot';
+import * as ToggleGroupUtils from '~/lib/rn-primitives/native/toggle-group-utils';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

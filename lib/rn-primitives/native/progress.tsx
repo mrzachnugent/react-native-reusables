@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
+import * as Slot from '~/lib/rn-primitives/native/slot';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.

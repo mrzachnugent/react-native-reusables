@@ -10,14 +10,14 @@ import {
   ViewStyle,
 } from 'react-native';
 import { StoreApi, createStore, useStore } from 'zustand';
-import { Portal as RNPPortal } from '~/lib/rn-primitives/portal';
-import * as Slot from '~/lib/rn-primitives/slot';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/utils';
+import { Portal as RNPPortal } from '~/lib/rn-primitives/native/portal';
+import * as Slot from '~/lib/rn-primitives/native/slot';
+import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 import {
   Insets,
   LayoutPosition,
   useRelativePosition,
-} from './hooks/useRelativePosition';
+} from '../hooks/useRelativePosition';
 
 interface RootProps {
   open: boolean;

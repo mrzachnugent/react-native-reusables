@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import * as AlertDialog from '~/lib/rn-primitives/alert-dialog';
+import * as AlertDialog from '~/lib/rn-primitives/native/alert-dialog';
 
 export default function AlertDialogPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

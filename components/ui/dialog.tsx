@@ -8,7 +8,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot';
+import * as Slot from '~/lib/rn-primitives/native/slot';
 import { cn } from '~/lib/utils';
 import { Button } from './button';
 

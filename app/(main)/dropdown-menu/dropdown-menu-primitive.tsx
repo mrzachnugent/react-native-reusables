@@ -2,8 +2,8 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as DropdownMenu from '~/lib/rn-primitives/dropdown-menu';
-import { PortalHost } from '~/lib/rn-primitives/portal';
+import * as DropdownMenu from '~/lib/rn-primitives/native/dropdown-menu';
+import { PortalHost } from '~/lib/rn-primitives/native/portal';
 
 export default function DropdownMenuPrimitiveScreen() {
   const headerHeight = useHeaderHeight();

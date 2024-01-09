@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import * as Switch from '~/lib/rn-primitives/switch';
+import * as Switch from '~/lib/rn-primitives/native/switch';
 import { cn } from '~/lib/utils';
 
 export default function SwitchPrimitiveScreen() {

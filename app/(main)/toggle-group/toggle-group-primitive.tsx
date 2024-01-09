@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import * as ToggleGroup from '~/lib/rn-primitives/toggle-group';
+import * as ToggleGroup from '~/lib/rn-primitives/native/toggle-group';
 import { cn } from '~/lib/utils';
 
 export default function ToggleGroupPrimitiveScreen() {
