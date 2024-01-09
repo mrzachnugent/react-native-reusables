@@ -2,7 +2,7 @@ import { FlashList } from '@shopify/flash-list';
 import React from 'react';
 import { Pressable, ScrollView, Text, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
+import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { cn, isTextChildren } from '~/lib/utils';
 
 const Table = React.forwardRef<

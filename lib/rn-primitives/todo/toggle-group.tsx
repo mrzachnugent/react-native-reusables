@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
+import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import * as ToggleGroupUtils from '~/lib/rn-primitives/todo/toggle-group-utils';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 

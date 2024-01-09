@@ -1,6 +1,12 @@
 import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import * as Slot from '../slot';
+import type {
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
 import type {
   AccordionContentProps,
   AccordionContext,
@@ -9,13 +15,7 @@ import type {
   AccordionItemProps,
   AccordionRootProps,
   AccordionTriggerProps,
-} from '~/lib/rn-primitives/accordion/types';
-import {
-  PressableRef,
-  SlottablePressableProps,
-  SlottableViewProps,
-  ViewRef,
-} from '~/lib/rn-primitives/types';
+} from './types';
 
 const AccordionContext = React.createContext<AccordionContext | null>(null);
 

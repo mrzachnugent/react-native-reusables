@@ -1,22 +1,22 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import React from 'react';
 import { View } from 'react-native';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
+import { useTrigger } from '../hooks/useTrigger';
+import * as Slot from '../slot';
+import type {
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
 import type {
   AccordionContentProps,
   AccordionHeaderProps,
   AccordionItemProps,
   AccordionRootProps,
   AccordionTriggerProps,
-} from '~/lib/rn-primitives/accordion/types';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
-import {
-  PressableRef,
-  SlottablePressableProps,
-  SlottableViewProps,
-  ViewRef,
-} from '~/lib/rn-primitives/types';
-import { useTrigger } from '~/lib/rn-primitives/hooks/useTrigger';
-import { useAugmentedRef } from '~/lib/rn-primitives/hooks/useAugmentedRef';
+} from './types';
 
 const Root = React.forwardRef<
   ViewRef,

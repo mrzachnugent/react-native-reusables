@@ -1,29 +1,29 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import React from 'react';
 import {
-  GestureResponderEvent,
   Modal,
   Pressable,
   Text,
   View,
+  type GestureResponderEvent,
 } from 'react-native';
-import {
-  AlertDialogRootProps,
-  ContentProps,
-  OverlayProps,
-  PortalProps,
-  TriggerProps,
-} from '~/lib/rn-primitives/alert-dialog/types';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
-import {
+import { useTrigger } from '../hooks/useTrigger';
+import * as Slot from '../slot';
+import type {
   PressableRef,
   SlottablePressableProps,
   SlottableTextProps,
   SlottableViewProps,
   TextRef,
   ViewRef,
-} from '~/lib/rn-primitives/types';
-import { useTrigger } from '../hooks/useTrigger';
+} from '../types';
+import type {
+  AlertDialogRootProps,
+  ContentProps,
+  OverlayProps,
+  PortalProps,
+  TriggerProps,
+} from './types';
 
 const Root = React.forwardRef<
   ViewRef,

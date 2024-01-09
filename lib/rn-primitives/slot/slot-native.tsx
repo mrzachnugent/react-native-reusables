@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  PressableStateCallbackType,
   Image as RNImage,
-  ImageProps as RNImageProps,
-  ImageStyle as RNImageStyle,
   Pressable as RNPressable,
-  PressableProps as RNPressableprops,
   Text as RNText,
-  TextProps as RNTextProps,
   View as RNView,
-  ViewProps as RNViewProps,
-  StyleProp,
+  type PressableStateCallbackType,
+  type ImageProps as RNImageProps,
+  type ImageStyle as RNImageStyle,
+  type PressableProps as RNPressableprops,
+  type TextProps as RNTextProps,
+  type ViewProps as RNViewProps,
+  type StyleProp,
 } from 'react-native';
 
 const Pressable = React.forwardRef<

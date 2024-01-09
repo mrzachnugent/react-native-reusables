@@ -1,12 +1,21 @@
 import React from 'react';
 import {
-  GestureResponderEvent,
   Modal,
-  NativeSyntheticEvent,
   Pressable,
   Text,
   View,
+  type GestureResponderEvent,
+  type NativeSyntheticEvent,
 } from 'react-native';
+import * as Slot from '../slot';
+import type {
+  PressableRef,
+  SlottablePressableProps,
+  SlottableTextProps,
+  SlottableViewProps,
+  TextRef,
+  ViewRef,
+} from '../types';
 import type {
   AlertDialogContext,
   AlertDialogRootProps,
@@ -14,16 +23,7 @@ import type {
   OverlayProps,
   PortalProps,
   TriggerProps,
-} from '~/lib/rn-primitives/alert-dialog/types';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
-import {
-  PressableRef,
-  SlottablePressableProps,
-  SlottableTextProps,
-  SlottableViewProps,
-  TextRef,
-  ViewRef,
-} from '~/lib/rn-primitives/types';
+} from './types';
 
 const AlertDialogContext = React.createContext<AlertDialogContext | null>(null);
 

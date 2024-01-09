@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/todo/slot';
+import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 
 const Root = React.forwardRef<
