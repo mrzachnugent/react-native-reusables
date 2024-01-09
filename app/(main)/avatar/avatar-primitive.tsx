@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
-import * as Avatar from '~/lib/rn-primitives/todo/avatar';
+import * as Avatar from '~/lib/rn-primitives/avatar';
 
 const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
 const TWITTER_AVATAR_URI =
