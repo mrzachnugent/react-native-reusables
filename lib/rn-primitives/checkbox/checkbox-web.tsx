@@ -20,7 +20,6 @@ const Root = React.forwardRef<
       checked,
       onCheckedChange,
       onPress: onPressProp,
-      nativeID,
       ...props
     },
     ref
