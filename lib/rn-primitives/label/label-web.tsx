@@ -25,7 +25,7 @@ const Text = React.forwardRef<
 >(({ asChild, nativeID, ...props }, ref) => {
   const Component = asChild ? Slot.Text : RNText;
   return (
-    <Label.Root asChild htmlFor={nativeID} id={nativeID}>
+    <Label.Root asChild id={nativeID}>
       <Component ref={ref} {...props} />
     </Label.Root>
   );

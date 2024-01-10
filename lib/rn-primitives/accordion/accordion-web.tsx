@@ -1,8 +1,6 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import React from 'react';
 import { View } from 'react-native';
-import { useAugmentedRef } from '../hooks/useAugmentedRef';
-import { useTrigger } from '../hooks/useTrigger';
 import * as Slot from '../slot';
 import type {
   PressableRef,
@@ -77,25 +75,11 @@ Header.displayName = 'HeaderWebAccordion';
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const { htmlButtonProps, pressableProps } = useTrigger(buttonRef, props);
-    useAugmentedRef({ augmentedRef, ref });
-
-    function onFocus() {
-      augmentedRef.current?.focus();
-    }
-
     const Component = asChild ? Slot.Pressable : Slot.Pressable;
     return (
-      <>
-        <Accordion.Trigger
-          ref={buttonRef}
-          onFocus={onFocus}
-          {...htmlButtonProps}
-        />
-        <Component ref={augmentedRef} {...pressableProps} />
-      </>
+      <Accordion.Trigger asChild>
+        <Component ref={ref} role='button' {...props} />
+      </Accordion.Trigger>
     );
   }
 );

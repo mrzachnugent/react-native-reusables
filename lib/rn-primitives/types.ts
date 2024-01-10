@@ -8,10 +8,16 @@ type PressableRef = React.ElementRef<typeof Pressable>;
 type TextRef = React.ElementRef<typeof Text>;
 
 type SlottableViewProps = ComponentPropsWithAsChild<typeof View>;
-type SlottablePressableProps = Omit<
-  ComponentPropsWithAsChild<typeof Pressable>,
-  'children'
-> & { children: React.ReactNode };
+type SlottablePressableProps = ComponentPropsWithAsChild<typeof Pressable> & {
+  /**
+   * Platform: WEB ONLY
+   */
+  onKeyDown?: (ev: React.KeyboardEvent) => void;
+  /**
+   * Platform: WEB ONLY
+   */
+  onKeyUp?: (ev: React.KeyboardEvent) => void;
+};
 type SlottableTextProps = ComponentPropsWithAsChild<typeof Text>;
 
 export type {

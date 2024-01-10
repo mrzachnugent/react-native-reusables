@@ -148,15 +148,17 @@ const Content = React.forwardRef<
 Content.displayName = 'ContentAlertWebDialog';
 
 const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, onPress: onPressProp, ...props }, ref) => {
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const { htmlButtonProps, pressableProps } = useTrigger(buttonRef, props);
+  ({ asChild, ...props }, ref) => {
+    const { buttonRef, hideHtmlButtonProps, pressableProps } =
+      useTrigger(props);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <AlertDialog.Cancel ref={buttonRef} {...htmlButtonProps} />
-        <Component ref={ref} {...pressableProps} />
+        <AlertDialog.Cancel ref={buttonRef} {...hideHtmlButtonProps} />
+        <AlertDialog.Cancel asChild>
+          <Component ref={ref} {...pressableProps} />
+        </AlertDialog.Cancel>
       </>
     );
   }
@@ -166,14 +168,16 @@ Cancel.displayName = 'CancelAlertWebDialog';
 
 const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, ...props }, ref) => {
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const { htmlButtonProps, pressableProps } = useTrigger(buttonRef, props);
+    const { buttonRef, hideHtmlButtonProps, pressableProps } =
+      useTrigger(props);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <AlertDialog.Action ref={buttonRef} {...htmlButtonProps} />
-        <Component ref={ref} {...pressableProps} />
+        <AlertDialog.Action ref={buttonRef} {...hideHtmlButtonProps} />
+        <AlertDialog.Action asChild>
+          <Component ref={ref} {...pressableProps} />
+        </AlertDialog.Action>
       </>
     );
   }

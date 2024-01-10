@@ -20,6 +20,7 @@ const Root = React.forwardRef<
       checked,
       onCheckedChange,
       onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
       ...props
     },
     ref
@@ -27,11 +28,14 @@ const Root = React.forwardRef<
     const buttonRef = React.useRef<HTMLButtonElement>(null);
 
     function onPress(ev: GestureResponderEvent) {
-      if (onPressProp) {
-        onPressProp(ev);
-      }
-      if (buttonRef.current) {
-        buttonRef.current.click();
+      onPressProp?.(ev);
+      onCheckedChange(!checked);
+    }
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onCheckedChange(!checked);
       }
     }
 
@@ -44,9 +48,13 @@ const Root = React.forwardRef<
         ref={buttonRef}
         asChild
       >
-        <span>
-          <Component role='button' ref={ref} onPress={onPress} {...props} />
-        </span>
+        <Component
+          ref={ref}
+          // @ts-expect-error - web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          {...props}
+        />
       </Checkbox.Root>
     );
   }
