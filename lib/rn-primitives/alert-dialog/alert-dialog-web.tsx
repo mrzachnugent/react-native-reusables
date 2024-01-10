@@ -22,7 +22,6 @@ import type {
   ContentProps,
   OverlayProps,
   PortalProps,
-  TriggerProps,
 } from './types';
 
 const Root = React.forwardRef<
@@ -39,34 +38,33 @@ const Root = React.forwardRef<
 
 Root.displayName = 'RootAlertWebDialog';
 
-const Trigger = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & TriggerProps
->(({ asChild, onPress: onPressProp, ...props }, ref) => {
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-  function onPress(ev: GestureResponderEvent) {
-    if (onPressProp) {
-      onPressProp(ev);
+const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+  ({ asChild, onPress: onPressProp, ...props }, ref) => {
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    function onPress(ev: GestureResponderEvent) {
+      if (onPressProp) {
+        onPressProp(ev);
+      }
+      if (buttonRef.current) {
+        buttonRef.current.click();
+      }
     }
-    if (buttonRef.current) {
-      buttonRef.current.click();
-    }
-  }
 
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <>
-      <AlertDialog.Trigger
-        ref={buttonRef}
-        aria-hidden
-        style={{ position: 'absolute', zIndex: -999999999 }}
-        aria-disabled={true}
-        tabIndex={-1}
-      />
-      <Component ref={ref} onPress={onPress} role='button' {...props} />
-    </>
-  );
-});
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <>
+        <AlertDialog.Trigger
+          ref={buttonRef}
+          aria-hidden
+          style={{ position: 'absolute', zIndex: -999999999 }}
+          aria-disabled={true}
+          tabIndex={-1}
+        />
+        <Component ref={ref} onPress={onPress} role='button' {...props} />
+      </>
+    );
+  }
+);
 
 Trigger.displayName = 'TriggerAlertWebDialog';
 
@@ -77,13 +75,7 @@ Trigger.displayName = 'TriggerAlertWebDialog';
  */
 const Portal = React.forwardRef<
   React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> &
-    PortalProps & {
-      /**
-       * Platform: WEB ONLY
-       */
-      container?: HTMLElement | null | undefined;
-    }
+  React.ComponentPropsWithoutRef<typeof Modal> & PortalProps
 >(({ forceMount, container, children }, _ref) => {
   return (
     <AlertDialog.Portal

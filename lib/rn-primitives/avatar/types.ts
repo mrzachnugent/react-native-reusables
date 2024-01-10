@@ -7,6 +7,4 @@ interface AvatarImageProps {
   onLoadingStatusChange?: (status: 'error' | 'loaded') => void;
 }
 
-interface AvatarFallbackProps {}
-
-export type { AvatarRootProps, AvatarImageProps, AvatarFallbackProps };
+export type { AvatarRootProps, AvatarImageProps };

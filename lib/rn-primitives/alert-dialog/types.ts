@@ -7,15 +7,19 @@ type AlertDialogContext = AlertDialogRootProps & {
   nativeID: string;
 };
 
-type TriggerProps = {};
-type PortalProps = { forceMount?: true | undefined };
+type PortalProps = {
+  forceMount?: true | undefined;
+  /**
+   * Platform: WEB ONLY
+   */
+  container?: HTMLElement | null | undefined;
+};
 type OverlayProps = { forceMount?: true | undefined };
 type ContentProps = { forceMount?: true | undefined };
 
 export type {
   AlertDialogContext,
   AlertDialogRootProps,
-  TriggerProps,
   PortalProps,
   OverlayProps,
   ContentProps,

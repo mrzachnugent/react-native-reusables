@@ -12,20 +12,11 @@ import type {
 } from '../types';
 import type {
   AccordionContentProps,
-  AccordionHeaderProps,
   AccordionItemProps,
   AccordionRootProps,
-  AccordionTriggerProps,
 } from './types';
 
-const Root = React.forwardRef<
-  ViewRef,
-  SlottableViewProps &
-    AccordionRootProps & {
-      dir?: 'ltr' | 'rtl';
-      orientation?: 'vertical' | 'horizontal';
-    }
->(
+const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
   (
     {
       asChild,
@@ -71,45 +62,43 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
 
 Item.displayName = 'ItemWebAccordion';
 
-const Header = React.forwardRef<
-  ViewRef,
-  AccordionHeaderProps & SlottableViewProps
->(({ asChild, ...props }, ref) => {
-  const Component = asChild ? Slot.View : View;
-  return (
-    <Accordion.Header asChild>
-      <Component ref={ref} {...props} />
-    </Accordion.Header>
-  );
-});
+const Header = React.forwardRef<ViewRef, SlottableViewProps>(
+  ({ asChild, ...props }, ref) => {
+    const Component = asChild ? Slot.View : View;
+    return (
+      <Accordion.Header asChild>
+        <Component ref={ref} {...props} />
+      </Accordion.Header>
+    );
+  }
+);
 
 Header.displayName = 'HeaderWebAccordion';
 
-const Trigger = React.forwardRef<
-  PressableRef,
-  AccordionTriggerProps & SlottablePressableProps
->(({ asChild, ...props }, ref) => {
-  const augmentedRef = React.useRef<PressableRef>(null);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-  const { htmlButtonProps, pressableProps } = useTrigger(buttonRef, props);
-  useAugmentedRef({ augmentedRef, ref });
+const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+  ({ asChild, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const { htmlButtonProps, pressableProps } = useTrigger(buttonRef, props);
+    useAugmentedRef({ augmentedRef, ref });
 
-  function onFocus() {
-    augmentedRef.current?.focus();
+    function onFocus() {
+      augmentedRef.current?.focus();
+    }
+
+    const Component = asChild ? Slot.Pressable : Slot.Pressable;
+    return (
+      <>
+        <Accordion.Trigger
+          ref={buttonRef}
+          onFocus={onFocus}
+          {...htmlButtonProps}
+        />
+        <Component ref={augmentedRef} {...pressableProps} />
+      </>
+    );
   }
-
-  const Component = asChild ? Slot.Pressable : Slot.Pressable;
-  return (
-    <>
-      <Accordion.Trigger
-        ref={buttonRef}
-        onFocus={onFocus}
-        {...htmlButtonProps}
-      />
-      <Component ref={augmentedRef} {...pressableProps} />
-    </>
-  );
-});
+);
 
 Trigger.displayName = 'TriggerWebAccordion';
 

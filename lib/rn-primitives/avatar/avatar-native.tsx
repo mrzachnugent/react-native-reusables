@@ -13,11 +13,7 @@ import {
   SlottableViewProps,
   ViewRef,
 } from '~/lib/rn-primitives/types';
-import {
-  AvatarFallbackProps,
-  AvatarImageProps,
-  AvatarRootProps,
-} from './types';
+import { AvatarImageProps, AvatarRootProps } from './types';
 
 type AvatarState = 'loading' | 'error' | 'loaded';
 
@@ -126,19 +122,18 @@ const Image = React.forwardRef<
 
 Image.displayName = 'ImageAvatar';
 
-const Fallback = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & AvatarFallbackProps
->(({ asChild, ...props }, ref) => {
-  const { alt } = useRootContext();
-  const status = useRootStoreContext((state) => state.status);
+const Fallback = React.forwardRef<ViewRef, SlottableViewProps>(
+  ({ asChild, ...props }, ref) => {
+    const { alt } = useRootContext();
+    const status = useRootStoreContext((state) => state.status);
 
-  if (status !== 'error') {
-    return null;
+    if (status !== 'error') {
+      return null;
+    }
+    const Component = asChild ? Slot.View : View;
+    return <Component ref={ref} role={'img'} aria-label={alt} {...props} />;
   }
-  const Component = asChild ? Slot.View : View;
-  return <Component ref={ref} role={'img'} aria-label={alt} {...props} />;
-});
+);
 
 Fallback.displayName = 'FallbackAvatar';
 

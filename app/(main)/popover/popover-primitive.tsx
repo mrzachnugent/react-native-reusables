@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Popover from '~/lib/rn-primitives/todo/popover';
-import { PortalHost } from '~/lib/rn-primitives/todo/portal/portal-native';
+import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
 
 function getSide(): 'bottom' | 'top' {
   return 'bottom';

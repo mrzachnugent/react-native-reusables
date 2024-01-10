@@ -22,7 +22,6 @@ import type {
   ContentProps,
   OverlayProps,
   PortalProps,
-  TriggerProps,
 } from './types';
 
 const AlertDialogContext = React.createContext<AlertDialogContext | null>(null);
@@ -58,31 +57,30 @@ function useAlertDialogContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & TriggerProps
->(({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-  const { open: value, onOpenChange } = useAlertDialogContext();
+const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+  ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
+    const { open: value, onOpenChange } = useAlertDialogContext();
 
-  function onPress(ev: GestureResponderEvent) {
-    if (disabled) return;
-    const newValue = !value;
-    onOpenChange(newValue);
-    onPressProp?.(ev);
+    function onPress(ev: GestureResponderEvent) {
+      if (disabled) return;
+      const newValue = !value;
+      onOpenChange(newValue);
+      onPressProp?.(ev);
+    }
+
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <Component
+        ref={ref}
+        aria-disabled={disabled ?? undefined}
+        role='button'
+        onPress={onPress}
+        disabled={disabled ?? undefined}
+        {...props}
+      />
+    );
   }
-
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <Component
-      ref={ref}
-      aria-disabled={disabled ?? undefined}
-      role='button'
-      onPress={onPress}
-      disabled={disabled ?? undefined}
-      {...props}
-    />
-  );
-});
+);
 
 Trigger.displayName = 'TriggerNativeAlertDialog';
 
@@ -96,6 +94,7 @@ const Portal = React.forwardRef<
       statusBarTranslucent = true,
       forceMount,
       onRequestClose: onRequestCloseProp,
+      container: _container,
       ...props
     },
     ref

@@ -10,11 +10,9 @@ import type {
 import type {
   AccordionContentProps,
   AccordionContext,
-  AccordionHeaderProps,
   AccordionItemContext,
   AccordionItemProps,
   AccordionRootProps,
-  AccordionTriggerProps,
 } from './types';
 
 const AccordionContext = React.createContext<AccordionContext | null>(null);
@@ -99,31 +97,27 @@ function useAccordionItemContext() {
   return context;
 }
 
-const Header = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & AccordionHeaderProps
->(({ asChild, ...props }, ref) => {
-  const { disabled: rootDisabled, value: rootValue } = useAccordionContext();
-  const { disabled: itemDisabled, value } = useAccordionItemContext();
+const Header = React.forwardRef<ViewRef, SlottableViewProps>(
+  ({ asChild, ...props }, ref) => {
+    const { disabled: rootDisabled, value: rootValue } = useAccordionContext();
+    const { disabled: itemDisabled, value } = useAccordionItemContext();
 
-  const Component = asChild ? Slot.View : View;
-  return (
-    <Component
-      ref={ref}
-      role='heading'
-      aria-expanded={isItemExpanded(rootValue, value)}
-      aria-disabled={rootDisabled ?? itemDisabled}
-      {...props}
-    />
-  );
-});
+    const Component = asChild ? Slot.View : View;
+    return (
+      <Component
+        ref={ref}
+        role='heading'
+        aria-expanded={isItemExpanded(rootValue, value)}
+        aria-disabled={rootDisabled ?? itemDisabled}
+        {...props}
+      />
+    );
+  }
+);
 
 Header.displayName = 'HeaderNativeAccordion';
 
-const Trigger = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & AccordionTriggerProps
->(
+const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
     { asChild, onPress: onPressProp, disabled: disabledProp, ...props },
     ref

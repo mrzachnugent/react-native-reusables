@@ -15,7 +15,16 @@ type AccordionContext = (SingleRootProps | MultipleRootProps) & {
   collapsable?: boolean;
 };
 
-type AccordionRootProps = AccordionContext;
+type AccordionRootProps = AccordionContext & {
+  /**
+   * Platform: WEB ONLY
+   */
+  dir?: 'ltr' | 'rtl';
+  /**
+   * Platform: WEB ONLY
+   */
+  orientation?: 'vertical' | 'horizontal';
+};
 
 interface ItemProps {
   value: string;
@@ -24,16 +33,12 @@ interface ItemProps {
 
 type AccordionItemContext = ItemProps & { nativeID: string };
 type AccordionItemProps = ItemProps;
-type AccordionHeaderProps = {};
-type AccordionTriggerProps = {};
 type AccordionContentProps = { forceMount?: true | undefined };
 
 export type {
   AccordionContentProps,
   AccordionContext,
-  AccordionHeaderProps,
   AccordionItemContext,
   AccordionItemProps,
   AccordionRootProps,
-  AccordionTriggerProps,
 };

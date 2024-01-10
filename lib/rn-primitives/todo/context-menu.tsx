@@ -12,7 +12,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { StoreApi, createStore, useStore } from 'zustand';
-import { Portal as RNPPortal } from '~/lib/rn-primitives/todo/portal/portal-native';
+import { Portal as RNPPortal } from '~/lib/rn-primitives/portal/portal-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 import {
