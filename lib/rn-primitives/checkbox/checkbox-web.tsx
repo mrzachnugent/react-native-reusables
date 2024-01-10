@@ -43,9 +43,11 @@ const Root = React.forwardRef<
         onCheckedChange={onCheckedChange}
         disabled={disabled}
         ref={buttonRef}
-        tabIndex={-1}
+        asChild
       >
-        <Component ref={ref} role='button' onPress={onPress} {...props} />
+        <span>
+          <Component role='button' ref={ref} onPress={onPress} {...props} />
+        </span>
       </Checkbox.Root>
     );
   }
