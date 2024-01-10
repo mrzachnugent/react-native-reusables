@@ -1,3 +1,5 @@
+import type { ForceMountable } from '../types';
+
 type AlertDialogRootProps = {
   open: boolean;
   onOpenChange: (value: boolean) => void;
@@ -7,15 +9,14 @@ type AlertDialogContext = AlertDialogRootProps & {
   nativeID: string;
 };
 
-type PortalProps = {
-  forceMount?: true | undefined;
+interface PortalProps extends ForceMountable {
   /**
    * Platform: WEB ONLY
    */
   container?: HTMLElement | null | undefined;
-};
-type OverlayProps = { forceMount?: true | undefined };
-type ContentProps = { forceMount?: true | undefined };
+}
+type OverlayProps = ForceMountable;
+type ContentProps = ForceMountable;
 
 export type {
   AlertDialogContext,

@@ -1,3 +1,5 @@
+import { ForceMountable } from '../types';
+
 type SingleRootProps = {
   type: 'single';
   value: string | undefined;
@@ -33,7 +35,7 @@ interface ItemProps {
 
 type AccordionItemContext = ItemProps & { nativeID: string };
 type AccordionItemProps = ItemProps;
-type AccordionContentProps = { forceMount?: true | undefined };
+type AccordionContentProps = ForceMountable;
 
 export type {
   AccordionContentProps,

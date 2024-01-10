@@ -5,6 +5,7 @@ import {
   ViewStyle,
   useWindowDimensions,
 } from 'react-native';
+import type { Insets } from '../types';
 
 const POSITION_ABSOLUTE: ViewStyle = {
   position: 'absolute',
@@ -64,13 +65,6 @@ export interface LayoutPosition {
   width: number;
   height: number;
 }
-
-export type Insets = {
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
 
 interface GetPositionArgs {
   dimensions: ScaledSize;

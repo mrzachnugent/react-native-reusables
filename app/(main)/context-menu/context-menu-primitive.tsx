@@ -1,8 +1,8 @@
 import { useHeaderHeight } from '@react-navigation/elements';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as ContextMenu from '~/lib/rn-primitives/todo/context-menu';
+import * as ContextMenu from '~/lib/rn-primitives/context-menu';
 import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
 
 export default function ContextPrimitiveScreen() {
@@ -41,8 +41,14 @@ export default function ContextPrimitiveScreen() {
               LONG PRESS WITHIN DASHED BORDER
             </Text>
           </ContextMenu.Trigger>
-          <ContextMenu.Portal>
-            <ContextMenu.Overlay className='bg-sky-500/10' onPress={onClose} />
+          <ContextMenu.Portal
+            overlay={
+              <ContextMenu.Overlay
+                className='bg-sky-500/10'
+                onPress={onClose}
+              />
+            }
+          >
             <ContextMenu.Content
               align='start'
               insets={contentInsets}
@@ -66,15 +72,16 @@ export default function ContextPrimitiveScreen() {
                 closeOnPress={false}
                 className='flex-row justify-between items-center gap-3'
               >
-                <Text className='text-foreground text-xl'>Is checked?</Text>
+                <Text className='text-foreground text-xl select-none'>
+                  Is checked?
+                </Text>
                 <ContextMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
               </ContextMenu.CheckboxItem>
               <ContextMenu.Sub open={openSub} onOpenChange={setOpenSub}>
                 <ContextMenu.SubTrigger>
                   <Text className='text-foreground text-xl'>SUB TRIGGER</Text>
                 </ContextMenu.SubTrigger>
-
-                <ContextMenu.SubContent className='bg-blue-500 '>
+                <ContextMenu.SubContent className='bg-blue-500'>
                   <ContextMenu.Item onPress={onClose}>
                     <Text className='text-foreground text-xl'>SubItem 1</Text>
                   </ContextMenu.Item>
@@ -153,7 +160,6 @@ export default function ContextPrimitiveScreen() {
                 </ContextMenu.RadioItem>
               </ContextMenu.RadioGroup>
             </ContextMenu.Content>
-            <PortalHost name={'TEST'} />
           </ContextMenu.Portal>
         </ContextMenu.Root>
         <ContextMenu.Root open={open} onOpenChange={setOpen} className='w-full'>
@@ -165,8 +171,10 @@ export default function ContextPrimitiveScreen() {
               LONG PRESS WITHIN DASHED BORDER
             </Text>
           </ContextMenu.Trigger>
-          <ContextMenu.Portal hostName='inner'>
-            <ContextMenu.Overlay className='bg-sky-500/10' />
+          <ContextMenu.Portal
+            hostName='inner'
+            overlay={<ContextMenu.Overlay className='bg-sky-500/10' />}
+          >
             <ContextMenu.Content
               align='center'
               sideOffset={-headerHeight}

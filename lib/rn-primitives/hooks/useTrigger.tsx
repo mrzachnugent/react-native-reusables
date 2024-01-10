@@ -9,19 +9,21 @@ import { SlottablePressableProps } from '../types';
  * @option #3: If option 2 doesn't work, use the `useTrigger` hook as shown below.
  *
  * @example
- * const { pressableProps, hideHtmlButtonProps, buttonRef } = useTrigger(props);
+ * const { pressableProps, hideHtmlButtonProps, buttonRef } = useTrigger<HTMLButtonElement>(props);
  * const Component = asChild ? Slot.Pressable : Pressable;
  * return (
  *  <>
- *    <WebPrimitive.Trigger ref={buttonRef} {...hideHtmlButtonProps} />/>
+ *    <WebPrimitive.Trigger ref={buttonRef} {...hideHtmlButtonProps} />
  *    <WebPrimitive.Trigger asChild>
  *      <Component ref={ref} {...pressableProps} />
  *    </WebPrimitive.Trigger>
  *  </>
  * )
  */
-export function useTrigger(pressableProps: SlottablePressableProps) {
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
+export function useTrigger<T extends HTMLElement>(
+  pressableProps: SlottablePressableProps
+) {
+  const buttonRef = React.useRef<T>(null);
   const { onPress: onPressProp, onKeyDown, onKeyUp, ...props } = pressableProps;
   function onPress(ev: GestureResponderEvent) {
     if (onPressProp) {
@@ -40,7 +42,6 @@ export function useTrigger(pressableProps: SlottablePressableProps) {
       tabIndex: -1,
     } as const,
     pressableProps: {
-      role: 'button' as const,
       onPress,
       onKeyDown: (event: Event) => {
         onKeyDown?.(event as unknown as React.KeyboardEvent);

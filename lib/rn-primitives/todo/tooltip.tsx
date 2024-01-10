@@ -12,9 +12,8 @@ import {
 import { StoreApi, createStore, useStore } from 'zustand';
 import { Portal as RNPPortal } from '~/lib/rn-primitives/portal/portal-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
+import { ComponentPropsWithAsChild, Insets } from '~/lib/rn-primitives/types';
 import {
-  Insets,
   LayoutPosition,
   useRelativePosition,
 } from '../hooks/useRelativePosition';

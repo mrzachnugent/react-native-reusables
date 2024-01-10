@@ -1,11 +1,11 @@
+import type { ForceMountable } from '../types';
+
 interface CollapsibleRootProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   disabled?: boolean;
 }
 
-interface CollapsibleContentProps {
-  forceMount?: true | undefined;
-}
+type CollapsibleContentProps = ForceMountable;
 
 export type { CollapsibleContentProps, CollapsibleRootProps };

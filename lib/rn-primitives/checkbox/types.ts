@@ -1,11 +1,11 @@
+import type { ForceMountable } from '../types';
+
 interface CheckboxRootProps {
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
   disabled?: boolean;
 }
 
-interface CheckboxIndicator {
-  forceMount?: true | undefined;
-}
+type CheckboxIndicator = ForceMountable;
 
 export type { CheckboxRootProps, CheckboxIndicator };
