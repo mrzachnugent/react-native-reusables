@@ -1,22 +1,22 @@
 import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import * as Slot from '../slot';
+import type {
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
+import type { CollapsibleContentProps, CollapsibleRootProps } from './types';
 
-interface RootProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  disabled?: boolean;
-}
-
-interface RootContext extends RootProps {
+interface RootContext extends CollapsibleRootProps {
   nativeID: string;
 }
 const CollapsibleContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
+  ViewRef,
+  SlottableViewProps & CollapsibleRootProps
 >(({ asChild, disabled = false, open, onOpenChange, ...viewProps }, ref) => {
   const nativeID = React.useId();
 
@@ -35,7 +35,7 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootCollapsible';
+Root.displayName = 'RootNativeCollapsible';
 
 function useCollapsibleContext() {
   const context = React.useContext(CollapsibleContext);
@@ -47,10 +47,7 @@ function useCollapsibleContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable>
->(
+const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
     { asChild, onPress: onPressProp, disabled: disabledProp = false, ...props },
     ref
@@ -83,11 +80,11 @@ const Trigger = React.forwardRef<
   }
 );
 
-Trigger.displayName = 'TriggerCollapsible';
+Trigger.displayName = 'TriggerNativeCollapsible';
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & { forceMount?: true | undefined }
+  ViewRef,
+  SlottableViewProps & CollapsibleContentProps
 >(({ asChild, forceMount, ...props }, ref) => {
   const { nativeID, open } = useCollapsibleContext();
 
@@ -109,6 +106,6 @@ const Content = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentCollapsible';
+Content.displayName = 'ContentNativeCollapsible';
 
 export { Content, Root, Trigger };
