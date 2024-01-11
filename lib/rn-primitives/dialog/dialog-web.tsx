@@ -1,4 +1,4 @@
-import * as AlertDialog from '@radix-ui/react-alert-dialog';
+import * as Dialog from '@radix-ui/react-dialog';
 import React from 'react';
 import {
   Modal,
@@ -18,25 +18,24 @@ import type {
   ViewRef,
 } from '../types';
 import type {
-  AlertDialogRootProps,
-  AlertDialogContentProps,
-  AlertDialogOverlayProps,
-  AlertDialogPortalProps,
+  DialogContentProps,
+  DialogOverlayProps,
+  DialogPortalProps,
+  DialogRootProps,
 } from './types';
 
-const Root = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & AlertDialogRootProps
->(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
-  const Component = asChild ? Slot.View : View;
-  return (
-    <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
-      <Component ref={ref} {...viewProps} />
-    </AlertDialog.Root>
-  );
-});
+const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
+  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+    const Component = asChild ? Slot.View : View;
+    return (
+      <Dialog.Root open={open} onOpenChange={onOpenChange}>
+        <Component ref={ref} {...viewProps} />
+      </Dialog.Root>
+    );
+  }
+);
 
-Root.displayName = 'RootAlertWebDialog';
+Root.displayName = 'RootWebDialog';
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, ...props }, ref) => {
@@ -53,7 +52,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <AlertDialog.Trigger
+        <Dialog.Trigger
           ref={buttonRef}
           aria-hidden
           style={{ position: 'absolute', zIndex: -999999999 }}
@@ -66,7 +65,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   }
 );
 
-Trigger.displayName = 'TriggerAlertWebDialog';
+Trigger.displayName = 'TriggerWebDialog';
 
 /**
  * @param {object} props.forceMount - Platform: ALL
@@ -75,10 +74,10 @@ Trigger.displayName = 'TriggerAlertWebDialog';
  */
 const Portal = React.forwardRef<
   React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & AlertDialogPortalProps
+  React.ComponentPropsWithoutRef<typeof Modal> & DialogPortalProps
 >(({ forceMount, container, children }, _ref) => {
   return (
-    <AlertDialog.Portal
+    <Dialog.Portal
       forceMount={forceMount}
       children={children}
       container={container}
@@ -86,25 +85,25 @@ const Portal = React.forwardRef<
   );
 });
 
-Portal.displayName = 'PortalAlertWebDialog';
+Portal.displayName = 'PortalWebDialog';
 
 const Overlay = React.forwardRef<
   PressableRef,
-  SlottablePressableProps & AlertDialogOverlayProps
+  SlottablePressableProps & DialogOverlayProps
 >(({ asChild, forceMount, ...props }, ref) => {
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <AlertDialog.Overlay forceMount={forceMount} asChild>
+    <Dialog.Overlay forceMount={forceMount} asChild>
       <Component ref={ref} {...props} />
-    </AlertDialog.Overlay>
+    </Dialog.Overlay>
   );
 });
 
-Overlay.displayName = 'OverlayAlertWebDialog';
+Overlay.displayName = 'OverlayWebDialog';
 
 const Content = React.forwardRef<
   PressableRef,
-  SlottablePressableProps & AlertDialogContentProps
+  SlottablePressableProps & DialogContentProps
 >(
   (
     {
@@ -114,29 +113,32 @@ const Content = React.forwardRef<
       onOpenAutoFocus,
       onCloseAutoFocus,
       onEscapeKeyDown,
+      onInteractOutside,
+      onPointerDownOutside,
       ...props
     },
     ref
   ) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <AlertDialog.Content
+      <Dialog.Content
         onOpenAutoFocus={onOpenAutoFocus}
         onCloseAutoFocus={onCloseAutoFocus}
         onEscapeKeyDown={onEscapeKeyDown}
+        onInteractOutside={onInteractOutside}
+        onPointerDownOutside={onPointerDownOutside}
         forceMount={forceMount}
-        asChild
       >
         {/* @ts-expect-error tabIndex is web-only */}
         <Component ref={ref} tabIndex={-1} {...props} />
-      </AlertDialog.Content>
+      </Dialog.Content>
     );
   }
 );
 
-Content.displayName = 'ContentAlertWebDialog';
+Content.displayName = 'ContentWebDialog';
 
-const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, ...props }, ref) => {
     const { buttonRef, hideHtmlButtonProps, pressableProps } =
       useTrigger<HTMLButtonElement>(props);
@@ -144,70 +146,41 @@ const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <AlertDialog.Cancel ref={buttonRef} {...hideHtmlButtonProps} />
-        <AlertDialog.Cancel asChild>
+        <Dialog.Close ref={buttonRef} {...hideHtmlButtonProps} />
+        <Dialog.Close asChild>
           <Component ref={ref} role='button' {...pressableProps} />
-        </AlertDialog.Cancel>
+        </Dialog.Close>
       </>
     );
   }
 );
 
-Cancel.displayName = 'CancelAlertWebDialog';
-
-const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, ...props }, ref) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLButtonElement>(props);
-
-    const Component = asChild ? Slot.Pressable : Pressable;
-    return (
-      <>
-        <AlertDialog.Action ref={buttonRef} {...hideHtmlButtonProps} />
-        <AlertDialog.Action asChild>
-          <Component ref={ref} role='button' {...pressableProps} />
-        </AlertDialog.Action>
-      </>
-    );
-  }
-);
-
-Action.displayName = 'ActionAlertWebDialog';
+Close.displayName = 'CloseWebDialog';
 
 const Title = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.Text : Text;
     return (
-      <AlertDialog.Title asChild>
+      <Dialog.Title asChild>
         <Component ref={ref} {...props} />
-      </AlertDialog.Title>
+      </Dialog.Title>
     );
   }
 );
 
-Title.displayName = 'TitleAlertWebDialog';
+Title.displayName = 'TitleWebDialog';
 
 const Description = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.Text : Text;
     return (
-      <AlertDialog.Description asChild>
+      <Dialog.Description asChild>
         <Component ref={ref} {...props} />
-      </AlertDialog.Description>
+      </Dialog.Description>
     );
   }
 );
 
-Description.displayName = 'DescriptionAlertWebDialog';
+Description.displayName = 'DescriptionWebDialog';
 
-export {
-  Action,
-  Cancel,
-  Content,
-  Description,
-  Overlay,
-  Portal,
-  Root,
-  Title,
-  Trigger,
-};
+export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger };

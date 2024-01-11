@@ -181,12 +181,7 @@ Trigger.displayName = 'TriggerNativeContextMenu';
 /**
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
  */
-function Portal({
-  forceMount,
-  hostName,
-  children,
-  overlay,
-}: ContextMenuPortalProps) {
+function Portal({ forceMount, hostName, children }: ContextMenuPortalProps) {
   const value = useContextMenuContext();
   const pressPosition = useRootStoreContext((state) => state.pressPosition);
   const nativeID = useRootStoreContext((state) => state.nativeID);
@@ -205,10 +200,7 @@ function Portal({
   return (
     <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
       <RootStoreContext.Provider value={store}>
-        <RootContext.Provider value={value}>
-          {overlay}
-          {children}
-        </RootContext.Provider>
+        <RootContext.Provider value={value}>{children}</RootContext.Provider>
       </RootStoreContext.Provider>
     </RNPPortal>
   );
@@ -224,7 +216,6 @@ const Overlay = React.forwardRef<
       forceMount,
       onPress: OnPressProp,
       closeOnPress = true,
-      style,
       ...props
     },
     ref
@@ -253,14 +244,7 @@ const Overlay = React.forwardRef<
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
-    return (
-      <Component
-        ref={ref}
-        onPress={onPress}
-        style={[StyleSheet.absoluteFill, style]}
-        {...props}
-      />
-    );
+    return <Component ref={ref} onPress={onPress} {...props} />;
   }
 );
 

@@ -16,17 +16,12 @@ interface ContextMenuPortalProps extends ForceMountable {
    */
   hostName?: string;
   /**
-   * Platform: NATIVE ONLY
-   */
-  overlay?: JSX.Element | null;
-  /**
    * Platform: WEB ONLY
    */
   container?: HTMLElement | null | undefined;
 }
 
 interface ContextMenuOverlayProps extends ForceMountable {
-  style?: ViewStyle;
   closeOnPress?: boolean;
 }
 

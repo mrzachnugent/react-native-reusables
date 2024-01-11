@@ -75,14 +75,12 @@ function Portal({ forceMount, container, children }: ContextMenuPortalProps) {
   );
 }
 
-/**
- * Platform: NATIVE ONLY
- */
 const Overlay = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ContextMenuOverlayProps
->(() => {
-  return null;
+>(({ asChild, ...props }, ref) => {
+  const Component = asChild ? Slot.Pressable : Pressable;
+  return <Component ref={ref} {...props} />;
 });
 
 Overlay.displayName = 'OverlayWebContextMenu';

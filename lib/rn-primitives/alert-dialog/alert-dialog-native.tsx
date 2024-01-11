@@ -17,12 +17,15 @@ import type {
   ViewRef,
 } from '../types';
 import type {
-  AlertDialogContext,
   AlertDialogRootProps,
-  ContentProps,
-  OverlayProps,
-  PortalProps,
+  AlertDialogContentProps,
+  AlertDialogOverlayProps,
+  AlertDialogPortalProps,
 } from './types';
+
+type AlertDialogContext = AlertDialogRootProps & {
+  nativeID: string;
+};
 
 const AlertDialogContext = React.createContext<AlertDialogContext | null>(null);
 
@@ -86,7 +89,7 @@ Trigger.displayName = 'TriggerNativeAlertDialog';
 
 const Portal = React.forwardRef<
   React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & PortalProps
+  React.ComponentPropsWithoutRef<typeof Modal> & AlertDialogPortalProps
 >(
   (
     {
@@ -122,47 +125,49 @@ const Portal = React.forwardRef<
 
 Portal.displayName = 'PortalNativeAlertDialog';
 
-const Overlay = React.forwardRef<ViewRef, SlottableViewProps & OverlayProps>(
-  ({ asChild, forceMount, ...props }, ref) => {
-    const { open: value } = useAlertDialogContext();
+const Overlay = React.forwardRef<
+  ViewRef,
+  SlottableViewProps & AlertDialogOverlayProps
+>(({ asChild, forceMount, ...props }, ref) => {
+  const { open: value } = useAlertDialogContext();
 
-    if (!forceMount) {
-      if (!value) {
-        return null;
-      }
+  if (!forceMount) {
+    if (!value) {
+      return null;
     }
-
-    const Component = asChild ? Slot.View : View;
-    return <Component ref={ref} {...props} />;
   }
-);
+
+  const Component = asChild ? Slot.View : View;
+  return <Component ref={ref} {...props} />;
+});
 
 Overlay.displayName = 'OverlayNativeAlertDialog';
 
-const Content = React.forwardRef<ViewRef, SlottableViewProps & ContentProps>(
-  ({ asChild, forceMount, ...props }, ref) => {
-    const { open: value, nativeID } = useAlertDialogContext();
+const Content = React.forwardRef<
+  ViewRef,
+  SlottableViewProps & AlertDialogContentProps
+>(({ asChild, forceMount, ...props }, ref) => {
+  const { open: value, nativeID } = useAlertDialogContext();
 
-    if (!forceMount) {
-      if (!value) {
-        return null;
-      }
+  if (!forceMount) {
+    if (!value) {
+      return null;
     }
-
-    const Component = asChild ? Slot.View : View;
-    return (
-      <Component
-        ref={ref}
-        role='alertdialog'
-        nativeID={nativeID}
-        aria-labelledby={`${nativeID}_label`}
-        aria-describedby={`${nativeID}_desc`}
-        aria-modal={true}
-        {...props}
-      />
-    );
   }
-);
+
+  const Component = asChild ? Slot.View : View;
+  return (
+    <Component
+      ref={ref}
+      role='alertdialog'
+      nativeID={nativeID}
+      aria-labelledby={`${nativeID}_label`}
+      aria-describedby={`${nativeID}_desc`}
+      aria-modal={true}
+      {...props}
+    />
+  );
+});
 
 Content.displayName = 'ContentNativeAlertDialog';
 

@@ -1,20 +1,23 @@
 import type { ForceMountable } from '../types';
 
-type AlertDialogRootProps = {
+type DialogRootProps = {
   open: boolean;
   onOpenChange: (value: boolean) => void;
 };
 
-interface AlertDialogPortalProps extends ForceMountable {
+interface DialogPortalProps extends ForceMountable {
   /**
    * Platform: WEB ONLY
    */
   container?: HTMLElement | null | undefined;
 }
-type AlertDialogOverlayProps = ForceMountable & {
+type DialogOverlayProps = ForceMountable & {
+  /**
+   * Platform: NATIVE ONLY - default: true
+   */
   closeOnPress?: boolean;
 };
-type AlertDialogContentProps = ForceMountable & {
+type DialogContentProps = ForceMountable & {
   /**
    * Platform: WEB ONLY
    */
@@ -27,11 +30,19 @@ type AlertDialogContentProps = ForceMountable & {
    * Platform: WEB ONLY
    */
   onEscapeKeyDown?: (ev: Event) => void;
+  /**
+   * Platform: WEB ONLY
+   */
+  onInteractOutside?: (ev: Event) => void;
+  /**
+   * Platform: WEB ONLY
+   */
+  onPointerDownOutside?: (ev: Event) => void;
 };
 
 export type {
-  AlertDialogRootProps,
-  AlertDialogPortalProps,
-  AlertDialogOverlayProps,
-  AlertDialogContentProps,
+  DialogRootProps,
+  DialogPortalProps,
+  DialogOverlayProps,
+  DialogContentProps,
 };
