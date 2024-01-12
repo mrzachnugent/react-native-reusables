@@ -159,8 +159,8 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'OverlayNativeDialog';
 
 const Content = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & DialogContentProps
+  ViewRef,
+  SlottableViewProps & DialogContentProps
 >(({ asChild, forceMount, ...props }, ref) => {
   const { open, nativeID } = useDialogContext();
 
@@ -170,7 +170,7 @@ const Content = React.forwardRef<
     }
   }
 
-  const Component = asChild ? Slot.Pressable : Pressable;
+  const Component = asChild ? Slot.View : View;
   return (
     <Component
       ref={ref}
@@ -179,6 +179,7 @@ const Content = React.forwardRef<
       aria-labelledby={`${nativeID}_label`}
       aria-describedby={`${nativeID}_desc`}
       aria-modal={true}
+      onStartShouldSetResponder={onStartShouldSetResponder}
       {...props}
     />
   );
@@ -231,3 +232,7 @@ const Description = React.forwardRef<TextRef, SlottableTextProps>(
 Description.displayName = 'DescriptionNativeDialog';
 
 export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger };
+
+function onStartShouldSetResponder() {
+  return true;
+}

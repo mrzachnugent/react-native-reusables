@@ -102,8 +102,8 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'OverlayWebDialog';
 
 const Content = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & DialogContentProps
+  ViewRef,
+  SlottableViewProps & DialogContentProps
 >(
   (
     {
@@ -119,7 +119,7 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const Component = asChild ? Slot.Pressable : Pressable;
+    const Component = asChild ? Slot.View : View;
     return (
       <Dialog.Content
         onOpenAutoFocus={onOpenAutoFocus}
@@ -129,8 +129,7 @@ const Content = React.forwardRef<
         onPointerDownOutside={onPointerDownOutside}
         forceMount={forceMount}
       >
-        {/* @ts-expect-error tabIndex is web-only */}
-        <Component ref={ref} tabIndex={-1} {...props} />
+        <Component ref={ref} {...props} />
       </Dialog.Content>
     );
   }
