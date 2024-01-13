@@ -251,8 +251,8 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'OverlayNativeContextMenu';
 
 const Content = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & PositionedContentProps
+  ViewRef,
+  SlottableViewProps & PositionedContentProps
 >(
   (
     {
@@ -322,7 +322,7 @@ const Content = React.forwardRef<
       }
     }
 
-    const Component = asChild ? Slot.Pressable : Pressable;
+    const Component = asChild ? Slot.View : View;
     return (
       <Component
         ref={ref}
@@ -331,6 +331,7 @@ const Content = React.forwardRef<
         aria-modal={true}
         style={[positionStyle, style]}
         onLayout={onLayout}
+        onStartShouldSetResponder={onStartShouldSetResponder}
         {...props}
       />
     );
@@ -674,8 +675,8 @@ const SubTrigger = React.forwardRef<
 SubTrigger.displayName = 'SubTriggerNativeContextMenu';
 
 const SubContent = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & ForceMountable
+  PressableRef,
+  SlottablePressableProps & ForceMountable
 >(({ asChild = false, forceMount, ...props }, ref) => {
   const { open, nativeID } = useSubContext();
 
@@ -685,7 +686,7 @@ const SubContent = React.forwardRef<
     }
   }
 
-  const Component = asChild ? Slot.View : View;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
     <Component ref={ref} role='group' aria-labelledby={nativeID} {...props} />
   );
@@ -711,3 +712,7 @@ export {
   SubTrigger,
   Trigger,
 };
+
+function onStartShouldSetResponder() {
+  return true;
+}

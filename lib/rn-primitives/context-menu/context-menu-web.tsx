@@ -2,7 +2,7 @@ import * as ContextMenu from '@radix-ui/react-context-menu';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { useTrigger } from '../hooks/useTrigger';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -26,19 +26,35 @@ import type {
   ContextMenuSubTriggerProps,
 } from './types';
 
+const ContextMenuContext = React.createContext<ContextMenuRootProps | null>(
+  null
+);
+
 const Root = React.forwardRef<
   ViewRef,
   SlottableViewProps & ContextMenuRootProps
->(({ asChild, open: _open, onOpenChange, ...viewProps }, ref) => {
+>(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <ContextMenu.Root onOpenChange={onOpenChange}>
-      <Component ref={ref} {...viewProps} />
-    </ContextMenu.Root>
+    <ContextMenuContext.Provider value={{ open, onOpenChange }}>
+      <ContextMenu.Root onOpenChange={onOpenChange}>
+        <Component ref={ref} {...viewProps} />
+      </ContextMenu.Root>
+    </ContextMenuContext.Provider>
   );
 });
 
 Root.displayName = 'RootWebContextMenu';
+
+function useContextMenuContext() {
+  const context = React.useContext(ContextMenuContext);
+  if (!context) {
+    throw new Error(
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+    );
+  }
+  return context;
+}
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
@@ -51,10 +67,32 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     },
     ref
   ) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { open } = useContextMenuContext();
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        augRef.dataset.state = open ? 'open' : 'closed';
+      }
+    }, [open]);
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        if (disabled) {
+          augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
+        }
+      }
+    }, [disabled]);
+
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <ContextMenu.Trigger disabled={disabled ?? undefined} asChild>
-        <Component ref={ref} {...props} />
+        <Component ref={augmentedRef} {...props} />
       </ContextMenu.Trigger>
     );
   }
@@ -62,9 +100,6 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerWebContextMenu';
 
-/**
- * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
- */
 function Portal({ forceMount, container, children }: ContextMenuPortalProps) {
   return (
     <ContextMenu.Portal
@@ -86,8 +121,8 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'OverlayWebContextMenu';
 
 const Content = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & PositionedContentProps
+  ViewRef,
+  SlottableViewProps & PositionedContentProps
 >(
   (
     {
@@ -112,7 +147,7 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const Component = asChild ? Slot.Pressable : Pressable;
+    const Component = asChild ? Slot.View : View;
     return (
       <ContextMenu.Content
         forceMount={forceMount}
@@ -140,33 +175,23 @@ Content.displayName = 'ContentWebContextMenu';
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ContextMenuItemProps
->(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
-  const { buttonRef, hideHtmlButtonProps, pressableProps } =
-    useTrigger<HTMLDivElement>(props);
-
-  function onSelected(ev: Event) {
-    ev.preventDefault();
-  }
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <>
+>(
+  (
+    { asChild, textValue, closeOnPress = true, onPress: onPressProp, ...props },
+    ref
+  ) => {
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
       <ContextMenu.Item
-        ref={buttonRef}
         textValue={textValue}
         disabled={props.disabled ?? undefined}
         onSelect={closeOnPress ? undefined : onSelected}
-        {...hideHtmlButtonProps}
-      />
-      <ContextMenu.Item
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        asChild
       >
-        <Component ref={ref} {...pressableProps} />
+        <Component ref={ref} pointerEvents='none' {...props} />
       </ContextMenu.Item>
-    </>
-  );
-});
+    );
+  }
+);
 
 Item.displayName = 'ItemWebContextMenu';
 
@@ -212,42 +237,17 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLDivElement>({
-        ...props,
-        onKeyDown(ev) {
-          if (ev.key === ' ') {
-            buttonRef.current?.click();
-          }
-        },
-      });
-
-    function onSelected(ev: Event) {
-      ev.preventDefault();
-    }
-
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <>
-        <ContextMenu.CheckboxItem
-          ref={buttonRef}
-          textValue={textValue}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          disabled={disabled ?? undefined}
-          onSelect={closeOnPress ? undefined : onSelected}
-          {...hideHtmlButtonProps}
-        />
-        <ContextMenu.CheckboxItem
-          textValue={textValue}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          disabled={disabled ?? undefined}
-          asChild
-        >
-          <Component ref={ref} {...pressableProps} />
-        </ContextMenu.CheckboxItem>
-      </>
+      <ContextMenu.CheckboxItem
+        textValue={textValue}
+        checked={checked}
+        onCheckedChange={onCheckedChange}
+        onSelect={closeOnPress ? undefined : onSelected}
+        disabled={disabled ?? undefined}
+      >
+        <Component ref={ref} pointerEvents='none' {...props} />
+      </ContextMenu.CheckboxItem>
     );
   }
 );
@@ -272,33 +272,16 @@ const RadioItem = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ContextMenuRadioItemProps
 >(({ asChild, value, textValue, closeOnPress = true, ...props }, ref) => {
-  const { buttonRef, hideHtmlButtonProps, pressableProps } =
-    useTrigger<HTMLDivElement>(props);
-
-  function onSelected(ev: Event) {
-    ev.preventDefault();
-  }
-
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <>
-      <ContextMenu.RadioItem
-        ref={buttonRef}
-        value={value}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        onSelect={closeOnPress ? undefined : onSelected}
-        {...hideHtmlButtonProps}
-      />
-      <ContextMenu.RadioItem
-        value={value}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        asChild
-      >
-        <Component ref={ref} {...pressableProps} />
-      </ContextMenu.RadioItem>
-    </>
+    <ContextMenu.RadioItem
+      value={value}
+      textValue={textValue}
+      disabled={props.disabled ?? undefined}
+      onSelect={closeOnPress ? undefined : onSelected}
+    >
+      <Component ref={ref} pointerEvents='none' {...props} />
+    </ContextMenu.RadioItem>
   );
 });
 
@@ -311,7 +294,7 @@ const ItemIndicator = React.forwardRef<
   const Component = asChild ? Slot.View : View;
   return (
     <ContextMenu.ItemIndicator forceMount={forceMount} asChild>
-      <Component ref={ref} role='presentation' {...props} />
+      <Component ref={ref} {...props} />
     </ContextMenu.ItemIndicator>
   );
 });
@@ -354,9 +337,8 @@ const SubTrigger = React.forwardRef<
     <ContextMenu.SubTrigger
       disabled={disabled ?? undefined}
       textValue={textValue}
-      asChild
     >
-      <Component ref={ref} {...props} />
+      <Component ref={ref} pointerEvents='none' {...props} />
     </ContextMenu.SubTrigger>
   );
 });
@@ -364,10 +346,10 @@ const SubTrigger = React.forwardRef<
 SubTrigger.displayName = 'SubTriggerWebContextMenu';
 
 const SubContent = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & ForceMountable
+  PressableRef,
+  SlottablePressableProps & ForceMountable
 >(({ asChild = false, forceMount, ...props }, ref) => {
-  const Component = asChild ? Slot.View : View;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
     <ContextMenu.Portal>
       <ContextMenu.SubContent forceMount={forceMount}>
@@ -397,3 +379,7 @@ export {
   SubTrigger,
   Trigger,
 };
+
+function onSelected(ev: Event) {
+  ev.preventDefault();
+}

@@ -7,7 +7,7 @@ import {
   View,
   type GestureResponderEvent,
 } from 'react-native';
-import { useTrigger } from '../hooks/useTrigger';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import * as Slot from '../slot';
 import type {
   PressableRef,
@@ -24,54 +24,70 @@ import type {
   DialogRootProps,
 } from './types';
 
+const DialogContext = React.createContext<DialogRootProps | null>(null);
+
 const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
   ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <Dialog.Root open={open} onOpenChange={onOpenChange}>
-        <Component ref={ref} {...viewProps} />
-      </Dialog.Root>
+      <DialogContext.Provider value={{ open, onOpenChange }}>
+        <Dialog.Root open={open} onOpenChange={onOpenChange}>
+          <Component ref={ref} {...viewProps} />
+        </Dialog.Root>
+      </DialogContext.Provider>
     );
   }
 );
 
 Root.displayName = 'RootWebDialog';
 
+function useDialogContext() {
+  const context = React.useContext(DialogContext);
+  if (!context) {
+    throw new Error(
+      'Dialog compound components cannot be rendered outside the Dialog component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, onPress: onPressProp, ...props }, ref) => {
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
+  ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { onOpenChange, open } = useDialogContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
         onPressProp(ev);
       }
-      if (buttonRef.current) {
-        buttonRef.current.click();
-      }
+      onOpenChange(!open);
     }
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.dataset.state = open ? 'open' : 'closed';
+        augRef.type = 'button';
+      }
+    }, [open]);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <>
-        <Dialog.Trigger
-          ref={buttonRef}
-          aria-hidden
-          style={{ position: 'absolute', zIndex: -999999999 }}
-          aria-disabled={true}
-          tabIndex={-1}
+      <Dialog.Trigger disabled={disabled ?? undefined} asChild>
+        <Component
+          ref={augmentedRef}
+          onPress={onPress}
+          role='button'
+          disabled={disabled}
+          {...props}
         />
-        <Component ref={ref} onPress={onPress} role='button' {...props} />
-      </>
+      </Dialog.Trigger>
     );
   }
 );
 
 Trigger.displayName = 'TriggerWebDialog';
 
-/**
- * @param {object} props.forceMount - Platform: ALL
- * @param {string} props.container - Platform: WEB ONLY
- * @param {rest} ...rest - Platform: Native - Modal props
- */
 const Portal = React.forwardRef<
   React.ElementRef<typeof Modal>,
   React.ComponentPropsWithoutRef<typeof Modal> & DialogPortalProps
@@ -93,7 +109,7 @@ const Overlay = React.forwardRef<
 >(({ asChild, forceMount, ...props }, ref) => {
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Dialog.Overlay forceMount={forceMount} asChild>
+    <Dialog.Overlay forceMount={forceMount}>
       <Component ref={ref} {...props} />
     </Dialog.Overlay>
   );
@@ -109,7 +125,6 @@ const Content = React.forwardRef<
     {
       asChild,
       forceMount,
-
       onOpenAutoFocus,
       onCloseAutoFocus,
       onEscapeKeyDown,
@@ -138,16 +153,36 @@ const Content = React.forwardRef<
 Content.displayName = 'ContentWebDialog';
 
 const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, ...props }, ref) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLButtonElement>(props);
+  ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { onOpenChange, open } = useDialogContext();
+
+    function onPress(ev: GestureResponderEvent) {
+      if (onPressProp) {
+        onPressProp(ev);
+      }
+      onOpenChange(!open);
+    }
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.type = 'button';
+      }
+    }, []);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <Dialog.Close ref={buttonRef} {...hideHtmlButtonProps} />
-        <Dialog.Close asChild>
-          <Component ref={ref} role='button' {...pressableProps} />
+        <Dialog.Close disabled={disabled ?? undefined} asChild>
+          <Component
+            ref={augmentedRef}
+            onPress={onPress}
+            role='button'
+            disabled={disabled}
+            {...props}
+          />
         </Dialog.Close>
       </>
     );

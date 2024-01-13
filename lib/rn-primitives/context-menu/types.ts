@@ -1,4 +1,3 @@
-import type { ViewStyle } from 'react-native';
 import { ForceMountable } from '../types';
 
 interface ContextMenuRootProps {
@@ -62,14 +61,14 @@ interface ContextMenuSubTriggerProps {
 }
 
 export type {
-  ContextMenuRootProps,
-  ContextMenuSubTriggerProps,
-  ContextMenuSubProps,
-  ContextMenuRadioItemProps,
-  ContextMenuRadioGroupProps,
-  ContextMenuPortalProps,
   ContextMenuCheckboxItemProps,
-  ContextMenuSeparatorProps,
   ContextMenuItemProps,
   ContextMenuOverlayProps,
+  ContextMenuPortalProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemProps,
+  ContextMenuRootProps,
+  ContextMenuSeparatorProps,
+  ContextMenuSubProps,
+  ContextMenuSubTriggerProps,
 };

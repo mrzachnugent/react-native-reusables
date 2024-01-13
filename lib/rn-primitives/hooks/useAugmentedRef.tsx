@@ -7,6 +7,7 @@ interface AugmentRefProps<T> {
   deps?: any[];
 }
 
+// TODO: intantiate augmentedRef in here and return it
 export function useAugmentedRef<T>({
   augmentedRef,
   ref,
