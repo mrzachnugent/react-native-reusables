@@ -1,19 +1,20 @@
 import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import * as Slot from '../slot';
+import type {
+  ForceMountable,
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
+import type { RadioGroupItemProps, RadioGroupRootProps } from './types';
 
-interface RootProps {
-  value: string | undefined;
-  onValueChange: (val: string) => void;
-  disabled?: boolean;
-}
-
-const RadioGroupContext = React.createContext<RootProps | null>(null);
+const RadioGroupContext = React.createContext<RadioGroupRootProps | null>(null);
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
+  ViewRef,
+  SlottableViewProps & RadioGroupRootProps
 >(({ asChild, value, onValueChange, disabled = false, ...viewProps }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
@@ -48,14 +49,8 @@ interface RadioItemContext {
 const RadioItemContext = React.createContext<RadioItemContext | null>(null);
 
 const Item = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & {
-    value: string;
-    /**
-     * nativeID of the label element that describes this radio group item
-     */
-    'aria-labelledby': string;
-  }
+  PressableRef,
+  SlottablePressableProps & RadioGroupItemProps
 >(
   (
     {
@@ -112,10 +107,8 @@ function useRadioItemContext() {
 }
 
 const Indicator = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & {
-    forceMount?: true | undefined;
-  }
+  ViewRef,
+  SlottableViewProps & ForceMountable
 >(({ asChild, forceMount, ...props }, ref) => {
   const { value } = useRadioGroupContext();
   const { itemValue } = useRadioItemContext();

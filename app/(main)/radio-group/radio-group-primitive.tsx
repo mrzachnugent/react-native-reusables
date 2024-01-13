@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import * as Label from '~/lib/rn-primitives/label';
-import * as RadioGroup from '~/lib/rn-primitives/todo/radio-group';
+import * as RadioGroup from '~/lib/rn-primitives/radio-group';
 
 export default function RadioGroupPrimitiveScreen() {
   const [value, setValue] = React.useState('Primitive 2');
@@ -42,7 +42,7 @@ function RadioGroupItemWithLabel({
     <View className={'flex-row gap-3 items-center'}>
       <RadioGroup.Item
         className={
-          'h-6 w-6 border-primary [borderWidth:1.5] items-center justify-center'
+          'h-6 w-6 border-primary web:border native:[borderWidth:1.5] items-center justify-center'
         }
         aria-labelledby={`label-for-${value}`}
         value={value}
