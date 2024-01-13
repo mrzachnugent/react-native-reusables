@@ -78,12 +78,34 @@ const AccordionItemContext = React.createContext<AccordionItemProps | null>(
 );
 
 const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
-  ({ asChild, value, disabled, ...props }, ref) => {
+  ({ asChild, value: itemValue, disabled, ...props }, ref) => {
+    const augmentedRef = React.useRef<ViewRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const {
+      value,
+      orientation,
+      disabled: disabledRoot,
+    } = useAccordionContext();
+
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        const isExpanded = Array.isArray(value)
+          ? value.includes(itemValue)
+          : value === itemValue;
+        augRef.dataset.state = isExpanded ? 'open' : 'closed';
+        augRef.dataset.orientation = orientation;
+        if (disabled || disabledRoot) {
+          augRef.dataset.disabled = 'true';
+        }
+      }
+    }, [value, itemValue, orientation]);
+
     const Component = asChild ? Slot.View : View;
     return (
-      <AccordionItemContext.Provider value={{ value, disabled }}>
-        <Accordion.Item value={value} disabled={disabled} asChild>
-          <Component ref={ref} {...props} />
+      <AccordionItemContext.Provider value={{ value: itemValue, disabled }}>
+        <Accordion.Item value={itemValue} disabled={disabled} asChild>
+          <Component ref={augmentedRef} {...props} />
         </Accordion.Item>
       </AccordionItemContext.Provider>
     );
@@ -104,10 +126,33 @@ function useAccordionItemContext() {
 
 const Header = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
+    const augmentedRef = React.useRef<ViewRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { value: itemValue, disabled } = useAccordionItemContext();
+    const {
+      value,
+      orientation,
+      disabled: disabledRoot,
+    } = useAccordionContext();
+
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        const isExpanded = Array.isArray(value)
+          ? value.includes(itemValue)
+          : value === itemValue;
+        augRef.dataset.state = isExpanded ? 'open' : 'closed';
+        augRef.dataset.orientation = orientation;
+        if (disabled || disabledRoot) {
+          augRef.dataset.disabled = 'true';
+        }
+      }
+    }, [value, itemValue, orientation]);
+
     const Component = asChild ? Slot.View : View;
     return (
       <Accordion.Header asChild>
-        <Component ref={ref} {...props} />
+        <Component ref={augmentedRef} {...props} />
       </Accordion.Header>
     );
   }
@@ -130,6 +175,10 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
           : value === itemValue;
         augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
         augRef.type = 'button';
+
+        if (disabled || disabledRoot || disabledProp) {
+          augRef.dataset.disabled = 'true';
+        }
       }
     }, [value, itemValue]);
 
@@ -159,8 +208,8 @@ const Content = React.forwardRef<
   const augmentedRef = React.useRef<ViewRef>(null);
   useAugmentedRef({ augmentedRef, ref });
 
-  const { value, orientation } = useAccordionContext();
-  const { value: itemValue } = useAccordionItemContext();
+  const { value, orientation, disabled: disabledRoot } = useAccordionContext();
+  const { value: itemValue, disabled } = useAccordionItemContext();
   React.useEffect(() => {
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
@@ -169,6 +218,10 @@ const Content = React.forwardRef<
         : value === itemValue;
       augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
       augRef.dataset.orientation = orientation;
+
+      if (disabled || disabledRoot) {
+        augRef.dataset.disabled = 'true';
+      }
     }
   }, [value, itemValue, orientation]);
 
