@@ -282,8 +282,8 @@ Overlay.displayName = 'OverlayMenubar';
  * @info `position`, `top`, `left`, and `maxWidth` style properties are controlled internally. Opt out of this behavior by setting `disablePositioningStyle` to `true`.
  */
 const Content = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & PositionedContentProps
+  ViewRef,
+  SlottableViewProps & PositionedContentProps
 >(
   (
     {
@@ -356,7 +356,7 @@ const Content = React.forwardRef<
       }
     }
 
-    const Component = asChild ? Slot.Pressable : Pressable;
+    const Component = asChild ? Slot.View : View;
     return (
       <Component
         ref={ref}
@@ -365,6 +365,7 @@ const Content = React.forwardRef<
         aria-modal={true}
         style={[positionStyle, style]}
         onLayout={onLayout}
+        onStartShouldSetResponder={onStartShouldSetResponder}
         {...props}
       />
     );
@@ -745,3 +746,7 @@ export {
   SubTrigger,
   Trigger,
 };
+
+function onStartShouldSetResponder() {
+  return true;
+}

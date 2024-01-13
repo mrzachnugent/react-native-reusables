@@ -1,88 +1,88 @@
 import { Platform } from 'react-native';
+import * as MenubarWeb from './menubar-web';
 import * as MenubarNative from './menubar-native';
-import * as DropdownWeb from './menubar-web';
 
 export const Root = Platform.select({
-  web: DropdownWeb.Root,
+  web: MenubarWeb.Root,
   default: MenubarNative.Root,
 });
 
 export const Trigger = Platform.select({
-  web: DropdownWeb.Trigger,
+  web: MenubarWeb.Trigger,
   default: MenubarNative.Trigger,
 });
 
 export const Menu = Platform.select({
-  web: DropdownWeb.Menu,
+  web: MenubarWeb.Menu,
   default: MenubarNative.Menu,
 });
 
 export const Portal = Platform.select({
-  web: DropdownWeb.Portal,
+  web: MenubarWeb.Portal,
   default: MenubarNative.Portal,
 });
 
 export const Overlay = Platform.select({
-  web: DropdownWeb.Overlay,
+  web: MenubarWeb.Overlay,
   default: MenubarNative.Overlay,
 });
 
 export const Content = Platform.select({
-  web: DropdownWeb.Content,
+  web: MenubarWeb.Content,
   default: MenubarNative.Content,
 });
 
 export const Item = Platform.select({
-  web: DropdownWeb.Item,
+  web: MenubarWeb.Item,
   default: MenubarNative.Item,
 });
 
 export const Group = Platform.select({
-  web: DropdownWeb.Group,
+  web: MenubarWeb.Group,
   default: MenubarNative.Group,
 });
 
 export const Label = Platform.select({
-  web: DropdownWeb.Label,
+  web: MenubarWeb.Label,
   default: MenubarNative.Label,
 });
 
 export const CheckboxItem = Platform.select({
-  web: DropdownWeb.CheckboxItem,
+  web: MenubarWeb.CheckboxItem,
   default: MenubarNative.CheckboxItem,
 });
 
 export const RadioGroup = Platform.select({
-  web: DropdownWeb.RadioGroup,
+  web: MenubarWeb.RadioGroup,
   default: MenubarNative.RadioGroup,
 });
 
 export const RadioItem = Platform.select({
-  web: DropdownWeb.RadioItem,
+  web: MenubarWeb.RadioItem,
   default: MenubarNative.RadioItem,
 });
 
 export const ItemIndicator = Platform.select({
-  web: DropdownWeb.ItemIndicator,
+  web: MenubarWeb.ItemIndicator,
   default: MenubarNative.ItemIndicator,
 });
 
 export const Separator = Platform.select({
-  web: DropdownWeb.Separator,
+  web: MenubarWeb.Separator,
   default: MenubarNative.Separator,
 });
 
 export const Sub = Platform.select({
-  web: DropdownWeb.Sub,
+  web: MenubarWeb.Sub,
   default: MenubarNative.Sub,
 });
 
 export const SubTrigger = Platform.select({
-  web: DropdownWeb.SubTrigger,
+  web: MenubarWeb.SubTrigger,
   default: MenubarNative.SubTrigger,
 });
 
 export const SubContent = Platform.select({
-  web: DropdownWeb.SubContent,
+  web: MenubarWeb.SubContent,
   default: MenubarNative.SubContent,
 });

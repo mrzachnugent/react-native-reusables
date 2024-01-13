@@ -1,92 +1,69 @@
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDrawerStatus } from '@react-navigation/drawer';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useNavigation } from 'expo-router';
-import { StyleSheet } from 'nativewind';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as NavigationMenu from '~/lib/rn-primitives/todo/navigation-menu';
-import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
-
-const shouldBlockNavWhenPortalRoot = () => false;
+import * as NavigationMenu from '~/lib/rn-primitives/navigation-menu';
 
 export default function MenubarPrimitiveScreen() {
   const insets = useSafeAreaInsets();
-  const headerHeight = useHeaderHeight();
-  const bottomBarHeight = useBottomTabBarHeight();
   const contentInsets = {
     top: insets.top,
     bottom: insets.bottom,
     left: 12,
     right: 12,
   };
-  const [value, setValue] = React.useState<string | undefined>();
-  const [portalHost, setPortalHost] = React.useState<string | undefined>();
+  const [value, setValue] = React.useState<string>();
   const navigation = useNavigation();
   const isDrawerOpen = useDrawerStatus() === 'open';
 
-  const blockNavWhenPortalRoot = shouldBlockNavWhenPortalRoot();
-
   function closeAll() {
-    setValue(undefined);
+    setValue('');
   }
 
   React.useEffect(() => {
     const sub = navigation.addListener('blur', () => {
-      if (!portalHost) {
-        closeAll();
-      }
+      closeAll();
     });
 
     return sub;
-  }, [portalHost]);
+  }, []);
 
   React.useEffect(() => {
-    if (isDrawerOpen && !portalHost) {
+    if (isDrawerOpen) {
       closeAll();
     }
   }, [isDrawerOpen]);
 
   return (
     <>
+      {!!value && (
+        <Pressable
+          onPress={() => {
+            setValue('');
+          }}
+          style={StyleSheet.absoluteFill}
+          className='bg-red-500 absolute'
+        />
+      )}
       <View
         pointerEvents={'box-none'}
         className='flex-1 items-center justify-center p-6 gap-12'
       >
-        <Pressable
-          onPress={() => {
-            setPortalHost(portalHost === 'inner' ? undefined : 'inner');
-          }}
-          className='bg-secondary'
-        >
-          <Text className='text-xl text-foreground'>Toggle Portal</Text>
-          <Text className='text-xl text-foreground'>
-            {portalHost ?? 'root'}
-          </Text>
-        </Pressable>
         <NavigationMenu.Root
           onValueChange={setValue}
           value={value}
-          className='flex-row items-center p-0.5 gap-5 z-50'
+          className='flex-row items-center p-0.5 gap-5 z-50 bg-blue-500'
         >
           <NavigationMenu.List className='flex-row items-center gap-5'>
             <NavigationMenu.Item value='learn' className='bg-background'>
               <NavigationMenu.Trigger>
                 <Text className='text-foreground text-xl'>Learn</Text>
               </NavigationMenu.Trigger>
-              <NavigationMenu.Portal hostName={portalHost}>
-                {!portalHost && blockNavWhenPortalRoot && (
-                  <BlockNavHeaderAndBottomTabs
-                    onPress={closeAll}
-                    headerHeight={headerHeight}
-                    bottomBarHeight={bottomBarHeight}
-                  />
-                )}
+              <NavigationMenu.Portal>
                 <NavigationMenu.Content
                   insets={contentInsets}
-                  sideOffset={portalHost ? -headerHeight : undefined}
-                  className='bg-background w-2/3'
+                  className='bg-blue-500 absolute'
                 >
                   <NavigationMenu.Link asChild onPress={closeAll}>
                     <Text className='text-foreground text-xl'>Stiches</Text>
@@ -104,18 +81,10 @@ export default function MenubarPrimitiveScreen() {
               <NavigationMenu.Trigger>
                 <Text className='text-foreground text-xl'>Overview</Text>
               </NavigationMenu.Trigger>
-              <NavigationMenu.Portal hostName={portalHost}>
-                {!portalHost && blockNavWhenPortalRoot && (
-                  <BlockNavHeaderAndBottomTabs
-                    onPress={closeAll}
-                    headerHeight={headerHeight}
-                    bottomBarHeight={bottomBarHeight}
-                  />
-                )}
+              <NavigationMenu.Portal>
                 <NavigationMenu.Content
                   insets={contentInsets}
-                  sideOffset={portalHost ? -headerHeight : undefined}
-                  className='bg-background w-2/3'
+                  className='bg-blue-500 absolute'
                 >
                   <NavigationMenu.Link asChild onPress={closeAll}>
                     <Text className='text-foreground text-xl'>
@@ -134,60 +103,13 @@ export default function MenubarPrimitiveScreen() {
               </NavigationMenu.Portal>
             </NavigationMenu.Item>
             <NavigationMenu.Item value='terminal' className='bg-background'>
-              <NavigationMenu.Link asChild onPress={closeAll} className='z-50'>
+              <NavigationMenu.Link onPress={closeAll} className='z-50'>
                 <Text className='text-foreground text-xl'>Github</Text>
               </NavigationMenu.Link>
             </NavigationMenu.Item>
           </NavigationMenu.List>
         </NavigationMenu.Root>
-        {!!value && (
-          <Pressable
-            style={StyleSheet.absoluteFill}
-            className='bg-green-500/30'
-            onPress={closeAll}
-          />
-        )}
       </View>
-      <PortalHost name='inner' />
-    </>
-  );
-}
-
-// forces the menubar to be closed before navigating
-function BlockNavHeaderAndBottomTabs({
-  onPress,
-  headerHeight,
-  bottomBarHeight,
-}: {
-  onPress: () => void;
-  headerHeight: number;
-  bottomBarHeight: number;
-}) {
-  return (
-    <>
-      <Pressable
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: headerHeight,
-        }}
-        className='bg-green-900'
-        onPress={onPress}
-      />
-
-      <Pressable
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: bottomBarHeight,
-        }}
-        className='bg-green-900'
-        onPress={onPress}
-      />
     </>
   );
 }

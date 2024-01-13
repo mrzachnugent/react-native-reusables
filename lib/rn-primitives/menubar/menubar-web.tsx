@@ -2,7 +2,7 @@ import * as Menubar from '@radix-ui/react-menubar';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { useTrigger } from '../hooks/useTrigger';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -26,7 +26,6 @@ import type {
   MenubarSubProps,
   MenubarSubTriggerProps,
 } from './types';
-import { useAugmentedRef } from '../hooks/useAugmentedRef';
 
 const MenubarContext = React.createContext<MenubarRootProps | null>(null);
 
