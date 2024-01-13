@@ -66,7 +66,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       onOpenChange(!open);
     }
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
         augRef.dataset.state = open ? 'open' : 'closed';
@@ -110,21 +110,10 @@ const Overlay = React.forwardRef<
   PressableRef,
   SlottablePressableProps & AlertDialogOverlayProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const augmentedRef = React.useRef<ViewRef>(null);
-  useAugmentedRef({ augmentedRef, ref });
-  const { open } = useAlertDialogContext();
-
-  React.useEffect(() => {
-    if (augmentedRef.current) {
-      const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-      augRef.dataset.state = open ? 'open' : 'closed';
-    }
-  }, [open]);
-
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <AlertDialog.Overlay forceMount={forceMount} asChild>
-      <Component ref={augmentedRef} {...props} />
+    <AlertDialog.Overlay forceMount={forceMount}>
+      <Component ref={ref} {...props} />
     </AlertDialog.Overlay>
   );
 });
@@ -151,9 +140,9 @@ const Content = React.forwardRef<
     useAugmentedRef({ augmentedRef, ref });
     const { open } = useAlertDialogContext();
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
-        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
         augRef.dataset.state = open ? 'open' : 'closed';
       }
     }, [open]);
@@ -188,7 +177,7 @@ const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
       onOpenChange(!open);
     }
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
         augRef.type = 'button';
@@ -227,7 +216,7 @@ const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
       onOpenChange(!open);
     }
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
         augRef.type = 'button';

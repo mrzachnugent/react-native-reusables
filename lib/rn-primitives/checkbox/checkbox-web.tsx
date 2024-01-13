@@ -10,6 +10,8 @@ import type {
 } from '../types';
 import type { CheckboxIndicator, CheckboxRootProps } from './types';
 
+const CheckboxContext = React.createContext<CheckboxRootProps | null>(null);
+
 const Root = React.forwardRef<
   PressableRef,
   SlottablePressableProps & CheckboxRootProps
@@ -17,7 +19,7 @@ const Root = React.forwardRef<
   (
     {
       asChild,
-      disabled = false,
+      disabled,
       checked,
       onCheckedChange,
       onPress: onPressProp,
@@ -34,42 +36,84 @@ const Root = React.forwardRef<
       onCheckedChange(!checked);
     }
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
         augRef.dataset.state = checked ? 'checked' : 'unchecked';
-        augRef.type = 'button';
-        augRef.role = 'checkbox';
         augRef.value = checked ? 'on' : 'off';
       }
     }, [checked]);
 
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.type = 'button';
+        augRef.role = 'checkbox';
+
+        if (disabled) {
+          augRef.dataset.disabled = 'true';
+        }
+      }
+    }, [disabled]);
+
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Checkbox.Root
-        checked={checked}
-        onCheckedChange={onCheckedChange}
-        disabled={disabled}
-        asChild
-      >
-        <Component
-          ref={augmentedRef}
-          role='button'
-          onPress={onPress}
+      <CheckboxContext.Provider value={{ checked, disabled, onCheckedChange }}>
+        <Checkbox.Root
+          checked={checked}
+          onCheckedChange={onCheckedChange}
           disabled={disabled}
-          {...props}
-        />
-      </Checkbox.Root>
+          asChild
+        >
+          <Component
+            ref={augmentedRef}
+            role='button'
+            onPress={onPress}
+            disabled={disabled}
+            {...props}
+          />
+        </Checkbox.Root>
+      </CheckboxContext.Provider>
     );
   }
 );
 
 Root.displayName = 'RootWebCheckbox';
 
+function useCheckboxContext() {
+  const context = React.useContext(CheckboxContext);
+  if (context === null) {
+    throw new Error(
+      'Checkbox compound components cannot be rendered outside the Checkbox component'
+    );
+  }
+  return context;
+}
+
 const Indicator = React.forwardRef<
   React.ElementRef<typeof View>,
   ComponentPropsWithAsChild<typeof View> & CheckboxIndicator
 >(({ asChild, forceMount, ...props }, ref) => {
+  const { checked, disabled } = useCheckboxContext();
+  const augmentedRef = React.useRef<PressableRef>(null);
+  useAugmentedRef({ augmentedRef, ref });
+
+  React.useLayoutEffect(() => {
+    if (augmentedRef.current) {
+      const augRef = augmentedRef.current as unknown as HTMLDivElement;
+      augRef.dataset.state = checked ? 'checked' : 'unchecked';
+    }
+  }, [checked]);
+
+  React.useLayoutEffect(() => {
+    if (augmentedRef.current) {
+      const augRef = augmentedRef.current as unknown as HTMLDivElement;
+      if (disabled) {
+        augRef.dataset.disabled = 'true';
+      }
+    }
+  }, [disabled]);
+
   const Component = asChild ? Slot.View : View;
   return (
     <Checkbox.Indicator forceMount={forceMount} asChild>

@@ -87,19 +87,25 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
       disabled: disabledRoot,
     } = useAccordionContext();
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
         const isExpanded = Array.isArray(value)
           ? value.includes(itemValue)
           : value === itemValue;
         augRef.dataset.state = isExpanded ? 'open' : 'closed';
+      }
+    }, [value, itemValue]);
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
         augRef.dataset.orientation = orientation;
         if (disabled || disabledRoot) {
           augRef.dataset.disabled = 'true';
         }
       }
-    }, [value, itemValue, orientation]);
+    }, [orientation, disabled, disabledRoot]);
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -135,19 +141,25 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
       disabled: disabledRoot,
     } = useAccordionContext();
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
         const isExpanded = Array.isArray(value)
           ? value.includes(itemValue)
           : value === itemValue;
         augRef.dataset.state = isExpanded ? 'open' : 'closed';
+      }
+    }, [value, itemValue]);
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
         augRef.dataset.orientation = orientation;
         if (disabled || disabledRoot) {
           augRef.dataset.disabled = 'true';
         }
       }
-    }, [value, itemValue, orientation]);
+    }, [orientation, disabled, disabledRoot]);
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -167,20 +179,25 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const augmentedRef = React.useRef<PressableRef>(null);
     useAugmentedRef({ augmentedRef, ref });
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (augmentedRef.current) {
-        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
         const isExpanded = Array.isArray(value)
           ? value.includes(itemValue)
           : value === itemValue;
-        augRef.dataset.state = isExpanded ? 'open' : 'closed';
-        augRef.type = 'button';
+        augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
+      }
+    }, [value, itemValue]);
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
 
         if (disabled || disabledRoot || disabledProp) {
           augRef.dataset.disabled = 'true';
         }
       }
-    }, [value, itemValue]);
+    }, [disabled, disabledRoot, disabledProp]);
 
     const Component = asChild ? Slot.Pressable : Slot.Pressable;
     return (
@@ -210,20 +227,26 @@ const Content = React.forwardRef<
 
   const { value, orientation, disabled: disabledRoot } = useAccordionContext();
   const { value: itemValue, disabled } = useAccordionItemContext();
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
       const isExpanded = Array.isArray(value)
         ? value.includes(itemValue)
         : value === itemValue;
       augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
+    }
+  }, [value, itemValue]);
+
+  React.useLayoutEffect(() => {
+    if (augmentedRef.current) {
+      const augRef = augmentedRef.current as unknown as HTMLDivElement;
       augRef.dataset.orientation = orientation;
 
       if (disabled || disabledRoot) {
         augRef.dataset.disabled = 'true';
       }
     }
-  }, [value, itemValue, orientation]);
+  }, [orientation, disabled, disabledRoot]);
 
   const Component = asChild ? Slot.View : View;
   return (
