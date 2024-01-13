@@ -1,9 +1,9 @@
 import { useHeaderHeight } from '@react-navigation/elements';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Popover from '~/lib/rn-primitives/todo/popover';
-import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
+import * as Popover from '~/lib/rn-primitives/popover';
+import { PortalHost } from '~/lib/rn-primitives/portal';
 
 function getSide(): 'bottom' | 'top' {
   return 'bottom';
@@ -31,20 +31,21 @@ export default function PopoverPrimitiveScreen() {
             </Text>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Overlay className='bg-red-500/10' />
-            <Popover.Content
-              side={side === 'bottom' ? 'top' : 'bottom'}
-              align='center'
-              sideOffset={3}
-              insets={contentInsets}
-              className='bg-background'
-            >
-              <Text className='text-foreground text-xl'>TITLE</Text>
-              <Text className='text-foreground text-xl'>DESCRIPTION</Text>
-              <Popover.Close>
-                <Text className='text-foreground text-xl'>Close</Text>
-              </Popover.Close>
-            </Popover.Content>
+            <NativeOverlay>
+              <Popover.Content
+                side={side === 'bottom' ? 'top' : 'bottom'}
+                align='center'
+                sideOffset={3}
+                insets={contentInsets}
+                className='bg-background'
+              >
+                <Text className='text-foreground text-xl'>TITLE</Text>
+                <Text className='text-foreground text-xl'>DESCRIPTION</Text>
+                <Popover.Close>
+                  <Text className='text-foreground text-xl'>Close</Text>
+                </Popover.Close>
+              </Popover.Content>
+            </NativeOverlay>
           </Popover.Portal>
         </Popover.Root>
         <Popover.Root open={openInner} onOpenChange={setOpenInner}>
@@ -54,26 +55,42 @@ export default function PopoverPrimitiveScreen() {
             </Text>
           </Popover.Trigger>
           <Popover.Portal hostName='inner'>
-            <Popover.Overlay className='bg-red-500/10' />
-            <Popover.Content
-              side={side}
-              align='center'
-              sideOffset={
-                side === 'bottom' ? -headerHeight + 3 : headerHeight + 3
-              }
-              insets={contentInsets}
-              className='bg-background'
-            >
-              <Text className='text-foreground text-xl'>TITLE</Text>
-              <Text className='text-foreground text-xl'>DESCRIPTION</Text>
-              <Popover.Close>
-                <Text className='text-foreground text-xl'>Close</Text>
-              </Popover.Close>
-            </Popover.Content>
+            <NativeOverlay>
+              <Popover.Content
+                side={side}
+                align='center'
+                sideOffset={
+                  Platform.OS === 'web'
+                    ? 3
+                    : side === 'bottom'
+                    ? -headerHeight + 3
+                    : headerHeight + 3
+                }
+                insets={contentInsets}
+                className='bg-background'
+              >
+                <Text className='text-foreground text-xl'>TITLE</Text>
+                <Text className='text-foreground text-xl'>DESCRIPTION</Text>
+                <Popover.Close>
+                  <Text className='text-foreground text-xl'>Close</Text>
+                </Popover.Close>
+              </Popover.Content>
+            </NativeOverlay>
           </Popover.Portal>
         </Popover.Root>
         <PortalHost name='inner' />
       </View>
     </>
+  );
+}
+
+function NativeOverlay({ children }: { children: React.ReactNode }) {
+  if (Platform.OS === 'web') {
+    return <>{children}</>;
+  }
+  return (
+    <Popover.Overlay style={StyleSheet.absoluteFill} className='bg-red-500/10'>
+      {children}
+    </Popover.Overlay>
   );
 }
