@@ -5,14 +5,17 @@ import {
   LayoutChangeEvent,
   LayoutRectangle,
   Pressable,
-  StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
 import { StoreApi, createStore, useStore } from 'zustand';
 import { Portal as RNPPortal } from '~/lib/rn-primitives/portal/portal-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ComponentPropsWithAsChild, Insets } from '~/lib/rn-primitives/types';
+import {
+  ComponentPropsWithAsChild,
+  ForceMountable,
+  Insets,
+} from '~/lib/rn-primitives/types';
 import {
   LayoutPosition,
   useRelativePosition,
@@ -145,15 +148,7 @@ Trigger.displayName = 'TriggerPopover';
 /**
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
  */
-function Portal({
-  forceMount,
-  hostName,
-  children,
-}: {
-  children: React.ReactNode;
-  hostName?: string;
-  forceMount?: true | undefined;
-}) {
+function Portal({ forceMount, hostName, children }: PopoverPortalProps) {
   const value = usePopoverContext();
   const triggerPosition = useRootStoreContext((state) => state.triggerPosition);
   const nativeID = useRootStoreContext((state) => state.nativeID);
@@ -180,11 +175,7 @@ function Portal({
 
 const Overlay = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & {
-    forceMount?: true | undefined;
-    style?: ViewStyle;
-    closeOnPress?: boolean;
-  }
+  ComponentPropsWithAsChild<typeof Pressable> & PopoverOverlayProps
 >(
   (
     {
@@ -192,7 +183,6 @@ const Overlay = React.forwardRef<
       forceMount,
       onPress: OnPressProp,
       closeOnPress = true,
-      style,
       ...props
     },
     ref
@@ -221,14 +211,7 @@ const Overlay = React.forwardRef<
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
-    return (
-      <Component
-        ref={ref}
-        onPress={onPress}
-        style={[StyleSheet.absoluteFill, style]}
-        {...props}
-      />
-    );
+    return <Component ref={ref} onPress={onPress} {...props} />;
   }
 );
 
@@ -376,3 +359,19 @@ const Close = React.forwardRef<
 Close.displayName = 'ClosePopover';
 
 export { Close, Content, Overlay, Portal, Root, Trigger };
+
+interface PopoverPortalProps extends ForceMountable {
+  children: React.ReactNode;
+  /**
+   * Platform: NATIVE ONLY
+   */
+  hostName?: string;
+  /**
+   * Platform: WEB ONLY
+   */
+  container?: HTMLElement | null | undefined;
+}
+
+interface PopoverOverlayProps extends ForceMountable {
+  closeOnPress?: boolean;
+}

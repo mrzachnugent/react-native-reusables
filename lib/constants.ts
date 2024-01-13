@@ -37,6 +37,7 @@ export const COMPONENTS = [
   'dialog',
   'dropdown-menu',
   'form',
+  'hover-card',
   'input',
   'label',
   'menubar',
