@@ -1,6 +1,7 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import * as Slot from '../slot';
 import type {
   ComponentPropsWithAsChild,
@@ -21,23 +22,32 @@ const Root = React.forwardRef<
       onCheckedChange,
       onPress: onPressProp,
       onKeyDown: onKeyDownProp,
+      role: _role,
       ...props
     },
     ref
   ) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
+    useAugmentedRef({
+      augmentedRef,
+      ref,
+    });
 
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
       onCheckedChange(!checked);
     }
 
-    function onKeyDown(ev: React.KeyboardEvent) {
-      onKeyDownProp?.(ev);
-      if (ev.key === 'Enter' || ev.key === ' ') {
-        onCheckedChange(!checked);
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const auggRef = augmentedRef.current as unknown as HTMLButtonElement;
+        auggRef.dataset.state = checked ? 'checked' : 'unchecked';
+        auggRef.type = 'button';
+        auggRef.role = 'checkbox';
+        auggRef.value = checked ? 'on' : 'off';
       }
-    }
+    }, [checked]);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
@@ -49,10 +59,10 @@ const Root = React.forwardRef<
         asChild
       >
         <Component
-          ref={ref}
-          // @ts-expect-error - web only
-          onKeyDown={onKeyDown}
+          ref={augmentedRef}
+          role='button'
           onPress={onPress}
+          disabled={disabled}
           {...props}
         />
       </Checkbox.Root>
@@ -68,7 +78,7 @@ const Indicator = React.forwardRef<
 >(({ asChild, forceMount, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <Checkbox.Indicator forceMount={forceMount}>
+    <Checkbox.Indicator forceMount={forceMount} asChild>
       <Component ref={ref} {...props} />
     </Checkbox.Indicator>
   );
