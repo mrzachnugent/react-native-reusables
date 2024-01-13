@@ -5,6 +5,7 @@ import { useNavigation } from 'expo-router';
 import { StyleSheet } from 'nativewind';
 import React from 'react';
 import {
+  Platform,
   Pressable,
   ScrollView,
   Text,
@@ -12,7 +13,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Menubar from '~/lib/rn-primitives/todo/menubar';
+import * as Menubar from '~/lib/rn-primitives/menubar';
 import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
 
 const shouldBlockNavWhenPortalRoot = () => false;
@@ -103,17 +104,19 @@ export default function MenubarPrimitiveScreen() {
           pointerEvents={'box-none'}
           className=' items-center justify-center p-6 gap-12'
         >
-          <Pressable
-            onPress={() => {
-              setPortalHost(portalHost === 'inner' ? undefined : 'inner');
-            }}
-            className='bg-secondary'
-          >
-            <Text className='text-xl text-foreground'>Toggle Portal</Text>
-            <Text className='text-xl text-foreground'>
-              {portalHost ?? 'root'}
-            </Text>
-          </Pressable>
+          {Platform.OS !== 'web' && (
+            <Pressable
+              onPress={() => {
+                setPortalHost(portalHost === 'inner' ? undefined : 'inner');
+              }}
+              className='bg-secondary'
+            >
+              <Text className='text-xl text-foreground'>Toggle Portal</Text>
+              <Text className='text-xl text-foreground'>
+                {portalHost ?? 'root'}
+              </Text>
+            </Pressable>
+          )}
           <Menubar.Root
             onValueChange={setValue}
             value={value}
@@ -124,13 +127,13 @@ export default function MenubarPrimitiveScreen() {
                 <Text className='text-foreground text-xl'>File</Text>
               </Menubar.Trigger>
               <Menubar.Portal hostName={portalHost}>
-                {!portalHost && blockNavWhenPortalRoot && (
+                {/* {!portalHost && blockNavWhenPortalRoot && (
                   <BlockNavHeaderAndBottomTabs
                     onPress={closeAll}
                     headerHeight={headerHeight}
                     bottomBarHeight={bottomBarHeight}
                   />
-                )}
+                )} */}
                 <Menubar.Content
                   insets={contentInsets}
                   sideOffset={portalHost ? -headerHeight : undefined}
@@ -164,7 +167,7 @@ export default function MenubarPrimitiveScreen() {
                           {'>'} Open Recent
                         </Text>
                       </Menubar.SubTrigger>
-                      <Menubar.SubContent>
+                      <Menubar.SubContent className='bg-background'>
                         <Menubar.Item onPress={closeAllSubMenus}>
                           <Text className='text-foreground text-xl'>expo</Text>
                         </Menubar.Item>
@@ -184,13 +187,13 @@ export default function MenubarPrimitiveScreen() {
                 <Text className='text-foreground text-xl'>Keyboard</Text>
               </Menubar.Trigger>
               <Menubar.Portal hostName={portalHost}>
-                {!portalHost && blockNavWhenPortalRoot && (
+                {/* {!portalHost && blockNavWhenPortalRoot && (
                   <BlockNavHeaderAndBottomTabs
                     onPress={closeAll}
                     headerHeight={headerHeight}
                     bottomBarHeight={bottomBarHeight}
                   />
-                )}
+                )} */}
                 <Menubar.Content
                   insets={contentInsets}
                   sideOffset={portalHost ? -headerHeight : undefined}
@@ -225,7 +228,7 @@ export default function MenubarPrimitiveScreen() {
                           {'>'} More Options...
                         </Text>
                       </Menubar.SubTrigger>
-                      <Menubar.SubContent>
+                      <Menubar.SubContent className='bg-background'>
                         <Menubar.RadioGroup
                           value={keyboardType}
                           onValueChange={setKeyboardType}
@@ -262,13 +265,13 @@ export default function MenubarPrimitiveScreen() {
                 <Text className='text-foreground text-xl'>Terminal</Text>
               </Menubar.Trigger>
               <Menubar.Portal hostName={portalHost}>
-                {!portalHost && blockNavWhenPortalRoot && (
+                {/* {!portalHost && blockNavWhenPortalRoot && (
                   <BlockNavHeaderAndBottomTabs
                     onPress={closeAll}
                     headerHeight={headerHeight}
                     bottomBarHeight={bottomBarHeight}
                   />
-                )}
+                )} */}
 
                 <Menubar.Content
                   insets={contentInsets}

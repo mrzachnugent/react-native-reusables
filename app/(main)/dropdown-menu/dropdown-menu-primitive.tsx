@@ -1,8 +1,8 @@
 import { useHeaderHeight } from '@react-navigation/elements';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as DropdownMenu from '~/lib/rn-primitives/todo/dropdown-menu';
+import * as DropdownMenu from '~/lib/rn-primitives/dropdown-menu';
 import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
 
 export default function DropdownMenuPrimitiveScreen() {
@@ -40,119 +40,126 @@ export default function DropdownMenuPrimitiveScreen() {
             </Text>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
-            <DropdownMenu.Overlay className='bg-red-500/10' onPress={onClose} />
-            <DropdownMenu.Content
-              align='start'
-              sideOffset={6}
-              insets={contentInsets}
-              className='bg-background w-2/3'
+            <DropdownMenu.Overlay
+              style={StyleSheet.absoluteFill}
+              className='bg-red-500/10'
+              onPress={onClose}
             >
-              <DropdownMenu.Group>
-                <DropdownMenu.Label className='text-foreground font-bold'>
-                  Label
-                </DropdownMenu.Label>
-                <DropdownMenu.Item onPress={onClose}>
-                  <Text className='text-foreground text-xl'>Item 1</Text>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item onPress={onClose}>
-                  <Text className='text-foreground text-xl'>Item 2</Text>
-                </DropdownMenu.Item>
-              </DropdownMenu.Group>
-              <DropdownMenu.Separator />
-              <DropdownMenu.CheckboxItem
-                checked={checkboxValue}
-                onCheckedChange={setCheckboxValue}
-                closeOnPress={false}
-                className='flex-row justify-between items-center gap-3'
+              <DropdownMenu.Content
+                align='start'
+                sideOffset={6}
+                insets={contentInsets}
+                className='bg-background native:w-2/3'
               >
-                <Text className='text-foreground text-xl'>Is checked?</Text>
-                <DropdownMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
-              </DropdownMenu.CheckboxItem>
-              <DropdownMenu.Sub open={openSub} onOpenChange={setOpenSub}>
-                <DropdownMenu.SubTrigger>
-                  <Text className='text-foreground text-xl'>SUB TRIGGER</Text>
-                </DropdownMenu.SubTrigger>
-
-                <DropdownMenu.SubContent className='bg-blue-500 '>
+                <DropdownMenu.Group>
+                  <DropdownMenu.Label className='text-foreground font-bold'>
+                    Label
+                  </DropdownMenu.Label>
                   <DropdownMenu.Item onPress={onClose}>
-                    <Text className='text-foreground text-xl'>SubItem 1</Text>
+                    <Text className='text-foreground text-xl'>Item 1</Text>
                   </DropdownMenu.Item>
-                  <DropdownMenu.CheckboxItem
-                    checked={subCheckboxValue}
-                    onCheckedChange={setSubCheckboxValue}
-                    closeOnPress={false}
-                    className='flex-row justify-between items-center gap-3'
-                  >
-                    <Text className='text-foreground text-xl'>
-                      Sub is checked?
-                    </Text>
-                    <DropdownMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
-                  </DropdownMenu.CheckboxItem>
+                  <DropdownMenu.Item onPress={onClose}>
+                    <Text className='text-foreground text-xl'>Item 2</Text>
+                  </DropdownMenu.Item>
+                </DropdownMenu.Group>
+                <DropdownMenu.Separator />
+                <DropdownMenu.CheckboxItem
+                  checked={checkboxValue}
+                  onCheckedChange={setCheckboxValue}
+                  closeOnPress={false}
+                  className='flex-row justify-between items-center gap-3'
+                >
+                  <Text className='text-foreground text-xl'>Is checked?</Text>
+                  <DropdownMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
+                </DropdownMenu.CheckboxItem>
+                <DropdownMenu.Sub open={openSub} onOpenChange={setOpenSub}>
+                  <DropdownMenu.SubTrigger>
+                    <Text className='text-foreground text-xl'>SUB TRIGGER</Text>
+                  </DropdownMenu.SubTrigger>
 
-                  <DropdownMenu.Sub open={openSub2} onOpenChange={setOpenSub2}>
-                    <DropdownMenu.SubTrigger>
+                  <DropdownMenu.SubContent className='bg-blue-500 '>
+                    <DropdownMenu.Item onPress={onClose}>
+                      <Text className='text-foreground text-xl'>SubItem 1</Text>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.CheckboxItem
+                      checked={subCheckboxValue}
+                      onCheckedChange={setSubCheckboxValue}
+                      closeOnPress={false}
+                      className='flex-row justify-between items-center gap-3'
+                    >
                       <Text className='text-foreground text-xl'>
-                        SUB TRIGGER 2
+                        Sub is checked?
                       </Text>
-                    </DropdownMenu.SubTrigger>
-                    <DropdownMenu.SubContent className='bg-secondary'>
-                      <DropdownMenu.Item onPress={onClose}>
+                      <DropdownMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
+                    </DropdownMenu.CheckboxItem>
+
+                    <DropdownMenu.Sub
+                      open={openSub2}
+                      onOpenChange={setOpenSub2}
+                    >
+                      <DropdownMenu.SubTrigger>
                         <Text className='text-foreground text-xl'>
-                          SubItem 2
+                          SUB TRIGGER 2
                         </Text>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.RadioGroup
-                        value={subRadioValue}
-                        onValueChange={setSubRadioValue}
-                      >
-                        <DropdownMenu.RadioItem
-                          className='flex-row justify-between items-center gap-3'
-                          value='1'
-                          closeOnPress={false}
-                        >
+                      </DropdownMenu.SubTrigger>
+                      <DropdownMenu.SubContent className='bg-secondary'>
+                        <DropdownMenu.Item onPress={onClose}>
                           <Text className='text-foreground text-xl'>
-                            Sub 2 Radio 1
+                            SubItem 2
                           </Text>
-                          <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
-                        </DropdownMenu.RadioItem>
-                        <DropdownMenu.RadioItem
-                          className='flex-row justify-between items-center gap-3'
-                          value='2'
-                          closeOnPress={false}
+                        </DropdownMenu.Item>
+                        <DropdownMenu.RadioGroup
+                          value={subRadioValue}
+                          onValueChange={setSubRadioValue}
                         >
-                          <Text className='text-foreground text-xl'>
-                            Sub 2Radio 2
-                          </Text>
-                          <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
-                        </DropdownMenu.RadioItem>
-                      </DropdownMenu.RadioGroup>
-                    </DropdownMenu.SubContent>
-                  </DropdownMenu.Sub>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Sub>
-              <DropdownMenu.RadioGroup
-                value={radioValue}
-                onValueChange={setRadioValue}
-              >
-                <DropdownMenu.RadioItem
-                  className='flex-row justify-between items-center gap-3'
-                  value='1'
-                  closeOnPress={false}
+                          <DropdownMenu.RadioItem
+                            className='flex-row justify-between items-center gap-3'
+                            value='1'
+                            closeOnPress={false}
+                          >
+                            <Text className='text-foreground text-xl'>
+                              Sub 2 Radio 1
+                            </Text>
+                            <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
+                          </DropdownMenu.RadioItem>
+                          <DropdownMenu.RadioItem
+                            className='flex-row justify-between items-center gap-3'
+                            value='2'
+                            closeOnPress={false}
+                          >
+                            <Text className='text-foreground text-xl'>
+                              Sub 2Radio 2
+                            </Text>
+                            <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
+                          </DropdownMenu.RadioItem>
+                        </DropdownMenu.RadioGroup>
+                      </DropdownMenu.SubContent>
+                    </DropdownMenu.Sub>
+                  </DropdownMenu.SubContent>
+                </DropdownMenu.Sub>
+                <DropdownMenu.RadioGroup
+                  value={radioValue}
+                  onValueChange={setRadioValue}
                 >
-                  <Text className='text-foreground text-xl'>Radio 1</Text>
-                  <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
-                </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem
-                  className='flex-row justify-between items-center gap-3'
-                  value='2'
-                  closeOnPress={false}
-                >
-                  <Text className='text-foreground text-xl'>Radio 2</Text>
-                  <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
-                </DropdownMenu.RadioItem>
-              </DropdownMenu.RadioGroup>
-            </DropdownMenu.Content>
-            <PortalHost name={'TEST'} />
+                  <DropdownMenu.RadioItem
+                    className='flex-row justify-between items-center gap-3'
+                    value='1'
+                    closeOnPress={false}
+                  >
+                    <Text className='text-foreground text-xl'>Radio 1</Text>
+                    <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
+                  </DropdownMenu.RadioItem>
+                  <DropdownMenu.RadioItem
+                    className='flex-row justify-between items-center gap-3'
+                    value='2'
+                    closeOnPress={false}
+                  >
+                    <Text className='text-foreground text-xl'>Radio 2</Text>
+                    <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
+                  </DropdownMenu.RadioItem>
+                </DropdownMenu.RadioGroup>
+              </DropdownMenu.Content>
+            </DropdownMenu.Overlay>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
         <DropdownMenu.Root open={openInner} onOpenChange={setOpenInner}>
@@ -162,62 +169,69 @@ export default function DropdownMenuPrimitiveScreen() {
             </Text>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal hostName='inner'>
-            <DropdownMenu.Overlay className='bg-red-500/10' onPress={onClose} />
-            <DropdownMenu.Content
-              align='center'
-              sideOffset={-headerHeight - (openSub3 ? 100 : 0)}
-              insets={contentInsets}
-              className='bg-background'
-            >
-              <DropdownMenu.Label className='text-foreground font-bold'>
-                Label
-              </DropdownMenu.Label>
-              <DropdownMenu.Item onPress={onClose}>
-                <Text className='text-foreground text-xl'>Item 1</Text>
-              </DropdownMenu.Item>
-              <DropdownMenu.Sub open={openSub3} onOpenChange={setOpenSub3}>
-                <DropdownMenu.SubTrigger>
-                  <Text className='text-foreground text-xl'>SUB TRIGGER</Text>
-                </DropdownMenu.SubTrigger>
-                <DropdownMenu.SubContent className='bg-secondary'>
-                  <DropdownMenu.Item onPress={onClose}>
-                    <Text className='text-foreground text-xl'>SubItem 1</Text>
-                  </DropdownMenu.Item>
-                  <DropdownMenu.CheckboxItem
-                    checked={subCheckboxValue}
-                    onCheckedChange={setSubCheckboxValue}
-                    closeOnPress={false}
-                    className='flex-row justify-between items-center gap-3'
-                  >
-                    <Text className='text-foreground text-xl'>Is checked?</Text>
-                    <DropdownMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
-                  </DropdownMenu.CheckboxItem>
+            <DropdownMenu.Overlay className='bg-red-500/10' onPress={onClose}>
+              <DropdownMenu.Content
+                align='center'
+                sideOffset={
+                  Platform.OS === 'web'
+                    ? 0
+                    : -headerHeight - (openSub3 ? 100 : 0)
+                }
+                insets={contentInsets}
+                className='bg-background'
+              >
+                <DropdownMenu.Label className='text-foreground font-bold'>
+                  Label
+                </DropdownMenu.Label>
+                <DropdownMenu.Item onPress={onClose}>
+                  <Text className='text-foreground text-xl'>Item 1</Text>
+                </DropdownMenu.Item>
+                <DropdownMenu.Sub open={openSub3} onOpenChange={setOpenSub3}>
+                  <DropdownMenu.SubTrigger>
+                    <Text className='text-foreground text-xl'>SUB TRIGGER</Text>
+                  </DropdownMenu.SubTrigger>
+                  <DropdownMenu.SubContent className='bg-secondary'>
+                    <DropdownMenu.Item onPress={onClose}>
+                      <Text className='text-foreground text-xl'>SubItem 1</Text>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.CheckboxItem
+                      checked={subCheckboxValue}
+                      onCheckedChange={setSubCheckboxValue}
+                      closeOnPress={false}
+                      className='flex-row justify-between items-center gap-3'
+                    >
+                      <Text className='text-foreground text-xl'>
+                        Is checked?
+                      </Text>
+                      <DropdownMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
+                    </DropdownMenu.CheckboxItem>
 
-                  <DropdownMenu.RadioGroup
-                    value={subRadioValue}
-                    onValueChange={setSubRadioValue}
-                  >
-                    <DropdownMenu.RadioItem
-                      className='flex-row justify-between items-center gap-3'
-                      value='1'
-                      closeOnPress={false}
+                    <DropdownMenu.RadioGroup
+                      value={subRadioValue}
+                      onValueChange={setSubRadioValue}
                     >
-                      <Text className='text-foreground text-xl'>Radio 1</Text>
-                      <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
-                    </DropdownMenu.RadioItem>
-                    <DropdownMenu.RadioItem
-                      className='flex-row justify-between items-center gap-3'
-                      value='2'
-                      closeOnPress={false}
-                    >
-                      <Text className='text-foreground text-xl'>Radio 2</Text>
-                      <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
-                    </DropdownMenu.RadioItem>
-                  </DropdownMenu.RadioGroup>
-                  <View className='w-10 h-52 bg-red-500' />
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Sub>
-            </DropdownMenu.Content>
+                      <DropdownMenu.RadioItem
+                        className='flex-row justify-between items-center gap-3'
+                        value='1'
+                        closeOnPress={false}
+                      >
+                        <Text className='text-foreground text-xl'>Radio 1</Text>
+                        <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
+                      </DropdownMenu.RadioItem>
+                      <DropdownMenu.RadioItem
+                        className='flex-row justify-between items-center gap-3'
+                        value='2'
+                        closeOnPress={false}
+                      >
+                        <Text className='text-foreground text-xl'>Radio 2</Text>
+                        <DropdownMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
+                      </DropdownMenu.RadioItem>
+                    </DropdownMenu.RadioGroup>
+                    <View className='w-10 h-52 bg-red-500' />
+                  </DropdownMenu.SubContent>
+                </DropdownMenu.Sub>
+              </DropdownMenu.Content>
+            </DropdownMenu.Overlay>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
         <PortalHost name='inner' />

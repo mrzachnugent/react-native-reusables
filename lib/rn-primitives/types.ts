@@ -30,6 +30,7 @@ interface Insets {
 
 type RadixContent = React.ComponentProps<typeof Popover.Content>;
 
+// TODO: the NATIVE ONLY props depend on the component
 interface PositionedContentProps {
   forceMount?: true | undefined;
   style?: ViewStyle;
