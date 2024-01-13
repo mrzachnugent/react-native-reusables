@@ -29,15 +29,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
 Root.displayName = 'RootWebHoverCard';
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
-  (
-    {
-      asChild,
-      onLongPress: onLongPressProp,
-      onAccessibilityAction: onAccessibilityActionProp,
-      ...props
-    },
-    ref
-  ) => {
+  ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <HoverCard.Trigger asChild>

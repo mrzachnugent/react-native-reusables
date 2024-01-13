@@ -58,10 +58,7 @@ function useDropdownMenuContext() {
 }
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
-  (
-    { asChild, onLongPress: onLongPressProp, disabled = false, ...props },
-    ref
-  ) => {
+  ({ asChild, disabled = false, ...props }, ref) => {
     const augmentedRef = React.useRef<PressableRef>(null);
     useAugmentedRef({ augmentedRef, ref });
     const { open } = useDropdownMenuContext();

@@ -83,7 +83,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <ContextMenu.Trigger disabled={disabled ?? undefined} asChild>
-        <Component ref={augmentedRef} {...props} />
+        <Component ref={augmentedRef} disabled={disabled} {...props} />
       </ContextMenu.Trigger>
     );
   }
@@ -232,7 +232,12 @@ const CheckboxItem = React.forwardRef<
         onSelect={closeOnPress ? undefined : onSelected}
         disabled={disabled ?? undefined}
       >
-        <Component ref={ref} pointerEvents='none' {...props} />
+        <Component
+          ref={ref}
+          pointerEvents='none'
+          disabled={disabled}
+          {...props}
+        />
       </ContextMenu.CheckboxItem>
     );
   }

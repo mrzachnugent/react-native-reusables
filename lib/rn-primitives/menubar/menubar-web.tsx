@@ -26,48 +26,91 @@ import type {
   MenubarSubProps,
   MenubarSubTriggerProps,
 } from './types';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
+
+const MenubarContext = React.createContext<MenubarRootProps | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & MenubarRootProps>(
   ({ asChild, value, onValueChange, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <Menubar.Root value={value} onValueChange={onValueChange}>
-        <Component ref={ref} {...viewProps} />
-      </Menubar.Root>
+      <MenubarContext.Provider value={{ value, onValueChange }}>
+        <Menubar.Root value={value} onValueChange={onValueChange}>
+          <Component ref={ref} {...viewProps} />
+        </Menubar.Root>
+      </MenubarContext.Provider>
     );
   }
 );
 
 Root.displayName = 'RootWebMenubar';
 
+function useMenubarContext() {
+  const context = React.useContext(MenubarContext);
+  if (!context) {
+    throw new Error(
+      'Menubar compound components cannot be rendered outside the Menubar component'
+    );
+  }
+  return context;
+}
+
+const MenubarMenuContext = React.createContext<MenubarMenuProps | null>(null);
+
 const Menu = React.forwardRef<ViewRef, SlottableViewProps & MenubarMenuProps>(
   ({ asChild, value, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <Menubar.Menu value={value}>
-        <Component ref={ref} {...viewProps} />
-      </Menubar.Menu>
+      <MenubarMenuContext.Provider value={{ value }}>
+        <Menubar.Menu value={value}>
+          <Component ref={ref} {...viewProps} />
+        </Menubar.Menu>
+      </MenubarMenuContext.Provider>
     );
   }
 );
 
 Menu.displayName = 'MenuWebMenubar';
 
+function useMenubarMenuContext() {
+  const context = React.useContext(MenubarMenuContext);
+  if (!context) {
+    throw new Error(
+      'Menubar compound components cannot be rendered outside the Menubar component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
-  (
-    {
-      asChild,
-      onLongPress: onLongPressProp,
-      disabled = false,
-      onAccessibilityAction: onAccessibilityActionProp,
-      ...props
-    },
-    ref
-  ) => {
+  ({ asChild, disabled = false, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { value: menuValue } = useMenubarMenuContext();
+    const { value } = useMenubarContext();
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        augRef.dataset.state = value && menuValue === value ? 'open' : 'closed';
+      }
+    }, [open]);
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        if (disabled) {
+          augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
+        }
+      }
+    }, [disabled]);
+
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Menubar.Trigger disabled={disabled ?? undefined} asChild>
-        <Component ref={ref} {...props} />
+        <Component ref={augmentedRef} disabled={disabled} {...props} />
       </Menubar.Trigger>
     );
   }
@@ -75,9 +118,6 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerWebMenubar';
 
-/**
- * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
- */
 function Portal({ forceMount, container, children }: MenubarPortalProps) {
   return (
     <Menubar.Portal
@@ -99,8 +139,8 @@ const Overlay = React.forwardRef<
 Overlay.displayName = 'OverlayWebMenubar';
 
 const Content = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & PositionedContentProps
+  ViewRef,
+  SlottableViewProps & PositionedContentProps
 >(
   (
     {
@@ -125,7 +165,7 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const Component = asChild ? Slot.Pressable : Pressable;
+    const Component = asChild ? Slot.View : View;
     return (
       <Menubar.Content
         forceMount={forceMount}
@@ -157,30 +197,15 @@ const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & MenubarItemProps
 >(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
-  const { buttonRef, hideHtmlButtonProps, pressableProps } =
-    useTrigger<HTMLDivElement>(props);
-
-  function onSelected(ev: Event) {
-    ev.preventDefault();
-  }
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <>
-      <Menubar.Item
-        ref={buttonRef}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        onSelect={closeOnPress ? undefined : onSelected}
-        {...hideHtmlButtonProps}
-      />
-      <Menubar.Item
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        asChild
-      >
-        <Component ref={ref} {...pressableProps} />
-      </Menubar.Item>
-    </>
+    <Menubar.Item
+      textValue={textValue}
+      disabled={props.disabled ?? undefined}
+      onSelect={closeOnPress ? undefined : onSelected}
+    >
+      <Component ref={ref} pointerEvents='none' {...props} />
+    </Menubar.Item>
   );
 });
 
@@ -228,42 +253,22 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLDivElement>({
-        ...props,
-        onKeyDown(ev) {
-          if (ev.key === ' ') {
-            buttonRef.current?.click();
-          }
-        },
-      });
-
-    function onSelected(ev: Event) {
-      ev.preventDefault();
-    }
-
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <>
-        <Menubar.CheckboxItem
-          ref={buttonRef}
-          textValue={textValue}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          disabled={disabled ?? undefined}
-          onSelect={closeOnPress ? undefined : onSelected}
-          {...hideHtmlButtonProps}
+      <Menubar.CheckboxItem
+        textValue={textValue}
+        checked={checked}
+        onCheckedChange={onCheckedChange}
+        onSelect={closeOnPress ? undefined : onSelected}
+        disabled={disabled ?? undefined}
+      >
+        <Component
+          ref={ref}
+          pointerEvents='none'
+          disabled={disabled}
+          {...props}
         />
-        <Menubar.CheckboxItem
-          textValue={textValue}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          disabled={disabled ?? undefined}
-          asChild
-        >
-          <Component ref={ref} {...pressableProps} />
-        </Menubar.CheckboxItem>
-      </>
+      </Menubar.CheckboxItem>
     );
   }
 );
@@ -288,33 +293,16 @@ const RadioItem = React.forwardRef<
   PressableRef,
   SlottablePressableProps & MenubarRadioItemProps
 >(({ asChild, value, textValue, closeOnPress = true, ...props }, ref) => {
-  const { buttonRef, hideHtmlButtonProps, pressableProps } =
-    useTrigger<HTMLDivElement>(props);
-
-  function onSelected(ev: Event) {
-    ev.preventDefault();
-  }
-
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <>
-      <Menubar.RadioItem
-        ref={buttonRef}
-        value={value}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        onSelect={closeOnPress ? undefined : onSelected}
-        {...hideHtmlButtonProps}
-      />
-      <Menubar.RadioItem
-        value={value}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        asChild
-      >
-        <Component ref={ref} {...pressableProps} />
-      </Menubar.RadioItem>
-    </>
+    <Menubar.RadioItem
+      value={value}
+      textValue={textValue}
+      disabled={props.disabled ?? undefined}
+      onSelect={closeOnPress ? undefined : onSelected}
+    >
+      <Component ref={ref} pointerEvents='none' {...props} />
+    </Menubar.RadioItem>
   );
 });
 
@@ -327,7 +315,7 @@ const ItemIndicator = React.forwardRef<
   const Component = asChild ? Slot.View : View;
   return (
     <Menubar.ItemIndicator forceMount={forceMount} asChild>
-      <Component ref={ref} role='presentation' {...props} />
+      <Component ref={ref} {...props} />
     </Menubar.ItemIndicator>
   );
 });
@@ -367,12 +355,8 @@ const SubTrigger = React.forwardRef<
 >(({ asChild, textValue, disabled = false, ...props }, ref) => {
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Menubar.SubTrigger
-      disabled={disabled ?? undefined}
-      textValue={textValue}
-      asChild
-    >
-      <Component ref={ref} {...props} />
+    <Menubar.SubTrigger disabled={disabled ?? undefined} textValue={textValue}>
+      <Component ref={ref} pointerEvents='none' {...props} />
     </Menubar.SubTrigger>
   );
 });
@@ -414,3 +398,7 @@ export {
   SubTrigger,
   Trigger,
 };
+
+function onSelected(ev: Event) {
+  ev.preventDefault();
+}
