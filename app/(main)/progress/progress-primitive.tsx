@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
-import * as Progress from '~/lib/rn-primitives/todo/progress';
+import * as Progress from '~/lib/rn-primitives/progress';
 
 export default function ProgressPrimitiveScreen() {
   const [progress, setProgress] = React.useState(13);
@@ -19,7 +19,7 @@ export default function ProgressPrimitiveScreen() {
         </Progress.Root>
         <Pressable
           onPress={() => {
-            setProgress(Math.random() * 100);
+            setProgress(Math.floor(Math.random() * 100));
           }}
         >
           <Text className='text-xl text-foreground text-center'>Randomize</Text>
