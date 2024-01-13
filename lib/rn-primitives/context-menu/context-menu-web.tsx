@@ -57,16 +57,7 @@ function useContextMenuContext() {
 }
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
-  (
-    {
-      asChild,
-      onLongPress: onLongPressProp,
-      disabled = false,
-      onAccessibilityAction: onAccessibilityActionProp,
-      ...props
-    },
-    ref
-  ) => {
+  ({ asChild, disabled = false, ...props }, ref) => {
     const augmentedRef = React.useRef<PressableRef>(null);
     useAugmentedRef({ augmentedRef, ref });
     const { open } = useContextMenuContext();
@@ -175,23 +166,18 @@ Content.displayName = 'ContentWebContextMenu';
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ContextMenuItemProps
->(
-  (
-    { asChild, textValue, closeOnPress = true, onPress: onPressProp, ...props },
-    ref
-  ) => {
-    const Component = asChild ? Slot.Pressable : Pressable;
-    return (
-      <ContextMenu.Item
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        onSelect={closeOnPress ? undefined : onSelected}
-      >
-        <Component ref={ref} pointerEvents='none' {...props} />
-      </ContextMenu.Item>
-    );
-  }
-);
+>(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
+  const Component = asChild ? Slot.Pressable : Pressable;
+  return (
+    <ContextMenu.Item
+      textValue={textValue}
+      disabled={props.disabled ?? undefined}
+      onSelect={closeOnPress ? undefined : onSelected}
+    >
+      <Component ref={ref} pointerEvents='none' {...props} />
+    </ContextMenu.Item>
+  );
+});
 
 Item.displayName = 'ItemWebContextMenu';
 

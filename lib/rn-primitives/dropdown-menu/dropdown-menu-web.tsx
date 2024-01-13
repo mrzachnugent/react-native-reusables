@@ -25,6 +25,11 @@ import type {
   DropdownMenuSubProps,
   DropdownMenuSubTriggerProps,
 } from './types';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
+
+const DropdownMenuContext = React.createContext<DropdownMenuRootProps | null>(
+  null
+);
 
 const Root = React.forwardRef<
   ViewRef,
@@ -32,29 +37,57 @@ const Root = React.forwardRef<
 >(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <DropdownMenu.Root open={open} onOpenChange={onOpenChange}>
-      <Component ref={ref} {...viewProps} />
-    </DropdownMenu.Root>
+    <DropdownMenuContext.Provider value={{ open, onOpenChange }}>
+      <DropdownMenu.Root open={open} onOpenChange={onOpenChange}>
+        <Component ref={ref} {...viewProps} />
+      </DropdownMenu.Root>
+    </DropdownMenuContext.Provider>
   );
 });
 
 Root.displayName = 'RootWebDropdownMenu';
 
+function useDropdownMenuContext() {
+  const context = React.useContext(DropdownMenuContext);
+  if (!context) {
+    throw new Error(
+      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
-    {
-      asChild,
-      onLongPress: onLongPressProp,
-      disabled = false,
-      onAccessibilityAction: onAccessibilityActionProp,
-      ...props
-    },
+    { asChild, onLongPress: onLongPressProp, disabled = false, ...props },
     ref
   ) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { open } = useDropdownMenuContext();
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        augRef.dataset.state = open ? 'open' : 'closed';
+      }
+    }, [open]);
+
+    React.useLayoutEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLDivElement;
+        if (disabled) {
+          augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
+        }
+      }
+    }, [disabled]);
+
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <DropdownMenu.Trigger disabled={disabled ?? undefined} asChild>
-        <Component ref={ref} {...props} />
+        <Component ref={augmentedRef} {...props} />
       </DropdownMenu.Trigger>
     );
   }
@@ -62,9 +95,6 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerWebDropdownMenu';
 
-/**
- * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
- */
 function Portal({ forceMount, container, children }: DropdownMenuPortalProps) {
   return (
     <DropdownMenu.Portal
@@ -144,30 +174,15 @@ const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & DropdownMenuItemProps
 >(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
-  const { buttonRef, hideHtmlButtonProps, pressableProps } =
-    useTrigger<HTMLDivElement>(props);
-
-  function onSelected(ev: Event) {
-    ev.preventDefault();
-  }
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <>
-      <DropdownMenu.Item
-        ref={buttonRef}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        onSelect={closeOnPress ? undefined : onSelected}
-        {...hideHtmlButtonProps}
-      />
-      <DropdownMenu.Item
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        asChild
-      >
-        <Component ref={ref} {...pressableProps} />
-      </DropdownMenu.Item>
-    </>
+    <DropdownMenu.Item
+      textValue={textValue}
+      disabled={props.disabled ?? undefined}
+      onSelect={closeOnPress ? undefined : onSelected}
+    >
+      <Component ref={ref} pointerEvents='none' {...props} />
+    </DropdownMenu.Item>
   );
 });
 
@@ -215,42 +230,17 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLDivElement>({
-        ...props,
-        onKeyDown(ev) {
-          if (ev.key === ' ') {
-            buttonRef.current?.click();
-          }
-        },
-      });
-
-    function onSelected(ev: Event) {
-      ev.preventDefault();
-    }
-
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <>
-        <DropdownMenu.CheckboxItem
-          ref={buttonRef}
-          textValue={textValue}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          disabled={disabled ?? undefined}
-          onSelect={closeOnPress ? undefined : onSelected}
-          {...hideHtmlButtonProps}
-        />
-        <DropdownMenu.CheckboxItem
-          textValue={textValue}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          disabled={disabled ?? undefined}
-          asChild
-        >
-          <Component ref={ref} {...pressableProps} />
-        </DropdownMenu.CheckboxItem>
-      </>
+      <DropdownMenu.CheckboxItem
+        textValue={textValue}
+        checked={checked}
+        onCheckedChange={onCheckedChange}
+        onSelect={closeOnPress ? undefined : onSelected}
+        disabled={disabled ?? undefined}
+      >
+        <Component ref={ref} pointerEvents='none' {...props} />
+      </DropdownMenu.CheckboxItem>
     );
   }
 );
@@ -279,33 +269,16 @@ const RadioItem = React.forwardRef<
   PressableRef,
   SlottablePressableProps & DropdownMenuRadioItemProps
 >(({ asChild, value, textValue, closeOnPress = true, ...props }, ref) => {
-  const { buttonRef, hideHtmlButtonProps, pressableProps } =
-    useTrigger<HTMLDivElement>(props);
-
-  function onSelected(ev: Event) {
-    ev.preventDefault();
-  }
-
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <>
-      <DropdownMenu.RadioItem
-        ref={buttonRef}
-        value={value}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        onSelect={closeOnPress ? undefined : onSelected}
-        {...hideHtmlButtonProps}
-      />
-      <DropdownMenu.RadioItem
-        value={value}
-        textValue={textValue}
-        disabled={props.disabled ?? undefined}
-        asChild
-      >
-        <Component ref={ref} {...pressableProps} />
-      </DropdownMenu.RadioItem>
-    </>
+    <DropdownMenu.RadioItem
+      value={value}
+      textValue={textValue}
+      disabled={props.disabled ?? undefined}
+      onSelect={closeOnPress ? undefined : onSelected}
+    >
+      <Component ref={ref} pointerEvents='none' {...props} />
+    </DropdownMenu.RadioItem>
   );
 });
 
@@ -318,7 +291,7 @@ const ItemIndicator = React.forwardRef<
   const Component = asChild ? Slot.View : View;
   return (
     <DropdownMenu.ItemIndicator forceMount={forceMount} asChild>
-      <Component ref={ref} role='presentation' {...props} />
+      <Component ref={ref} {...props} />
     </DropdownMenu.ItemIndicator>
   );
 });
@@ -362,9 +335,8 @@ const SubTrigger = React.forwardRef<
     <DropdownMenu.SubTrigger
       disabled={disabled ?? undefined}
       textValue={textValue}
-      asChild
     >
-      <Component ref={ref} {...props} />
+      <Component ref={ref} pointerEvents='none' {...props} />
     </DropdownMenu.SubTrigger>
   );
 });
@@ -372,10 +344,10 @@ const SubTrigger = React.forwardRef<
 SubTrigger.displayName = 'SubTriggerWebDropdownMenu';
 
 const SubContent = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & ForceMountable
+  PressableRef,
+  SlottablePressableProps & ForceMountable
 >(({ asChild = false, forceMount, ...props }, ref) => {
-  const Component = asChild ? Slot.View : View;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.SubContent forceMount={forceMount}>
@@ -405,3 +377,7 @@ export {
   SubTrigger,
   Trigger,
 };
+
+function onSelected(ev: Event) {
+  ev.preventDefault();
+}

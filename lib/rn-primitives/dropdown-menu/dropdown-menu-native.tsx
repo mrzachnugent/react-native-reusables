@@ -664,8 +664,8 @@ const SubTrigger = React.forwardRef<
 SubTrigger.displayName = 'SubTriggerNativeDropdownMenu';
 
 const SubContent = React.forwardRef<
-  ViewRef,
-  SlottableViewProps & ForceMountable
+  PressableRef,
+  SlottablePressableProps & ForceMountable
 >(({ asChild = false, forceMount, ...props }, ref) => {
   const { open, nativeID } = useSubContext();
 
@@ -675,7 +675,7 @@ const SubContent = React.forwardRef<
     }
   }
 
-  const Component = asChild ? Slot.View : View;
+  const Component = asChild ? Slot.Pressable : Pressable;
   return (
     <Component ref={ref} role='group' aria-labelledby={nativeID} {...props} />
   );
