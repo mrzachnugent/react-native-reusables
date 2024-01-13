@@ -21,18 +21,13 @@ const Root = React.forwardRef<
       checked,
       onCheckedChange,
       onPress: onPressProp,
-      onKeyDown: onKeyDownProp,
       role: _role,
       ...props
     },
     ref
   ) => {
     const augmentedRef = React.useRef<PressableRef>(null);
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    useAugmentedRef({
-      augmentedRef,
-      ref,
-    });
+    useAugmentedRef({ augmentedRef, ref });
 
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
@@ -41,11 +36,11 @@ const Root = React.forwardRef<
 
     React.useEffect(() => {
       if (augmentedRef.current) {
-        const auggRef = augmentedRef.current as unknown as HTMLButtonElement;
-        auggRef.dataset.state = checked ? 'checked' : 'unchecked';
-        auggRef.type = 'button';
-        auggRef.role = 'checkbox';
-        auggRef.value = checked ? 'on' : 'off';
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.dataset.state = checked ? 'checked' : 'unchecked';
+        augRef.type = 'button';
+        augRef.role = 'checkbox';
+        augRef.value = checked ? 'on' : 'off';
       }
     }, [checked]);
 
@@ -55,7 +50,6 @@ const Root = React.forwardRef<
         checked={checked}
         onCheckedChange={onCheckedChange}
         disabled={disabled}
-        ref={buttonRef}
         asChild
       >
         <Component

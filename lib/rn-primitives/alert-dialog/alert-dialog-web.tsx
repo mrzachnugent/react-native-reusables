@@ -7,7 +7,7 @@ import {
   View,
   type GestureResponderEvent,
 } from 'react-native';
-import { useTrigger } from '../hooks/useTrigger';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import * as Slot from '../slot';
 import type {
   PressableRef,
@@ -18,11 +18,15 @@ import type {
   ViewRef,
 } from '../types';
 import type {
-  AlertDialogRootProps,
   AlertDialogContentProps,
   AlertDialogOverlayProps,
   AlertDialogPortalProps,
+  AlertDialogRootProps,
 } from './types';
+
+const AlertDialogContext = React.createContext<AlertDialogRootProps | null>(
+  null
+);
 
 const Root = React.forwardRef<
   ViewRef,
@@ -30,49 +34,63 @@ const Root = React.forwardRef<
 >(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
-      <Component ref={ref} {...viewProps} />
-    </AlertDialog.Root>
+    <AlertDialogContext.Provider value={{ open, onOpenChange }}>
+      <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
+        <Component ref={ref} {...viewProps} />
+      </AlertDialog.Root>
+    </AlertDialogContext.Provider>
   );
 });
 
 Root.displayName = 'RootAlertWebDialog';
 
+function useAlertDialogContext() {
+  const context = React.useContext(AlertDialogContext);
+  if (!context) {
+    throw new Error(
+      'AlertDialog compound components cannot be rendered outside the AlertDialog component'
+    );
+  }
+  return context;
+}
+
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, onPress: onPressProp, ...props }, ref) => {
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
+  ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { onOpenChange, open } = useAlertDialogContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
         onPressProp(ev);
       }
-      if (buttonRef.current) {
-        buttonRef.current.click();
-      }
+      onOpenChange(!open);
     }
+
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.dataset.state = open ? 'open' : 'closed';
+        augRef.type = 'button';
+      }
+    }, [open]);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <>
-        <AlertDialog.Trigger
-          ref={buttonRef}
-          aria-hidden
-          style={{ position: 'absolute', zIndex: -999999999 }}
-          aria-disabled={true}
-          tabIndex={-1}
+      <AlertDialog.Trigger disabled={disabled ?? undefined} asChild>
+        <Component
+          ref={augmentedRef}
+          onPress={onPress}
+          role='button'
+          disabled={disabled}
+          {...props}
         />
-        <Component ref={ref} onPress={onPress} role='button' {...props} />
-      </>
+      </AlertDialog.Trigger>
     );
   }
 );
 
 Trigger.displayName = 'TriggerAlertWebDialog';
 
-/**
- * @param {object} props.forceMount - Platform: ALL
- * @param {string} props.container - Platform: WEB ONLY
- * @param {rest} ...rest - Platform: Native - Modal props
- */
 const Portal = React.forwardRef<
   React.ElementRef<typeof Modal>,
   React.ComponentPropsWithoutRef<typeof Modal> & AlertDialogPortalProps
@@ -136,16 +154,36 @@ const Content = React.forwardRef<
 Content.displayName = 'ContentAlertWebDialog';
 
 const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, ...props }, ref) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLButtonElement>(props);
+  ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { onOpenChange, open } = useAlertDialogContext();
+
+    function onPress(ev: GestureResponderEvent) {
+      if (onPressProp) {
+        onPressProp(ev);
+      }
+      onOpenChange(!open);
+    }
+
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.type = 'button';
+      }
+    }, []);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <AlertDialog.Cancel ref={buttonRef} {...hideHtmlButtonProps} />
-        <AlertDialog.Cancel asChild>
-          <Component ref={ref} role='button' {...pressableProps} />
+        <AlertDialog.Cancel disabled={disabled ?? undefined} asChild>
+          <Component
+            ref={augmentedRef}
+            onPress={onPress}
+            role='button'
+            disabled={disabled}
+            {...props}
+          />
         </AlertDialog.Cancel>
       </>
     );
@@ -155,16 +193,36 @@ const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
 Cancel.displayName = 'CancelAlertWebDialog';
 
 const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
-  ({ asChild, ...props }, ref) => {
-    const { buttonRef, hideHtmlButtonProps, pressableProps } =
-      useTrigger<HTMLButtonElement>(props);
+  ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
+    const augmentedRef = React.useRef<PressableRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { onOpenChange, open } = useAlertDialogContext();
+
+    function onPress(ev: GestureResponderEvent) {
+      if (onPressProp) {
+        onPressProp(ev);
+      }
+      onOpenChange(!open);
+    }
+
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.type = 'button';
+      }
+    }, []);
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <>
-        <AlertDialog.Action ref={buttonRef} {...hideHtmlButtonProps} />
-        <AlertDialog.Action asChild>
-          <Component ref={ref} role='button' {...pressableProps} />
+        <AlertDialog.Action disabled={disabled ?? undefined} asChild>
+          <Component
+            ref={augmentedRef}
+            onPress={onPress}
+            role='button'
+            disabled={disabled}
+            {...props}
+          />
         </AlertDialog.Action>
       </>
     );
