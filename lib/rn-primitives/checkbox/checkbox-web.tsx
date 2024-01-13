@@ -52,6 +52,8 @@ const Root = React.forwardRef<
 
         if (disabled) {
           augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
         }
       }
     }, [disabled]);
@@ -110,6 +112,8 @@ const Indicator = React.forwardRef<
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
       if (disabled) {
         augRef.dataset.disabled = 'true';
+      } else {
+        augRef.dataset.disabled = undefined;
       }
     }
   }, [disabled]);

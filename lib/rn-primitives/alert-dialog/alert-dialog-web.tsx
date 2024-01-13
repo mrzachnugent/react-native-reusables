@@ -107,10 +107,10 @@ const Portal = React.forwardRef<
 Portal.displayName = 'PortalAlertWebDialog';
 
 const Overlay = React.forwardRef<
-  PressableRef,
-  SlottablePressableProps & AlertDialogOverlayProps
+  ViewRef,
+  SlottableViewProps & AlertDialogOverlayProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
+  const Component = asChild ? Slot.View : View;
   return (
     <AlertDialog.Overlay forceMount={forceMount}>
       <Component ref={ref} {...props} />

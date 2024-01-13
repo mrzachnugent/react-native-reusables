@@ -103,6 +103,8 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
         augRef.dataset.orientation = orientation;
         if (disabled || disabledRoot) {
           augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
         }
       }
     }, [orientation, disabled, disabledRoot]);
@@ -157,6 +159,8 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
         augRef.dataset.orientation = orientation;
         if (disabled || disabledRoot) {
           augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
         }
       }
     }, [orientation, disabled, disabledRoot]);
@@ -195,6 +199,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
         if (disabled || disabledRoot || disabledProp) {
           augRef.dataset.disabled = 'true';
+        } else {
+          augRef.dataset.disabled = undefined;
         }
       }
     }, [disabled, disabledRoot, disabledProp]);
@@ -244,6 +250,8 @@ const Content = React.forwardRef<
 
       if (disabled || disabledRoot) {
         augRef.dataset.disabled = 'true';
+      } else {
+        augRef.dataset.disabled = undefined;
       }
     }
   }, [orientation, disabled, disabledRoot]);
