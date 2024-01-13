@@ -110,10 +110,21 @@ const Overlay = React.forwardRef<
   PressableRef,
   SlottablePressableProps & AlertDialogOverlayProps
 >(({ asChild, forceMount, ...props }, ref) => {
+  const augmentedRef = React.useRef<ViewRef>(null);
+  useAugmentedRef({ augmentedRef, ref });
+  const { open } = useAlertDialogContext();
+
+  React.useEffect(() => {
+    if (augmentedRef.current) {
+      const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+      augRef.dataset.state = open ? 'open' : 'closed';
+    }
+  }, [open]);
+
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
     <AlertDialog.Overlay forceMount={forceMount} asChild>
-      <Component ref={ref} {...props} />
+      <Component ref={augmentedRef} {...props} />
     </AlertDialog.Overlay>
   );
 });
@@ -136,6 +147,17 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
+    const augmentedRef = React.useRef<ViewRef>(null);
+    useAugmentedRef({ augmentedRef, ref });
+    const { open } = useAlertDialogContext();
+
+    React.useEffect(() => {
+      if (augmentedRef.current) {
+        const augRef = augmentedRef.current as unknown as HTMLButtonElement;
+        augRef.dataset.state = open ? 'open' : 'closed';
+      }
+    }, [open]);
+
     const Component = asChild ? Slot.View : View;
     return (
       <AlertDialog.Content
@@ -145,7 +167,7 @@ const Content = React.forwardRef<
         forceMount={forceMount}
         asChild
       >
-        <Component ref={ref} {...props} />
+        <Component ref={augmentedRef} {...props} />
       </AlertDialog.Content>
     );
   }

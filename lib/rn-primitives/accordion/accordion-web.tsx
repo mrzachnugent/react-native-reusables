@@ -173,7 +173,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         const isExpanded = Array.isArray(value)
           ? value.includes(itemValue)
           : value === itemValue;
-        augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
+        augRef.dataset.state = isExpanded ? 'open' : 'closed';
         augRef.type = 'button';
 
         if (disabled || disabledRoot || disabledProp) {
