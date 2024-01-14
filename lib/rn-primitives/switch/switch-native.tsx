@@ -1,17 +1,17 @@
 import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
-
-interface RootProps {
-  checked: boolean;
-  onCheckedChange: (checked: boolean) => void;
-  disabled?: boolean;
-}
+import type {
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
+import type { SwitchRootProps } from './types';
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & RootProps
+  PressableRef,
+  SlottablePressableProps & SwitchRootProps
 >(
   (
     {
@@ -51,16 +51,15 @@ const Root = React.forwardRef<
   }
 );
 
-Root.displayName = 'RootSwitch';
+Root.displayName = 'RootNativeSwitch';
 
-const Thumb = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View>
->(({ asChild, ...props }, ref) => {
-  const Component = asChild ? Slot.View : View;
-  return <Component ref={ref} role='presentation' {...props} />;
-});
+const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(
+  ({ asChild, ...props }, ref) => {
+    const Component = asChild ? Slot.View : View;
+    return <Component ref={ref} role='presentation' {...props} />;
+  }
+);
 
-Root.displayName = 'RootSwitch';
+Root.displayName = 'RootNativeSwitch';
 
 export { Root, Thumb };

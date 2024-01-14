@@ -7,7 +7,21 @@ import type { SliderRootProps } from './types';
 const RootContext = React.createContext<SliderRootProps | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SliderRootProps>(
-  ({ asChild, value, disabled, min, max, ...props }, ref) => {
+  (
+    {
+      asChild,
+      value,
+      disabled,
+      min,
+      max,
+      dir: _dir,
+      inverted: _inverted,
+      step: _step,
+      onValueChange: _onValueChange,
+      ...props
+    },
+    ref
+  ) => {
     const Component = asChild ? Slot.View : View;
     return (
       <RootContext.Provider value={{ value, disabled, min, max }}>
