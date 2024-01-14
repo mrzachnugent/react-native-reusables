@@ -2,19 +2,17 @@ import React from 'react';
 import { View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
-
-interface RootProps {
-  decorative?: boolean;
-}
+import { SeparatorRootProps } from './types';
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
->(({ asChild, decorative, ...props }, ref) => {
+  ComponentPropsWithAsChild<typeof View> & SeparatorRootProps
+>(({ asChild, decorative, orientation = 'horizontal', ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
     <Component
       role={decorative ? 'presentation' : 'separator'}
+      aria-orientation={orientation}
       ref={ref}
       {...props}
     />
