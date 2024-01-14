@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Tooltip from '~/lib/rn-primitives/todo/tooltip';
+import * as Tooltip from '~/lib/rn-primitives/tooltip';
 
 export default function TooltipPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
@@ -20,14 +20,17 @@ export default function TooltipPrimitiveScreen() {
             <Text className='text-foreground text-xl italic font-bold'>i</Text>
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Overlay />
-            <Tooltip.Content
-              sideOffset={6}
-              insets={contentInsets}
-              className='bg-muted p-2'
-            >
-              <Text className='text-foreground text-xl'>Some information</Text>
-            </Tooltip.Content>
+            <Tooltip.Overlay style={StyleSheet.absoluteFill}>
+              <Tooltip.Content
+                sideOffset={6}
+                insets={contentInsets}
+                className='bg-muted p-2'
+              >
+                <Text className='text-foreground text-xl'>
+                  Some information
+                </Text>
+              </Tooltip.Content>
+            </Tooltip.Overlay>
           </Tooltip.Portal>
         </Tooltip.Root>
       </View>
