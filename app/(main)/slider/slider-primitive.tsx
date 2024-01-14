@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pressable, View, Text } from 'react-native';
-import * as Slider from '~/lib/rn-primitives/todo/slider';
+import { Pressable, View, Text, Platform } from 'react-native';
+import * as Slider from '~/lib/rn-primitives/slider';
 import { cn } from '~/lib/utils';
 
 export default function SliderPrimitiveScreen() {
@@ -18,7 +18,15 @@ export default function SliderPrimitiveScreen() {
             {Math.round(value)}
           </Text>
         </Pressable>
-        <Slider.Root value={value} className='w-full justify-center'>
+        <Slider.Root
+          value={value}
+          onValueChange={(vals) => {
+            const nextValue = vals[0];
+            if (typeof nextValue !== 'number') return;
+            setValue(nextValue);
+          }}
+          className='w-full justify-center'
+        >
           <Slider.Track className='h-4 bg-secondary rounded-full border border-border'>
             <Slider.Range
               style={{ width: `${value}%` }}
@@ -33,14 +41,16 @@ export default function SliderPrimitiveScreen() {
           </Slider.Track>
         </Slider.Root>
 
-        <View>
-          <Text className='text-xl text-center text-foreground pb-2'>
-            You will have to implement the gesture handling
-          </Text>
-          <Text className='text-center text-sm text-foreground'>
-            Press the number to change the slider's value
-          </Text>
-        </View>
+        {Platform.OS !== 'web' && (
+          <View>
+            <Text className='text-xl text-center text-foreground pb-2'>
+              You will have to implement the gesture handling
+            </Text>
+            <Text className='text-center text-sm text-foreground'>
+              Press the number to change the slider's value
+            </Text>
+          </View>
+        )}
       </View>
     </>
   );
