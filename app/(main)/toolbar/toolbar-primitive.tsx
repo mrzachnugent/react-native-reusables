@@ -1,7 +1,7 @@
 import { AlignCenter, AlignLeft, Bold, Italic } from 'lucide-react-native';
 import React from 'react';
 import { Text, View } from 'react-native';
-import * as Toolbar from '~/lib/rn-primitives/todo/toolbar';
+import * as Toolbar from '~/lib/rn-primitives/toolbar';
 import { cn } from '~/lib/utils';
 
 export default function ToolbarPrimitiveScreen() {
@@ -63,7 +63,12 @@ export default function ToolbarPrimitiveScreen() {
         </Toolbar.ToggleGroup>
         <Toolbar.Separator className='h-full w-0.5 bg-border' />
         <View className='flex-row flex-1 justify-end items-center'>
-          <Toolbar.Button className='bg-secondary py-2 px-4 rounded-lg active:opacity-80'>
+          <Toolbar.Button
+            onPress={() => {
+              console.log('Button pressed');
+            }}
+            className='bg-secondary py-2 px-4 rounded-lg active:opacity-80'
+          >
             <Text className='text-xl text-foreground'>Button</Text>
           </Toolbar.Button>
         </View>
