@@ -1,7 +1,7 @@
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import * as ToggleGroupUtils from '~/lib/rn-primitives/todo/toggle-group-utils';
+import { ToggleGroupUtils } from '~/lib/rn-primitives/utils';
 import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
 
 type SingleRootProps = {
