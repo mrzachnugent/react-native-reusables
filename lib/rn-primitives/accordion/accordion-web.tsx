@@ -27,6 +27,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
       disabled,
       dir,
       orientation = 'vertical',
+      collapsible,
       ...props
     },
     ref
@@ -53,6 +54,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
           disabled={disabled}
           dir={dir}
           orientation={orientation}
+          collapsible={collapsible}
         >
           <Component ref={ref} {...props} />
         </Accordion.Root>
@@ -266,4 +268,12 @@ const Content = React.forwardRef<
 
 Content.displayName = 'ContentWebAccordion';
 
-export { Content, Header, Item, Root, Trigger };
+export {
+  Content,
+  Header,
+  Item,
+  Root,
+  Trigger,
+  useAccordionContext,
+  useAccordionItemContext,
+};

@@ -26,3 +26,13 @@ export const Content = Platform.select({
   web: AccordionWeb.Content,
   default: AccordionNative.Content,
 });
+
+export const useRootContext = Platform.select({
+  web: AccordionWeb.useAccordionContext,
+  default: AccordionNative.useAccordionContext,
+});
+
+export const useItemContext = Platform.select({
+  web: AccordionWeb.useAccordionItemContext,
+  default: AccordionNative.useAccordionItemContext,
+});

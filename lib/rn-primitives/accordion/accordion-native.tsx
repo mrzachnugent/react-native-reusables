@@ -127,7 +127,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       type,
       onValueChange,
       value: rootValue,
-      collapsable,
+      collapsible,
     } = useAccordionContext();
     const {
       nativeID,
@@ -138,7 +138,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     function onPress(ev: GestureResponderEvent) {
       if (rootDisabled || itemDisabled) return;
       if (type === 'single') {
-        const newValue = collapsable
+        const newValue = collapsible
           ? value === rootValue
             ? undefined
             : value
@@ -147,7 +147,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       }
       if (type === 'multiple') {
         const rootToArray = toStringArray(rootValue);
-        const newValue = collapsable
+        const newValue = collapsible
           ? rootToArray.includes(value)
             ? rootToArray.filter((val) => val !== value)
             : rootToArray.concat(value)
@@ -207,7 +207,15 @@ const Content = React.forwardRef<
 
 Content.displayName = 'ContentNativeAccordion';
 
-export { Content, Header, Item, Root, Trigger };
+export {
+  Content,
+  Header,
+  Item,
+  Root,
+  Trigger,
+  useAccordionContext,
+  useAccordionItemContext,
+};
 
 function toStringArray(value?: string | string[]) {
   return Array.isArray(value) ? value : value ? [value] : [];

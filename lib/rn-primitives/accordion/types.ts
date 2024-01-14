@@ -14,7 +14,7 @@ type MultipleRootProps = {
 
 type AccordionContext = (SingleRootProps | MultipleRootProps) & {
   disabled?: boolean;
-  collapsable?: boolean;
+  collapsible?: boolean;
 };
 
 type AccordionRootProps = AccordionContext & {
