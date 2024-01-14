@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '~/components/universal-ui/accordion';
+
 export default function AccordionPrimitiveScreen() {
   const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
 
@@ -26,7 +27,7 @@ export default function AccordionPrimitiveScreen() {
       >
         <AccordionItem value='item-1'>
           <AccordionTrigger>
-            <Text className='text-foreground group-hover:underline'>
+            <Text className='text-foreground font-medium group-hover:underline'>
               Is it accessible?
             </Text>
           </AccordionTrigger>
@@ -38,7 +39,7 @@ export default function AccordionPrimitiveScreen() {
         </AccordionItem>
         <AccordionItem value='item-2'>
           <AccordionTrigger>
-            <Text className='text-foreground group-hover:underline'>
+            <Text className='text-foreground font-medium group-hover:underline'>
               Is it fully universal?
             </Text>
           </AccordionTrigger>

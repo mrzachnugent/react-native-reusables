@@ -1,8 +1,16 @@
 import * as React from 'react';
 import * as AccordionPrimitive from '~/lib/rn-primitives/accordion';
 
-import { ChevronDown, ChevronUp } from 'lucide-react-native';
-import { View } from 'react-native';
+import { ChevronDown } from 'lucide-react-native';
+import { Platform, View } from 'react-native';
+import Animated, {
+  Extrapolate,
+  FadeInDown,
+  interpolate,
+  useAnimatedStyle,
+  useDerivedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { cn } from '~/lib/utils';
 
 const Accordion = AccordionPrimitive.Root;
@@ -24,9 +32,7 @@ AccordionItem.displayName = 'AccordionItem';
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof View> & {
-    children: React.ReactNode;
-  }
+  React.ComponentPropsWithoutRef<typeof View>
 >(({ className, children, ...props }, ref) => {
   const { value } = AccordionPrimitive.useRootContext();
   const { value: itemValue } = AccordionPrimitive.useItemContext();
@@ -34,22 +40,31 @@ const AccordionTrigger = React.forwardRef<
     ? value.includes(itemValue)
     : value === itemValue;
 
+  const progress = useDerivedValue(() =>
+    isOpen ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })
+  );
+  const chevronStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        rotate: `${progress.value * 180}deg`,
+      },
+    ],
+    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolate.CLAMP),
+  }));
+
   return (
     <AccordionPrimitive.Header className='flex'>
       <AccordionPrimitive.Trigger ref={ref} {...props} asChild>
         <View
           className={cn(
-            'flex flex-row web:flex-1 rounded-md items-center justify-between py-4 font-medium transition-all group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-muted-foreground',
+            'flex flex-row web:flex-1 rounded-md items-center justify-between py-4 transition-all group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-muted-foreground',
             className
           )}
         >
           {children}
-
-          {!isOpen ? (
+          <Animated.View style={chevronStyle}>
             <ChevronDown size={18} className={'text-foreground shrink-0'} />
-          ) : (
-            <ChevronUp size={18} className={'text-foreground shrink-0'} />
-          )}
+          </Animated.View>
         </View>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -72,14 +87,30 @@ const AccordionContent = React.forwardRef<
         'overflow-hidden text-sm transition-all',
         isOpen ? 'animate-accordion-down' : 'animate-accordion-up'
       )}
+      ref={ref}
       {...props}
     >
-      <View ref={ref} className={cn('pb-4', className)}>
-        {children}
-      </View>
+      <InnerContent className={cn('pb-4', className)}>{children}</InnerContent>
     </AccordionPrimitive.Content>
   );
 });
+
+function InnerContent({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  if (Platform.OS === 'web') {
+    return <View className={cn('pb-4', className)}>{children}</View>;
+  }
+  return (
+    <Animated.View entering={FadeInDown} className={cn('pb-4', className)}>
+      {children}
+    </Animated.View>
+  );
+}
 
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
