@@ -21,9 +21,8 @@ const Root = React.forwardRef<
     ref
   ) => {
     function onPress(ev: GestureResponderEvent) {
-      const newValue = !pressed;
-      onPressedChange(newValue);
       onPressProp?.(ev);
+      onPressedChange(!pressed);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;

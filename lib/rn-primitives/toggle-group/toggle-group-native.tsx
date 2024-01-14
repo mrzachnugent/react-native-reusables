@@ -1,33 +1,36 @@
 import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ToggleGroupUtils } from '~/lib/rn-primitives/utils';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import * as Slot from '../slot';
+import type {
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
+import { ToggleGroupUtils } from '../utils';
+import type { ToggleGroupItemProps, ToggleGroupRootProps } from './types';
 
-type SingleRootProps = {
-  type: 'single';
-  value: string | undefined;
-  onValueChange: (val: string | undefined) => void;
-};
-
-type MultipleRootProps = {
-  type: 'multiple';
-  value: string[];
-  onValueChange: (val: string[]) => void;
-};
-
-type RootProps = (SingleRootProps | MultipleRootProps) & {
-  disabled?: boolean;
-};
-
-const ToggleGroupContext = React.createContext<RootProps | null>(null);
+const ToggleGroupContext = React.createContext<ToggleGroupRootProps | null>(
+  null
+);
 
 const Root = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
+  ViewRef,
+  SlottableViewProps & ToggleGroupRootProps
 >(
   (
-    { asChild, type, value, onValueChange, disabled = false, ...viewProps },
+    {
+      asChild,
+      type,
+      value,
+      onValueChange,
+      disabled = false,
+      rovingFocus: _rovingFocus,
+      orientation: _orientation,
+      dir: _dir,
+      loop: _loop,
+      ...viewProps
+    },
     ref
   ) => {
     const Component = asChild ? Slot.View : View;
@@ -39,7 +42,7 @@ const Root = React.forwardRef<
             value,
             disabled,
             onValueChange,
-          } as RootProps
+          } as ToggleGroupRootProps
         }
       >
         <Component ref={ref} role='group' {...viewProps} />
@@ -61,10 +64,8 @@ function useToggleGroupContext() {
 }
 
 const Item = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ComponentPropsWithAsChild<typeof Pressable> & {
-    value: string;
-  }
+  PressableRef,
+  SlottablePressableProps & ToggleGroupItemProps
 >(
   (
     {
