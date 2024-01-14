@@ -36,13 +36,12 @@ const AccordionTrigger = React.forwardRef<
 
   return (
     <AccordionPrimitive.Header className='flex'>
-      <AccordionPrimitive.Trigger ref={ref} asChild>
+      <AccordionPrimitive.Trigger ref={ref} {...props} asChild>
         <View
           className={cn(
-            'flex flex-row flex-1 items-center justify-between py-4 font-medium transition-all group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-muted-foreground',
+            'flex flex-row web:flex-1 rounded-md items-center justify-between py-4 font-medium transition-all group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-muted-foreground',
             className
           )}
-          {...props}
         >
           {children}
 

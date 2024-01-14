@@ -33,14 +33,12 @@ interface ItemProps {
   disabled?: boolean;
 }
 
-type AccordionItemContext = ItemProps & { nativeID: string };
 type AccordionItemProps = ItemProps;
 type AccordionContentProps = ForceMountable;
 
 export type {
   AccordionContentProps,
   AccordionContext,
-  AccordionItemContext,
   AccordionItemProps,
   AccordionRootProps,
 };

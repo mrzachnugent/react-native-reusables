@@ -10,7 +10,6 @@ import type {
 import type {
   AccordionContentProps,
   AccordionContext,
-  AccordionItemContext,
   AccordionItemProps,
   AccordionRootProps,
 } from './types';
@@ -23,7 +22,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
       asChild,
       type,
       disabled,
-      collapsable = true,
+      collapsible = true,
       value,
       onValueChange,
       ...viewProps
@@ -38,7 +37,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
           {
             type,
             disabled,
-            collapsable,
+            collapsible,
             value,
             onValueChange,
           } as AccordionContext
@@ -61,6 +60,10 @@ function useAccordionContext() {
   }
   return context;
 }
+
+type AccordionItemContext = AccordionItemProps & {
+  nativeID: string;
+};
 
 const AccordionItemContext = React.createContext<AccordionItemContext | null>(
   null
@@ -162,6 +165,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     return (
       <Component
         ref={ref}
+        key={`trigger_${value}-${JSON.stringify(rootValue)}`}
         nativeID={nativeID}
         aria-disabled={isDisabled}
         role='button'
