@@ -1,39 +1,49 @@
-import React, { useId } from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { ComponentPropsWithAsChild } from '~/lib/rn-primitives/types';
+import React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import * as Slot from '../slot';
+import type {
+  ComponentPropsWithAsChild,
+  SlottableViewProps,
+  ViewRef,
+} from '../types';
+import type { TabsContentProps, TabsRootProps } from './types';
 
-interface RootProps {
-  value: string;
-  onValueChange: (value: string) => void;
-}
-
-interface RootContext extends RootProps {
+interface RootContext extends TabsRootProps {
   nativeID: string;
 }
 
 const TabsContext = React.createContext<RootContext | null>(null);
 
-const Root = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & RootProps
->(({ asChild, value, onValueChange, ...viewProps }, ref) => {
-  const nativeID = useId();
-  const Component = asChild ? Slot.View : View;
-  return (
-    <TabsContext.Provider
-      value={{
-        value,
-        onValueChange,
-        nativeID,
-      }}
-    >
-      <Component ref={ref} {...viewProps} />
-    </TabsContext.Provider>
-  );
-});
+const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
+  (
+    {
+      asChild,
+      value,
+      onValueChange,
+      orientation: _orientation,
+      dir: _dir,
+      activationMode: _activationMode,
+      ...viewProps
+    },
+    ref
+  ) => {
+    const nativeID = React.useId();
+    const Component = asChild ? Slot.View : View;
+    return (
+      <TabsContext.Provider
+        value={{
+          value,
+          onValueChange,
+          nativeID,
+        }}
+      >
+        <Component ref={ref} {...viewProps} />
+      </TabsContext.Provider>
+    );
+  }
+);
 
-Root.displayName = 'RootTabs';
+Root.displayName = 'RootNativeTabs';
 
 function useTabsContext() {
   const context = React.useContext(TabsContext);
@@ -45,15 +55,14 @@ function useTabsContext() {
   return context;
 }
 
-const List = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View>
->(({ asChild, ...props }, ref) => {
-  const Component = asChild ? Slot.View : View;
-  return <Component ref={ref} role='tablist' {...props} />;
-});
+const List = React.forwardRef<ViewRef, SlottableViewProps>(
+  ({ asChild, ...props }, ref) => {
+    const Component = asChild ? Slot.View : View;
+    return <Component ref={ref} role='tablist' {...props} />;
+  }
+);
 
-List.displayName = 'ListTabs';
+List.displayName = 'ListNativeTabs';
 
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
@@ -93,14 +102,11 @@ const Trigger = React.forwardRef<
   }
 );
 
-Trigger.displayName = 'TriggerTabs';
+Trigger.displayName = 'TriggerNativeTabs';
 
 const Content = React.forwardRef<
-  React.ElementRef<typeof View>,
-  ComponentPropsWithAsChild<typeof View> & {
-    value: string;
-    forceMount?: true | undefined;
-  }
+  ViewRef,
+  SlottableViewProps & TabsContentProps
 >(({ asChild, forceMount, value: tabValue, ...props }, ref) => {
   const { value: rootValue, nativeID } = useTabsContext();
 
@@ -122,6 +128,6 @@ const Content = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentTabs';
+Content.displayName = 'ContentNativeTabs';
 
 export { Content, List, Root, Trigger };

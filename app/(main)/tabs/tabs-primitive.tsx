@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import * as Tabs from '~/lib/rn-primitives/todo/tabs';
+import * as Tabs from '~/lib/rn-primitives/tabs';
 import { cn } from '~/lib/utils';
 
 export default function TabsPrimitiveScreen() {
