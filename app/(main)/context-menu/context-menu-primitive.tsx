@@ -8,6 +8,7 @@ import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
 export default function ContextPrimitiveScreen() {
   const headerHeight = useHeaderHeight();
   const [open, setOpen] = React.useState(false);
+  const [openInner, setOpenInner] = React.useState(false);
   const [openSub, setOpenSub] = React.useState(false);
   const [openSub2, setOpenSub2] = React.useState(false);
   const [openSub3, setOpenSub3] = React.useState(false);
@@ -173,7 +174,11 @@ export default function ContextPrimitiveScreen() {
             </ContextMenu.Overlay>
           </ContextMenu.Portal>
         </ContextMenu.Root>
-        <ContextMenu.Root open={open} onOpenChange={setOpen} className='w-full'>
+        <ContextMenu.Root
+          open={openInner}
+          onOpenChange={setOpenInner}
+          className='w-full'
+        >
           <ContextMenu.Trigger className='p-8 border border-dashed rounded-xl border-sky-500 bg-sky-100/20'>
             <Text className='text-foreground select-none text-xl text-center'>
               Inner Portal ContextMenu
@@ -183,7 +188,10 @@ export default function ContextPrimitiveScreen() {
             </Text>
           </ContextMenu.Trigger>
           <ContextMenu.Portal hostName='inner'>
-            <ContextMenu.Overlay className='bg-sky-500/10'>
+            <ContextMenu.Overlay
+              style={StyleSheet.absoluteFill}
+              className='bg-sky-500/10'
+            >
               <ContextMenu.Content
                 align='center'
                 sideOffset={-headerHeight}
