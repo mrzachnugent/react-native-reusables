@@ -169,7 +169,11 @@ export default function DropdownMenuPrimitiveScreen() {
             </Text>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal hostName='inner'>
-            <DropdownMenu.Overlay className='bg-red-500/10' onPress={onClose}>
+            <DropdownMenu.Overlay
+              style={StyleSheet.absoluteFill}
+              className='bg-red-500/10'
+              onPress={onClose}
+            >
               <DropdownMenu.Content
                 align='center'
                 sideOffset={
