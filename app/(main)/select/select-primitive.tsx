@@ -1,15 +1,21 @@
 import { ChevronDown } from 'lucide-react-native';
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Select from '~/lib/rn-primitives/todo/select';
+import * as Select from '~/lib/rn-primitives/select';
+
+const VALUES = [
+  { value: 'volvo', label: 'Volvo' },
+  { value: 'bmw', label: 'BMW' },
+  { value: 'honda', label: 'Honda' },
+  { value: 'red', label: 'Red' },
+  { value: 'blue', label: 'Blue' },
+  { value: 'green', label: 'Green' },
+];
 
 export default function SelectPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState<Select.Option>({
-    value: 'bmw',
-    label: 'BMW',
-  });
+  const [value, setValue] = React.useState<Select.Option>();
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -24,7 +30,7 @@ export default function SelectPrimitiveScreen() {
         <Select.Root
           value={value}
           onValueChange={(newValue) => {
-            // prevent unselecting
+            // prevent unselecting on native
             if (newValue) {
               setValue(newValue);
             }
@@ -36,15 +42,22 @@ export default function SelectPrimitiveScreen() {
             <Select.Value
               className='text-foreground text-xl'
               placeholder='Select...'
-            />
+            >
+              {value?.value
+                ? VALUES.find((e) => e.value === value.value)?.label
+                : null}
+            </Select.Value>
             <ChevronDown className='text-foreground' size={21} />
           </Select.Trigger>
           <Select.Portal>
-            <Select.Overlay className='bg-red-500/10' />
             <Select.Content
               sideOffset={6}
               insets={contentInsets}
               className='bg-muted p-1 w-52'
+              style={{
+                maxHeight: Platform.OS === 'web' ? 200 : undefined,
+                overflow: Platform.OS === 'web' ? 'scroll' : undefined,
+              }}
             >
               <Select.Group>
                 <Select.Label className='text-lg px-2 text-muted-foreground'>
@@ -53,7 +66,7 @@ export default function SelectPrimitiveScreen() {
                 <Select.Item
                   value='volvo'
                   label='Volvo'
-                  className='flex-row justify-between items-center'
+                  className='flex-row justify-between items-center hover:bg-blue-500 w-full rounded-2xl'
                 >
                   <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />
