@@ -25,7 +25,7 @@ const Accordion = React.forwardRef<
       {...props}
       asChild={Platform.OS !== 'web'}
     >
-      <Animated.View layout={Layout}>{children}</Animated.View>
+      <Animated.View layout={Layout.duration(200)}>{children}</Animated.View>
     </AccordionPrimitive.Root>
   );
 });
@@ -37,7 +37,7 @@ const AccordionItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, value, ...props }, ref) => {
   return (
-    <Animated.View className={'overflow-hidden'} layout={Layout}>
+    <Animated.View className={'overflow-hidden'} layout={Layout.duration(200)}>
       <AccordionPrimitive.Item
         ref={ref}
         className={cn('border-b border-border', className)}
@@ -116,7 +116,7 @@ function InnerContent({
   }
   return (
     <Animated.View
-      entering={FadeInUp}
+      entering={FadeInUp.duration(220)}
       exiting={FadeOutUp.duration(200)}
       className={cn('pb-4', className)}
     >
