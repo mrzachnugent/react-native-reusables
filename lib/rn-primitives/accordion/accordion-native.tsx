@@ -63,6 +63,7 @@ function useAccordionContext() {
 
 type AccordionItemContext = AccordionItemProps & {
   nativeID: string;
+  isExpanded: boolean;
 };
 
 const AccordionItemContext = React.createContext<AccordionItemContext | null>(
@@ -71,6 +72,7 @@ const AccordionItemContext = React.createContext<AccordionItemContext | null>(
 
 const Item = React.forwardRef<ViewRef, SlottableViewProps & AccordionItemProps>(
   ({ asChild, value, disabled, ...viewProps }, ref) => {
+    const { value: rootValue } = useAccordionContext();
     const nativeID = React.useId();
 
     const Component = asChild ? Slot.View : View;
@@ -80,6 +82,7 @@ const Item = React.forwardRef<ViewRef, SlottableViewProps & AccordionItemProps>(
           value,
           disabled,
           nativeID,
+          isExpanded: isItemExpanded(rootValue, value),
         }}
       >
         <Component ref={ref} {...viewProps} />
@@ -102,15 +105,15 @@ function useAccordionItemContext() {
 
 const Header = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
-    const { disabled: rootDisabled, value: rootValue } = useAccordionContext();
-    const { disabled: itemDisabled, value } = useAccordionItemContext();
+    const { disabled: rootDisabled } = useAccordionContext();
+    const { disabled: itemDisabled, isExpanded } = useAccordionItemContext();
 
     const Component = asChild ? Slot.View : View;
     return (
       <Component
         ref={ref}
         role='heading'
-        aria-expanded={isItemExpanded(rootValue, value)}
+        aria-expanded={isExpanded}
         aria-disabled={rootDisabled ?? itemDisabled}
         {...props}
       />
@@ -136,6 +139,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       nativeID,
       disabled: itemDisabled,
       value,
+      isExpanded,
     } = useAccordionItemContext();
 
     function onPress(ev: GestureResponderEvent) {
@@ -173,7 +177,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         role='button'
         onPress={onPress}
         accessibilityState={{
-          expanded: isItemExpanded(rootValue, value),
+          expanded: isExpanded,
           disabled: isDisabled,
         }}
         disabled={isDisabled}
@@ -189,9 +193,8 @@ const Content = React.forwardRef<
   ViewRef,
   SlottableViewProps & AccordionContentProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const { type, value: rootValue } = useAccordionContext();
-  const { nativeID, value } = useAccordionItemContext();
-  const isExpanded = isItemExpanded(rootValue, value);
+  const { type } = useAccordionContext();
+  const { nativeID, isExpanded } = useAccordionItemContext();
 
   if (!forceMount) {
     if (!isExpanded) {

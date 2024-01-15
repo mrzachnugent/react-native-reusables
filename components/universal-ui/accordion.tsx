@@ -5,7 +5,9 @@ import { ChevronDown } from 'lucide-react-native';
 import { Platform, View } from 'react-native';
 import Animated, {
   Extrapolate,
-  FadeInDown,
+  FadeInUp,
+  FadeOutUp,
+  Layout,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -13,42 +15,53 @@ import Animated, {
 } from 'react-native-reanimated';
 import { cn } from '~/lib/utils';
 
-const Accordion = AccordionPrimitive.Root;
+const Accordion = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
+>(({ children, ...props }, ref) => {
+  return (
+    <AccordionPrimitive.Root
+      ref={ref}
+      {...props}
+      asChild={Platform.OS !== 'web'}
+    >
+      <Animated.View layout={Layout}>{children}</Animated.View>
+    </AccordionPrimitive.Root>
+  );
+});
+
+Accordion.displayName = AccordionPrimitive.Root.displayName;
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, value, ...props }, ref) => {
   return (
-    <AccordionPrimitive.Item
-      ref={ref}
-      className={cn('border-b border-border', className)}
-      value={value}
-      {...props}
-    />
+    <Animated.View className={'overflow-hidden'} layout={Layout}>
+      <AccordionPrimitive.Item
+        ref={ref}
+        className={cn('border-b border-border', className)}
+        value={value}
+        {...props}
+      />
+    </Animated.View>
   );
 });
-AccordionItem.displayName = 'AccordionItem';
+AccordionItem.displayName = AccordionPrimitive.Item.displayName;
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, children, ...props }, ref) => {
-  const { value } = AccordionPrimitive.useRootContext();
-  const { value: itemValue } = AccordionPrimitive.useItemContext();
-  const isOpen = Array.isArray(value)
-    ? value.includes(itemValue)
-    : value === itemValue;
+  const { isExpanded } = AccordionPrimitive.useItemContext();
 
   const progress = useDerivedValue(() =>
-    isOpen ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })
+    isExpanded
+      ? withTiming(1, { duration: 250 })
+      : withTiming(0, { duration: 200 })
   );
   const chevronStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        rotate: `${progress.value * 180}deg`,
-      },
-    ],
+    transform: [{ rotate: `${progress.value * 180}deg` }],
     opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolate.CLAMP),
   }));
 
@@ -76,16 +89,12 @@ const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
-  const { value } = AccordionPrimitive.useRootContext();
-  const { value: itemValue } = AccordionPrimitive.useItemContext();
-  const isOpen = Array.isArray(value)
-    ? value.includes(itemValue)
-    : value === itemValue;
+  const { isExpanded } = AccordionPrimitive.useItemContext();
   return (
     <AccordionPrimitive.Content
       className={cn(
         'overflow-hidden text-sm transition-all',
-        isOpen ? 'animate-accordion-down' : 'animate-accordion-up'
+        isExpanded ? 'animate-accordion-down' : 'animate-accordion-up'
       )}
       ref={ref}
       {...props}
@@ -106,7 +115,11 @@ function InnerContent({
     return <View className={cn('pb-4', className)}>{children}</View>;
   }
   return (
-    <Animated.View entering={FadeInDown} className={cn('pb-4', className)}>
+    <Animated.View
+      entering={FadeInUp}
+      exiting={FadeOutUp.duration(200)}
+      className={cn('pb-4', className)}
+    >
       {children}
     </Animated.View>
   );

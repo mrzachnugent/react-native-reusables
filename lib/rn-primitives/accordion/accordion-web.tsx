@@ -75,9 +75,9 @@ function useAccordionContext() {
   return context;
 }
 
-const AccordionItemContext = React.createContext<AccordionItemProps | null>(
-  null
-);
+const AccordionItemContext = React.createContext<
+  (AccordionItemProps & { isExpanded: boolean }) | null
+>(null);
 
 const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
   ({ asChild, value: itemValue, disabled, ...props }, ref) => {
@@ -113,7 +113,13 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
 
     const Component = asChild ? Slot.View : View;
     return (
-      <AccordionItemContext.Provider value={{ value: itemValue, disabled }}>
+      <AccordionItemContext.Provider
+        value={{
+          value: itemValue,
+          disabled,
+          isExpanded: isItemExpanded(value, itemValue),
+        }}
+      >
         <Accordion.Item value={itemValue} disabled={disabled} asChild>
           <Component ref={augmentedRef} {...props} />
         </Accordion.Item>
@@ -138,22 +144,15 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
     const augmentedRef = React.useRef<ViewRef>(null);
     useAugmentedRef({ augmentedRef, ref });
-    const { value: itemValue, disabled } = useAccordionItemContext();
-    const {
-      value,
-      orientation,
-      disabled: disabledRoot,
-    } = useAccordionContext();
+    const { disabled, isExpanded } = useAccordionItemContext();
+    const { orientation, disabled: disabledRoot } = useAccordionContext();
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
-        const isExpanded = Array.isArray(value)
-          ? value.includes(itemValue)
-          : value === itemValue;
         augRef.dataset.state = isExpanded ? 'open' : 'closed';
       }
-    }, [value, itemValue]);
+    }, [isExpanded]);
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -180,20 +179,18 @@ Header.displayName = 'HeaderWebAccordion';
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled: disabledProp, ...props }, ref) => {
-    const { value, disabled: disabledRoot } = useAccordionContext();
-    const { value: itemValue, disabled } = useAccordionItemContext();
+    const { disabled: disabledRoot } = useAccordionContext();
+    const { disabled, isExpanded } = useAccordionItemContext();
     const augmentedRef = React.useRef<PressableRef>(null);
     useAugmentedRef({ augmentedRef, ref });
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
-        const isExpanded = Array.isArray(value)
-          ? value.includes(itemValue)
-          : value === itemValue;
+
         augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
       }
-    }, [value, itemValue]);
+    }, [isExpanded]);
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -233,17 +230,14 @@ const Content = React.forwardRef<
   const augmentedRef = React.useRef<ViewRef>(null);
   useAugmentedRef({ augmentedRef, ref });
 
-  const { value, orientation, disabled: disabledRoot } = useAccordionContext();
-  const { value: itemValue, disabled } = useAccordionItemContext();
+  const { orientation, disabled: disabledRoot } = useAccordionContext();
+  const { disabled, isExpanded } = useAccordionItemContext();
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
-      const isExpanded = Array.isArray(value)
-        ? value.includes(itemValue)
-        : value === itemValue;
       augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
     }
-  }, [value, itemValue]);
+  }, [isExpanded]);
 
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
@@ -277,3 +271,12 @@ export {
   useAccordionContext,
   useAccordionItemContext,
 };
+
+function isItemExpanded(
+  rootValue: string | string[] | undefined,
+  value: string
+) {
+  return Array.isArray(rootValue)
+    ? rootValue.includes(value)
+    : rootValue === value;
+}
