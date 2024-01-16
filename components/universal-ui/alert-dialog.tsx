@@ -85,7 +85,7 @@ const AlertDialogContent = React.forwardRef<
               'z-50 max-w-lg gap-4 border border-border bg-background p-6 shadow-lg duration-200 rounded-lg',
               open
                 ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
-                : 'web:animate-out fweb:ade-out-0 web:zoom-out-95',
+                : 'web:animate-out web:fade-out-0 web:zoom-out-95',
               className
             )}
             {...props}
