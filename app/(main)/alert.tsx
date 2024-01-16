@@ -1,5 +1,9 @@
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '~/components/universal-ui/alert';
 
 export default function AlertScreen() {
   return (
@@ -15,13 +19,6 @@ export default function AlertScreen() {
         <AlertDescription>
           High voltage. Do not touch. Risk of electric shock. Keep away from
           children.
-        </AlertDescription>
-      </Alert>
-      <Alert icon='CheckSquare' variant='success' className='max-w-xl'>
-        <AlertTitle>Success!</AlertTitle>
-        <AlertDescription>
-          You have successfully completed the tutorial. You can now go touch
-          some grass.
         </AlertDescription>
       </Alert>
     </View>
