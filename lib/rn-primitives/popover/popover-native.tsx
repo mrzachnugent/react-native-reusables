@@ -145,7 +145,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 Trigger.displayName = 'TriggerNativePopover';
 
 /**
- * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
+ * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset to account for nav elements like headers.
  */
 function Portal({ forceMount, hostName, children }: PopoverPortalProps) {
   const value = usePopoverContext();

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Modal,
+  BackHandler,
   Pressable,
   Text,
   View,
   type GestureResponderEvent,
-  type NativeSyntheticEvent,
 } from 'react-native';
+import { Portal as RNPPortal } from '../portal';
 import * as Slot from '../slot';
 import type {
   PressableRef,
@@ -17,10 +17,10 @@ import type {
   ViewRef,
 } from '../types';
 import type {
-  AlertDialogRootProps,
   AlertDialogContentProps,
   AlertDialogOverlayProps,
   AlertDialogPortalProps,
+  AlertDialogRootProps,
 } from './types';
 
 type AlertDialogContext = AlertDialogRootProps & {
@@ -87,43 +87,26 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerNativeAlertDialog';
 
-const Portal = React.forwardRef<
-  React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & AlertDialogPortalProps
->(
-  (
-    {
-      transparent = true,
-      statusBarTranslucent = true,
-      forceMount,
-      onRequestClose: onRequestCloseProp,
-      container: _container,
-      ...props
-    },
-    ref
-  ) => {
-    const { open: value, onOpenChange } = useAlertDialogContext();
+/**
+ * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset to account for nav elements like headers.
+ */
+function Portal({ forceMount, hostName, children }: AlertDialogPortalProps) {
+  const value = useAlertDialogContext();
 
-    function onRequestClose(ev: NativeSyntheticEvent<any>) {
-      onOpenChange(!value);
-      onRequestCloseProp?.(ev);
+  if (!forceMount) {
+    if (!value.open) {
+      return null;
     }
-
-    return (
-      <Modal
-        ref={ref}
-        aria-hidden={!(forceMount || value)}
-        transparent={transparent}
-        statusBarTranslucent={statusBarTranslucent}
-        onRequestClose={onRequestClose}
-        visible={forceMount || value}
-        {...props}
-      />
-    );
   }
-);
 
-Portal.displayName = 'PortalNativeAlertDialog';
+  return (
+    <RNPPortal hostName={hostName} name={`${value.nativeID}_portal`}>
+      <AlertDialogContext.Provider value={value}>
+        {children}
+      </AlertDialogContext.Provider>
+    </RNPPortal>
+  );
+}
 
 const Overlay = React.forwardRef<
   ViewRef,
@@ -147,7 +130,21 @@ const Content = React.forwardRef<
   ViewRef,
   SlottableViewProps & AlertDialogContentProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const { open: value, nativeID } = useAlertDialogContext();
+  const { open: value, nativeID, onOpenChange } = useAlertDialogContext();
+
+  React.useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        onOpenChange(false);
+        return true;
+      }
+    );
+
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 
   if (!forceMount) {
     if (!value) {

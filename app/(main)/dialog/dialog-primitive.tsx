@@ -16,7 +16,7 @@ export default function DialogPrimitiveScreen() {
         <Dialog.Trigger>
           <Text className='text-foreground text-xl'>Open dialog</Text>
         </Dialog.Trigger>
-        <Dialog.Portal className='flex-1 justify-center items-center'>
+        <Dialog.Portal>
           <Dialog.Overlay
             style={StyleSheet.absoluteFill}
             className='bg-zinc-50/80 dark:bg-zinc-900/80 justify-center items-center'

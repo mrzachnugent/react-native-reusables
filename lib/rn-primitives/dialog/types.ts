@@ -6,6 +6,11 @@ type DialogRootProps = {
 };
 
 interface DialogPortalProps extends ForceMountable {
+  children: React.ReactNode;
+  /**
+   * Platform: NATIVE ONLY
+   */
+  hostName?: string;
   /**
    * Platform: WEB ONLY
    */

@@ -1,13 +1,13 @@
 import React from 'react';
 import {
+  BackHandler,
   GestureResponderEvent,
-  Modal,
-  NativeSyntheticEvent,
   Pressable,
   Text,
   View,
 } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
+import { Portal as RNPPortal } from '../portal';
 import type {
   PressableRef,
   SlottablePressableProps,
@@ -17,10 +17,10 @@ import type {
   ViewRef,
 } from '../types';
 import type {
-  DialogRootProps,
-  DialogPortalProps,
-  DialogOverlayProps,
   DialogContentProps,
+  DialogOverlayProps,
+  DialogPortalProps,
+  DialogRootProps,
 } from './types';
 
 interface RootContext extends DialogRootProps {
@@ -85,42 +85,24 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerNativeDialog';
 
-const Portal = React.forwardRef<
-  React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & DialogPortalProps
->(
-  (
-    {
-      transparent = true,
-      statusBarTranslucent = true,
-      forceMount,
-      onRequestClose: onRequestCloseProp,
-      ...props
-    },
-    ref
-  ) => {
-    const { open, onOpenChange } = useDialogContext();
+/**
+ * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset to account for nav elements like headers.
+ */
+function Portal({ forceMount, hostName, children }: DialogPortalProps) {
+  const value = useDialogContext();
 
-    function onRequestClose(ev: NativeSyntheticEvent<any>) {
-      onOpenChange(!open);
-      onRequestCloseProp?.(ev);
+  if (!forceMount) {
+    if (!value.open) {
+      return null;
     }
-
-    return (
-      <Modal
-        ref={ref}
-        aria-hidden={!(forceMount || open)}
-        transparent={transparent}
-        statusBarTranslucent={statusBarTranslucent}
-        onRequestClose={onRequestClose}
-        visible={forceMount || open}
-        {...props}
-      />
-    );
   }
-);
 
-Portal.displayName = 'PortalNativeDialog';
+  return (
+    <RNPPortal hostName={hostName} name={`${value.nativeID}_portal`}>
+      <DialogContext.Provider value={value}>{children}</DialogContext.Provider>
+    </RNPPortal>
+  );
+}
 
 const Overlay = React.forwardRef<
   PressableRef,
@@ -162,7 +144,21 @@ const Content = React.forwardRef<
   ViewRef,
   SlottableViewProps & DialogContentProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const { open, nativeID } = useDialogContext();
+  const { open, nativeID, onOpenChange } = useDialogContext();
+
+  React.useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        onOpenChange(false);
+        return true;
+      }
+    );
+
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 
   if (!forceMount) {
     if (!open) {

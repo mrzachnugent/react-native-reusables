@@ -91,10 +91,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerAlertWebDialog';
 
-const Portal = React.forwardRef<
-  React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & AlertDialogPortalProps
->(({ forceMount, container, children }, _ref) => {
+function Portal({ forceMount, container, children }: AlertDialogPortalProps) {
   return (
     <AlertDialog.Portal
       forceMount={forceMount}
@@ -102,9 +99,7 @@ const Portal = React.forwardRef<
       container={container}
     />
   );
-});
-
-Portal.displayName = 'PortalAlertWebDialog';
+}
 
 const Overlay = React.forwardRef<
   ViewRef,

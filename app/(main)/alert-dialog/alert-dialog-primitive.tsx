@@ -16,7 +16,7 @@ export default function AlertDialogPrimitiveScreen() {
         <AlertDialog.Trigger className='bg-red-500 active:bg-red-900'>
           <Text className='text-foreground text-xl'>Open alert dialog</Text>
         </AlertDialog.Trigger>
-        <AlertDialog.Portal className='flex-1 justify-center items-center'>
+        <AlertDialog.Portal>
           <AlertDialog.Overlay
             style={StyleSheet.absoluteFill}
             className='bg-zinc-50/80 dark:bg-zinc-900/80 flex justify-center items-center'

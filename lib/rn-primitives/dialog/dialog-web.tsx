@@ -88,10 +88,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerWebDialog';
 
-const Portal = React.forwardRef<
-  React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & DialogPortalProps
->(({ forceMount, container, children }, _ref) => {
+function Portal({ forceMount, container, children }: DialogPortalProps) {
   return (
     <Dialog.Portal
       forceMount={forceMount}
@@ -99,9 +96,7 @@ const Portal = React.forwardRef<
       container={container}
     />
   );
-});
-
-Portal.displayName = 'PortalWebDialog';
+}
 
 const Overlay = React.forwardRef<
   PressableRef,

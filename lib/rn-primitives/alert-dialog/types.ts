@@ -6,6 +6,11 @@ type AlertDialogRootProps = {
 };
 
 interface AlertDialogPortalProps extends ForceMountable {
+  children: React.ReactNode;
+  /**
+   * Platform: NATIVE ONLY
+   */
+  hostName?: string;
   /**
    * Platform: WEB ONLY
    */
