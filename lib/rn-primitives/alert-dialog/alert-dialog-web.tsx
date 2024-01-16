@@ -273,4 +273,5 @@ export {
   Root,
   Title,
   Trigger,
+  useAlertDialogContext,
 };

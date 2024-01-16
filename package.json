@@ -84,6 +84,7 @@
     "react-native-toast-message": "^2.2.0",
     "react-native-web": "~0.19.6",
     "tailwind-merge": "^2.1.0",
+    "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },

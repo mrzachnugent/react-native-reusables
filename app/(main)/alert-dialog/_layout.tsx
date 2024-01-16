@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
-import { Copy, ToyBrick } from 'lucide-react-native';
+import { Copy, Merge, ToyBrick } from 'lucide-react-native';
 
-export default function DialogTabsLayout() {
+export default function AlertDialogTabsLayout() {
   return (
     <Tabs screenOptions={screenOptions}>
       <Tabs.Screen
@@ -19,6 +19,15 @@ export default function DialogTabsLayout() {
           title: 'Primitive',
           tabBarIcon({ color, size }) {
             return <ToyBrick color={color} size={size} />;
+          },
+        }}
+      />
+      <Tabs.Screen
+        name='alert-dialog-universal'
+        options={{
+          title: 'Universal',
+          tabBarIcon({ color, size }) {
+            return <Merge color={color} size={size} />;
           },
         }}
       />

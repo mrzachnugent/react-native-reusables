@@ -46,3 +46,8 @@ export const Action = Platform.select({
   web: AlertDialogWeb.Action,
   default: AlertDialogNative.Action,
 });
+
+export const useAlertDialogContext = Platform.select({
+  web: AlertDialogWeb.useAlertDialogContext,
+  default: AlertDialogNative.useAlertDialogContext,
+});
