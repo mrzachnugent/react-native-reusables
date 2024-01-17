@@ -4,7 +4,7 @@ import * as Slot from '../slot';
 import type { SlottableViewProps } from '../types';
 import type { AspectRatioRootProps } from './types';
 
-const AspectRatio = React.forwardRef<
+const Root = React.forwardRef<
   React.ElementRef<typeof View>,
   Omit<SlottableViewProps, 'style'> & AspectRatioRootProps
 >(({ asChild, ratio = 1, style, ...props }, ref) => {
@@ -14,6 +14,6 @@ const AspectRatio = React.forwardRef<
   );
 });
 
-AspectRatio.displayName = 'PrimitiveAspectRatio';
+Root.displayName = 'RootAspectRatio';
 
-export { AspectRatio };
+export { Root };

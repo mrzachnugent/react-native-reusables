@@ -21,6 +21,7 @@ export const COMPONENTS = [
   'accordion',
   'alert',
   'alert-dialog',
+  'aspect-ratio',
   'avatar',
   'badge',
   'bottom-sheet',
