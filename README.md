@@ -53,15 +53,31 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used t
 
 ### Roadmap
 
-1. **Styled Native-Focused Expo-Go Components - 34 ✅ / 38**
+1. Styled Native-Focused Expo-Go Components - 34 ✅ / 38
    <br>
    _Quick start for your own components_
 
-2. Unstyled Native-Focused A11y Components (rn-primitives)
+2. Unstyled Universal A11y Components (rn-primitives)
    <br>
-   _Style agnostic accessible like [radix-ui/primitives](https://github.com/radix-ui/primitives) for ios and android components_
+   _Style agnostic and accessible components that **will later be made into it's own library**. It uses [radix-ui/primitives](https://github.com/radix-ui/primitives) for the web and native equivalents for native components_
 
-3. Look into options to seamlessly combine web primitives from external library and rn-primitives.
+3. **Create POC universal components**
+   <br>
+   _Build components while ensuring `rn-primitives` works as intended_
+
+4. Release `rn-primitives` on npm, use it as a dependency and finalize first version of universal components.
+
+5. Create a documentation website
+
+6. Complete Github Community Standards Checklist
+   <br>
+   _Code of conduct, Contributing, Security policy, Issue templates, and Pull request template_
+
+<br>
+
+**Tool for creating your own theme**
+<br>
+If you want inspiration for your own theme, check out: https://ui.jln.dev/. And make sure you use `.dark:root` as the selector in your css file instead of `.dark`
 
 #### Accordion
 
