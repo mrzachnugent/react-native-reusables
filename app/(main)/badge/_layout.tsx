@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
-import { Copy, Merge, ToyBrick } from 'lucide-react-native';
+import { Copy, Merge } from 'lucide-react-native';
 
-export default function AvatarTabsLayout() {
+export default function BadgeTabsLayout() {
   return (
     <Tabs screenOptions={screenOptions}>
       <Tabs.Screen
@@ -14,16 +14,7 @@ export default function AvatarTabsLayout() {
         }}
       />
       <Tabs.Screen
-        name='avatar-primitive'
-        options={{
-          title: 'Primitive',
-          tabBarIcon({ color, size }) {
-            return <ToyBrick color={color} size={size} />;
-          },
-        }}
-      />
-      <Tabs.Screen
-        name='avatar-universal'
+        name='badge-universal'
         options={{
           title: 'Universal',
           tabBarIcon({ color, size }) {

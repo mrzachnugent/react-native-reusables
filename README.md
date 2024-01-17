@@ -131,7 +131,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <summary>Code</summary>
   
   - [UI](/components/ui/badge.tsx)
-  - [Example](/app/(main)/badge.tsx)
+  - [Example](/app/(main)/badge/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/211cc87a-ea85-4d17-80d5-876ff31e8055" width="250px" />
@@ -154,7 +154,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <summary>Code</summary>
   
   - [UI](/components/ui/button.tsx)
-  - [Example](/app/(main)/button.tsx)
+  - [Example](/app/(main)/button/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/61ab7308-c628-4b1e-a688-91413dfc05a9" width="250px" />

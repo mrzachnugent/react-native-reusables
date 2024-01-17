@@ -12,7 +12,7 @@ import type {
 import { cn } from '~/lib/utils';
 
 const buttonVariants = cva(
-  'group flex items-center justify-center rounded-md ring-offset-background web:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'group flex items-center justify-center rounded-md ring-offset-background web:transition-colors web:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
@@ -27,7 +27,7 @@ const buttonVariants = cva(
       size: {
         default: 'h-10 px-4 py-2 native:h-12 native:px-5 native:py-3',
         sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
+        lg: 'h-11 rounded-md px-8 native:h-14',
         icon: 'h-10 w-10',
       },
     },
@@ -50,7 +50,7 @@ const buttonTextVariants = cva(
         secondary: 'text-secondary-foreground',
         ghost:
           'group-hover:text-accent-foreground group-active:text-accent-foreground',
-        link: 'text-primary underline-offset-4 group-hover:underline group-active:underline',
+        link: 'text-primary web:underline-offset-4 group-hover:underline group-active:underline',
       },
       size: {
         default: '',
@@ -69,18 +69,27 @@ const buttonTextVariants = cva(
 type ButtonProps = SlottablePressableProps &
   VariantProps<typeof buttonVariants>;
 
-const ButtonContext = React.createContext<VariantProps<
-  typeof buttonVariants
-> | null>(null);
+const ButtonContext = React.createContext<
+  | (VariantProps<typeof buttonVariants> & {
+      disabled: boolean | null | undefined;
+    })
+  | null
+>(null);
 
 const Button = React.forwardRef<PressableRef, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <ButtonContext.Provider value={{ variant, size }}>
+      <ButtonContext.Provider
+        value={{ variant, size, disabled: props.disabled }}
+      >
         <Component
-          className={cn(buttonVariants({ variant, size, className }))}
+          className={cn(
+            props.disabled && 'opacity-50 web:pointer-events-none',
+            buttonVariants({ variant, size, className })
+          )}
           ref={ref}
+          role='button'
           {...props}
         />
       </ButtonContext.Provider>
@@ -103,11 +112,14 @@ type ButtonTextProps = SlottableTextProps;
 
 const ButtonText = React.forwardRef<TextRef, ButtonTextProps>(
   ({ className, asChild = false, ...props }, ref) => {
-    const { size, variant } = useButtonContext();
+    const { size, variant, disabled } = useButtonContext();
     const Component = asChild ? Slot.Text : Text;
     return (
       <Component
-        className={cn(buttonTextVariants({ variant, size, className }))}
+        className={cn(
+          disabled && 'web:pointer-events-none',
+          buttonTextVariants({ variant, size, className })
+        )}
         ref={ref}
         {...props}
       />
