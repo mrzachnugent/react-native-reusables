@@ -178,7 +178,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <summary>Code</summary>
   
   - [UI](/components/ui/card.tsx)
-  - [Example](/app/(main)/card.tsx)
+  - [Example](/app/(main)/card/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f67fe49b-ebf2-4eb7-87fd-fb513c532aeb" width="250px" />
