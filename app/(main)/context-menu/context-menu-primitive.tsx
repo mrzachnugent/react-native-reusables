@@ -1,6 +1,6 @@
 import { useHeaderHeight } from '@react-navigation/elements';
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ContextMenu from '~/lib/rn-primitives/context-menu';
 import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
@@ -34,12 +34,15 @@ export default function ContextPrimitiveScreen() {
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
         <ContextMenu.Root open={open} onOpenChange={setOpen} className='w-full'>
-          <ContextMenu.Trigger className='p-8 border border-dashed rounded-xl border-sky-500 bg-sky-100/20'>
+          <ContextMenu.Trigger className='p-5 border border-dashed rounded-xl border-sky-500 bg-sky-100/20 web:cursor-default'>
             <Text className='text-foreground select-none text-xl text-center'>
               Root Portal ContextMenu
             </Text>
             <Text className='text-foreground select-none font-bold text-center'>
-              LONG PRESS WITHIN DASHED BORDER
+              LONG PRESS / RIGHT CLICK WITHIN DASHED BORDER
+            </Text>
+            <Text className='text-foreground select-none text-sm text-center'>
+              Relative to long press location (native only)
             </Text>
           </ContextMenu.Trigger>
           <ContextMenu.Portal>
@@ -175,16 +178,20 @@ export default function ContextPrimitiveScreen() {
           </ContextMenu.Portal>
         </ContextMenu.Root>
         <ContextMenu.Root
+          relativeTo='trigger'
           open={openInner}
           onOpenChange={setOpenInner}
           className='w-full'
         >
-          <ContextMenu.Trigger className='p-8 border border-dashed rounded-xl border-sky-500 bg-sky-100/20'>
+          <ContextMenu.Trigger className='p-5 border border-dashed rounded-xl border-sky-500 bg-sky-100/20 web:cursor-default'>
             <Text className='text-foreground select-none text-xl text-center'>
               Inner Portal ContextMenu
             </Text>
             <Text className='text-foreground select-none font-bold text-center'>
-              LONG PRESS WITHIN DASHED BORDER
+              LONG PRESS / RIGHT CLICK WITHIN DASHED BORDER
+            </Text>
+            <Text className='text-foreground select-none text-sm text-center'>
+              Relative to trigger positioning (native only)
             </Text>
           </ContextMenu.Trigger>
           <ContextMenu.Portal hostName='inner'>

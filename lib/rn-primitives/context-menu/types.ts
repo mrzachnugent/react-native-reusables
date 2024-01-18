@@ -2,10 +2,15 @@ import { ForceMountable } from '../types';
 
 interface ContextMenuRootProps {
   /**
-   * Platform: ONLY NATIVE AND MADATORY
+   * Platform: NATIVE ONLY
    */
   open: boolean;
   onOpenChange: (value: boolean) => void;
+
+  /**
+   * Platform: NATIVE ONLY
+   */
+  relativeTo?: 'longPress' | 'trigger';
 }
 
 interface ContextMenuPortalProps extends ForceMountable {

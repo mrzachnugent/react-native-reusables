@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BackHandler,
   Pressable,
-  StyleSheet,
   Text,
   View,
   type GestureResponderEvent,

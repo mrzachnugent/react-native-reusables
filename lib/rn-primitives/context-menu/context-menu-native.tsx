@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BackHandler,
   Pressable,
-  StyleSheet,
   Text,
   View,
   type AccessibilityActionEvent,
@@ -56,30 +55,35 @@ const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
 const Root = React.forwardRef<
   ViewRef,
   SlottableViewProps & ContextMenuRootProps
->(({ asChild, open, onOpenChange, ...viewProps }, ref) => {
-  const nativeID = React.useId();
-  const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
-  if (!storeRef.current) {
-    storeRef.current = createStore((set) => ({
-      pressPosition: null,
-      setPressPosition: (pressPosition: LayoutPosition | null) =>
-        set({ pressPosition }),
-      contentLayout: null,
-      setContentLayout: (contentLayout: LayoutRectangle | null) =>
-        set({ contentLayout }),
-      nativeID,
-    }));
-  }
+>(
+  (
+    { asChild, open, onOpenChange, relativeTo = 'longPress', ...viewProps },
+    ref
+  ) => {
+    const nativeID = React.useId();
+    const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
+    if (!storeRef.current) {
+      storeRef.current = createStore((set) => ({
+        pressPosition: null,
+        setPressPosition: (pressPosition: LayoutPosition | null) =>
+          set({ pressPosition }),
+        contentLayout: null,
+        setContentLayout: (contentLayout: LayoutRectangle | null) =>
+          set({ contentLayout }),
+        nativeID,
+      }));
+    }
 
-  const Component = asChild ? Slot.View : View;
-  return (
-    <RootStoreContext.Provider value={storeRef.current}>
-      <RootContext.Provider value={{ open, onOpenChange }}>
-        <Component ref={ref} {...viewProps} />
-      </RootContext.Provider>
-    </RootStoreContext.Provider>
-  );
-});
+    const Component = asChild ? Slot.View : View;
+    return (
+      <RootStoreContext.Provider value={storeRef.current}>
+        <RootContext.Provider value={{ open, onOpenChange, relativeTo }}>
+          <Component ref={ref} {...viewProps} />
+        </RootContext.Provider>
+      </RootStoreContext.Provider>
+    );
+  }
+);
 
 Root.displayName = 'RootNativeContextMenu';
 
@@ -126,21 +130,39 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     },
     ref
   ) => {
-    const { open, onOpenChange } = useContextMenuContext();
+    const triggerRef = React.useRef<View>(null);
+    const { open, onOpenChange, relativeTo } = useContextMenuContext();
     const setPressPosition = useRootStoreContext(
       (state) => state.setPressPosition
     );
 
+    React.useImperativeHandle(
+      ref,
+      () => {
+        if (!triggerRef.current) {
+          return new View({});
+        }
+        return triggerRef.current;
+      },
+      [triggerRef.current]
+    );
+
     function onLongPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      setPressPosition({
-        width: 0,
-        pageX: ev.nativeEvent.pageX,
-        pageY: ev.nativeEvent.pageY,
-        height: 0,
-      });
-      const newValue = !open;
-      onOpenChange(newValue);
+      if (relativeTo === 'longPress') {
+        setPressPosition({
+          width: 0,
+          pageX: ev.nativeEvent.pageX,
+          pageY: ev.nativeEvent.pageY,
+          height: 0,
+        });
+      }
+      if (relativeTo === 'trigger') {
+        triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+          setPressPosition({ width, pageX, pageY: pageY, height });
+        });
+      }
+      onOpenChange(!open);
       onLongPressProp?.(ev);
     }
 
@@ -162,7 +184,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={ref}
+        ref={triggerRef}
         aria-disabled={disabled ?? undefined}
         role='button'
         onLongPress={onLongPress}
