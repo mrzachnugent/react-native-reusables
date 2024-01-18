@@ -20,7 +20,7 @@ const AlertDialogOverlayWeb = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => {
-  const { open } = AlertDialogPrimitive.useAlertDialogContext();
+  const { open } = AlertDialogPrimitive.useContext();
   return (
     <AlertDialogPrimitive.Overlay
       style={StyleSheet.absoluteFill}
@@ -73,7 +73,7 @@ const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
 >(({ className, ...props }, ref) => {
-  const { open } = AlertDialogPrimitive.useAlertDialogContext();
+  const { open } = AlertDialogPrimitive.useContext();
 
   return (
     <AlertDialogPortal>
