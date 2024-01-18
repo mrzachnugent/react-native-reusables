@@ -60,4 +60,5 @@ export const COMPONENTS = [
   'toggle-group',
   'toolbar',
   'tooltip',
+  'typography',
 ];
