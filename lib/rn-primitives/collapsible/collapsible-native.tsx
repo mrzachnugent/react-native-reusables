@@ -56,14 +56,14 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled || disabledProp) return;
-      const newValue = !open;
-      onOpenChange(newValue);
+      onOpenChange(!open);
       onPressProp?.(ev);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
+        key={`trigger-${nativeID}-${open}`}
         ref={ref}
         nativeID={nativeID}
         aria-disabled={(disabled || disabledProp) ?? undefined}
