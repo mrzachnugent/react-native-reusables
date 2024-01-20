@@ -55,7 +55,7 @@ const buttonTextVariants = cva(
       size: {
         default: '',
         sm: '',
-        lg: '',
+        lg: 'native:text-lg',
         icon: '',
       },
     },

@@ -5,9 +5,15 @@ import {
   ChevronUp,
 } from 'lucide-react-native';
 import * as React from 'react';
+import {
+  Platform,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from 'react-native';
 import * as ContextMenuPrimitive from '~/lib/rn-primitives/context-menu';
-
-import { Platform, StyleProp, Text, View, ViewStyle } from 'react-native';
 import { TextRef } from '~/lib/rn-primitives/types';
 import { cn } from '~/lib/utils';
 
@@ -36,7 +42,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     <ContextMenuPrimitive.SubTrigger
       ref={ref}
       className={cn(
-        'flex flex-row web:cursor-default select-none items-center focus:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
+        'flex flex-row web:cursor-default select-none items-center gap-2 focus:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
         open && 'bg-accent',
         inset && 'pl-8',
         className
@@ -59,7 +65,7 @@ const ContextMenuSubTriggerText = React.forwardRef<
     <Text
       ref={ref}
       className={cn(
-        'select-none text-sm native:text-base text-primary',
+        'select-none text-sm native:text-lg text-primary',
         open && 'native:text-accent-foreground',
         className
       )}
@@ -78,7 +84,7 @@ const ContextMenuSubContent = React.forwardRef<
     <ContextMenuPrimitive.SubContent
       ref={ref}
       className={cn(
-        'z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+        'z-50 min-w-[8rem] overflow-hidden rounded-md border mt-1 border-border bg-popover p-1 shadow-md data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         open
           ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
           : 'web:animate-out web:fade-out-0 web:zoom-out ',
@@ -101,7 +107,16 @@ const ContextMenuContent = React.forwardRef<
   return (
     <ContextMenuPrimitive.Portal>
       <ContextMenuPrimitive.Overlay
-        style={overlayStyle}
+        style={
+          overlayStyle
+            ? StyleSheet.flatten([
+                Platform.OS !== 'web' ? StyleSheet.absoluteFill : {},
+                overlayStyle,
+              ])
+            : Platform.OS !== 'web'
+            ? StyleSheet.absoluteFill
+            : undefined
+        }
         className={overlayClassName}
       >
         <ContextMenuPrimitive.Content
@@ -130,7 +145,7 @@ const ContextMenuItem = React.forwardRef<
   <ContextMenuPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex flex-row web:cursor-default items-center rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent hover:bg-accent group',
+      'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent hover:bg-accent group',
       inset && 'pl-8',
       props.disabled && 'opacity-50 web:pointer-events-none',
       className
@@ -148,7 +163,7 @@ const ContextMenuItemText = React.forwardRef<
     <Text
       ref={ref}
       className={cn(
-        'select-none text-sm native:text-base text-popover-foreground group-focus:text-accent-foreground',
+        'select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground',
         className
       )}
       {...props}
@@ -214,7 +229,7 @@ const ContextMenuLabel = React.forwardRef<
   <ContextMenuPrimitive.Label
     ref={ref}
     className={cn(
-      'px-2 py-1.5 text-sm font-semibold text-foreground web:cursor-default',
+      'px-2 py-1.5 text-sm native:text-base font-semibold text-foreground web:cursor-default',
       inset && 'pl-8',
       className
     )}

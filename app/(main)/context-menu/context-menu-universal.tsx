@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -47,7 +47,7 @@ export default function ContextPrimitiveScreen() {
           }}
         >
           <ContextMenuTrigger className='flex h-[150px] w-[300px] web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
-            <Text className='text-foreground  text-sm native:text-base'>
+            <Text className='text-foreground text-sm native:text-lg'>
               {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
             </Text>
           </ContextMenuTrigger>
@@ -56,7 +56,6 @@ export default function ContextPrimitiveScreen() {
             align='start'
             insets={contentInsets}
             className='w-64 native:w-72'
-            overlayStyle={Platform.OS !== 'web' && StyleSheet.absoluteFill}
           >
             <ContextMenuItem inset>
               <ContextMenuItemText>Back</ContextMenuItemText>

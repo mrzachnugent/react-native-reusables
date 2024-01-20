@@ -699,4 +699,6 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
+  useDropdownMenuContext,
+  useSubContext,
 };

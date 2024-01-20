@@ -1,8 +1,8 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
-import { useTrigger } from '../hooks/useTrigger';
+import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -13,6 +13,7 @@ import type {
   TextRef,
   ViewRef,
 } from '../types';
+import { EmptyGestureResponderEvent } from '../utils';
 import type {
   DropdownMenuCheckboxItemProps,
   DropdownMenuItemProps,
@@ -25,7 +26,6 @@ import type {
   DropdownMenuSubProps,
   DropdownMenuSubTriggerProps,
 } from './types';
-import { useAugmentedRef } from '../hooks/useAugmentedRef';
 
 const DropdownMenuContext = React.createContext<DropdownMenuRootProps | null>(
   null
@@ -112,6 +112,10 @@ const Overlay = React.forwardRef<
 
 Overlay.displayName = 'OverlayWebDropdownMenu';
 
+const DropdownMenuContentContext = React.createContext<{
+  close: () => void;
+} | null>(null);
+
 const Content = React.forwardRef<
   PressableRef,
   SlottablePressableProps & PositionedContentProps
@@ -139,49 +143,112 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
+    const itemRef = React.useRef<HTMLDivElement>(null);
+
+    function close() {
+      itemRef.current?.click();
+    }
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <DropdownMenu.Content
-        forceMount={forceMount}
-        alignOffset={alignOffset}
-        avoidCollisions={avoidCollisions}
-        collisionPadding={insets}
-        loop={loop}
-        onCloseAutoFocus={onCloseAutoFocus}
-        onEscapeKeyDown={onEscapeKeyDown}
-        onPointerDownOutside={onPointerDownOutside}
-        onFocusOutside={onFocusOutside}
-        onInteractOutside={onInteractOutside}
-        collisionBoundary={collisionBoundary}
-        sticky={sticky}
-        hideWhenDetached={hideWhenDetached}
-        align={align}
-        side={side}
-        sideOffset={sideOffset}
-      >
-        <Component ref={ref} {...props} />
-      </DropdownMenu.Content>
+      <DropdownMenuContentContext.Provider value={{ close }}>
+        <DropdownMenu.Content
+          forceMount={forceMount}
+          alignOffset={alignOffset}
+          avoidCollisions={avoidCollisions}
+          collisionPadding={insets}
+          loop={loop}
+          onCloseAutoFocus={onCloseAutoFocus}
+          onEscapeKeyDown={onEscapeKeyDown}
+          onPointerDownOutside={onPointerDownOutside}
+          onFocusOutside={onFocusOutside}
+          onInteractOutside={onInteractOutside}
+          collisionBoundary={collisionBoundary}
+          sticky={sticky}
+          hideWhenDetached={hideWhenDetached}
+          align={align}
+          side={side}
+          sideOffset={sideOffset}
+        >
+          <Component ref={ref} {...props} />
+          <DropdownMenu.Item
+            ref={itemRef}
+            aria-hidden
+            style={{ position: 'fixed', top: 0, left: 0, zIndex: -999999999 }}
+            aria-disabled
+            tabIndex={-1}
+            hidden
+          />
+        </DropdownMenu.Content>
+      </DropdownMenuContentContext.Provider>
     );
   }
 );
 
 Content.displayName = 'ContentWebDropdownMenu';
 
+function useDropdownMenuContentContext() {
+  const context = React.useContext(DropdownMenuContentContext);
+  if (!context) {
+    throw new Error(
+      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
+    );
+  }
+  return context;
+}
+
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & DropdownMenuItemProps
->(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <DropdownMenu.Item
-      textValue={textValue}
-      disabled={props.disabled ?? undefined}
-      onSelect={closeOnPress ? undefined : onSelected}
-    >
-      <Component ref={ref} pointerEvents='none' {...props} />
-    </DropdownMenu.Item>
-  );
-});
+>(
+  (
+    {
+      asChild,
+      textValue,
+      closeOnPress = true,
+      onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
+      ...props
+    },
+    ref
+  ) => {
+    const { close } = useDropdownMenuContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onPressProp?.(EmptyGestureResponderEvent);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onPressProp?.(ev);
+      if (closeOnPress) {
+        close();
+      }
+    }
+
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <DropdownMenu.Item
+        textValue={textValue}
+        disabled={props.disabled ?? undefined}
+        onSelect={closeOnPress ? undefined : onSelected}
+        asChild
+      >
+        <Component
+          ref={ref}
+          // @ts-expect-error web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          {...props}
+        />
+      </DropdownMenu.Item>
+    );
+  }
+);
 
 Item.displayName = 'ItemWebDropdownMenu';
 
@@ -223,10 +290,32 @@ const CheckboxItem = React.forwardRef<
       textValue,
       disabled = false,
       closeOnPress = true,
+      onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
       ...props
     },
     ref
   ) => {
+    const { close } = useDropdownMenuContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onPressProp?.(EmptyGestureResponderEvent);
+        onCheckedChange?.(!checked);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onPressProp?.(ev);
+      onCheckedChange?.(!checked);
+      if (closeOnPress) {
+        close();
+      }
+    }
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <DropdownMenu.CheckboxItem
@@ -236,7 +325,14 @@ const CheckboxItem = React.forwardRef<
         onSelect={closeOnPress ? undefined : onSelected}
         disabled={disabled ?? undefined}
       >
-        <Component ref={ref} pointerEvents='none' {...props} />
+        <Component
+          ref={ref}
+          // @ts-expect-error web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          role='button'
+          {...props}
+        />
       </DropdownMenu.CheckboxItem>
     );
   }
@@ -244,40 +340,97 @@ const CheckboxItem = React.forwardRef<
 
 CheckboxItem.displayName = 'CheckboxItemWebDropdownMenu';
 
+const DropdownMenuRadioGroupContext = React.createContext<{
+  value?: string;
+  onValueChange?: (value: string) => void;
+} | null>(null);
+
 const RadioGroup = React.forwardRef<
   ViewRef,
   SlottableViewProps & DropdownMenuRadioGroupProps
 >(({ asChild, value, onValueChange, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <DropdownMenu.RadioGroup
-      value={value}
-      onValueChange={onValueChange}
-      asChild
-    >
-      <Component ref={ref} {...props} />
-    </DropdownMenu.RadioGroup>
+    <DropdownMenuRadioGroupContext.Provider value={{ value, onValueChange }}>
+      <DropdownMenu.RadioGroup
+        value={value}
+        onValueChange={onValueChange}
+        asChild
+      >
+        <Component ref={ref} {...props} />
+      </DropdownMenu.RadioGroup>
+    </DropdownMenuRadioGroupContext.Provider>
   );
 });
 
 RadioGroup.displayName = 'RadioGroupWebDropdownMenu';
 
+function useDropdownMenuRadioGroupContext() {
+  const context = React.useContext(DropdownMenuRadioGroupContext);
+  if (!context) {
+    throw new Error(
+      'DropdownMenuRadioGroup compound components cannot be rendered outside the DropdownMenuRadioGroup component'
+    );
+  }
+  return context;
+}
+
 const RadioItem = React.forwardRef<
   PressableRef,
   SlottablePressableProps & DropdownMenuRadioItemProps
->(({ asChild, value, textValue, closeOnPress = true, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <DropdownMenu.RadioItem
-      value={value}
-      textValue={textValue}
-      disabled={props.disabled ?? undefined}
-      onSelect={closeOnPress ? undefined : onSelected}
-    >
-      <Component ref={ref} pointerEvents='none' {...props} />
-    </DropdownMenu.RadioItem>
-  );
-});
+>(
+  (
+    {
+      asChild,
+      value,
+      textValue,
+      closeOnPress = true,
+      onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
+      ...props
+    },
+    ref
+  ) => {
+    const { onValueChange } = useDropdownMenuRadioGroupContext();
+    const { close } = useDropdownMenuContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onValueChange?.(value);
+        onPressProp?.(EmptyGestureResponderEvent);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onValueChange?.(value);
+      onPressProp?.(ev);
+      if (closeOnPress) {
+        close();
+      }
+    }
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <DropdownMenu.RadioItem
+        value={value}
+        textValue={textValue}
+        disabled={props.disabled ?? undefined}
+        onSelect={closeOnPress ? undefined : onSelected}
+      >
+        <Component
+          ref={ref}
+          // @ts-expect-error web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          {...props}
+        />
+      </DropdownMenu.RadioItem>
+    );
+  }
+);
 
 RadioItem.displayName = 'RadioItemWebDropdownMenu';
 
@@ -309,19 +462,36 @@ const Separator = React.forwardRef<
 
 Separator.displayName = 'SeparatorWebDropdownMenu';
 
+const DropdownMenuSubContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
+
 const Sub = React.forwardRef<
   ViewRef,
   SlottableViewProps & DropdownMenuSubProps
 >(({ asChild, open, onOpenChange, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <DropdownMenu.Sub open={open} onOpenChange={onOpenChange}>
-      <Component ref={ref} {...props} />
-    </DropdownMenu.Sub>
+    <DropdownMenuSubContext.Provider value={{ open, onOpenChange }}>
+      <DropdownMenu.Sub open={open} onOpenChange={onOpenChange}>
+        <Component ref={ref} {...props} />
+      </DropdownMenu.Sub>
+    </DropdownMenuSubContext.Provider>
   );
 });
 
 Sub.displayName = 'SubWebDropdownMenu';
+
+function useSubContext() {
+  const context = React.useContext(DropdownMenuSubContext);
+  if (!context) {
+    throw new Error(
+      'DropdownMenu compound components cannot be rendered outside the DropdownMenu component'
+    );
+  }
+  return context;
+}
 
 const SubTrigger = React.forwardRef<
   PressableRef,
@@ -332,8 +502,9 @@ const SubTrigger = React.forwardRef<
     <DropdownMenu.SubTrigger
       disabled={disabled ?? undefined}
       textValue={textValue}
+      asChild
     >
-      <Component ref={ref} pointerEvents='none' {...props} />
+      <Component ref={ref} {...props} />
     </DropdownMenu.SubTrigger>
   );
 });
@@ -373,6 +544,8 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
+  useDropdownMenuContext,
+  useSubContext,
 };
 
 function onSelected(ev: Event) {

@@ -1,4 +1,4 @@
-import { ChevronsUpDown } from 'lucide-react-native';
+import { ChevronsUpDown, ChevronsDownUp } from 'lucide-react-native';
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import Animated, { FadeInDown, Layout } from 'react-native-reanimated';
@@ -17,18 +17,22 @@ export default function CollapsibleUniversalScreen() {
         <Animated.View layout={Layout}>
           <View className='w-[350px] gap-2'>
             <View className='flex flex-row items-center justify-between space-x-4 px-4'>
-              <Text className='text-foreground text-sm font-semibold'>
+              <Text className='text-foreground text-sm native:text-lg font-semibold'>
                 @peduarte starred 3 repositories
               </Text>
               <CollapsibleTrigger asChild>
-                <Button variant='ghost' size='sm' className='w-9 p-0 '>
-                  <ChevronsUpDown size={16} className='text-foreground' />
+                <Button variant='ghost' size='icon'>
+                  {open ? (
+                    <ChevronsDownUp size={16} className='text-foreground' />
+                  ) : (
+                    <ChevronsUpDown size={16} className='text-foreground' />
+                  )}
                   <Text className='sr-only'>Toggle</Text>
                 </Button>
               </CollapsibleTrigger>
             </View>
             <View className='rounded-md border border-border px-4 py-3 '>
-              <Text className='text-foreground text-sm'>
+              <Text className='text-foreground text-sm native:text-lg'>
                 @radix-ui/primitives
               </Text>
             </View>
@@ -63,7 +67,7 @@ function CollapsibleItem({
       entering={FadeInDown.duration(200).delay(delay)}
       className='rounded-md border border-border px-4 py-3'
     >
-      <Text className='text-foreground text-sm'>{children}</Text>
+      <Text className='text-foreground text-lg'>{children}</Text>
     </Animated.View>
   );
 }

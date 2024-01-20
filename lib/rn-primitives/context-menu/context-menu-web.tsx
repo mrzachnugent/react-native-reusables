@@ -281,6 +281,7 @@ const CheckboxItem = React.forwardRef<
       disabled = false,
       closeOnPress = true,
       onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
       ...props
     },
     ref
@@ -288,6 +289,7 @@ const CheckboxItem = React.forwardRef<
     const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
       if (ev.key === 'Enter' || ev.key === ' ') {
         onPressProp?.(EmptyGestureResponderEvent);
         onCheckedChange?.(!checked);
@@ -318,6 +320,7 @@ const CheckboxItem = React.forwardRef<
         <Component
           ref={ref}
           disabled={disabled}
+          // @ts-expect-error web only
           onKeyDown={onKeyDown}
           onPress={onPress}
           role='button'
@@ -376,6 +379,7 @@ const RadioItem = React.forwardRef<
       textValue,
       closeOnPress = true,
       onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
       ...props
     },
     ref
@@ -384,6 +388,7 @@ const RadioItem = React.forwardRef<
     const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
       if (ev.key === 'Enter' || ev.key === ' ') {
         onValueChange?.(value);
         onPressProp?.(EmptyGestureResponderEvent);
@@ -411,6 +416,7 @@ const RadioItem = React.forwardRef<
       >
         <Component
           ref={ref}
+          // @ts-expect-error web only
           onKeyDown={onKeyDown}
           onPress={onPress}
           {...props}

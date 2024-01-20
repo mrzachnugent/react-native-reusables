@@ -81,3 +81,13 @@ export const SubContent = Platform.select({
   web: DropdownWeb.SubContent,
   default: DropdownMenuNative.SubContent,
 });
+
+export const useRootContext = Platform.select({
+  web: DropdownWeb.useDropdownMenuContext,
+  default: DropdownMenuNative.useDropdownMenuContext,
+});
+
+export const useSubContext = Platform.select({
+  web: DropdownWeb.useSubContext,
+  default: DropdownMenuNative.useSubContext,
+});
