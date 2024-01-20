@@ -42,7 +42,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
       className={cn(
-        'flex flex-row web:cursor-default select-none gap-2 items-center focus:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
+        'flex flex-row web:cursor-default select-none gap-2 items-center focus:bg-accent hover:bg-accent active:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
         open && 'bg-accent',
         inset && 'pl-8',
         className
@@ -147,7 +147,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex flex-row web:cursor-default gap-2 items-center rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent hover:bg-accent group',
+      'relative flex flex-row web:cursor-default gap-2 items-center rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
       inset && 'pl-8',
       props.disabled && 'opacity-50 web:pointer-events-none',
       className
@@ -181,7 +181,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      'relative flex flex-row web:cursor-default items-center group rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none focus:bg-accent',
+      'relative flex flex-row web:cursor-default items-center group rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none focus:bg-accent active:bg-accent',
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}
@@ -206,7 +206,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      'relative flex flex-row web:cursor-default group items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none focus:bg-accent',
+      'relative flex flex-row web:cursor-default group items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none focus:bg-accent active:bg-accent',
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}

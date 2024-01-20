@@ -324,6 +324,7 @@ const CheckboxItem = React.forwardRef<
         onCheckedChange={onCheckedChange}
         onSelect={closeOnPress ? undefined : onSelected}
         disabled={disabled ?? undefined}
+        asChild
       >
         <Component
           ref={ref}
@@ -419,6 +420,7 @@ const RadioItem = React.forwardRef<
         textValue={textValue}
         disabled={props.disabled ?? undefined}
         onSelect={closeOnPress ? undefined : onSelected}
+        asChild
       >
         <Component
           ref={ref}

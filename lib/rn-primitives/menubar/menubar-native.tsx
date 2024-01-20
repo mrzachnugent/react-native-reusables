@@ -474,6 +474,7 @@ const CheckboxItem = React.forwardRef<
     const setContentLayout = useMenuStoreContext(
       (state) => state.setContentLayout
     );
+    const nativeID = useMenuStoreContext((state) => state.nativeID);
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
       if (closeOnPress) {
@@ -489,6 +490,7 @@ const CheckboxItem = React.forwardRef<
       <FormItemContext.Provider value={{ checked }}>
         <Component
           ref={ref}
+          key={`checkbox-${nativeID}-${checked}`}
           role='checkbox'
           aria-checked={checked}
           onPress={onPress}
@@ -745,6 +747,9 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
+  useMenubarContext,
+  useMenuContext,
+  useSubContext,
 };
 
 function onStartShouldSetResponder() {

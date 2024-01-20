@@ -428,6 +428,7 @@ const CheckboxItem = React.forwardRef<
     const setContentLayout = useRootStoreContext(
       (state) => state.setContentLayout
     );
+    const nativeID = useRootStoreContext((state) => state.nativeID);
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
       if (closeOnPress) {
@@ -443,6 +444,7 @@ const CheckboxItem = React.forwardRef<
       <FormItemContext.Provider value={{ checked }}>
         <Component
           ref={ref}
+          key={`checkbox-${nativeID}-${checked}`}
           role='checkbox'
           aria-checked={checked}
           onPress={onPress}

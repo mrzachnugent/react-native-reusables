@@ -1,6 +1,6 @@
 import * as Menubar from '@radix-ui/react-menubar';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import type {
@@ -26,6 +26,7 @@ import type {
   MenubarSubProps,
   MenubarSubTriggerProps,
 } from './types';
+import { EmptyGestureResponderEvent } from '../utils';
 
 const MenubarContext = React.createContext<MenubarRootProps | null>(null);
 
@@ -137,6 +138,10 @@ const Overlay = React.forwardRef<
 
 Overlay.displayName = 'OverlayWebMenubar';
 
+const MenubarContentContext = React.createContext<{
+  close: () => void;
+} | null>(null);
+
 const Content = React.forwardRef<
   ViewRef,
   SlottableViewProps & PositionedContentProps
@@ -164,49 +169,113 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
+    const itemRef = React.useRef<HTMLDivElement>(null);
+
+    function close() {
+      itemRef.current?.click();
+    }
+
     const Component = asChild ? Slot.View : View;
     return (
-      <Menubar.Content
-        forceMount={forceMount}
-        alignOffset={alignOffset}
-        avoidCollisions={avoidCollisions}
-        collisionPadding={insets}
-        loop={loop}
-        onCloseAutoFocus={onCloseAutoFocus}
-        onEscapeKeyDown={onEscapeKeyDown}
-        onPointerDownOutside={onPointerDownOutside}
-        onFocusOutside={onFocusOutside}
-        onInteractOutside={onInteractOutside}
-        collisionBoundary={collisionBoundary}
-        sticky={sticky}
-        hideWhenDetached={hideWhenDetached}
-        align={align}
-        side={side}
-        sideOffset={sideOffset}
-      >
-        <Component ref={ref} {...props} />
-      </Menubar.Content>
+      <MenubarContentContext.Provider value={{ close }}>
+        <Menubar.Content
+          forceMount={forceMount}
+          alignOffset={alignOffset}
+          avoidCollisions={avoidCollisions}
+          collisionPadding={insets}
+          loop={loop}
+          onCloseAutoFocus={onCloseAutoFocus}
+          onEscapeKeyDown={onEscapeKeyDown}
+          onPointerDownOutside={onPointerDownOutside}
+          onFocusOutside={onFocusOutside}
+          onInteractOutside={onInteractOutside}
+          collisionBoundary={collisionBoundary}
+          sticky={sticky}
+          hideWhenDetached={hideWhenDetached}
+          align={align}
+          side={side}
+          sideOffset={sideOffset}
+        >
+          <Component ref={ref} {...props} />
+          <Menubar.Item
+            ref={itemRef}
+            aria-hidden
+            style={{ position: 'fixed', top: 0, left: 0, zIndex: -999999999 }}
+            aria-disabled
+            tabIndex={-1}
+            hidden
+          />
+        </Menubar.Content>
+      </MenubarContentContext.Provider>
     );
   }
 );
 
 Content.displayName = 'ContentWebMenubar';
 
+function useMenubarContentContext() {
+  const context = React.useContext(MenubarContentContext);
+  if (!context) {
+    throw new Error(
+      'MenubarContent compound components cannot be rendered outside the MenubarContent component'
+    );
+  }
+  return context;
+}
+
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & MenubarItemProps
->(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <Menubar.Item
-      textValue={textValue}
-      disabled={props.disabled ?? undefined}
-      onSelect={closeOnPress ? undefined : onSelected}
-    >
-      <Component ref={ref} pointerEvents='none' {...props} />
-    </Menubar.Item>
-  );
-});
+>(
+  (
+    {
+      asChild,
+      textValue,
+      closeOnPress = true,
+      onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
+      ...props
+    },
+    ref
+  ) => {
+    const { close } = useMenubarContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onPressProp?.(EmptyGestureResponderEvent);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onPressProp?.(ev);
+      if (closeOnPress) {
+        close();
+      }
+    }
+
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <Menubar.Item
+        textValue={textValue}
+        disabled={props.disabled ?? undefined}
+        onSelect={closeOnPress ? undefined : onSelected}
+        asChild
+      >
+        <Component
+          ref={ref}
+          // @ts-expect-error web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          {...props}
+        />
+      </Menubar.Item>
+    );
+  }
+);
 
 Item.displayName = 'ItemWebMenubar';
 
@@ -248,10 +317,30 @@ const CheckboxItem = React.forwardRef<
       textValue,
       disabled = false,
       closeOnPress = true,
+      onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
       ...props
     },
     ref
   ) => {
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onPressProp?.(EmptyGestureResponderEvent);
+        onCheckedChange?.(!checked);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onPressProp?.(ev);
+      onCheckedChange?.(!checked);
+      if (closeOnPress) {
+        close();
+      }
+    }
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Menubar.CheckboxItem
@@ -260,11 +349,14 @@ const CheckboxItem = React.forwardRef<
         onCheckedChange={onCheckedChange}
         onSelect={closeOnPress ? undefined : onSelected}
         disabled={disabled ?? undefined}
+        asChild
       >
         <Component
           ref={ref}
-          pointerEvents='none'
-          disabled={disabled}
+          // @ts-expect-error web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          role='button'
           {...props}
         />
       </Menubar.CheckboxItem>
@@ -274,36 +366,94 @@ const CheckboxItem = React.forwardRef<
 
 CheckboxItem.displayName = 'CheckboxItemWebMenubar';
 
+const MenubarRadioGroupContext = React.createContext<{
+  value?: string;
+  onValueChange?: (value: string) => void;
+} | null>(null);
+
 const RadioGroup = React.forwardRef<
   ViewRef,
   SlottableViewProps & MenubarRadioGroupProps
 >(({ asChild, value, onValueChange, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <Menubar.RadioGroup value={value} onValueChange={onValueChange} asChild>
-      <Component ref={ref} {...props} />
-    </Menubar.RadioGroup>
+    <MenubarRadioGroupContext.Provider value={{ value, onValueChange }}>
+      <Menubar.RadioGroup value={value} onValueChange={onValueChange} asChild>
+        <Component ref={ref} {...props} />
+      </Menubar.RadioGroup>
+    </MenubarRadioGroupContext.Provider>
   );
 });
 
 RadioGroup.displayName = 'RadioGroupWebMenubar';
 
+function useMenubarRadioGroupContext() {
+  const context = React.useContext(MenubarRadioGroupContext);
+  if (!context) {
+    throw new Error(
+      'MenubarRadioGroup compound components cannot be rendered outside the MenubarRadioGroup component'
+    );
+  }
+  return context;
+}
+
 const RadioItem = React.forwardRef<
   PressableRef,
   SlottablePressableProps & MenubarRadioItemProps
->(({ asChild, value, textValue, closeOnPress = true, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <Menubar.RadioItem
-      value={value}
-      textValue={textValue}
-      disabled={props.disabled ?? undefined}
-      onSelect={closeOnPress ? undefined : onSelected}
-    >
-      <Component ref={ref} pointerEvents='none' {...props} />
-    </Menubar.RadioItem>
-  );
-});
+>(
+  (
+    {
+      asChild,
+      value,
+      textValue,
+      closeOnPress = true,
+      onPress: onPressProp,
+      onKeyDown: onKeyDownProp,
+      ...props
+    },
+    ref
+  ) => {
+    const { onValueChange } = useMenubarRadioGroupContext();
+    const { close } = useMenubarContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      onKeyDownProp?.(ev);
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onValueChange?.(value);
+        onPressProp?.(EmptyGestureResponderEvent);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onValueChange?.(value);
+      onPressProp?.(ev);
+      if (closeOnPress) {
+        close();
+      }
+    }
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <Menubar.RadioItem
+        value={value}
+        textValue={textValue}
+        disabled={props.disabled ?? undefined}
+        onSelect={closeOnPress ? undefined : onSelected}
+        asChild
+      >
+        <Component
+          ref={ref}
+          // @ts-expect-error web only
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          {...props}
+        />
+      </Menubar.RadioItem>
+    );
+  }
+);
 
 RadioItem.displayName = 'RadioItemWebMenubar';
 
@@ -335,18 +485,35 @@ const Separator = React.forwardRef<
 
 Separator.displayName = 'SeparatorWebMenubar';
 
+const MenubarSubContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
+
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & MenubarSubProps>(
   ({ asChild, open, onOpenChange, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <Menubar.Sub open={open} onOpenChange={onOpenChange}>
-        <Component ref={ref} {...props} />
-      </Menubar.Sub>
+      <MenubarSubContext.Provider value={{ open, onOpenChange }}>
+        <Menubar.Sub open={open} onOpenChange={onOpenChange}>
+          <Component ref={ref} {...props} />
+        </Menubar.Sub>
+      </MenubarSubContext.Provider>
     );
   }
 );
 
 Sub.displayName = 'SubWebMenubar';
+
+function useSubContext() {
+  const context = React.useContext(MenubarSubContext);
+  if (!context) {
+    throw new Error(
+      'MenubarSub compound components cannot be rendered outside the MenubarSub component'
+    );
+  }
+  return context;
+}
 
 const SubTrigger = React.forwardRef<
   PressableRef,
@@ -354,8 +521,12 @@ const SubTrigger = React.forwardRef<
 >(({ asChild, textValue, disabled = false, ...props }, ref) => {
   const Component = asChild ? Slot.Pressable : Pressable;
   return (
-    <Menubar.SubTrigger disabled={disabled ?? undefined} textValue={textValue}>
-      <Component ref={ref} pointerEvents='none' {...props} />
+    <Menubar.SubTrigger
+      disabled={disabled ?? undefined}
+      textValue={textValue}
+      asChild
+    >
+      <Component ref={ref} {...props} />
     </Menubar.SubTrigger>
   );
 });
@@ -396,6 +567,9 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
+  useMenubarContext,
+  useMenubarMenuContext,
+  useSubContext,
 };
 
 function onSelected(ev: Event) {

@@ -86,3 +86,17 @@ export const SubContent = Platform.select({
   web: MenubarWeb.SubContent,
   default: MenubarNative.SubContent,
 });
+
+export const useRootContext = Platform.select({
+  web: MenubarWeb.useMenubarContext,
+  default: MenubarNative.useMenubarContext,
+});
+
+export const useMenuContext = Platform.select({
+  web: MenubarWeb.useMenubarMenuContext,
+  default: MenubarNative.useMenuContext,
+});
+export const useSubContext = Platform.select({
+  web: MenubarWeb.useSubContext,
+  default: MenubarNative.useSubContext,
+});
