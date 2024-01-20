@@ -212,4 +212,14 @@ const Description = React.forwardRef<TextRef, SlottableTextProps>(
 
 Description.displayName = 'DescriptionWebDialog';
 
-export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger };
+export {
+  Close,
+  Content,
+  Description,
+  Overlay,
+  Portal,
+  Root,
+  Title,
+  Trigger,
+  useDialogContext,
+};

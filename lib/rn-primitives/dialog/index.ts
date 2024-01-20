@@ -41,3 +41,8 @@ export const Close = Platform.select({
   web: AlertDialogWeb.Close,
   default: AlertDialogNative.Close,
 });
+
+export const useContext = Platform.select({
+  web: AlertDialogWeb.useDialogContext,
+  default: AlertDialogNative.useDialogContext,
+});
