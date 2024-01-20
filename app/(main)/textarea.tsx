@@ -1,14 +1,11 @@
 import React from 'react';
 import { ScrollView, TextInput, View } from 'react-native';
-import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import { Label } from '~/components/ui/label';
-import { Textarea } from '~/components/ui/textarea';
-import { cn } from '~/lib/utils';
+import { Label, LabelText } from '~/components/universal-ui/label';
+import { Textarea } from '~/components/universal-ui/textarea';
 
-export default function TextareaScreen() {
+export default function InputScreen() {
   const inputRef = React.useRef<TextInput>(null);
   const [value, setValue] = React.useState<string>('');
-  const [err, setErr] = React.useState<string | null>(null);
 
   function handleOnLabelPress() {
     if (!inputRef.current) {
@@ -22,45 +19,29 @@ export default function TextareaScreen() {
   }
 
   function onChangeText(text: string) {
-    if (err) {
-      setErr(null);
-    }
     setValue(text);
   }
 
-  function onBlur() {
-    setErr("Seem's like something is not right...");
-  }
-
   return (
-    <ScrollView contentContainerClassName='flex-1 justify-center p-6'>
-      <Label
-        className={cn(err && 'text-destructive', 'pb-1')}
-        onPress={handleOnLabelPress}
-        nativeID='textareaLabel'
-      >
-        Label
-      </Label>
-      <Textarea
-        ref={inputRef}
-        placeholder='Write some stuff...'
-        value={value}
-        onChangeText={onChangeText}
-        onBlur={onBlur}
-        aria-labelledby='textarea'
-        aria-labelledbyledBy='textareaLabel'
-      />
-      {err && (
-        <Animated.Text
-          entering={FadeInDown}
-          exiting={FadeOut.duration(275)}
-          className={'text-destructive text-sm px-0.5 py-2'}
-          role='alert'
-        >
-          {err}
-        </Animated.Text>
-      )}
-      <View className='h-32' />
+    <ScrollView contentContainerClassName='flex-1 justify-center items-center p-6'>
+      <View className='web:max-w-xs w-full'>
+        <Label onPress={handleOnLabelPress}>
+          <LabelText
+            className='pb-2 native:pb-1 pl-0.5'
+            nativeID='textareaLabel'
+          >
+            Label
+          </LabelText>
+        </Label>
+        <Textarea
+          ref={inputRef}
+          placeholder='Write some stuff...'
+          value={value}
+          onChangeText={onChangeText}
+          aria-labelledbyledBy='textareaLabel'
+        />
+        <View className='h-20' />
+      </View>
     </ScrollView>
   );
 }
