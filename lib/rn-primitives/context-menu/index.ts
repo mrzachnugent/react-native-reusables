@@ -81,3 +81,13 @@ export const SubContent = Platform.select({
   web: ContextMenuWeb.SubContent,
   default: ContextMenuNative.SubContent,
 });
+
+export const useRootContext = Platform.select({
+  web: ContextMenuWeb.useContextMenuContext,
+  default: ContextMenuNative.useContextMenuContext,
+});
+
+export const useSubContext = Platform.select({
+  web: ContextMenuWeb.useSubContext,
+  default: ContextMenuNative.useSubContext,
+});

@@ -1,6 +1,6 @@
 import * as ContextMenu from '@radix-ui/react-context-menu';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { useAugmentedRef } from '../hooks/useAugmentedRef';
 import type {
@@ -25,6 +25,7 @@ import type {
   ContextMenuSubProps,
   ContextMenuSubTriggerProps,
 } from './types';
+import { EmptyGestureResponderEvent } from '../utils';
 
 const ContextMenuContext = React.createContext<ContextMenuRootProps | null>(
   null
@@ -111,6 +112,10 @@ const Overlay = React.forwardRef<
 
 Overlay.displayName = 'OverlayWebContextMenu';
 
+const ContextMenuContentContext = React.createContext<{
+  close: () => void;
+} | null>(null);
+
 const Content = React.forwardRef<
   ViewRef,
   SlottableViewProps & PositionedContentProps
@@ -138,46 +143,102 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
+    const itemRef = React.useRef<HTMLDivElement>(null);
+
+    function close() {
+      itemRef.current?.click();
+    }
+
     const Component = asChild ? Slot.View : View;
     return (
-      <ContextMenu.Content
-        forceMount={forceMount}
-        alignOffset={alignOffset}
-        avoidCollisions={avoidCollisions}
-        collisionPadding={insets}
-        loop={loop}
-        onCloseAutoFocus={onCloseAutoFocus}
-        onEscapeKeyDown={onEscapeKeyDown}
-        onPointerDownOutside={onPointerDownOutside}
-        onFocusOutside={onFocusOutside}
-        onInteractOutside={onInteractOutside}
-        collisionBoundary={collisionBoundary}
-        sticky={sticky}
-        hideWhenDetached={hideWhenDetached}
-      >
-        <Component ref={ref} {...props} />
-      </ContextMenu.Content>
+      <ContextMenuContentContext.Provider value={{ close }}>
+        <ContextMenu.Content
+          forceMount={forceMount}
+          alignOffset={alignOffset}
+          avoidCollisions={avoidCollisions}
+          collisionPadding={insets}
+          loop={loop}
+          onCloseAutoFocus={onCloseAutoFocus}
+          onEscapeKeyDown={onEscapeKeyDown}
+          onPointerDownOutside={onPointerDownOutside}
+          onFocusOutside={onFocusOutside}
+          onInteractOutside={onInteractOutside}
+          collisionBoundary={collisionBoundary}
+          sticky={sticky}
+          hideWhenDetached={hideWhenDetached}
+        >
+          <Component ref={ref} {...props} />
+          <ContextMenu.Item
+            ref={itemRef}
+            aria-hidden
+            style={{ position: 'fixed', top: 0, left: 0, zIndex: -999999999 }}
+            aria-disabled
+            tabIndex={-1}
+            hidden
+          />
+        </ContextMenu.Content>
+      </ContextMenuContentContext.Provider>
     );
   }
 );
 
 Content.displayName = 'ContentWebContextMenu';
 
+function useContextMenuContentContext() {
+  const context = React.useContext(ContextMenuContentContext);
+  if (!context) {
+    throw new Error(
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+    );
+  }
+  return context;
+}
+
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ContextMenuItemProps
->(({ asChild, textValue, closeOnPress = true, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <ContextMenu.Item
-      textValue={textValue}
-      disabled={props.disabled ?? undefined}
-      onSelect={closeOnPress ? undefined : onSelected}
-    >
-      <Component ref={ref} pointerEvents='none' {...props} />
-    </ContextMenu.Item>
-  );
-});
+>(
+  (
+    { asChild, textValue, closeOnPress = true, onPress: onPressProp, ...props },
+    ref
+  ) => {
+    const { close } = useContextMenuContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onPressProp?.(EmptyGestureResponderEvent);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onPressProp?.(ev);
+      if (closeOnPress) {
+        close();
+      }
+    }
+
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <ContextMenu.Item
+        textValue={textValue}
+        disabled={props.disabled ?? undefined}
+        onSelect={closeOnPress ? undefined : onSelected}
+        asChild
+      >
+        <Component
+          ref={ref}
+          role='button'
+          onPress={onPress}
+          onKeyDown={onKeyDown}
+          {...props}
+        />
+      </ContextMenu.Item>
+    );
+  }
+);
 
 Item.displayName = 'ItemWebContextMenu';
 
@@ -219,10 +280,31 @@ const CheckboxItem = React.forwardRef<
       textValue,
       disabled = false,
       closeOnPress = true,
+      onPress: onPressProp,
       ...props
     },
     ref
   ) => {
+    const { close } = useContextMenuContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onPressProp?.(EmptyGestureResponderEvent);
+        onCheckedChange?.(!checked);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onPressProp?.(ev);
+      onCheckedChange?.(!checked);
+      if (closeOnPress) {
+        close();
+      }
+    }
+
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <ContextMenu.CheckboxItem
@@ -231,11 +313,14 @@ const CheckboxItem = React.forwardRef<
         onCheckedChange={onCheckedChange}
         onSelect={closeOnPress ? undefined : onSelected}
         disabled={disabled ?? undefined}
+        asChild
       >
         <Component
           ref={ref}
-          pointerEvents='none'
           disabled={disabled}
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          role='button'
           {...props}
         />
       </ContextMenu.CheckboxItem>
@@ -245,36 +330,95 @@ const CheckboxItem = React.forwardRef<
 
 CheckboxItem.displayName = 'CheckboxItemWebContextMenu';
 
+const ContextMenuRadioGroupContext = React.createContext<{
+  value?: string;
+  onValueChange?: (value: string) => void;
+} | null>(null);
+
 const RadioGroup = React.forwardRef<
   ViewRef,
   SlottableViewProps & ContextMenuRadioGroupProps
 >(({ asChild, value, onValueChange, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <ContextMenu.RadioGroup value={value} onValueChange={onValueChange} asChild>
-      <Component ref={ref} {...props} />
-    </ContextMenu.RadioGroup>
+    <ContextMenuRadioGroupContext.Provider value={{ value, onValueChange }}>
+      <ContextMenu.RadioGroup
+        value={value}
+        onValueChange={onValueChange}
+        asChild
+      >
+        <Component ref={ref} {...props} />
+      </ContextMenu.RadioGroup>
+    </ContextMenuRadioGroupContext.Provider>
   );
 });
 
 RadioGroup.displayName = 'RadioGroupWebContextMenu';
 
+function useContextMenuRadioGroupContext() {
+  const context = React.useContext(ContextMenuRadioGroupContext);
+  if (!context) {
+    throw new Error(
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+    );
+  }
+  return context;
+}
+
 const RadioItem = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ContextMenuRadioItemProps
->(({ asChild, value, textValue, closeOnPress = true, ...props }, ref) => {
-  const Component = asChild ? Slot.Pressable : Pressable;
-  return (
-    <ContextMenu.RadioItem
-      value={value}
-      textValue={textValue}
-      disabled={props.disabled ?? undefined}
-      onSelect={closeOnPress ? undefined : onSelected}
-    >
-      <Component ref={ref} pointerEvents='none' {...props} />
-    </ContextMenu.RadioItem>
-  );
-});
+>(
+  (
+    {
+      asChild,
+      value,
+      textValue,
+      closeOnPress = true,
+      onPress: onPressProp,
+      ...props
+    },
+    ref
+  ) => {
+    const { onValueChange } = useContextMenuRadioGroupContext();
+    const { close } = useContextMenuContentContext();
+
+    function onKeyDown(ev: React.KeyboardEvent) {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        onValueChange?.(value);
+        onPressProp?.(EmptyGestureResponderEvent);
+        if (closeOnPress) {
+          close();
+        }
+      }
+    }
+
+    function onPress(ev: GestureResponderEvent) {
+      onValueChange?.(value);
+      onPressProp?.(ev);
+      if (closeOnPress) {
+        close();
+      }
+    }
+    const Component = asChild ? Slot.Pressable : Pressable;
+    return (
+      <ContextMenu.RadioItem
+        value={value}
+        textValue={textValue}
+        disabled={props.disabled ?? undefined}
+        onSelect={closeOnPress ? undefined : onSelected}
+        asChild
+      >
+        <Component
+          ref={ref}
+          onKeyDown={onKeyDown}
+          onPress={onPress}
+          {...props}
+        />
+      </ContextMenu.RadioItem>
+    );
+  }
+);
 
 RadioItem.displayName = 'RadioItemWebContextMenu';
 
@@ -306,18 +450,35 @@ const Separator = React.forwardRef<
 
 Separator.displayName = 'SeparatorWebContextMenu';
 
+const ContextMenuSubContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
+
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuSubProps>(
   ({ asChild, open, onOpenChange, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <ContextMenu.Sub open={open} onOpenChange={onOpenChange}>
-        <Component ref={ref} {...props} />
-      </ContextMenu.Sub>
+      <ContextMenuSubContext.Provider value={{ open, onOpenChange }}>
+        <ContextMenu.Sub open={open} onOpenChange={onOpenChange}>
+          <Component ref={ref} {...props} />
+        </ContextMenu.Sub>
+      </ContextMenuSubContext.Provider>
     );
   }
 );
 
 Sub.displayName = 'SubWebContextMenu';
+
+function useSubContext() {
+  const context = React.useContext(ContextMenuSubContext);
+  if (!context) {
+    throw new Error(
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+    );
+  }
+  return context;
+}
 
 const SubTrigger = React.forwardRef<
   PressableRef,
@@ -328,8 +489,9 @@ const SubTrigger = React.forwardRef<
     <ContextMenu.SubTrigger
       disabled={disabled ?? undefined}
       textValue={textValue}
+      asChild
     >
-      <Component ref={ref} pointerEvents='none' {...props} />
+      <Component ref={ref} {...props} />
     </ContextMenu.SubTrigger>
   );
 });
@@ -369,6 +531,8 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
+  useSubContext,
+  useContextMenuContext,
 };
 
 function onSelected(ev: Event) {

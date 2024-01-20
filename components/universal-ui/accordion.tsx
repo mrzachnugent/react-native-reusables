@@ -51,7 +51,7 @@ AccordionItem.displayName = AccordionPrimitive.Item.displayName;
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof View>
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => {
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
@@ -74,7 +74,7 @@ const AccordionTrigger = React.forwardRef<
             className
           )}
         >
-          {children}
+          <>{children}</>
           <Animated.View style={chevronStyle}>
             <ChevronDown size={18} className={'text-foreground shrink-0'} />
           </Animated.View>

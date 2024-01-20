@@ -101,22 +101,17 @@ function getSidePosition({
     };
   }
 
-  const maxTop = Math.max(insetTop, positionTop);
-  const maxBottom = Math.min(dimensions.height - insetBottom, positionBottom);
-
   if (side === 'top') {
-    const isCollision =
-      triggerPosition.pageY + sideOffset < insetTop + contentLayout.height;
     return {
-      top: isCollision ? maxBottom : maxTop,
+      top: Math.max(insetTop, positionTop),
     };
   }
 
-  const isCollision =
-    triggerPosition.pageY + triggerPosition.height + sideOffset >
-    dimensions.height - insetBottom - contentLayout.height;
   return {
-    top: isCollision ? maxTop : maxBottom,
+    top: Math.min(
+      dimensions.height - insetBottom - contentLayout.height,
+      positionBottom
+    ),
   };
 }
 
