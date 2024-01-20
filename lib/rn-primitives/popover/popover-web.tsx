@@ -184,4 +184,4 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Close.displayName = 'CloseWebPopover';
 
-export { Close, Content, Overlay, Portal, Root, Trigger };
+export { Close, Content, Overlay, Portal, Root, Trigger, usePopoverContext };

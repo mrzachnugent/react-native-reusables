@@ -345,7 +345,7 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Close.displayName = 'CloseNativePopover';
 
-export { Close, Content, Overlay, Portal, Root, Trigger };
+export { Close, Content, Overlay, Portal, Root, Trigger, usePopoverContext };
 
 function onStartShouldSetResponder() {
   return true;

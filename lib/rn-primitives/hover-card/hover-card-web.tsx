@@ -15,18 +15,32 @@ import type {
   HoverCardRootProps,
 } from './types';
 
+const HoverCardContext = React.createContext<HoverCardRootProps | null>(null);
+
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
   ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <HoverCard.Root open={open} onOpenChange={onOpenChange}>
-        <Component ref={ref} {...viewProps} />
-      </HoverCard.Root>
+      <HoverCardContext.Provider value={{ open, onOpenChange }}>
+        <HoverCard.Root open={open} onOpenChange={onOpenChange}>
+          <Component ref={ref} {...viewProps} />
+        </HoverCard.Root>
+      </HoverCardContext.Provider>
     );
   }
 );
 
 Root.displayName = 'RootWebHoverCard';
+
+function useHoverCardContext() {
+  const context = React.useContext(HoverCardContext);
+  if (!context) {
+    throw new Error(
+      'HoverCard compound components cannot be rendered outside the HoverCard component'
+    );
+  }
+  return context;
+}
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, ...props }, ref) => {
@@ -41,9 +55,6 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Trigger.displayName = 'TriggerWebHoverCard';
 
-/**
- * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
- */
 function Portal({ forceMount, container, children }: HoverCardPortalProps) {
   return (
     <HoverCard.Portal
@@ -117,4 +128,4 @@ const Content = React.forwardRef<
 
 Content.displayName = 'ContentWebHoverCard';
 
-export { Content, Overlay, Portal, Root, Trigger };
+export { Content, Overlay, Portal, Root, Trigger, useHoverCardContext };

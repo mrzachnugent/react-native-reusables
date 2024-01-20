@@ -31,3 +31,8 @@ export const Close = Platform.select({
   web: PopoverWeb.Close,
   default: PopoverNative.Close,
 });
+
+export const useRootContext = Platform.select({
+  web: PopoverWeb.usePopoverContext,
+  default: PopoverNative.usePopoverContext,
+});
