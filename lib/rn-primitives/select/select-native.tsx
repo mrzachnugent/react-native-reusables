@@ -217,7 +217,6 @@ const Overlay = React.forwardRef<
       forceMount,
       onPress: OnPressProp,
       closeOnPress = true,
-      style,
       ...props
     },
     ref
@@ -490,6 +489,18 @@ const Separator = React.forwardRef<
 
 Separator.displayName = 'SeparatorNativeSelect';
 
+const ScrollUpButton = ({ children }: { children: React.ReactNode }) => {
+  return children;
+};
+
+const ScrollDownButton = ({ children }: { children: React.ReactNode }) => {
+  return children;
+};
+
+const Viewport = ({ children }: { children: React.ReactNode }) => {
+  return children;
+};
+
 export {
   Content,
   Group,
@@ -503,6 +514,11 @@ export {
   Separator,
   Trigger,
   Value,
+  ScrollUpButton,
+  ScrollDownButton,
+  Viewport,
+  useSelectContext,
+  useItemContext,
 };
 
 function onStartShouldSetResponder() {

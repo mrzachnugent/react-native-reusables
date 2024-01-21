@@ -102,13 +102,10 @@ Trigger.displayName = 'TriggerWebSelect';
 
 const Value = React.forwardRef<TextRef, SlottableTextProps & SelectValueProps>(
   ({ asChild, placeholder, children, ...props }, ref) => {
-    const { open } = useSelectContext();
-
-    const Component = asChild ? Slot.Text : Text;
     return (
-      <Component role='combobox' aria-expanded={open} ref={ref} {...props}>
-        {children ?? placeholder}
-      </Component>
+      <Slot.Text ref={ref} {...props}>
+        <Select.Value placeholder={placeholder}>{children}</Select.Value>
+      </Slot.Text>
     );
   }
 );
@@ -165,9 +162,7 @@ const Content = React.forwardRef<
         avoidCollisions={avoidCollisions}
         position={position}
       >
-        <Select.Viewport>
-          <Component ref={ref} {...props} />
-        </Select.Viewport>
+        <Component ref={ref} {...props} />
       </Select.Content>
     );
   }
@@ -183,23 +178,7 @@ const ItemContext = React.createContext<{
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & SelectItemProps
->(({ asChild, closeOnPress = true, label, value, ...props }, ref) => {
-  const { value: valueRoot } = useSelectContext();
-  const augmentedRef = React.useRef<PressableRef>(null);
-  useAugmentedRef({ augmentedRef, ref });
-
-  React.useLayoutEffect(() => {
-    if (augmentedRef.current) {
-      const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-      augRef.dataset.state =
-        valueRoot?.value && valueRoot?.value === value
-          ? 'checked'
-          : 'unchecked';
-      augRef.type = 'button';
-    }
-  }, [open]);
-
-  const Component = asChild ? Slot.Pressable : Pressable;
+>(({ asChild, closeOnPress = true, label, value, children, ...props }, ref) => {
   return (
     <ItemContext.Provider value={{ itemValue: value, label: label }}>
       <Slot.Pressable ref={ref} {...props}>
@@ -208,7 +187,7 @@ const Item = React.forwardRef<
           value={value}
           disabled={props.disabled ?? undefined}
         >
-          <Component ref={augmentedRef} role='button' {...props} />
+          <>{children}</>
         </Select.Item>
       </Slot.Pressable>
     </ItemContext.Provider>
@@ -299,6 +278,24 @@ const Separator = React.forwardRef<
 
 Separator.displayName = 'SeparatorWebSelect';
 
+const ScrollUpButton = (
+  props: React.ComponentPropsWithoutRef<typeof Select.ScrollUpButton>
+) => {
+  return <Select.ScrollUpButton {...props} />;
+};
+
+const ScrollDownButton = (
+  props: React.ComponentPropsWithoutRef<typeof Select.ScrollDownButton>
+) => {
+  return <Select.ScrollDownButton {...props} />;
+};
+
+const Viewport = (
+  props: React.ComponentPropsWithoutRef<typeof Select.Viewport>
+) => {
+  return <Select.Viewport {...props} />;
+};
+
 export {
   Content,
   Group,
@@ -312,4 +309,9 @@ export {
   Separator,
   Trigger,
   Value,
+  ScrollUpButton,
+  ScrollDownButton,
+  Viewport,
+  useSelectContext,
+  useItemContext,
 };

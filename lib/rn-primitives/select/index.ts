@@ -63,3 +63,28 @@ export const Value = Platform.select({
   web: SelectWeb.Value,
   default: SelectNative.Value,
 });
+
+export const ScrollUpButton = Platform.select({
+  web: SelectWeb.ScrollUpButton,
+  default: SelectNative.ScrollUpButton as typeof SelectWeb.ScrollUpButton,
+});
+
+export const ScrollDownButton = Platform.select({
+  web: SelectWeb.ScrollDownButton,
+  default: SelectNative.ScrollDownButton as typeof SelectWeb.ScrollDownButton,
+});
+
+export const Viewport = Platform.select({
+  web: SelectWeb.Viewport,
+  default: SelectNative.Viewport as typeof SelectWeb.Viewport,
+});
+
+export const useRootContext = Platform.select({
+  web: SelectWeb.useSelectContext,
+  default: SelectNative.useSelectContext,
+});
+
+export const useItemContext = Platform.select({
+  web: SelectWeb.useItemContext,
+  default: SelectNative.useItemContext,
+});
