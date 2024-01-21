@@ -9,8 +9,20 @@ const Card = React.forwardRef<
   Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> & {
     style?: ViewStyle;
   }
->(({ className, style, ...props }, ref) => {
+>(({ className, style: styleProp, ...props }, ref) => {
   const { colorScheme } = useColorScheme();
+  const [style, setStyle] = React.useState<ViewStyle>(styleProp ?? {});
+
+  React.useEffect(() => {
+    setStyle(
+      StyleSheet.flatten([
+        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+        styleProp,
+      ])
+    );
+  }, [styleProp, colorScheme]);
+
+  React.useEffect(() => {}, []);
   return (
     <View
       ref={ref}
@@ -18,10 +30,7 @@ const Card = React.forwardRef<
         'rounded-lg border border-border bg-card px-0.5 py-2',
         className
       )}
-      style={[
-        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
-        style,
-      ]}
+      style={style}
       {...props}
     />
   );
