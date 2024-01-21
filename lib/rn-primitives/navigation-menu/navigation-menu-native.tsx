@@ -332,7 +332,37 @@ const Link = React.forwardRef<
 
 Link.displayName = 'LinkNativeNavigationMenu';
 
-export { Content, Item, Link, List, Portal, Root, Trigger };
+const Viewport = React.forwardRef<
+  ViewRef,
+  Omit<React.ComponentPropsWithoutRef<typeof View>, 'children'>
+>((props, ref) => {
+  return <View ref={ref} {...props} />;
+});
+
+Viewport.displayName = 'ViewportNativeNavigationMenu';
+
+const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
+  ({ asChild, ...props }, ref) => {
+    const Component = asChild ? Slot.View : View;
+    return <Component ref={ref} {...props} />;
+  }
+);
+
+Indicator.displayName = 'IndicatorNativeNavigationMenu';
+
+export {
+  Content,
+  Item,
+  Link,
+  List,
+  Portal,
+  Root,
+  Trigger,
+  Viewport,
+  Indicator,
+  useNavigationMenuContext,
+  useItemContext,
+};
 
 function onStartShouldSetResponder() {
   return true;

@@ -36,3 +36,23 @@ export const Portal = Platform.select({
   web: NavigationMenuWeb.Portal,
   default: NavigationMenuNative.Portal,
 });
+
+export const Viewport = Platform.select({
+  web: NavigationMenuWeb.Viewport,
+  default: NavigationMenuNative.Viewport,
+});
+
+export const Indicator = Platform.select({
+  web: NavigationMenuWeb.Indicator,
+  default: NavigationMenuNative.Indicator,
+});
+
+export const useRootContext = Platform.select({
+  web: NavigationMenuWeb.useNavigationMenuContext,
+  default: NavigationMenuNative.useNavigationMenuContext,
+});
+
+export const useItemContext = Platform.select({
+  web: NavigationMenuWeb.useItemContext,
+  default: NavigationMenuNative.useItemContext,
+});
