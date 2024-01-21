@@ -63,6 +63,8 @@ function useToggleGroupContext() {
   return context;
 }
 
+const ItemContext = React.createContext<ToggleGroupItemProps | null>(null);
+
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ToggleGroupItemProps
@@ -77,6 +79,7 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
+    const id = React.useId();
     const { type, disabled, value, onValueChange } = useToggleGroupContext();
 
     function onPress(ev: GestureResponderEvent) {
@@ -101,25 +104,38 @@ const Item = React.forwardRef<
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Component
-        ref={ref}
-        aria-disabled={disabled}
-        role={type === 'single' ? 'radio' : 'checkbox'}
-        onPress={onPress}
-        aria-checked={isChecked}
-        aria-selected={isSelected}
-        disabled={(disabled || disabledProp) ?? false}
-        accessibilityState={{
-          disabled: (disabled || disabledProp) ?? false,
-          checked: isChecked,
-          selected: isSelected,
-        }}
-        {...props}
-      />
+      <ItemContext.Provider value={{ value: itemValue }}>
+        <Component
+          ref={ref}
+          key={`${id}-item-${value}`}
+          aria-disabled={disabled}
+          role={type === 'single' ? 'radio' : 'checkbox'}
+          onPress={onPress}
+          aria-checked={isChecked}
+          aria-selected={isSelected}
+          disabled={(disabled || disabledProp) ?? false}
+          accessibilityState={{
+            disabled: (disabled || disabledProp) ?? false,
+            checked: isChecked,
+            selected: isSelected,
+          }}
+          {...props}
+        />
+      </ItemContext.Provider>
     );
   }
 );
 
 Item.displayName = 'ItemToggleGroup';
 
-export { Item, Root };
+function useItemContext() {
+  const context = React.useContext(ItemContext);
+  if (!context) {
+    throw new Error(
+      'ToggleGroupItem compound components cannot be rendered outside the ToggleGroupItem component'
+    );
+  }
+  return context;
+}
+
+export { Item, Root, useToggleGroupContext, useItemContext };

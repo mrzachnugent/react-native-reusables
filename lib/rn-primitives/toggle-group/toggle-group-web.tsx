@@ -76,6 +76,8 @@ function useToggleGroupContext() {
   return context;
 }
 
+const ItemContext = React.createContext<ToggleGroupItemProps | null>(null);
+
 const Item = React.forwardRef<
   PressableRef,
   SlottablePressableProps & ToggleGroupItemProps
@@ -104,19 +106,31 @@ const Item = React.forwardRef<
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <ToggleGroup.Item value={itemValue} asChild>
-        <Component
-          ref={ref}
-          onPress={onPress}
-          disabled={disabled || disabledProp}
-          role='button'
-          {...props}
-        />
-      </ToggleGroup.Item>
+      <ItemContext.Provider value={{ value: itemValue }}>
+        <ToggleGroup.Item value={itemValue} asChild>
+          <Component
+            ref={ref}
+            onPress={onPress}
+            disabled={disabled || disabledProp}
+            role='button'
+            {...props}
+          />
+        </ToggleGroup.Item>
+      </ItemContext.Provider>
     );
   }
 );
 
 Item.displayName = 'ItemToggleGroup';
 
-export { Item, Root };
+function useItemContext() {
+  const context = React.useContext(ItemContext);
+  if (!context) {
+    throw new Error(
+      'ToggleGroupItem compound components cannot be rendered outside the ToggleGroupItem component'
+    );
+  }
+  return context;
+}
+
+export { Item, Root, useToggleGroupContext, useItemContext };

@@ -22,6 +22,15 @@ export default function ToggleGroupTabsLayout() {
           },
         }}
       />
+      <Tabs.Screen
+        name='toggle-group-universal'
+        options={{
+          title: 'Universal',
+          tabBarIcon({ color, size }) {
+            return <ToyBrick color={color} size={size} />;
+          },
+        }}
+      />
     </Tabs>
   );
 }

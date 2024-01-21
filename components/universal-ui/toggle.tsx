@@ -130,6 +130,6 @@ const ToggleIcon = React.forwardRef<
   );
 });
 
-ToggleText.displayName = 'ToggleText';
+ToggleIcon.displayName = 'ToggleIcon';
 
-export { Toggle, ToggleIcon, toggleVariants };
+export { Toggle, ToggleText, ToggleIcon, toggleVariants, toggleTextVariants };
