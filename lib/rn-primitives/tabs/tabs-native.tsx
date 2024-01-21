@@ -64,6 +64,8 @@ const List = React.forwardRef<ViewRef, SlottableViewProps>(
 
 List.displayName = 'ListNativeTabs';
 
+const TriggerContext = React.createContext<{ value: string } | null>(null);
+
 const Trigger = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   ComponentPropsWithAsChild<typeof Pressable> & {
@@ -84,25 +86,37 @@ const Trigger = React.forwardRef<
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Component
-        ref={ref}
-        nativeID={`${nativeID}-tab-${tabValue}`}
-        aria-disabled={!!disabled}
-        aria-selected={rootValue === tabValue}
-        role='tab'
-        onPress={onPress}
-        accessibilityState={{
-          selected: rootValue === tabValue,
-          disabled: !!disabled,
-        }}
-        disabled={!!disabled}
-        {...props}
-      />
+      <TriggerContext.Provider value={{ value: tabValue }}>
+        <Component
+          ref={ref}
+          nativeID={`${nativeID}-tab-${tabValue}`}
+          aria-disabled={!!disabled}
+          aria-selected={rootValue === tabValue}
+          role='tab'
+          onPress={onPress}
+          accessibilityState={{
+            selected: rootValue === tabValue,
+            disabled: !!disabled,
+          }}
+          disabled={!!disabled}
+          {...props}
+        />
+      </TriggerContext.Provider>
     );
   }
 );
 
 Trigger.displayName = 'TriggerNativeTabs';
+
+function useTriggerContext() {
+  const context = React.useContext(TriggerContext);
+  if (!context) {
+    throw new Error(
+      'Tabs.Trigger compound components cannot be rendered outside the Tabs.Trigger component'
+    );
+  }
+  return context;
+}
 
 const Content = React.forwardRef<
   ViewRef,
@@ -130,4 +144,4 @@ const Content = React.forwardRef<
 
 Content.displayName = 'ContentNativeTabs';
 
-export { Content, List, Root, Trigger };
+export { Content, List, Root, Trigger, useTabsContext, useTriggerContext };

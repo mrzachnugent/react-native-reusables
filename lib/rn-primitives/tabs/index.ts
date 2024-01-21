@@ -22,3 +22,13 @@ export const Content = Platform.select({
   web: TabsWeb.Content,
   default: TabsNative.Content,
 });
+
+export const useRootContext = Platform.select({
+  web: TabsWeb.useTabsContext,
+  default: TabsNative.useTabsContext,
+});
+
+export const useTriggerContext = Platform.select({
+  web: TabsWeb.useTriggerContext,
+  default: TabsNative.useTriggerContext,
+});
