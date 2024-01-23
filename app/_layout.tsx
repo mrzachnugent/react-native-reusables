@@ -10,7 +10,8 @@ import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import { useColorScheme } from 'nativewind';
 import React, { useEffect, useRef } from 'react';
-import { AppState, Platform } from 'react-native';
+import { AppState } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from '~/components/ui/toast';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
@@ -27,9 +28,7 @@ const DARK_THEME: Theme = {
 };
 
 async function onFetchUpdateAsync() {
-  if (process.env.NODE_ENV === 'development') {
-    return;
-  }
+  if (__DEV__) return;
 
   const update = await Updates.checkForUpdateAsync();
 
@@ -97,28 +96,30 @@ function RootLayoutNav() {
   const { colorScheme } = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'light' ? LIGHT_THEME : DARK_THEME}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <SafeAreaProvider>
-        <BottomSheetModalProvider>
-          <Stack initialRouteName='(main)'>
-            <Stack.Screen
-              name='(main)'
-              options={{
-                headerShown: false,
-              }}
-            />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={colorScheme === 'light' ? LIGHT_THEME : DARK_THEME}>
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <SafeAreaProvider>
+          <BottomSheetModalProvider>
+            <Stack initialRouteName='(main)'>
+              <Stack.Screen
+                name='(main)'
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name='modal'
-              options={{ presentation: 'modal', title: 'Modal' }}
-            />
-          </Stack>
-        </BottomSheetModalProvider>
-        <PortalHost />
-        <ToastProvider />
-      </SafeAreaProvider>
-    </ThemeProvider>
+              <Stack.Screen
+                name='modal'
+                options={{ presentation: 'modal', title: 'Modal' }}
+              />
+            </Stack>
+          </BottomSheetModalProvider>
+          <PortalHost />
+          <ToastProvider />
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 
