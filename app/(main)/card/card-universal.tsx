@@ -5,9 +5,9 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardText,
   CardTitle,
 } from '~/components/universal-ui/card';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function ButtonUniversalScreen() {
   return (
@@ -18,10 +18,10 @@ export default function ButtonUniversalScreen() {
           <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardContent>
-          <CardText>Card Content</CardText>
+          <Text>Card Content</Text>
         </CardContent>
         <CardFooter>
-          <CardText>Card Footer</CardText>
+          <Text>Card Footer</Text>
         </CardFooter>
       </Card>
     </View>

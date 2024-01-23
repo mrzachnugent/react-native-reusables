@@ -1,15 +1,13 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
+import { Pressable } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot';
-
-import { Pressable, Text } from 'react-native';
 import type {
   PressableRef,
   SlottablePressableProps,
-  SlottableTextProps,
-  TextRef,
 } from '~/lib/rn-primitives/types';
 import { cn } from '~/lib/utils';
+import { TextClassContext } from '~/components/universal-ui/typography';
 
 const buttonVariants = cva(
   'group flex items-center justify-center rounded-md ring-offset-background web:transition-colors web:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
@@ -69,19 +67,15 @@ const buttonTextVariants = cva(
 type ButtonProps = SlottablePressableProps &
   VariantProps<typeof buttonVariants>;
 
-const ButtonContext = React.createContext<
-  | (VariantProps<typeof buttonVariants> & {
-      disabled: boolean | null | undefined;
-    })
-  | null
->(null);
-
 const Button = React.forwardRef<PressableRef, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <ButtonContext.Provider
-        value={{ variant, size, disabled: props.disabled }}
+      <TextClassContext.Provider
+        value={cn(
+          props.disabled && 'web:pointer-events-none',
+          buttonTextVariants({ variant, size })
+        )}
       >
         <Component
           className={cn(
@@ -92,41 +86,11 @@ const Button = React.forwardRef<PressableRef, ButtonProps>(
           role='button'
           {...props}
         />
-      </ButtonContext.Provider>
+      </TextClassContext.Provider>
     );
   }
 );
 Button.displayName = 'Button';
 
-function useButtonContext() {
-  const context = React.useContext(ButtonContext);
-  if (context === null) {
-    throw new Error(
-      'Button compound components cannot be rendered outside the Button component'
-    );
-  }
-  return context;
-}
-
-type ButtonTextProps = SlottableTextProps;
-
-const ButtonText = React.forwardRef<TextRef, ButtonTextProps>(
-  ({ className, asChild = false, ...props }, ref) => {
-    const { size, variant, disabled } = useButtonContext();
-    const Component = asChild ? Slot.Text : Text;
-    return (
-      <Component
-        className={cn(
-          disabled && 'web:pointer-events-none',
-          buttonTextVariants({ variant, size, className })
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-ButtonText.displayName = 'ButtonText';
-
-export { Button, ButtonText, buttonTextVariants, buttonVariants };
-export type { ButtonProps, ButtonTextProps };
+export { Button, buttonTextVariants, buttonVariants };
+export type { ButtonProps };

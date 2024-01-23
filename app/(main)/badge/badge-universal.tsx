@@ -1,20 +1,21 @@
 import { View } from 'react-native';
-import { Badge, BadgeText } from '~/components/universal-ui/badge';
+import { Badge } from '~/components/universal-ui/badge';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function BadgeUniversalScreen() {
   return (
     <View className='flex-1 justify-center items-center gap-5'>
       <Badge>
-        <BadgeText>Default</BadgeText>
+        <Text>Default</Text>
       </Badge>
       <Badge variant={'secondary'}>
-        <BadgeText>Secondary</BadgeText>
+        <Text>Secondary</Text>
       </Badge>
       <Badge variant={'destructive'}>
-        <BadgeText>Destructive</BadgeText>
+        <Text>Destructive</Text>
       </Badge>
       <Badge variant={'outline'}>
-        <BadgeText>Outline</BadgeText>
+        <Text>Outline</Text>
       </Badge>
     </View>
   );

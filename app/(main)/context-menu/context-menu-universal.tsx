@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -7,7 +7,6 @@ import {
   ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuItemText,
   ContextMenuLabel,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
@@ -16,9 +15,9 @@ import {
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
-  ContextMenuSubTriggerText,
   ContextMenuTrigger,
 } from '~/components/universal-ui/context-menu';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function ContextPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);
@@ -58,39 +57,35 @@ export default function ContextPrimitiveScreen() {
             className='w-64 native:w-72'
           >
             <ContextMenuItem inset>
-              <ContextMenuItemText>Back</ContextMenuItemText>
+              <Text>Back</Text>
               <ContextMenuShortcut>⌘[</ContextMenuShortcut>
             </ContextMenuItem>
             <ContextMenuItem inset disabled>
-              <ContextMenuItemText>Forward</ContextMenuItemText>
+              <Text>Forward</Text>
               <ContextMenuShortcut>⌘]</ContextMenuShortcut>
             </ContextMenuItem>
             <ContextMenuItem inset>
-              <ContextMenuItemText>Reload</ContextMenuItemText>
+              <Text>Reload</Text>
               <ContextMenuShortcut>⌘R</ContextMenuShortcut>
             </ContextMenuItem>
 
             <ContextMenuSub open={openSub} onOpenChange={setOpenSub}>
               <ContextMenuSubTrigger inset>
-                <ContextMenuSubTriggerText>
-                  More Tools
-                </ContextMenuSubTriggerText>
+                <Text>More Tools</Text>
               </ContextMenuSubTrigger>
               <ContextMenuSubContent className='web:w-48 native:mt-1'>
                 <Animated.View entering={FadeIn.duration(200)}>
                   <ContextMenuItem>
-                    <ContextMenuItemText>Save Page As...</ContextMenuItemText>
+                    <Text>Save Page As...</Text>
                     <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
                   </ContextMenuItem>
                   <ContextMenuItem>
-                    <ContextMenuItemText>
-                      Create Shortcut...
-                    </ContextMenuItemText>
+                    <Text>Create Shortcut...</Text>
                   </ContextMenuItem>
 
                   <ContextMenuSeparator />
                   <ContextMenuItem>
-                    <ContextMenuItemText>Developer Tools</ContextMenuItemText>
+                    <Text>Developer Tools</Text>
                   </ContextMenuItem>
                 </Animated.View>
               </ContextMenuSubContent>
@@ -102,7 +97,7 @@ export default function ContextPrimitiveScreen() {
               onCheckedChange={setCheckboxValue}
               closeOnPress={false}
             >
-              <ContextMenuItemText>Show Bookmarks Bar</ContextMenuItemText>
+              <Text>Show Bookmarks Bar</Text>
               <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
             </ContextMenuCheckboxItem>
             <ContextMenuCheckboxItem
@@ -110,22 +105,20 @@ export default function ContextPrimitiveScreen() {
               onCheckedChange={setSubCheckboxValue}
               closeOnPress={false}
             >
-              <ContextMenuItemText>Show Full URLs</ContextMenuItemText>
+              <Text>Show Full URLs</Text>
             </ContextMenuCheckboxItem>
             <ContextMenuSeparator />
             <ContextMenuRadioGroup
               value={radioValue}
               onValueChange={setRadioValue}
             >
-              <ContextMenuLabel inset>
-                <ContextMenuItemText>People</ContextMenuItemText>
-              </ContextMenuLabel>
+              <ContextMenuLabel inset>People</ContextMenuLabel>
               <ContextMenuSeparator />
               <ContextMenuRadioItem value='pedro' closeOnPress={false}>
-                <ContextMenuItemText>Elmer Fudd</ContextMenuItemText>
+                <Text>Elmer Fudd</Text>
               </ContextMenuRadioItem>
               <ContextMenuRadioItem value='colm' closeOnPress={false}>
-                <ContextMenuItemText>Foghorn Leghorn</ContextMenuItemText>
+                <Text>Foghorn Leghorn</Text>
               </ContextMenuRadioItem>
             </ContextMenuRadioGroup>
           </ContextMenuContent>

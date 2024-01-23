@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as LucideIcon from 'lucide-react-native';
 import * as React from 'react';
-import { Text } from 'react-native';
+import { TextClassContext } from '~/components/universal-ui/typography';
 import * as TogglePrimitive from '~/lib/rn-primitives/toggle';
 import { cn } from '~/lib/utils';
 
@@ -49,16 +49,20 @@ const toggleTextVariants = cva(
   }
 );
 
-const ToggleContext = React.createContext<
-  ({ pressed: boolean } & VariantProps<typeof toggleVariants>) | null
->(null);
-
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
     VariantProps<typeof toggleVariants>
 >(({ className, variant, size, ...props }, ref) => (
-  <ToggleContext.Provider value={{ pressed: props.pressed, variant, size }}>
+  <TextClassContext.Provider
+    value={cn(
+      toggleTextVariants({ variant, size }),
+      props.pressed
+        ? 'text-accent-foreground'
+        : 'group-hover:text-muted-foreground',
+      className
+    )}
+  >
     <TogglePrimitive.Root
       ref={ref}
       className={cn(
@@ -69,42 +73,10 @@ const Toggle = React.forwardRef<
       )}
       {...props}
     />
-  </ToggleContext.Provider>
+  </TextClassContext.Provider>
 ));
 
 Toggle.displayName = TogglePrimitive.Root.displayName;
-
-function useToggleContext() {
-  const context = React.useContext(ToggleContext);
-  if (context === null) {
-    throw new Error(
-      'Toggle compound components cannot be rendered outside the Toggle component'
-    );
-  }
-  return context;
-}
-
-const ToggleText = React.forwardRef<
-  React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  const { pressed, variant, size } = useToggleContext();
-  return (
-    <Text
-      ref={ref}
-      className={cn(
-        toggleTextVariants({ variant, size }),
-        pressed
-          ? 'text-accent-foreground'
-          : 'group-hover:text-muted-foreground',
-        className
-      )}
-      {...props}
-    />
-  );
-});
-
-ToggleText.displayName = 'ToggleText';
 
 const ToggleIcon = React.forwardRef<
   React.ElementRef<LucideIcon.Icon>,
@@ -112,24 +84,12 @@ const ToggleIcon = React.forwardRef<
     name: keyof typeof LucideIcon;
   }
 >(({ className, name, ...props }, ref) => {
-  const { pressed, variant } = useToggleContext();
+  const textClass = React.useContext(TextClassContext);
 
   const Icon = LucideIcon[name] as LucideIcon.Icon;
-  return (
-    <Icon
-      ref={ref}
-      className={cn(
-        toggleTextVariants({ variant }),
-        pressed
-          ? 'text-accent-foreground'
-          : 'group-hover:text-muted-foreground',
-        className
-      )}
-      {...props}
-    />
-  );
+  return <Icon ref={ref} className={cn(textClass, className)} {...props} />;
 });
 
 ToggleIcon.displayName = 'ToggleIcon';
 
-export { Toggle, ToggleText, ToggleIcon, toggleVariants, toggleTextVariants };
+export { Toggle, ToggleIcon, toggleTextVariants, toggleVariants };

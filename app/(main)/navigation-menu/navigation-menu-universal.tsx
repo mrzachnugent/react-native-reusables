@@ -2,7 +2,7 @@ import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
 import { Sparkles } from 'lucide-react-native';
 import React from 'react';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   NavigationMenu,
@@ -15,6 +15,7 @@ import {
 } from '~/components/universal-ui/navigation-menu';
 import { TextRef } from '~/lib/rn-primitives/types';
 import { cn } from '~/lib/utils';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function MenubarPrimitiveScreen() {
   const insets = useSafeAreaInsets();
@@ -60,7 +61,7 @@ export default function MenubarPrimitiveScreen() {
         <NavigationMenuList>
           <NavigationMenuItem value='getting-started'>
             <NavigationMenuTrigger>
-              <Text className='text-foreground'>Getting started</Text>
+              <Text>Getting started</Text>
             </NavigationMenuTrigger>
             <NavigationMenuContent insets={contentInsets}>
               <View
@@ -71,7 +72,7 @@ export default function MenubarPrimitiveScreen() {
                   <NavigationMenuLink asChild>
                     <View className='flex select-none flex-col justify-end rounded-md web:bg-gradient-to-b web:from-muted/50 web:to-muted native:border native:border-border p-6 web:no-underline web:outline-none focus:shadow-md'>
                       <Sparkles size={16} className='text-foreground' />
-                      <Text className='mb-2 mt-4 text-lg native:text-2xl font-medium text-foreground'>
+                      <Text className='mb-2 mt-4 text-lg native:text-2xl font-medium'>
                         react-native-reusables
                       </Text>
                       <Text className='text-sm native:text-base leading-tight text-muted-foreground'>
@@ -82,20 +83,18 @@ export default function MenubarPrimitiveScreen() {
                   </NavigationMenuLink>
                 </View>
                 <ListItem href='/docs' title='Introduction'>
-                  <Text className='text-foreground'>
+                  <Text>
                     Re-usable components built using Radix UI on the web and
                     Tailwind CSS.
                   </Text>
                 </ListItem>
                 <ListItem href='/docs/installation' title='Installation'>
-                  <Text className='text-foreground'>
+                  <Text>
                     How to install dependencies and structure your app.
                   </Text>
                 </ListItem>
                 <ListItem href='/docs/primitives/typography' title='Typography'>
-                  <Text className='text-foreground'>
-                    Styles for headings, paragraphs, lists...etc
-                  </Text>
+                  <Text>Styles for headings, paragraphs, lists...etc</Text>
                 </ListItem>
               </View>
             </NavigationMenuContent>
@@ -126,7 +125,7 @@ export default function MenubarPrimitiveScreen() {
               onPress={closeAll}
               className={navigationMenuTriggerStyle()}
             >
-              <Text className='text-foreground '>Documentation</Text>
+              <Text>Documentation</Text>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

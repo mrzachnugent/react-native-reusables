@@ -14,13 +14,13 @@ import React from 'react';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
+import { Text } from '~/components/universal-ui/typography';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuItemText,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
@@ -54,7 +54,7 @@ export default function DropdownMenuUniversalScreen() {
       >
         <DropdownMenuTrigger asChild>
           <Button variant='outline'>
-            <ButtonText>Open</ButtonText>
+            <Text>Open</Text>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
@@ -66,54 +66,54 @@ export default function DropdownMenuUniversalScreen() {
           <DropdownMenuGroup>
             <DropdownMenuItem>
               <Users className='text-foreground' size={14} />
-              <DropdownMenuItemText>Team</DropdownMenuItemText>
+              <Text>Team</Text>
             </DropdownMenuItem>
             <DropdownMenuSub open={openSub} onOpenChange={setOpenSub}>
               <DropdownMenuSubTrigger>
                 <UserPlus className='text-foreground' size={14} />
-                <DropdownMenuItemText>Invite users</DropdownMenuItemText>
+                <Text>Invite users</Text>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent>
                 <Animated.View entering={FadeIn.duration(200)}>
                   <DropdownMenuItem>
                     <Mail className='text-foreground' size={14} />
-                    <DropdownMenuItemText>Email</DropdownMenuItemText>
+                    <Text>Email</Text>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <MessageSquare className='text-foreground' size={14} />
-                    <DropdownMenuItemText>Message</DropdownMenuItemText>
+                    <Text>Message</Text>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <PlusCircle className='text-foreground' size={14} />
-                    <DropdownMenuItemText>More...</DropdownMenuItemText>
+                    <Text>More...</Text>
                   </DropdownMenuItem>
                 </Animated.View>
               </DropdownMenuSubContent>
             </DropdownMenuSub>
             <DropdownMenuItem>
               <Plus className='text-foreground' size={14} />
-              <DropdownMenuItemText>New Team</DropdownMenuItemText>
+              <Text>New Team</Text>
               <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Github className='text-foreground' size={14} />
-            <DropdownMenuItemText>GitHub</DropdownMenuItemText>
+            <Text>GitHub</Text>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <LifeBuoy className='text-foreground' size={14} />
-            <DropdownMenuItemText>Support</DropdownMenuItemText>
+            <Text>Support</Text>
           </DropdownMenuItem>
           <DropdownMenuItem disabled>
             <Cloud className='text-foreground' size={14} />
-            <DropdownMenuItemText>API</DropdownMenuItemText>
+            <Text>API</Text>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogOut className='text-foreground' size={14} />
-            <DropdownMenuItemText>Log out</DropdownMenuItemText>
+            <Text>Log out</Text>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>

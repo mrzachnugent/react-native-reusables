@@ -9,7 +9,6 @@ import {
   MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
-  MenubarItemText,
   MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
@@ -20,6 +19,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from '~/components/universal-ui/menubar';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function MenubarPrimitiveScreen() {
   const insets = useSafeAreaInsets();
@@ -78,97 +78,97 @@ export default function MenubarPrimitiveScreen() {
       <Menubar value={value} onValueChange={onValueChange}>
         <MenubarMenu value='file'>
           <MenubarTrigger onPress={closeSubs}>
-            <MenubarItemText>File</MenubarItemText>
+            <Text>File</Text>
           </MenubarTrigger>
           <MenubarContent insets={contentInsets}>
             <MenubarItem>
-              <MenubarItemText>New Tab</MenubarItemText>
+              <Text>New Tab</Text>
               <MenubarShortcut>⌘T</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
-              <MenubarItemText>New Window</MenubarItemText>
+              <Text>New Window</Text>
               <MenubarShortcut>⌘N</MenubarShortcut>
             </MenubarItem>
             <MenubarItem disabled>
-              <MenubarItemText>New Incognito Window</MenubarItemText>
+              <Text>New Incognito Window</Text>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarSub open={isSubOpen} onOpenChange={setIsSubOpen}>
               <MenubarSubTrigger>
-                <MenubarItemText>Share</MenubarItemText>
+                <Text>Share</Text>
               </MenubarSubTrigger>
               <MenubarSubContent>
                 <Animated.View entering={FadeIn.duration(200)}>
                   <MenubarItem>
-                    <MenubarItemText>Email link</MenubarItemText>
+                    <Text>Email link</Text>
                   </MenubarItem>
                   <MenubarItem>
-                    <MenubarItemText>Messages</MenubarItemText>
+                    <Text>Messages</Text>
                   </MenubarItem>
                   <MenubarItem>
-                    <MenubarItemText>Notes</MenubarItemText>
+                    <Text>Notes</Text>
                   </MenubarItem>
                 </Animated.View>
               </MenubarSubContent>
             </MenubarSub>
             <MenubarSeparator />
             <MenubarItem>
-              <MenubarItemText>Print...</MenubarItemText>
+              <Text>Print...</Text>
               <MenubarShortcut>⌘P</MenubarShortcut>
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu value='edit'>
           <MenubarTrigger onPress={closeSubs}>
-            <MenubarItemText>Edit</MenubarItemText>
+            <Text>Edit</Text>
           </MenubarTrigger>
           <MenubarContent insets={contentInsets} className='native:w-48'>
             <MenubarItem>
-              <MenubarItemText>Undo</MenubarItemText>
+              <Text>Undo</Text>
               <MenubarShortcut>⌘Z</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
-              <MenubarItemText>Redo</MenubarItemText>
+              <Text>Redo</Text>
               <MenubarShortcut>⇧⌘Z</MenubarShortcut>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarSub open={isSubOpen2} onOpenChange={setIsSubOpen2}>
               <MenubarSubTrigger>
-                <MenubarItemText>Find</MenubarItemText>
+                <Text>Find</Text>
               </MenubarSubTrigger>
               <MenubarSubContent>
                 <Animated.View entering={FadeIn.duration(200)}>
                   <MenubarItem>
-                    <MenubarItemText>Search the web</MenubarItemText>
+                    <Text>Search the web</Text>
                   </MenubarItem>
                   <MenubarSeparator />
                   <MenubarItem>
-                    <MenubarItemText>Find...</MenubarItemText>
+                    <Text>Find...</Text>
                   </MenubarItem>
                   <MenubarItem>
-                    <MenubarItemText>Find Next</MenubarItemText>
+                    <Text>Find Next</Text>
                   </MenubarItem>
                   <MenubarItem>
-                    <MenubarItemText>Find Previous</MenubarItemText>
+                    <Text>Find Previous</Text>
                   </MenubarItem>
                 </Animated.View>
               </MenubarSubContent>
             </MenubarSub>
             <MenubarSeparator />
             <MenubarItem>
-              <MenubarItemText>Cut</MenubarItemText>
+              <Text>Cut</Text>
             </MenubarItem>
             <MenubarItem>
-              <MenubarItemText>Copy</MenubarItemText>
+              <Text>Copy</Text>
             </MenubarItem>
             <MenubarItem>
-              <MenubarItemText>Paste</MenubarItemText>
+              <Text>Paste</Text>
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu value='view'>
           <MenubarTrigger onPress={closeSubs}>
-            <MenubarItemText>View</MenubarItemText>
+            <Text>View</Text>
           </MenubarTrigger>
           <MenubarContent insets={contentInsets}>
             <MenubarCheckboxItem
@@ -176,57 +176,57 @@ export default function MenubarPrimitiveScreen() {
               onCheckedChange={setIsChecked}
               closeOnPress={false}
             >
-              <MenubarItemText>Always Show Bookmarks Bar</MenubarItemText>
+              <Text>Always Show Bookmarks Bar</Text>
             </MenubarCheckboxItem>
             <MenubarCheckboxItem
               checked={isChecked2}
               onCheckedChange={setIsChecked2}
               closeOnPress={false}
             >
-              <MenubarItemText>Always Show Full URLs</MenubarItemText>
+              <Text>Always Show Full URLs</Text>
             </MenubarCheckboxItem>
             <MenubarSeparator />
             <MenubarItem inset>
-              <MenubarItemText>Reload</MenubarItemText>
+              <Text>Reload</Text>
               <MenubarShortcut>⌘R</MenubarShortcut>
             </MenubarItem>
             <MenubarItem disabled inset>
-              <MenubarItemText>Force Reload</MenubarItemText>
+              <Text>Force Reload</Text>
               <MenubarShortcut>⇧⌘R</MenubarShortcut>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem inset>
-              <MenubarItemText>Toggle Fullscreen</MenubarItemText>
+              <Text>Toggle Fullscreen</Text>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem inset>
-              <MenubarItemText>Hide Sidebar</MenubarItemText>
+              <Text>Hide Sidebar</Text>
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu value='profile'>
           <MenubarTrigger onPress={closeSubs}>
-            <MenubarItemText>Profiles</MenubarItemText>
+            <Text>Profiles</Text>
           </MenubarTrigger>
           <MenubarContent insets={contentInsets}>
             <MenubarRadioGroup value={radio} onValueChange={setRadio}>
               <MenubarRadioItem closeOnPress={false} value='andy'>
-                <MenubarItemText>Andy</MenubarItemText>
+                <Text>Andy</Text>
               </MenubarRadioItem>
               <MenubarRadioItem closeOnPress={false} value='michael'>
-                <MenubarItemText>Michael</MenubarItemText>
+                <Text>Michael</Text>
               </MenubarRadioItem>
               <MenubarRadioItem closeOnPress={false} value='creed'>
-                <MenubarItemText>Creed</MenubarItemText>
+                <Text>Creed</Text>
               </MenubarRadioItem>
             </MenubarRadioGroup>
             <MenubarSeparator />
             <MenubarItem inset>
-              <MenubarItemText>Edit...</MenubarItemText>
+              <Text>Edit...</Text>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem inset>
-              <MenubarItemText>Add Profile...</MenubarItemText>
+              <Text>Add Profile...</Text>
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>

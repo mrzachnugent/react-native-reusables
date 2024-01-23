@@ -6,8 +6,8 @@ import {
 } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
+import { TextClassContext } from '~/components/universal-ui/typography';
 import * as MenubarPrimitive from '~/lib/rn-primitives/menubar';
-import { TextRef } from '~/lib/rn-primitives/types';
 import { cn } from '~/lib/utils';
 
 const MenubarMenu = MenubarPrimitive.Menu;
@@ -66,41 +66,29 @@ const MenubarSubTrigger = React.forwardRef<
   const Icon =
     Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
-    <MenubarPrimitive.SubTrigger
-      ref={ref}
-      className={cn(
-        'flex flex-row web:cursor-default select-none items-center gap-2 focus:bg-accent active:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
-        open && 'bg-accent',
-        inset && 'pl-8',
-        className
+    <TextClassContext.Provider
+      value={cn(
+        'select-none text-sm native:text-lg text-primary',
+        open && 'native:text-accent-foreground'
       )}
-      {...props}
     >
-      <>{children}</>
-      <Icon size={18} className='ml-auto text-foreground' />
-    </MenubarPrimitive.SubTrigger>
+      <MenubarPrimitive.SubTrigger
+        ref={ref}
+        className={cn(
+          'flex flex-row web:cursor-default select-none items-center gap-2 focus:bg-accent active:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
+          open && 'bg-accent',
+          inset && 'pl-8',
+          className
+        )}
+        {...props}
+      >
+        <>{children}</>
+        <Icon size={18} className='ml-auto text-foreground' />
+      </MenubarPrimitive.SubTrigger>
+    </TextClassContext.Provider>
   );
 });
 MenubarSubTrigger.displayName = MenubarPrimitive.SubTrigger.displayName;
-
-const MenubarSubTriggerText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  const { open } = MenubarPrimitive.useSubContext();
-  return (
-    <Text
-      ref={ref}
-      className={cn(
-        'select-none text-sm native:text-lg text-primary',
-        open && 'native:text-accent-foreground',
-        className
-      )}
-      {...props}
-    />
-  );
-});
-MenubarSubTriggerText.displayName = 'MenubarSubTriggerText';
 
 const MenubarSubContent = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.SubContent>,
@@ -153,35 +141,20 @@ const MenubarItem = React.forwardRef<
     inset?: boolean;
   }
 >(({ className, inset, ...props }, ref) => (
-  <MenubarPrimitive.Item
-    ref={ref}
-    className={cn(
-      'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
-      inset && 'pl-8',
-      props.disabled && 'opacity-50 web:pointer-events-none',
-      className
-    )}
-    {...props}
-  />
-));
-MenubarItem.displayName = MenubarPrimitive.Item.displayName;
-
-const MenubarItemText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  return (
-    <Text
+  <TextClassContext.Provider value='select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground'>
+    <MenubarPrimitive.Item
       ref={ref}
       className={cn(
-        'select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground',
+        'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
+        inset && 'pl-8',
+        props.disabled && 'opacity-50 web:pointer-events-none',
         className
       )}
       {...props}
     />
-  );
-});
-MenubarItemText.displayName = 'MenubarItemText';
+  </TextClassContext.Provider>
+));
+MenubarItem.displayName = MenubarPrimitive.Item.displayName;
 
 const MenubarCheckboxItem = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.CheckboxItem>,
@@ -282,7 +255,6 @@ export {
   MenubarContent,
   MenubarGroup,
   MenubarItem,
-  MenubarItemText,
   MenubarLabel,
   MenubarMenu,
   MenubarPortal,
