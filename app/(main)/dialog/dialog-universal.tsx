@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
+import { Text } from '~/components/universal-ui/typography';
 import {
   Dialog,
   DialogClose,
@@ -19,7 +20,7 @@ export default function DialogUniversalScreen() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant='outline'>
-            <ButtonText>Edit Profile</ButtonText>
+            <Text>Edit Profile</Text>
           </Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
@@ -33,7 +34,7 @@ export default function DialogUniversalScreen() {
           <DialogFooter>
             <DialogClose asChild>
               <Button>
-                <ButtonText>OK</ButtonText>
+                <Text>OK</Text>
               </Button>
             </DialogClose>
           </DialogFooter>

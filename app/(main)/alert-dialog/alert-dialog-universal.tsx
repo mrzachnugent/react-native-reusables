@@ -3,9 +3,7 @@ import { View } from 'react-native';
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogActionText,
   AlertDialogCancel,
-  AlertDialogCancelText,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -13,7 +11,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '~/components/universal-ui/alert-dialog';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function AlertDialogUniversalScreen() {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +21,7 @@ export default function AlertDialogUniversalScreen() {
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>
           <Button variant='outline'>
-            <ButtonText>Show Alert Dialog</ButtonText>
+            <Text>Show Alert Dialog</Text>
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
@@ -35,10 +34,10 @@ export default function AlertDialogUniversalScreen() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>
-              <AlertDialogCancelText>Cancel</AlertDialogCancelText>
+              <Text>Cancel</Text>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <AlertDialogActionText>Continue</AlertDialogActionText>
+              <Text>Continue</Text>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

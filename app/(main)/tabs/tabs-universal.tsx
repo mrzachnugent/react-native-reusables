@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
+import { Text } from '~/components/universal-ui/typography';
 import {
   Card,
   CardContent,
@@ -16,7 +17,6 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  TabsTriggerText,
 } from '~/components/universal-ui/tabs';
 
 export default function TabsPrimitiveScreen() {
@@ -30,10 +30,10 @@ export default function TabsPrimitiveScreen() {
       >
         <TabsList className='flex-row w-full'>
           <TabsTrigger value='account' className='flex-1'>
-            <TabsTriggerText>Account</TabsTriggerText>
+            <Text>Account</Text>
           </TabsTrigger>
           <TabsTrigger value='password' className='flex-1'>
-            <TabsTriggerText>Password</TabsTriggerText>
+            <Text>Password</Text>
           </TabsTrigger>
         </TabsList>
         <TabsContent value='account'>
@@ -63,7 +63,7 @@ export default function TabsPrimitiveScreen() {
             </CardContent>
             <CardFooter>
               <Button>
-                <ButtonText>Save changes</ButtonText>
+                <Text>Save changes</Text>
               </Button>
             </CardFooter>
           </Card>
@@ -100,7 +100,7 @@ export default function TabsPrimitiveScreen() {
             </CardContent>
             <CardFooter>
               <Button>
-                <ButtonText>Save password</ButtonText>
+                <Text>Save password</Text>
               </Button>
             </CardFooter>
           </Card>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
 import { Progress } from '~/components/universal-ui/progress';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function ProgressUniversalScreen() {
   const [progress, setProgress] = React.useState(13);
@@ -15,7 +16,7 @@ export default function ProgressUniversalScreen() {
       <View className='w-full gap-8 items-center'>
         <Progress value={progress} className='web:w-[60%]' />
         <Button variant='ghost' onPress={onPress}>
-          <ButtonText>Randomize</ButtonText>
+          <Text>Randomize</Text>
         </Button>
       </View>
     </View>

@@ -13,8 +13,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import { TextClassContext } from '~/components/universal-ui/typography';
 import * as DropdownMenuPrimitive from '~/lib/rn-primitives/dropdown-menu';
-import { TextRef } from '~/lib/rn-primitives/types';
 import { cn } from '~/lib/utils';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
@@ -39,42 +39,30 @@ const DropdownMenuSubTrigger = React.forwardRef<
   const Icon =
     Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
-    <DropdownMenuPrimitive.SubTrigger
-      ref={ref}
-      className={cn(
-        'flex flex-row web:cursor-default select-none gap-2 items-center focus:bg-accent hover:bg-accent active:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
-        open && 'bg-accent',
-        inset && 'pl-8',
-        className
+    <TextClassContext.Provider
+      value={cn(
+        'select-none text-sm native:text-lg text-primary',
+        open && 'native:text-accent-foreground'
       )}
-      {...props}
     >
-      <>{children}</>
-      <Icon size={18} className='ml-auto text-foreground' />
-    </DropdownMenuPrimitive.SubTrigger>
+      <DropdownMenuPrimitive.SubTrigger
+        ref={ref}
+        className={cn(
+          'flex flex-row web:cursor-default select-none gap-2 items-center focus:bg-accent hover:bg-accent active:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
+          open && 'bg-accent',
+          inset && 'pl-8',
+          className
+        )}
+        {...props}
+      >
+        <>{children}</>
+        <Icon size={18} className='ml-auto text-foreground' />
+      </DropdownMenuPrimitive.SubTrigger>
+    </TextClassContext.Provider>
   );
 });
 DropdownMenuSubTrigger.displayName =
   DropdownMenuPrimitive.SubTrigger.displayName;
-
-const DropdownMenuSubTriggerText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  const { open } = DropdownMenuPrimitive.useSubContext();
-  return (
-    <Text
-      ref={ref}
-      className={cn(
-        'select-none text-sm native:text-lg text-primary',
-        open && 'native:text-accent-foreground',
-        className
-      )}
-      {...props}
-    />
-  );
-});
-DropdownMenuSubTriggerText.displayName = 'DropdownMenuSubTriggerText';
 
 const DropdownMenuSubContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
@@ -112,7 +100,7 @@ const DropdownMenuContent = React.forwardRef<
         style={
           overlayStyle
             ? StyleSheet.flatten([
-                Platform.OS !== 'web' ? StyleSheet.absoluteFill : {},
+                Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined,
                 overlayStyle,
               ])
             : Platform.OS !== 'web'
@@ -144,35 +132,20 @@ const DropdownMenuItem = React.forwardRef<
     inset?: boolean;
   }
 >(({ className, inset, ...props }, ref) => (
-  <DropdownMenuPrimitive.Item
-    ref={ref}
-    className={cn(
-      'relative flex flex-row web:cursor-default gap-2 items-center rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
-      inset && 'pl-8',
-      props.disabled && 'opacity-50 web:pointer-events-none',
-      className
-    )}
-    {...props}
-  />
-));
-DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
-
-const DropdownMenuItemText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  return (
-    <Text
+  <TextClassContext.Provider value='select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground'>
+    <DropdownMenuPrimitive.Item
       ref={ref}
       className={cn(
-        'select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground',
+        'relative flex flex-row web:cursor-default gap-2 items-center rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
+        inset && 'pl-8',
+        props.disabled && 'opacity-50 web:pointer-events-none',
         className
       )}
       {...props}
     />
-  );
-});
-DropdownMenuItemText.displayName = 'DropdownMenuItemText';
+  </TextClassContext.Provider>
+));
+DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 
 const DropdownMenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
@@ -274,7 +247,6 @@ export {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuItemText,
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuRadioGroup,
@@ -284,6 +256,5 @@ export {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuSubTriggerText,
   DropdownMenuTrigger,
 };

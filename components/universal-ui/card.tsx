@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
+import { TextClassContext } from '~/components/universal-ui/typography';
 import { TextRef, ViewRef } from '~/lib/rn-primitives/types';
-
 import { cn } from '~/lib/utils';
 
 const Card = React.forwardRef<
@@ -64,7 +64,9 @@ const CardContent = React.forwardRef<
   ViewRef,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, ...props }, ref) => (
-  <View ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+  <TextClassContext.Provider value='text-card-foreground'>
+    <View ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+  </TextClassContext.Provider>
 ));
 CardContent.displayName = 'CardContent';
 
@@ -80,24 +82,11 @@ const CardFooter = React.forwardRef<
 ));
 CardFooter.displayName = 'CardFooter';
 
-const CardText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => (
-  <Text
-    ref={ref}
-    className={cn('text-card-foreground', className)}
-    {...props}
-  />
-));
-CardTitle.displayName = 'CardTitle';
-
 export {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardText,
   CardTitle,
 };

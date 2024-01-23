@@ -1,15 +1,15 @@
 import React from 'react';
-import { Platform, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
 import { Input } from '~/components/universal-ui/input';
 import { Label, LabelText } from '~/components/universal-ui/label';
 import {
   Popover,
   PopoverContent,
-  PopoverText,
   PopoverTrigger,
 } from '~/components/universal-ui/popover';
+import { Text } from '~/components/universal-ui/typography';
 
 export default function PopoverUniversalScreen() {
   const [open, setOpen] = React.useState(false);
@@ -26,7 +26,7 @@ export default function PopoverUniversalScreen() {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant='outline'>
-            <ButtonText>Open popover</ButtonText>
+            <Text>Open popover</Text>
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -36,9 +36,9 @@ export default function PopoverUniversalScreen() {
         >
           <View className='web:grid gap-4'>
             <View className='space-y-2'>
-              <PopoverText className='font-medium leading-none native:text-xl'>
+              <Text className='font-medium leading-none native:text-xl'>
                 Dimensions
-              </PopoverText>
+              </Text>
               <Text className='text-sm text-muted-foreground'>
                 Set the dimensions for the layer.
               </Text>

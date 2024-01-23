@@ -1,9 +1,6 @@
 import * as React from 'react';
 import * as AvatarPrimitive from '~/lib/rn-primitives/avatar';
-import * as Slot from '~/lib/rn-primitives/slot';
-import { SlottableTextProps, TextRef } from '~/lib/rn-primitives/types';
 
-import { Text } from 'react-native';
 import { cn } from '~/lib/utils';
 
 const Avatar = React.forwardRef<
@@ -48,20 +45,4 @@ const AvatarFallback = React.forwardRef<
 ));
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
-const AvatarFallbackText = React.forwardRef<TextRef, SlottableTextProps>(
-  ({ asChild, className, ...props }, ref) => {
-    const Component = asChild ? Slot.Text : Text;
-    return (
-      <Component
-        ref={ref}
-        className={cn('text-foreground text-base', className)}
-        {...props}
-      >
-        ZN
-      </Component>
-    );
-  }
-);
-AvatarFallbackText.displayName = 'AvatarFallbackText';
-
-export { Avatar, AvatarImage, AvatarFallback, AvatarFallbackText };
+export { Avatar, AvatarFallback, AvatarImage };

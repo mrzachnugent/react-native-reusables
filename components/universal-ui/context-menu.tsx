@@ -14,8 +14,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import * as ContextMenuPrimitive from '~/lib/rn-primitives/context-menu';
-import { TextRef } from '~/lib/rn-primitives/types';
 import { cn } from '~/lib/utils';
+import { TextClassContext } from '~/components/universal-ui/typography';
 
 const ContextMenu = ContextMenuPrimitive.Root;
 
@@ -39,41 +39,29 @@ const ContextMenuSubTrigger = React.forwardRef<
   const Icon =
     Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
-    <ContextMenuPrimitive.SubTrigger
-      ref={ref}
-      className={cn(
-        'flex flex-row web:cursor-default select-none items-center gap-2 focus:bg-accent active:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
-        open && 'bg-accent',
-        inset && 'pl-8',
-        className
+    <TextClassContext.Provider
+      value={cn(
+        'select-none text-sm native:text-lg text-primary',
+        open && 'native:text-accent-foreground'
       )}
-      {...props}
     >
-      <>{children}</>
-      <Icon size={18} className='ml-auto text-foreground' />
-    </ContextMenuPrimitive.SubTrigger>
+      <ContextMenuPrimitive.SubTrigger
+        ref={ref}
+        className={cn(
+          'flex flex-row web:cursor-default select-none items-center gap-2 focus:bg-accent active:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
+          open && 'bg-accent',
+          inset && 'pl-8',
+          className
+        )}
+        {...props}
+      >
+        <>{children}</>
+        <Icon size={18} className='ml-auto text-foreground' />
+      </ContextMenuPrimitive.SubTrigger>
+    </TextClassContext.Provider>
   );
 });
 ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName;
-
-const ContextMenuSubTriggerText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  const { open } = ContextMenuPrimitive.useSubContext();
-  return (
-    <Text
-      ref={ref}
-      className={cn(
-        'select-none text-sm native:text-lg text-primary',
-        open && 'native:text-accent-foreground',
-        className
-      )}
-      {...props}
-    />
-  );
-});
-ContextMenuSubTriggerText.displayName = 'ContextMenuSubTriggerText';
 
 const ContextMenuSubContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
@@ -142,35 +130,20 @@ const ContextMenuItem = React.forwardRef<
     inset?: boolean;
   }
 >(({ className, inset, ...props }, ref) => (
-  <ContextMenuPrimitive.Item
-    ref={ref}
-    className={cn(
-      'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
-      inset && 'pl-8',
-      props.disabled && 'opacity-50 web:pointer-events-none',
-      className
-    )}
-    {...props}
-  />
-));
-ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName;
-
-const ContextMenuItemText = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
-  return (
-    <Text
+  <TextClassContext.Provider value='select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground'>
+    <ContextMenuPrimitive.Item
       ref={ref}
       className={cn(
-        'select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground',
+        'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
+        inset && 'pl-8',
+        props.disabled && 'opacity-50 web:pointer-events-none',
         className
       )}
       {...props}
     />
-  );
-});
-ContextMenuItemText.displayName = 'ContextMenuItemText';
+  </TextClassContext.Provider>
+));
+ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName;
 
 const ContextMenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,
@@ -272,7 +245,6 @@ export {
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
-  ContextMenuItemText,
   ContextMenuLabel,
   ContextMenuPortal,
   ContextMenuRadioGroup,
@@ -282,6 +254,5 @@ export {
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
-  ContextMenuSubTriggerText,
   ContextMenuTrigger,
 };

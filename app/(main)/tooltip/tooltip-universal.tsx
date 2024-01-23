@@ -1,11 +1,11 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, ButtonText } from '~/components/universal-ui/button';
+import { Button } from '~/components/universal-ui/button';
+import { Text } from '~/components/universal-ui/typography';
 import {
   Tooltip,
   TooltipContent,
-  TooltipText,
   TooltipTrigger,
 } from '~/components/universal-ui/tooltip';
 
@@ -23,13 +23,11 @@ export default function TooltipUniversalScreen() {
       <Tooltip open={open} onOpenChange={setOpen} delayDuration={150}>
         <TooltipTrigger asChild>
           <Button variant='outline'>
-            <ButtonText>
-              {Platform.OS === 'web' ? 'Hover me' : 'Press me'}
-            </ButtonText>
+            <Text>{Platform.OS === 'web' ? 'Hover me' : 'Press me'}</Text>
           </Button>
         </TooltipTrigger>
         <TooltipContent insets={contentInsets}>
-          <TooltipText className='native:text-lg'>Add to library</TooltipText>
+          <Text className='native:text-lg'>Add to library</Text>
         </TooltipContent>
       </Tooltip>
     </View>
