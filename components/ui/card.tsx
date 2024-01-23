@@ -22,7 +22,6 @@ const Card = React.forwardRef<
     );
   }, [styleProp, colorScheme]);
 
-  React.useEffect(() => {}, []);
   return (
     <View
       ref={ref}

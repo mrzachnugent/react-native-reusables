@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ViewStyle,
 } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { cn } from '~/lib/utils';
@@ -91,11 +92,31 @@ const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Modal> & { overlayClass?: string }
 >(
   (
-    { className, children, animationType = 'fade', overlayClass, ...props },
+    {
+      className,
+      children,
+      animationType = 'fade',
+      style: styleProp,
+      overlayClass,
+      ...props
+    },
     ref
   ) => {
     const { colorScheme } = useColorScheme();
     const { visible, setVisible, closeOnOverlayPress } = useDialogContext();
+    const [style, setStyle] = React.useState<ViewStyle>(
+      StyleSheet.flatten(styleProp)
+    );
+
+    React.useEffect(() => {
+      setStyle(
+        StyleSheet.flatten([
+          colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+          styleProp,
+        ])
+      );
+    }, [styleProp, colorScheme]);
+
     return (
       <Modal
         ref={ref}
@@ -123,9 +144,7 @@ const DialogContent = React.forwardRef<
           )}
         >
           <Pressable
-            style={
-              colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight
-            }
+            style={style}
             className={cn(
               'bg-background rounded-2xl p-8 border border-border',
               className

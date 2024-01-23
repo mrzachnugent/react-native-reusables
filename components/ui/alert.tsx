@@ -29,8 +29,21 @@ const Alert = React.forwardRef<
       icon?: keyof typeof LucideIcon;
       style?: ViewStyle;
     }
->(({ children, icon, className, variant, style, ...props }, ref) => {
+>(({ children, icon, className, variant, style: styleProp, ...props }, ref) => {
   const { colorScheme } = useColorScheme();
+  const [style, setStyle] = React.useState<ViewStyle>(
+    StyleSheet.flatten(styleProp)
+  );
+
+  React.useEffect(() => {
+    setStyle(
+      StyleSheet.flatten([
+        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+        styleProp,
+      ])
+    );
+  }, [styleProp, colorScheme]);
+
   const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.Icon;
   return (
     <View
@@ -41,10 +54,7 @@ const Alert = React.forwardRef<
         icon && 'ios:pl-[50] android:pl-[50] pl-[50px]',
         className
       )}
-      style={[
-        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
-        style,
-      ]}
+      style={style}
       {...props}
     >
       {icon && (

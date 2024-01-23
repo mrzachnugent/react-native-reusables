@@ -150,7 +150,7 @@ const PopoverContent = React.forwardRef<
       align = 'left',
       position = 'auto',
       overlayClass,
-      style,
+      style: styleProp,
       ...props
     },
     ref
@@ -163,6 +163,19 @@ const PopoverContent = React.forwardRef<
       contentLayout,
       setContentLayout,
     } = usePopoverContext();
+
+    const [style, setStyle] = React.useState<ViewStyle>(
+      StyleSheet.flatten(styleProp)
+    );
+
+    React.useEffect(() => {
+      setStyle(
+        StyleSheet.flatten([
+          colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
+          styleProp,
+        ])
+      );
+    }, [styleProp, colorScheme]);
 
     return (
       <Modal
@@ -203,7 +216,6 @@ const PopoverContent = React.forwardRef<
                   triggerPosition,
                   width,
                 }),
-                colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
                 style,
                 { maxWidth: windowWidth - MARGIN_X * 2 },
               ]}
