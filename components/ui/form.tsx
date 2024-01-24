@@ -235,7 +235,7 @@ const FormInput = React.forwardRef<
 
       <Input
         ref={inputRef}
-        aria-labelledbyledBy={formItemNativeID}
+        aria-labelledby={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -297,7 +297,7 @@ const FormTextarea = React.forwardRef<
 
       <Textarea
         ref={textareaRef}
-        aria-labelledbyledBy={formItemNativeID}
+        aria-labelledby={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -347,7 +347,7 @@ const FormCheckbox = React.forwardRef<
       <View className='flex-row gap-3 items-center'>
         <Checkbox
           ref={checkboxRef}
-          aria-labelledbyledBy={formItemNativeID}
+          aria-labelledby={formItemNativeID}
           aria-describedby={
             !error
               ? `${formDescriptionNativeID}`
@@ -393,7 +393,7 @@ const FormDatePicker = React.forwardRef<
             size='sm'
             className='gap-3 justify-start px-4 relative'
             ref={ref}
-            aria-labelledbyledBy={formItemNativeID}
+            aria-labelledby={formItemNativeID}
             aria-describedby={
               !error
                 ? `${formDescriptionNativeID}`
@@ -510,7 +510,7 @@ const FormRadioGroup = React.forwardRef<
       </View>
       <RadioGroup
         ref={ref}
-        aria-labelledbyledBy={formItemNativeID}
+        aria-labelledby={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -546,7 +546,7 @@ const FormCombobox = React.forwardRef<
       <Combobox
         ref={ref}
         placeholder='Select framework'
-        aria-labelledbyledBy={formItemNativeID}
+        aria-labelledby={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -587,7 +587,7 @@ const FormSelect = React.forwardRef<
       {!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
       <Select
         ref={ref}
-        aria-labelledbyledBy={formItemNativeID}
+        aria-labelledby={formItemNativeID}
         aria-describedby={
           !error
             ? `${formDescriptionNativeID}`
@@ -640,7 +640,7 @@ const FormSwitch = React.forwardRef<
       <View className='flex-row gap-3 items-center'>
         <Switch
           ref={switchRef}
-          aria-labelledbyledBy={formItemNativeID}
+          aria-labelledby={formItemNativeID}
           aria-describedby={
             !error
               ? `${formDescriptionNativeID}`
