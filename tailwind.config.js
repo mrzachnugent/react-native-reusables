@@ -41,39 +41,6 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        'border-dark': 'hsl(var(--border-dark))',
-        'input-dark': 'hsl(var(--input-dark))',
-        'ring-dark': 'hsl(var(--ring-dark))',
-        'background-dark': 'hsl(var(--background-dark))',
-        'foreground-dark': 'hsl(var(--foreground-dark))',
-        'primary-dark': {
-          DEFAULT: 'hsl(var(--primary-dark))',
-          foreground: 'hsl(var(--primary-foreground-dark))',
-        },
-        'secondary-dark': {
-          DEFAULT: 'hsl(var(--secondary-dark))',
-          foreground: 'hsl(var(--secondary-foreground-dark))',
-        },
-        'destructive-dark': {
-          DEFAULT: 'hsl(var(--destructive-dark))',
-          foreground: 'hsl(var(--destructive-foreground-dark))',
-        },
-        'muted-dark': {
-          DEFAULT: 'hsl(var(--muted-dark))',
-          foreground: 'hsl(var(--muted-foreground-dark))',
-        },
-        'accent-dark': {
-          DEFAULT: 'hsl(var(--accent-dark))',
-          foreground: 'hsl(var(--accent-foreground-dark))',
-        },
-        'popover-dark': {
-          DEFAULT: 'hsl(var(--popover-dark))',
-          foreground: 'hsl(var(--popover-foreground-dark))',
-        },
-        'card-dark': {
-          DEFAULT: 'hsl(var(--card-dark))',
-          foreground: 'hsl(var(--card-foreground-dark))',
-        },
       },
       borderWidth: {
         hairline: hairlineWidth(),
