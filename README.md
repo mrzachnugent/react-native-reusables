@@ -6,7 +6,7 @@ Work in progress...
 
 ## Powered by [Expo](https://docs.expo.dev/) and styled with [NativeWind v4](https://www.nativewind.dev/v4/overview)
 
-Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used to build your own **mobile** component libraries. Copy, paste, and tailor the code to suit your specific requirements.
+[UI by shadcn](https://ui.shadcn.com) for React Native with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
 <details>
 <summary>Table of contents</summary>
@@ -55,7 +55,7 @@ Inspired by [ui.shadcn.com](https://ui.shadcn.com) with the purpose to be used t
 
 1. Styled Native-Focused Expo-Go Components - 34 ✅ / 38
    <br>
-   _Quick start for your own components_
+   _Quick start for your own components: use the components found in `~/components/ui/*`_
 
 2. Unstyled Universal A11y Components (rn-primitives)
    <br>
@@ -479,12 +479,3 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e4
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/9b126131-dbac-4f96-8f3f-ae61afa9c607" width="250px" />
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1c60edbb-c64d-4e5d-83a7-8d13c599e6b3" width="250px" />
-
-##### Initial Plan
-
-- Make accessible components for React-Native applications that can be copy/pasted
-- Will require additional libraries (and list libraries per component)
-- Most components to be compatible with Expo Go, while others will require [expo-dev-client](https://docs.expo.dev/develop/development-builds/introduction/)
-- Might offer alternatives for components that cannot be used in Expo Go
-- Focused on mobile development, for web components you can use ui by shadcn. Here's a great example: https://github.com/EvanBacon/expo-shadcn-ui-demo and a combined example: https://github.com/EvanBacon/expo-router-better-web-drawers-example
-- Standardize components API (ex: value/set value, root component props VS sub-components props)
