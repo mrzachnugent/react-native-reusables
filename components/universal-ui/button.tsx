@@ -118,7 +118,7 @@ const Button = React.forwardRef<
       }
     }
     function onPressOut(ev: GestureResponderEvent) {
-      onPressInProp?.(ev);
+      onPressOutProp?.(ev);
       if (Platform.OS !== 'web') {
         setIsPressed(false);
       }
