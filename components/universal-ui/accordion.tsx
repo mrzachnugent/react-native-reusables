@@ -4,10 +4,11 @@ import * as AccordionPrimitive from '~/lib/rn-primitives/accordion';
 import { ChevronDown } from 'lucide-react-native';
 import { Platform, View } from 'react-native';
 import Animated, {
-  Extrapolate,
-  FadeInUp,
+  Extrapolation,
+  FadeIn,
   FadeOutUp,
-  Layout,
+  LayoutAnimationConfig,
+  LinearTransition,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -20,13 +21,17 @@ const Accordion = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
 >(({ children, ...props }, ref) => {
   return (
-    <AccordionPrimitive.Root
-      ref={ref}
-      {...props}
-      asChild={Platform.OS !== 'web'}
-    >
-      <Animated.View layout={Layout.duration(200)}>{children}</Animated.View>
-    </AccordionPrimitive.Root>
+    <LayoutAnimationConfig skipEntering>
+      <AccordionPrimitive.Root
+        ref={ref}
+        {...props}
+        asChild={Platform.OS !== 'web'}
+      >
+        <Animated.View layout={LinearTransition.duration(200)}>
+          {children}
+        </Animated.View>
+      </AccordionPrimitive.Root>
+    </LayoutAnimationConfig>
   );
 });
 
@@ -37,7 +42,10 @@ const AccordionItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, value, ...props }, ref) => {
   return (
-    <Animated.View className={'overflow-hidden'} layout={Layout.duration(200)}>
+    <Animated.View
+      className={'overflow-hidden'}
+      layout={LinearTransition.duration(200)}
+    >
       <AccordionPrimitive.Item
         ref={ref}
         className={cn('border-b border-border', className)}
@@ -62,7 +70,7 @@ const AccordionTrigger = React.forwardRef<
   );
   const chevronStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${progress.value * 180}deg` }],
-    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolate.CLAMP),
+    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
   }));
 
   return (
@@ -93,8 +101,8 @@ const AccordionContent = React.forwardRef<
   return (
     <AccordionPrimitive.Content
       className={cn(
-        'overflow-hidden text-sm transition-all',
-        isExpanded ? 'animate-accordion-down' : 'animate-accordion-up'
+        'overflow-hidden text-sm web:transition-all',
+        isExpanded ? 'web:animate-accordion-down' : 'web:animate-accordion-up'
       )}
       ref={ref}
       {...props}
@@ -116,7 +124,7 @@ function InnerContent({
   }
   return (
     <Animated.View
-      entering={FadeInUp.duration(220)}
+      entering={FadeIn}
       exiting={FadeOutUp.duration(200)}
       className={cn('pb-4', className)}
     >

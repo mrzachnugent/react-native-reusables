@@ -5,7 +5,7 @@ import * as NavigationMenuPrimitive from '~/lib/rn-primitives/navigation-menu';
 
 import { Platform, View } from 'react-native';
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   FadeInLeft,
   FadeOutLeft,
   interpolate,
@@ -68,7 +68,7 @@ const NavigationMenuTrigger = React.forwardRef<
   );
   const chevronStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${progress.value * 180}deg` }],
-    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolate.CLAMP),
+    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
   }));
 
   return (
@@ -89,7 +89,7 @@ const NavigationMenuTrigger = React.forwardRef<
           className={cn(
             'relative text-foreground   h-3 w-3 web:transition web:duration-200'
           )}
-          aria-hidden='true'
+          aria-hidden={true}
         />
       </Animated.View>
     </NavigationMenuPrimitive.Trigger>

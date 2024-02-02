@@ -30,7 +30,7 @@ const SelectTrigger = React.forwardRef<
     <>{children}</>
     <ChevronDown
       size={16}
-      aria-hidden='true'
+      aria-hidden={true}
       className='text-foreground opacity-50'
     />
   </SelectPrimitive.Trigger>

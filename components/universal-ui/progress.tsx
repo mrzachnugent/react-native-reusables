@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -41,7 +41,7 @@ function Indicator({ value }: { value: number | undefined | null }) {
           progress.value,
           [0, 100],
           [1, 100],
-          Extrapolate.CLAMP
+          Extrapolation.CLAMP
         )}%`,
         { overshootClamping: true }
       ),

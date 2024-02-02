@@ -1,7 +1,10 @@
-import { ChevronsUpDown, ChevronsDownUp } from 'lucide-react-native';
+import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react-native';
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
-import Animated, { FadeInDown, Layout } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  LinearTransition,
+} from 'react-native-reanimated';
 import { Button } from '~/components/universal-ui/button';
 import {
   Collapsible,
@@ -14,7 +17,7 @@ export default function CollapsibleUniversalScreen() {
   return (
     <View className='flex-1 justify-center items-center'>
       <Collapsible open={open} onOpenChange={setOpen} asChild>
-        <Animated.View layout={Layout}>
+        <Animated.View layout={LinearTransition}>
           <View className='w-[350px] gap-2'>
             <View className='flex flex-row items-center justify-between space-x-4 px-4'>
               <Text className='text-foreground text-sm native:text-lg font-semibold'>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   SharedValue,
   interpolate,
   useAnimatedStyle,
@@ -27,7 +27,7 @@ const Progress = React.forwardRef<
           progress.value,
           [0, 100],
           [1, 100],
-          Extrapolate.CLAMP
+          Extrapolation.CLAMP
         )}%`,
         { overshootClamping: true }
       ),

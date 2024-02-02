@@ -6,7 +6,7 @@ Work in progress...
 
 ## Powered by [Expo](https://docs.expo.dev/) and styled with [NativeWind v4](https://www.nativewind.dev/v4/overview)
 
-[UI by shadcn](https://ui.shadcn.com) for React Native with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
+[shadcn/ui](https://ui.shadcn.com) for React Native with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
 <details>
 <summary>Table of contents</summary>
@@ -61,9 +61,9 @@ Work in progress...
    <br>
    _Style agnostic and accessible components that **will later be made into it's own library**. It uses [radix-ui/primitives](https://github.com/radix-ui/primitives) for the web and native equivalents for native components_
 
-3. **Create POC universal components**
+3. **Create universal components**
    <br>
-   _Build components while ensuring `rn-primitives` works as intended_
+   _Build components with `rn-primitives` (soon be removed from here and hosted as a package on npm)_
 
 4. Release `rn-primitives` on npm, use it as a dependency and finalize first version of universal components.
 

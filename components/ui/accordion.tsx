@@ -2,11 +2,13 @@ import { ChevronDown } from 'lucide-react-native';
 import React from 'react';
 import { LayoutChangeEvent, Pressable, View } from 'react-native';
 import Animated, {
-  Extrapolate,
+  AnimatedRef,
+  Extrapolation,
   SharedValue,
   interpolate,
   measure,
   runOnUI,
+  useAnimatedRef,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -31,7 +33,7 @@ interface AccordionItemProps {
 }
 
 interface AccordionItemContext extends AccordionItemProps {
-  innerContentRef: React.RefObject<View>;
+  innerContentRef: AnimatedRef<View>;
   contentHeight: SharedValue<number>;
   progress: SharedValue<number>;
   open: SharedValue<boolean>;
@@ -53,7 +55,7 @@ const AccordionItem = React.forwardRef<
     const nativeID = React.useId();
     const open = useSharedValue(defaultOpen);
     const contentHeight = useSharedValue(0);
-    const innerContentRef = React.useRef<View>(null);
+    const innerContentRef = useAnimatedRef<View>();
     const progress = useDerivedValue(() =>
       open.value ? withTiming(1) : withTiming(0)
     );
@@ -115,7 +117,7 @@ const AccordionTrigger = React.forwardRef<
           contentHeight.value === 0 ? '0deg' : `${progress.value * 180}deg`,
       },
     ],
-    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolate.CLAMP),
+    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
   }));
 
   function onPress() {
@@ -123,7 +125,7 @@ const AccordionTrigger = React.forwardRef<
     if (contentHeight.value === 0) {
       runOnUI(() => {
         'worklet';
-        contentHeight.value = measure(innerContentRef).height;
+        contentHeight.value = measure(innerContentRef)?.height ?? 0;
       })();
     }
     open.value = !open.value;
@@ -168,7 +170,7 @@ const AccordionContent = React.forwardRef<
       progress.value,
       [0, 1],
       [0, contentHeight.value],
-      Extrapolate.CLAMP
+      Extrapolation.CLAMP
     ),
   }));
 
