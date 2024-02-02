@@ -77,19 +77,17 @@ const AlertDialogContent = React.forwardRef<
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay>
-        <Animated.View entering={FadeIn} exiting={FadeOut.duration(150)}>
-          <AlertDialogPrimitive.Content
-            ref={ref}
-            className={cn(
-              'z-50 max-w-lg gap-4 border border-border bg-background p-6 shadow-lg duration-200 rounded-lg',
-              open
-                ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
-                : 'web:animate-out web:fade-out-0 web:zoom-out-95',
-              className
-            )}
-            {...props}
-          />
-        </Animated.View>
+        <AlertDialogPrimitive.Content
+          ref={ref}
+          className={cn(
+            'z-50 max-w-lg gap-4 border border-border bg-background p-6 shadow-lg web:duration-200 rounded-lg',
+            open
+              ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
+              : 'web:animate-out web:fade-out-0 web:zoom-out-95',
+            className
+          )}
+          {...props}
+        />
       </AlertDialogOverlay>
     </AlertDialogPortal>
   );

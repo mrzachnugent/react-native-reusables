@@ -68,7 +68,13 @@ const SelectTrigger = React.forwardRef<
 >(({ variant = 'outline', placeholder = 'Select...', ...props }, ref) => {
   const { selected } = useSelectContext();
   return (
-    <PopoverTrigger ref={ref} size='sm' variant='outline' {...props}>
+    <PopoverTrigger
+      ref={ref}
+      size='sm'
+      variant='outline'
+      className='w-full'
+      {...props}
+    >
       {({ pressed }) => (
         <View className='flex-1 flex-row justify-between items-center'>
           <Text
@@ -109,15 +115,18 @@ const SelectList = React.forwardRef<
 >(({ containerProps, extraData, ...props }, ref) => {
   const { selected, items } = useSelectContext();
 
-  const initialScrollIndex = React.useMemo(() => {
-    return selected
-      ? items.findIndex((item) => item.value === selected.value)
-      : undefined;
+  const { initialScrollIndex, contentStyle } = React.useMemo(() => {
+    return {
+      initialScrollIndex: selected
+        ? items.findIndex((item) => item.value === selected.value)
+        : undefined,
+      contentStyle: { height: items.length * SELECT_ITEM_HEIGHT },
+    };
   }, [selected, items]);
 
   return (
     <PopoverContent
-      style={{ height: items.length * SELECT_ITEM_HEIGHT }}
+      style={contentStyle}
       className='p-0 max-h-[30%]'
       {...containerProps}
     >
@@ -162,16 +171,17 @@ const SelectItem = React.forwardRef<
       onValueChange?.(item);
     }
     return (
-      <PopoverClose asChild style={[{ height: SELECT_ITEM_HEIGHT }, style]}>
+      <PopoverClose asChild>
         <Button
           ref={ref}
           variant={'ghost'}
           className={cn(
             index === 0 ? '' : 'border-t border-border',
-            'justify-start gap-3 pl-3',
+            'justify-start gap-3 pl-3 w-full',
             className
           )}
           onPress={handleOnPress}
+          style={[{ height: SELECT_ITEM_HEIGHT }, style]}
           {...props}
         >
           {({ pressed }) => (
