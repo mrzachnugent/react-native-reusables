@@ -12,7 +12,6 @@ import { useColorScheme } from 'nativewind';
 import React, { useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from '~/components/ui/toast';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
@@ -99,25 +98,23 @@ function RootLayoutNav() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'light' ? LIGHT_THEME : DARK_THEME}>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-        <SafeAreaProvider>
-          <BottomSheetModalProvider>
-            <Stack initialRouteName='(main)'>
-              <Stack.Screen
-                name='(main)'
-                options={{
-                  headerShown: false,
-                }}
-              />
+        <BottomSheetModalProvider>
+          <Stack initialRouteName='(main)'>
+            <Stack.Screen
+              name='(main)'
+              options={{
+                headerShown: false,
+              }}
+            />
 
-              <Stack.Screen
-                name='modal'
-                options={{ presentation: 'modal', title: 'Modal' }}
-              />
-            </Stack>
-          </BottomSheetModalProvider>
-          <PortalHost />
-          <ToastProvider />
-        </SafeAreaProvider>
+            <Stack.Screen
+              name='modal'
+              options={{ presentation: 'modal', title: 'Modal' }}
+            />
+          </Stack>
+        </BottomSheetModalProvider>
+        <PortalHost />
+        <ToastProvider />
       </ThemeProvider>
     </GestureHandlerRootView>
   );
