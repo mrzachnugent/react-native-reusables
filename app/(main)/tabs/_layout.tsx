@@ -5,7 +5,7 @@ export default function TabsTabsLayout() {
   return (
     <Tabs screenOptions={screenOptions}>
       <Tabs.Screen
-        name='index'
+        name='material-top-tabs'
         options={{
           title: 'Reusable',
           tabBarIcon({ color, size }) {
