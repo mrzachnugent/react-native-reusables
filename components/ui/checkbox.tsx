@@ -53,7 +53,7 @@ const Checkbox = React.forwardRef<
   return (
     <Pressable
       ref={ref}
-      role="checkbox"
+      role='checkbox'
       accessibilityState={{ checked: value }}
       className={cn(
         'peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50',
