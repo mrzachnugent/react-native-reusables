@@ -1,13 +1,13 @@
-import React from "react";
-import { Check } from "lucide-react-native";
+import React from 'react';
+import { Check } from 'lucide-react-native';
 
-import { cn } from "~/lib/utils";
-import { Pressable, View } from "react-native";
+import { cn } from '~/lib/utils';
+import { Pressable, View } from 'react-native';
 import Animated, {
   Easing,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
 interface CheckboxProps {
   value: boolean;
@@ -40,7 +40,7 @@ const AnimatedCheck = Animated.createAnimatedComponent(
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  Omit<React.ComponentPropsWithoutRef<typeof Pressable>, "onPress"> &
+  Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'> &
     CheckboxProps
 >(({ className, value, onChange, iconClass, iconSize = 16, ...props }, ref) => {
   const opacity = useSharedValue(0);
@@ -56,7 +56,7 @@ const Checkbox = React.forwardRef<
       role="checkbox"
       accessibilityState={{ checked: value }}
       className={cn(
-        "peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50",
+        'peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50',
         className
       )}
       onPress={() => {
@@ -68,7 +68,7 @@ const Checkbox = React.forwardRef<
 
       <AnimatedCheck
         size={iconSize || 16}
-        className={cn("text-foreground", iconClass) || ""}
+        className={cn('text-foreground', iconClass) || ''}
         value={value}
         opacity={opacity}
       />
@@ -76,6 +76,6 @@ const Checkbox = React.forwardRef<
   );
 });
 
-Checkbox.displayName = "Checkbox";
+Checkbox.displayName = 'Checkbox';
 
 export { Checkbox };
