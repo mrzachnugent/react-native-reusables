@@ -1,17 +1,17 @@
-import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import React from "react";
+import { View, ViewStyle } from "react-native";
 import Animated, {
   Extrapolation,
   SharedValue,
   interpolate,
   useAnimatedStyle,
   withSpring,
-} from 'react-native-reanimated';
-import { cn } from '~/lib/utils';
+} from "react-native-reanimated";
+import { cn } from "~/lib/utils";
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof Animated.View>,
-  Omit<React.ComponentPropsWithoutRef<typeof Animated.View>, 'style'> & {
+  Omit<React.ComponentPropsWithoutRef<typeof Animated.View>, "style"> & {
     /**
      * Value between 0 and 100
      */
@@ -37,20 +37,18 @@ const Progress = React.forwardRef<
   return (
     <View
       className={cn(
-        'rounded-xl h-4 bg-border overflow-hidden relative',
+        "rounded-xl h-4 bg-border overflow-hidden relative",
         rootClass
       )}
-      role='progressbar'
+      role="progressbar"
     >
-      <Animated.View
-        style={[stylez, style]}
-        className={cn('h-full bg-foreground', className)}
-        {...props}
-      />
+      <Animated.View {...props} style={[stylez, style]}>
+        <View className={cn("h-4 bg-foreground", className)}></View>
+      </Animated.View>
     </View>
   );
 });
 
-Progress.displayName = 'Progress';
+Progress.displayName = "Progress";
 
 export { Progress };
