@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 /**
  * Temporary fix for warning when accessing useLayoutEffect on the server. See issue
- * https://github.com/mrzachnugent/react-native-reusables/issues/32
+ * https://github.com/calintamas/react-native-toast-message/issues/530
  */
 if (typeof document === 'undefined') {
   React.useLayoutEffect = React.useEffect;
