@@ -5,9 +5,8 @@ import Toast, { ToastConfig } from 'react-native-toast-message';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 /**
- * This suppresses an annoying, but nonbreaking warning
- * when accessing `useLayoutEffect`on the server.
- * See issue: https://github.com/mrzachnugent/react-native-reusables/issues/32
+ * Temporary fix for warning when accessing useLayoutEffect on the server. See issue
+ * https://github.com/mrzachnugent/react-native-reusables/issues/32
  */
 if (typeof document === 'undefined') {
   React.useLayoutEffect = React.useEffect;
