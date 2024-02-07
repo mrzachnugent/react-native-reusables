@@ -1,9 +1,8 @@
-import React from 'react';
 import { Check } from 'lucide-react-native';
-
+import * as React from 'react';
+import { Pressable } from 'react-native';
+import Animated, { withTiming, useSharedValue } from 'react-native-reanimated';
 import { cn } from '~/lib/utils';
-import { Pressable, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 interface CheckboxProps {
   value: boolean;
@@ -12,20 +11,24 @@ interface CheckboxProps {
   iconSize?: number;
 }
 
-const AnimatedCheck = Animated.createAnimatedComponent(Check);
-
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'> &
     CheckboxProps
 >(({ className, value, onChange, iconClass, iconSize = 16, ...props }, ref) => {
+  const opacity = useSharedValue(0);
+
+  opacity.value = withTiming(value === true ? 1.0 : 0.0, {
+    duration: 200,
+  });
+
   return (
     <Pressable
       ref={ref}
       role='checkbox'
       accessibilityState={{ checked: value }}
       className={cn(
-        'peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50',
+        'peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary web:ring-offset-background web:disabled:cursor-not-allowed web:disabled:opacity-50',
         className
       )}
       onPress={() => {
@@ -33,15 +36,9 @@ const Checkbox = React.forwardRef<
       }}
       {...props}
     >
-      <View />
-      {value && (
-        <AnimatedCheck
-          entering={FadeIn.duration(200)}
-          exiting={FadeOut.duration(200)}
-          size={iconSize}
-          className={cn('text-foreground', iconClass)}
-        />
-      )}
+      <Animated.View style={{ opacity }}>
+        <Check size={iconSize} className={cn('text-foreground', iconClass)} />
+      </Animated.View>
     </Pressable>
   );
 });
