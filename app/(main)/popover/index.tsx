@@ -16,7 +16,7 @@ const { height } = Dimensions.get('window');
 export default function PopoverScreen() {
   return (
     <ScrollView>
-      <View className='p-6 w-full'>
+      <View className='w-full p-6'>
         <Alert icon='Code' className='max-w-xl'>
           <AlertTitle>FYI</AlertTitle>
           <AlertDescription>
@@ -24,7 +24,7 @@ export default function PopoverScreen() {
           </AlertDescription>
         </Alert>
       </View>
-      <View style={{ height: height / 3 }} className='pt-4 p-6'>
+      <View style={{ height: height / 3 }} className='p-6 pt-4'>
         <Popover>
           <PopoverTrigger className='w-full'>
             {({ pressed }) => (
@@ -38,7 +38,7 @@ export default function PopoverScreen() {
               </Text>
             )}
           </PopoverTrigger>
-          <PopoverContent className='gap-6 ' position='bottom'>
+          <PopoverContent className='gap-6' position='bottom'>
             <View>
               <Text className='text-2xl font-bold text-foreground'>
                 Dimensions
@@ -47,18 +47,18 @@ export default function PopoverScreen() {
                 Set the dimensions for the layer.
               </Text>
             </View>
-            <View className='flex-row gap-5 items-center'>
-              <Label className='pt-3 font-semibold w-20'>Width:</Label>
-              <Input className='flex-1' defaultValue='100%' />
+            <View className='flex-row items-center gap-5'>
+              <Label className='w-20 pt-3 font-semibold'>Width:</Label>
+              <Input className='flex-1 min-w-0' defaultValue='100%' />
             </View>
-            <View className='flex-row gap-5 items-center'>
-              <Label className='pt-3 font-semibold w-20'>Height:</Label>
-              <Input className='flex-1' defaultValue='25px' />
+            <View className='flex-row items-center gap-5'>
+              <Label className='w-20 pt-3 font-semibold'>Height:</Label>
+              <Input className='flex-1 min-w-0' defaultValue='25px' />
             </View>
           </PopoverContent>
         </Popover>
       </View>
-      <View style={{ height: height }} className='p-6 gap-24'>
+      <View style={{ height: height }} className='gap-24 p-6'>
         <Popover>
           <PopoverTrigger className='w-full' variant={'secondary'}>
             {({ pressed }) => (
@@ -81,13 +81,13 @@ export default function PopoverScreen() {
                 Set the dimensions for the layer.
               </Text>
             </View>
-            <View className='flex-row gap-5 items-center'>
-              <Label className='pt-3 font-semibold w-20'>Width:</Label>
-              <Input className='flex-1' defaultValue='100%' />
+            <View className='flex-row items-center gap-5'>
+              <Label className='w-20 pt-3 font-semibold'>Width:</Label>
+              <Input className='flex-1 min-w-0' defaultValue='100%' />
             </View>
-            <View className='flex-row gap-5 items-center'>
-              <Label className='pt-3 font-semibold w-20'>Height:</Label>
-              <Input className='flex-1' defaultValue='25px' />
+            <View className='flex-row items-center gap-5'>
+              <Label className='w-20 pt-3 font-semibold'>Height:</Label>
+              <Input className='flex-1 min-w-0' defaultValue='25px' />
             </View>
           </PopoverContent>
         </Popover>
@@ -113,13 +113,13 @@ export default function PopoverScreen() {
                 Set the dimensions for the layer.
               </Text>
             </View>
-            <View className='flex-row gap-5 items-center'>
-              <Label className='pt-3 font-semibold w-20'>Width:</Label>
-              <Input className='flex-1' defaultValue='100%' />
+            <View className='flex-row items-center gap-5'>
+              <Label className='w-20 pt-3 font-semibold'>Width:</Label>
+              <Input className='flex-1 min-w-0' defaultValue='100%' />
             </View>
-            <View className='flex-row gap-5 items-center'>
-              <Label className='pt-3 font-semibold w-20'>Height:</Label>
-              <Input className='flex-1' defaultValue='25px' />
+            <View className='flex-row items-center gap-5'>
+              <Label className='w-20 pt-3 font-semibold'>Height:</Label>
+              <Input className='flex-1 min-w-0' defaultValue='25px' />
             </View>
           </PopoverContent>
         </Popover>
