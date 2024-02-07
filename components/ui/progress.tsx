@@ -42,11 +42,9 @@ const Progress = React.forwardRef<
       )}
       role='progressbar'
     >
-      <Animated.View
-        style={[stylez, style]}
-        className={cn('h-full bg-foreground', className)}
-        {...props}
-      />
+      <Animated.View {...props} style={[stylez, style]}>
+        <View className={cn('h-4 bg-foreground', className)}></View>
+      </Animated.View>
     </View>
   );
 });
