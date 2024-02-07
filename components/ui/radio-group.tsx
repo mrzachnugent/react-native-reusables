@@ -97,7 +97,7 @@ const RadioGroupItem = React.forwardRef<
           disabled={disabled}
           onPress={handleOnPress}
           className={cn(
-            'h-6 w-6 border-primary [borderWidth:1.5] rounded-full items-center justify-center',
+            'h-6 w-6 border-primary native:[borderWidth:1.5] web:border rounded-full items-center justify-center',
             buttonClass
           )}
           aria-labelledby={name}
