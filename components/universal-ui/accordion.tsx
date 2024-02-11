@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as AccordionPrimitive from '~/lib/rn-primitives/accordion';
 
 import { ChevronDown } from 'lucide-react-native';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import Animated, {
   Extrapolation,
   FadeIn,
@@ -57,9 +57,11 @@ const AccordionItem = React.forwardRef<
 });
 AccordionItem.displayName = AccordionPrimitive.Item.displayName;
 
+const Trigger = Platform.OS === 'web' ? View : Pressable;
+
 const AccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+  React.ElementRef<typeof Pressable>,
+  React.ComponentPropsWithoutRef<typeof Pressable>
 >(({ className, children, ...props }, ref) => {
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
@@ -76,9 +78,9 @@ const AccordionTrigger = React.forwardRef<
   return (
     <AccordionPrimitive.Header className='flex'>
       <AccordionPrimitive.Trigger ref={ref} {...props} asChild>
-        <View
+        <Trigger
           className={cn(
-            'flex flex-row web:flex-1 rounded-md items-center justify-between py-4 transition-all group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-muted-foreground',
+            'flex flex-row web:flex-1 rounded-md items-center justify-between py-4 web:transition-all web:group web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground',
             className
           )}
         >
@@ -86,7 +88,7 @@ const AccordionTrigger = React.forwardRef<
           <Animated.View style={chevronStyle}>
             <ChevronDown size={18} className={'text-foreground shrink-0'} />
           </Animated.View>
-        </View>
+        </Trigger>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

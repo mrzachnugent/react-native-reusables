@@ -22,7 +22,7 @@ const Textarea = React.forwardRef<
       <TextInput
         ref={ref}
         className={cn(
-          'rounded-md border border-input bg-background p-3 native:text-lg h-28 leading-[1.25] text-foreground items-center  ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          'rounded-md border border-input bg-background p-3 native:text-lg h-28 leading-[1.25] text-foreground items-center  web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
           className
         )}
         placeholderClassName={cn('text-muted-foreground', placeholderClassName)}

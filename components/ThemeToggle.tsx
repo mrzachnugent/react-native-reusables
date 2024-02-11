@@ -15,7 +15,7 @@ export function ThemeToggle() {
         setAndroidNavigationBar(newTheme);
         AsyncStorage.setItem('theme', newTheme);
       }}
-      className='ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+      className='web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 web:disabled:pointer-events-none disabled:opacity-50'
     >
       {({ pressed }) => (
         <View

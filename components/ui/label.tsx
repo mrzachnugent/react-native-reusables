@@ -14,7 +14,7 @@ const Label = React.forwardRef<
 >(({ className, onPress, rootProps, ...props }, ref) => (
   <Pressable
     onPress={onPress}
-    className='rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+    className='rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 web:disabled:pointer-events-none disabled:opacity-50'
     {...rootProps}
   >
     <Text

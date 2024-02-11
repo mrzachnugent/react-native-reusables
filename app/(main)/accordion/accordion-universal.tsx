@@ -21,7 +21,7 @@ export default function AccordionPrimitiveScreen() {
       >
         <AccordionItem value='item-1'>
           <AccordionTrigger>
-            <Text className='text-foreground text-base native:text-lg font-medium group-hover:underline'>
+            <Text className='text-foreground text-base native:text-lg font-medium web:group-hover:underline'>
               Is it accessible?
             </Text>
           </AccordionTrigger>
@@ -33,7 +33,7 @@ export default function AccordionPrimitiveScreen() {
         </AccordionItem>
         <AccordionItem value='item-2'>
           <AccordionTrigger>
-            <Text className='text-secondary-foreground font-medium text-base native:text-lg group-hover:underline'>
+            <Text className='text-secondary-foreground font-medium text-base native:text-lg web:group-hover:underline'>
               What are universal components?
             </Text>
           </AccordionTrigger>
@@ -46,7 +46,7 @@ export default function AccordionPrimitiveScreen() {
         </AccordionItem>
         <AccordionItem value='item-3'>
           <AccordionTrigger>
-            <Text className='text-foreground text-base native:text-lg font-medium group-hover:underline'>
+            <Text className='text-foreground text-base native:text-lg font-medium web:group-hover:underline'>
               Is this component universal?
             </Text>
           </AccordionTrigger>

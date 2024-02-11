@@ -25,7 +25,9 @@ const AlertDialogOverlayWeb = React.forwardRef<
       style={StyleSheet.absoluteFill}
       className={cn(
         'z-50 bg-black/80 flex justify-center items-center p-2',
-        open ? 'animate-in fade-in-0' : 'animate-out fade-out-0',
+        open
+          ? 'web:animate-in web:fade-in-0'
+          : 'web:animate-out web:fade-out-0',
         className
       )}
       {...props}

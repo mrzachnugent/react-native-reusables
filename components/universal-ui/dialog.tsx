@@ -23,7 +23,9 @@ const DialogOverlayWeb = React.forwardRef<
       style={StyleSheet.absoluteFill}
       className={cn(
         'z-50 bg-black/80 flex justify-center items-center p-2',
-        open ? 'animate-in fade-in-0' : 'animate-out fade-out-0',
+        open
+          ? 'web:animate-in web:fade-in-0'
+          : 'web:animate-out web:fade-out-0',
         className
       )}
       {...props}
@@ -88,7 +90,7 @@ const DialogContent = React.forwardRef<
           {children}
           <DialogPrimitive.Close
             className={
-              'absolute right-4 top-4 p-0.5 group rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none'
+              'absolute right-4 top-4 p-0.5 web:group rounded-sm opacity-70 web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none'
             }
           >
             <X

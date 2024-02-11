@@ -66,7 +66,7 @@ export default function SelectPrimitiveScreen() {
                 <Select.Item
                   value='volvo'
                   label='Volvo'
-                  className='flex-row justify-between items-center hover:bg-blue-500 w-full rounded-2xl'
+                  className='flex-row justify-between items-center web:hover:bg-blue-500 w-full rounded-2xl'
                 >
                   <Select.ItemText className='text-xl text-foreground p-2' />
                   <Select.ItemIndicator className='w-4 h-4 bg-red-500' />

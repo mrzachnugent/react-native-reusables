@@ -115,10 +115,10 @@ const Button = React.forwardRef<
           {...props}
         >
           {isTextChildren(children)
-            ? ({ pressed, hovered }) => (
+            ? ({ pressed }) => (
                 <Text
                   className={cn(
-                    hovered && 'opacity-90',
+                    'web:hover:opacity-90',
                     pressed && 'opacity-70',
                     buttonTextVariants({ variant, size, className: textClass }),
                     disabled && 'opacity-100'

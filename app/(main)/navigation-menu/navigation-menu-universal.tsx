@@ -66,11 +66,11 @@ export default function MenubarPrimitiveScreen() {
             <NavigationMenuContent insets={contentInsets}>
               <View
                 role='list'
-                className='grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]'
+                className='web:grid gap-3 p-6 md:w-[400px] lg:w-[500px] web:lg:grid-cols-[.75fr_1fr]'
               >
                 <View role='listitem' className='web:row-span-3'>
                   <NavigationMenuLink asChild>
-                    <View className='flex select-none flex-col justify-end rounded-md web:bg-gradient-to-b web:from-muted/50 web:to-muted native:border native:border-border p-6 web:no-underline web:outline-none focus:shadow-md'>
+                    <View className='flex web:select-none flex-col justify-end rounded-md web:bg-gradient-to-b web:from-muted/50 web:to-muted native:border native:border-border p-6 web:no-underline web:outline-none web:focus:shadow-md'>
                       <Sparkles size={16} className='text-foreground' />
                       <Text className='mb-2 mt-4 text-lg native:text-2xl font-medium'>
                         react-native-reusables
@@ -181,7 +181,7 @@ const ListItem = React.forwardRef<
       <NavigationMenuLink
         ref={ref}
         className={cn(
-          'block select-none gap-1 rounded-md p-3 leading-none no-underline text-foreground outline-none web:transition-colors hover:bg-accent active:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+          'web:block web:select-none gap-1 rounded-md p-3 leading-none no-underline text-foreground web:outline-none web:transition-colors web:hover:bg-accent active:bg-accent web:hover:text-accent-foreground web:focus:bg-accent web:focus:text-accent-foreground',
           className
         )}
         {...props}

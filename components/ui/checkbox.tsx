@@ -28,7 +28,7 @@ const Checkbox = React.forwardRef<
       role='checkbox'
       accessibilityState={{ checked: value }}
       className={cn(
-        'peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary web:ring-offset-background web:disabled:cursor-not-allowed web:disabled:opacity-50',
+        'web:peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary web:ring-offset-background web:disabled:cursor-not-allowed web:disabled:opacity-50',
         className
       )}
       onPress={() => {

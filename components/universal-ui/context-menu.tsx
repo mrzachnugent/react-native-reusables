@@ -48,7 +48,7 @@ const ContextMenuSubTrigger = React.forwardRef<
       <ContextMenuPrimitive.SubTrigger
         ref={ref}
         className={cn(
-          'flex flex-row web:cursor-default select-none items-center gap-2 focus:bg-accent active:bg-accent hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
+          'flex flex-row web:cursor-default web:select-none items-center gap-2 web:focus:bg-accent active:bg-accent web:hover:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none',
           open && 'bg-accent',
           inset && 'pl-8',
           className
@@ -130,11 +130,11 @@ const ContextMenuItem = React.forwardRef<
     inset?: boolean;
   }
 >(({ className, inset, ...props }, ref) => (
-  <TextClassContext.Provider value='select-none text-sm native:text-lg text-popover-foreground group-focus:text-accent-foreground'>
+  <TextClassContext.Provider value='select-none text-sm native:text-lg text-popover-foreground web:group-focus:text-accent-foreground'>
     <ContextMenuPrimitive.Item
       ref={ref}
       className={cn(
-        'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none focus:bg-accent active:bg-accent hover:bg-accent group',
+        'relative flex flex-row web:cursor-default items-center gap-2 rounded-sm px-2 py-1.5 native:py-2 web:outline-none web:focus:bg-accent active:bg-accent web:hover:bg-accent group',
         inset && 'pl-8',
         props.disabled && 'opacity-50 web:pointer-events-none',
         className
@@ -152,7 +152,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   <ContextMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      'relative flex flex-row web:cursor-default items-center group rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none focus:bg-accent active:bg-accent',
+      'relative flex flex-row web:cursor-default items-center web:group rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none web:focus:bg-accent active:bg-accent',
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}
@@ -177,7 +177,7 @@ const ContextMenuRadioItem = React.forwardRef<
   <ContextMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      'relative flex flex-row web:cursor-default group items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none focus:bg-accent active:bg-accent',
+      'relative flex flex-row web:cursor-default web:group items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none web:focus:bg-accent active:bg-accent',
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}

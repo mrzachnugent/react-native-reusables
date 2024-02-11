@@ -4,7 +4,7 @@ import * as LabelPrimitive from '~/lib/rn-primitives/label';
 import { cn } from '~/lib/utils';
 
 const labelVariants = cva(
-  'text-sm text-foreground native:text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+  'text-sm text-foreground native:text-base font-medium leading-none web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70'
 );
 
 const Label = React.forwardRef<

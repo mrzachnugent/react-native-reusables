@@ -35,13 +35,13 @@ export default function ContextPrimitiveScreen() {
       <View className='flex-1 justify-center items-center p-6 gap-12'>
         <ContextMenu.Root open={open} onOpenChange={setOpen} className='w-full'>
           <ContextMenu.Trigger className='p-5 border border-dashed rounded-xl border-sky-500 bg-sky-100/20 web:cursor-default'>
-            <Text className='text-foreground select-none text-xl text-center'>
+            <Text className='text-foreground web:select-none text-xl text-center'>
               Root Portal ContextMenu
             </Text>
-            <Text className='text-foreground select-none font-bold text-center'>
+            <Text className='text-foreground web:select-none font-bold text-center'>
               LONG PRESS / RIGHT CLICK WITHIN DASHED BORDER
             </Text>
-            <Text className='text-foreground select-none text-sm text-center'>
+            <Text className='text-foreground web:select-none text-sm text-center'>
               Relative to long press location (native only)
             </Text>
           </ContextMenu.Trigger>
@@ -57,16 +57,16 @@ export default function ContextPrimitiveScreen() {
                 className='bg-background'
               >
                 <ContextMenu.Group>
-                  <ContextMenu.Label className='text-foreground select-none font-bold'>
+                  <ContextMenu.Label className='text-foreground web:select-none font-bold'>
                     Label
                   </ContextMenu.Label>
                   <ContextMenu.Item onPress={onClose}>
-                    <Text className='text-foreground select-none text-xl'>
+                    <Text className='text-foreground web:select-none text-xl'>
                       Item 1
                     </Text>
                   </ContextMenu.Item>
                   <ContextMenu.Item onPress={onClose}>
-                    <Text className='text-foreground select-none text-xl'>
+                    <Text className='text-foreground web:select-none text-xl'>
                       Item 2
                     </Text>
                   </ContextMenu.Item>
@@ -78,20 +78,20 @@ export default function ContextPrimitiveScreen() {
                   closeOnPress={false}
                   className='flex-row justify-between items-center gap-3'
                 >
-                  <Text className='text-foreground select-none text-xl'>
+                  <Text className='text-foreground web:select-none text-xl'>
                     Is checked?
                   </Text>
                   <ContextMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
                 </ContextMenu.CheckboxItem>
                 <ContextMenu.Sub open={openSub} onOpenChange={setOpenSub}>
                   <ContextMenu.SubTrigger>
-                    <Text className='text-foreground select-none text-xl'>
+                    <Text className='text-foreground web:select-none text-xl'>
                       SUB TRIGGER
                     </Text>
                   </ContextMenu.SubTrigger>
                   <ContextMenu.SubContent className='bg-blue-500'>
                     <ContextMenu.Item onPress={onClose}>
-                      <Text className='text-foreground select-none text-xl'>
+                      <Text className='text-foreground web:select-none text-xl'>
                         SubItem 1
                       </Text>
                     </ContextMenu.Item>
@@ -101,7 +101,7 @@ export default function ContextPrimitiveScreen() {
                       closeOnPress={false}
                       className='flex-row justify-between items-center gap-3'
                     >
-                      <Text className='text-foreground select-none text-xl'>
+                      <Text className='text-foreground web:select-none text-xl'>
                         Sub is checked?
                       </Text>
                       <ContextMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
@@ -109,13 +109,13 @@ export default function ContextPrimitiveScreen() {
 
                     <ContextMenu.Sub open={openSub2} onOpenChange={setOpenSub2}>
                       <ContextMenu.SubTrigger>
-                        <Text className='text-foreground select-none text-xl'>
+                        <Text className='text-foreground web:select-none text-xl'>
                           SUB TRIGGER 2
                         </Text>
                       </ContextMenu.SubTrigger>
                       <ContextMenu.SubContent className='bg-secondary'>
                         <ContextMenu.Item onPress={onClose}>
-                          <Text className='text-foreground select-none text-xl'>
+                          <Text className='text-foreground web:select-none text-xl'>
                             SubItem 2
                           </Text>
                         </ContextMenu.Item>
@@ -128,7 +128,7 @@ export default function ContextPrimitiveScreen() {
                             value='1'
                             closeOnPress={false}
                           >
-                            <Text className='text-foreground select-none text-xl'>
+                            <Text className='text-foreground web:select-none text-xl'>
                               Sub 2 Radio 1
                             </Text>
                             <ContextMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
@@ -138,7 +138,7 @@ export default function ContextPrimitiveScreen() {
                             value='2'
                             closeOnPress={false}
                           >
-                            <Text className='text-foreground select-none text-xl'>
+                            <Text className='text-foreground web:select-none text-xl'>
                               Sub 2Radio 2
                             </Text>
                             <ContextMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
@@ -157,7 +157,7 @@ export default function ContextPrimitiveScreen() {
                     value='1'
                     closeOnPress={false}
                   >
-                    <Text className='text-foreground select-none text-xl'>
+                    <Text className='text-foreground web:select-none text-xl'>
                       Radio 1
                     </Text>
                     <ContextMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
@@ -167,7 +167,7 @@ export default function ContextPrimitiveScreen() {
                     value='2'
                     closeOnPress={false}
                   >
-                    <Text className='text-foreground select-none text-xl'>
+                    <Text className='text-foreground web:select-none text-xl'>
                       Radio 2
                     </Text>
                     <ContextMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
@@ -184,13 +184,13 @@ export default function ContextPrimitiveScreen() {
           className='w-full'
         >
           <ContextMenu.Trigger className='p-5 border border-dashed rounded-xl border-sky-500 bg-sky-100/20 web:cursor-default'>
-            <Text className='text-foreground select-none text-xl text-center'>
+            <Text className='text-foreground web:select-none text-xl text-center'>
               Inner Portal ContextMenu
             </Text>
-            <Text className='text-foreground select-none font-bold text-center'>
+            <Text className='text-foreground web:select-none font-bold text-center'>
               LONG PRESS / RIGHT CLICK WITHIN DASHED BORDER
             </Text>
-            <Text className='text-foreground select-none text-sm text-center'>
+            <Text className='text-foreground web:select-none text-sm text-center'>
               Relative to trigger positioning (native only)
             </Text>
           </ContextMenu.Trigger>
@@ -205,23 +205,23 @@ export default function ContextPrimitiveScreen() {
                 insets={contentInsets}
                 className='bg-background'
               >
-                <ContextMenu.Label className='text-foreground select-none font-bold'>
+                <ContextMenu.Label className='text-foreground web:select-none font-bold'>
                   Label
                 </ContextMenu.Label>
                 <ContextMenu.Item onPress={onClose}>
-                  <Text className='text-foreground select-none text-xl'>
+                  <Text className='text-foreground web:select-none text-xl'>
                     Item 1
                   </Text>
                 </ContextMenu.Item>
                 <ContextMenu.Sub open={openSub3} onOpenChange={setOpenSub3}>
                   <ContextMenu.SubTrigger>
-                    <Text className='text-foreground select-none text-xl'>
+                    <Text className='text-foreground web:select-none text-xl'>
                       SUB TRIGGER
                     </Text>
                   </ContextMenu.SubTrigger>
                   <ContextMenu.SubContent className='bg-secondary'>
                     <ContextMenu.Item onPress={onClose}>
-                      <Text className='text-foreground select-none text-xl'>
+                      <Text className='text-foreground web:select-none text-xl'>
                         SubItem 1
                       </Text>
                     </ContextMenu.Item>
@@ -231,7 +231,7 @@ export default function ContextPrimitiveScreen() {
                       closeOnPress={false}
                       className='flex-row justify-between items-center gap-3'
                     >
-                      <Text className='text-foreground select-none text-xl'>
+                      <Text className='text-foreground web:select-none text-xl'>
                         Is checked?
                       </Text>
                       <ContextMenu.ItemIndicator className='w-2 h-4 bg-red-500' />
@@ -246,7 +246,7 @@ export default function ContextPrimitiveScreen() {
                         value='1'
                         closeOnPress={false}
                       >
-                        <Text className='text-foreground select-none text-xl'>
+                        <Text className='text-foreground web:select-none text-xl'>
                           Radio 1
                         </Text>
                         <ContextMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />
@@ -256,7 +256,7 @@ export default function ContextPrimitiveScreen() {
                         value='2'
                         closeOnPress={false}
                       >
-                        <Text className='text-foreground select-none text-xl'>
+                        <Text className='text-foreground web:select-none text-xl'>
                           Radio 2
                         </Text>
                         <ContextMenu.ItemIndicator className='w-2 h-4 bg-blue-500' />

@@ -21,7 +21,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex flex-row h-10 native:h-12 items-center text-sm justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 [&>span]:line-clamp-1',
+      'flex flex-row h-10 native:h-12 items-center text-sm justify-between rounded-md border border-input bg-background px-3 py-2 web:ring-offset-background text-muted-foreground web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 [&>span]:line-clamp-1',
       props.disabled && 'web:cursor-not-allowed opacity-50',
       className
     )}
@@ -50,7 +50,7 @@ const SelectScrollUpButton = ({
   return (
     <SelectPrimitive.ScrollUpButton
       className={cn(
-        'flex cursor-default items-center justify-center py-1',
+        'flex web:cursor-default items-center justify-center py-1',
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ const SelectScrollDownButton = ({
   return (
     <SelectPrimitive.ScrollDownButton
       className={cn(
-        'flex cursor-default items-center justify-center py-1',
+        'flex web:cursor-default items-center justify-center py-1',
         className
       )}
       {...props}
@@ -150,7 +150,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative group flex flex-row w-full cursor-default select-none items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 outline-none focus:bg-accent',
+      'relative web:group flex flex-row w-full web:cursor-default web:select-none items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none web:focus:bg-accent',
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}
@@ -162,7 +162,7 @@ const SelectItem = React.forwardRef<
       </SelectPrimitive.ItemIndicator>
     </View>
 
-    <SelectPrimitive.ItemText className='text-sm native:text-lg text-popover-foreground native:text-base group-focus:text-accent-foreground' />
+    <SelectPrimitive.ItemText className='text-sm native:text-lg text-popover-foreground native:text-base web:group-focus:text-accent-foreground' />
   </SelectPrimitive.Item>
 ));
 SelectItem.displayName = SelectPrimitive.Item.displayName;
