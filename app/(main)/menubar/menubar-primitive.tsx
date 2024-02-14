@@ -2,7 +2,6 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useNavigation } from 'expo-router';
-import { StyleSheet } from 'nativewind';
 import React from 'react';
 import {
   Platform,
@@ -11,6 +10,7 @@ import {
   Text,
   View,
   useWindowDimensions,
+  StyleSheet,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Menubar from '~/lib/rn-primitives/menubar';

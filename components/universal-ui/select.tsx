@@ -1,7 +1,6 @@
 import { Check, ChevronDown, ChevronUp } from '~/components/Icons';
-import { StyleSheet } from 'nativewind';
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import * as SelectPrimitive from '~/lib/rn-primitives/select';
 import { cn } from '~/lib/utils';
