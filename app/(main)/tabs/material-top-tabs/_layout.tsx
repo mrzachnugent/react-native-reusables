@@ -36,6 +36,8 @@ export default function MaterialTopTabsLayout() {
         tabBarIndicatorStyle: {
           backgroundColor: NAV_THEME[colorScheme ?? 'light'].text,
         },
+        tabBarScrollEnabled: true,
+        tabBarItemStyle: { width: 'auto', minWidth: 100 },
       }}
     >
       <MaterialTopTabs.Screen
