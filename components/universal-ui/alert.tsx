@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils';
 import { Text, View } from 'react-native';
 import * as LucideIcon from 'lucide-react-native';
 import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 
 const alertVariants = cva(
   'relative w-full rounded-lg border border-border p-4',

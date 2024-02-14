@@ -1,5 +1,5 @@
 import RNCSlider from '@react-native-community/slider';
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import React from 'react';
 import { NAV_THEME } from '~/lib/constants';
 /**

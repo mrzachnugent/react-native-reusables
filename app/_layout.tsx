@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import React, { useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -93,9 +93,8 @@ export default function RootLayout() {
 // TODO(web): Fix BottomSheetModalProvider hydration issue
 function RootLayoutNav() {
   const { colorScheme } = useColorScheme();
-
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }} className={colorScheme}>
       <ThemeProvider value={colorScheme === 'light' ? LIGHT_THEME : DARK_THEME}>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <BottomSheetModalProvider>

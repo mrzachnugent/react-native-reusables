@@ -1,5 +1,4 @@
 import { VariantProps } from 'class-variance-authority';
-import { useColorScheme } from 'nativewind';
 import React, { useImperativeHandle } from 'react';
 import {
   Dimensions,
@@ -7,7 +6,6 @@ import {
   LayoutRectangle,
   Modal,
   Pressable,
-  StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';

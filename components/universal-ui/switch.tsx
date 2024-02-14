@@ -1,4 +1,4 @@
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, {

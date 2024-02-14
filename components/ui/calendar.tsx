@@ -1,4 +1,4 @@
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import React from 'react';
 import { Calendar as RNCalendar, LocaleConfig } from 'react-native-calendars';
 import { NAV_THEME } from '~/lib/constants';

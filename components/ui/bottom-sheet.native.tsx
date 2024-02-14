@@ -13,7 +13,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { X } from '~/components/Icons';
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import React, { useCallback, useImperativeHandle } from 'react';
 import {
   GestureResponderEvent,

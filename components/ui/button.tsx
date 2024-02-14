@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import { Platform, Pressable, Text, View } from 'react-native';
 import { cn, isTextChildren } from '~/lib/utils';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';

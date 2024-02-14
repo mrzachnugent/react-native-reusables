@@ -1,5 +1,5 @@
 import { Skeleton as MotiSkeleton } from 'moti/skeleton';
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import React from 'react';
 import { NAV_THEME } from '~/lib/constants';
 const COLORS_LIGHT_THEME = [

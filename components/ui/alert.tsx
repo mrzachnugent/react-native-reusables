@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
 import * as LucideIcon from 'lucide-react-native';
-import { useColorScheme } from 'nativewind';
+import { useColorScheme } from '~/lib/useColorScheme';
 import { Text, View, ViewStyle } from 'react-native';
 import { NAV_THEME } from '~/lib/constants';
 import { cn } from '~/lib/utils';
