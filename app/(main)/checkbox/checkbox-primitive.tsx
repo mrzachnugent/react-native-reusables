@@ -1,8 +1,8 @@
-import { Check } from 'lucide-react-native';
 import React from 'react';
 import { View } from 'react-native';
 import * as Checkbox from '~/lib/rn-primitives/checkbox';
 import * as Label from '~/lib/rn-primitives/label';
+import { Check } from '~/components/Icons';
 
 export default function CheckboxPrimitiveScreen() {
   const [checked, setChecked] = React.useState(false);

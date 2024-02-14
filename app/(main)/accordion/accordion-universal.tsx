@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import {
   Accordion,
   AccordionContent,
@@ -11,7 +11,7 @@ export default function AccordionPrimitiveScreen() {
   const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
 
   return (
-    <ScrollView contentContainerClassName='flex-1 justify-center items-center p-6'>
+    <View className='flex-1 justify-center items-center p-6'>
       <Accordion
         type='multiple'
         collapsible
@@ -57,6 +57,6 @@ export default function AccordionPrimitiveScreen() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </ScrollView>
+    </View>
   );
 }

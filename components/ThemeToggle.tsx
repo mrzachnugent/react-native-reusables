@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { MoonStar, Sun } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { Pressable, View } from 'react-native';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { cn } from '~/lib/utils';
+import { MoonStar, Sun } from './Icons';
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme();

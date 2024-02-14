@@ -1,6 +1,5 @@
-import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Button, buttonVariants } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
@@ -35,7 +34,6 @@ const Toggle = React.forwardRef<
     },
     ref
   ) => {
-    const { colorScheme } = useColorScheme();
     const [isChecked, setChecked] = React.useState(false);
     return (
       <Pressable
@@ -68,11 +66,6 @@ const Toggle = React.forwardRef<
                 className,
               })
             )}
-            style={
-              (value || isChecked) &&
-              colorScheme === 'dark' &&
-              styles.shadowDark
-            }
           >
             {children}
           </View>
@@ -83,16 +76,3 @@ const Toggle = React.forwardRef<
 );
 
 export { Toggle };
-
-const styles = StyleSheet.create({
-  shadowDark: {
-    shadowColor: '#FFFFFF',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-});

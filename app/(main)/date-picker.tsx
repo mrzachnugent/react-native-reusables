@@ -1,6 +1,6 @@
-import { CalendarIcon } from 'lucide-react-native';
 import React from 'react';
 import { Text, View } from 'react-native';
+import { Calendar as CalendarIcon } from '~/components/Icons';
 import {
   BottomSheet,
   BottomSheetCloseTrigger,

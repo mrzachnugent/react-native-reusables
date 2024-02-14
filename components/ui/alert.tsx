@@ -1,13 +1,14 @@
-import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
 
-import { cn } from '~/lib/utils';
-import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 import * as LucideIcon from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
+import { Text, View, ViewStyle } from 'react-native';
+import { NAV_THEME } from '~/lib/constants';
+import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
-  'bg-background relative w-full rounded-lg border p-5',
+  'bg-background relative w-full rounded-lg border p-5 shadow shadow-primary/10',
   {
     variants: {
       variant: {
@@ -31,20 +32,8 @@ const Alert = React.forwardRef<
     }
 >(({ children, icon, className, variant, style: styleProp, ...props }, ref) => {
   const { colorScheme } = useColorScheme();
-  const [style, setStyle] = React.useState<ViewStyle>(
-    StyleSheet.flatten(styleProp)
-  );
 
-  React.useEffect(() => {
-    setStyle(
-      StyleSheet.flatten([
-        colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
-        styleProp,
-      ])
-    );
-  }, [styleProp, colorScheme]);
-
-  const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.Icon;
+  const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.LucideIcon;
   return (
     <View
       ref={ref}
@@ -54,21 +43,21 @@ const Alert = React.forwardRef<
         icon && 'ios:pl-[50] android:pl-[50] pl-[50px]',
         className
       )}
-      style={style}
       {...props}
     >
       {icon && (
-        <Icon
-          size={21}
-          className={cn(
-            variant === 'destructive'
-              ? 'text-destructive'
-              : variant === 'success'
-              ? 'text-emerald-500'
-              : 'text-foreground',
-            'absolute web:left-[16px] web:top-[18px] native:left-[16] native:top-[18]'
-          )}
-        />
+        <View className='absolute left-[16px] top-[18px] native:left-[15] native:top-[15]'>
+          <Icon
+            size={21}
+            color={
+              variant === 'destructive'
+                ? NAV_THEME[colorScheme ?? 'light'].notification
+                : variant === 'success'
+                ? '#10b981'
+                : NAV_THEME[colorScheme ?? 'light'].text
+            }
+          />
+        </View>
       )}
       {children}
     </View>
@@ -103,27 +92,4 @@ const AlertDescription = React.forwardRef<
 ));
 AlertDescription.displayName = 'AlertDescription';
 
-export { Alert, AlertTitle, AlertDescription };
-
-const styles = StyleSheet.create({
-  shadowLight: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  shadowDark: {
-    shadowColor: '#FFFFFF',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 1,
-  },
-});
+export { Alert, AlertDescription, AlertTitle };

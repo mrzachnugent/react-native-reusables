@@ -2,7 +2,7 @@
 // The code is licensed under the MIT License.
 // https://github.com/shadcn-ui/ui
 
-import { CalendarIcon, X } from 'lucide-react-native';
+import { Calendar as CalendarIcon, X } from '~/components/Icons';
 import React from 'react';
 import {
   Controller,

@@ -1,6 +1,6 @@
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
-import { Sparkles } from 'lucide-react-native';
+import { Sparkles } from '~/components/Icons';
 import React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -70,7 +70,7 @@ export default function MenubarPrimitiveScreen() {
               >
                 <View role='listitem' className='web:row-span-3'>
                   <NavigationMenuLink asChild>
-                    <View className='flex web:select-none flex-col justify-end rounded-md web:bg-gradient-to-b web:from-muted/50 web:to-muted native:border native:border-border p-6 web:no-underline web:outline-none web:focus:shadow-md'>
+                    <View className='flex web:select-none flex-col justify-end rounded-md web:bg-gradient-to-b web:from-muted/50 web:to-muted native:border native:border-border p-6 web:no-underline web:outline-none web:focus:shadow-md web:focus:shadow-foreground/5'>
                       <Sparkles size={16} className='text-foreground' />
                       <Text className='mb-2 mt-4 text-lg native:text-2xl font-medium'>
                         react-native-reusables

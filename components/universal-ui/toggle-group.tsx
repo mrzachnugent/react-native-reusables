@@ -80,18 +80,17 @@ const ToggleGroupItem = React.forwardRef<
 
 ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;
 
-const ToggleGroupIcon = React.forwardRef<
-  React.ElementRef<LucideIcon.Icon>,
-  Omit<React.ComponentPropsWithoutRef<LucideIcon.Icon>, 'name'> & {
-    name: keyof typeof LucideIcon;
-  }
->(({ className, name, ...props }, ref) => {
+function ToggleGroupIcon({
+  className,
+  name,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<LucideIcon.LucideIcon>, 'name'> & {
+  name: keyof typeof LucideIcon;
+}) {
   const textClass = React.useContext(TextClassContext);
 
-  const Icon = LucideIcon[name] as LucideIcon.Icon;
-  return <Icon ref={ref} className={cn(textClass, className)} {...props} />;
-});
-
-ToggleGroupIcon.displayName = 'ToggleGroupIcon';
+  const Icon = LucideIcon[name] as LucideIcon.LucideIcon;
+  return <Icon className={cn(textClass, className)} {...props} />;
+}
 
 export { ToggleGroup, ToggleGroupIcon, ToggleGroupItem };

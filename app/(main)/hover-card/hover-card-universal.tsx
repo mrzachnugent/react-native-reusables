@@ -1,4 +1,4 @@
-import { CalendarDays } from 'lucide-react-native';
+import { CalendarDays } from '~/components/Icons';
 import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

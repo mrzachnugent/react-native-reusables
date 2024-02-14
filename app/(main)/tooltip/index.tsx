@@ -1,4 +1,4 @@
-import { Info } from 'lucide-react-native';
+import { Info } from '~/components/Icons';
 import { Pressable, Text, View } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import {

@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react-native';
+import { ChevronDown } from '~/components/Icons';
 import React from 'react';
 import { LayoutChangeEvent, Pressable, View } from 'react-native';
 import Animated, {

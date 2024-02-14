@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority';
-import { ChevronDown } from 'lucide-react-native';
+import { ChevronDown } from '~/components/Icons';
 import * as React from 'react';
 import * as NavigationMenuPrimitive from '~/lib/rn-primitives/navigation-menu';
 
@@ -169,7 +169,7 @@ const NavigationMenuIndicator = React.forwardRef<
       )}
       {...props}
     >
-      <View className='relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md' />
+      <View className='relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md shadow-foreground/5' />
     </NavigationMenuPrimitive.Indicator>
   );
 });

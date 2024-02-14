@@ -71,7 +71,7 @@
     "jotai-scope": "^0.4.1",
     "lucide-react-native": "^0.314.0",
     "moti": "^0.27.2",
-    "nativewind": "4.0.13",
+    "nativewind": "^4.0.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.49.2",

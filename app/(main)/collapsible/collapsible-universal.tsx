@@ -1,4 +1,4 @@
-import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react-native';
+import { ChevronsDownUp, ChevronsUpDown } from '~/components/Icons';
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import Animated, {

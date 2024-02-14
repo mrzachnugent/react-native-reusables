@@ -4,6 +4,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '~/lib/utils';
 import { Text, View } from 'react-native';
 import * as LucideIcon from 'lucide-react-native';
+import { NAV_THEME } from '~/lib/constants';
+import { useColorScheme } from 'nativewind';
 
 const alertVariants = cva(
   'relative w-full rounded-lg border border-border p-4',
@@ -20,20 +22,17 @@ const alertVariants = cva(
   }
 );
 
-const alertIconVariants = cva(
-  'absolute left-4 top-4 -translate-y-0.5 text-foreground',
-  {
-    variants: {
-      variant: {
-        default: '',
-        destructive: 'text-destructive',
-      },
+const alertIconVariants = cva(' text-foreground', {
+  variants: {
+    variant: {
+      default: '',
+      destructive: 'text-destructive',
     },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
 
 const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -56,7 +55,8 @@ const Alert = React.forwardRef<
     },
     ref
   ) => {
-    const Icon = LucideIcon[icon] as LucideIcon.Icon;
+    const { colorScheme } = useColorScheme();
+    const Icon = LucideIcon[icon] as LucideIcon.LucideIcon;
     return (
       <View
         ref={ref}
@@ -64,10 +64,16 @@ const Alert = React.forwardRef<
         className={cn(alertVariants({ variant }), className)}
         {...props}
       >
-        <Icon
-          size={iconSize}
-          className={cn(cn(alertIconVariants({ variant }), iconClassName))}
-        />
+        <View className='absolute left-4 top-4 -translate-y-0.5'>
+          <Icon
+            size={iconSize}
+            color={
+              variant === 'destructive'
+                ? NAV_THEME[colorScheme ?? 'light'].notification
+                : NAV_THEME[colorScheme ?? 'light'].text
+            }
+          />
+        </View>
         {children}
       </View>
     );

@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react-native';
+import { ChevronDown } from '~/components/Icons';
 import React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

@@ -1,4 +1,4 @@
-import { Bold, Italic } from 'lucide-react-native';
+import { Bold, Italic } from '~/components/Icons';
 import React from 'react';
 import { View } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';

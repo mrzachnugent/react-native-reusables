@@ -70,8 +70,8 @@ export default function RootLayout() {
     (async () => {
       const theme = await AsyncStorage.getItem('theme');
       if (!theme) {
-        setAndroidNavigationBar(colorScheme);
-        AsyncStorage.setItem('theme', colorScheme);
+        setAndroidNavigationBar(colorScheme ?? 'light');
+        AsyncStorage.setItem('theme', colorScheme ?? 'light');
         return;
       }
       const colorTheme = theme === 'dark' ? 'dark' : 'light';

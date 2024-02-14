@@ -9,7 +9,7 @@ import {
   PlusCircle,
   UserPlus,
   Users,
-} from 'lucide-react-native';
+} from '~/components/Icons';
 import React from 'react';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';

@@ -1,9 +1,9 @@
 import { Column, ColumnDef } from '@tanstack/react-table';
 import Drawer from 'expo-router/drawer';
-import { ArrowDown, ArrowUp } from 'lucide-react-native';
 import React from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
+import { ArrowDown, ArrowUp } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { DataTable } from '~/components/ui/data-table';
 import { Skeleton } from '~/components/ui/skeleton';

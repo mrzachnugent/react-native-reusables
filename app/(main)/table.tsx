@@ -1,7 +1,7 @@
 import Drawer from 'expo-router/drawer';
-import { ChevronDown } from 'lucide-react-native';
 import { Alert, Dimensions, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
+import { ChevronDown } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import {
   Popover,

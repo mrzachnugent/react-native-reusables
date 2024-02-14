@@ -1,3 +1,5 @@
+import React from 'react';
+import { Alert, Pressable, Text, View } from 'react-native';
 import {
   Activity,
   Airplay,
@@ -13,9 +15,7 @@ import {
   GalleryHorizontal,
   Lamp,
   Table,
-} from 'lucide-react-native';
-import React from 'react';
-import { Alert, Pressable, Text, View } from 'react-native';
+} from '~/components/Icons';
 import { buttonTextVariants, buttonVariants } from '~/components/ui/button';
 import {
   Command,

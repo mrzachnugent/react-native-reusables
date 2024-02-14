@@ -1,14 +1,12 @@
-import { useColorScheme } from 'nativewind';
 import React from 'react';
 import {
   GestureResponderEvent,
   Pressable,
-  StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
-import { cn } from '~/lib/utils';
 import { Button, buttonVariants } from '~/components/ui/button';
+import { cn } from '~/lib/utils';
 
 interface ToggleGroupProps {
   defaultValue?: string | string[];
@@ -107,8 +105,6 @@ const ToggleGroupItem = React.forwardRef<
     const { value, setValue, disabled, onValueChange } =
       useToggleGroupContext();
 
-    const { colorScheme } = useColorScheme();
-
     function handleOnPress(ev: GestureResponderEvent) {
       setValue((prev) => {
         if (typeof prev === 'string') {
@@ -136,52 +132,28 @@ const ToggleGroupItem = React.forwardRef<
       <Pressable
         disabled={disabled}
         onPress={handleOnPress}
-        className={buttonClass}
+        className={cn(
+          'border bg-background active:opacity-70',
+          isSelected ? 'border-border' : 'border-transparent',
+          buttonVariants({
+            variant: isSelected
+              ? 'secondary'
+              : variant === 'default'
+              ? 'ghost'
+              : 'outline',
+            size,
+          }),
+          className
+        )}
         accessibilityState={{ selected: value === name }}
         role={typeof name === 'string' ? 'radio' : 'switch'}
         ref={ref}
         {...props}
       >
-        {({ pressed }) => (
-          <View
-            className={cn(
-              'border bg-background',
-              pressed ? 'opacity-70' : '',
-              isSelected ? 'border-border' : 'border-transparent',
-              buttonVariants({
-                variant: isSelected
-                  ? 'secondary'
-                  : variant === 'default'
-                  ? 'ghost'
-                  : 'outline',
-                size,
-                className,
-              })
-            )}
-            style={[
-              isSelected && colorScheme === 'dark' && styles.shadowDark,
-              style,
-            ]}
-          >
-            {children}
-          </View>
-        )}
+        {children}
       </Pressable>
     );
   }
 );
 
 export { ToggleGroup, ToggleGroupItem };
-
-const styles = StyleSheet.create({
-  shadowDark: {
-    shadowColor: '#FFFFFF',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-});

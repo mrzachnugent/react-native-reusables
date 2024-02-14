@@ -1,6 +1,6 @@
 import * as Clipboard from 'expo-clipboard';
 import * as Haptics from 'expo-haptics';
-import { Check, Copy } from 'lucide-react-native';
+import { Check, Copy } from '~/components/Icons';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';

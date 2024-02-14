@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Bold, Italic, Underline } from 'lucide-react-native';
+import { Bold, Italic, Underline } from '~/components/Icons';
 import { ToggleGroup, ToggleGroupItem } from '~/components/ui/toggle-group';
 
 export default function ToggleGroupScreen() {

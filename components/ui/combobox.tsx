@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, Search } from 'lucide-react-native';
+import { Check, ChevronsUpDown, Search } from '~/components/Icons';
 import React from 'react';
 import { ListRenderItemInfo, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

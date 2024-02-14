@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
-import { LayoutPanelLeft, MenuSquare } from 'lucide-react-native';
 import { DrawerToggle } from '~/components/DrawerToggle';
+import { LayoutPanelLeft, MenuSquare } from '~/components/Icons';
 import { ThemeToggle } from '~/components/ThemeToggle';
 
 export default function TabsLayout() {
@@ -10,7 +10,7 @@ export default function TabsLayout() {
         name='index'
         options={{
           title: 'Example',
-          tabBarIcon({color, size}) {
+          tabBarIcon({ color, size }) {
             return <LayoutPanelLeft color={color} size={size} />;
           },
         }}
@@ -19,7 +19,7 @@ export default function TabsLayout() {
         name='components'
         options={{
           title: 'Components',
-          tabBarIcon({color, size}) {
+          tabBarIcon({ color, size }) {
             return <MenuSquare color={color} size={size} />;
           },
         }}

@@ -156,26 +156,12 @@ const PopoverContent = React.forwardRef<
     ref
   ) => {
     const insets = useSafeAreaInsets();
-    const { colorScheme } = useColorScheme();
     const {
       triggerPosition,
       setTriggerPosition,
       contentLayout,
       setContentLayout,
     } = usePopoverContext();
-
-    const [style, setStyle] = React.useState<ViewStyle>(
-      StyleSheet.flatten(styleProp)
-    );
-
-    React.useEffect(() => {
-      setStyle(
-        StyleSheet.flatten([
-          colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
-          styleProp,
-        ])
-      );
-    }, [styleProp, colorScheme]);
 
     return (
       <Modal
@@ -216,11 +202,11 @@ const PopoverContent = React.forwardRef<
                   triggerPosition,
                   width,
                 }),
-                style,
+                styleProp,
                 { maxWidth: windowWidth - MARGIN_X * 2 },
               ]}
               className={cn(
-                'bg-popover rounded-2xl p-8 border border-border',
+                'bg-popover rounded-2xl p-8 border border-border shadow-lg shadow-primary/5',
                 !contentLayout && 'opacity-0',
                 className
               )}
@@ -289,26 +275,3 @@ function getContentPosition({
     maxWidth: width,
   };
 }
-
-const styles = StyleSheet.create({
-  shadowLight: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  shadowDark: {
-    shadowColor: '#FFFFFF',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.03,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-});

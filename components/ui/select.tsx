@@ -1,5 +1,5 @@
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
-import { Check, ChevronDown } from 'lucide-react-native';
+import { Check, ChevronDown } from '~/components/Icons';
 import React from 'react';
 import { GestureResponderEvent, Text, View, ViewStyle } from 'react-native';
 import {

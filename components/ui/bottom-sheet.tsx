@@ -8,7 +8,7 @@ import {
   BottomSheetView as GBottomSheetView,
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
-import { X } from 'lucide-react-native';
+import { X } from '~/components/Icons';
 import React, { useCallback } from 'react';
 import {
   GestureResponderEvent,

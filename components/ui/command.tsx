@@ -1,5 +1,5 @@
 import { type ListRenderItemInfo } from '@shopify/flash-list';
-import { Search, X } from 'lucide-react-native';
+import { Search, X } from '~/components/Icons';
 import React, { useImperativeHandle } from 'react';
 import {
   GestureResponderEvent,

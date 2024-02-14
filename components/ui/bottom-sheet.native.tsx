@@ -12,7 +12,7 @@ import {
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { X } from 'lucide-react-native';
+import { X } from '~/components/Icons';
 import { useColorScheme } from 'nativewind';
 import React, { useCallback, useImperativeHandle } from 'react';
 import {
@@ -121,7 +121,10 @@ const BottomSheetContent = React.forwardRef<
             opacity={opacity}
             disappearsOnIndex={disappearsOnIndex}
             pressBehavior={pressBehavior}
-            style={[{ backgroundColor: NAV_THEME[colorScheme].border }, style]}
+            style={[
+              { backgroundColor: NAV_THEME[colorScheme ?? 'light'].border },
+              style,
+            ]}
             onPress={() => {
               if (Keyboard.isVisible()) {
                 Keyboard.dismiss();
@@ -143,11 +146,11 @@ const BottomSheetContent = React.forwardRef<
         backdropComponent={renderBackdrop}
         enableDynamicSizing={enableDynamicSizing}
         backgroundStyle={[
-          { backgroundColor: NAV_THEME[colorScheme].card },
+          { backgroundColor: NAV_THEME[colorScheme ?? 'light'].card },
           backgroundStyle,
         ]}
         handleIndicatorStyle={{
-          backgroundColor: NAV_THEME[colorScheme].text,
+          backgroundColor: NAV_THEME[colorScheme ?? 'light'].text,
         }}
         topInset={insets.top}
         android_keyboardInputMode={android_keyboardInputMode}

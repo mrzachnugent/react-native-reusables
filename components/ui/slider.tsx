@@ -11,9 +11,9 @@ function Slider(props: React.ComponentProps<typeof RNCSlider>) {
   const {
     minimumValue = 0,
     maximumValue = 1,
-    minimumTrackTintColor = NAV_THEME[colorScheme].text,
-    maximumTrackTintColor = NAV_THEME[colorScheme].border,
-    thumbTintColor = NAV_THEME[colorScheme].text,
+    minimumTrackTintColor = NAV_THEME[colorScheme ?? 'light'].text,
+    maximumTrackTintColor = NAV_THEME[colorScheme ?? 'light'].border,
+    thumbTintColor = NAV_THEME[colorScheme ?? 'light'].text,
   } = props;
   return (
     <RNCSlider

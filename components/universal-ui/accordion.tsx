@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as AccordionPrimitive from '~/lib/rn-primitives/accordion';
 
-import { ChevronDown } from 'lucide-react-native';
+import { ChevronDown } from '~/components/Icons';
 import { Platform, Pressable, View } from 'react-native';
 import Animated, {
   Extrapolation,
@@ -80,7 +80,7 @@ const AccordionTrigger = React.forwardRef<
       <AccordionPrimitive.Trigger ref={ref} {...props} asChild>
         <Trigger
           className={cn(
-            'flex flex-row web:flex-1 rounded-md items-center justify-between py-4 web:transition-all web:group web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground',
+            'flex flex-row web:flex-1 items-center justify-between py-4 web:transition-all web:group web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground',
             className
           )}
         >

@@ -1,13 +1,10 @@
-import { useColorScheme } from 'nativewind';
 import React from 'react';
 import {
   GestureResponderEvent,
   Modal,
   Pressable,
-  StyleSheet,
   Text,
   View,
-  ViewStyle,
 } from 'react-native';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
 import { cn } from '~/lib/utils';
@@ -92,30 +89,10 @@ const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Modal> & { overlayClass?: string }
 >(
   (
-    {
-      className,
-      children,
-      animationType = 'fade',
-      style: styleProp,
-      overlayClass,
-      ...props
-    },
+    { className, children, animationType = 'fade', overlayClass, ...props },
     ref
   ) => {
-    const { colorScheme } = useColorScheme();
     const { visible, setVisible, closeOnOverlayPress } = useDialogContext();
-    const [style, setStyle] = React.useState<ViewStyle>(
-      StyleSheet.flatten(styleProp)
-    );
-
-    React.useEffect(() => {
-      setStyle(
-        StyleSheet.flatten([
-          colorScheme === 'dark' ? styles.shadowDark : styles.shadowLight,
-          styleProp,
-        ])
-      );
-    }, [styleProp, colorScheme]);
 
     return (
       <Modal
@@ -144,9 +121,8 @@ const DialogContent = React.forwardRef<
           )}
         >
           <Pressable
-            style={style}
             className={cn(
-              'bg-background rounded-2xl p-8 border border-border',
+              'bg-background rounded-2xl p-8 border border-border shadow-lg shadow-primary/5',
               className
             )}
             role={'dialog'}
@@ -251,26 +227,3 @@ export {
   DialogTitle,
   DialogTrigger,
 };
-
-const styles = StyleSheet.create({
-  shadowLight: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  shadowDark: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-});
