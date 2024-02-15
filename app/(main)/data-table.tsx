@@ -6,7 +6,7 @@ import Toast from 'react-native-toast-message';
 import { ArrowDown, ArrowUp } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { DataTable } from '~/components/ui/data-table';
-import { Skeleton } from '~/components/ui/skeleton';
+import { Skeleton } from '~/components/universal-ui/skeleton';
 import { TableCell, TableRow } from '~/components/ui/table';
 
 const { width, height } = Dimensions.get('screen');
@@ -139,12 +139,12 @@ export default function DataTableScreen() {
           }}
           ListEmptyComponent={() => {
             return (
-              <TableRow className='border-b-0 opacity-50 dark:opacity-30'>
-                <Skeleton show height={height} radius={0}>
+              <TableRow className='border-b-0 dark:opacity-50'>
+                <Skeleton className='flex-1'>
                   <TableCell
                     width={width}
-                    style={{ height: height }}
-                    className='flex-1'
+                    style={{ height }}
+                    className='flex-1 '
                   />
                 </Skeleton>
               </TableRow>

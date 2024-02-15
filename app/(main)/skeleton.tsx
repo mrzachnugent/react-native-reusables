@@ -1,42 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Skeleton } from '~/components/ui/skeleton';
+import { Skeleton } from '~/components/universal-ui/skeleton';
 
 export default function SkeletonScreen() {
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-    if (isLoading) {
-      timeout = setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    }
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [isLoading]);
-
   return (
     <View className='flex-1 justify-center items-center'>
-      <Skeleton
-        key={`skeleton-${isLoading}`} // key is not needed if loading only goes one way (not toggled)
-        show={isLoading}
-        radius={4}
-        width={200}
-      >
-        <Button
-          disabled={isLoading}
-          onPress={() => {
-            setIsLoading(true);
-          }}
-        >
-          Show Loading
-        </Button>
-      </Skeleton>
+      <View className='flex flex-row items-center gap-4'>
+        <Skeleton className='h-12 w-12 rounded-full' />
+        <View className='gap-2'>
+          <Skeleton className='h-4 w-[250px]' />
+          <Skeleton className='h-4 w-[200px]' />
+        </View>
+      </View>
     </View>
   );
 }
