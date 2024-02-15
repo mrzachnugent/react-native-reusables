@@ -13,7 +13,6 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.0",
     "@gorhom/bottom-sheet": "^4.6.0",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-accordion": "^1.1.2",
@@ -67,10 +66,7 @@
     "expo-status-bar": "~1.11.1",
     "expo-system-ui": "~2.9.3",
     "expo-updates": "~0.24.10",
-    "jotai": "^2.6.1",
-    "jotai-scope": "^0.4.1",
     "lucide-react-native": "^0.314.0",
-    "moti": "^0.27.2",
     "nativewind": "^4.0.33",
     "react": "18.2.0",
     "react-dom": "18.2.0",
