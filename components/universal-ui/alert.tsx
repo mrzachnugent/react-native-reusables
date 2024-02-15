@@ -1,11 +1,10 @@
-import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-
-import { cn } from '~/lib/utils';
-import { Text, View } from 'react-native';
 import * as LucideIcon from 'lucide-react-native';
+import * as React from 'react';
+import { Text, View } from 'react-native';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
+import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
   'relative w-full rounded-lg border border-border p-4',
@@ -21,18 +20,6 @@ const alertVariants = cva(
     },
   }
 );
-
-const alertIconVariants = cva(' text-foreground', {
-  variants: {
-    variant: {
-      default: '',
-      destructive: 'text-destructive',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
 
 const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -69,8 +56,8 @@ const Alert = React.forwardRef<
             size={iconSize}
             color={
               variant === 'destructive'
-                ? NAV_THEME[colorScheme ?? 'light'].notification
-                : NAV_THEME[colorScheme ?? 'light'].text
+                ? NAV_THEME[colorScheme].notification
+                : NAV_THEME[colorScheme].text
             }
           />
         </View>
@@ -108,4 +95,4 @@ const AlertDescription = React.forwardRef<
 ));
 AlertDescription.displayName = 'AlertDescription';
 
-export { Alert, AlertTitle, AlertDescription };
+export { Alert, AlertDescription, AlertTitle };

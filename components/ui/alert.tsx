@@ -1,10 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
-
 import * as LucideIcon from 'lucide-react-native';
-import { useColorScheme } from '~/lib/useColorScheme';
+import * as React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
 import { NAV_THEME } from '~/lib/constants';
+import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
@@ -51,10 +50,10 @@ const Alert = React.forwardRef<
             size={21}
             color={
               variant === 'destructive'
-                ? NAV_THEME[colorScheme ?? 'light'].notification
+                ? NAV_THEME[colorScheme].notification
                 : variant === 'success'
                 ? '#10b981'
-                : NAV_THEME[colorScheme ?? 'light'].text
+                : NAV_THEME[colorScheme].text
             }
           />
         </View>

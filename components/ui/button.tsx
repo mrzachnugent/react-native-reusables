@@ -1,10 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
-
-import { useColorScheme } from '~/lib/useColorScheme';
 import { Platform, Pressable, Text, View } from 'react-native';
-import { cn, isTextChildren } from '~/lib/utils';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
+import { useColorScheme } from '~/lib/useColorScheme';
+import { cn, isTextChildren } from '~/lib/utils';
 
 const buttonVariants = cva(
   'flex-row items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
@@ -86,7 +85,7 @@ const Button = React.forwardRef<
     },
     ref
   ) => {
-    const { colorScheme } = useColorScheme();
+    const { isDarkColorScheme } = useColorScheme();
     const Root = Platform.OS === 'android' ? View : Slot.Pressable;
     return (
       <Root
@@ -108,7 +107,7 @@ const Button = React.forwardRef<
           )}
           ref={ref}
           android_ripple={{
-            color: rippleColor(colorScheme === 'dark')[variant as 'default'],
+            color: rippleColor(isDarkColorScheme)[variant as 'default'],
             borderless: false,
           }}
           disabled={disabled}

@@ -1,4 +1,3 @@
-import { useColorScheme } from '~/lib/useColorScheme';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, {
@@ -8,6 +7,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import * as SwitchPrimitives from '~/lib/rn-primitives/switch';
+import { useColorScheme } from '~/lib/useColorScheme';
 
 import { cn } from '~/lib/utils';
 
@@ -58,10 +58,7 @@ const SwitchNative = React.forwardRef<
       backgroundColor: interpolateColor(
         translateX.value,
         [0, 18],
-        [
-          RGB_COLORS[colorScheme ?? 'light'].primary,
-          RGB_COLORS[colorScheme ?? 'light'].input,
-        ]
+        [RGB_COLORS[colorScheme].primary, RGB_COLORS[colorScheme].input]
       ),
     };
   });

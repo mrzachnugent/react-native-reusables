@@ -12,9 +12,7 @@ import {
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { X } from '~/components/Icons';
-import { useColorScheme } from '~/lib/useColorScheme';
-import React, { useCallback, useImperativeHandle } from 'react';
+import * as React from 'react';
 import {
   GestureResponderEvent,
   Keyboard,
@@ -23,9 +21,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { X } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { NAV_THEME } from '~/lib/constants';
 import * as Slot from '~/lib/rn-primitives/slot/slot-native';
+import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
 
 type BottomSheetRef = React.ElementRef<typeof View>;
@@ -89,10 +89,10 @@ const BottomSheetContent = React.forwardRef<
     ref
   ) => {
     const insets = useSafeAreaInsets();
-    const { colorScheme } = useColorScheme();
+    const { colorScheme, isDarkColorScheme } = useColorScheme();
     const { sheetRef } = useBottomSheetContext();
 
-    useImperativeHandle(
+    React.useImperativeHandle(
       ref,
       () => {
         if (!sheetRef.current) {
@@ -103,11 +103,11 @@ const BottomSheetContent = React.forwardRef<
       [sheetRef.current]
     );
 
-    const renderBackdrop = useCallback(
+    const renderBackdrop = React.useCallback(
       (props: BottomSheetBackdropProps) => {
         const {
           pressBehavior = 'close',
-          opacity = colorScheme === 'dark' ? 0.3 : 0.7,
+          opacity = isDarkColorScheme ? 0.3 : 0.7,
           disappearsOnIndex = CLOSED_INDEX,
           style,
           onPress,
@@ -121,10 +121,7 @@ const BottomSheetContent = React.forwardRef<
             opacity={opacity}
             disappearsOnIndex={disappearsOnIndex}
             pressBehavior={pressBehavior}
-            style={[
-              { backgroundColor: NAV_THEME[colorScheme ?? 'light'].border },
-              style,
-            ]}
+            style={[{ backgroundColor: NAV_THEME[colorScheme].border }, style]}
             onPress={() => {
               if (Keyboard.isVisible()) {
                 Keyboard.dismiss();
@@ -146,11 +143,11 @@ const BottomSheetContent = React.forwardRef<
         backdropComponent={renderBackdrop}
         enableDynamicSizing={enableDynamicSizing}
         backgroundStyle={[
-          { backgroundColor: NAV_THEME[colorScheme ?? 'light'].card },
+          { backgroundColor: NAV_THEME[colorScheme].card },
           backgroundStyle,
         ]}
         handleIndicatorStyle={{
-          backgroundColor: NAV_THEME[colorScheme ?? 'light'].text,
+          backgroundColor: NAV_THEME[colorScheme].text,
         }}
         topInset={insets.top}
         android_keyboardInputMode={android_keyboardInputMode}
@@ -334,11 +331,11 @@ const BottomSheetFooter = React.forwardRef<
 function useBottomSheet() {
   const ref = React.useRef<BottomSheetContentRef>(null);
 
-  const open = useCallback(() => {
+  const open = React.useCallback(() => {
     ref.current?.present();
   }, []);
 
-  const close = useCallback(() => {
+  const close = React.useCallback(() => {
     ref.current?.dismiss();
   }, []);
 

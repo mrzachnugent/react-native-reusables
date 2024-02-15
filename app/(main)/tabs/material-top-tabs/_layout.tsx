@@ -8,8 +8,8 @@ import type {
   TabNavigationState,
 } from '@react-navigation/native';
 import { withLayoutContext } from 'expo-router';
-import { useColorScheme } from '~/lib/useColorScheme';
 import { NAV_THEME } from '~/lib/constants';
+import { useColorScheme } from '~/lib/useColorScheme';
 
 const { Navigator } = createMaterialTopTabNavigator();
 
@@ -26,7 +26,7 @@ export default function MaterialTopTabsLayout() {
     <MaterialTopTabs
       initialRouteName='index'
       screenOptions={{
-        tabBarActiveTintColor: NAV_THEME[colorScheme ?? 'light'].text,
+        tabBarActiveTintColor: NAV_THEME[colorScheme].text,
         tabBarInactiveTintColor: 'grey',
         tabBarLabelStyle: {
           fontSize: 14,
@@ -34,7 +34,7 @@ export default function MaterialTopTabsLayout() {
           fontWeight: 'bold',
         },
         tabBarIndicatorStyle: {
-          backgroundColor: NAV_THEME[colorScheme ?? 'light'].text,
+          backgroundColor: NAV_THEME[colorScheme].text,
         },
         tabBarScrollEnabled: true,
         tabBarItemStyle: { width: 'auto', minWidth: 100 },

@@ -1,7 +1,7 @@
-import { useColorScheme } from '~/lib/useColorScheme';
-import React from 'react';
-import { Calendar as RNCalendar, LocaleConfig } from 'react-native-calendars';
+import * as React from 'react';
+import { LocaleConfig, Calendar as RNCalendar } from 'react-native-calendars';
 import { NAV_THEME } from '~/lib/constants';
+import { useColorScheme } from '~/lib/useColorScheme';
 
 /**
  * @docs https://github.com/wix/react-native-calendars
@@ -10,13 +10,13 @@ function Calendar({
   theme,
   ...props
 }: React.ComponentProps<typeof RNCalendar>) {
-  const { colorScheme } = useColorScheme();
+  const { colorScheme, isDarkColorScheme } = useColorScheme();
   const id = React.useId();
 
   return (
     <RNCalendar
       key={`${id}-${colorScheme}`}
-      theme={getTheme(colorScheme === 'dark', theme)}
+      theme={getTheme(isDarkColorScheme, theme)}
       {...props}
     />
   );

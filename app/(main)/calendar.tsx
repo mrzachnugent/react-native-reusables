@@ -1,12 +1,12 @@
-import { useColorScheme } from 'nativewind';
-import React from 'react';
+import * as React from 'react';
 import { ScrollView } from 'react-native';
 import { Calendar, LocaleConfig } from '~/components/ui/calendar';
+import { useColorScheme } from '~/lib/useColorScheme';
 
 LocaleConfig.defaultLocale = 'en';
 
 export default function CalendarScreen() {
-  const { colorScheme } = useColorScheme();
+  const { isDarkColorScheme } = useColorScheme();
   const [selectedDate, setSelectedDate] = React.useState('');
   const [selectedDates, setSelectedDates] = React.useState<string[]>([]);
 
@@ -20,7 +20,7 @@ export default function CalendarScreen() {
           [selectedDate]: {
             selected: true,
             disableTouchEvent: true,
-            selectedColor: colorScheme === 'dark' ? '#0ea5e9' : '#0284c7',
+            selectedColor: isDarkColorScheme ? '#0ea5e9' : '#0284c7',
           },
         }}
       />

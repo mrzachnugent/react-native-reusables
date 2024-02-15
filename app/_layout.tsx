@@ -8,14 +8,14 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
-import { useColorScheme } from '~/lib/useColorScheme';
-import React, { useEffect, useRef } from 'react';
+import * as React from 'react';
 import { AppState } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ToastProvider } from '~/components/ui/toast';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
+import { useColorScheme } from '~/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -51,30 +51,30 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { colorScheme, setColorScheme } = useColorScheme();
+  const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   useAppForground(onFetchUpdateAsync, true);
   const [loaded, error] = useFonts(FontAwesome.font);
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
+  React.useEffect(() => {
     if (error) throw error;
   }, [error]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     (async () => {
       const theme = await AsyncStorage.getItem('theme');
       if (!theme) {
-        setAndroidNavigationBar(colorScheme ?? 'light');
-        AsyncStorage.setItem('theme', colorScheme ?? 'light');
+        setAndroidNavigationBar(colorScheme);
+        AsyncStorage.setItem('theme', colorScheme);
         return;
       }
-      const colorTheme = theme === 'dark' ? 'dark' : 'light';
+      const colorTheme = isDarkColorScheme ? 'dark' : 'light';
       setAndroidNavigationBar(colorTheme);
       if (colorTheme !== colorScheme) {
         setColorScheme(colorTheme);
@@ -92,11 +92,11 @@ export default function RootLayout() {
 
 // TODO(web): Fix BottomSheetModalProvider hydration issue
 function RootLayoutNav() {
-  const { colorScheme } = useColorScheme();
+  const { colorScheme, isDarkColorScheme } = useColorScheme();
   return (
     <GestureHandlerRootView style={{ flex: 1 }} className={colorScheme}>
-      <ThemeProvider value={colorScheme === 'light' ? LIGHT_THEME : DARK_THEME}>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
         <BottomSheetModalProvider>
           <Stack initialRouteName='(main)'>
             <Stack.Screen
@@ -120,8 +120,8 @@ function RootLayoutNav() {
 }
 
 function useAppForground(cb: () => void, onMount = true) {
-  const appState = useRef(AppState.currentState);
-  useEffect(() => {
+  const appState = React.useRef(AppState.currentState);
+  React.useEffect(() => {
     if (onMount) {
       cb();
     }
