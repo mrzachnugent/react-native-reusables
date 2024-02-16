@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, ScrollView, TextInput, View, Text } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import { Input } from '~/components/universal-ui/input';
-import { Label, LabelText } from '~/components/universal-ui/label';
+import { Input } from '~/components/ui/input';
+import { Label, LabelText } from '~/components/ui/label';
 import { cn } from '~/lib/utils';
 
 export default function InputScreen() {

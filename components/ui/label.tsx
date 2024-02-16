@@ -1,33 +1,35 @@
-import React from 'react';
-
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import * as LabelPrimitive from '~/components/primitives/label';
 import { cn } from '~/lib/utils';
-import { Text, Pressable } from 'react-native';
+
+const labelVariants = cva(
+  'text-sm text-foreground native:text-base font-medium leading-none web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70'
+);
 
 const Label = React.forwardRef<
-  React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text> & {
-    rootProps?: Omit<
-      React.ComponentPropsWithoutRef<typeof Pressable>,
-      'onPress'
-    >;
-  }
->(({ className, onPress, rootProps, ...props }, ref) => (
-  <Pressable
-    onPress={onPress}
-    className='rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 web:disabled:pointer-events-none disabled:opacity-50'
-    {...rootProps}
-  >
-    <Text
-      ref={ref}
-      className={cn(
-        'native:text-lg text-foreground font-medium px-0.5 py-1.5 leading-none ',
-        className
-      )}
-      {...props}
-    />
-  </Pressable>
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn('web:cursor-default', className)}
+    {...props}
+  />
 ));
+Label.displayName = LabelPrimitive.Root.displayName;
 
-Label.displayName = 'Label';
+const LabelText = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Text>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Text> &
+    VariantProps<typeof labelVariants>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Text
+    ref={ref}
+    className={cn(labelVariants(), className)}
+    {...props}
+  />
+));
+LabelText.displayName = LabelPrimitive.Text.displayName;
 
-export { Label };
+export { Label, LabelText };

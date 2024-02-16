@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TextInput } from 'react-native';
 
 import { cn } from '~/lib/utils';
@@ -10,7 +10,6 @@ const Textarea = React.forwardRef<
   (
     {
       className,
-      editable = true,
       multiline = true,
       numberOfLines = 4,
       placeholderClassName,
@@ -22,11 +21,11 @@ const Textarea = React.forwardRef<
       <TextInput
         ref={ref}
         className={cn(
-          'rounded-md border border-input bg-background p-3 native:text-lg h-28 leading-[1.25] text-foreground items-center  web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          'web:flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm native:text-lg native:leading-[1.25] text-foreground web:ring-offset-background placeholder:text-muted-foreground web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
+          props.editable === false && 'opacity-50 web:cursor-not-allowed',
           className
         )}
         placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
-        editable={editable}
         multiline={multiline}
         numberOfLines={numberOfLines}
         textAlignVertical='top'

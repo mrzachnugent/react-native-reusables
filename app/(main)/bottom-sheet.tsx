@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
 import {
   BottomSheet,
@@ -8,15 +8,16 @@ import {
   BottomSheetOpenTrigger,
   BottomSheetTextInput,
   BottomSheetView,
-} from '~/components/ui/bottom-sheet';
+} from '~/components/deprecated-ui/bottom-sheet';
 import {
   Button,
   buttonTextVariants,
   buttonVariants,
-} from '~/components/ui/button';
-import { Label } from '~/components/ui/label';
+} from '~/components/deprecated-ui/button';
+import { Label } from '~/components/deprecated-ui/label';
 import { cn } from '~/lib/utils';
 
+// TODO: refactor to use UI components
 export default function BottomSheetScreen() {
   const nameInputRef =
     React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);

@@ -1,10 +1,10 @@
 import { AlignCenter, AlignLeft, Bold, Italic } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
-import * as Toolbar from '~/lib/rn-primitives/toolbar';
+import * as Toolbar from '~/components/primitives/toolbar';
 import { cn } from '~/lib/utils';
 
-export default function ToolbarPrimitiveScreen() {
+export default function ToolbarScreen() {
   const [singleValue, setSingleValue] = React.useState<string>();
   const [multipleValue, setMultipleValue] = React.useState<string[]>([]);
   return (

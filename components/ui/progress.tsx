@@ -1,26 +1,40 @@
-import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import * as React from 'react';
+import { Platform } from 'react-native';
 import Animated, {
   Extrapolation,
-  SharedValue,
   interpolate,
   useAnimatedStyle,
+  useDerivedValue,
   withSpring,
 } from 'react-native-reanimated';
+import * as ProgressPrimitive from '~/components/primitives/progress';
 import { cn } from '~/lib/utils';
 
 const Progress = React.forwardRef<
-  React.ElementRef<typeof Animated.View>,
-  Omit<React.ComponentPropsWithoutRef<typeof Animated.View>, 'style'> & {
-    /**
-     * Value between 0 and 100
-     */
-    progress: SharedValue<number>;
-    rootClass?: string;
-    style?: ViewStyle;
-  }
->(({ progress, rootClass, className, style, ...props }, ref) => {
-  const stylez = useAnimatedStyle(() => {
+  React.ElementRef<typeof ProgressPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
+>(({ className, value, ...props }, ref) => {
+  return (
+    <ProgressPrimitive.Root
+      ref={ref}
+      className={cn(
+        'relative h-4 w-full overflow-hidden rounded-full bg-secondary',
+        className
+      )}
+      {...props}
+    >
+      <Indicator value={value} />
+    </ProgressPrimitive.Root>
+  );
+});
+Progress.displayName = ProgressPrimitive.Root.displayName;
+
+export { Progress };
+
+function Indicator({ value }: { value: number | undefined | null }) {
+  const progress = useDerivedValue(() => value ?? 0);
+
+  const indicator = useAnimatedStyle(() => {
     return {
       width: withSpring(
         `${interpolate(
@@ -34,21 +48,18 @@ const Progress = React.forwardRef<
     };
   });
 
+  if (Platform.OS === 'web') {
+    return (
+      <ProgressPrimitive.Indicator
+        className='h-full w-full flex-1 bg-primary web:transition-all'
+        style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}
+      />
+    );
+  }
+
   return (
-    <View
-      className={cn(
-        'rounded-xl h-4 bg-border overflow-hidden relative',
-        rootClass
-      )}
-      role='progressbar'
-    >
-      <Animated.View {...props} style={[stylez, style]}>
-        <View className={cn('h-4 bg-foreground', className)}></View>
-      </Animated.View>
-    </View>
+    <ProgressPrimitive.Indicator asChild>
+      <Animated.View style={indicator} className={cn('h-full bg-foreground')} />
+    </ProgressPrimitive.Indicator>
   );
-});
-
-Progress.displayName = 'Progress';
-
-export { Progress };
+}

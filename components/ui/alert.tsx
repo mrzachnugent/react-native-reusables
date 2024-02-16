@@ -1,19 +1,18 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as LucideIcon from 'lucide-react-native';
 import * as React from 'react';
-import { Text, View, ViewStyle } from 'react-native';
+import { Text, View } from 'react-native';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
-  'bg-background relative w-full rounded-lg border p-5 shadow shadow-primary/10',
+  'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-foreground/10',
   {
     variants: {
       variant: {
-        default: 'border-muted-foreground',
+        default: '',
         destructive: 'border-destructive',
-        success: 'border-emerald-500',
       },
     },
     defaultVariants: {
@@ -24,44 +23,49 @@ const alertVariants = cva(
 
 const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
-  Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> &
+  React.ComponentPropsWithoutRef<typeof View> &
     VariantProps<typeof alertVariants> & {
-      icon?: keyof typeof LucideIcon;
-      style?: ViewStyle;
+      icon: keyof typeof LucideIcon;
+      iconSize?: number;
+      iconClassName?: string;
     }
->(({ children, icon, className, variant, style: styleProp, ...props }, ref) => {
-  const { colorScheme } = useColorScheme();
-
-  const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.LucideIcon;
-  return (
-    <View
-      ref={ref}
-      role='alert'
-      className={cn(
-        alertVariants({ variant }),
-        icon && 'ios:pl-[50] android:pl-[50] pl-[50px]',
-        className
-      )}
-      {...props}
-    >
-      {icon && (
-        <View className='absolute left-[16px] top-[18px] native:left-[15] native:top-[15]'>
+>(
+  (
+    {
+      className,
+      variant,
+      children,
+      icon,
+      iconSize = 16,
+      iconClassName,
+      ...props
+    },
+    ref
+  ) => {
+    const { colorScheme } = useColorScheme();
+    const Icon = LucideIcon[icon] as LucideIcon.LucideIcon;
+    return (
+      <View
+        ref={ref}
+        role='alert'
+        className={alertVariants({ variant, className })}
+        {...props}
+      >
+        <View className='absolute left-3.5 top-4 -translate-y-0.5'>
           <Icon
-            size={21}
+            size={iconSize}
             color={
               variant === 'destructive'
                 ? NAV_THEME[colorScheme].notification
-                : variant === 'success'
-                ? '#10b981'
                 : NAV_THEME[colorScheme].text
             }
           />
         </View>
-      )}
-      {children}
-    </View>
-  );
-});
+        {children}
+      </View>
+    );
+  }
+);
 Alert.displayName = 'Alert';
 
 const AlertTitle = React.forwardRef<
@@ -71,7 +75,7 @@ const AlertTitle = React.forwardRef<
   <Text
     ref={ref}
     className={cn(
-      'mb-1.5 text-xl font-medium leading-none tracking-tight text-foreground',
+      'pl-7 mb-1 font-medium text-base leading-none tracking-tight text-foreground',
       className
     )}
     {...props}
@@ -85,7 +89,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Text
     ref={ref}
-    className={cn('text-muted-foreground', className)}
+    className={cn('pl-7 text-sm leading-relaxed text-foreground', className)}
     {...props}
   />
 ));
