@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { View } from 'react-native';
-import { H1, Muted, Text } from '~/components/universal-ui/typography';
+import { H1, Muted, Text } from '~/components/ui/typography';
 
 export default function RedScreen() {
   return (

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Menubar } from '~/components/ui/menubar';
+import { Menubar } from '~/components/old-ui/menubar';
 
 export default function MenubarScreen() {
   return (

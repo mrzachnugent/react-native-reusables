@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/universal-ui/button';
-import { Input } from '~/components/universal-ui/input';
-import { Label, LabelText } from '~/components/universal-ui/label';
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
+import { Label, LabelText } from '~/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/universal-ui/popover';
-import { Text } from '~/components/universal-ui/typography';
+} from '~/components/ui/popover';
+import { Text } from '~/components/ui/typography';
 
 export default function PopoverUniversalScreen() {
   const [open, setOpen] = React.useState(false);

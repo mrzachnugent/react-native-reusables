@@ -1,7 +1,7 @@
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
+import { Button } from '~/components/old-ui/button';
 import Toast from 'react-native-toast-message';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
 
 export default function ToastScreen() {
   function showSuccessToast() {

@@ -1,275 +1,41 @@
-import { VariantProps } from 'class-variance-authority';
-import React, { useImperativeHandle } from 'react';
-import {
-  Dimensions,
-  GestureResponderEvent,
-  LayoutRectangle,
-  Modal,
-  Pressable,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Slot from '~/lib/rn-primitives/slot/slot-native';
+import * as React from 'react';
+import { Platform, StyleSheet } from 'react-native';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { TextClassContext } from '~/components/ui/typography';
+import * as PopoverPrimitive from '~/components/primitives/popover';
 import { cn } from '~/lib/utils';
-import { Button, buttonVariants } from './button';
 
-const windowWidth = Dimensions.get('window').width;
+const Popover = PopoverPrimitive.Root;
 
-const MARGIN_X = 12;
-interface LayoutPosition {
-  pageY: number;
-  pageX: number;
-  width: number;
-  height: number;
-}
-
-interface PopoverContext {
-  triggerRef: React.RefObject<View>;
-  triggerPosition: LayoutPosition | null;
-  setTriggerPosition: React.Dispatch<
-    React.SetStateAction<LayoutPosition | null>
-  >;
-  contentLayout: LayoutRectangle | null;
-  setContentLayout: React.Dispatch<
-    React.SetStateAction<LayoutRectangle | null>
-  >;
-}
-
-const PopoverContext = React.createContext({} as PopoverContext);
-
-const Popover = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
->((props, ref) => {
-  const triggerRef = React.useRef<View>(null);
-  const [triggerPosition, setTriggerPosition] =
-    React.useState<LayoutPosition | null>(null);
-  const [contentLayout, setContentLayout] =
-    React.useState<LayoutRectangle | null>(null);
-
-  return (
-    <PopoverContext.Provider
-      value={{
-        triggerRef,
-        triggerPosition,
-        setTriggerPosition,
-        contentLayout,
-        setContentLayout,
-      }}
-    >
-      <View ref={ref} {...props} />
-    </PopoverContext.Provider>
-  );
-});
-
-Popover.displayName = 'Popover';
-
-function usePopoverContext() {
-  const context = React.useContext(PopoverContext);
-  if (!context) {
-    throw new Error(
-      'Popover compound components cannot be rendered outside the Popover component'
-    );
-  }
-  return context;
-}
-
-const PopoverTrigger = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  React.ComponentPropsWithoutRef<typeof Button> &
-    VariantProps<typeof buttonVariants> & {
-      asChild?: boolean;
-    }
->(({ asChild, onPress, ...props }, ref) => {
-  const { triggerRef, setTriggerPosition } = usePopoverContext();
-
-  function handleOnPress(event: GestureResponderEvent) {
-    triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-      setTriggerPosition({ width, pageX, pageY: pageY, height });
-    });
-    onPress?.(event);
-  }
-
-  useImperativeHandle(
-    ref,
-    () => {
-      if (!triggerRef.current) {
-        return new View({});
-      }
-      return triggerRef.current;
-    },
-    [triggerRef.current]
-  );
-
-  const Trigger = asChild ? Slot.Pressable : Button;
-  return <Trigger ref={triggerRef} onPress={handleOnPress} {...props} />;
-});
-
-PopoverTrigger.displayName = 'PopoverTrigger';
-
-const PopoverClose = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  React.ComponentPropsWithoutRef<typeof Button> &
-    VariantProps<typeof buttonVariants> & {
-      asChild?: boolean;
-    }
->(({ asChild, onPress, ...props }, ref) => {
-  const { setTriggerPosition, setContentLayout } = usePopoverContext();
-
-  function handleOnPress(event: GestureResponderEvent) {
-    setTriggerPosition(null);
-    setContentLayout(null);
-    onPress?.(event);
-  }
-
-  const Trigger = asChild ? Slot.Pressable : Button;
-  return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
-});
-
-PopoverClose.displayName = 'PopoverClose';
+const PopoverTrigger = PopoverPrimitive.Trigger;
 
 const PopoverContent = React.forwardRef<
-  React.ElementRef<typeof Modal>,
-  Omit<React.ComponentPropsWithoutRef<typeof Modal>, 'width' | 'style'> & {
-    overlayClass?: string;
-    width?: 'auto' | number;
-    align?: 'left' | 'right' | 'center';
-    position?: 'auto' | 'top' | 'bottom';
-    style?: ViewStyle;
-  }
->(
-  (
-    {
-      className,
-      children,
-      animationType = 'fade',
-      width = 'auto',
-      align = 'left',
-      position = 'auto',
-      overlayClass,
-      style: styleProp,
-      ...props
-    },
-    ref
-  ) => {
-    const insets = useSafeAreaInsets();
-    const {
-      triggerPosition,
-      setTriggerPosition,
-      contentLayout,
-      setContentLayout,
-    } = usePopoverContext();
-
-    return (
-      <Modal
-        ref={ref}
-        animationType={animationType}
-        transparent={true}
-        visible={!!triggerPosition}
-        aria-modal
-        onRequestClose={() => {
-          setTriggerPosition(null);
-          setContentLayout(null);
-        }}
-        statusBarTranslucent
-        {...props}
+  React.ElementRef<typeof PopoverPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
+>(({ className, align = 'center', sideOffset = 4, ...props }, ref) => {
+  return (
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Overlay
+        style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}
       >
-        <Pressable
-          aria-hidden={!!triggerPosition}
-          onPressOut={() => {
-            setTriggerPosition(null);
-            setContentLayout(null);
-          }}
-          className={cn(
-            'flex-1 bg-zinc-50/30 dark:bg-zinc-900/30',
-            overlayClass
-          )}
-        >
-          {!!triggerPosition && (
-            <Pressable
-              onLayout={(event) => {
-                setContentLayout(event.nativeEvent.layout);
-              }}
-              style={[
-                getContentPosition({
-                  align,
-                  contentLayout,
-                  insetsTop: insets.top,
-                  position,
-                  triggerPosition,
-                  width,
-                }),
-                styleProp,
-                { maxWidth: windowWidth - MARGIN_X * 2 },
-              ]}
+        <Animated.View entering={FadeIn} exiting={FadeOut}>
+          <TextClassContext.Provider value='text-popover-foreground'>
+            <PopoverPrimitive.Content
+              ref={ref}
+              align={align}
+              sideOffset={sideOffset}
               className={cn(
-                'bg-popover rounded-2xl p-8 border border-border shadow-lg shadow-primary/5',
-                !contentLayout && 'opacity-0',
+                'z-50 w-72 rounded-md web:cursor-auto border border-border bg-popover p-4 shadow-md shadow-foreground/5 web:outline-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 web:animate-in web:zoom-in-95 web:fade-in-0',
                 className
               )}
-            >
-              {children}
-            </Pressable>
-          )}
-        </Pressable>
-      </Modal>
-    );
-  }
-);
+              {...props}
+            />
+          </TextClassContext.Provider>
+        </Animated.View>
+      </PopoverPrimitive.Overlay>
+    </PopoverPrimitive.Portal>
+  );
+});
+PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
-PopoverContent.displayName = 'PopoverContent';
-
-export { Popover, PopoverClose, PopoverContent, PopoverTrigger };
-
-interface GetContentPositionArgs {
-  position: 'auto' | 'top' | 'bottom';
-  align: 'left' | 'right' | 'center';
-  triggerPosition: LayoutPosition;
-  contentLayout: LayoutRectangle | null;
-  insetsTop: number;
-  width: number | 'auto';
-}
-
-function getContentPosition({
-  align,
-  contentLayout,
-  insetsTop,
-  position,
-  triggerPosition,
-  width,
-}: GetContentPositionArgs) {
-  const positionTop = triggerPosition?.pageY - 6 - (contentLayout?.height ?? 0);
-  const positionBottom = triggerPosition.pageY + triggerPosition.height + 6;
-
-  const alignCenter =
-    triggerPosition?.pageX +
-    triggerPosition?.width / 2 -
-    (width === 'auto' ? triggerPosition?.width : width) / 2;
-
-  const maxLeft =
-    windowWidth - (width === 'auto' ? triggerPosition.width : width);
-
-  return {
-    top:
-      position === 'auto'
-        ? triggerPosition.pageY > (contentLayout?.height ?? 0) + insetsTop
-          ? positionTop
-          : positionBottom
-        : position === 'top'
-        ? positionTop
-        : positionBottom,
-    left:
-      align === 'center'
-        ? alignCenter > maxLeft
-          ? MARGIN_X
-          : alignCenter
-        : align === 'left'
-        ? triggerPosition?.pageX
-        : triggerPosition?.pageX +
-          triggerPosition?.width -
-          (width === 'auto' ? triggerPosition?.width : width),
-    width: width === 'auto' ? triggerPosition?.width : width,
-    maxWidth: width,
-  };
-}
+export { Popover, PopoverContent, PopoverTrigger };

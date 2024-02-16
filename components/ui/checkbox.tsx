@@ -1,48 +1,36 @@
 import { Check } from '~/components/Icons';
 import * as React from 'react';
-import { Pressable } from 'react-native';
-import Animated, { withTiming, useSharedValue } from 'react-native-reanimated';
+import * as CheckboxPrimitive from '~/components/primitives/checkbox';
+
+import { Platform } from 'react-native';
 import { cn } from '~/lib/utils';
 
-interface CheckboxProps {
-  value: boolean;
-  onChange: (checked: boolean) => void;
-  iconClass?: string;
-  iconSize?: number;
-}
-
 const Checkbox = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'> &
-    CheckboxProps
->(({ className, value, onChange, iconClass, iconSize = 16, ...props }, ref) => {
-  const opacity = useSharedValue(0);
-
-  opacity.value = withTiming(value === true ? 1.0 : 0.0, {
-    duration: 200,
-  });
-
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
+>(({ className, ...props }, ref) => {
   return (
-    <Pressable
+    <CheckboxPrimitive.Root
       ref={ref}
-      role='checkbox'
-      accessibilityState={{ checked: value }}
       className={cn(
-        'web:peer h-7 w-7 shrink-0 flex items-center bg-card justify-center rounded-md border border-primary web:ring-offset-background web:disabled:cursor-not-allowed web:disabled:opacity-50',
+        'web:peer h-4 w-4 native:h-[20] native:w-[20] shrink-0 rounded-sm native:rounded border border-primary web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        props.checked && 'bg-primary',
         className
       )}
-      onPress={() => {
-        onChange(!value);
-      }}
       {...props}
     >
-      <Animated.View style={{ opacity }}>
-        <Check size={iconSize} className={cn('text-foreground', iconClass)} />
-      </Animated.View>
-    </Pressable>
+      <CheckboxPrimitive.Indicator
+        className={cn('items-center justify-center h-full w-full')}
+      >
+        <Check
+          size={12}
+          strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5}
+          className='text-primary-foreground'
+        />
+      </CheckboxPrimitive.Indicator>
+    </CheckboxPrimitive.Root>
   );
 });
-
-Checkbox.displayName = 'Checkbox';
+Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };

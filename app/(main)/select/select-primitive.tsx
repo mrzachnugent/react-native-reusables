@@ -1,8 +1,8 @@
 import { ChevronDown } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Select from '~/lib/rn-primitives/select';
+import * as Select from '~/components/primitives/select';
 
 const VALUES = [
   { value: 'volvo', label: 'Volvo' },

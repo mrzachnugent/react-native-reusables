@@ -1,16 +1,16 @@
 import { ChevronsDownUp, ChevronsUpDown } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
 import Animated, {
   FadeInDown,
   LinearTransition,
 } from 'react-native-reanimated';
-import { Button } from '~/components/universal-ui/button';
+import { Button } from '~/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '~/components/universal-ui/collapsible';
+} from '~/components/ui/collapsible';
 
 export default function CollapsibleUniversalScreen() {
   const [open, setOpen] = React.useState(false);

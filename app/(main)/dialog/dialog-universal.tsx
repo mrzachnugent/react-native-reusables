@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { Button } from '~/components/universal-ui/button';
-import { Text } from '~/components/universal-ui/typography';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/typography';
 import {
   Dialog,
   DialogClose,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/universal-ui/dialog';
+} from '~/components/ui/dialog';
 
 export default function DialogUniversalScreen() {
   const [open, setOpen] = React.useState(false);

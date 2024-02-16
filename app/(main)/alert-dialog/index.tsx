@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { ScrollView, View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '~/components/ui/alert-dialog';
+} from '~/components/old-ui/alert-dialog';
 
 export default function AlertDialogScreen() {
   return (

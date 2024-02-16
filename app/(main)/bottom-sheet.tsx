@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
 import {
   BottomSheet,
@@ -8,13 +8,13 @@ import {
   BottomSheetOpenTrigger,
   BottomSheetTextInput,
   BottomSheetView,
-} from '~/components/ui/bottom-sheet';
+} from '~/components/old-ui/bottom-sheet';
 import {
   Button,
   buttonTextVariants,
   buttonVariants,
-} from '~/components/ui/button';
-import { Label } from '~/components/ui/label';
+} from '~/components/old-ui/button';
+import { Label } from '~/components/old-ui/label';
 import { cn } from '~/lib/utils';
 
 export default function BottomSheetScreen() {

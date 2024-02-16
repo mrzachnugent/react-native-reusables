@@ -1,8 +1,8 @@
 import { Bold, Italic } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Toggle } from '~/components/ui/toggle';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { Toggle } from '~/components/old-ui/toggle';
 
 export default function ToggleScreen() {
   return (

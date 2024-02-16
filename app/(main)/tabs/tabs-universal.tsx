@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '~/components/universal-ui/button';
-import { Text } from '~/components/universal-ui/typography';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/typography';
 import {
   Card,
   CardContent,
@@ -9,15 +9,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/universal-ui/card';
-import { Input } from '~/components/universal-ui/input';
-import { Label, LabelText } from '~/components/universal-ui/label';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '~/components/universal-ui/tabs';
+} from '~/components/ui/card';
+import { Input } from '~/components/ui/input';
+import { Label, LabelText } from '~/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 
 export default function TabsPrimitiveScreen() {
   const [value, setValue] = React.useState('account');

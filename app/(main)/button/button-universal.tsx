@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { Button } from '~/components/universal-ui/button';
-import { Text } from '~/components/universal-ui/typography';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/typography';
 
 export default function ButtonUniversalScreen() {
   return (

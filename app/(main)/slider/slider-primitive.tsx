@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Pressable, View, Text, Platform } from 'react-native';
-import * as Slider from '~/lib/rn-primitives/slider';
+import * as Slider from '~/components/primitives/slider';
 import { cn } from '~/lib/utils';
 
 export default function SliderPrimitiveScreen() {

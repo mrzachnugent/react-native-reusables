@@ -1,9 +1,9 @@
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
-import React from 'react';
+import * as React from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as NavigationMenu from '~/lib/rn-primitives/navigation-menu';
+import * as NavigationMenu from '~/components/primitives/navigation-menu';
 
 export default function MenubarPrimitiveScreen() {
   const insets = useSafeAreaInsets();

@@ -2,12 +2,12 @@ import Drawer from 'expo-router/drawer';
 import { Alert, Dimensions, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { ChevronDown } from '~/components/Icons';
-import { Button } from '~/components/ui/button';
+import { Button } from '~/components/old-ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/ui/popover';
+} from '~/components/old-ui/popover';
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '~/components/ui/table';
+} from '~/components/old-ui/table';
 import { cn } from '~/lib/utils';
 
 const { width } = Dimensions.get('window');

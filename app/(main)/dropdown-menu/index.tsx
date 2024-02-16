@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { DropdownMenu } from '~/components/ui/dropdown-menu';
+import { DropdownMenu } from '~/components/old-ui/dropdown-menu';
 
 export default function DropdownMenuScreen() {
   return (

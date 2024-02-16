@@ -1,13 +1,13 @@
 import { ChevronsUpDown } from '~/components/Icons';
 import { Platform, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleHeader,
   CollapsibleTrigger,
-} from '~/components/ui/collapsible';
+} from '~/components/old-ui/collapsible';
 import { cn } from '~/lib/utils';
 
 export default function CollapsibleScreen() {

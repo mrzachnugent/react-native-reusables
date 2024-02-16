@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/universal-ui/button';
-import { Text } from '~/components/universal-ui/typography';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/typography';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '~/components/universal-ui/tooltip';
+} from '~/components/ui/tooltip';
 
 export default function TooltipUniversalScreen() {
   const [open, setOpen] = React.useState(false);

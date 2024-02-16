@@ -1,6 +1,10 @@
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '~/components/old-ui/avatar';
 
 const AVATAR_URI = 'https://github.com/mrzachnugent.png';
 

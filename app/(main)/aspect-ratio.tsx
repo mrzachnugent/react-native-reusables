@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { AspectRatio } from '~/components/universal-ui/aspect-ratio';
+import { AspectRatio } from '~/components/ui/aspect-ratio';
 
 export default function AspectRatioScreen() {
   return (

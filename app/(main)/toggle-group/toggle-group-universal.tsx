@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import {
   ToggleGroup,
   ToggleGroupIcon,
   ToggleGroupItem,
-} from '~/components/universal-ui/toggle-group';
+} from '~/components/ui/toggle-group';
 
 export default function ToggleGroupUniversalScreen() {
   const [value, setValue] = React.useState<string[]>([]);

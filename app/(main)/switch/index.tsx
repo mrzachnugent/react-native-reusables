@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Label } from '~/components/ui/label';
-import { Switch } from '~/components/ui/switch';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { Label } from '~/components/old-ui/label';
+import { Switch } from '~/components/old-ui/switch';
 
 export default function SwitchScreen() {
   const [value, setValue] = React.useState(false);

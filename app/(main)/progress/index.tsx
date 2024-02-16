@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Button } from '~/components/ui/button';
-import { Progress } from '~/components/ui/progress';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { Button } from '~/components/old-ui/button';
+import { Progress } from '~/components/old-ui/progress';
 
 export default function ProgressScreen() {
   const progress = useSharedValue(0);

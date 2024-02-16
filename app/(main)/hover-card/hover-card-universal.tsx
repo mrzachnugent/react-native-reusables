@@ -1,19 +1,15 @@
 import { CalendarDays } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '~/components/universal-ui/avatar';
-import { Button } from '~/components/universal-ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Button } from '~/components/ui/button';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '~/components/universal-ui/hover-card';
-import { Text } from '~/components/universal-ui/typography';
+} from '~/components/ui/hover-card';
+import { Text } from '~/components/ui/typography';
 
 export default function HoverCardUniversalScreen() {
   const [open, setOpen] = React.useState(false);

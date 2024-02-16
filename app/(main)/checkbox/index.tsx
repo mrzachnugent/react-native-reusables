@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Checkbox } from '~/components/ui/checkbox';
-import { Label } from '~/components/ui/label';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { Checkbox } from '~/components/old-ui/checkbox';
+import { Label } from '~/components/old-ui/label';
 
 export default function CheckboxScreen() {
   const [isChecked, setIsChecked] = React.useState(false);

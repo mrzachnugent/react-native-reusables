@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { Separator } from '~/components/universal-ui/separator';
-import * as Typo from '~/components/universal-ui/typography';
+import { Separator } from '~/components/ui/separator';
+import * as Typo from '~/components/ui/typography';
 
 export default function SeparatorUniversalScreen() {
   return (

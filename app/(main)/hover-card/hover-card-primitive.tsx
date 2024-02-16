@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as HoverCard from '~/lib/rn-primitives/hover-card';
+import * as HoverCard from '~/components/primitives/hover-card';
 
 export default function HoverCardPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

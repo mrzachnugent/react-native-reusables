@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import * as Checkbox from '~/lib/rn-primitives/checkbox';
-import * as Label from '~/lib/rn-primitives/label';
+import * as Checkbox from '~/components/primitives/checkbox';
+import * as Label from '~/components/primitives/label';
 import { Check } from '~/components/Icons';
 
 export default function CheckboxPrimitiveScreen() {

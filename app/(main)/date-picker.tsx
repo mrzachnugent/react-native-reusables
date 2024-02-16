@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
 import { Calendar as CalendarIcon } from '~/components/Icons';
 import {
@@ -7,9 +7,9 @@ import {
   BottomSheetContent,
   BottomSheetOpenTrigger,
   BottomSheetView,
-} from '~/components/ui/bottom-sheet';
-import { Button, buttonTextVariants } from '~/components/ui/button';
-import { Calendar } from '~/components/ui/calendar';
+} from '~/components/old-ui/bottom-sheet';
+import { Button, buttonTextVariants } from '~/components/old-ui/button';
+import { Calendar } from '~/components/old-ui/calendar';
 import { cn } from '~/lib/utils';
 
 export default function DatePickerScreen() {

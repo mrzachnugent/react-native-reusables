@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { RadioGroup, RadioGroupItem } from '~/components/old-ui/radio-group';
 
 export default function RadioGroupScreen() {
   return (

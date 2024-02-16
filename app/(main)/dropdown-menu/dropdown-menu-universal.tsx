@@ -10,12 +10,12 @@ import {
   UserPlus,
   Users,
 } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/universal-ui/button';
-import { Text } from '~/components/universal-ui/typography';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/typography';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,7 +28,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '~/components/universal-ui/dropdown-menu';
+} from '~/components/ui/dropdown-menu';
 
 export default function DropdownMenuUniversalScreen() {
   const [open, setOpen] = React.useState(false);

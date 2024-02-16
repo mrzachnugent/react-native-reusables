@@ -5,7 +5,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '~/components/universal-ui/accordion';
+} from '~/components/ui/accordion';
 
 export default function AccordionPrimitiveScreen() {
   const [multiple, setMultiple] = React.useState<string[]>(['item-1']);

@@ -1,77 +1,36 @@
-import React from 'react';
-import {
-  GestureResponderEvent,
-  Pressable,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { Button, buttonVariants } from '~/components/ui/button';
+import { VariantProps } from 'class-variance-authority';
+import * as LucideIcon from 'lucide-react-native';
+import * as React from 'react';
+import { toggleTextVariants, toggleVariants } from '~/components/ui/toggle';
+import { TextClassContext } from '~/components/ui/typography';
+import * as ToggleGroupPrimitive from '~/components/primitives/toggle-group';
 import { cn } from '~/lib/utils';
 
-interface ToggleGroupProps {
-  defaultValue?: string | string[];
-  onValueChange?: (value: string | string[]) => void;
-  disabled?: boolean;
-  type?: 'single' | 'multiple';
-}
-
-interface ToggleGroupContext {
-  value: string | string[];
-  setValue: React.Dispatch<React.SetStateAction<string | string[]>>;
-  onValueChange?: (value: string | string[]) => void;
-  disabled: boolean;
-}
-
-const ToggleGroupContext = React.createContext({} as ToggleGroupContext);
+const ToggleGroupContext = React.createContext<VariantProps<
+  typeof toggleVariants
+> | null>(null);
 
 const ToggleGroup = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View> & ToggleGroupProps
->(
-  (
-    {
-      defaultValue = '',
-      onValueChange,
-      className,
-      disabled = false,
-      type = 'single',
-      ...props
-    },
-    ref
-  ) => {
-    const [value, setValue] = React.useState(
-      type === 'single'
-        ? defaultValue
-        : Array.isArray(defaultValue)
-        ? defaultValue
-        : []
-    );
+  React.ElementRef<typeof ToggleGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
+    VariantProps<typeof toggleVariants>
+>(({ className, variant, size, children, ...props }, ref) => (
+  <ToggleGroupPrimitive.Root
+    ref={ref}
+    className={cn('flex flex-row items-center justify-center gap-1', className)}
+    {...props}
+  >
+    <ToggleGroupContext.Provider value={{ variant, size }}>
+      {children}
+    </ToggleGroupContext.Provider>
+  </ToggleGroupPrimitive.Root>
+));
 
-    return (
-      <ToggleGroupContext.Provider
-        value={{
-          value,
-          setValue,
-          disabled,
-          onValueChange,
-        }}
-      >
-        <View
-          role={type === 'single' ? 'radiogroup' : 'group'}
-          ref={ref}
-          className={cn('flex-row gap-3', className)}
-          {...props}
-        />
-      </ToggleGroupContext.Provider>
-    );
-  }
-);
-
-ToggleGroup.displayName = 'ToggleGroup';
+ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
 
 function useToggleGroupContext() {
   const context = React.useContext(ToggleGroupContext);
-  if (!context) {
+  if (context === null) {
     throw new Error(
       'ToggleGroup compound components cannot be rendered outside the ToggleGroup component'
     );
@@ -80,80 +39,55 @@ function useToggleGroupContext() {
 }
 
 const ToggleGroupItem = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  Omit<React.ComponentPropsWithoutRef<typeof Button>, 'disabled' | 'style'> & {
-    name: string;
-    buttonClass?: string;
-    children?: React.ReactNode;
-    style?: ViewStyle;
-  }
->(
-  (
-    {
-      className,
-      name,
-      buttonClass,
-      onPress,
-      children,
-      variant = 'default',
-      size,
-      style,
-      ...props
-    },
-    ref
-  ) => {
-    const { value, setValue, disabled, onValueChange } =
-      useToggleGroupContext();
+  React.ElementRef<typeof ToggleGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
+    VariantProps<typeof toggleVariants>
+>(({ className, children, variant, size, ...props }, ref) => {
+  const context = useToggleGroupContext();
+  const { value } = ToggleGroupPrimitive.useRootContext();
 
-    function handleOnPress(ev: GestureResponderEvent) {
-      setValue((prev) => {
-        if (typeof prev === 'string') {
-          const newVal = prev === name ? '' : name;
-          onValueChange?.(newVal);
-          return newVal;
-        }
-        if (prev.includes(name)) {
-          const newVal = prev.filter((v) => v !== name);
-          onValueChange?.(newVal);
-          return newVal;
-        }
-        const newVal = [...prev, name];
-        onValueChange?.(newVal);
-        return newVal;
-      });
-      onPress?.(ev);
-    }
-
-    const isSelected = Array.isArray(value)
-      ? value.includes(name)
-      : value === name;
-
-    return (
-      <Pressable
-        disabled={disabled}
-        onPress={handleOnPress}
+  return (
+    <TextClassContext.Provider
+      value={cn(
+        toggleTextVariants({ variant, size }),
+        ToggleGroupPrimitive.utils.getIsSelected(value, props.value)
+          ? 'text-accent-foreground'
+          : 'web:group-hover:text-muted-foreground'
+      )}
+    >
+      <ToggleGroupPrimitive.Item
+        ref={ref}
         className={cn(
-          'border bg-background active:opacity-70',
-          isSelected ? 'border-border' : 'border-transparent',
-          buttonVariants({
-            variant: isSelected
-              ? 'secondary'
-              : variant === 'default'
-              ? 'ghost'
-              : 'outline',
-            size,
+          toggleVariants({
+            variant: context.variant || variant,
+            size: context.size || size,
           }),
+          props.disabled && 'web:pointer-events-none opacity-50',
+          ToggleGroupPrimitive.utils.getIsSelected(value, props.value) &&
+            'bg-accent',
           className
         )}
-        accessibilityState={{ selected: value === name }}
-        role={typeof name === 'string' ? 'radio' : 'switch'}
-        ref={ref}
         {...props}
       >
         {children}
-      </Pressable>
-    );
-  }
-);
+      </ToggleGroupPrimitive.Item>
+    </TextClassContext.Provider>
+  );
+});
 
-export { ToggleGroup, ToggleGroupItem };
+ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;
+
+function ToggleGroupIcon({
+  className,
+  name,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<LucideIcon.LucideIcon>, 'name'> & {
+  name: keyof typeof LucideIcon;
+}) {
+  const textClass = React.useContext(TextClassContext);
+
+  const Icon = LucideIcon[name] as LucideIcon.LucideIcon;
+  return <Icon className={cn(textClass, className)} {...props} />;
+}
+
+export { ToggleGroup, ToggleGroupIcon, ToggleGroupItem };

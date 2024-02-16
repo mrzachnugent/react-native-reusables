@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
 import { Bold, Italic, Underline } from '~/components/Icons';
-import { ToggleGroup, ToggleGroupItem } from '~/components/ui/toggle-group';
+import { ToggleGroup, ToggleGroupItem } from '~/components/old-ui/toggle-group';
 
 export default function ToggleGroupScreen() {
   return (

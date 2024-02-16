@@ -1,5 +1,5 @@
 import { ScrollView, View } from 'react-native';
-import * as Typo from '~/components/universal-ui/typography';
+import * as Typo from '~/components/ui/typography';
 
 export default function TypographyScreen() {
   return (

@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { ScrollView, TextInput, View } from 'react-native';
-import { Label, LabelText } from '~/components/universal-ui/label';
-import { Textarea } from '~/components/universal-ui/textarea';
+import { Label, LabelText } from '~/components/ui/label';
+import { Textarea } from '~/components/ui/textarea';
 
 export default function InputScreen() {
   const inputRef = React.useRef<TextInput>(null);

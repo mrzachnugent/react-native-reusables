@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
 import {
   Select,
   SelectItem,
@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   type RenderSelectItem,
   type SelectOption,
-} from '~/components/ui/select';
+} from '~/components/old-ui/select';
 
 const DATA = [
   { value: 'tom@cruise.com', label: 'tom@cruise.com' },

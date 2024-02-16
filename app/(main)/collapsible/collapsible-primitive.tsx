@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
-import * as Collapsible from '~/lib/rn-primitives/collapsible';
+import * as Collapsible from '~/components/primitives/collapsible';
 
 export default function CollapsiblePrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

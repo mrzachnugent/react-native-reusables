@@ -1,9 +1,5 @@
 import { View } from 'react-native';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '~/components/universal-ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 export default function AlertScreen() {
   return (

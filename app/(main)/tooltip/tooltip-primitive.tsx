@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Tooltip from '~/lib/rn-primitives/tooltip';
+import * as Tooltip from '~/components/primitives/tooltip';
 
 export default function TooltipPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

@@ -1,7 +1,7 @@
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
 import { Sparkles } from '~/components/Icons';
-import React from 'react';
+import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -12,10 +12,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '~/components/universal-ui/navigation-menu';
-import { TextRef } from '~/lib/rn-primitives/types';
+} from '~/components/ui/navigation-menu';
+import { TextRef } from '~/components/primitives/types';
 import { cn } from '~/lib/utils';
-import { Text } from '~/components/universal-ui/typography';
+import { Text } from '~/components/ui/typography';
 
 export default function MenubarPrimitiveScreen() {
   const insets = useSafeAreaInsets();

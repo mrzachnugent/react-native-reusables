@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import {
   AlertDialog,
@@ -10,9 +10,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '~/components/universal-ui/alert-dialog';
-import { Button } from '~/components/universal-ui/button';
-import { Text } from '~/components/universal-ui/typography';
+} from '~/components/ui/alert-dialog';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/typography';
 
 export default function AlertDialogUniversalScreen() {
   const [open, setOpen] = React.useState(false);

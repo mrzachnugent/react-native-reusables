@@ -1,11 +1,11 @@
 import { Info } from '~/components/Icons';
 import { Pressable, Text, View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/ui/popover';
+} from '~/components/old-ui/popover';
 import { cn } from '~/lib/utils';
 
 export default function TooltipScreen() {

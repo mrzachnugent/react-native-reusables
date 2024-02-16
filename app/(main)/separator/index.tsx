@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Separator } from '~/components/ui/separator';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { Separator } from '~/components/old-ui/separator';
 
 export default function SeparatorScreen() {
   return (

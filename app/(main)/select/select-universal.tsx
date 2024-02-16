@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
   Option,
-} from '~/components/universal-ui/select';
+} from '~/components/ui/select';
 
 const VALUES = {
   apple: 'Apple',

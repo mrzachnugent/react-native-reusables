@@ -1,221 +1,164 @@
-import React from 'react';
-import {
-  GestureResponderEvent,
-  Modal,
-  Pressable,
-  Text,
-  View,
-} from 'react-native';
-import * as Slot from '~/lib/rn-primitives/slot/slot-native';
+import { X } from '~/components/Icons';
+import * as React from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import * as DialogPrimitive from '~/components/primitives/dialog';
 import { cn } from '~/lib/utils';
-import { Button } from './button';
 
-interface DialogProps {
-  children: React.ReactNode;
-  closeOnOverlayPress?: boolean;
-  defaultOpen?: boolean;
-  open?: boolean;
-  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-}
-interface DialogContext {
-  visible: boolean;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  closeOnOverlayPress: boolean;
-}
+const Dialog = DialogPrimitive.Root;
 
-const DialogContext = React.createContext<DialogContext>({} as DialogContext);
+const DialogTrigger = DialogPrimitive.Trigger;
 
-const Dialog = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View> & DialogProps
->(
-  (
-    {
-      open,
-      setOpen,
-      closeOnOverlayPress = true,
-      defaultOpen = false,
-      ...props
-    },
-    ref
-  ) => {
-    const [visible, setVisible] = React.useState(defaultOpen ?? false);
-    return (
-      <DialogContext.Provider
-        value={{
-          visible: open ?? visible,
-          setVisible: setOpen ?? setVisible,
-          closeOnOverlayPress,
-        }}
-      >
-        <View ref={ref} {...props} />
-      </DialogContext.Provider>
-    );
-  }
-);
+const DialogPortal = DialogPrimitive.Portal;
 
-Dialog.displayName = 'Dialog';
+const DialogClose = DialogPrimitive.Close;
 
-function useDialogContext() {
-  const context = React.useContext(DialogContext);
-  if (!context) {
-    throw new Error(
-      'Dialog compound components cannot be rendered outside the Dialog component'
-    );
-  }
-  return context;
-}
-
-const DialogTrigger = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  React.ComponentPropsWithoutRef<typeof Button> & {
-    asChild?: boolean;
-  }
->(({ onPress, asChild = false, ...props }, ref) => {
-  const { setVisible } = useDialogContext();
-  function handleOnPress(event: GestureResponderEvent) {
-    setVisible(true);
-    onPress?.(event);
-  }
-
-  const Trigger = asChild ? Slot.Pressable : Button;
-  return <Trigger ref={ref} onPress={handleOnPress} {...props} />;
-});
-
-DialogTrigger.displayName = 'DialogTrigger';
-
-const DialogContent = React.forwardRef<
-  React.ElementRef<typeof Modal>,
-  React.ComponentPropsWithoutRef<typeof Modal> & { overlayClass?: string }
->(
-  (
-    { className, children, animationType = 'fade', overlayClass, ...props },
-    ref
-  ) => {
-    const { visible, setVisible, closeOnOverlayPress } = useDialogContext();
-
-    return (
-      <Modal
-        ref={ref}
-        animationType={animationType}
-        transparent={true}
-        visible={visible}
-        onRequestClose={() => {
-          setVisible((prev) => !prev);
-        }}
-        statusBarTranslucent
-        {...props}
-      >
-        <Pressable
-          onPressOut={
-            closeOnOverlayPress
-              ? () => {
-                  setVisible(false);
-                }
-              : undefined
-          }
-          className={cn(
-            'flex-1  justify-center items-center p-2',
-            animationType !== 'slide' && 'bg-zinc-50/80 dark:bg-zinc-900/80',
-            overlayClass
-          )}
-        >
-          <Pressable
-            className={cn(
-              'bg-background rounded-2xl p-8 border border-border shadow-lg shadow-primary/5',
-              className
-            )}
-            role={'dialog'}
-          >
-            {children}
-          </Pressable>
-        </Pressable>
-      </Modal>
-    );
-  }
-);
-
-DialogContent.displayName = 'DialogContent';
-
-const DialogHeader = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
+const DialogOverlayWeb = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => {
-  return <View className={cn('gap-2', className)} ref={ref} {...props} />;
-});
-
-DialogHeader.displayName = 'DialogHeader';
-
-const DialogTitle = React.forwardRef<
-  React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
+  const { open } = DialogPrimitive.useContext();
   return (
-    <Text
+    <DialogPrimitive.Overlay
+      style={StyleSheet.absoluteFill}
       className={cn(
-        'text-2xl leading-6 text-foreground font-semibold',
+        'z-50 bg-black/80 flex justify-center items-center p-2',
+        open
+          ? 'web:animate-in web:fade-in-0'
+          : 'web:animate-out web:fade-out-0',
         className
       )}
-      ref={ref}
-      role='heading'
       {...props}
+      ref={ref}
     />
   );
 });
 
-DialogTitle.displayName = 'DialogTitle';
+DialogOverlayWeb.displayName = 'DialogOverlayWeb';
 
-const DialogDescription = React.forwardRef<
-  React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
+const DialogOverlayNative = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, children, ...props }, ref) => {
   return (
-    <Text
-      className={cn('text-lg text-muted-foreground', className)}
-      ref={ref}
-      {...props}
-    />
+    <Animated.View
+      style={StyleSheet.absoluteFill}
+      entering={FadeIn.duration(150)}
+      exiting={FadeOut.duration(150)}
+    >
+      <DialogPrimitive.Overlay
+        style={StyleSheet.absoluteFill}
+        className={cn(
+          'z-50 flex bg-black/80 justify-center items-center p-2',
+          className
+        )}
+        {...props}
+        ref={ref}
+      >
+        <>{children}</>
+      </DialogPrimitive.Overlay>
+    </Animated.View>
   );
 });
 
-DialogDescription.displayName = 'DialogDescription';
+DialogOverlayNative.displayName = 'DialogOverlayNative';
 
-const DialogFooter = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
->(({ className, ...props }, ref) => {
+const DialogOverlay = Platform.select({
+  web: DialogOverlayWeb,
+  default: DialogOverlayNative,
+});
+
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => {
+  const { open } = DialogPrimitive.useContext();
   return (
-    <View
-      className={cn('flex-row justify-end gap-3', className)}
-      ref={ref}
-      {...props}
-    />
+    <DialogPortal>
+      <DialogOverlay style={StyleSheet.absoluteFill}>
+        <DialogPrimitive.Content
+          ref={ref}
+          className={cn(
+            'z-50 max-w-lg gap-4 border border-border web:cursor-default bg-background p-6 shadow-lg web:duration-200 rounded-lg',
+            open
+              ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
+              : 'web:animate-out web:fade-out-0 web:zoom-out-95',
+            className
+          )}
+          {...props}
+        >
+          {children}
+          <DialogPrimitive.Close
+            className={
+              'absolute right-4 top-4 p-0.5 web:group rounded-sm opacity-70 web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none'
+            }
+          >
+            <X
+              size={Platform.OS === 'web' ? 16 : 18}
+              className={cn(
+                'text-muted-foreground',
+                open && 'text-accent-foreground'
+              )}
+            />
+          </DialogPrimitive.Close>
+        </DialogPrimitive.Content>
+      </DialogOverlay>
+    </DialogPortal>
   );
 });
+DialogContent.displayName = DialogPrimitive.Content.displayName;
 
+const DialogHeader = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof View>) => (
+  <View
+    className={cn('flex flex-col gap-1.5 text-center sm:text-left', className)}
+    {...props}
+  />
+);
+DialogHeader.displayName = 'DialogHeader';
+
+const DialogFooter = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof View>) => (
+  <View
+    className={cn(
+      'flex flex-col-reverse sm:flex-row sm:justify-end gap-2',
+      className
+    )}
+    {...props}
+  />
+);
 DialogFooter.displayName = 'DialogFooter';
 
-const DialogClose = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  React.ComponentPropsWithoutRef<typeof Button> & {
-    asChild?: boolean;
-  }
->(({ variant = 'outline', asChild, ...props }, ref) => {
-  const { setVisible } = useDialogContext();
-  const Trigger = asChild ? Slot.Pressable : Button;
-  return (
-    <Trigger
-      variant={variant}
-      onPress={() => {
-        setVisible(false);
-      }}
-      ref={ref}
-      {...props}
-    />
-  );
-});
+const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cn(
+      'text-lg native:text-xl text-foreground font-semibold leading-none tracking-tight',
+      className
+    )}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-DialogClose.displayName = 'DialogClose';
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn('text-sm native:text-base text-muted-foreground', className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {
   Dialog,
@@ -224,6 +167,8 @@ export {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogOverlay,
+  DialogPortal,
   DialogTitle,
   DialogTrigger,
 };

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
-import * as Toggle from '~/lib/rn-primitives/toggle';
+import * as Toggle from '~/components/primitives/toggle';
 import { cn } from '~/lib/utils';
 
 export default function TogglePrimitiveScreen() {

@@ -1,6 +1,6 @@
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
-import React from 'react';
+import * as React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -18,8 +18,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '~/components/universal-ui/menubar';
-import { Text } from '~/components/universal-ui/typography';
+} from '~/components/ui/menubar';
+import { Text } from '~/components/ui/typography';
 
 export default function MenubarPrimitiveScreen() {
   const insets = useSafeAreaInsets();

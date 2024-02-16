@@ -8,10 +8,10 @@ import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import * as React from 'react';
 import { AppState } from 'react-native';
-import { ToastProvider } from '~/components/ui/toast';
+import { ToastProvider } from '~/components/old-ui/toast';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
-import { PortalHost } from '~/lib/rn-primitives/portal/portal-native';
+import { PortalHost } from '~/components/primitives/portal/portal-native';
 import { useColorScheme } from '~/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {

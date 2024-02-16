@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/universal-ui/card';
-import { Text } from '~/components/universal-ui/typography';
+} from '~/components/ui/card';
+import { Text } from '~/components/ui/typography';
 
 export default function ButtonUniversalScreen() {
   return (

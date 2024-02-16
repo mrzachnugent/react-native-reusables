@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,8 +16,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '~/components/universal-ui/context-menu';
-import { Text } from '~/components/universal-ui/typography';
+} from '~/components/ui/context-menu';
+import { Text } from '~/components/ui/typography';
 
 export default function ContextPrimitiveScreen() {
   const [open, setOpen] = React.useState(false);

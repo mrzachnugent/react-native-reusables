@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { Badge } from '~/components/ui/badge';
+import { Badge } from '~/components/old-ui/badge';
 
 export default function BadgeScreen() {
   return (

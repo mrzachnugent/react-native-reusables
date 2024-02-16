@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Pressable, View, Text } from 'react-native';
-import * as Progress from '~/lib/rn-primitives/progress';
+import * as Progress from '~/components/primitives/progress';
 
 export default function ProgressPrimitiveScreen() {
   const [progress, setProgress] = React.useState(13);

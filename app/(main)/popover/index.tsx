@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import { Text, View, ScrollView, Dimensions } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { buttonTextVariants } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
+import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import { buttonTextVariants } from '~/components/old-ui/button';
+import { Input } from '~/components/old-ui/input';
+import { Label } from '~/components/old-ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/ui/popover';
+} from '~/components/old-ui/popover';
 import { cn } from '~/lib/utils';
 
 const { height } = Dimensions.get('window');

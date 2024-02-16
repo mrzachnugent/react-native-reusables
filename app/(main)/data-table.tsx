@@ -1,13 +1,13 @@
 import { Column, ColumnDef } from '@tanstack/react-table';
 import Drawer from 'expo-router/drawer';
-import React from 'react';
+import * as React from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { ArrowDown, ArrowUp } from '~/components/Icons';
-import { Button } from '~/components/ui/button';
-import { DataTable } from '~/components/ui/data-table';
-import { Skeleton } from '~/components/universal-ui/skeleton';
-import { TableCell, TableRow } from '~/components/ui/table';
+import { Button } from '~/components/old-ui/button';
+import { DataTable } from '~/components/old-ui/data-table';
+import { Skeleton } from '~/components/ui/skeleton';
+import { TableCell, TableRow } from '~/components/old-ui/table';
 
 const { width, height } = Dimensions.get('screen');
 
