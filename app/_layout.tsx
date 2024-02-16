@@ -8,11 +8,12 @@ import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import * as React from 'react';
 import { AppState } from 'react-native';
-import { ToastProvider } from '~/components/old-ui/toast';
+import { ToastProvider } from '~/components/deprecated-ui/toast';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { PortalHost } from '~/components/primitives/portal/portal-native';
 import { useColorScheme } from '~/lib/useColorScheme';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -82,21 +83,23 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <BottomSheetModalProvider>
-        <Stack initialRouteName='(main)'>
-          <Stack.Screen
-            name='(main)'
-            options={{
-              headerShown: false,
-            }}
-          />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <Stack initialRouteName='(main)'>
+            <Stack.Screen
+              name='(main)'
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name='modal'
-            options={{ presentation: 'modal', title: 'Modal' }}
-          />
-        </Stack>
-      </BottomSheetModalProvider>
+            <Stack.Screen
+              name='modal'
+              options={{ presentation: 'modal', title: 'Modal' }}
+            />
+          </Stack>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
       <PortalHost />
       <ToastProvider />
     </ThemeProvider>

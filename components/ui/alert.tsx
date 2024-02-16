@@ -7,11 +7,11 @@ import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
-  'relative w-full rounded-lg border border-border p-4',
+  'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-foreground/10',
   {
     variants: {
       variant: {
-        default: 'bg-background',
+        default: '',
         destructive: 'border-destructive',
       },
     },
@@ -48,10 +48,10 @@ const Alert = React.forwardRef<
       <View
         ref={ref}
         role='alert'
-        className={cn(alertVariants({ variant }), className)}
+        className={alertVariants({ variant, className })}
         {...props}
       >
-        <View className='absolute left-4 top-4 -translate-y-0.5'>
+        <View className='absolute left-3.5 top-4 -translate-y-0.5'>
           <Icon
             size={iconSize}
             color={

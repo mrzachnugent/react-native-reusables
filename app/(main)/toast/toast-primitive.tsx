@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Portal } from '~/components/primitives/portal/portal-native';
 import * as Toast from '~/components/primitives/toast';
 
-export default function ToastPrimitiveScreen() {
+export default function ToastScreen() {
   const [open, setOpen] = React.useState(false);
   const [seconds, setSeconds] = React.useState(3);
   const insets = useSafeAreaInsets();

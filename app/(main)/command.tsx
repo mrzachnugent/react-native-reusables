@@ -16,7 +16,10 @@ import {
   Lamp,
   Table,
 } from '~/components/Icons';
-import { buttonTextVariants, buttonVariants } from '~/components/old-ui/button';
+import {
+  buttonTextVariants,
+  buttonVariants,
+} from '~/components/deprecated-ui/button';
 import {
   Command,
   CommandContent,
@@ -27,7 +30,7 @@ import {
   CommandListItem,
   CommandListItemProps,
   CommandTrigger,
-} from '~/components/old-ui/command';
+} from '~/components/deprecated-ui/command';
 import { cn } from '~/lib/utils';
 
 export default function CommandScreen() {

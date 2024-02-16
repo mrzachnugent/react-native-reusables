@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
-import { Label } from '~/components/old-ui/label';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '~/components/deprecated-ui/alert';
+import { Label } from '~/components/deprecated-ui/label';
 
 export default function LabelScreen() {
   return (

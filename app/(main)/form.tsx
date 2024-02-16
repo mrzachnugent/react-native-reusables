@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, ScrollView, View } from 'react-native';
 import * as z from 'zod';
-import { Button } from '~/components/old-ui/button';
+import { Button } from '~/components/deprecated-ui/button';
 import {
   Form,
   FormCheckbox,
@@ -15,8 +15,8 @@ import {
   FormSelect,
   FormSwitch,
   FormTextarea,
-} from '~/components/old-ui/form';
-import { RadioGroupItem } from '~/components/old-ui/radio-group';
+} from '~/components/deprecated-ui/form';
+import { RadioGroupItem } from '~/components/deprecated-ui/radio-group';
 
 const frameworks = [
   {

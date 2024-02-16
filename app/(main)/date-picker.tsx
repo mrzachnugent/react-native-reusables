@@ -7,9 +7,9 @@ import {
   BottomSheetContent,
   BottomSheetOpenTrigger,
   BottomSheetView,
-} from '~/components/old-ui/bottom-sheet';
-import { Button, buttonTextVariants } from '~/components/old-ui/button';
-import { Calendar } from '~/components/old-ui/calendar';
+} from '~/components/deprecated-ui/bottom-sheet';
+import { Button, buttonTextVariants } from '~/components/deprecated-ui/button';
+import { Calendar } from '~/components/deprecated-ui/calendar';
 import { cn } from '~/lib/utils';
 
 export default function DatePickerScreen() {

@@ -1,7 +1,11 @@
 import { View } from 'react-native';
-import { Button } from '~/components/old-ui/button';
+import { Button } from '~/components/deprecated-ui/button';
 import Toast from 'react-native-toast-message';
-import { Alert, AlertDescription, AlertTitle } from '~/components/old-ui/alert';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '~/components/deprecated-ui/alert';
 
 export default function ToastScreen() {
   function showSuccessToast() {

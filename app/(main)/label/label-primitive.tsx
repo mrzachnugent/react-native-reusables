@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import * as Label from '~/components/primitives/label';
 
-export default function LabelPrimitiveScreen() {
+export default function LabelScreen() {
   return (
     <View className='flex-1 justify-center items-center p-6 gap-12'>
       <View className='flex-row gap-6 items-center'>

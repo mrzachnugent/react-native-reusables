@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { Calendar, LocaleConfig } from '~/components/old-ui/calendar';
+import { Calendar, LocaleConfig } from '~/components/deprecated-ui/calendar';
 import { useColorScheme } from '~/lib/useColorScheme';
+
+// TODO: refactor to use UI components
 
 LocaleConfig.defaultLocale = 'en';
 

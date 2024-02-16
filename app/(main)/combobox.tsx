@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Combobox, ComboboxOption } from '~/components/old-ui/combobox';
+import { Combobox, ComboboxOption } from '~/components/deprecated-ui/combobox';
 
 const frameworks = [
   {
