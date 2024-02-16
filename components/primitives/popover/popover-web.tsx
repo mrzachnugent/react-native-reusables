@@ -45,8 +45,7 @@ function usePopoverContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = usePopoverContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
@@ -147,8 +146,7 @@ Content.displayName = 'ContentWebPopover';
 
 const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = usePopoverContext();
 
     function onPress(ev: GestureResponderEvent) {

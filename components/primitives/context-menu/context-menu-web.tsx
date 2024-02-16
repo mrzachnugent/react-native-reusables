@@ -59,8 +59,7 @@ function useContextMenuContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled = false, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { open } = useContextMenuContext();
 
     React.useLayoutEffect(() => {

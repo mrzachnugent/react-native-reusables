@@ -67,8 +67,7 @@ function useTooltipContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = useTooltipContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {

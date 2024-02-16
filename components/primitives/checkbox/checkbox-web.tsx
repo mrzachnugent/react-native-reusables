@@ -28,8 +28,7 @@ const Root = React.forwardRef<
     },
     ref
   ) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
 
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
@@ -97,8 +96,7 @@ const Indicator = React.forwardRef<
   ComponentPropsWithAsChild<typeof View> & CheckboxIndicator
 >(({ asChild, forceMount, ...props }, ref) => {
   const { checked, disabled } = useCheckboxContext();
-  const augmentedRef = React.useRef<PressableRef>(null);
-  useAugmentedRef({ augmentedRef, ref });
+  const augmentedRef = useAugmentedRef({ ref });
 
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {

@@ -72,8 +72,7 @@ function useSelectContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { open } = useSelectContext();
 
     React.useLayoutEffect(() => {

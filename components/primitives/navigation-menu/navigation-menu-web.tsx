@@ -72,8 +72,7 @@ function useNavigationMenuContext() {
 
 const List = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...viewProps }, ref) => {
-    const augmentedRef = React.useRef<View>(null);
-    useAugmentedRef({ ref, augmentedRef });
+    const augmentedRef = useAugmentedRef({ ref });
     const { orientation } = useNavigationMenuContext();
 
     React.useLayoutEffect(() => {

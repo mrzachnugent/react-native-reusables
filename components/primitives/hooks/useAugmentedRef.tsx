@@ -1,19 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 
 interface AugmentRefProps<T> {
   ref: React.Ref<T>;
-  augmentedRef: React.ForwardedRef<T>;
   methods?: Record<string, (...args: any[]) => any>;
   deps?: any[];
 }
 
-// TODO: intantiate augmentedRef in here and return it
 export function useAugmentedRef<T>({
-  augmentedRef,
   ref,
   methods,
   deps = [],
 }: AugmentRefProps<T>) {
+  const augmentedRef = React.useRef<T>(null);
   React.useImperativeHandle(
     ref,
     () => {
@@ -27,4 +25,5 @@ export function useAugmentedRef<T>({
     },
     deps
   );
+  return augmentedRef;
 }

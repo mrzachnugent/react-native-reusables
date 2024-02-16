@@ -84,8 +84,7 @@ function useMenubarMenuContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled = false, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { value: menuValue } = useMenubarMenuContext();
     const { value } = useMenubarContext();
 

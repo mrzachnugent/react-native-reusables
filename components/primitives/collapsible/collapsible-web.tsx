@@ -19,8 +19,7 @@ const Root = React.forwardRef<
   ViewRef,
   SlottableViewProps & CollapsibleRootProps
 >(({ asChild, disabled = false, open, onOpenChange, ...viewProps }, ref) => {
-  const augmentedRef = React.useRef<ViewRef>(null);
-  useAugmentedRef({ augmentedRef, ref });
+  const augmentedRef = useAugmentedRef({ ref });
 
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
@@ -78,9 +77,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     ref
   ) => {
     const { disabled, open, onOpenChange } = useCollapsibleContext();
-
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -128,8 +125,7 @@ const Content = React.forwardRef<
   ViewRef,
   SlottableViewProps & CollapsibleContentProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const augmentedRef = React.useRef<ViewRef>(null);
-  useAugmentedRef({ augmentedRef, ref });
+  const augmentedRef = useAugmentedRef({ ref });
   const { open } = useCollapsibleContext();
 
   React.useLayoutEffect(() => {

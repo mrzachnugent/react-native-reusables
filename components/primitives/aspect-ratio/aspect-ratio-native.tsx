@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import * as Slot from '~/components/primitives/slot';
 import type { SlottableViewProps } from '~/components/primitives/types';

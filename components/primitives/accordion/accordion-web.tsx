@@ -92,8 +92,7 @@ const AccordionItemContext = React.createContext<
 
 const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
   ({ asChild, value: itemValue, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<ViewRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const {
       value,
       orientation,
@@ -153,8 +152,7 @@ function useAccordionItemContext() {
 
 const Header = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
-    const augmentedRef = React.useRef<ViewRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { disabled, isExpanded } = useAccordionItemContext();
     const { orientation, disabled: disabledRoot } = useAccordionContext();
 
@@ -201,8 +199,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const { disabled: disabledRoot } = useAccordionContext();
     const { disabled, isExpanded } = useAccordionItemContext();
     const triggerRef = React.useRef<HTMLButtonElement>(null);
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
 
     useIsomorphicLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -266,8 +263,7 @@ const Content = React.forwardRef<
   ViewRef,
   AccordionContentProps & SlottableViewProps
 >(({ asChild, forceMount, ...props }, ref) => {
-  const augmentedRef = React.useRef<ViewRef>(null);
-  useAugmentedRef({ augmentedRef, ref });
+  const augmentedRef = useAugmentedRef({ ref });
 
   const { orientation, disabled: disabledRoot } = useAccordionContext();
   const { disabled, isExpanded } = useAccordionItemContext();

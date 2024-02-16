@@ -55,8 +55,7 @@ function useAlertDialogContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = useAlertDialogContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
@@ -130,8 +129,7 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const augmentedRef = React.useRef<ViewRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { open } = useAlertDialogContext();
 
     React.useLayoutEffect(() => {
@@ -160,8 +158,7 @@ Content.displayName = 'ContentAlertWebDialog';
 
 const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = useAlertDialogContext();
 
     function onPress(ev: GestureResponderEvent) {
@@ -199,8 +196,7 @@ Cancel.displayName = 'CancelAlertWebDialog';
 
 const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
-    const augmentedRef = React.useRef<PressableRef>(null);
-    useAugmentedRef({ augmentedRef, ref });
+    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = useAlertDialogContext();
 
     function onPress(ev: GestureResponderEvent) {
