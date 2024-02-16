@@ -28,26 +28,21 @@ interface Insets {
   right?: number;
 }
 
+// TODO: Avoid requiring Popover from radix-ui, write out the types manually
 type RadixContent = React.ComponentProps<typeof Popover.Content>;
 
-// TODO: the NATIVE ONLY props depend on the component
+/**
+ * Certain props are only available on the native version of the component.
+ * @docs For the web version, see the Radix documentation https://www.radix-ui.com/primitives
+ */
 interface PositionedContentProps {
   forceMount?: true | undefined;
   style?: ViewStyle;
   alignOffset?: number;
   insets?: Insets;
   avoidCollisions?: boolean;
-  /**
-   * Platform: NATIVE ONLY
-   */
   align?: 'start' | 'center' | 'end';
-  /**
-   * Platform: NATIVE ONLY
-   */
   side?: 'top' | 'bottom';
-  /**
-   * Platform: NATIVE ONLY
-   */
   sideOffset?: number;
   /**
    * Platform: NATIVE ONLY

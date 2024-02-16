@@ -54,7 +54,7 @@ Work in progress...
 
 ### Backlog
 
-1. Tackle all commented `TODO`s - 11 Left
+1. Tackle all commented `TODO`s - 10 Left
    <br>
    _Mostly refactoring and adding web components for certain components in `~/components/deprecated-ui/`_
 
