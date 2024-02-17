@@ -1,4 +1,3 @@
-import * as Popover from '@radix-ui/react-popover';
 import type { Pressable, Text, View, ViewStyle } from 'react-native';
 
 type ComponentPropsWithAsChild<T extends React.ElementType<any>> =
@@ -28,8 +27,8 @@ interface Insets {
   right?: number;
 }
 
-// TODO: Avoid requiring Popover from radix-ui, write out the types manually
-type RadixContent = React.ComponentProps<typeof Popover.Content>;
+type PointerDownOutsideEvent = CustomEvent<{ originalEvent: PointerEvent }>;
+type FocusOutsideEvent = CustomEvent<{ originalEvent: FocusEvent }>;
 
 /**
  * Certain props are only available on the native version of the component.
@@ -55,35 +54,37 @@ interface PositionedContentProps {
   /**
    * Platform: WEB ONLY
    */
-  onCloseAutoFocus?: RadixContent['onCloseAutoFocus'];
+  onCloseAutoFocus?: (event: Event) => void;
   /**
    * Platform: WEB ONLY
    */
-  onEscapeKeyDown?: RadixContent['onEscapeKeyDown'];
+  onEscapeKeyDown?: (event: KeyboardEvent) => void;
   /**
    * Platform: WEB ONLY
    */
-  onPointerDownOutside?: RadixContent['onPointerDownOutside'];
+  onPointerDownOutside?: (event: PointerDownOutsideEvent) => void;
   /**
    * Platform: WEB ONLY
    */
-  onFocusOutside?: RadixContent['onFocusOutside'];
+  onFocusOutside?: (event: FocusOutsideEvent) => void;
   /**
    * Platform: WEB ONLY
    */
-  onInteractOutside?: RadixContent['onInteractOutside'];
+  onInteractOutside?: (
+    event: PointerDownOutsideEvent | FocusOutsideEvent
+  ) => void;
   /**
    * Platform: WEB ONLY
    */
-  collisionBoundary?: RadixContent['collisionBoundary'];
+  collisionBoundary?: Element | null | Array<Element | null>;
   /**
    * Platform: WEB ONLY
    */
-  sticky?: RadixContent['sticky'];
+  sticky?: 'partial' | 'always';
   /**
    * Platform: WEB ONLY
    */
-  hideWhenDetached?: RadixContent['hideWhenDetached'];
+  hideWhenDetached?: boolean;
 }
 
 interface ForceMountable {
