@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import {
   BottomSheet,
   BottomSheetCloseTrigger,
@@ -9,15 +9,11 @@ import {
   BottomSheetTextInput,
   BottomSheetView,
 } from '~/components/deprecated-ui/bottom-sheet';
-import {
-  Button,
-  buttonTextVariants,
-  buttonVariants,
-} from '~/components/deprecated-ui/button';
-import { Label } from '~/components/deprecated-ui/label';
+import { Button } from '~/components/ui/button';
+import { Label, LabelText } from '~/components/ui/label';
+import { Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
 
-// TODO(v1): refactor to use UI non-bottom-sheet components
 // TODO(v2): refactor to use UI bottom-sheet component
 export default function BottomSheetScreen() {
   const nameInputRef =
@@ -40,7 +36,9 @@ export default function BottomSheetScreen() {
       <BottomSheet>
         <BottomSheetOpenTrigger asChild>
           <Button>
-            {Platform.OS === 'web' ? 'Not implemented for web yet' : 'Open'}
+            <Text>
+              {Platform.OS === 'web' ? 'Not implemented for web yet' : 'Open'}
+            </Text>
           </Button>
         </BottomSheetOpenTrigger>
         <BottomSheetContent>
@@ -56,11 +54,12 @@ export default function BottomSheetScreen() {
                   className={'pb-2.5'}
                   onPress={handleOnLabelPress(nameInputRef)}
                 >
-                  Name
+                  <LabelText nativeID='name'>Name</LabelText>
                 </Label>
                 <BottomSheetTextInput
                   defaultValue='Pedro Duarte'
                   ref={nameInputRef}
+                  aria-labelledby='name'
                 />
               </View>
               <View>
@@ -68,19 +67,20 @@ export default function BottomSheetScreen() {
                   className={'pb-2.5'}
                   onPress={handleOnLabelPress(usernameInputRef)}
                 >
-                  Username
+                  <LabelText nativeID='username'>Username</LabelText>
                 </Label>
                 <BottomSheetTextInput
                   defaultValue='@peduarte'
                   ref={usernameInputRef}
+                  aria-labelledby='username'
                 />
               </View>
             </View>
             <View className={cn(Platform.OS === 'android' && 'pb-2')}>
-              <BottomSheetCloseTrigger
-                className={buttonVariants({ size: 'sm' })}
-              >
-                <Text className={buttonTextVariants()}>Save Changes</Text>
+              <BottomSheetCloseTrigger asChild>
+                <Button>
+                  <Text>Save Changes</Text>
+                </Button>
               </BottomSheetCloseTrigger>
             </View>
           </BottomSheetView>

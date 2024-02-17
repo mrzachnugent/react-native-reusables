@@ -125,7 +125,7 @@ const BottomSheetContent = React.forwardRef<
             opacity={opacity}
             disappearsOnIndex={disappearsOnIndex}
             pressBehavior={pressBehavior}
-            style={[{ backgroundColor: colors.border }, style]}
+            style={[{ backgroundColor: 'rgba(0,0,0,0.8)' }, style]}
             onPress={() => {
               if (Keyboard.isVisible()) {
                 Keyboard.dismiss();
