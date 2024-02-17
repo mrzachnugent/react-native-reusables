@@ -12,6 +12,7 @@ import {
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { useTheme } from '@react-navigation/native';
 import * as React from 'react';
 import {
   GestureResponderEvent,
@@ -23,7 +24,6 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { X } from '~/components/Icons';
 import { Button } from '~/components/deprecated-ui/button';
-import { NAV_THEME } from '~/lib/constants';
 import * as Slot from '~/components/primitives/slot/slot-native';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
@@ -92,7 +92,8 @@ const BottomSheetContent = React.forwardRef<
     ref
   ) => {
     const insets = useSafeAreaInsets();
-    const { colorScheme, isDarkColorScheme } = useColorScheme();
+    const { isDarkColorScheme } = useColorScheme();
+    const { colors } = useTheme();
     const { sheetRef } = useBottomSheetContext();
 
     React.useImperativeHandle(
@@ -124,7 +125,7 @@ const BottomSheetContent = React.forwardRef<
             opacity={opacity}
             disappearsOnIndex={disappearsOnIndex}
             pressBehavior={pressBehavior}
-            style={[{ backgroundColor: NAV_THEME[colorScheme].border }, style]}
+            style={[{ backgroundColor: colors.border }, style]}
             onPress={() => {
               if (Keyboard.isVisible()) {
                 Keyboard.dismiss();
@@ -135,7 +136,7 @@ const BottomSheetContent = React.forwardRef<
           />
         );
       },
-      [backdropProps, colorScheme]
+      [backdropProps, colors]
     );
 
     return (
@@ -145,12 +146,9 @@ const BottomSheetContent = React.forwardRef<
         enablePanDownToClose={enablePanDownToClose}
         backdropComponent={renderBackdrop}
         enableDynamicSizing={enableDynamicSizing}
-        backgroundStyle={[
-          { backgroundColor: NAV_THEME[colorScheme].card },
-          backgroundStyle,
-        ]}
+        backgroundStyle={[{ backgroundColor: colors.card }, backgroundStyle]}
         handleIndicatorStyle={{
-          backgroundColor: NAV_THEME[colorScheme].text,
+          backgroundColor: colors.text,
         }}
         topInset={insets.top}
         android_keyboardInputMode={android_keyboardInputMode}

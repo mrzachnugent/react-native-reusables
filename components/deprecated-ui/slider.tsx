@@ -1,19 +1,18 @@
 import RNCSlider from '@react-native-community/slider';
+import { useTheme } from '@react-navigation/native';
 import * as React from 'react';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
 
 /**
  * @docs https://github.com/callstack/react-native-slider?tab=readme-ov-file#-react-native-communityslider-
  */
 function Slider(props: React.ComponentProps<typeof RNCSlider>) {
-  const { colorScheme } = useColorScheme();
+  const { colors } = useTheme();
   const {
     minimumValue = 0,
     maximumValue = 1,
-    minimumTrackTintColor = NAV_THEME[colorScheme].text,
-    maximumTrackTintColor = NAV_THEME[colorScheme].border,
-    thumbTintColor = NAV_THEME[colorScheme].text,
+    minimumTrackTintColor = colors.text,
+    maximumTrackTintColor = colors.border,
+    thumbTintColor = colors.text,
   } = props;
   return (
     <RNCSlider

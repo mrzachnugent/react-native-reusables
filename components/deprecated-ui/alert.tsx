@@ -1,9 +1,8 @@
+import { useTheme } from '@react-navigation/native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as LucideIcon from 'lucide-react-native';
 import * as React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
 
 const alertVariants = cva(
@@ -30,7 +29,7 @@ const Alert = React.forwardRef<
       style?: ViewStyle;
     }
 >(({ children, icon, className, variant, style: styleProp, ...props }, ref) => {
-  const { colorScheme } = useColorScheme();
+  const { colors } = useTheme();
 
   const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.LucideIcon;
   return (
@@ -50,10 +49,10 @@ const Alert = React.forwardRef<
             size={21}
             color={
               variant === 'destructive'
-                ? NAV_THEME[colorScheme].notification
+                ? colors.notification
                 : variant === 'success'
                 ? '#10b981'
-                : NAV_THEME[colorScheme].text
+                : colors.text
             }
           />
         </View>
