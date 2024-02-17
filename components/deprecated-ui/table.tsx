@@ -5,8 +5,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Slot from '~/components/primitives/slot/slot-native';
 import { cn, isTextChildren } from '~/lib/utils';
 
-// TODO: refactor and move to UI
-
 const Table = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>

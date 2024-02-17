@@ -17,8 +17,8 @@ import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';
 
-// TODO: refactor and move to UI
-// TODO: create web component, use https://ui.shadcn.com/docs/components/command
+// TODO(v2): refactor and move to UI
+// TODO(v2): create web component, use https://ui.shadcn.com/docs/components/command
 
 type Data = Record<string, unknown> | string;
 

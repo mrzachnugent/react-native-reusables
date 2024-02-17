@@ -18,14 +18,14 @@ const PopoverContent = React.forwardRef<
       <PopoverPrimitive.Overlay
         style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}
       >
-        <Animated.View entering={FadeIn} exiting={FadeOut}>
+        <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut}>
           <TextClassContext.Provider value='text-popover-foreground'>
             <PopoverPrimitive.Content
               ref={ref}
               align={align}
               sideOffset={sideOffset}
               className={cn(
-                'z-50 w-72 rounded-md web:cursor-auto border border-border bg-popover p-4 shadow-md shadow-foreground/5 web:outline-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 web:animate-in web:zoom-in-95 web:fade-in-0',
+                'z-50 w-72 rounded-md web:cursor-auto border border-border bg-popover p-4 shadow-md shadow-foreground/5 web:outline-none web:data-[side=bottom]:slide-in-from-top-2 web:data-[side=left]:slide-in-from-right-2 web:data-[side=right]:slide-in-from-left-2 web:data-[side=top]:slide-in-from-bottom-2 web:animate-in web:zoom-in-95 web:fade-in-0',
                 className
               )}
               {...props}

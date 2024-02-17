@@ -22,7 +22,7 @@ import {
   TableRowsList,
 } from './table';
 
-// TODO: refactor and move to UI
+// TODO(v1): refactor and move to UI
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];

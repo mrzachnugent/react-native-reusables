@@ -1,198 +1,201 @@
+import { FlashList } from '@shopify/flash-list';
 import Drawer from 'expo-router/drawer';
-import { Alert, Dimensions, Text, View } from 'react-native';
+import * as React from 'react';
+import { Alert, View, useWindowDimensions } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { ChevronDown } from '~/components/Icons';
-import { Button } from '~/components/deprecated-ui/button';
+import { Button } from '~/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/deprecated-ui/popover';
+} from '~/components/ui/popover';
 import {
   Table,
   TableBody,
-  TableRowsList,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
   TableHeader,
   TableRow,
-} from '~/components/deprecated-ui/table';
+} from '~/components/ui/table';
+import { Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
 
-const { width } = Dimensions.get('window');
-
-const MIN_COLUMN_WIDTHS = [120, 120, 100, 160];
-
-function getColumnWidth(minWidths: number[]) {
-  return minWidths.map((minWidth) => {
-    const evenWidth = width / minWidths.length;
-    return evenWidth > minWidth ? evenWidth : minWidth;
-  });
-}
-
-const columnWidths = getColumnWidth(MIN_COLUMN_WIDTHS);
+const MIN_COLUMN_WIDTHS = [120, 120, 100, 120];
 
 export default function TableScreen() {
+  const { width } = useWindowDimensions();
+  const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+  const insets = useSafeAreaInsets();
+
+  const columnWidths = React.useMemo(() => {
+    return MIN_COLUMN_WIDTHS.map((minWidth) => {
+      const evenWidth = width / MIN_COLUMN_WIDTHS.length;
+      return evenWidth > minWidth ? evenWidth : minWidth;
+    });
+  }, [width]);
+
   return (
     <>
       <Drawer.Screen
         options={{ headerStyle: { shadowColor: 'transparent' } }}
       />
-      <Table nativeID='invoice-table'>
-        <TableHeader>
-          <TableRow>
-            <TableHead className='px-0.5' width={columnWidths[0] as number}>
-              <Popover>
-                <PopoverTrigger
-                  variant='ghost'
-                  size='sm'
-                  className='justify-start'
-                >
-                  {({ pressed }) => (
-                    <>
+      <ScrollView
+        horizontal
+        bounces={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <Table aria-labelledby='invoice-table'>
+          <TableHeader>
+            <TableRow>
+              <TableHead className='px-0.5' style={{ width: columnWidths[0] }}>
+                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      className='flex-row justify-start gap-3'
+                    >
                       <Text
                         className={cn(
-                          pressed && 'opacity-70',
                           'text-base text-muted-foreground font-medium'
                         )}
                       >
                         Invoice
                       </Text>
                       <ChevronDown
-                        className={cn(
-                          pressed && 'opacity-70',
-                          'text-muted-foreground'
-                        )}
+                        className={cn('text-muted-foreground')}
                         size={18}
                       />
-                    </>
-                  )}
-                </PopoverTrigger>
-                <PopoverContent width={300} className='p-5'>
-                  <View className='gap-1.5'>
-                    <Text className='text-2xl font-bold text-foreground'>
-                      Table Head
-                    </Text>
-                    <Text className='text-lg text-muted-foreground'>
-                      This is the Invoice column. Just an example of a popover.
-                    </Text>
-                  </View>
-                </PopoverContent>
-              </Popover>
-            </TableHead>
-            <TableHead width={columnWidths[1] as number}>Status</TableHead>
-            <TableHead width={columnWidths[2] as number}>Method</TableHead>
-            <TableHead
-              width={columnWidths[3] as number}
-              textClass='text-center'
-            >
-              Amount
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRowsList
-            data={INVOICES}
-            estimatedItemSize={45}
-            renderItem={({ item: invoice, index }) => {
-              return (
-                <TableRow
-                  key={invoice.invoice}
-                  className={cn(
-                    index % 2 && 'bg-zinc-100/50 dark:bg-zinc-900/50'
-                  )}
-                  onPress={() => {
-                    Toast.show({
-                      type: 'base',
-                      text1: `${invoice.invoice}`,
-                      text2: 'The row was pressed.',
-                      props: {
-                        icon: 'Rows',
-                      },
-                      visibilityTime: 1500,
-                    });
-                  }}
-                >
-                  {({ pressed }) => (
-                    <>
-                      <TableCell
-                        className={cn(pressed && 'bg-secondary')}
-                        textClass='font-medium text-foreground'
-                        width={columnWidths[0] as number}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className='p-5' insets={{ left: 6 }}>
+                    <View className='gap-1.5'>
+                      <Text className='text-2xl font-bold text-foreground'>
+                        Table Head
+                      </Text>
+                      <Text className='text-lg text-muted-foreground'>
+                        This is the Invoice column. Just an example of a
+                        popover.
+                      </Text>
+                    </View>
+                  </PopoverContent>
+                </Popover>
+              </TableHead>
+              <TableHead style={{ width: columnWidths[1] }}>
+                <Text>Status</Text>
+              </TableHead>
+              <TableHead style={{ width: columnWidths[2] }}>
+                <Text>Method</Text>
+              </TableHead>
+              <TableHead style={{ width: columnWidths[3] }}>
+                <Text className='text-center md:text-right md:pr-5'>
+                  Amount
+                </Text>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <FlashList
+              data={INVOICES}
+              estimatedItemSize={45}
+              contentContainerStyle={{
+                paddingBottom: insets.bottom,
+              }}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item: invoice, index }) => {
+                return (
+                  <TableRow
+                    key={invoice.invoice}
+                    className={cn(
+                      'active:bg-secondary',
+                      index % 2 && 'bg-muted/40 '
+                    )}
+                    onPress={() => {
+                      Toast.show({
+                        type: 'base',
+                        text1: `${invoice.invoice}`,
+                        text2: 'The row was pressed.',
+                        props: {
+                          icon: 'Rows',
+                        },
+                        visibilityTime: 1500,
+                        topOffset: insets.top === 0 ? 12 : insets.top,
+                      });
+                    }}
+                  >
+                    <TableCell style={{ width: columnWidths[0] }}>
+                      <Text>{invoice.invoice}</Text>
+                    </TableCell>
+                    <TableCell style={{ width: columnWidths[1] }}>
+                      <Text>{invoice.paymentStatus}</Text>
+                    </TableCell>
+                    <TableCell style={{ width: columnWidths[2] }}>
+                      <Text>{invoice.paymentMethod}</Text>
+                    </TableCell>
+                    <TableCell
+                      style={{ width: columnWidths[3] }}
+                      className='items-end '
+                    >
+                      <Button
+                        variant='secondary'
+                        size='sm'
+                        className='shadow-sm shadow-foreground/10 mr-3'
+                        onPress={() => {
+                          Alert.alert(
+                            invoice.totalAmount,
+                            `You pressed the price button on invoice ${invoice.invoice}.`
+                          );
+                        }}
                       >
-                        {invoice.invoice}
-                      </TableCell>
-                      <TableCell
-                        className={cn(pressed && 'bg-secondary')}
-                        textClass='text-foreground'
-                        width={columnWidths[1] as number}
+                        <Text>{invoice.totalAmount}</Text>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              }}
+              ListFooterComponent={() => {
+                return (
+                  <>
+                    <TableFooter>
+                      <TableRow>
+                        <TableCell className='flex-1 justify-center'>
+                          <Text className='text-foreground'>Total</Text>
+                        </TableCell>
+                        <TableCell className='items-end pr-8'>
+                          <Button
+                            size='sm'
+                            variant='ghost'
+                            onPress={() => {
+                              Alert.alert(
+                                'Total Amount',
+                                `You pressed the total amount price button.`
+                              );
+                            }}
+                          >
+                            <Text>$2,500.00</Text>
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    </TableFooter>
+                    <View className='items-center py-3 ios:pb-0'>
+                      <Text
+                        nativeID='invoice-table'
+                        className='items-center text-sm text-muted-foreground'
                       >
-                        {invoice.paymentStatus}
-                      </TableCell>
-                      <TableCell
-                        className={cn(pressed && 'bg-secondary')}
-                        textClass='text-foreground'
-                        width={columnWidths[2] as number}
-                      >
-                        {invoice.paymentMethod}
-                      </TableCell>
-                      <TableCell
-                        className={cn(pressed && 'bg-secondary ')}
-                        width={columnWidths[3] as number}
-                      >
-                        <Button
-                          variant='secondary'
-                          size='sm'
-                          onPress={() => {
-                            Alert.alert(
-                              invoice.totalAmount,
-                              `You pressed the price button on invoice ${invoice.invoice}.`
-                            );
-                          }}
-                        >
-                          {invoice.totalAmount}
-                        </Button>
-                      </TableCell>
-                    </>
-                  )}
-                </TableRow>
-              );
-            }}
-            ListFooterComponent={() => {
-              return (
-                <>
-                  <TableFooter>
-                    <TableRow>
-                      <TableCell className='flex-1' width={200}>
-                        <Text className='text-foreground'>Total</Text>
-                      </TableCell>
-                      <TableCell className='items-end pr-8' width={200}>
-                        <Button
-                          size='sm'
-                          variant='ghost'
-                          onPress={() => {
-                            Alert.alert(
-                              'Total Amount',
-                              `You pressed the total amount price button.`
-                            );
-                          }}
-                        >
-                          $2,500.00
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableFooter>
-                  <TableCaption aria-labelledbyledBy='invoice-table'>
-                    A list of your recent invoices.
-                  </TableCaption>
-                </>
-              );
-            }}
-          />
-        </TableBody>
-      </Table>
+                        A list of your recent invoices.
+                      </Text>
+                    </View>
+                  </>
+                );
+              }}
+            />
+          </TableBody>
+        </Table>
+      </ScrollView>
     </>
   );
 }

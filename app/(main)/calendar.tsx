@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import { Calendar, LocaleConfig } from '~/components/deprecated-ui/calendar';
 import { useColorScheme } from '~/lib/useColorScheme';
 
-// TODO: refactor to use UI components
+// TODO(v2): refactor to use UI components
 
 LocaleConfig.defaultLocale = 'en';
 

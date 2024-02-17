@@ -17,7 +17,8 @@ import {
 import { Label } from '~/components/deprecated-ui/label';
 import { cn } from '~/lib/utils';
 
-// TODO: refactor to use UI components
+// TODO(v1): refactor to use UI non-bottom-sheet components
+// TODO(v2): refactor to use UI bottom-sheet component
 export default function BottomSheetScreen() {
   const nameInputRef =
     React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
