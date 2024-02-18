@@ -1,13 +1,15 @@
 import { Column, ColumnDef } from '@tanstack/react-table';
 import Drawer from 'expo-router/drawer';
 import * as React from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import { Dimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { ArrowDown, ArrowUp } from '~/components/Icons';
-import { Button } from '~/components/deprecated-ui/button';
-import { DataTable } from '~/components/deprecated-ui/data-table';
+import { Button } from '~/components/ui/button';
+import { DataTable } from '~/components/ui/data-table';
 import { Skeleton } from '~/components/ui/skeleton';
-import { TableCell, TableRow } from '~/components/deprecated-ui/table';
+import { TableCell, TableRow } from '~/components/ui/table';
+import { Text } from '~/components/ui/typography';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -38,7 +40,7 @@ type User = {
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'name',
-    size: 170,
+    size: 200,
     header: ({ column }) => <Header title='Name' column={column} />,
     cell: ({ row }) => {
       return (
@@ -88,6 +90,7 @@ export const columns: ColumnDef<User>[] = [
 ];
 
 export default function DataTableScreen() {
+  const insets = useSafeAreaInsets();
   const [fetchedData, setFetchedData] = React.useState<User[]>([]);
   const [isRefreshing, setIsRefreshing] = React.useState(false);
 
@@ -120,38 +123,33 @@ export default function DataTableScreen() {
       <Drawer.Screen
         options={{ headerStyle: { shadowColor: 'transparent' } }}
       />
-      <View className='flex-1 justify-center items-center'>
-        <DataTable
-          isRefreshing={isRefreshing}
-          onRefresh={onRefresh}
-          data={fetchedData}
-          columns={columns}
-          onRowPress={(row) => {
-            Toast.show({
-              type: 'base',
-              text1: `${row.getValue('name')}`,
-              text2: 'The row was pressed.',
-              props: {
-                icon: 'Rows',
-              },
-              visibilityTime: 1000,
-            });
-          }}
-          ListEmptyComponent={() => {
-            return (
-              <TableRow className='border-b-0 dark:opacity-50'>
-                <Skeleton className='flex-1'>
-                  <TableCell
-                    width={width}
-                    style={{ height }}
-                    className='flex-1 '
-                  />
-                </Skeleton>
-              </TableRow>
-            );
-          }}
-        />
-      </View>
+      <DataTable
+        isRefreshing={isRefreshing}
+        onRefresh={onRefresh}
+        data={fetchedData}
+        columns={columns}
+        onRowPress={(row) => {
+          Toast.show({
+            type: 'base',
+            text1: `${row.getValue('name')}`,
+            text2: 'The row was pressed.',
+            props: {
+              icon: 'Rows',
+            },
+            visibilityTime: 1000,
+            topOffset: insets.top === 0 ? 12 : insets.top,
+          });
+        }}
+        ListEmptyComponent={() => {
+          return (
+            <TableRow className='border-b-0 dark:opacity-50'>
+              <Skeleton className='flex-1'>
+                <TableCell style={{ height, width }} className='flex-1 ' />
+              </Skeleton>
+            </TableRow>
+          );
+        }}
+      />
     </>
   );
 }
@@ -168,7 +166,7 @@ function Header({ title, column }: { title: string; column: Column<User> }) {
       }}
       size='sm'
       variant='ghost'
-      className='px-0 justify-start active:opacity-70'
+      className='flex flex-row px-0 justify-start gap-1.5 web:hover:bg-background/0 web:hover:opacity-80 active:bg-background/0'
     >
       <Text className={'font-medium text-muted-foreground'}>{title}</Text>
       {column.getIsSorted() === 'asc' ? (

@@ -28,8 +28,8 @@ import * as Slot from '~/components/primitives/slot/slot-native';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
 
-// TODO(v2): refactor and move to UI
-// TODO(v2): create web component, use https://ui.shadcn.com/docs/components/drawer
+// TODO: refactor and move to UI
+// TODO: create web component, use https://ui.shadcn.com/docs/components/drawer
 
 type BottomSheetRef = React.ElementRef<typeof View>;
 type BottomSheetProps = React.ComponentPropsWithoutRef<typeof View>;

@@ -3,8 +3,8 @@ import { LocaleConfig, Calendar as RNCalendar } from 'react-native-calendars';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
 
-// TODO(v2): create custom native calendar
-// TODO(v2): create web component, use https://ui.shadcn.com/docs/components/calendar
+// TODO: create custom native calendar
+// TODO: create web component, use https://ui.shadcn.com/docs/components/calendar
 
 /**
  * @docs https://github.com/wix/react-native-calendars

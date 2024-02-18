@@ -54,17 +54,15 @@ Work in progress...
 
 ### Backlog
 
-1. Tackle all commented `TODO(v1)`s - 1 Left
-   <br>
-   _Mostly refactoring and adding web components for certain components in `~/components/deprecated-ui/`_
-
-2. Create a documentation website
+1. **Create a documentation website _(in progress)_**
    <br>
    _Document initial setup, installation, and use for each component with their dependencies_
 
-3. Complete Github Community Standards Checklist
+2. Complete Github Community Standards Checklist
    <br>
    _Code of conduct, Contributing, Security policy, Issue templates, and Pull request template_
+
+3. Tackle all commented `TODO`s - 1 Left
 
 <br>
 

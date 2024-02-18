@@ -14,7 +14,7 @@ import { Label, LabelText } from '~/components/ui/label';
 import { Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
 
-// TODO(v2): refactor to use UI bottom-sheet component
+// TODO: refactor to use UI bottom-sheet component
 export default function BottomSheetScreen() {
   const nameInputRef =
     React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);

@@ -108,7 +108,7 @@ const formSchema = z.object({
   }),
 });
 
-// TODO(v2): refactor to use UI components
+// TODO: refactor to use UI components
 
 export default function FormScreen() {
   const scrollRef = React.useRef<ScrollView>(null);

@@ -18,8 +18,8 @@ import {
 } from '~/components/deprecated-ui/button';
 import { cn } from '~/lib/utils';
 
-// TODO(v2): refactor and move to UI
-// TODO(v2): create web component, use https://ui.shadcn.com/docs/components/combobox
+// TODO: refactor and move to UI
+// TODO: create web component, use https://ui.shadcn.com/docs/components/combobox
 
 const HEADER_HEIGHT = 130;
 
