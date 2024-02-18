@@ -2,7 +2,6 @@
 // The code is licensed under the MIT License.
 // https://github.com/shadcn-ui/ui
 
-import { Calendar as CalendarIcon, X } from '~/components/Icons';
 import * as React from 'react';
 import {
   Controller,
@@ -13,8 +12,9 @@ import {
   Noop,
   useFormContext,
 } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
+import { Calendar as CalendarIcon, X } from '~/components/Icons';
 import {
   BottomSheet,
   BottomSheetCloseTrigger,
@@ -22,24 +22,18 @@ import {
   BottomSheetOpenTrigger,
   BottomSheetView,
 } from '~/components/deprecated-ui/bottom-sheet';
-import { Button, buttonTextVariants } from '~/components/deprecated-ui/button';
 import { Calendar } from '~/components/deprecated-ui/calendar';
 import { Combobox, ComboboxOption } from '~/components/deprecated-ui/combobox';
-import { Input } from '~/components/deprecated-ui/input';
-import { Label } from '~/components/deprecated-ui/label';
-import { RadioGroup } from '~/components/deprecated-ui/radio-group';
-import {
-  RenderSelectItem,
-  Select,
-  SelectItem,
-  SelectList,
-  SelectOption,
-  SelectTrigger,
-} from '~/components/deprecated-ui/select';
-import { Switch } from '~/components/deprecated-ui/switch';
-import { Textarea } from '~/components/deprecated-ui/textarea';
+import { Button, buttonTextVariants } from '~/components/ui/button';
+import { Checkbox } from '~/components/ui/checkbox';
+import { Input } from '~/components/ui/input';
+import { Label, LabelText } from '~/components/ui/label';
+import { RadioGroup } from '~/components/ui/radio-group';
+import { Select, type Option } from '~/components/ui/select';
+import { Switch } from '~/components/ui/switch';
+import { Textarea } from '~/components/ui/textarea';
+import { Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
-import { Checkbox } from './checkbox';
 
 const Form = FormProvider;
 
@@ -115,17 +109,20 @@ FormItem.displayName = 'FormItem';
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
-  React.ComponentPropsWithoutRef<typeof Label>
+  Omit<React.ComponentPropsWithoutRef<typeof Label>, 'children'> & {
+    children: string;
+  }
 >(({ className, ...props }, ref) => {
   const { error, formItemNativeID } = useFormField();
 
   return (
     <Label
       ref={ref}
-      className={cn(error && 'text-destructive', className)}
-      nativeID={formItemNativeID}
+      className={cn('pb-2 px-px', error && 'text-destructive', className)}
       {...props}
-    />
+    >
+      <LabelText nativeID={formItemNativeID}>{props.children}</LabelText>
+    </Label>
   );
 });
 FormLabel.displayName = 'FormLabel';
@@ -317,26 +314,14 @@ FormTextarea.displayName = 'FormTextarea';
 
 const FormCheckbox = React.forwardRef<
   React.ElementRef<typeof Checkbox>,
-  FormItemProps<typeof Checkbox, boolean>
+  Omit<FormItemProps<typeof Checkbox, boolean>, 'checked' | 'onCheckedChange'>
 >(({ label, description, value, onChange, ...props }, ref) => {
-  const checkboxRef = React.useRef<React.ComponentRef<typeof Checkbox>>(null);
   const {
     error,
     formItemNativeID,
     formDescriptionNativeID,
     formMessageNativeID,
   } = useFormField();
-
-  React.useImperativeHandle(
-    ref,
-    () => {
-      if (!checkboxRef.current) {
-        return {} as React.ComponentRef<typeof Checkbox>;
-      }
-      return checkboxRef.current;
-    },
-    [checkboxRef.current]
-  );
 
   function handleOnLabelPress() {
     onChange?.(!value);
@@ -346,7 +331,7 @@ const FormCheckbox = React.forwardRef<
     <FormItem className='px-1'>
       <View className='flex-row gap-3 items-center'>
         <Checkbox
-          ref={checkboxRef}
+          ref={ref}
           aria-labelledby={formItemNativeID}
           aria-describedby={
             !error
@@ -354,12 +339,16 @@ const FormCheckbox = React.forwardRef<
               : `${formDescriptionNativeID} ${formMessageNativeID}`
           }
           aria-invalid={!!error}
-          onChange={onChange}
-          value={value}
+          onCheckedChange={onChange}
+          checked={value}
           {...props}
         />
         {!!label && (
-          <FormLabel nativeID={formItemNativeID} onPress={handleOnLabelPress}>
+          <FormLabel
+            className='pb-0'
+            nativeID={formItemNativeID}
+            onPress={handleOnLabelPress}
+          >
             {label}
           </FormLabel>
         )}
@@ -390,8 +379,7 @@ const FormDatePicker = React.forwardRef<
         <BottomSheetOpenTrigger asChild>
           <Button
             variant='outline'
-            size='sm'
-            className='gap-3 justify-start px-4 relative'
+            className='flex-row gap-3 justify-start px-3 relative'
             ref={ref}
             aria-labelledby={formItemNativeID}
             aria-describedby={
@@ -427,21 +415,13 @@ const FormDatePicker = React.forwardRef<
                 </Text>
                 {!!value && (
                   <Button
-                    className='absolute right-0'
+                    className='absolute right-0 active:opacity-70 native:pr-3'
                     variant='ghost'
-                    size='sm'
                     onPress={() => {
                       onChange?.('');
                     }}
                   >
-                    {({ pressed }) => (
-                      <X
-                        className={cn(
-                          'text-muted-foreground',
-                          pressed && 'opacity-70'
-                        )}
-                      />
-                    )}
+                    <X size={18} className='text-muted-foreground text-xs' />
                   </Button>
                 )}
               </>
@@ -465,16 +445,8 @@ const FormDatePicker = React.forwardRef<
             />
             <View className={'pb-2 pt-4'}>
               <BottomSheetCloseTrigger asChild>
-                <Button size='sm'>
-                  {({ pressed }) => (
-                    <Text
-                      className={buttonTextVariants({
-                        className: cn(pressed && 'opacity-70'),
-                      })}
-                    >
-                      Close
-                    </Text>
-                  )}
+                <Button>
+                  <Text>Close</Text>
                 </Button>
               </BottomSheetCloseTrigger>
             </View>
@@ -491,8 +463,8 @@ FormDatePicker.displayName = 'FormDatePicker';
 
 const FormRadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
-  FormItemProps<typeof RadioGroup, string>
->(({ label, description, defaultValue, onChange, ...props }, ref) => {
+  Omit<FormItemProps<typeof RadioGroup, string>, 'onValueChange'>
+>(({ label, description, value, onChange, ...props }, ref) => {
   const {
     error,
     formItemNativeID,
@@ -518,7 +490,7 @@ const FormRadioGroup = React.forwardRef<
         }
         aria-invalid={!!error}
         onValueChange={onChange}
-        defaultValue={defaultValue}
+        value={value}
         {...props}
       />
 
@@ -565,22 +537,38 @@ const FormCombobox = React.forwardRef<
 
 FormCombobox.displayName = 'FormCombobox';
 
+/**
+ * @prop {children} 
+ * @example
+ *  <SelectTrigger className='w-[250px]'>
+      <SelectValue
+        className='text-foreground text-sm native:text-lg'
+        placeholder='Select a fruit'
+      />
+    </SelectTrigger>
+    <SelectContent insets={contentInsets} className='w-[250px]'>
+      <SelectGroup>
+        <SelectLabel>Fruits</SelectLabel>
+        <SelectItem label='Apple' value='apple'>
+          Apple
+        </SelectItem>
+      </SelectGroup>
+    </SelectContent>
+ */
 const FormSelect = React.forwardRef<
   React.ElementRef<typeof Select>,
-  FormItemProps<typeof Select, SelectOption | null> & {
-    placeholder: string;
-  }
->(({ label, description, placeholder, onChange, ...props }, ref) => {
+  Omit<
+    FormItemProps<typeof Select, Option>,
+    'open' | 'onOpenChange' | 'onValueChange'
+  >
+>(({ label, description, onChange, value, ...props }, ref) => {
+  const [open, setOpen] = React.useState(false);
   const {
     error,
     formItemNativeID,
     formDescriptionNativeID,
     formMessageNativeID,
   } = useFormField();
-  const renderItem: RenderSelectItem = React.useCallback(
-    ({ item, index }) => <SelectItem item={item} index={index} />,
-    []
-  );
 
   return (
     <FormItem>
@@ -594,12 +582,12 @@ const FormSelect = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
+        open={open}
+        onOpenChange={setOpen}
+        value={value}
         onValueChange={onChange}
         {...props}
-      >
-        <SelectTrigger placeholder={placeholder} />
-        <SelectList renderItem={renderItem} />
-      </Select>
+      />
       {!!description && <FormDescription>{description}</FormDescription>}
       <FormMessage />
     </FormItem>
@@ -610,7 +598,7 @@ FormSelect.displayName = 'FormSelect';
 
 const FormSwitch = React.forwardRef<
   React.ElementRef<typeof Switch>,
-  FormItemProps<typeof Switch, boolean>
+  Omit<FormItemProps<typeof Switch, boolean>, 'checked' | 'onCheckedChange'>
 >(({ label, description, value, onChange, ...props }, ref) => {
   const switchRef = React.useRef<React.ComponentRef<typeof Switch>>(null);
   const {
@@ -647,12 +635,16 @@ const FormSwitch = React.forwardRef<
               : `${formDescriptionNativeID} ${formMessageNativeID}`
           }
           aria-invalid={!!error}
-          onValueChange={onChange}
-          value={value}
+          onCheckedChange={onChange}
+          checked={value}
           {...props}
         />
         {!!label && (
-          <FormLabel nativeID={formItemNativeID} onPress={handleOnLabelPress}>
+          <FormLabel
+            className='pb-0'
+            nativeID={formItemNativeID}
+            onPress={handleOnLabelPress}
+          >
             {label}
           </FormLabel>
         )}

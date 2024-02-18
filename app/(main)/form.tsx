@@ -2,8 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, ScrollView, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as z from 'zod';
-import { Button } from '~/components/deprecated-ui/button';
+import { Button } from '~/components/ui/button';
 import {
   Form,
   FormCheckbox,
@@ -15,8 +16,18 @@ import {
   FormSelect,
   FormSwitch,
   FormTextarea,
-} from '~/components/deprecated-ui/form';
-import { RadioGroupItem } from '~/components/deprecated-ui/radio-group';
+} from '~/components/ui/form';
+import { Label, LabelText } from '~/components/ui/label';
+import { RadioGroupItem } from '~/components/ui/radio-group';
+import {
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
+import { Text } from '~/components/ui/typography';
+import { cn } from '~/lib/utils';
 
 const frameworks = [
   {
@@ -97,8 +108,12 @@ const formSchema = z.object({
   }),
 });
 
+// TODO(v2): refactor to use UI components
+
 export default function FormScreen() {
   const scrollRef = React.useRef<ScrollView>(null);
+  const insets = useSafeAreaInsets();
+  const [selectTriggerWidth, setSelectTriggerWidth] = React.useState(0);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -109,6 +124,13 @@ export default function FormScreen() {
       tos: false,
     },
   });
+
+  const contentInsets = {
+    top: insets.top,
+    bottom: insets.bottom,
+    left: 12,
+    right: 12,
+  };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
@@ -125,11 +147,13 @@ export default function FormScreen() {
   return (
     <ScrollView
       ref={scrollRef}
-      contentContainerClassName='p-6'
+      contentContainerClassName='p-6 mx-auto w-full max-w-xl'
       showsVerticalScrollIndicator={false}
+      automaticallyAdjustContentInsets={false}
+      contentInset={{ top: 12 }}
     >
       <Form {...form}>
-        <View className='gap-6'>
+        <View className='gap-7'>
           <FormField
             control={form.control}
             name='email'
@@ -173,18 +197,44 @@ export default function FormScreen() {
           <FormField
             control={form.control}
             name='accountType'
-            render={({ field }) => (
-              <FormRadioGroup
-                defaultValue='white'
-                label='Account Type'
-                description='Select your account type.'
-                {...field}
-              >
-                <RadioGroupItem name='staff'>Staff</RadioGroupItem>
-                <RadioGroupItem name='admin'>Admin</RadioGroupItem>
-                <RadioGroupItem name='owner'>Owner</RadioGroupItem>
-              </FormRadioGroup>
-            )}
+            defaultValue='staff'
+            render={({ field }) => {
+              function onLabelPress(label: 'staff' | 'admin' | 'owner') {
+                return () => {
+                  form.setValue('accountType', label);
+                };
+              }
+              return (
+                <FormRadioGroup
+                  label='Account Type'
+                  description='Select your account type.'
+                  className='gap-4'
+                  {...field}
+                >
+                  {(['staff', 'admin', 'owner'] as const).map((value) => {
+                    return (
+                      <View
+                        key={value}
+                        className={'flex-row gap-2 items-center'}
+                      >
+                        <RadioGroupItem
+                          aria-labelledby={`label-for-${value}`}
+                          value={value}
+                        />
+                        <Label onPress={onLabelPress(value)}>
+                          <LabelText
+                            nativeID={`label-for-${value}`}
+                            className='capitalize'
+                          >
+                            {value}
+                          </LabelText>
+                        </Label>
+                      </View>
+                    );
+                  })}
+                </FormRadioGroup>
+              );
+            }}
           />
           <FormField
             control={form.control}
@@ -203,12 +253,40 @@ export default function FormScreen() {
             name='favoriteEmail'
             render={({ field }) => (
               <FormSelect
-                items={emails}
                 label='If you were an email, which one would you be?'
                 description='Hint: it is not the one you use.'
-                placeholder='Select a verified email'
                 {...field}
-              />
+              >
+                <SelectTrigger
+                  onLayout={(ev) => {
+                    setSelectTriggerWidth(ev.nativeEvent.layout.width);
+                  }}
+                >
+                  <SelectValue
+                    className={cn(
+                      'text-sm native:text-lg',
+                      field.value ? 'text-foreground' : 'text-muted-foreground'
+                    )}
+                    placeholder='Select a verified email'
+                  />
+                </SelectTrigger>
+                <SelectContent
+                  insets={contentInsets}
+                  style={{ width: selectTriggerWidth }}
+                >
+                  <SelectGroup>
+                    {emails.map((email) => (
+                      <SelectItem
+                        key={email.value}
+                        label={email.label}
+                        value={email.value}
+                      >
+                        <Text>{email.label}</Text>
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </FormSelect>
             )}
           />
           <FormField
@@ -240,26 +318,27 @@ export default function FormScreen() {
               <FormCheckbox label='Accept terms & conditions' {...field} />
             )}
           />
-          <View />
-          <Button onPress={form.handleSubmit(onSubmit)}>Submit</Button>
-          <Button
-            variant='ghost'
-            size='sm'
-            onPress={() => {
-              form.clearErrors();
-            }}
-          >
-            Clear errors
+          <Button onPress={form.handleSubmit(onSubmit)}>
+            <Text>Submit</Text>
           </Button>
-          <Button
-            variant='ghost'
-            size='sm'
-            onPress={() => {
-              form.reset();
-            }}
-          >
-            Clear form values
-          </Button>
+          <View>
+            <Button
+              variant='ghost'
+              onPress={() => {
+                form.clearErrors();
+              }}
+            >
+              <Text>Clear errors</Text>
+            </Button>
+            <Button
+              variant='ghost'
+              onPress={() => {
+                form.reset();
+              }}
+            >
+              <Text>Clear form values</Text>
+            </Button>
+          </View>
         </View>
       </Form>
     </ScrollView>

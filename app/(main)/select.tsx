@@ -9,7 +9,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-  Option,
+  type Option,
 } from '~/components/ui/select';
 
 const VALUES = {
