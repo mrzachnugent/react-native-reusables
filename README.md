@@ -62,7 +62,7 @@ Work in progress...
    <br>
    _Code of conduct, Contributing, Security policy, Issue templates, and Pull request template_
 
-3. Tackle all commented `TODO`s - 1 Left
+3. Tackle all commented `TODO`s
 
 <br>
 
