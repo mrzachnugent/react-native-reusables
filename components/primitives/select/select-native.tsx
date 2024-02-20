@@ -8,7 +8,6 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { createStore, useStore, type StoreApi } from 'zustand';
 import {
   useRelativePosition,
   type LayoutPosition,
@@ -35,18 +34,15 @@ import type {
   SelectValueProps,
 } from './types';
 
-interface RootStoreContext {
-  pressPosition: LayoutPosition | null;
-  setTriggerPosition: (pressPosition: LayoutPosition | null) => void;
+interface IRootContext extends SelectRootProps {
+  triggerPosition: LayoutPosition | null;
+  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
   setContentLayout: (contentLayout: LayoutRectangle | null) => void;
   nativeID: string;
 }
 
-const RootContext = React.createContext<SelectRootProps | null>(null);
-const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
-  null
-);
+const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
   (
@@ -62,28 +58,29 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
     ref
   ) => {
     const nativeID = React.useId();
-    const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
-    if (!storeRef.current) {
-      storeRef.current = createStore((set) => ({
-        pressPosition: null,
-        setTriggerPosition: (pressPosition: LayoutPosition | null) =>
-          set({ pressPosition }),
-        contentLayout: null,
-        setContentLayout: (contentLayout: LayoutRectangle | null) =>
-          set({ contentLayout }),
-        nativeID,
-      }));
-    }
+    const [triggerPosition, setTriggerPosition] =
+      React.useState<LayoutPosition | null>(null);
+    const [contentLayout, setContentLayout] =
+      React.useState<LayoutRectangle | null>(null);
 
     const Component = asChild ? Slot.View : View;
     return (
-      <RootStoreContext.Provider value={storeRef.current}>
-        <RootContext.Provider
-          value={{ value, onValueChange, open, onOpenChange, disabled }}
-        >
-          <Component ref={ref} {...viewProps} />
-        </RootContext.Provider>
-      </RootStoreContext.Provider>
+      <RootContext.Provider
+        value={{
+          value,
+          onValueChange,
+          open,
+          onOpenChange,
+          disabled,
+          contentLayout,
+          nativeID,
+          setContentLayout,
+          setTriggerPosition,
+          triggerPosition,
+        }}
+      >
+        <Component ref={ref} {...viewProps} />
+      </RootContext.Provider>
     );
   }
 );
@@ -100,33 +97,15 @@ function useSelectContext() {
   return context;
 }
 
-function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
-  const store = React.useContext(RootStoreContext);
-  if (!store) {
-    throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
-    );
-  }
-  return useStore(store, selector);
-}
-
-function useGetRootStore() {
-  const store = React.useContext(RootStoreContext);
-  if (!store) {
-    throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
-    );
-  }
-  return store;
-}
-
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { open, onOpenChange, disabled: disabledRoot } = useSelectContext();
-    const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
-    );
+    const {
+      open,
+      onOpenChange,
+      disabled: disabledRoot,
+      setTriggerPosition,
+    } = useSelectContext();
 
     React.useImperativeHandle(
       ref,
@@ -184,11 +163,8 @@ Value.displayName = 'ValueNativeSelect';
  */
 function Portal({ forceMount, hostName, children }: SelectPortalProps) {
   const value = useSelectContext();
-  const pressPosition = useRootStoreContext((state) => state.pressPosition);
-  const nativeID = useRootStoreContext((state) => state.nativeID);
-  const store = useGetRootStore();
 
-  if (!pressPosition) {
+  if (!value.triggerPosition) {
     return null;
   }
 
@@ -199,10 +175,8 @@ function Portal({ forceMount, hostName, children }: SelectPortalProps) {
   }
 
   return (
-    <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
-      <RootStoreContext.Provider value={store}>
-        <RootContext.Provider value={value}>{children}</RootContext.Provider>
-      </RootStoreContext.Provider>
+    <RNPPortal hostName={hostName} name={`${value.nativeID}_portal`}>
+      <RootContext.Provider value={value}>{children}</RootContext.Provider>
     </RNPPortal>
   );
 }
@@ -221,13 +195,8 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useSelectContext();
-    const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
+    const { open, onOpenChange, setTriggerPosition, setContentLayout } =
+      useSelectContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -276,16 +245,15 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useSelectContext();
-    const nativeID = useRootStoreContext((state) => state.nativeID);
-    const pressPosition = useRootStoreContext((state) => state.pressPosition);
-    const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const contentLayout = useRootStoreContext((state) => state.contentLayout);
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
+    const {
+      open,
+      onOpenChange,
+      contentLayout,
+      nativeID,
+      triggerPosition,
+      setContentLayout,
+      setTriggerPosition,
+    } = useSelectContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
@@ -307,7 +275,7 @@ const Content = React.forwardRef<
     const positionStyle = useRelativePosition({
       align,
       avoidCollisions,
-      triggerPosition: pressPosition,
+      triggerPosition,
       contentLayout,
       alignOffset,
       insets,
@@ -366,14 +334,13 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange, value, onValueChange } = useSelectContext();
-    const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
-
+    const {
+      onOpenChange,
+      value,
+      onValueChange,
+      setTriggerPosition,
+      setContentLayout,
+    } = useSelectContext();
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
         setTriggerPosition(null);

@@ -8,7 +8,6 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { createStore, useStore, type StoreApi } from 'zustand';
 import {
   useRelativePosition,
   type LayoutPosition,
@@ -39,16 +38,35 @@ import type {
   MenubarSubTriggerProps,
 } from './types';
 
-const RootContext = React.createContext<MenubarRootProps | null>(null);
+interface IMenuContext extends MenubarRootProps {
+  triggerPosition: LayoutPosition | null;
+  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
+  contentLayout: LayoutRectangle | null;
+  setContentLayout: (contentLayout: LayoutRectangle | null) => void;
+  nativeID: string;
+}
+
+const RootContext = React.createContext<IMenuContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & MenubarRootProps>(
   ({ asChild, value, onValueChange, ...viewProps }, ref) => {
+    const nativeID = React.useId();
+    const [triggerPosition, setTriggerPosition] =
+      React.useState<LayoutPosition | null>(null);
+    const [contentLayout, setContentLayout] =
+      React.useState<LayoutRectangle | null>(null);
+
     const Component = asChild ? Slot.View : View;
     return (
       <RootContext.Provider
         value={{
           value,
           onValueChange,
+          nativeID,
+          contentLayout,
+          setContentLayout,
+          setTriggerPosition,
+          triggerPosition,
         }}
       >
         <Component ref={ref} {...viewProps} />
@@ -69,46 +87,19 @@ function useMenubarContext() {
   return context;
 }
 
-interface MenuStoreContext {
-  triggerPosition: LayoutPosition | null;
-  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
-  contentLayout: LayoutRectangle | null;
-  setContentLayout: (contentLayout: LayoutRectangle | null) => void;
-  nativeID: string;
-}
-
 const MenuContext = React.createContext<MenubarMenuProps | null>(null);
-const MenuStoreContext = React.createContext<StoreApi<MenuStoreContext> | null>(
-  null
-);
 
 const Menu = React.forwardRef<ViewRef, SlottableViewProps & MenubarMenuProps>(
   ({ asChild, value, ...viewProps }, ref) => {
-    const nativeID = React.useId();
-    const storeRef = React.useRef<StoreApi<MenuStoreContext> | null>(null);
-    if (!storeRef.current) {
-      storeRef.current = createStore((set) => ({
-        triggerPosition: null,
-        setTriggerPosition: (triggerPosition: LayoutPosition | null) =>
-          set({ triggerPosition }),
-        contentLayout: null,
-        setContentLayout: (contentLayout: LayoutRectangle | null) =>
-          set({ contentLayout }),
-        nativeID,
-      }));
-    }
-
     const Component = asChild ? Slot.View : View;
     return (
-      <MenuStoreContext.Provider value={storeRef.current}>
-        <MenuContext.Provider
-          value={{
-            value,
-          }}
-        >
-          <Component ref={ref} role='menubar' {...viewProps} />
-        </MenuContext.Provider>
-      </MenuStoreContext.Provider>
+      <MenuContext.Provider
+        value={{
+          value,
+        }}
+      >
+        <Component ref={ref} role='menubar' {...viewProps} />
+      </MenuContext.Provider>
     );
   }
 );
@@ -125,34 +116,11 @@ function useMenuContext() {
   return context;
 }
 
-function useMenuStoreContext<T>(selector: (state: MenuStoreContext) => T): T {
-  const store = React.useContext(MenuStoreContext);
-  if (!store) {
-    throw new Error(
-      'Menubar compound components cannot be rendered outside the Menubar component'
-    );
-  }
-  return useStore(store, selector);
-}
-
-function useGetMenuStore() {
-  const store = React.useContext(MenuStoreContext);
-  if (!store) {
-    throw new Error(
-      'Menubar compound components cannot be rendered outside the Menubar component'
-    );
-  }
-  return store;
-}
-
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { value, onValueChange } = useMenubarContext();
+    const { value, onValueChange, setTriggerPosition } = useMenubarContext();
     const { value: menuValue } = useMenuContext();
-    const setTriggerPosition = useMenuStoreContext(
-      (state) => state.setTriggerPosition
-    );
 
     React.useImperativeHandle(
       ref,
@@ -198,11 +166,8 @@ Trigger.displayName = 'TriggerMenubar';
 function Portal({ forceMount, hostName, children }: MenubarPortalProps) {
   const menubar = useMenubarContext();
   const menu = useMenuContext();
-  const triggerPosition = useMenuStoreContext((state) => state.triggerPosition);
-  const nativeID = useMenuStoreContext((state) => state.nativeID);
-  const store = useGetMenuStore();
 
-  if (!triggerPosition) {
+  if (!menubar.triggerPosition) {
     return null;
   }
 
@@ -213,22 +178,17 @@ function Portal({ forceMount, hostName, children }: MenubarPortalProps) {
   }
 
   return (
-    <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
+    <RNPPortal hostName={hostName} name={`${menubar.nativeID}_portal`}>
       <RootContext.Provider
         value={menubar}
-        key={`RootContex_t${nativeID}_portal`}
+        key={`RootContext_${menubar.nativeID}_portal_provider`}
       >
-        <MenuStoreContext.Provider
-          value={store}
-          key={`MenuStoreContext_${nativeID}_portal`}
+        <MenuContext.Provider
+          value={menu}
+          key={`MenuContext_${menubar.nativeID}_portal_provider`}
         >
-          <MenuContext.Provider
-            value={menu}
-            key={`MenuContext_${nativeID}_portal`}
-          >
-            {children}
-          </MenuContext.Provider>
-        </MenuStoreContext.Provider>
+          {children}
+        </MenuContext.Provider>
       </RootContext.Provider>
     </RNPPortal>
   );
@@ -248,13 +208,8 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { value, onValueChange } = useMenubarContext();
-    const setTriggerPosition = useMenuStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const setContentLayout = useMenuStoreContext(
-      (state) => state.setContentLayout
-    );
+    const { value, onValueChange, setContentLayout, setTriggerPosition } =
+      useMenubarContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -302,19 +257,16 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const { value, onValueChange } = useMenubarContext();
+    const {
+      value,
+      onValueChange,
+      triggerPosition,
+      contentLayout,
+      setContentLayout,
+      nativeID,
+      setTriggerPosition,
+    } = useMenubarContext();
     const { value: menuValue } = useMenuContext();
-    const nativeID = useMenuStoreContext((state) => state.nativeID);
-    const triggerPosition = useMenuStoreContext(
-      (state) => state.triggerPosition
-    );
-    const setTriggerPosition = useMenuStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const contentLayout = useMenuStoreContext((state) => state.contentLayout);
-    const setContentLayout = useMenuStoreContext(
-      (state) => state.setContentLayout
-    );
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
@@ -389,13 +341,9 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
-    const { onValueChange } = useMenubarContext();
-    const setTriggerPosition = useMenuStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const setContentLayout = useMenuStoreContext(
-      (state) => state.setContentLayout
-    );
+    const { onValueChange, setContentLayout, setTriggerPosition } =
+      useMenubarContext();
+
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
         setTriggerPosition(null);
@@ -467,14 +415,9 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onValueChange } = useMenubarContext();
-    const setTriggerPosition = useMenuStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const setContentLayout = useMenuStoreContext(
-      (state) => state.setContentLayout
-    );
-    const nativeID = useMenuStoreContext((state) => state.nativeID);
+    const { onValueChange, setTriggerPosition, setContentLayout, nativeID } =
+      useMenubarContext();
+
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
       if (closeOnPress) {
@@ -553,13 +496,11 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onValueChange: onRootValueChange } = useMenubarContext();
-    const setTriggerPosition = useMenuStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const setContentLayout = useMenuStoreContext(
-      (state) => state.setContentLayout
-    );
+    const {
+      onValueChange: onRootValueChange,
+      setTriggerPosition,
+      setContentLayout,
+    } = useMenubarContext();
 
     const { value, onValueChange } =
       useFormItemContext() as BothFormItemContext;

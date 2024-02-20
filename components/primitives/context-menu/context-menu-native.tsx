@@ -9,13 +9,12 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { createStore, useStore, type StoreApi } from 'zustand';
-import { Portal as RNPPortal } from '~/components/primitives/portal';
-import * as Slot from '~/components/primitives/slot';
 import {
   useRelativePosition,
   type LayoutPosition,
 } from '~/components/primitives/hooks';
+import { Portal as RNPPortal } from '~/components/primitives/portal';
+import * as Slot from '~/components/primitives/slot';
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -39,7 +38,7 @@ import type {
   ContextMenuSubTriggerProps,
 } from './types';
 
-interface RootStoreContext {
+interface IRootContext extends ContextMenuRootProps {
   pressPosition: LayoutPosition | null;
   setPressPosition: (pressPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -47,10 +46,7 @@ interface RootStoreContext {
   nativeID: string;
 }
 
-const RootContext = React.createContext<ContextMenuRootProps | null>(null);
-const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
-  null
-);
+const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<
   ViewRef,
@@ -61,26 +57,27 @@ const Root = React.forwardRef<
     ref
   ) => {
     const nativeID = React.useId();
-    const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
-    if (!storeRef.current) {
-      storeRef.current = createStore((set) => ({
-        pressPosition: null,
-        setPressPosition: (pressPosition: LayoutPosition | null) =>
-          set({ pressPosition }),
-        contentLayout: null,
-        setContentLayout: (contentLayout: LayoutRectangle | null) =>
-          set({ contentLayout }),
-        nativeID,
-      }));
-    }
+    const [pressPosition, setPressPosition] =
+      React.useState<LayoutPosition | null>(null);
+    const [contentLayout, setContentLayout] =
+      React.useState<LayoutRectangle | null>(null);
 
     const Component = asChild ? Slot.View : View;
     return (
-      <RootStoreContext.Provider value={storeRef.current}>
-        <RootContext.Provider value={{ open, onOpenChange, relativeTo }}>
-          <Component ref={ref} {...viewProps} />
-        </RootContext.Provider>
-      </RootStoreContext.Provider>
+      <RootContext.Provider
+        value={{
+          open,
+          onOpenChange,
+          relativeTo,
+          contentLayout,
+          nativeID,
+          pressPosition,
+          setContentLayout,
+          setPressPosition,
+        }}
+      >
+        <Component ref={ref} {...viewProps} />
+      </RootContext.Provider>
     );
   }
 );
@@ -97,26 +94,6 @@ function useContextMenuContext() {
   return context;
 }
 
-function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
-  const store = React.useContext(RootStoreContext);
-  if (!store) {
-    throw new Error(
-      'Popover compound components cannot be rendered outside the Popover component'
-    );
-  }
-  return useStore(store, selector);
-}
-
-function useGetRootStore() {
-  const store = React.useContext(RootStoreContext);
-  if (!store) {
-    throw new Error(
-      'Popover compound components cannot be rendered outside the Popover component'
-    );
-  }
-  return store;
-}
-
 const accessibilityActions = [{ name: 'longpress' }];
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
@@ -131,10 +108,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     ref
   ) => {
     const triggerRef = React.useRef<View>(null);
-    const { open, onOpenChange, relativeTo } = useContextMenuContext();
-    const setPressPosition = useRootStoreContext(
-      (state) => state.setPressPosition
-    );
+    const { open, onOpenChange, relativeTo, setPressPosition } =
+      useContextMenuContext();
 
     React.useImperativeHandle(
       ref,
@@ -205,11 +180,8 @@ Trigger.displayName = 'TriggerNativeContextMenu';
  */
 function Portal({ forceMount, hostName, children }: ContextMenuPortalProps) {
   const value = useContextMenuContext();
-  const pressPosition = useRootStoreContext((state) => state.pressPosition);
-  const nativeID = useRootStoreContext((state) => state.nativeID);
-  const store = useGetRootStore();
 
-  if (!pressPosition) {
+  if (!value.pressPosition) {
     return null;
   }
 
@@ -220,10 +192,8 @@ function Portal({ forceMount, hostName, children }: ContextMenuPortalProps) {
   }
 
   return (
-    <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
-      <RootStoreContext.Provider value={store}>
-        <RootContext.Provider value={value}>{children}</RootContext.Provider>
-      </RootStoreContext.Provider>
+    <RNPPortal hostName={hostName} name={`${value.nativeID}_portal`}>
+      <RootContext.Provider value={value}>{children}</RootContext.Provider>
     </RNPPortal>
   );
 }
@@ -242,13 +212,8 @@ const Overlay = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useContextMenuContext();
-    const setPressPosition = useRootStoreContext(
-      (state) => state.setPressPosition
-    );
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
+    const { open, onOpenChange, setContentLayout, setPressPosition } =
+      useContextMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -293,16 +258,15 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useContextMenuContext();
-    const nativeID = useRootStoreContext((state) => state.nativeID);
-    const pressPosition = useRootStoreContext((state) => state.pressPosition);
-    const setPressPosition = useRootStoreContext(
-      (state) => state.setPressPosition
-    );
-    const contentLayout = useRootStoreContext((state) => state.contentLayout);
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
+    const {
+      open,
+      onOpenChange,
+      contentLayout,
+      nativeID,
+      pressPosition,
+      setContentLayout,
+      setPressPosition,
+    } = useContextMenuContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
@@ -377,13 +341,8 @@ const Item = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange } = useContextMenuContext();
-    const setPressPosition = useRootStoreContext(
-      (state) => state.setPressPosition
-    );
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
+    const { onOpenChange, setContentLayout, setPressPosition } =
+      useContextMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -456,14 +415,8 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange } = useContextMenuContext();
-    const setPressPosition = useRootStoreContext(
-      (state) => state.setPressPosition
-    );
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
-    const nativeID = useRootStoreContext((state) => state.nativeID);
+    const { onOpenChange, setContentLayout, setPressPosition, nativeID } =
+      useContextMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
@@ -543,13 +496,9 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange } = useContextMenuContext();
-    const setPressPosition = useRootStoreContext(
-      (state) => state.setPressPosition
-    );
-    const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
-    );
+    const { onOpenChange, setContentLayout, setPressPosition } =
+      useContextMenuContext();
+
     const { value, onValueChange } =
       useFormItemContext() as BothFormItemContext;
     function onPress(ev: GestureResponderEvent) {
@@ -736,8 +685,8 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useSubContext,
   useContextMenuContext,
+  useSubContext,
 };
 
 function onStartShouldSetResponder() {

@@ -7,7 +7,6 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { createStore, useStore, type StoreApi } from 'zustand';
 import {
   useRelativePosition,
   type LayoutPosition,
@@ -28,18 +27,39 @@ import type {
   NavigationMenuRootProps,
 } from './types';
 
-const RootContext = React.createContext<NavigationMenuRootProps | null>(null);
+interface INavigationMenuRootContext extends NavigationMenuRootProps {
+  triggerPosition: LayoutPosition | null;
+  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
+  contentLayout: LayoutRectangle | null;
+  setContentLayout: (contentLayout: LayoutRectangle | null) => void;
+  nativeID: string;
+}
+
+const RootContext = React.createContext<INavigationMenuRootContext | null>(
+  null
+);
 
 const Root = React.forwardRef<
   ViewRef,
   SlottableViewProps & NavigationMenuRootProps
 >(({ asChild, value, onValueChange, ...viewProps }, ref) => {
+  const nativeID = React.useId();
+  const [triggerPosition, setTriggerPosition] =
+    React.useState<LayoutPosition | null>(null);
+  const [contentLayout, setContentLayout] =
+    React.useState<LayoutRectangle | null>(null);
+
   const Component = asChild ? Slot.View : View;
   return (
     <RootContext.Provider
       value={{
         value,
         onValueChange,
+        nativeID,
+        contentLayout,
+        setContentLayout,
+        setTriggerPosition,
+        triggerPosition,
       }}
     >
       <Component ref={ref} role='navigation' {...viewProps} />
@@ -68,48 +88,26 @@ const List = React.forwardRef<ViewRef, SlottableViewProps>(
 
 List.displayName = 'ListNativeNavigationMenu';
 
-interface ItemStoreContext {
-  triggerPosition: LayoutPosition | null;
-  setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
-  contentLayout: LayoutRectangle | null;
-  setContentLayout: (contentLayout: LayoutRectangle | null) => void;
-  nativeID: string;
-}
-
-const ItemContext = React.createContext<NavigationMenuItemProps | null>(null);
-const ItemStoreContext = React.createContext<StoreApi<ItemStoreContext> | null>(
-  null
-);
+const ItemContext = React.createContext<
+  (NavigationMenuItemProps & { nativeID: string }) | null
+>(null);
 
 const Item = React.forwardRef<
   ViewRef,
   SlottableViewProps & NavigationMenuItemProps
 >(({ asChild, value, ...viewProps }, ref) => {
   const nativeID = React.useId();
-  const storeRef = React.useRef<StoreApi<ItemStoreContext> | null>(null);
-  if (!storeRef.current) {
-    storeRef.current = createStore((set) => ({
-      triggerPosition: null,
-      setTriggerPosition: (triggerPosition: LayoutPosition | null) =>
-        set({ triggerPosition }),
-      contentLayout: null,
-      setContentLayout: (contentLayout: LayoutRectangle | null) =>
-        set({ contentLayout }),
-      nativeID,
-    }));
-  }
 
   const Component = asChild ? Slot.View : View;
   return (
-    <ItemStoreContext.Provider value={storeRef.current}>
-      <ItemContext.Provider
-        value={{
-          value,
-        }}
-      >
-        <Component ref={ref} role='menuitem' {...viewProps} />
-      </ItemContext.Provider>
-    </ItemStoreContext.Provider>
+    <ItemContext.Provider
+      value={{
+        value,
+        nativeID,
+      }}
+    >
+      <Component ref={ref} role='menuitem' {...viewProps} />
+    </ItemContext.Provider>
   );
 });
 
@@ -125,34 +123,12 @@ function useItemContext() {
   return context;
 }
 
-function useItemStoreContext<T>(selector: (state: ItemStoreContext) => T): T {
-  const store = React.useContext(ItemStoreContext);
-  if (!store) {
-    throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
-    );
-  }
-  return useStore(store, selector);
-}
-
-function useGetItemStore() {
-  const store = React.useContext(ItemStoreContext);
-  if (!store) {
-    throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
-    );
-  }
-  return store;
-}
-
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { value, onValueChange } = useNavigationMenuContext();
+    const { value, onValueChange, setTriggerPosition } =
+      useNavigationMenuContext();
     const { value: menuValue } = useItemContext();
-    const setTriggerPosition = useItemStoreContext(
-      (state) => state.setTriggerPosition
-    );
 
     React.useImperativeHandle(
       ref,
@@ -198,11 +174,8 @@ Trigger.displayName = 'TriggerNativeNavigationMenu';
 function Portal({ forceMount, hostName, children }: NavigationMenuPortalProps) {
   const navigationMenu = useNavigationMenuContext();
   const item = useItemContext();
-  const triggerPosition = useItemStoreContext((state) => state.triggerPosition);
-  const nativeID = useItemStoreContext((state) => state.nativeID);
-  const store = useGetItemStore();
 
-  if (!triggerPosition) {
+  if (!navigationMenu.triggerPosition) {
     return null;
   }
 
@@ -213,14 +186,15 @@ function Portal({ forceMount, hostName, children }: NavigationMenuPortalProps) {
   }
 
   return (
-    <RNPPortal hostName={hostName} name={`${nativeID}_portal`}>
+    <RNPPortal
+      hostName={hostName}
+      name={`${navigationMenu.nativeID}_portal_provider`}
+    >
       <RootContext.Provider
         value={navigationMenu}
-        key={`RootContex_t${nativeID}_portal`}
+        key={`RootContext_${navigationMenu.nativeID}_portal_provider`}
       >
-        <ItemStoreContext.Provider value={store}>
-          <ItemContext.Provider value={item}>{children}</ItemContext.Provider>
-        </ItemStoreContext.Provider>
+        <ItemContext.Provider value={item}>{children}</ItemContext.Provider>
       </RootContext.Provider>
     </RNPPortal>
   );
@@ -250,19 +224,15 @@ const Content = React.forwardRef<
     },
     ref
   ) => {
-    const { value, onValueChange } = useNavigationMenuContext();
-    const { value: menuValue } = useItemContext();
-    const nativeID = useItemStoreContext((state) => state.nativeID);
-    const triggerPosition = useItemStoreContext(
-      (state) => state.triggerPosition
-    );
-    const setTriggerPosition = useItemStoreContext(
-      (state) => state.setTriggerPosition
-    );
-    const contentLayout = useItemStoreContext((state) => state.contentLayout);
-    const setContentLayout = useItemStoreContext(
-      (state) => state.setContentLayout
-    );
+    const {
+      value,
+      onValueChange,
+      triggerPosition,
+      setTriggerPosition,
+      contentLayout,
+      setContentLayout,
+    } = useNavigationMenuContext();
+    const { value: menuValue, nativeID } = useItemContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(

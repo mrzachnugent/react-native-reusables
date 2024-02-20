@@ -6,7 +6,6 @@ import {
   Image as RNImage,
   View,
 } from 'react-native';
-import { StoreApi, createStore, useStore } from 'zustand';
 import * as Slot from '~/components/primitives/slot';
 import {
   ComponentPropsWithAsChild,
@@ -17,32 +16,21 @@ import { AvatarImageProps, AvatarRootProps } from './types';
 
 type AvatarState = 'loading' | 'error' | 'loaded';
 
-interface RootStoreContext {
+interface IRootContext extends AvatarRootProps {
   status: AvatarState;
   setStatus: (status: AvatarState) => void;
 }
 
-const RootContext = React.createContext<AvatarRootProps | null>(null);
-const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
-  null
-);
+const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AvatarRootProps>(
   ({ asChild, alt, ...viewProps }, ref) => {
-    const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
-    if (!storeRef.current) {
-      storeRef.current = createStore((set) => ({
-        status: 'loading',
-        setStatus: (status: AvatarState) => set({ status }),
-      }));
-    }
+    const [status, setStatus] = React.useState<AvatarState>('loading');
     const Component = asChild ? Slot.View : View;
     return (
-      <RootStoreContext.Provider value={storeRef.current}>
-        <RootContext.Provider value={{ alt }}>
-          <Component ref={ref} {...viewProps} />
-        </RootContext.Provider>
-      </RootStoreContext.Provider>
+      <RootContext.Provider value={{ alt, status, setStatus }}>
+        <Component ref={ref} {...viewProps} />
+      </RootContext.Provider>
     );
   }
 );
@@ -59,14 +47,6 @@ function useRootContext() {
   return context;
 }
 
-function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
-  const store = React.useContext(RootStoreContext);
-  if (!store) {
-    throw new Error('Missing StoreProvider');
-  }
-  return useStore(store, selector);
-}
-
 const Image = React.forwardRef<
   React.ElementRef<typeof RNImage>,
   Omit<ComponentPropsWithAsChild<typeof RNImage>, 'alt'> & AvatarImageProps
@@ -81,9 +61,7 @@ const Image = React.forwardRef<
     },
     ref
   ) => {
-    const { alt } = useRootContext();
-    const status = useRootStoreContext((state) => state.status);
-    const setStatus = useRootStoreContext((state) => state.setStatus);
+    const { alt, setStatus, status } = useRootContext();
 
     const onLoad = React.useCallback(
       (e: NativeSyntheticEvent<ImageLoadEventData>) => {
@@ -124,8 +102,7 @@ Image.displayName = 'ImageAvatar';
 
 const Fallback = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
-    const { alt } = useRootContext();
-    const status = useRootStoreContext((state) => state.status);
+    const { alt, status } = useRootContext();
 
     if (status !== 'error') {
       return null;
