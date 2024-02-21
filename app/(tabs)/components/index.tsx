@@ -1,6 +1,7 @@
+import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { Link } from 'expo-router';
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import { ChevronRight } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
@@ -11,6 +12,8 @@ import { cn } from '~/lib/utils';
 
 export default function ComponentsScreen() {
   const [search, setSearch] = React.useState('');
+  const ref = React.useRef(null);
+  useScrollToTop(ref);
 
   const data = !search
     ? COMPONENTS
@@ -21,21 +24,22 @@ export default function ComponentsScreen() {
     <View className='flex-1 px-4'>
       <View className='py-4'>
         <Input
-          placeholder='Search...'
+          placeholder='Search UI...'
           clearButtonMode='always'
           value={search}
           onChangeText={setSearch}
         />
       </View>
       <FlashList
+        ref={ref}
         data={data}
-        estimatedItemSize={100}
+        className='overflow-hidden rounded-t-lg'
+        estimatedItemSize={49}
         showsVerticalScrollIndicator={false}
-        className='overflow-hidden rounded-lg'
         renderItem={({ item, index }) => (
           <Link
             href={{
-              pathname: `/(main)/${item}`,
+              pathname: `/${item}`,
               params: { showBackButton: 'true' },
             }}
             asChild
@@ -44,9 +48,9 @@ export default function ComponentsScreen() {
               variant='secondary'
               size='lg'
               className={cn(
-                'pl-4 pr-1.5 border-foreground/5 rounded-none flex-row justify-between',
-                index === 0 ? 'rounded-t-lg' : 'border-t',
-                index === data.length - 1 && 'border-b-1 rounded-b-lg'
+                'bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
+                index === 0 && 'rounded-t-lg',
+                index === data.length - 1 && 'border-b rounded-b-lg'
               )}
             >
               <Text className='text-xl'>{toOptions(item)}</Text>

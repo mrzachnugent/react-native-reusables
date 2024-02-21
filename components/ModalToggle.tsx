@@ -1,15 +1,14 @@
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { cn } from '~/lib/utils';
-import { AlignJustify } from './Icons';
+import { CircleUserRound } from './Icons';
 
-export function DrawerToggle() {
-  const navigation = useNavigation<DrawerNavigationProp<{}>>();
-
+export function ModalToggle() {
   return (
     <Pressable
-      onPress={navigation.toggleDrawer}
+      onPress={() => {
+        router.push('/modal');
+      }}
       className='web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2'
     >
       {({ pressed }) => (
@@ -19,7 +18,7 @@ export function DrawerToggle() {
             pressed && 'opacity-70'
           )}
         >
-          <AlignJustify
+          <CircleUserRound
             className='text-foreground'
             size={24}
             strokeWidth={1.25}

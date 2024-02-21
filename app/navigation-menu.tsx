@@ -1,4 +1,3 @@
-import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
 import { Sparkles } from '~/components/Icons';
 import * as React from 'react';
@@ -27,7 +26,6 @@ export default function MenubarScreen() {
   };
   const [value, setValue] = React.useState<string>();
   const navigation = useNavigation();
-  const isDrawerOpen = useDrawerStatus() === 'open';
 
   function closeAll() {
     setValue('');
@@ -40,12 +38,6 @@ export default function MenubarScreen() {
 
     return sub;
   }, []);
-
-  React.useEffect(() => {
-    if (isDrawerOpen) {
-      closeAll();
-    }
-  }, [isDrawerOpen]);
 
   return (
     <View className='flex-1  items-center px-6 py-3 gap-12'>

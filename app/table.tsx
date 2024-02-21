@@ -1,8 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
-import Drawer from 'expo-router/drawer';
+import { Stack } from 'expo-router';
 import * as React from 'react';
-import { Alert, View, useWindowDimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Alert, ScrollView, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { ChevronDown } from '~/components/Icons';
@@ -40,9 +39,7 @@ export default function TableScreen() {
 
   return (
     <>
-      <Drawer.Screen
-        options={{ headerStyle: { shadowColor: 'transparent' } }}
-      />
+      <Stack.Screen options={{ headerShadowVisible: false }} />
       <ScrollView
         horizontal
         bounces={false}

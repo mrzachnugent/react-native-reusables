@@ -24,6 +24,7 @@ import {
   Database,
   Ear,
   Fan,
+  CircleUserRound,
   GalleryHorizontal,
   Info,
   Italic,
@@ -74,6 +75,7 @@ interopIcon(AlignRight);
 interopIcon(Baby);
 interopIcon(BadgeAlert);
 interopIcon(Calendar);
+interopIcon(CircleUserRound);
 interopIcon(Database);
 interopIcon(Ear);
 interopIcon(Fan);
@@ -136,6 +138,7 @@ export {
   ChevronsDownUp,
   ChevronsUpDown,
   Copy,
+  CircleUserRound,
   Database,
   Ear,
   Fan,

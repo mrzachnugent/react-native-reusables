@@ -1,11 +1,11 @@
 import { Tabs } from 'expo-router';
-import { DrawerToggle } from '~/components/DrawerToggle';
 import { LayoutPanelLeft, MenuSquare } from '~/components/Icons';
+import { ModalToggle } from '~/components/ModalToggle';
 import { ThemeToggle } from '~/components/ThemeToggle';
 
 export default function TabsLayout() {
   return (
-    <Tabs screenOptions={screenOptions}>
+    <Tabs>
       <Tabs.Screen
         name='index'
         options={{
@@ -13,6 +13,8 @@ export default function TabsLayout() {
           tabBarIcon({ color, size }) {
             return <LayoutPanelLeft color={color} size={size} />;
           },
+          headerLeft: () => <ModalToggle />,
+          headerRight: () => <ThemeToggle />,
         }}
       />
       <Tabs.Screen
@@ -22,16 +24,9 @@ export default function TabsLayout() {
           tabBarIcon({ color, size }) {
             return <MenuSquare color={color} size={size} />;
           },
+          headerRight: () => <ThemeToggle />,
         }}
       />
     </Tabs>
   );
 }
-
-type RootTabs = React.ComponentProps<typeof Tabs>;
-type ScreenOptions = RootTabs['screenOptions'];
-
-const screenOptions: ScreenOptions = {
-  headerLeft: () => <DrawerToggle />,
-  headerRight: () => <ThemeToggle />,
-};

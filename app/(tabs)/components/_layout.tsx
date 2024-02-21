@@ -8,8 +8,7 @@ import {
   type ParamListBase,
   type TabNavigationState,
 } from '@react-navigation/native';
-import { withLayoutContext } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
+import { Stack, withLayoutContext } from 'expo-router';
 import { useWindowDimensions } from 'react-native';
 
 const { Navigator } = createMaterialTopTabNavigator();
@@ -26,7 +25,7 @@ export default function MaterialTopTabsLayout() {
   const { width } = useWindowDimensions();
   return (
     <>
-      <Drawer.Screen options={{ headerShadowVisible: false }} />
+      <Stack.Screen options={{ headerShadowVisible: false }} />
       <MaterialTopTabs
         initialRouteName='index'
         screenOptions={{

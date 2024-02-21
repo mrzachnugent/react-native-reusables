@@ -1,4 +1,3 @@
-import { useDrawerStatus } from '@react-navigation/drawer';
 import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
@@ -36,7 +35,6 @@ export default function MenubarScreen() {
   const [isChecked2, setIsChecked2] = React.useState(false);
   const [radio, setRadio] = React.useState('michael');
   const navigation = useNavigation();
-  const isDrawerOpen = useDrawerStatus() === 'open';
   React.useEffect(() => {
     const sub = navigation.addListener('blur', () => {
       onValueChange(undefined);
@@ -44,12 +42,6 @@ export default function MenubarScreen() {
 
     return sub;
   }, []);
-
-  React.useEffect(() => {
-    if (isDrawerOpen) {
-      onValueChange(undefined);
-    }
-  }, [isDrawerOpen]);
 
   function closeSubs() {
     setIsSubOpen(false);

@@ -27,7 +27,7 @@ export function ThemeToggle() {
           {isDarkColorScheme ? (
             <MoonStar
               className='text-foreground'
-              size={24}
+              size={23}
               strokeWidth={1.25}
             />
           ) : (

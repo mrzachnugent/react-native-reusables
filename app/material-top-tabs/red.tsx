@@ -9,7 +9,7 @@ export default function RedScreen() {
         <H1 className='text-red-500'>Red tab</H1>
         <Muted>Swipe to see other tabs</Muted>
       </View>
-      <Link href='/(main)/material-top-tabs/green'>
+      <Link href='/material-top-tabs/green'>
         <Text>
           Go to <Text className='text-green-500 font-bold'>green</Text> tab
         </Text>

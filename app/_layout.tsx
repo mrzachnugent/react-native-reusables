@@ -5,15 +5,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import * as Updates from 'expo-updates';
 import * as React from 'react';
-import { AppState } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ToastProvider } from '~/components/deprecated-ui/toast';
+import { PortalHost } from '~/components/primitives/portal/portal-native';
+import { Text } from '~/components/ui/typography';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
-import { PortalHost } from '~/components/primitives/portal/portal-native';
 import { useColorScheme } from '~/lib/useColorScheme';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ThemeToggle } from '~/components/ThemeToggle';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -23,17 +23,6 @@ const DARK_THEME: Theme = {
   dark: true,
   colors: NAV_THEME.dark,
 };
-
-async function onFetchUpdateAsync() {
-  if (__DEV__) return;
-
-  const update = await Updates.checkForUpdateAsync();
-
-  if (update.isAvailable) {
-    await Updates.fetchUpdateAsync();
-    await Updates.reloadAsync();
-  }
-}
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -51,7 +40,6 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
-  useAppForground(onFetchUpdateAsync, true);
 
   React.useEffect(() => {
     (async () => {
@@ -85,9 +73,22 @@ export default function RootLayout() {
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <BottomSheetModalProvider>
-          <Stack initialRouteName='(main)'>
+          <Stack
+            initialRouteName='(tabs)'
+            screenOptions={{
+              headerBackTitle: 'Back',
+              headerTitle(props) {
+                return (
+                  <Text className='text-xl font-semibold'>
+                    {toOptions(props.children)}
+                  </Text>
+                );
+              },
+              headerRight: () => <ThemeToggle />,
+            }}
+          >
             <Stack.Screen
-              name='(main)'
+              name='(tabs)'
               options={{
                 headerShown: false,
               }}
@@ -95,7 +96,10 @@ export default function RootLayout() {
 
             <Stack.Screen
               name='modal'
-              options={{ presentation: 'modal', title: 'Modal' }}
+              options={{
+                presentation: 'modal',
+                title: 'Modal',
+              }}
             />
           </Stack>
         </BottomSheetModalProvider>
@@ -106,25 +110,14 @@ export default function RootLayout() {
   );
 }
 
-function useAppForground(cb: () => void, onMount = true) {
-  const appState = React.useRef(AppState.currentState);
-  React.useEffect(() => {
-    if (onMount) {
-      cb();
-    }
-    const subscription = AppState.addEventListener('change', (nextAppState) => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === 'active'
-      ) {
-        cb();
-      }
-
-      appState.current = nextAppState;
-    });
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
+function toOptions(name: string) {
+  const title = name
+    .split('-')
+    .map(function (str: string) {
+      return str.replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+      });
+    })
+    .join(' ');
+  return title;
 }

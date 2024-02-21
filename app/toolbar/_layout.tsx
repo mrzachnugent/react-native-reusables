@@ -1,11 +1,9 @@
 import { Tabs } from 'expo-router';
-import Drawer from 'expo-router/drawer';
 import { Copy, ToyBrick } from 'lucide-react-native';
 
 export default function ToolbarTabsLayout() {
   return (
     <>
-      <Drawer.Screen options={{ swipeEnabled: false }} />
       <Tabs screenOptions={screenOptions}>
         <Tabs.Screen
           name='index'

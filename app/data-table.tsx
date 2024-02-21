@@ -1,5 +1,5 @@
 import { Column, ColumnDef } from '@tanstack/react-table';
-import Drawer from 'expo-router/drawer';
+import { Stack } from 'expo-router';
 import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -120,9 +120,7 @@ export default function DataTableScreen() {
 
   return (
     <>
-      <Drawer.Screen
-        options={{ headerStyle: { shadowColor: 'transparent' } }}
-      />
+      <Stack.Screen options={{ headerShadowVisible: false }} />
       <DataTable
         isRefreshing={isRefreshing}
         onRefresh={onRefresh}
