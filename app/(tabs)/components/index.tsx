@@ -33,7 +33,7 @@ export default function ComponentsScreen() {
       <FlashList
         ref={ref}
         data={data}
-        className='overflow-hidden rounded-t-lg'
+        className='native:overflow-hidden rounded-t-lg'
         estimatedItemSize={49}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
