@@ -16,6 +16,7 @@ import {
   Check,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   ChevronUp,
   ChevronsDownUp,
   ChevronsUpDown,
@@ -98,6 +99,7 @@ interopIcon(Info);
 interopIcon(X);
 interopIcon(Search);
 interopIcon(ChevronRight);
+interopIcon(ChevronLeft);
 interopIcon(ChevronUp);
 interopIcon(Cloud);
 interopIcon(Github);
@@ -129,6 +131,7 @@ export {
   Check,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   ChevronUp,
   ChevronsDownUp,
   ChevronsUpDown,
