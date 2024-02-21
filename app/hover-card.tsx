@@ -35,7 +35,9 @@ export default function HoverCardScreen() {
                 <AvatarImage
                   source={{ uri: 'https://github.com/vercel.png' }}
                 />
-                <AvatarFallback>VC</AvatarFallback>
+                <AvatarFallback>
+                  <Text>VA</Text>
+                </AvatarFallback>
               </Avatar>
               <View className='gap-1 flex-1'>
                 <Text className='text-sm native:text-base font-semibold'>

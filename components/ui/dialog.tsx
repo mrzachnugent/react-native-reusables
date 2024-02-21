@@ -41,23 +41,22 @@ const DialogOverlayNative = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, children, ...props }, ref) => {
   return (
-    <Animated.View
+    <DialogPrimitive.Overlay
       style={StyleSheet.absoluteFill}
-      entering={FadeIn.duration(150)}
-      exiting={FadeOut.duration(150)}
+      className={cn(
+        'z-50 flex bg-black/80 justify-center items-center p-2',
+        className
+      )}
+      {...props}
+      ref={ref}
     >
-      <DialogPrimitive.Overlay
-        style={StyleSheet.absoluteFill}
-        className={cn(
-          'z-50 flex bg-black/80 justify-center items-center p-2',
-          className
-        )}
-        {...props}
-        ref={ref}
+      <Animated.View
+        entering={FadeIn.duration(150)}
+        exiting={FadeOut.duration(150)}
       >
         <>{children}</>
-      </DialogPrimitive.Overlay>
-    </Animated.View>
+      </Animated.View>
+    </DialogPrimitive.Overlay>
   );
 });
 
@@ -75,7 +74,7 @@ const DialogContent = React.forwardRef<
   const { open } = DialogPrimitive.useContext();
   return (
     <DialogPortal>
-      <DialogOverlay style={StyleSheet.absoluteFill}>
+      <DialogOverlay>
         <DialogPrimitive.Content
           ref={ref}
           className={cn(
