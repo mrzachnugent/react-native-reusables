@@ -1,12 +1,7 @@
 import { Link } from 'expo-router';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import {
-  CalendarDays,
-  ChevronDown,
-  ChevronRight,
-  Info,
-} from '~/components/Icons';
+import { CalendarDays, ChevronDown, ChevronRight, Info } from '~/components/Icons';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,13 +15,7 @@ import {
 } from '~/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '~/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import {
   ContextMenu,
   ContextMenuContent,
@@ -51,55 +40,37 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '~/components/ui/hover-card';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '~/components/ui/tooltip';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Muted, Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
+import { Paragraph } from '@rnr/ui';
 
 export default function ExampleScreen() {
   const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
   return (
     <View className='flex-1 p-4 justify-center gap-6'>
+      <Paragraph>Hello</Paragraph>
       <Card className='w-full max-w-lg mx-auto'>
         <CardHeader>
           <View className='flex-row gap-3'>
             <CardTitle className='pt-1'>Team Members</CardTitle>
-            <Tooltip
-              open={isTooltipOpen}
-              onOpenChange={setIsTooltipOpen}
-              delayDuration={150}
-            >
+            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen} delayDuration={150}>
               <TooltipTrigger>
                 <Info size={18} className='text-foreground' />
               </TooltipTrigger>
-              <TooltipContent
-                side='bottom'
-                insets={contentInsets}
-                className='gap-1 py-3 px-5'
-              >
+              <TooltipContent side='bottom' insets={contentInsets} className='gap-1 py-3 px-5'>
                 <Text className='native:text-lg font-bold'>Things to try:</Text>
                 <Text className='native:text-lg text-muted-foreground'>
-                  · {Platform.OS === 'web' ? 'Hover' : 'Press'} the team
-                  member's name
+                  · {Platform.OS === 'web' ? 'Hover' : 'Press'} the team member's name
                 </Text>
                 <Text className='native:text-lg text-muted-foreground'>
-                  · {Platform.OS === 'web' ? 'Right click' : 'Press and hold'}{' '}
-                  the avatar
+                  · {Platform.OS === 'web' ? 'Right click' : 'Press and hold'} the avatar
                 </Text>
               </TooltipContent>
             </Tooltip>
           </View>
-          <CardDescription>
-            Invite your team members to collaborate.
-          </CardDescription>
+          <CardDescription>Invite your team members to collaborate.</CardDescription>
         </CardHeader>
         <CardContent className='gap-8'>
           <View className='flex-row gap-3'>
@@ -120,11 +91,7 @@ export default function ExampleScreen() {
           </View>
           <View className='flex-row gap-3'>
             <View className='flex-1 flex-row gap-3'>
-              <TeamMemberAvatar
-                initials='JD'
-                name='Jane Doe'
-                uri='invalid link'
-              />
+              <TeamMemberAvatar initials='JD' name='Jane Doe' uri='invalid link' />
               <View className='flex-1'>
                 <TeamMemberHoverCard name='Jane Doe' />
                 <Text numberOfLines={1} className='text-muted-foreground'>
@@ -162,21 +129,14 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
           <ChevronDown size={18} className='text-foreground' />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align='end'
-        insets={contentInsets}
-        className='w-64 native:w-72'
-      >
+      <DropdownMenuContent align='end' insets={contentInsets} className='w-64 native:w-72'>
         <DropdownMenuLabel>Select new role</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onPress={() => {
             setValue('Viewer');
           }}
-          className={cn(
-            'flex-col items-start gap-1',
-            value === 'Viewer' ? 'bg-secondary' : ''
-          )}
+          className={cn('flex-col items-start gap-1', value === 'Viewer' ? 'bg-secondary' : '')}
         >
           <Text>Viewer</Text>
           <Muted>Can view and comment.</Muted>
@@ -185,10 +145,7 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
           onPress={() => {
             setValue('Billing');
           }}
-          className={cn(
-            'flex-col items-start gap-1',
-            value === 'Billing' ? 'bg-secondary' : ''
-          )}
+          className={cn('flex-col items-start gap-1', value === 'Billing' ? 'bg-secondary' : '')}
         >
           <Text>Billing</Text>
           <Muted>Can view, comment, and manage billing.</Muted>
@@ -197,10 +154,7 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
           onPress={() => {
             setValue('Owner');
           }}
-          className={cn(
-            'flex-col items-start gap-1',
-            value === 'Owner' ? 'bg-secondary' : ''
-          )}
+          className={cn('flex-col items-start gap-1', value === 'Owner' ? 'bg-secondary' : '')}
         >
           <Text>Owner</Text>
           <Muted>Admin-level access to all resources</Muted>
@@ -225,9 +179,7 @@ function TeamMemberHoverCard({ name }: { name: string }) {
             <AvatarFallback>VC</AvatarFallback>
           </Avatar>
           <View className='gap-1 flex-1'>
-            <Text className='text-sm native:text-base font-semibold'>
-              {name}
-            </Text>
+            <Text className='text-sm native:text-base font-semibold'>{name}</Text>
             <Text className='text-sm native:text-base'>
               Wishes they were part of the triangle company.
             </Text>
@@ -273,11 +225,7 @@ function TeamMemberAvatar({
         </Avatar>
       </ContextMenuTrigger>
 
-      <ContextMenuContent
-        align='start'
-        insets={contentInsets}
-        className='w-64 native:w-72'
-      >
+      <ContextMenuContent align='start' insets={contentInsets} className='w-64 native:w-72'>
         <ContextMenuItem>
           <Text>View</Text>
         </ContextMenuItem>
@@ -315,8 +263,8 @@ function TeamMemberAvatar({
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                This action cannot be undone. This will permanently delete your account and remove
+                your data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
