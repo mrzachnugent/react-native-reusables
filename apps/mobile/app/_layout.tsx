@@ -8,7 +8,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ToastProvider } from '~/components/deprecated-ui/toast';
-import { PortalHost } from '~/components/primitives/portal/portal-native';
+import { PortalHost } from '@rnr/portal';
 import { Text } from '~/components/ui/typography';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
@@ -78,11 +78,7 @@ export default function RootLayout() {
             screenOptions={{
               headerBackTitle: 'Back',
               headerTitle(props) {
-                return (
-                  <Text className='text-xl font-semibold'>
-                    {toOptions(props.children)}
-                  </Text>
-                );
+                return <Text className='text-xl font-semibold'>{toOptions(props.children)}</Text>;
               },
               headerRight: () => <ThemeToggle />,
             }}

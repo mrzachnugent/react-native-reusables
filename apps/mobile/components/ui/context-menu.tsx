@@ -1,19 +1,7 @@
-import {
-  Check,
-  ChevronDown,
-  ChevronRight,
-  ChevronUp,
-} from '~/components/Icons';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from '~/components/Icons';
 import * as React from 'react';
-import {
-  Platform,
-  StyleProp,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native';
-import * as ContextMenuPrimitive from '~/components/primitives/context-menu';
+import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import * as ContextMenuPrimitive from '@rnr/context-menu';
 import { cn } from '~/lib/utils';
 import { TextClassContext } from '~/components/ui/typography';
 
@@ -36,8 +24,7 @@ const ContextMenuSubTrigger = React.forwardRef<
   }
 >(({ className, inset, children, ...props }, ref) => {
   const { open } = ContextMenuPrimitive.useSubContext();
-  const Icon =
-    Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
+  const Icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
     <TextClassContext.Provider
       value={cn(
@@ -167,8 +154,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
     <>{children}</>
   </ContextMenuPrimitive.CheckboxItem>
 ));
-ContextMenuCheckboxItem.displayName =
-  ContextMenuPrimitive.CheckboxItem.displayName;
+ContextMenuCheckboxItem.displayName = ContextMenuPrimitive.CheckboxItem.displayName;
 
 const ContextMenuRadioItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.RadioItem>,

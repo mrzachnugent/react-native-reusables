@@ -12,7 +12,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { ChevronDown } from '~/components/Icons';
-import * as AccordionPrimitive from '~/components/primitives/accordion';
+import * as AccordionPrimitive from '@rnr/accordion';
 import { cn } from '~/lib/utils';
 
 const Accordion = React.forwardRef<
@@ -21,14 +21,8 @@ const Accordion = React.forwardRef<
 >(({ children, ...props }, ref) => {
   return (
     <LayoutAnimationConfig skipEntering>
-      <AccordionPrimitive.Root
-        ref={ref}
-        {...props}
-        asChild={Platform.OS !== 'web'}
-      >
-        <Animated.View layout={LinearTransition.duration(200)}>
-          {children}
-        </Animated.View>
+      <AccordionPrimitive.Root ref={ref} {...props} asChild={Platform.OS !== 'web'}>
+        <Animated.View layout={LinearTransition.duration(200)}>{children}</Animated.View>
       </AccordionPrimitive.Root>
     </LayoutAnimationConfig>
   );
@@ -41,10 +35,7 @@ const AccordionItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, value, ...props }, ref) => {
   return (
-    <Animated.View
-      className={'overflow-hidden'}
-      layout={LinearTransition.duration(200)}
-    >
+    <Animated.View className={'overflow-hidden'} layout={LinearTransition.duration(200)}>
       <AccordionPrimitive.Item
         ref={ref}
         className={cn('border-b border-border', className)}
@@ -65,9 +56,7 @@ const AccordionTrigger = React.forwardRef<
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
   const progress = useDerivedValue(() =>
-    isExpanded
-      ? withTiming(1, { duration: 250 })
-      : withTiming(0, { duration: 200 })
+    isExpanded ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })
   );
   const chevronStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${progress.value * 180}deg` }],
@@ -113,13 +102,7 @@ const AccordionContent = React.forwardRef<
   );
 });
 
-function InnerContent({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+function InnerContent({ children, className }: { children: React.ReactNode; className?: string }) {
   if (Platform.OS === 'web') {
     return <View className={cn('pb-4', className)}>{children}</View>;
   }
