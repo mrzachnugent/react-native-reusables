@@ -1,0 +1,310 @@
+---
+title: Installation
+description: NativeWind Light and Dark Mode
+---
+
+import Code from '@/components/Code.astro';
+
+Prepare your environment for copy/pasting and to use NativeWind with Light and Dark Mode.
+
+### Install NativeWind
+
+Follow the installation guide for NativeWind from the <a target="_blank" href="https://www.nativewind.dev/v4/overview">official documentation</a>.
+
+### Add Light and Dark Mode colors
+
+- **Add the following css variables to global.css file.**
+
+<Code lang="css" 
+title="global.css"
+code={`@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+  }
+
+.dark:root {
+--background: 240 10% 3.9%;
+--foreground: 0 0% 98%;
+--card: 240 10% 3.9%;
+--card-foreground: 0 0% 98%;
+--popover: 240 10% 3.9%;
+--popover-foreground: 0 0% 98%;
+--primary: 0 0% 98%;
+--primary-foreground: 240 5.9% 10%;
+--secondary: 240 3.7% 15.9%;
+--secondary-foreground: 0 0% 98%;
+--muted: 240 3.7% 15.9%;
+--muted-foreground: 240 5% 64.9%;
+--accent: 240 3.7% 15.9%;
+--accent-foreground: 0 0% 98%;
+--destructive: 0 72% 51%;
+--destructive-foreground: 0 0% 98%;
+--border: 240 3.7% 15.9%;
+--input: 240 3.7% 15.9%;
+--ring: 240 4.9% 83.9%;
+}
+}`}
+/>
+
+**IMPORTANT**: When customizing, make sure to use `.dark:root` or `@media (prefers-color-scheme: dark)` for the dark mode css selector.
+
+If you want inspiration for your own colors, check out: <a target="_blank" href="https://ui.jln.dev/">ui by jln.dev/</a> or <a target="_blank" href="https://ui.shadcn.com/themes">themes by ui/shadcn</a>
+
+- **Add the following code in the `lib/constants.ts` file for the navigation theme colors:**
+
+<Code
+  lang='ts'
+  title='lib/constants.ts'
+  code={`
+export const NAV_THEME = {
+  light: {
+    background: 'hsl(0 0% 100%)', // background
+    border: 'hsl(240 5.9% 90%)', // border
+    card: 'hsl(0 0% 100%)', // card
+    notification: 'hsl(0 84.2% 60.2%)', // destructive
+    primary: 'hsl(240 5.9% 10%)', // primary
+    text: 'hsl(240 10% 3.9%)', // foreground
+  },
+  dark: {
+    background: 'hsl(240 10% 3.9%)', // background
+    border: 'hsl(240 3.7% 15.9%)', // border
+    card: 'hsl(240 10% 3.9%)', // card
+    notification: 'hsl(0 72% 51%)', // destructive
+    primary: 'hsl(0 0% 98%)', // primary
+    text: 'hsl(0 0% 98%)', // foreground
+  },
+};
+`}
+/>
+
+If you changed the colors in the `global.css` file, update the `lib/constants.ts` file with the new colors.
+Each color has a commented css variable name next to it.
+
+### Install and set up utilities
+
+- **Install the following packages:**
+
+```bash
+npx expo install @react-native-async-storage/async-storage lucide-react-native class-variance-authority clsx tailwind-merge
+```
+
+If you are using the expo-web, also install the following package:
+
+```bash
+npx expo install tailwindcss-animate
+```
+
+- **Configure path aliases**
+
+We use the `~` alias. This is how you can configure it in your `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["*"]
+    }
+  }
+}
+```
+
+- **Add a cn helper**
+
+Add the following code to the `lib/utils.ts` file:
+
+```ts
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+- **Add the useColorScheme hook**
+
+Add the following code to the `lib/useColorScheme.tsx` file:
+
+```tsx
+import { useColorScheme as useNativewindColorScheme } from 'nativewind';
+
+export function useColorScheme() {
+  const { colorScheme, setColorScheme, toggleColorScheme } =
+    useNativewindColorScheme();
+  return {
+    colorScheme: colorScheme ?? 'dark',
+    isDarkColorScheme: colorScheme === 'dark',
+    setColorScheme,
+    toggleColorScheme,
+  };
+}
+```
+
+### Configure colors
+
+- **Use the CSS variables in your tailwind.config.js file.**
+
+If you do not use react-native-web, replace the value for the `plugin` key with `[]`
+
+<Code
+  lang='js'
+  title='tailwind.config.js'
+  code={`
+const { hairlineWidth } = require('nativewind/theme');
+
+/** @type {import('tailwindcss').Config} \*/
+module.exports = {
+darkMode: 'class',
+content: ['./app/**/_.{ts,tsx}', './components/\*\*/_.{ts,tsx}'],
+presets: [require('nativewind/preset')],
+theme: {
+extend: {
+colors: {
+border: 'hsl(var(--border))',
+input: 'hsl(var(--input))',
+ring: 'hsl(var(--ring))',
+background: 'hsl(var(--background))',
+foreground: 'hsl(var(--foreground))',
+primary: {
+DEFAULT: 'hsl(var(--primary))',
+foreground: 'hsl(var(--primary-foreground))',
+},
+secondary: {
+DEFAULT: 'hsl(var(--secondary))',
+foreground: 'hsl(var(--secondary-foreground))',
+},
+destructive: {
+DEFAULT: 'hsl(var(--destructive))',
+foreground: 'hsl(var(--destructive-foreground))',
+},
+muted: {
+DEFAULT: 'hsl(var(--muted))',
+foreground: 'hsl(var(--muted-foreground))',
+},
+accent: {
+DEFAULT: 'hsl(var(--accent))',
+foreground: 'hsl(var(--accent-foreground))',
+},
+popover: {
+DEFAULT: 'hsl(var(--popover))',
+foreground: 'hsl(var(--popover-foreground))',
+},
+card: {
+DEFAULT: 'hsl(var(--card))',
+foreground: 'hsl(var(--card-foreground))',
+},
+},
+borderWidth: {
+hairline: hairlineWidth(),
+},
+keyframes: {
+'accordion-down': {
+from: { height: '0' },
+to: { height: 'var(--radix-accordion-content-height)' },
+},
+'accordion-up': {
+from: { height: 'var(--radix-accordion-content-height)' },
+to: { height: '0' },
+},
+},
+animation: {
+'accordion-down': 'accordion-down 0.2s ease-out',
+'accordion-up': 'accordion-up 0.2s ease-out',
+},
+},
+},
+plugins: [require('tailwindcss-animate')], // require('tailwindcss-animate') is only used for web
+};
+`}
+/>
+
+- **Configure React Navigation Theme**
+
+In your root component (ex: the root `_layout.tsx` if you're using expo-router), add the following code
+to load the selected theme, prevent the flash of the default theme,
+and store the selected theme in the async storage.
+
+<Code
+  lang='tsx'
+  title='_layout.tsx'
+  code={`
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Theme, ThemeProvider } from '@react-navigation/native';
+import { SplashScreen, Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import * as React from 'react';
+import { NAV_THEME } from '~/lib/constants';
+import { useColorScheme } from '~/lib/useColorScheme';
+
+const LIGHT_THEME: Theme = {
+dark: false,
+colors: NAV_THEME.light,
+};
+const DARK_THEME: Theme = {
+dark: true,
+colors: NAV_THEME.dark,
+};
+
+// Prevent the splash screen from auto-hiding before getting the color scheme.
+SplashScreen.preventAutoHideAsync();
+
+export default function RootLayout() {
+  const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
+  const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+
+React.useEffect(() => {
+(async () => {
+const theme = await AsyncStorage.getItem('theme');
+if (!theme) {
+AsyncStorage.setItem('theme', colorScheme);
+setIsColorSchemeLoaded(true);
+return;
+}
+const colorTheme = theme === 'dark' ? 'dark' : 'light';
+if (colorTheme !== colorScheme) {
+setColorScheme(colorTheme);
+
+        setIsColorSchemeLoaded(true);
+        return;
+      }
+      setIsColorSchemeLoaded(true);
+    })()
+      .catch(() => {
+        setIsColorSchemeLoaded(true);
+      })
+      .finally(() => {
+        SplashScreen.hideAsync();
+      });
+
+}, []);
+
+// Only render the app when the color scheme is loaded.
+if (!isColorSchemeLoaded) {
+return null;
+}
+return (
+
+<ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+  <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+  <Stack />
+</ThemeProvider>
+); } `} />

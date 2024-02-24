@@ -1,0 +1,16 @@
+---
+import { Code as StarlightCode } from '@astrojs/starlight/components';
+import { CodeBlockWrapper } from '../components/react/CodeBlockWrapper';
+
+const { title = '', code = '', lang = 'tsx' } = Astro.props;
+---
+
+<CodeBlockWrapper client:visible>
+  <StarlightCode title={title} code={code} lang={lang} ins={'inverted'} />
+</CodeBlockWrapper>
+
+<style>
+  .expressive-code .copy button {
+    opacity: 1 !important;
+  }
+</style>

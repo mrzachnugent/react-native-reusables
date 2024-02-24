@@ -6,7 +6,9 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./native": "./src/accordion-native.tsx",
+    "./web": "./src/accordion-web.tsx"
   },
   "scripts": {
     "clean": "rm -rf node_modules"
