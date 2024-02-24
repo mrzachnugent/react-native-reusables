@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import * as Slot from '~/components/primitives/slot';
+import * as Slot from '@rnr/slot';
 import type {
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '~/components/primitives/types';
+} from '@rnr/types';
 import type { SwitchRootProps } from './types';
 
 const Root = React.forwardRef<

@@ -15,7 +15,8 @@
     "dev": "tsup --watch --silent",
     "lint": "eslint --ext js,ts,tsx .",
     "test": "jest",
-    "build": "tsup --clean"
+    "build": "tsup --clean",
+    "clean": "rm -rf .turbo build"
   },
   "dependencies": {
     "@radix-ui/react-toggle": "^1.0.3",

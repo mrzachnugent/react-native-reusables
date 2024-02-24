@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import * as PopoverWeb from './popover-web';
 import * as PopoverNative from './popover-native';
+export * from './types';
 
 export const Root = Platform.select({
   web: PopoverWeb.Root,

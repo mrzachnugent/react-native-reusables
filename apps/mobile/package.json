@@ -1,12 +1,13 @@
 {
   "name": "react-native-reusables",
-  "main": "index.js",
+  "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
     "start": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c",
     "android": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --android",
     "dev": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --ios",
-    "web": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --web"
+    "dev:web": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --web",
+    "clean": "rm -rf .expo node_modules"
   },
   "dependencies": {
     "@rnr/ui": "*",

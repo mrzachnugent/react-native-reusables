@@ -17,9 +17,7 @@ export default function ComponentsScreen() {
 
   const data = !search
     ? COMPONENTS
-    : COMPONENTS.filter((item) =>
-        item.toLowerCase().includes(search.toLowerCase())
-      );
+    : COMPONENTS.filter((item) => item.toLowerCase().includes(search.toLowerCase()));
   return (
     <View className='flex-1 px-4'>
       <View className='py-4'>

@@ -15,9 +15,7 @@ export default function PrimitivesScreen() {
 
   const data = !search
     ? PRIMITIVES
-    : PRIMITIVES.filter((item) =>
-        item.toLowerCase().includes(search.toLowerCase())
-      );
+    : PRIMITIVES.filter((item) => item.toLowerCase().includes(search.toLowerCase()));
   return (
     <View className='flex-1 px-4'>
       <View className='py-4'>
