@@ -3,13 +3,13 @@
   "private": true,
   "scripts": {
     "dev": "turbo dev",
-    "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\" --concurrency 50",
-    "dev:mobile:web": "turbo dev:web --filter=\"{./apps/mobile}...\" --concurrency 32",
+    "dev:showcase": "turbo dev --filter=\"{./apps/showcase}...\" --concurrency 32",
+    "dev:showcase:web": "turbo dev:web --filter=\"{./apps/showcase}...\" --concurrency 32",
     "dev:docs": "turbo dev --filter=\"{./apps/docs}...\"",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
-    "build:mobile": "turbo build --filter=\"...{./apps/mobile}\"",
+    "build:showcase": "turbo build --filter=\"...{./apps/showcase}\"",
     "build:docs": "turbo build --filter=\"...{./apps/docs}\"",
     "clean": "rm -rf .turbo node_modules && turbo clean",
     "postinstall": "turbo build"
