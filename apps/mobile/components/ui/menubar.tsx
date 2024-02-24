@@ -1,13 +1,8 @@
-import {
-  Check,
-  ChevronDown,
-  ChevronRight,
-  ChevronUp,
-} from '~/components/Icons';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from '~/components/Icons';
 import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { TextClassContext } from '~/components/ui/typography';
-import * as MenubarPrimitive from '~/components/primitives/menubar';
+import * as MenubarPrimitive from '@rnr/menubar';
 import { cn } from '~/lib/utils';
 
 const MenubarMenu = MenubarPrimitive.Menu;
@@ -63,8 +58,7 @@ const MenubarSubTrigger = React.forwardRef<
   }
 >(({ className, inset, children, ...props }, ref) => {
   const { open } = MenubarPrimitive.useSubContext();
-  const Icon =
-    Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
+  const Icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
     <TextClassContext.Provider
       value={cn(
@@ -233,10 +227,7 @@ const MenubarSeparator = React.forwardRef<
 ));
 MenubarSeparator.displayName = MenubarPrimitive.Separator.displayName;
 
-const MenubarShortcut = ({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof Text>) => {
+const MenubarShortcut = ({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text>) => {
   return (
     <Text
       className={cn(

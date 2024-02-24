@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 import { ChevronDown } from '~/components/Icons';
 import * as React from 'react';
-import * as NavigationMenuPrimitive from '~/components/primitives/navigation-menu';
+import * as NavigationMenuPrimitive from '@rnr/navigation-menu';
 
 import { Platform, View } from 'react-native';
 import Animated, {
@@ -21,10 +21,7 @@ const NavigationMenu = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Root
     ref={ref}
-    className={cn(
-      'relative z-10 flex flex-row max-w-max items-center justify-center',
-      className
-    )}
+    className={cn('relative z-10 flex flex-row max-w-max items-center justify-center', className)}
     {...props}
   >
     {children}
@@ -62,9 +59,7 @@ const NavigationMenuTrigger = React.forwardRef<
   const { value: itemValue } = NavigationMenuPrimitive.useItemContext();
 
   const progress = useDerivedValue(() =>
-    value === itemValue
-      ? withTiming(1, { duration: 250 })
-      : withTiming(0, { duration: 200 })
+    value === itemValue ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })
   );
   const chevronStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${progress.value * 180}deg` }],
@@ -86,9 +81,7 @@ const NavigationMenuTrigger = React.forwardRef<
       <Animated.View style={chevronStyle}>
         <ChevronDown
           size={12}
-          className={cn(
-            'relative text-foreground h-3 w-3 web:transition web:duration-200'
-          )}
+          className={cn('relative text-foreground h-3 w-3 web:transition web:duration-200')}
           aria-hidden={true}
         />
       </Animated.View>
@@ -147,8 +140,7 @@ const NavigationMenuViewport = React.forwardRef<
     </View>
   );
 });
-NavigationMenuViewport.displayName =
-  NavigationMenuPrimitive.Viewport.displayName;
+NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName;
 
 const NavigationMenuIndicator = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
@@ -162,9 +154,7 @@ const NavigationMenuIndicator = React.forwardRef<
       ref={ref}
       className={cn(
         'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden',
-        value === itemValue
-          ? 'web:animate-in web:fade-in'
-          : 'web:animate-out web:fade-out',
+        value === itemValue ? 'web:animate-in web:fade-in' : 'web:animate-out web:fade-out',
         className
       )}
       {...props}
@@ -173,8 +163,7 @@ const NavigationMenuIndicator = React.forwardRef<
     </NavigationMenuPrimitive.Indicator>
   );
 });
-NavigationMenuIndicator.displayName =
-  NavigationMenuPrimitive.Indicator.displayName;
+NavigationMenuIndicator.displayName = NavigationMenuPrimitive.Indicator.displayName;
 
 export {
   NavigationMenu,

@@ -1,20 +1,8 @@
-import {
-  Check,
-  ChevronDown,
-  ChevronRight,
-  ChevronUp,
-} from '~/components/Icons';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from '~/components/Icons';
 import * as React from 'react';
-import {
-  Platform,
-  StyleProp,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { TextClassContext } from '~/components/ui/typography';
-import * as DropdownMenuPrimitive from '~/components/primitives/dropdown-menu';
+import * as DropdownMenuPrimitive from '@rnr/dropdown-menu';
 import { cn } from '~/lib/utils';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
@@ -37,8 +25,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
   }
 >(({ className, inset, children, ...props }, ref) => {
   const { open } = DropdownMenuPrimitive.useSubContext();
-  const Icon =
-    Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
+  const Icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
     <TextClassContext.Provider
       value={cn(
@@ -62,8 +49,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     </TextClassContext.Provider>
   );
 });
-DropdownMenuSubTrigger.displayName =
-  DropdownMenuPrimitive.SubTrigger.displayName;
+DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
 
 const DropdownMenuSubContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
@@ -84,8 +70,7 @@ const DropdownMenuSubContent = React.forwardRef<
     />
   );
 });
-DropdownMenuSubContent.displayName =
-  DropdownMenuPrimitive.SubContent.displayName;
+DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
 
 const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
@@ -110,10 +95,7 @@ const DropdownMenuContent = React.forwardRef<
         }
         className={overlayClassName}
       >
-        <Animated.View
-          entering={FadeIn.duration(200)}
-          exiting={FadeOut.duration(200)}
-        >
+        <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(200)}>
           <DropdownMenuPrimitive.Content
             ref={ref}
             className={cn(
@@ -175,8 +157,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
     <>{children}</>
   </DropdownMenuPrimitive.CheckboxItem>
 ));
-DropdownMenuCheckboxItem.displayName =
-  DropdownMenuPrimitive.CheckboxItem.displayName;
+DropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displayName;
 
 const DropdownMenuRadioItem = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,

@@ -1,0 +1,60 @@
+{
+  "private": true,
+  "name": "@rnr/dialog",
+  "version": "0.0.0",
+  "description": "Primitive dialog",
+  "license": "MIT",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "react-native": "./src/index.ts",
+  "files": [
+    "build",
+    "src"
+  ],
+  "scripts": {
+    "dev": "tsup --watch --silent",
+    "lint": "eslint --ext js,ts,tsx .",
+    "test": "jest",
+    "build": "tsup --clean"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@rnr/hooks": "*",
+    "@rnr/slot": "*",
+    "@rnr/types": "*"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/react": "~18.2.43",
+    "babel-preset-expo": "~9.5.0",
+    "react": "18.2.0",
+    "react-native": "0.73.4",
+    "tsup": "^6.5.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-web": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    },
+    "react-native-web": {
+      "optional": true
+    }
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "outDir": "build",
+    "sourcemap": true,
+    "dts": true,
+    "external": [
+      "react",
+      "react-native",
+      "react-native-web"
+    ]
+  }
+}

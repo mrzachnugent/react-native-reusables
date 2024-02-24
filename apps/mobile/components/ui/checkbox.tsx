@@ -1,6 +1,6 @@
 import { Check } from '~/components/Icons';
 import * as React from 'react';
-import * as CheckboxPrimitive from '~/components/primitives/checkbox';
+import * as CheckboxPrimitive from '@rnr/checkbox';
 
 import { Platform } from 'react-native';
 import { cn } from '~/lib/utils';
@@ -19,9 +19,7 @@ const Checkbox = React.forwardRef<
       )}
       {...props}
     >
-      <CheckboxPrimitive.Indicator
-        className={cn('items-center justify-center h-full w-full')}
-      >
+      <CheckboxPrimitive.Indicator className={cn('items-center justify-center h-full w-full')}>
         <Check
           size={12}
           strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5}

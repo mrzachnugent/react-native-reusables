@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Check, ChevronDown, ChevronUp } from '~/components/Icons';
-import * as SelectPrimitive from '~/components/primitives/select';
+import * as SelectPrimitive from '@rnr/select';
 import { cn } from '~/lib/utils';
 
 type Option = SelectPrimitive.Option;
@@ -27,11 +27,7 @@ const SelectTrigger = React.forwardRef<
     {...props}
   >
     <>{children}</>
-    <ChevronDown
-      size={16}
-      aria-hidden={true}
-      className='text-foreground opacity-50'
-    />
+    <ChevronDown size={16} aria-hidden={true} className='text-foreground opacity-50' />
   </SelectPrimitive.Trigger>
 ));
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
@@ -48,10 +44,7 @@ const SelectScrollUpButton = ({
   }
   return (
     <SelectPrimitive.ScrollUpButton
-      className={cn(
-        'flex web:cursor-default items-center justify-center py-1',
-        className
-      )}
+      className={cn('flex web:cursor-default items-center justify-center py-1', className)}
       {...props}
     >
       <ChevronUp size={14} className='text-foreground' />
@@ -71,10 +64,7 @@ const SelectScrollDownButton = ({
   }
   return (
     <SelectPrimitive.ScrollDownButton
-      className={cn(
-        'flex web:cursor-default items-center justify-center py-1',
-        className
-      )}
+      className={cn('flex web:cursor-default items-center justify-center py-1', className)}
       {...props}
     >
       <ChevronDown size={14} className='text-foreground' />
@@ -90,9 +80,7 @@ const SelectContent = React.forwardRef<
 
   return (
     <SelectPrimitive.Portal>
-      <SelectPrimitive.Overlay
-        style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}
-      >
+      <SelectPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
         <Animated.View entering={FadeIn} exiting={FadeOut}>
           <SelectPrimitive.Content
             ref={ref}

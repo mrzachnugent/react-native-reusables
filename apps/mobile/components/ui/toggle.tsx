@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import * as LucideIcon from 'lucide-react-native';
 import * as React from 'react';
 import { TextClassContext } from '~/components/ui/typography';
-import * as TogglePrimitive from '~/components/primitives/toggle';
+import * as TogglePrimitive from '@rnr/toggle';
 import { cn } from '~/lib/utils';
 
 const toggleVariants = cva(
@@ -27,39 +27,32 @@ const toggleVariants = cva(
   }
 );
 
-const toggleTextVariants = cva(
-  'text-sm native:text-base text-foreground font-medium',
-  {
-    variants: {
-      variant: {
-        default: '',
-        outline:
-          'web:group-hover:text-accent-foreground web:group-active:text-accent-foreground',
-      },
-      size: {
-        default: '',
-        sm: '',
-        lg: '',
-      },
+const toggleTextVariants = cva('text-sm native:text-base text-foreground font-medium', {
+  variants: {
+    variant: {
+      default: '',
+      outline: 'web:group-hover:text-accent-foreground web:group-active:text-accent-foreground',
     },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
+    size: {
+      default: '',
+      sm: '',
+      lg: '',
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'default',
+  },
+});
 
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
-    VariantProps<typeof toggleVariants>
+  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>
 >(({ className, variant, size, ...props }, ref) => (
   <TextClassContext.Provider
     value={cn(
       toggleTextVariants({ variant, size }),
-      props.pressed
-        ? 'text-accent-foreground'
-        : 'web:group-hover:text-muted-foreground',
+      props.pressed ? 'text-accent-foreground' : 'web:group-hover:text-muted-foreground',
       className
     )}
   >

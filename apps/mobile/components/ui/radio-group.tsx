@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import * as RadioGroupPrimitive from '~/components/primitives/radio-group';
+import * as RadioGroupPrimitive from '@rnr/radio-group';
 import { cn } from '~/lib/utils';
 
 const RadioGroup = React.forwardRef<
@@ -8,11 +8,7 @@ const RadioGroup = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, ...props }, ref) => {
   return (
-    <RadioGroupPrimitive.Root
-      className={cn('web:grid gap-2', className)}
-      {...props}
-      ref={ref}
-    />
+    <RadioGroupPrimitive.Root className={cn('web:grid gap-2', className)} {...props} ref={ref} />
   );
 });
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;

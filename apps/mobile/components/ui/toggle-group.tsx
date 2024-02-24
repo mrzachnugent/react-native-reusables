@@ -3,12 +3,10 @@ import * as LucideIcon from 'lucide-react-native';
 import * as React from 'react';
 import { toggleTextVariants, toggleVariants } from '~/components/ui/toggle';
 import { TextClassContext } from '~/components/ui/typography';
-import * as ToggleGroupPrimitive from '~/components/primitives/toggle-group';
+import * as ToggleGroupPrimitive from '@rnr/toggle-group';
 import { cn } from '~/lib/utils';
 
-const ToggleGroupContext = React.createContext<VariantProps<
-  typeof toggleVariants
-> | null>(null);
+const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants> | null>(null);
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
@@ -20,9 +18,7 @@ const ToggleGroup = React.forwardRef<
     className={cn('flex flex-row items-center justify-center gap-1', className)}
     {...props}
   >
-    <ToggleGroupContext.Provider value={{ variant, size }}>
-      {children}
-    </ToggleGroupContext.Provider>
+    <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ));
 
@@ -63,8 +59,7 @@ const ToggleGroupItem = React.forwardRef<
             size: context.size || size,
           }),
           props.disabled && 'web:pointer-events-none opacity-50',
-          ToggleGroupPrimitive.utils.getIsSelected(value, props.value) &&
-            'bg-accent',
+          ToggleGroupPrimitive.utils.getIsSelected(value, props.value) && 'bg-accent',
           className
         )}
         {...props}

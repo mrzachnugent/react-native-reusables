@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { TextClassContext } from '~/components/ui/typography';
-import * as HoverCardPrimitive from '~/components/primitives/hover-card';
+import * as HoverCardPrimitive from '@rnr/hover-card';
 import { cn } from '~/lib/utils';
 
 const HoverCard = HoverCardPrimitive.Root;

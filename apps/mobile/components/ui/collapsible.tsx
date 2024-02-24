@@ -1,4 +1,4 @@
-import * as CollapsiblePrimitive from '~/components/primitives/collapsible';
+import * as CollapsiblePrimitive from '@rnr/collapsible';
 
 const Collapsible = CollapsiblePrimitive.Root;
 

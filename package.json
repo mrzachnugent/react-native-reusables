@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "dev": "turbo dev",
-    "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\"",
+    "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\" --concurrency 50",
     "dev:docs": "turbo dev --filter=\"{./apps/docs}...\"",
     "lint": "turbo lint",
     "test": "turbo test",

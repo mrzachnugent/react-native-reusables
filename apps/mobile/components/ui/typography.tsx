@@ -1,5 +1,5 @@
-import * as Slot from '~/components/primitives/slot';
-import { SlottableTextProps, TextRef } from '~/components/primitives/types';
+import * as Slot from '@rnr/slot';
+import { SlottableTextProps, TextRef } from '@rnr/types';
 import { Platform } from 'react-native';
 import { cn } from '~/lib/utils';
 import * as React from 'react';
@@ -13,11 +13,7 @@ const Text = React.forwardRef<TextRef, SlottableTextProps>(
     const Component = asChild ? Slot.Text : RNText;
     return (
       <Component
-        className={cn(
-          'text-base text-foreground web:select-text',
-          textClass,
-          className
-        )}
+        className={cn('text-base text-foreground web:select-text', textClass, className)}
         ref={ref}
         {...props}
       />
@@ -153,10 +149,7 @@ const Lead = React.forwardRef<TextRef, SlottableTextProps>(
     const Component = asChild ? Slot.Text : RNText;
     return (
       <Component
-        className={cn(
-          'text-xl text-muted-foreground web:select-text',
-          className
-        )}
+        className={cn('text-xl text-muted-foreground web:select-text', className)}
         ref={ref}
         {...props}
       />
@@ -171,10 +164,7 @@ const Large = React.forwardRef<TextRef, SlottableTextProps>(
     const Component = asChild ? Slot.Text : RNText;
     return (
       <Component
-        className={cn(
-          'text-xl text-foreground font-semibold web:select-text',
-          className
-        )}
+        className={cn('text-xl text-foreground font-semibold web:select-text', className)}
         ref={ref}
         {...props}
       />
@@ -207,10 +197,7 @@ const Muted = React.forwardRef<TextRef, SlottableTextProps>(
     const Component = asChild ? Slot.Text : RNText;
     return (
       <Component
-        className={cn(
-          'text-sm text-muted-foreground web:select-text',
-          className
-        )}
+        className={cn('text-sm text-muted-foreground web:select-text', className)}
         ref={ref}
         {...props}
       />
@@ -220,18 +207,4 @@ const Muted = React.forwardRef<TextRef, SlottableTextProps>(
 
 Muted.displayName = 'Muted';
 
-export {
-  H1,
-  H2,
-  H3,
-  H4,
-  P,
-  BlockQuote,
-  Code,
-  Lead,
-  Large,
-  Small,
-  Muted,
-  Text,
-  TextClassContext,
-};
+export { H1, H2, H3, H4, P, BlockQuote, Code, Lead, Large, Small, Muted, Text, TextClassContext };

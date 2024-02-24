@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as TablePrimitive from '~/components/primitives/table';
+import * as TablePrimitive from '@rnr/table';
 import { cn } from '~/lib/utils';
 import { TextClassContext } from './typography';
 
@@ -96,12 +96,4 @@ const TableCell = React.forwardRef<
 ));
 TableCell.displayName = 'TableCell';
 
-export {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-};
+export { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow };

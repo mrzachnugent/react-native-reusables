@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextClassContext } from '~/components/ui/typography';
-import * as PopoverPrimitive from '~/components/primitives/popover';
+import * as PopoverPrimitive from '@rnr/popover';
 import { cn } from '~/lib/utils';
 
 const Popover = PopoverPrimitive.Root;
@@ -15,9 +15,7 @@ const PopoverContent = React.forwardRef<
 >(({ className, align = 'center', sideOffset = 4, ...props }, ref) => {
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Overlay
-        style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}
-      >
+      <PopoverPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
         <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut}>
           <TextClassContext.Provider value='text-popover-foreground'>
             <PopoverPrimitive.Content
