@@ -1,12 +1,12 @@
 {
-  "name": "react-native-reusables",
-  "main": "expo-router/entry",
+  "name": "@rnr/mobile",
+  "main": "index.js",
   "version": "1.0.0",
   "scripts": {
-    "start": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c",
-    "android": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --android",
-    "dev": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --ios",
-    "dev:web": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start -c --web",
+    "start": "expo start -c",
+    "android": "expo start -c --android",
+    "dev": "expo start -c --ios",
+    "dev:web": "expo start -c --web",
     "clean": "rm -rf .expo node_modules"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "@rnr/select": "*",
     "@rnr/separator": "*",
     "@rnr/slider": "*",
+    "@rnr/slot": "*",
     "@rnr/switch": "*",
     "@rnr/table": "*",
     "@rnr/tabs": "*",
@@ -39,6 +40,7 @@
     "@rnr/toggle-group": "*",
     "@rnr/toolbar": "*",
     "@rnr/tooltip": "*",
+    "@rnr/types": "*",
     "@gorhom/bottom-sheet": "^4.6.0",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-accordion": "^1.1.2",

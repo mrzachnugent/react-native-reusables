@@ -44,13 +44,11 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/h
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Muted, Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
-import { Paragraph } from '@rnr/ui';
 
 export default function ExampleScreen() {
   const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
   return (
     <View className='flex-1 p-4 justify-center gap-6'>
-      <Paragraph>Hello</Paragraph>
       <Card className='w-full max-w-lg mx-auto'>
         <CardHeader>
           <View className='flex-row gap-3'>

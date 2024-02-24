@@ -17,7 +17,7 @@ interface RootContext extends ToastRootProps {
 const ToastContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & ToastRootProps>(
-  ({ asChild, type = 'foreground', open, onOpenChange, portalHostName, ...viewProps }, ref) => {
+  ({ asChild, type = 'foreground', open, onOpenChange, ...viewProps }, ref) => {
     const nativeID = React.useId();
 
     if (!open) {

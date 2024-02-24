@@ -1,25 +1,31 @@
 {
   "name": "@rnr/monorepo",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "dev": "turbo dev",
     "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\" --concurrency 50",
-    "dev:mobile:web": "turbo build && turbo dev:web --filter=\"{./apps/mobile}...\" --concurrency 32",
+    "dev:mobile:web": "turbo dev:web --filter=\"{./apps/mobile}...\" --concurrency 32",
     "dev:docs": "turbo dev --filter=\"{./apps/docs}...\"",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
     "build:mobile": "turbo build --filter=\"...{./apps/mobile}\"",
     "build:docs": "turbo build --filter=\"...{./apps/docs}\"",
-    "clean": "rm -rf .turbo node_modules && turbo clean"
+    "clean": "rm -rf .turbo node_modules && turbo clean",
+    "postinstall": "turbo build"
   },
   "devDependencies": {
     "turbo": "^1.12.4",
     "typescript": "^5.3.0"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/*",
+        "expo-modules-*",
+        "typescript"
+      ]
+    }
   },
   "prettier": {
     "printWidth": 100,
@@ -27,5 +33,9 @@
     "singleQuote": true,
     "jsxSingleQuote": true,
     "trailingComma": "es5"
-  }
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "packageManager": "pnpm@8.15.3"
 }

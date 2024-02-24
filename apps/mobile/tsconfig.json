@@ -23,6 +23,6 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+  "include": ["index.js", "**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
   "exclude": ["node_modules", "build", "dist", ".expo"]
 }
