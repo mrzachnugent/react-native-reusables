@@ -9,7 +9,8 @@
     "dev:web": "expo start -c --web",
     "build": "npx expo export -p web",
     "serve": "npx serve dist --single",
-    "clean": "rm -rf .expo node_modules"
+    "clean": "rm -rf .expo node_modules",
+    "postinstall": "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.6.0",
