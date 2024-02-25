@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { Label } from './label';
 
 interface RadioGroupProps {
@@ -21,32 +21,22 @@ const RadioGroupContext = React.createContext({} as RadioGroupContext);
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> & RadioGroupProps
->(
-  (
-    { defaultValue = '', onValueChange, className, disabled = false, ...props },
-    ref
-  ) => {
-    const [value, setValue] = React.useState(defaultValue);
+>(({ defaultValue = '', onValueChange, className, disabled = false, ...props }, ref) => {
+  const [value, setValue] = React.useState(defaultValue);
 
-    return (
-      <RadioGroupContext.Provider
-        value={{
-          value,
-          setValue,
-          disabled,
-          onValueChange,
-        }}
-      >
-        <View
-          role='radiogroup'
-          ref={ref}
-          className={cn('gap-2', className)}
-          {...props}
-        />
-      </RadioGroupContext.Provider>
-    );
-  }
-);
+  return (
+    <RadioGroupContext.Provider
+      value={{
+        value,
+        setValue,
+        disabled,
+        onValueChange,
+      }}
+    >
+      <View role='radiogroup' ref={ref} className={cn('gap-2', className)} {...props} />
+    </RadioGroupContext.Provider>
+  );
+});
 
 RadioGroup.displayName = 'RadioGroup';
 
@@ -71,16 +61,7 @@ const RadioGroupItem = React.forwardRef<
   }
 >(
   (
-    {
-      className,
-      name,
-      labelClass,
-      buttonClass,
-      innerButtonClass,
-      onPress,
-      children,
-      ...props
-    },
+    { className, name, labelClass, buttonClass, innerButtonClass, onPress, children, ...props },
     ref
   ) => {
     const { value, setValue, disabled, onValueChange } = useRadioGroupContext();
@@ -106,20 +87,10 @@ const RadioGroupItem = React.forwardRef<
           {...props}
         >
           {value === name && (
-            <View
-              ref={ref}
-              className={cn(
-                'h-3 w-3 bg-primary rounded-full',
-                innerButtonClass
-              )}
-            />
+            <View ref={ref} className={cn('h-3 w-3 bg-primary rounded-full', innerButtonClass)} />
           )}
         </Pressable>
-        <Label
-          onPress={handleOnPress}
-          className={cn('text-xl', labelClass)}
-          nativeID={name}
-        >
+        <Label onPress={handleOnPress} className={cn('text-xl', labelClass)} nativeID={name}>
           {children}
         </Label>
       </View>

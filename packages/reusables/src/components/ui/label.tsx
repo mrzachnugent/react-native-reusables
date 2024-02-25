@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import * as LabelPrimitive from '@rnr/label';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const labelVariants = cva(
   'text-sm text-foreground native:text-base font-medium leading-none web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70'

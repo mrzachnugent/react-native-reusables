@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Switch as RNSwitch } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
+import { NAV_THEME } from '../../lib/constants';
 
 const SKY_500 = '#0ea5e9';
 

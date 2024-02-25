@@ -16,11 +16,11 @@ import { useTheme } from '@react-navigation/native';
 import * as React from 'react';
 import { GestureResponderEvent, Keyboard, Pressable, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { X } from '~/components/Icons';
-import { Button } from '~/components/deprecated-ui/button';
+import { X } from '../../components/Icons';
+import { Button } from '../../components/deprecated-ui/button';
 import * as Slot from '@rnr/slot';
-import { useColorScheme } from '~/lib/useColorScheme';
-import { cn } from '~/lib/utils';
+import { useColorScheme } from '../../lib/useColorScheme';
+import { cn } from '../../lib/utils';
 
 // TODO: refactor and move to UI
 // TODO: create web component, use https://ui.shadcn.com/docs/components/drawer

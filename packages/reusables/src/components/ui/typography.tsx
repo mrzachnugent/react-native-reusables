@@ -1,7 +1,7 @@
 import * as Slot from '@rnr/slot';
 import { SlottableTextProps, TextRef } from '@rnr/types';
 import { Platform } from 'react-native';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import * as React from 'react';
 import { Text as RNText } from 'react-native';
 

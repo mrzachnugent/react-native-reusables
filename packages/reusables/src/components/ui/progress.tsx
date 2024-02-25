@@ -8,7 +8,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import * as ProgressPrimitive from '@rnr/progress';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,

@@ -10,7 +10,7 @@ import {
 import * as React from 'react';
 import { ActivityIndicator, Dimensions, RefreshControl } from 'react-native';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import {
   Table,
   TableBody,
@@ -82,10 +82,7 @@ export function DataTable<TData, TValue>({
                   >
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 );
               })}
@@ -123,15 +120,9 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      width={getColumnWidth(
-                        cell.column.getSize(),
-                        columns.length
-                      )}
+                      width={getColumnWidth(cell.column.getSize(), columns.length)}
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>

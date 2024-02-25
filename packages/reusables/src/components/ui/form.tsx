@@ -14,26 +14,26 @@ import {
 } from 'react-hook-form';
 import { View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import { Calendar as CalendarIcon, X } from '~/components/Icons';
+import { Calendar as CalendarIcon, X } from '../../components/Icons';
 import {
   BottomSheet,
   BottomSheetCloseTrigger,
   BottomSheetContent,
   BottomSheetOpenTrigger,
   BottomSheetView,
-} from '~/components/deprecated-ui/bottom-sheet';
-import { Calendar } from '~/components/deprecated-ui/calendar';
-import { Combobox, ComboboxOption } from '~/components/deprecated-ui/combobox';
-import { Button, buttonTextVariants } from '~/components/ui/button';
-import { Checkbox } from '~/components/ui/checkbox';
-import { Input } from '~/components/ui/input';
-import { Label, LabelText } from '~/components/ui/label';
-import { RadioGroup } from '~/components/ui/radio-group';
-import { Select, type Option } from '~/components/ui/select';
-import { Switch } from '~/components/ui/switch';
-import { Textarea } from '~/components/ui/textarea';
+} from '../../components/deprecated-ui/bottom-sheet';
+import { Calendar } from '../../components/deprecated-ui/calendar';
+import { Combobox, ComboboxOption } from '../../components/deprecated-ui/combobox';
+import { Button, buttonTextVariants } from '../../components/ui/button';
+import { Checkbox } from '../../components/ui/checkbox';
+import { Input } from '../../components/ui/input';
+import { Label, LabelText } from '../../components/ui/label';
+import { RadioGroup } from '../../components/ui/radio-group';
+import { Select, type Option } from '../../components/ui/select';
+import { Switch } from '../../components/ui/switch';
+import { Textarea } from '../../components/ui/textarea';
 import { Text } from './typography';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Form = FormProvider;
 

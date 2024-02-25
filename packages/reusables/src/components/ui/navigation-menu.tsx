@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority';
-import { ChevronDown } from '~/components/Icons';
+import { ChevronDown } from '../../components/Icons';
 import * as React from 'react';
 import * as NavigationMenuPrimitive from '@rnr/navigation-menu';
 
@@ -13,7 +13,7 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,

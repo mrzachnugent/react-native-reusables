@@ -1,9 +1,9 @@
-import { Check, ChevronDown, ChevronRight, ChevronUp } from '~/components/Icons';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from '../../components/Icons';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { TextClassContext } from './typography';
 import * as DropdownMenuPrimitive from '@rnr/dropdown-menu';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;

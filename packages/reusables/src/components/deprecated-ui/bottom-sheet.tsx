@@ -8,13 +8,13 @@ import {
   BottomSheetView as GBottomSheetView,
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
-import { X } from '~/components/Icons';
+import { X } from '../../components/Icons';
 import React, { useCallback } from 'react';
 import { GestureResponderEvent, Keyboard, Pressable, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Slot from '@rnr/slot';
-import { Button } from '~/components/deprecated-ui/button';
-import { cn } from '~/lib/utils';
+import { Button } from '../../components/deprecated-ui/button';
+import { cn } from '../../lib/utils';
 
 // !IMPORTANT: This file is only for web. BottomSheet is not available for web yet.
 // Should be available in v5 which is in alpha: components/ui/bottom-sheet.tsx

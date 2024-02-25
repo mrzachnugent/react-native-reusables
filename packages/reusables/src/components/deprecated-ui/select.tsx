@@ -1,5 +1,5 @@
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
-import { Check, ChevronDown } from '~/components/Icons';
+import { Check, ChevronDown } from '../../components/Icons';
 import * as React from 'react';
 import { GestureResponderEvent, Text, View, ViewStyle } from 'react-native';
 import {
@@ -7,8 +7,8 @@ import {
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
-} from '~/components/deprecated-ui/popover';
-import { cn } from '~/lib/utils';
+} from '../../components/deprecated-ui/popover';
+import { cn } from '../../lib/utils';
 import { Button, buttonTextVariants } from './button';
 
 const SELECT_ITEM_HEIGHT = 50;
@@ -53,9 +53,7 @@ Select.displayName = 'Select';
 function useSelectContext() {
   const context = React.useContext(SelectContext);
   if (!context) {
-    throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
-    );
+    throw new Error('Select compound components cannot be rendered outside the Select component');
   }
   return context;
 }
@@ -68,13 +66,7 @@ const SelectTrigger = React.forwardRef<
 >(({ variant = 'outline', placeholder = 'Select...', ...props }, ref) => {
   const { selected } = useSelectContext();
   return (
-    <PopoverTrigger
-      ref={ref}
-      size='sm'
-      variant='outline'
-      className='w-full'
-      {...props}
-    >
+    <PopoverTrigger ref={ref} size='sm' variant='outline' className='w-full' {...props}>
       {({ pressed }) => (
         <View className='flex-1 flex-row justify-between items-center'>
           <Text
@@ -125,11 +117,7 @@ const SelectList = React.forwardRef<
   }, [selected, items]);
 
   return (
-    <PopoverContent
-      style={contentStyle}
-      className='p-0 max-h-[30%]'
-      {...containerProps}
-    >
+    <PopoverContent style={contentStyle} className='p-0 max-h-[30%]' {...containerProps}>
       <FlashList<SelectOption>
         ref={ref}
         data={items}
@@ -148,79 +136,63 @@ type RenderSelectItem = ListRenderItem<SelectOption>;
 
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof PopoverClose>,
-  Omit<
-    React.ComponentPropsWithoutRef<typeof PopoverClose>,
-    'children' | 'style' | 'asChild'
-  > & {
+  Omit<React.ComponentPropsWithoutRef<typeof PopoverClose>, 'children' | 'style' | 'asChild'> & {
     index: number;
     item: SelectOption;
     style?: ViewStyle;
   }
->(
-  (
-    { variant = 'outline', index, item, onPress, style, className, ...props },
-    ref
-  ) => {
-    const { selected, onValueChange } = useSelectContext();
+>(({ variant = 'outline', index, item, onPress, style, className, ...props }, ref) => {
+  const { selected, onValueChange } = useSelectContext();
 
-    function handleOnPress(ev: GestureResponderEvent) {
-      onPress?.(ev);
-      if (selected?.value === item.value) {
-        onValueChange?.(null);
-      }
-      onValueChange?.(item);
+  function handleOnPress(ev: GestureResponderEvent) {
+    onPress?.(ev);
+    if (selected?.value === item.value) {
+      onValueChange?.(null);
     }
-    return (
-      <PopoverClose asChild>
-        <Button
-          ref={ref}
-          variant={'ghost'}
-          className={cn(
-            index === 0 ? '' : 'border-t border-border',
-            'justify-start gap-3 pl-3 w-full',
-            className
-          )}
-          onPress={handleOnPress}
-          style={[{ height: SELECT_ITEM_HEIGHT }, style]}
-          {...props}
-        >
-          {({ pressed }) => (
-            <>
-              <View>
-                <Check
-                  className={cn(
-                    'text-primary',
-                    buttonTextVariants({
-                      variant: 'ghost',
-                      className:
-                        selected?.value === item.value ? '' : 'opacity-0',
-                    })
-                  )}
-                />
-              </View>
-              <Text
-                className={buttonTextVariants({
-                  variant: 'ghost',
-                  className: pressed ? 'opacity-70' : '',
-                })}
-              >
-                {item.label}
-              </Text>
-            </>
-          )}
-        </Button>
-      </PopoverClose>
-    );
+    onValueChange?.(item);
   }
-);
+  return (
+    <PopoverClose asChild>
+      <Button
+        ref={ref}
+        variant={'ghost'}
+        className={cn(
+          index === 0 ? '' : 'border-t border-border',
+          'justify-start gap-3 pl-3 w-full',
+          className
+        )}
+        onPress={handleOnPress}
+        style={[{ height: SELECT_ITEM_HEIGHT }, style]}
+        {...props}
+      >
+        {({ pressed }) => (
+          <>
+            <View>
+              <Check
+                className={cn(
+                  'text-primary',
+                  buttonTextVariants({
+                    variant: 'ghost',
+                    className: selected?.value === item.value ? '' : 'opacity-0',
+                  })
+                )}
+              />
+            </View>
+            <Text
+              className={buttonTextVariants({
+                variant: 'ghost',
+                className: pressed ? 'opacity-70' : '',
+              })}
+            >
+              {item.label}
+            </Text>
+          </>
+        )}
+      </Button>
+    </PopoverClose>
+  );
+});
 
 SelectItem.displayName = 'SelectItem';
 
-export {
-  Select,
-  SelectTrigger,
-  SelectList,
-  SelectItem,
-  type RenderSelectItem,
-  type SelectOption,
-};
+export { Select, SelectTrigger, SelectList, SelectItem, type RenderSelectItem, type SelectOption };

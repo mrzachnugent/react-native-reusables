@@ -1,4 +1,4 @@
-import { ChevronDown } from '~/components/Icons';
+import { ChevronDown } from '../../components/Icons';
 import * as React from 'react';
 import { LayoutChangeEvent, Pressable, View } from 'react-native';
 import Animated, {
@@ -14,8 +14,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { Separator } from '~/components/deprecated-ui/separator';
-import { cn } from '~/lib/utils';
+import { Separator } from '../../components/deprecated-ui/separator';
+import { cn } from '../../lib/utils';
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof View>,

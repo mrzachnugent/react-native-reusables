@@ -1,15 +1,12 @@
 import * as React from 'react';
 
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { Text, Pressable } from 'react-native';
 
 const Label = React.forwardRef<
   React.ElementRef<typeof Text>,
   React.ComponentPropsWithoutRef<typeof Text> & {
-    rootProps?: Omit<
-      React.ComponentPropsWithoutRef<typeof Pressable>,
-      'onPress'
-    >;
+    rootProps?: Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'>;
   }
 >(({ className, onPress, rootProps, ...props }, ref) => (
   <Pressable

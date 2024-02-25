@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TablePrimitive from '@rnr/table';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { TextClassContext } from './typography';
 
 const Table = React.forwardRef<

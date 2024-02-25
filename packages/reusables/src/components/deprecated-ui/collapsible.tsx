@@ -2,9 +2,9 @@ import { VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
-import { buttonVariants } from '~/components/deprecated-ui/button';
+import { buttonVariants } from '../../components/deprecated-ui/button';
 import * as Slot from '@rnr/slot';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 interface CollapsibleProps {
   open?: boolean;

@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, Search } from '~/components/Icons';
+import { Check, ChevronsUpDown, Search } from '../../components/Icons';
 import * as React from 'react';
 import { ListRenderItemInfo, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,13 +10,9 @@ import {
   BottomSheetOpenTrigger,
   BottomSheetTextInput,
   useBottomSheet,
-} from '~/components/deprecated-ui/bottom-sheet';
-import {
-  Button,
-  buttonTextVariants,
-  buttonVariants,
-} from '~/components/deprecated-ui/button';
-import { cn } from '~/lib/utils';
+} from '../../components/deprecated-ui/bottom-sheet';
+import { Button, buttonTextVariants, buttonVariants } from '../../components/deprecated-ui/button';
+import { cn } from '../../lib/utils';
 
 // TODO: refactor and move to UI
 // TODO: create web component, use https://ui.shadcn.com/docs/components/combobox
@@ -59,18 +55,16 @@ const Combobox = React.forwardRef<
   ) => {
     const insets = useSafeAreaInsets();
     const [search, setSearch] = React.useState('');
-    const [selectedItem, setSelectedItem] =
-      React.useState<ComboboxOption | null>(defaultSelectedItem);
+    const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
+      defaultSelectedItem
+    );
     const bottomSheet = useBottomSheet();
-    const inputRef =
-      React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
+    const inputRef = React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
 
     const listItems = React.useMemo(() => {
       return search
         ? items.filter((item) => {
-            return item.label
-              .toLocaleLowerCase()
-              .includes(search.toLocaleLowerCase());
+            return item.label.toLocaleLowerCase().includes(search.toLocaleLowerCase());
           })
         : items;
     }, [items, search]);
@@ -104,13 +98,9 @@ const Combobox = React.forwardRef<
             }}
           >
             <View className='flex-row flex-1'>
-              <Text className={'text-foreground text-xl'}>
-                {listItem.label}
-              </Text>
+              <Text className={'text-foreground text-xl'}>{listItem.label}</Text>
             </View>
-            {isSelected && (
-              <Check size={24} className={'text-foreground px-6 mt-1.5'} />
-            )}
+            {isSelected && <Check size={24} className={'text-foreground px-6 mt-1.5'} />}
           </Button>
         );
       },
@@ -212,9 +202,7 @@ const Combobox = React.forwardRef<
                   className='items-center flex-row justify-center flex-1  px-3 py-5'
                   style={{ minHeight: 70 }}
                 >
-                  <Text className={'text-muted-foreground text-xl text-center'}>
-                    {emptyText}
-                  </Text>
+                  <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
                 </View>
               );
             }}

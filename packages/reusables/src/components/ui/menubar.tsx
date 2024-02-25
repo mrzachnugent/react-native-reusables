@@ -1,9 +1,9 @@
-import { Check, ChevronDown, ChevronRight, ChevronUp } from '~/components/Icons';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from '../../components/Icons';
 import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { TextClassContext } from './typography';
 import * as MenubarPrimitive from '@rnr/menubar';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const MenubarMenu = MenubarPrimitive.Menu;
 

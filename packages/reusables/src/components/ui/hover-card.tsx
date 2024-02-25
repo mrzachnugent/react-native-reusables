@@ -3,7 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { TextClassContext } from './typography';
 import * as HoverCardPrimitive from '@rnr/hover-card';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const HoverCard = HoverCardPrimitive.Root;
 

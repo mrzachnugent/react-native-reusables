@@ -3,7 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextClassContext } from './typography';
 import * as TooltipPrimitive from '@rnr/tooltip';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Tooltip = TooltipPrimitive.Root;
 

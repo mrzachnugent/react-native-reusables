@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Pressable, ScrollView, Text, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Slot from '@rnr/slot';
-import { cn, isTextChildren } from '~/lib/utils';
+import { cn, isTextChildren } from '../../lib/utils';
 
 const Table = React.forwardRef<
   React.ElementRef<typeof View>,

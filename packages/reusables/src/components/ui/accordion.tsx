@@ -13,7 +13,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { ChevronDown } from '../Icons';
 import * as AccordionPrimitive from '@rnr/accordion';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,

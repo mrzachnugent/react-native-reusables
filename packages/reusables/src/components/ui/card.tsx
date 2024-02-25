@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { TextClassContext } from './typography';
 import { TextRef, ViewRef } from '@rnr/types';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Card = React.forwardRef<ViewRef, React.ComponentPropsWithoutRef<typeof View>>(
   ({ className, ...props }, ref) => (

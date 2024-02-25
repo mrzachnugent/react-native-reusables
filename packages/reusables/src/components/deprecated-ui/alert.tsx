@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import * as LucideIcon from 'lucide-react-native';
 import * as React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const alertVariants = cva(
   'bg-background relative w-full rounded-lg border p-5 shadow shadow-foreground/10',

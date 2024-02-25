@@ -1,9 +1,8 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
 import { View } from 'react-native';
 import * as Slot from '@rnr/slot';
 import type { SlottableViewProps } from '@rnr/types';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { TextClassContext } from './typography';
 
 const badgeVariants = cva(

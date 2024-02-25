@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import { Button, buttonVariants } from '~/components/deprecated-ui/button';
-import { cn } from '~/lib/utils';
+import { Button, buttonVariants } from '../../components/deprecated-ui/button';
+import { cn } from '../../lib/utils';
 
 interface ToggleProps {
   defaultValue?: boolean;
@@ -12,10 +12,7 @@ interface ToggleProps {
 
 const Toggle = React.forwardRef<
   React.ElementRef<typeof Button>,
-  Omit<
-    React.ComponentPropsWithoutRef<typeof Button>,
-    'variant' | 'onPress' | 'children'
-  > &
+  Omit<React.ComponentPropsWithoutRef<typeof Button>, 'variant' | 'onPress' | 'children'> &
     ToggleProps & {
       children?: React.ReactNode;
     }
@@ -57,11 +54,7 @@ const Toggle = React.forwardRef<
               value || isChecked ? 'border-border' : 'border-transparent',
               buttonVariants({
                 variant:
-                  value || isChecked
-                    ? 'secondary'
-                    : variant === 'default'
-                    ? 'ghost'
-                    : 'outline',
+                  value || isChecked ? 'secondary' : variant === 'default' ? 'ghost' : 'outline',
                 size,
                 className,
               })

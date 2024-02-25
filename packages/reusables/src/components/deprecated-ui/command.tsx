@@ -1,12 +1,12 @@
 import { type ListRenderItemInfo } from '@shopify/flash-list';
-import { Search, X } from '~/components/Icons';
+import { Search, X } from '../../components/Icons';
 import React, { useImperativeHandle } from 'react';
 import { GestureResponderEvent, Modal, Pressable, Text, View } from 'react-native';
 import Animated, { FadeInUp, SlideInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useKeyboard } from '~/lib/keyboard';
+import { useKeyboard } from '../../lib/keyboard';
 import * as Slot from '@rnr/slot';
-import { cn, isTextChildren } from '~/lib/utils';
+import { cn, isTextChildren } from '../../lib/utils';
 import { Button } from './button';
 import { Input } from './input';
 import { SectionList } from './section-list';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as AvatarPrimitive from '@rnr/avatar';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,

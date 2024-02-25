@@ -1,12 +1,7 @@
 import * as React from 'react';
-import {
-  GestureResponderEvent,
-  Pressable,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { Button, buttonVariants } from '~/components/deprecated-ui/button';
-import { cn } from '~/lib/utils';
+import { GestureResponderEvent, Pressable, View, ViewStyle } from 'react-native';
+import { Button, buttonVariants } from '../../components/deprecated-ui/button';
+import { cn } from '../../lib/utils';
 
 interface ToggleGroupProps {
   defaultValue?: string | string[];
@@ -29,22 +24,11 @@ const ToggleGroup = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof View> & ToggleGroupProps
 >(
   (
-    {
-      defaultValue = '',
-      onValueChange,
-      className,
-      disabled = false,
-      type = 'single',
-      ...props
-    },
+    { defaultValue = '', onValueChange, className, disabled = false, type = 'single', ...props },
     ref
   ) => {
     const [value, setValue] = React.useState(
-      type === 'single'
-        ? defaultValue
-        : Array.isArray(defaultValue)
-        ? defaultValue
-        : []
+      type === 'single' ? defaultValue : Array.isArray(defaultValue) ? defaultValue : []
     );
 
     return (
@@ -89,21 +73,10 @@ const ToggleGroupItem = React.forwardRef<
   }
 >(
   (
-    {
-      className,
-      name,
-      buttonClass,
-      onPress,
-      children,
-      variant = 'default',
-      size,
-      style,
-      ...props
-    },
+    { className, name, buttonClass, onPress, children, variant = 'default', size, style, ...props },
     ref
   ) => {
-    const { value, setValue, disabled, onValueChange } =
-      useToggleGroupContext();
+    const { value, setValue, disabled, onValueChange } = useToggleGroupContext();
 
     function handleOnPress(ev: GestureResponderEvent) {
       setValue((prev) => {
@@ -124,9 +97,7 @@ const ToggleGroupItem = React.forwardRef<
       onPress?.(ev);
     }
 
-    const isSelected = Array.isArray(value)
-      ? value.includes(name)
-      : value === name;
+    const isSelected = Array.isArray(value) ? value.includes(name) : value === name;
 
     return (
       <Pressable
@@ -136,11 +107,7 @@ const ToggleGroupItem = React.forwardRef<
           'border bg-background active:opacity-70',
           isSelected ? 'border-border' : 'border-transparent',
           buttonVariants({
-            variant: isSelected
-              ? 'secondary'
-              : variant === 'default'
-              ? 'ghost'
-              : 'outline',
+            variant: isSelected ? 'secondary' : variant === 'default' ? 'ghost' : 'outline',
             size,
           }),
           className

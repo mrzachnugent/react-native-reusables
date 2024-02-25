@@ -1,8 +1,8 @@
-import { Check } from '~/components/Icons';
+import { Check } from '../../components/Icons';
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import Animated, { withTiming, useSharedValue } from 'react-native-reanimated';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 interface CheckboxProps {
   value: boolean;
@@ -13,8 +13,7 @@ interface CheckboxProps {
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof Pressable>,
-  Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'> &
-    CheckboxProps
+  Omit<React.ComponentPropsWithoutRef<typeof Pressable>, 'onPress'> & CheckboxProps
 >(({ className, value, onChange, iconClass, iconSize = 16, ...props }, ref) => {
   const opacity = useSharedValue(0);
 

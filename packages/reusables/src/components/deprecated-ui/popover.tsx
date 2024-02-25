@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Slot from '@rnr/slot';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { Button, buttonVariants } from './button';
 
 const windowWidth = Dimensions.get('window').width;

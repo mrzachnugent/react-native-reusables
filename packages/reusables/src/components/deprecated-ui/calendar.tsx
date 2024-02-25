@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { LocaleConfig, Calendar as RNCalendar } from 'react-native-calendars';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { NAV_THEME } from '../../lib/constants';
+import { useColorScheme } from '../../lib/useColorScheme';
 
 // TODO: create custom native calendar
 // TODO: create web component, use https://ui.shadcn.com/docs/components/calendar

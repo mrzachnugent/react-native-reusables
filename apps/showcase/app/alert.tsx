@@ -1,7 +1,5 @@
 import { View } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const { Alert, AlertDescription, AlertTitle } = Ui;
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 export default function AlertScreen() {
   return (

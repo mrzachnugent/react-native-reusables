@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const { Accordion, AccordionItem, AccordionTrigger, AccordionContent } = Ui;
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/ui/accordion';
 
 export default function AccordionScreen() {
   const [multiple, setMultiple] = React.useState<string[]>(['item-1']);

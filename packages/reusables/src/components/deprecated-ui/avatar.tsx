@@ -1,13 +1,7 @@
 import * as React from 'react';
-import {
-  Image,
-  ImageErrorEventData,
-  NativeSyntheticEvent,
-  Text,
-  View,
-} from 'react-native';
+import { Image, ImageErrorEventData, NativeSyntheticEvent, Text, View } from 'react-native';
 
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -15,10 +9,7 @@ const Avatar = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <View
     ref={ref}
-    className={cn(
-      'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
-      className
-    )}
+    className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
     {...props}
   />
 ));

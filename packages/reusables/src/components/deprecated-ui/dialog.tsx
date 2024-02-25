@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GestureResponderEvent, Modal, Pressable, Text, View } from 'react-native';
 import * as Slot from '@rnr/slot';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { Button } from './button';
 
 interface DialogProps {

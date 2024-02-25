@@ -1,8 +1,8 @@
-import { Check, ChevronDown, ChevronRight, ChevronUp } from '~/components/Icons';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from '../../components/Icons';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import * as ContextMenuPrimitive from '@rnr/context-menu';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 import { TextClassContext } from './typography';
 
 const ContextMenu = ContextMenuPrimitive.Root;

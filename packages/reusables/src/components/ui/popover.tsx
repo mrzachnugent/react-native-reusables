@@ -3,7 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextClassContext } from './typography';
 import * as PopoverPrimitive from '@rnr/popover';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Popover = PopoverPrimitive.Root;
 

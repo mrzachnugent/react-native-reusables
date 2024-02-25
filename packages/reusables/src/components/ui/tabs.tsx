@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextClassContext } from './typography';
 import * as TabsPrimitive from '@rnr/tabs';
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 const Tabs = TabsPrimitive.Root;
 
