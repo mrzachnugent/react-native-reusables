@@ -8,6 +8,10 @@ Work in progress...
 
 [shadcn/ui](https://ui.shadcn.com) for React Native with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
 
+**🌐 Try the web showcase:** https://rnr-showcase.vercel.app/
+
+https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-05a4-4568-b71a-f1e0be13650d
+
 <details>
 <summary>Table of contents</summary>
 

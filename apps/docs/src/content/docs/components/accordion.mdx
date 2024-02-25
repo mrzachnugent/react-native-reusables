@@ -6,10 +6,10 @@ description: A vertically stacked set of interactive headings that each reveal a
 import Code from '@/components/Code.astro';
 
 import importedCode from '@rnr/reusables/components/ui/accordion?raw';
-
+import {fixImports} from '@/lib/utils'
 
 
 A vertically stacked set of interactive headings that each reveal a section of content
 
 { /* prettier-ignore */}
-<Code code={importedCode} lang="tsx" title="~/components/ui/accordion.tsx" />
+<Code code={fixImports(importedCode)} lang="tsx" title="~/components/ui/accordion.tsx" />

@@ -23,6 +23,7 @@ export default defineConfig({
       social: {
         github: 'https://github.com/mrzachnugent/react-native-reusables',
       },
+
       sidebar: [
         {
           label: 'Getting Started',
