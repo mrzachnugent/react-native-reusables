@@ -7,13 +7,15 @@ import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ToastProvider } from '~/components/deprecated-ui/toast';
+import { DeprecatedUi } from '@rnr/reusables';
 import { PortalHost } from '@rnr/portal';
 import { Text } from '~/components/ui/typography';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { ThemeToggle } from '~/components/ThemeToggle';
+
+const { ToastProvider } = DeprecatedUi;
 
 const LIGHT_THEME: Theme = {
   dark: false,

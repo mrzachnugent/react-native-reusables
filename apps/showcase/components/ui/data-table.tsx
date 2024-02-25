@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { DataTable } = Ui;
-export { DataTable };
+export const { DataTable } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/data-table.tsx]]

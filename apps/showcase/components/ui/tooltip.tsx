@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Tooltip, TooltipContent, TooltipTrigger } = Ui;
-export { Tooltip, TooltipContent, TooltipTrigger };
+export const { Tooltip, TooltipContent, TooltipTrigger } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/tooltip.tsx]]

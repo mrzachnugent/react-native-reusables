@@ -1,5 +1,5 @@
 import { Ui } from '@rnr/reusables';
-const {
+export const {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuIndicator,
@@ -10,16 +10,5 @@ const {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } = Ui;
-export {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-  navigationMenuTriggerStyle,
-};
 
 // See file: [[packages/reusables/src/components/ui/navigation-menu.tsx]]

@@ -1,5 +1,5 @@
 import { Ui } from '@rnr/reusables';
-const {
+export const {
   Menubar,
   MenubarCheckboxItem,
   MenubarContent,
@@ -17,23 +17,5 @@ const {
   MenubarSubTrigger,
   MenubarTrigger,
 } = Ui;
-export {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarGroup,
-  MenubarItem,
-  MenubarLabel,
-  MenubarMenu,
-  MenubarPortal,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-};
 
 // See file: [[packages/reusables/src/components/ui/menubar.tsx]]

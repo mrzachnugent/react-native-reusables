@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { HoverCard, HoverCardContent, HoverCardTrigger } = Ui;
-export { HoverCard, HoverCardContent, HoverCardTrigger };
+export const { HoverCard, HoverCardContent, HoverCardTrigger } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/hover-card.tsx]]

@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Skeleton } = Ui;
-export { Skeleton };
+export const { Skeleton } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/skeleton.tsx]]

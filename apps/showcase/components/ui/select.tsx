@@ -1,5 +1,7 @@
 import { Ui } from '@rnr/reusables';
-const {
+type Option = Ui.Option;
+export type { Option };
+export const {
   Select,
   SelectContent,
   SelectGroup,
@@ -11,19 +13,5 @@ const {
   SelectTrigger,
   SelectValue,
 } = Ui;
-type Option = Ui.Option;
-export {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-  type Option,
-};
 
 // See file: [[packages/reusables/src/components/ui/select.tsx]]

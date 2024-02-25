@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Popover, PopoverContent, PopoverTrigger } = Ui;
-export { Popover, PopoverContent, PopoverTrigger };
+export const { Popover, PopoverContent, PopoverTrigger } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/popover.tsx]]

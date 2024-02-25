@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Avatar, AvatarFallback, AvatarImage } = Ui;
-export { Avatar, AvatarFallback, AvatarImage };
+export const { Avatar, AvatarFallback, AvatarImage } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/avatar.tsx]]

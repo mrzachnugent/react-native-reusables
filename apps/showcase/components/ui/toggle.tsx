@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Toggle, ToggleIcon, toggleTextVariants, toggleVariants } = Ui;
-export { Toggle, ToggleIcon, toggleTextVariants, toggleVariants };
+export const { Toggle, ToggleIcon, toggleTextVariants, toggleVariants } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/toggle.tsx]]

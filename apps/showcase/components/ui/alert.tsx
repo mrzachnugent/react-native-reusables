@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Alert, AlertDescription, AlertTitle } = Ui;
-export { Alert, AlertDescription, AlertTitle };
+export const { Alert, AlertDescription, AlertTitle } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/alert.tsx]]

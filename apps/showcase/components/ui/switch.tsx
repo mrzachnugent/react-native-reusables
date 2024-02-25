@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Switch } = Ui;
-export { Switch };
+export const { Switch } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/switch.tsx]]

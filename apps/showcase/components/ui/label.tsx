@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Label, LabelText } = Ui;
-export { Label, LabelText };
+export const { Label, LabelText } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/label.tsx]]

@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Progress } = Ui;
-export { Progress };
+export const { Progress } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/progress.tsx]]

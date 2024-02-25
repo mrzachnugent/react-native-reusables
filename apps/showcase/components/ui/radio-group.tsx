@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { RadioGroup, RadioGroupItem } = Ui;
-export { RadioGroup, RadioGroupItem };
+export const { RadioGroup, RadioGroupItem } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/radio-group.tsx]]

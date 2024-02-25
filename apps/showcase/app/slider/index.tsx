@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Slider } from '~/components/deprecated-ui/slider';
+import { DeprecatedUi } from '@rnr/reusables';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+
+const { Slider } = DeprecatedUi;
 
 export default function SliderScreen() {
   const [value, setValue] = React.useState(0.5);

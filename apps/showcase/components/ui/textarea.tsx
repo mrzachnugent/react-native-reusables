@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Textarea } = Ui;
-export { Textarea };
+export const { Textarea } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/textarea.tsx]]

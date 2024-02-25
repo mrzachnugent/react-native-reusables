@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Tabs, TabsContent, TabsList, TabsTrigger } = Ui;
-export { Tabs, TabsContent, TabsList, TabsTrigger };
+export const { Tabs, TabsContent, TabsList, TabsTrigger } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/tabs.tsx]]

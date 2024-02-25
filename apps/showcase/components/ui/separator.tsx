@@ -1,5 +1,4 @@
 import { Ui } from '@rnr/reusables';
-const { Separator } = Ui;
-export { Separator };
+export const { Separator } = Ui;
 
 // See file: [[packages/reusables/src/components/ui/separator.tsx]]
