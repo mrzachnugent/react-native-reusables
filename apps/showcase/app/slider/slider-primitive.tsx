@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Pressable, View, Text, Platform } from 'react-native';
-import * as Slider from '~/components/primitives/slider';
+import * as Slider from '@rnr/slider';
 import { cn } from '~/lib/utils';
 
 export default function SliderScreen() {
@@ -14,9 +14,7 @@ export default function SliderScreen() {
             setValue(Math.floor(Math.random() * 100));
           }}
         >
-          <Text className='text-5xl text-center text-foreground'>
-            {Math.round(value)}
-          </Text>
+          <Text className='text-5xl text-center text-foreground'>{Math.round(value)}</Text>
         </Pressable>
         <Slider.Root
           value={value}

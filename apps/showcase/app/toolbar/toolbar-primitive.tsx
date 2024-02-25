@@ -1,7 +1,7 @@
 import { AlignCenter, AlignLeft, Bold, Italic } from '~/components/Icons';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import * as Toolbar from '~/components/primitives/toolbar';
+import * as Toolbar from '@rnr/toolbar';
 import { cn } from '~/lib/utils';
 
 export default function ToolbarScreen() {
@@ -18,19 +18,13 @@ export default function ToolbarScreen() {
         >
           <Toolbar.ToggleItem
             value='bold'
-            className={cn(
-              multipleValue.includes('bold') && 'bg-secondary',
-              'p-3 rounded-lg'
-            )}
+            className={cn(multipleValue.includes('bold') && 'bg-secondary', 'p-3 rounded-lg')}
           >
             <Bold className='text-foreground' />
           </Toolbar.ToggleItem>
           <Toolbar.ToggleItem
             value='italic'
-            className={cn(
-              multipleValue.includes('italic') && 'bg-secondary',
-              'p-3 rounded-lg'
-            )}
+            className={cn(multipleValue.includes('italic') && 'bg-secondary', 'p-3 rounded-lg')}
           >
             <Italic className='text-foreground' />
           </Toolbar.ToggleItem>
@@ -44,19 +38,13 @@ export default function ToolbarScreen() {
         >
           <Toolbar.ToggleItem
             value='left'
-            className={cn(
-              singleValue === 'left' && 'bg-secondary',
-              'p-3 rounded-lg'
-            )}
+            className={cn(singleValue === 'left' && 'bg-secondary', 'p-3 rounded-lg')}
           >
             <AlignLeft className='text-foreground' />
           </Toolbar.ToggleItem>
           <Toolbar.ToggleItem
             value='center'
-            className={cn(
-              singleValue === 'center' && 'bg-secondary',
-              'p-3 rounded-lg'
-            )}
+            className={cn(singleValue === 'center' && 'bg-secondary', 'p-3 rounded-lg')}
           >
             <AlignCenter className='text-foreground' />
           </Toolbar.ToggleItem>

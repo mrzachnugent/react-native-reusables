@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Portal } from '~/components/primitives/portal/portal-native';
-import * as Toast from '~/components/primitives/toast';
+import { Portal } from '@rnr/portal';
+import * as Toast from '@rnr/toast';
 
 export default function ToastScreen() {
   const [open, setOpen] = React.useState(false);
@@ -47,10 +47,7 @@ export default function ToastScreen() {
     <>
       {open && (
         <Portal name='toast-example'>
-          <View
-            style={{ top: insets.top + 4 }}
-            className='px-4 absolute w-full'
-          >
+          <View style={{ top: insets.top + 4 }} className='px-4 absolute w-full'>
             <Toast.Root
               type='foreground'
               open={open}
@@ -58,9 +55,7 @@ export default function ToastScreen() {
               className='opacity-95 bg-secondary border-border flex-row justify-between items-center p-4 rounded-xl'
             >
               <View className='gap-1.5'>
-                <Toast.Title className='text-foreground text-3xl'>
-                  Here is a toast
-                </Toast.Title>
+                <Toast.Title className='text-foreground text-3xl'>Here is a toast</Toast.Title>
                 <Toast.Description className='text-foreground text-lg'>
                   It will disappear in {seconds} seconds
                 </Toast.Description>

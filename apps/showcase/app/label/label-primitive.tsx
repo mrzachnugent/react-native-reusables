@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import * as Label from '~/components/primitives/label';
+import * as Label from '@rnr/label';
 
 export default function LabelScreen() {
   return (

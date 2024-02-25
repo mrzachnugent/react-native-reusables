@@ -82,7 +82,7 @@ If you want inspiration for your own theme, check out: https://ui.jln.dev/. And 
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/accordion.tsx)
+  - [UI](packages/reusables/src/components/ui/accordion.tsx)
   - [Example](/apps/showcase/app/accordion.tsx)
 </details>
 
@@ -93,7 +93,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca5
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/alert.tsx)
+  - [UI](packages/reusables/src/components/ui/alert.tsx)
   - [Example](/apps/showcase/app/alert.tsx)
 </details>
 
@@ -105,7 +105,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca5
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/alert-dialog.tsx)
+  - [UI](packages/reusables/src/components/ui/alert-dialog.tsx)
   - [Example](/apps/showcase/app/alert-dialog.tsx)
 </details>
 
@@ -116,7 +116,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/avatar.tsx)
+  - [UI](packages/reusables/src/components/ui/avatar.tsx)
   - [Example](/apps/showcase/app/avatar.tsx)
 </details>
 
@@ -128,7 +128,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/badge.tsx)
+  - [UI](packages/reusables/src/components/ui/badge.tsx)
   - [Example](/apps/showcase/app/badge.tsx)
 </details>
 
@@ -151,7 +151,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/button.tsx)
+  - [UI](packages/reusables/src/components/ui/button.tsx)
   - [Example](/apps/showcase/app/button.tsx)
 </details>
 
@@ -175,7 +175,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/card.tsx)
+  - [UI](packages/reusables/src/components/ui/card.tsx)
   - [Example](/apps/showcase/app/card.tsx)
 </details>
 
@@ -187,7 +187,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/checkbox.tsx)
+  - [UI](packages/reusables/src/components/ui/checkbox.tsx)
   - [Example](/apps/showcase/app/checkbox.tsx)
 </details>
 
@@ -210,7 +210,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/a5bf066
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/collapsible.tsx)
+  - [UI](packages/reusables/src/components/ui/collapsible.tsx)
   - [Example](/apps/showcase/app/collapsible.tsx)
 </details>
 
@@ -232,7 +232,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/eb366b7
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/context-menu.tsx)
+  - [UI](packages/reusables/src/components/ui/context-menu.tsx)
   - [Example](/apps/showcase/app/context-menu.tsx)
 </details>
 
@@ -263,7 +263,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1feb89e
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/dialog.tsx)
+  - [UI](packages/reusables/src/components/ui/dialog.tsx)
   - [Example](/apps/showcase/app/dialog/index.tsx)
 </details>
 
@@ -274,7 +274,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a9
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/dropdown-menu.tsx)
+  - [UI](packages/reusables/src/components/ui/dropdown-menu.tsx)
   - [Example](/apps/showcase/app/dropdown-menu.tsx)
 </details>
 
@@ -294,7 +294,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/input.tsx)
+  - [UI](packages/reusables/src/components/ui/input.tsx)
   - [Example](/apps/showcase/app/input.tsx)
 </details>
 
@@ -305,7 +305,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/label.tsx)
+  - [UI](packages/reusables/src/components/ui/label.tsx)
   - [Example](/apps/showcase/app/label/index.tsx)
 </details>
 
@@ -324,7 +324,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
 
-- [UI](/apps/showcase/components/ui/menubar.tsx)
+- [UI](packages/reusables/src/components/ui/menubar.tsx)
 - [Example](/apps/showcase/app/menubar.tsx)
 </details>
 
@@ -333,7 +333,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/navigation-menu.tsx)
+  - [UI](packages/reusables/src/components/ui/navigation-menu.tsx)
   - [Example](/apps/showcase/app/navigation-menu.tsx)
 </details>
 
@@ -342,7 +342,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/popover.tsx)
+  - [UI](packages/reusables/src/components/ui/popover.tsx)
   - [Example](/apps/showcase/app/popover.tsx)
 </details>
 
@@ -353,7 +353,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/835891c
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/progress.tsx)
+  - [UI](packages/reusables/src/components/ui/progress.tsx)
   - [Example](/apps/showcase/app/progress.tsx)
 </details>
 
@@ -364,7 +364,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/b23d9ea
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/radio-group.tsx)
+  - [UI](packages/reusables/src/components/ui/radio-group.tsx)
   - [Example](/apps/showcase/app/radio-group.tsx)
 </details>
 
@@ -375,7 +375,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1dcd605
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/select.tsx)
+  - [UI](packages/reusables/src/components/ui/select.tsx)
   - [Example](/apps/showcase/app/select.tsx)
 </details>
 
@@ -386,7 +386,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a1748
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/separator.tsx)
+  - [UI](packages/reusables/src/components/ui/separator.tsx)
   - [Example](/apps/showcase/app/separator.tsx)
 </details>
 
@@ -398,7 +398,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a1748
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/skeleton.tsx)
+  - [UI](packages/reusables/src/components/ui/skeleton.tsx)
   - [Example](/apps/showcase/app/skeleton.tsx)
 </details>
 
@@ -420,7 +420,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/switch.tsx)
+  - [UI](packages/reusables/src/components/ui/switch.tsx)
   - [Example](/apps/showcase/app/switch.tsx)
 </details>
 
@@ -443,7 +443,7 @@ https://github.com/mrzachnugent/rnr-ui-inspired-by-shadcn/assets/63797719/32b0d0
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/tabs.tsx)
+  - [UI](packages/reusables/src/components/ui/tabs.tsx)
   - [Example](/apps/showcase/app/tabs.tsx)
 </details>
 
@@ -454,7 +454,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5f40bba
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/textarea.tsx)
+  - [UI](packages/reusables/src/components/ui/textarea.tsx)
   - [Example](/apps/showcase/app/textarea.tsx)
 </details>
 
@@ -477,7 +477,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/6a3dd0f
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/toggle.tsx)
+  - [UI](packages/reusables/src/components/ui/toggle.tsx)
   - [Example](/apps/showcase/app/toggle.tsx)
 </details>
 
@@ -488,7 +488,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/toggle-group.tsx)
+  - [UI](packages/reusables/src/components/ui/toggle-group.tsx)
   - [Example](/apps/showcase/app/toggle-group.tsx)
 </details>
 
@@ -499,7 +499,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e4
 <details>
 <summary>Code</summary>
   
-  - [UI](/apps/showcase/components/ui/tooltip.tsx)
+  - [UI](packages/reusables/src/components/ui/tooltip.tsx)
   - [Example](/apps/showcase/app/tooltip.tsx)
 </details>
 
