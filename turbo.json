@@ -16,10 +16,6 @@
       "cache": false,
       "persistent": true
     },
-    "dev:web": {
-      "cache": false,
-      "persistent": true
-    },
     "clean": {
       "cache": false
     }

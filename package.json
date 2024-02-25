@@ -3,14 +3,14 @@
   "private": true,
   "scripts": {
     "dev": "turbo dev",
-    "dev:showcase": "turbo dev --filter=\"{./apps/showcase}...\" --concurrency 32",
-    "dev:showcase:web": "turbo dev:web --filter=\"{./apps/showcase}...\" --concurrency 32",
-    "dev:docs": "turbo dev --filter=\"{./apps/docs}...\"",
+    "dev:showcase": "turbo dev --filter=showcase --concurrency 32",
+    "dev:showcase:web": "turbo dev:web --filter=showcase --concurrency 32",
+    "dev:docs": "turbo dev --filter=docs",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
-    "build:showcase": "turbo build --filter=\"...{./apps/showcase}\"",
-    "build:docs": "turbo build --filter=\"...{./apps/docs}\"",
+    "build:showcase": "turbo build --filter=showcase",
+    "build:docs": "turbo build --filter=docs",
     "clean": "rm -rf .turbo node_modules && turbo clean"
   },
   "devDependencies": {
