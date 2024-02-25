@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "@rnr/types",
+  "version": "0.0.0",
+  "description": "Primitive types",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "clean": "rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/react": "~18.2.43",
+    "react": "18.2.0",
+    "react-native": "0.73.4"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-web": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    },
+    "react-native-web": {
+      "optional": true
+    }
+  }
+}

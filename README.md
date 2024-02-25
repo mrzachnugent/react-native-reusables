@@ -82,8 +82,8 @@ If you want inspiration for your own theme, check out: https://ui.jln.dev/. And 
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/accordion.tsx)
-  - [Example](/app/accordion.tsx)
+  - [UI](packages/reusables/src/components/ui/accordion.tsx)
+  - [Example](/apps/showcase/app/accordion.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca54-7bbb-4a91-8f7f-7fed37901a0f
@@ -93,8 +93,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca5
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/alert.tsx)
-  - [Example](/app/alert.tsx)
+  - [UI](packages/reusables/src/components/ui/alert.tsx)
+  - [Example](/apps/showcase/app/alert.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/c5a2135e-c98a-4e21-a632-5de4590400cb" width="250px" />
@@ -105,8 +105,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/2fd5ca5
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/alert-dialog.tsx)
-  - [Example](/app/alert-dialog.tsx)
+  - [UI](packages/reusables/src/components/ui/alert-dialog.tsx)
+  - [Example](/apps/showcase/app/alert-dialog.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8f-bbfb-4bce-ae6f-05b448f218ab
@@ -116,8 +116,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/avatar.tsx)
-  - [Example](/app/avatar.tsx)
+  - [UI](packages/reusables/src/components/ui/avatar.tsx)
+  - [Example](/apps/showcase/app/avatar.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/3637197a-497d-4c41-b497-89d0da54bef2" width="250px" />
@@ -128,8 +128,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/badge.tsx)
-  - [Example](/app/badge.tsx)
+  - [UI](packages/reusables/src/components/ui/badge.tsx)
+  - [Example](/apps/showcase/app/badge.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/211cc87a-ea85-4d17-80d5-876ff31e8055" width="250px" />
@@ -141,7 +141,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e91d9f8
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/bottom-sheet.native.tsx)
-  - [Example](/app/bottom-sheet.tsx)
+  - [Example](/apps/showcase/app/bottom-sheet.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94a-4dfd-4eb2-9424-bf9b404d0efd
@@ -151,8 +151,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/button.tsx)
-  - [Example](/app/button.tsx)
+  - [UI](packages/reusables/src/components/ui/button.tsx)
+  - [Example](/apps/showcase/app/button.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/61ab7308-c628-4b1e-a688-91413dfc05a9" width="250px" />
@@ -164,7 +164,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/calendar.tsx)
-  - [Example](/app/calendar.tsx)
+  - [Example](/apps/showcase/app/calendar.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/6adb030a-06cf-4b84-8793-00ae308602a8" width="250px" />
@@ -175,8 +175,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/card.tsx)
-  - [Example](/app/card.tsx)
+  - [UI](packages/reusables/src/components/ui/card.tsx)
+  - [Example](/apps/showcase/app/card.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f67fe49b-ebf2-4eb7-87fd-fb513c532aeb" width="250px" />
@@ -187,8 +187,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/checkbox.tsx)
-  - [Example](/app/checkbox.tsx)
+  - [UI](packages/reusables/src/components/ui/checkbox.tsx)
+  - [Example](/apps/showcase/app/checkbox.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1580db11-d56d-4dab-ab2b-74abe7846144" width="250px" />
@@ -200,7 +200,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/f43be94
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/combobox.tsx)
-  - [Example](/app/combobox.tsx)
+  - [Example](/apps/showcase/app/combobox.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/a5bf0660-dcb4-480c-96c0-3df9d98bf082
@@ -210,8 +210,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/a5bf066
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/collapsible.tsx)
-  - [Example](/app/collapsible.tsx)
+  - [UI](packages/reusables/src/components/ui/collapsible.tsx)
+  - [Example](/apps/showcase/app/collapsible.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5e6de7cc-81e4-48d6-9b5d-ce2251c91609
@@ -222,7 +222,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5e6de7c
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/command.tsx)
-  - [Example](/app/command.tsx)
+  - [Example](/apps/showcase/app/command.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/eb366b71-e225-4828-be15-1fab9b76ae7f
@@ -232,8 +232,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/eb366b7
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/context-menu.tsx)
-  - [Example](/app/context-menu.tsx)
+  - [UI](packages/reusables/src/components/ui/context-menu.tsx)
+  - [Example](/apps/showcase/app/context-menu.tsx)
 </details>
 
 #### Data Table
@@ -242,7 +242,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/eb366b7
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/data-table.tsx)
-  - [Example](/app/data-table.tsx)
+  - [Example](/apps/showcase/app/data-table.tsx)
 </details>
 
 https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ed4b39db-0469-497a-902f-47648915fb5b
@@ -253,7 +253,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ed4b39db-
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/date-picker.tsx)
-  - [Example](/app/date-picker.tsx)
+  - [Example](/apps/showcase/app/date-picker.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1feb89ed-c598-4eb3-b56c-fa30d2b49cfd
@@ -263,8 +263,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1feb89e
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/dialog.tsx)
-  - [Example](/app/dialog/index.tsx)
+  - [UI](packages/reusables/src/components/ui/dialog.tsx)
+  - [Example](/apps/showcase/app/dialog/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a96-34ad-4f5f-bd19-250c2749932f
@@ -274,8 +274,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a9
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/dropdown-menu.tsx)
-  - [Example](/app/dropdown-menu.tsx)
+  - [UI](packages/reusables/src/components/ui/dropdown-menu.tsx)
+  - [Example](/apps/showcase/app/dropdown-menu.tsx)
 </details>
 
 #### Form
@@ -284,7 +284,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/190a8a9
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/form.tsx)
-  - [Example](/app/form.tsx)
+  - [Example](/apps/showcase/app/form.tsx)
 </details>
 
 https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-7614-43e9-afbb-44646ea63a26
@@ -294,8 +294,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/input.tsx)
-  - [Example](/app/input.tsx)
+  - [UI](packages/reusables/src/components/ui/input.tsx)
+  - [Example](/apps/showcase/app/input.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4e59752a-5751-4644-88ab-c30d336c961d" width="250px" />
@@ -305,8 +305,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/label.tsx)
-  - [Example](/app/label/index.tsx)
+  - [UI](packages/reusables/src/components/ui/label.tsx)
+  - [Example](/apps/showcase/app/label/index.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/54273fc2-36a8-4942-949c-91f36ee55334" width="250px" />
@@ -316,7 +316,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
 
-- [Example](/app/material-top-tabs/index.tsx)
+- [Example](/apps/showcase/app/material-top-tabs/index.tsx)
 </details>
 
 #### Menubar
@@ -324,8 +324,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
 
-- [UI](/components/ui/menubar.tsx)
-- [Example](/app/menubar.tsx)
+- [UI](packages/reusables/src/components/ui/menubar.tsx)
+- [Example](/apps/showcase/app/menubar.tsx)
 </details>
 
 #### Navigation Menu
@@ -333,8 +333,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/navigation-menu.tsx)
-  - [Example](/app/navigation-menu.tsx)
+  - [UI](packages/reusables/src/components/ui/navigation-menu.tsx)
+  - [Example](/apps/showcase/app/navigation-menu.tsx)
 </details>
 
 #### Popover
@@ -342,8 +342,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/c3a20210-
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/popover.tsx)
-  - [Example](/app/popover.tsx)
+  - [UI](packages/reusables/src/components/ui/popover.tsx)
+  - [Example](/apps/showcase/app/popover.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/835891c6-ea60-44c5-846d-76729a91f12c
@@ -353,8 +353,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/835891c
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/progress.tsx)
-  - [Example](/app/progress.tsx)
+  - [UI](packages/reusables/src/components/ui/progress.tsx)
+  - [Example](/apps/showcase/app/progress.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/b23d9ea7-81ca-41be-b35d-344df5a56bde
@@ -364,8 +364,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/b23d9ea
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/radio-group.tsx)
-  - [Example](/app/radio-group.tsx)
+  - [UI](packages/reusables/src/components/ui/radio-group.tsx)
+  - [Example](/apps/showcase/app/radio-group.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1dcd6059-971f-4c1f-b278-3a23ae527bdf
@@ -375,8 +375,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1dcd605
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/select.tsx)
-  - [Example](/app/select.tsx)
+  - [UI](packages/reusables/src/components/ui/select.tsx)
+  - [Example](/apps/showcase/app/select.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a17487-739d-4c24-8682-113562b44c91
@@ -386,8 +386,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a1748
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/separator.tsx)
-  - [Example](/app/separator.tsx)
+  - [UI](packages/reusables/src/components/ui/separator.tsx)
+  - [Example](/apps/showcase/app/separator.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/1d7fce13-6e69-4e69-8877-d52565b4c2ae" width="250px" />
@@ -398,8 +398,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/10a1748
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/skeleton.tsx)
-  - [Example](/app/skeleton.tsx)
+  - [UI](packages/reusables/src/components/ui/skeleton.tsx)
+  - [Example](/apps/showcase/app/skeleton.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/58d0ad8a-f2a6-438b-8ea1-6d914136004e
@@ -410,7 +410,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/58d0ad8
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/slider.tsx)
-  - [Example](/app/slider/index.tsx)
+  - [Example](/apps/showcase/app/slider/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5a-50d4-481f-827f-7f422d5a3656
@@ -420,8 +420,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/switch.tsx)
-  - [Example](/app/switch.tsx)
+  - [UI](packages/reusables/src/components/ui/switch.tsx)
+  - [Example](/apps/showcase/app/switch.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/60b9f622-d150-489f-bc0b-fe35b9dc1624" width="250px" />
@@ -433,7 +433,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/table.tsx)
-  - [Example](/app/table.tsx)
+  - [Example](/apps/showcase/app/table.tsx)
 </details>
 
 https://github.com/mrzachnugent/rnr-ui-inspired-by-shadcn/assets/63797719/32b0d075-213f-477e-a1c7-c05b7a7645e2
@@ -443,8 +443,8 @@ https://github.com/mrzachnugent/rnr-ui-inspired-by-shadcn/assets/63797719/32b0d0
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/tabs.tsx)
-  - [Example](/app/tabs.tsx)
+  - [UI](packages/reusables/src/components/ui/tabs.tsx)
+  - [Example](/apps/showcase/app/tabs.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5f40bba1-9184-46fd-b915-0f9e43f11606
@@ -454,8 +454,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5f40bba
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/textarea.tsx)
-  - [Example](/app/textarea.tsx)
+  - [UI](packages/reusables/src/components/ui/textarea.tsx)
+  - [Example](/apps/showcase/app/textarea.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/31197419-295b-4c12-9f19-b5f9b28f5814" width="250px" />
@@ -467,7 +467,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/5f40bba
 <summary>Code</summary>
   
   - [UI](/components/deprecated-ui/toast.tsx)
-  - [Example](/app/toast/index.tsx)
+  - [Example](/apps/showcase/app/toast/index.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/6a3dd0fb-4d9e-4dda-8769-bd2d424e6fb9
@@ -477,8 +477,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/6a3dd0f
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/toggle.tsx)
-  - [Example](/app/toggle.tsx)
+  - [UI](packages/reusables/src/components/ui/toggle.tsx)
+  - [Example](/apps/showcase/app/toggle.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5b-bed4-4489-99be-e4369c659713
@@ -488,8 +488,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/4c8fcc5
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/toggle-group.tsx)
-  - [Example](/app/toggle-group.tsx)
+  - [UI](packages/reusables/src/components/ui/toggle-group.tsx)
+  - [Example](/apps/showcase/app/toggle-group.tsx)
 </details>
 
 https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e42-54d5-46b5-9302-ec05ace55f5f
@@ -499,8 +499,8 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/e22c2e4
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/ui/tooltip.tsx)
-  - [Example](/app/tooltip.tsx)
+  - [UI](packages/reusables/src/components/ui/tooltip.tsx)
+  - [Example](/apps/showcase/app/tooltip.tsx)
 </details>
 
   <img src="https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/9b126131-dbac-4f96-8f3f-ae61afa9c607" width="250px" />
