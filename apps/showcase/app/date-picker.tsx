@@ -1,16 +1,19 @@
+import { DeprecatedUi, Icons, Lib } from '@rnr/reusables';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Calendar as CalendarIcon } from '~/components/Icons';
-import {
+const { Calendar: CalendarIcon } = Icons;
+const {
   BottomSheet,
   BottomSheetCloseTrigger,
   BottomSheetContent,
   BottomSheetOpenTrigger,
   BottomSheetView,
-} from '~/components/deprecated-ui/bottom-sheet';
-import { Button, buttonTextVariants } from '~/components/deprecated-ui/button';
-import { Calendar } from '~/components/deprecated-ui/calendar';
-import { cn } from '~/lib/utils';
+  Calendar,
+  Button,
+  buttonTextVariants,
+} = DeprecatedUi;
+
+const { cn } = Lib;
 
 export default function DatePickerScreen() {
   const [selectedDate, setSelectedDate] = React.useState('');
@@ -45,9 +48,7 @@ export default function DatePickerScreen() {
             <Calendar
               style={{ height: 358 }}
               onDayPress={(day) => {
-                setSelectedDate((prev) =>
-                  day.dateString === prev ? '' : day.dateString
-                );
+                setSelectedDate((prev) => (day.dateString === prev ? '' : day.dateString));
               }}
               markedDates={{
                 [selectedDate]: {

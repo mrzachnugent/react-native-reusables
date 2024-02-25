@@ -1,9 +1,11 @@
 import { useNavigation } from 'expo-router';
-import { Sparkles } from '~/components/Icons';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
+import { TextRef } from '@rnr/types';
+import { Ui, Icons, Lib } from '@rnr/reusables';
+
+const {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -11,10 +13,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '~/components/ui/navigation-menu';
-import { TextRef } from '~/components/primitives/types';
-import { cn } from '~/lib/utils';
-import { Text } from '~/components/ui/typography';
+  Text,
+} = Ui;
+const { Sparkles } = Icons;
+const { cn } = Lib;
 
 export default function MenubarScreen() {
   const insets = useSafeAreaInsets();
@@ -68,22 +70,19 @@ export default function MenubarScreen() {
                         react-native-reusables
                       </Text>
                       <Text className='text-sm native:text-base leading-tight text-muted-foreground'>
-                        Universal components that you can copy and paste into
-                        your apps. Accessible. Customizable. Open Source.
+                        Universal components that you can copy and paste into your apps. Accessible.
+                        Customizable. Open Source.
                       </Text>
                     </View>
                   </NavigationMenuLink>
                 </View>
                 <ListItem href='/docs' title='Introduction'>
                   <Text>
-                    Re-usable components built using Radix UI on the web and
-                    Tailwind CSS.
+                    Re-usable components built using Radix UI on the web and Tailwind CSS.
                   </Text>
                 </ListItem>
                 <ListItem href='/docs/installation' title='Installation'>
-                  <Text>
-                    How to install dependencies and structure your app.
-                  </Text>
+                  <Text>How to install dependencies and structure your app.</Text>
                 </ListItem>
                 <ListItem href='/docs/primitives/typography' title='Typography'>
                   <Text>Styles for headings, paragraphs, lists...etc</Text>
@@ -101,11 +100,7 @@ export default function MenubarScreen() {
                 className='web:grid w-[400px] gap-3 p-4 md:w-[500px] web:md:grid-cols-2 lg:w-[600px] '
               >
                 {components.map((component) => (
-                  <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  >
+                  <ListItem key={component.title} title={component.title} href={component.href}>
                     {component.description}
                   </ListItem>
                 ))}
@@ -113,10 +108,7 @@ export default function MenubarScreen() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem value='documentation'>
-            <NavigationMenuLink
-              onPress={closeAll}
-              className={navigationMenuTriggerStyle()}
-            >
+            <NavigationMenuLink onPress={closeAll} className={navigationMenuTriggerStyle()}>
               <Text>Documentation</Text>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -136,8 +128,7 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: 'Hover Card',
     href: '/hover-card/hover-card-universal',
-    description:
-      'For sighted users to preview content available behind a link.',
+    description: 'For sighted users to preview content available behind a link.',
   },
   {
     title: 'Progress',

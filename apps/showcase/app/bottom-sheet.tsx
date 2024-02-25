@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import {
+import { Ui, Lib, DeprecatedUi } from '@rnr/reusables';
+
+const {
   BottomSheet,
   BottomSheetCloseTrigger,
   BottomSheetContent,
@@ -8,18 +10,16 @@ import {
   BottomSheetOpenTrigger,
   BottomSheetTextInput,
   BottomSheetView,
-} from '~/components/deprecated-ui/bottom-sheet';
-import { Button } from '~/components/ui/button';
-import { Label, LabelText } from '~/components/ui/label';
-import { Text } from '~/components/ui/typography';
-import { cn } from '~/lib/utils';
+} = DeprecatedUi;
+
+const { Button, Label, LabelText, Text } = Ui;
+
+const { cn } = Lib;
 
 // TODO: refactor to use UI bottom-sheet component
 export default function BottomSheetScreen() {
-  const nameInputRef =
-    React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
-  const usernameInputRef =
-    React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
+  const nameInputRef = React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
+  const usernameInputRef = React.useRef<React.ComponentRef<typeof BottomSheetTextInput>>(null);
 
   function handleOnLabelPress(ref: typeof nameInputRef) {
     return () => {
@@ -36,9 +36,7 @@ export default function BottomSheetScreen() {
       <BottomSheet>
         <BottomSheetOpenTrigger asChild>
           <Button>
-            <Text>
-              {Platform.OS === 'web' ? 'Not implemented for web yet' : 'Open'}
-            </Text>
+            <Text>{Platform.OS === 'web' ? 'Not implemented for web yet' : 'Open'}</Text>
           </Button>
         </BottomSheetOpenTrigger>
         <BottomSheetContent>
@@ -50,10 +48,7 @@ export default function BottomSheetScreen() {
           <BottomSheetView className='gap-5 pt-6'>
             <View className='pb-2 gap-6'>
               <View>
-                <Label
-                  className={'pb-2.5'}
-                  onPress={handleOnLabelPress(nameInputRef)}
-                >
+                <Label className={'pb-2.5'} onPress={handleOnLabelPress(nameInputRef)}>
                   <LabelText nativeID='name'>Name</LabelText>
                 </Label>
                 <BottomSheetTextInput
@@ -63,10 +58,7 @@ export default function BottomSheetScreen() {
                 />
               </View>
               <View>
-                <Label
-                  className={'pb-2.5'}
-                  onPress={handleOnLabelPress(usernameInputRef)}
-                >
+                <Label className={'pb-2.5'} onPress={handleOnLabelPress(usernameInputRef)}>
                   <LabelText nativeID='username'>Username</LabelText>
                 </Label>
                 <BottomSheetTextInput

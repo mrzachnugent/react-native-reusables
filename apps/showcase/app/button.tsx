@@ -1,6 +1,7 @@
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/typography';
+import { Ui } from '@rnr/reusables';
+
+const { Button, Text } = Ui;
 
 export default function ButtonScreen() {
   return (

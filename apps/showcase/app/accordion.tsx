@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '~/components/ui/accordion';
+import { Ui } from '@rnr/reusables';
+
+const { Accordion, AccordionItem, AccordionTrigger, AccordionContent } = Ui;
 
 export default function AccordionScreen() {
   const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
@@ -39,8 +36,8 @@ export default function AccordionScreen() {
           </AccordionTrigger>
           <AccordionContent>
             <Text className='text-foreground text-base native:text-lg'>
-              In the world of React Native, universal components are components
-              that work on both web and native platforms.
+              In the world of React Native, universal components are components that work on both
+              web and native platforms.
             </Text>
           </AccordionContent>
         </AccordionItem>

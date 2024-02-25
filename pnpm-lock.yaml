@@ -95,6 +95,9 @@ importers:
       '@rnr/radio-group':
         specifier: '*'
         version: link:../../packages/radio-group
+      '@rnr/reusables':
+        specifier: '*'
+        version: link:../../packages/reusables
       '@rnr/select':
         specifier: '*'
         version: link:../../packages/select
@@ -134,9 +137,6 @@ importers:
       '@rnr/types':
         specifier: '*'
         version: link:../../packages/types
-      '@rnr/ui':
-        specifier: '*'
-        version: link:../../packages/ui
       '@types/react':
         specifier: ^18.2.56
         version: 18.2.58
@@ -332,6 +332,9 @@ importers:
       '@rnr/radio-group':
         specifier: '*'
         version: link:../../packages/radio-group
+      '@rnr/reusables':
+        specifier: '*'
+        version: link:../../packages/reusables
       '@rnr/select':
         specifier: '*'
         version: link:../../packages/select
@@ -371,9 +374,6 @@ importers:
       '@rnr/types':
         specifier: '*'
         version: link:../../packages/types
-      '@rnr/ui':
-        specifier: '*'
-        version: link:../../packages/ui
       '@shopify/flash-list':
         specifier: 1.6.3
         version: 1.6.3(react-native@0.73.4)(react@18.2.0)
@@ -1051,6 +1051,166 @@ importers:
         specifier: 0.73.4
         version: 0.73.4(@babel/core@7.23.9)(react@18.2.0)
 
+  packages/reusables:
+    dependencies:
+      '@gorhom/bottom-sheet':
+        specifier: ^4.6.0
+        version: 4.6.1(@types/react@18.2.58)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.6.3)(react-native@0.73.4)(react@18.2.0)
+      '@hookform/resolvers':
+        specifier: ^3.3.4
+        version: 3.3.4(react-hook-form@7.50.1)
+      '@react-native-community/slider':
+        specifier: 4.4.2
+        version: 4.4.2
+      '@react-navigation/native':
+        specifier: ^6.0.2
+        version: 6.1.12(react-native@0.73.4)(react@18.2.0)
+      '@rnr/accordion':
+        specifier: '*'
+        version: link:../accordion
+      '@rnr/alert-dialog':
+        specifier: '*'
+        version: link:../alert-dialog
+      '@rnr/aspect-ratio':
+        specifier: '*'
+        version: link:../aspect-ratio
+      '@rnr/avatar':
+        specifier: '*'
+        version: link:../avatar
+      '@rnr/checkbox':
+        specifier: '*'
+        version: link:../checkbox
+      '@rnr/collapsible':
+        specifier: '*'
+        version: link:../collapsible
+      '@rnr/context-menu':
+        specifier: '*'
+        version: link:../context-menu
+      '@rnr/dialog':
+        specifier: '*'
+        version: link:../dialog
+      '@rnr/dropdown-menu':
+        specifier: '*'
+        version: link:../dropdown-menu
+      '@rnr/hover-card':
+        specifier: '*'
+        version: link:../hover-card
+      '@rnr/label':
+        specifier: '*'
+        version: link:../label
+      '@rnr/menubar':
+        specifier: '*'
+        version: link:../menubar
+      '@rnr/navigation-menu':
+        specifier: '*'
+        version: link:../navigation-menu
+      '@rnr/popover':
+        specifier: '*'
+        version: link:../popover
+      '@rnr/portal':
+        specifier: '*'
+        version: link:../portal
+      '@rnr/progress':
+        specifier: '*'
+        version: link:../progress
+      '@rnr/radio-group':
+        specifier: '*'
+        version: link:../radio-group
+      '@rnr/select':
+        specifier: '*'
+        version: link:../select
+      '@rnr/separator':
+        specifier: '*'
+        version: link:../separator
+      '@rnr/slider':
+        specifier: '*'
+        version: link:../slider
+      '@rnr/slot':
+        specifier: '*'
+        version: link:../slot
+      '@rnr/switch':
+        specifier: '*'
+        version: link:../switch
+      '@rnr/table':
+        specifier: '*'
+        version: link:../table
+      '@rnr/tabs':
+        specifier: '*'
+        version: link:../tabs
+      '@rnr/toast':
+        specifier: '*'
+        version: link:../toast
+      '@rnr/toggle':
+        specifier: '*'
+        version: link:../toggle
+      '@rnr/toggle-group':
+        specifier: '*'
+        version: link:../toggle-group
+      '@rnr/toolbar':
+        specifier: '*'
+        version: link:../toolbar
+      '@rnr/tooltip':
+        specifier: '*'
+        version: link:../tooltip
+      '@rnr/types':
+        specifier: '*'
+        version: link:../types
+      '@shopify/flash-list':
+        specifier: 1.6.3
+        version: 1.6.3(react-native@0.73.4)(react@18.2.0)
+      '@tanstack/react-table':
+        specifier: ^8.11.7
+        version: 8.12.0(react-dom@18.2.0)(react@18.2.0)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.0.0
+        version: 2.1.0
+      lucide-react-native:
+        specifier: ^0.314.0
+        version: 0.314.0(react-native-svg@14.1.0)(react-native@0.73.4)(react@18.2.0)
+      nativewind:
+        specifier: ^4.0.33
+        version: 4.0.36(@babel/core@7.23.9)(react-native-reanimated@3.6.3)(react-native-safe-area-context@4.8.2)(react-native-svg@14.1.0)(react-native@0.73.4)(react@18.2.0)(tailwindcss@3.4.1)
+      react-hook-form:
+        specifier: ^7.49.2
+        version: 7.50.1(react@18.2.0)
+      react-native-calendars:
+        specifier: ^1.1302.0
+        version: 1.1303.0(react-native@0.73.4)(react@18.2.0)
+      react-native-reanimated:
+        specifier: ~3.6.2
+        version: 3.6.3(@babel/core@7.23.9)(react-native@0.73.4)(react@18.2.0)
+      react-native-safe-area-context:
+        specifier: 4.8.2
+        version: 4.8.2(react-native@0.73.4)(react@18.2.0)
+      react-native-svg:
+        specifier: 14.1.0
+        version: 14.1.0(react-native@0.73.4)(react@18.2.0)
+      react-native-toast-message:
+        specifier: ^2.2.0
+        version: 2.2.0(react-native@0.73.4)(react@18.2.0)
+      react-native-web:
+        specifier: '*'
+        version: 0.19.10(react-dom@18.2.0)(react@18.2.0)
+      tailwind-merge:
+        specifier: ^2.1.0
+        version: 2.2.1
+    devDependencies:
+      '@tsconfig/recommended':
+        specifier: ^1.0.1
+        version: 1.0.3
+      '@types/react':
+        specifier: ~18.2.43
+        version: 18.2.58
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-native:
+        specifier: 0.73.4
+        version: 0.73.4(@babel/core@7.23.9)(react@18.2.0)
+
   packages/select:
     dependencies:
       '@radix-ui/react-select':
@@ -1391,25 +1551,6 @@ importers:
         version: 0.73.4(@babel/core@7.23.9)(react@18.2.0)
 
   packages/types:
-    dependencies:
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0)(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.43
-        version: 18.2.58
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.73.4
-        version: 0.73.4(@babel/core@7.23.9)(react@18.2.0)
-
-  packages/ui:
     dependencies:
       react-native-web:
         specifier: '*'

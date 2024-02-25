@@ -1,25 +1,13 @@
-import {
-  Cloud,
-  Github,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  UserPlus,
-  Users,
-} from '~/components/Icons';
 import * as React from 'react';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/typography';
-import {
+
+import { Ui, Icons } from '@rnr/reusables';
+
+const {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -28,7 +16,13 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
+  DropdownMenuGroup,
+  Button,
+  Text,
+} = Ui;
+
+const { Users, UserPlus, Mail, MessageSquare, PlusCircle, Plus, Github, LifeBuoy, Cloud, LogOut } =
+  Icons;
 
 export default function DropdownMenuScreen() {
   const [open, setOpen] = React.useState(false);
@@ -57,10 +51,7 @@ export default function DropdownMenuScreen() {
             <Text>Open</Text>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent
-          insets={contentInsets}
-          className='w-64 native:w-72'
-        >
+        <DropdownMenuContent insets={contentInsets} className='w-64 native:w-72'>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>

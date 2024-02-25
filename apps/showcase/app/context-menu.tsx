@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
+import { Ui } from '@rnr/reusables';
+const {
   ContextMenu,
   ContextMenuCheckboxItem,
   ContextMenuContent,
@@ -16,8 +17,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '~/components/ui/context-menu';
-import { Text } from '~/components/ui/typography';
+  Text,
+} = Ui;
 
 export default function ContextScreen() {
   const [open, setOpen] = React.useState(false);
@@ -51,11 +52,7 @@ export default function ContextScreen() {
             </Text>
           </ContextMenuTrigger>
 
-          <ContextMenuContent
-            align='start'
-            insets={contentInsets}
-            className='w-64 native:w-72'
-          >
+          <ContextMenuContent align='start' insets={contentInsets} className='w-64 native:w-72'>
             <ContextMenuItem inset>
               <Text>Back</Text>
               <ContextMenuShortcut>⌘[</ContextMenuShortcut>
@@ -108,10 +105,7 @@ export default function ContextScreen() {
               <Text>Show Full URLs</Text>
             </ContextMenuCheckboxItem>
             <ContextMenuSeparator />
-            <ContextMenuRadioGroup
-              value={radioValue}
-              onValueChange={setRadioValue}
-            >
+            <ContextMenuRadioGroup value={radioValue} onValueChange={setRadioValue}>
               <ContextMenuLabel inset>People</ContextMenuLabel>
               <ContextMenuSeparator />
               <ContextMenuRadioItem value='pedro' closeOnPress={false}>

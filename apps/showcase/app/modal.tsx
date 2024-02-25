@@ -1,7 +1,7 @@
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { H1, Muted, Text } from '~/components/ui/typography';
+import { Ui } from '@rnr/reusables';
+
+const { Button, Input, Muted, Text, H1 } = Ui;
 
 export default function ModalScreen() {
   return (

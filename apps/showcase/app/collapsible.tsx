@@ -1,16 +1,10 @@
-import { ChevronsDownUp, ChevronsUpDown } from '~/components/Icons';
 import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
-import Animated, {
-  FadeInDown,
-  LinearTransition,
-} from 'react-native-reanimated';
-import { Button } from '~/components/ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '~/components/ui/collapsible';
+import Animated, { FadeInDown, LinearTransition } from 'react-native-reanimated';
+import { Ui, Icons } from '@rnr/reusables';
+
+const { Button, Collapsible, CollapsibleContent, CollapsibleTrigger } = Ui;
+const { ChevronsDownUp, ChevronsUpDown } = Icons;
 
 export default function CollapsibleScreen() {
   const [open, setOpen] = React.useState(false);
@@ -35,9 +29,7 @@ export default function CollapsibleScreen() {
               </CollapsibleTrigger>
             </View>
             <View className='rounded-md border border-border px-4 py-3 '>
-              <Text className='text-foreground text-sm native:text-lg'>
-                @radix-ui/primitives
-              </Text>
+              <Text className='text-foreground text-sm native:text-lg'>@radix-ui/primitives</Text>
             </View>
             <CollapsibleContent className='gap-2'>
               <CollapsibleItem delay={100}>@radix-ui/react</CollapsibleItem>
@@ -50,13 +42,7 @@ export default function CollapsibleScreen() {
   );
 }
 
-function CollapsibleItem({
-  children,
-  delay,
-}: {
-  children: string;
-  delay: number;
-}) {
+function CollapsibleItem({ children, delay }: { children: string; delay: number }) {
   if (Platform.OS === 'web') {
     return (
       <View className='rounded-md border border-border px-4 py-3'>

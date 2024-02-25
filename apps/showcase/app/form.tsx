@@ -4,30 +4,31 @@ import { useForm } from 'react-hook-form';
 import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as z from 'zod';
-import { Button } from '~/components/ui/button';
-import {
+import { Ui, Lib } from '@rnr/reusables';
+
+const {
   Form,
-  FormCheckbox,
-  FormCombobox,
-  FormDatePicker,
   FormField,
   FormInput,
+  FormTextarea,
   FormRadioGroup,
+  FormCombobox,
   FormSelect,
   FormSwitch,
-  FormTextarea,
-} from '~/components/ui/form';
-import { Label, LabelText } from '~/components/ui/label';
-import { RadioGroupItem } from '~/components/ui/radio-group';
-import {
+  FormDatePicker,
+  FormCheckbox,
+  Button,
+  Text,
+  SelectTrigger,
+  SelectValue,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/ui/select';
-import { Text } from '~/components/ui/typography';
-import { cn } from '~/lib/utils';
+  Label,
+  LabelText,
+  RadioGroupItem,
+} = Ui;
+const { cn } = Lib;
 
 const frameworks = [
   {
@@ -213,19 +214,10 @@ export default function FormScreen() {
                 >
                   {(['staff', 'admin', 'owner'] as const).map((value) => {
                     return (
-                      <View
-                        key={value}
-                        className={'flex-row gap-2 items-center'}
-                      >
-                        <RadioGroupItem
-                          aria-labelledby={`label-for-${value}`}
-                          value={value}
-                        />
+                      <View key={value} className={'flex-row gap-2 items-center'}>
+                        <RadioGroupItem aria-labelledby={`label-for-${value}`} value={value} />
                         <Label onPress={onLabelPress(value)}>
-                          <LabelText
-                            nativeID={`label-for-${value}`}
-                            className='capitalize'
-                          >
+                          <LabelText nativeID={`label-for-${value}`} className='capitalize'>
                             {value}
                           </LabelText>
                         </Label>
@@ -270,17 +262,10 @@ export default function FormScreen() {
                     placeholder='Select a verified email'
                   />
                 </SelectTrigger>
-                <SelectContent
-                  insets={contentInsets}
-                  style={{ width: selectTriggerWidth }}
-                >
+                <SelectContent insets={contentInsets} style={{ width: selectTriggerWidth }}>
                   <SelectGroup>
                     {emails.map((email) => (
-                      <SelectItem
-                        key={email.value}
-                        label={email.label}
-                        value={email.value}
-                      >
+                      <SelectItem key={email.value} label={email.label} value={email.value}>
                         <Text>{email.label}</Text>
                       </SelectItem>
                     ))}
@@ -314,9 +299,7 @@ export default function FormScreen() {
           <FormField
             control={form.control}
             name='tos'
-            render={({ field }) => (
-              <FormCheckbox label='Accept terms & conditions' {...field} />
-            )}
+            render={({ field }) => <FormCheckbox label='Accept terms & conditions' {...field} />}
           />
           <Button onPress={form.handleSubmit(onSubmit)}>
             <Text>Submit</Text>

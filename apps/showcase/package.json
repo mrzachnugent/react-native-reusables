@@ -10,7 +10,7 @@
     "clean": "rm -rf .expo node_modules"
   },
   "dependencies": {
-    "@rnr/ui": "*",
+    "@rnr/reusables": "*",
     "@rnr/accordion": "*",
     "@rnr/alert-dialog": "*",
     "@rnr/aspect-ratio": "*",

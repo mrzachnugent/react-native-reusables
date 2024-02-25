@@ -4,12 +4,10 @@ import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { ArrowDown, ArrowUp } from '~/components/Icons';
-import { Button } from '~/components/ui/button';
-import { DataTable } from '~/components/ui/data-table';
-import { Skeleton } from '~/components/ui/skeleton';
-import { TableCell, TableRow } from '~/components/ui/table';
-import { Text } from '~/components/ui/typography';
+import { Ui, Icons } from '@rnr/reusables';
+
+const { DataTable, TableRow, TableCell, Skeleton, Text, Button } = Ui;
+const { ArrowUp, ArrowDown } = Icons;
 
 const { width, height } = Dimensions.get('screen');
 
@@ -43,20 +41,14 @@ export const columns: ColumnDef<User>[] = [
     size: 200,
     header: ({ column }) => <Header title='Name' column={column} />,
     cell: ({ row }) => {
-      return (
-        <Text className='text-foreground font-medium'>
-          {row.getValue('name')}
-        </Text>
-      );
+      return <Text className='text-foreground font-medium'>{row.getValue('name')}</Text>;
     },
   },
   {
     accessorKey: 'username',
     header: ({ column }) => <Header title='Username' column={column} />,
     cell: ({ row }) => {
-      return (
-        <Text className='text-foreground'>{row.getValue('username')}</Text>
-      );
+      return <Text className='text-foreground'>{row.getValue('username')}</Text>;
     },
   },
   {

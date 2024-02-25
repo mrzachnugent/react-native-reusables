@@ -1,13 +1,7 @@
 import { View } from 'react-native';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '~/components/ui/card';
-import { Text } from '~/components/ui/typography';
+import { Ui } from '@rnr/reusables';
+
+const { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Text } = Ui;
 
 export default function ButtonScreen() {
   return (

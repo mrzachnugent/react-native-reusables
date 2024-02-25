@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Skeleton } from '~/components/ui/skeleton';
+import { Ui } from '@rnr/reusables';
+
+const { Skeleton } = Ui;
 
 export default function SkeletonScreen() {
   return (

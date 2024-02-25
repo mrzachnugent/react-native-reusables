@@ -1,15 +1,19 @@
-import { CalendarDays } from '~/components/Icons';
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Button } from '~/components/ui/button';
-import {
+import { Ui, Icons } from '@rnr/reusables';
+
+const {
   HoverCard,
-  HoverCardContent,
   HoverCardTrigger,
-} from '~/components/ui/hover-card';
-import { Text } from '~/components/ui/typography';
+  HoverCardContent,
+  Button,
+  Text,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} = Ui;
+const { CalendarDays } = Icons;
 
 export default function HoverCardScreen() {
   const [open, setOpen] = React.useState(false);
@@ -32,25 +36,18 @@ export default function HoverCardScreen() {
           <HoverCardContent insets={contentInsets} className='w-80 native:w-96'>
             <View className='flex flex-row justify-between gap-4'>
               <Avatar alt='Vercel avatar'>
-                <AvatarImage
-                  source={{ uri: 'https://github.com/vercel.png' }}
-                />
+                <AvatarImage source={{ uri: 'https://github.com/vercel.png' }} />
                 <AvatarFallback>
                   <Text>VA</Text>
                 </AvatarFallback>
               </Avatar>
               <View className='gap-1 flex-1'>
-                <Text className='text-sm native:text-base font-semibold'>
-                  @nextjs
-                </Text>
+                <Text className='text-sm native:text-base font-semibold'>@nextjs</Text>
                 <Text className='text-sm native:text-base'>
                   The React Framework – created and maintained by @vercel.
                 </Text>
                 <View className='flex flex-row items-center pt-2 gap-2'>
-                  <CalendarDays
-                    size={14}
-                    className='text-foreground opacity-70'
-                  />
+                  <CalendarDays size={14} className='text-foreground opacity-70' />
                   <Text className='text-xs native:text-sm text-muted-foreground'>
                     Joined December 2021
                   </Text>

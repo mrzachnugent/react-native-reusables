@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "include": ["*.ts", "src", "nativewind-env.d.ts"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

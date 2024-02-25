@@ -1,5 +1,7 @@
 import { View } from 'react-native';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Ui } from '@rnr/reusables';
+
+const { Alert, AlertDescription, AlertTitle } = Ui;
 
 export default function AlertScreen() {
   return (
@@ -13,8 +15,7 @@ export default function AlertScreen() {
       <Alert icon='AlertTriangle' variant='destructive' className='max-w-xl'>
         <AlertTitle>Danger!</AlertTitle>
         <AlertDescription>
-          High voltage. Do not touch. Risk of electric shock. Keep away from
-          children.
+          High voltage. Do not touch. Risk of electric shock. Keep away from children.
         </AlertDescription>
       </Alert>
     </View>

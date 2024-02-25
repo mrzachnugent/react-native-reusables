@@ -4,24 +4,24 @@ import * as React from 'react';
 import { Alert, ScrollView, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { ChevronDown } from '~/components/Icons';
-import { Button } from '~/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '~/components/ui/popover';
-import {
+import { Ui, Icons, Lib } from '@rnr/reusables';
+
+const {
   Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
   TableHeader,
+  TableBody,
+  TableFooter,
   TableRow,
-} from '~/components/ui/table';
-import { Text } from '~/components/ui/typography';
-import { cn } from '~/lib/utils';
+  TableCell,
+  TableHead,
+  Text,
+  Button,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} = Ui;
+const { ChevronDown } = Icons;
+const { cn } = Lib;
 
 const MIN_COLUMN_WIDTHS = [120, 120, 100, 120];
 
@@ -40,43 +40,25 @@ export default function TableScreen() {
   return (
     <>
       <Stack.Screen options={{ headerShadowVisible: false }} />
-      <ScrollView
-        horizontal
-        bounces={false}
-        showsHorizontalScrollIndicator={false}
-      >
+      <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
         <Table aria-labelledby='invoice-table'>
           <TableHeader>
             <TableRow>
               <TableHead className='px-0.5' style={{ width: columnWidths[0] }}>
                 <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                   <PopoverTrigger asChild>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex-row justify-start gap-3'
-                    >
-                      <Text
-                        className={cn(
-                          'text-base text-muted-foreground font-medium'
-                        )}
-                      >
+                    <Button variant='ghost' size='sm' className='flex-row justify-start gap-3'>
+                      <Text className={cn('text-base text-muted-foreground font-medium')}>
                         Invoice
                       </Text>
-                      <ChevronDown
-                        className={cn('text-muted-foreground')}
-                        size={18}
-                      />
+                      <ChevronDown className={cn('text-muted-foreground')} size={18} />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className='p-5' insets={{ left: 6 }}>
                     <View className='gap-1.5'>
-                      <Text className='text-2xl font-bold text-foreground'>
-                        Table Head
-                      </Text>
+                      <Text className='text-2xl font-bold text-foreground'>Table Head</Text>
                       <Text className='text-lg text-muted-foreground'>
-                        This is the Invoice column. Just an example of a
-                        popover.
+                        This is the Invoice column. Just an example of a popover.
                       </Text>
                     </View>
                   </PopoverContent>
@@ -89,9 +71,7 @@ export default function TableScreen() {
                 <Text>Method</Text>
               </TableHead>
               <TableHead style={{ width: columnWidths[3] }}>
-                <Text className='text-center md:text-right md:pr-5'>
-                  Amount
-                </Text>
+                <Text className='text-center md:text-right md:pr-5'>Amount</Text>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -107,10 +87,7 @@ export default function TableScreen() {
                 return (
                   <TableRow
                     key={invoice.invoice}
-                    className={cn(
-                      'active:bg-secondary',
-                      index % 2 && 'bg-muted/40 '
-                    )}
+                    className={cn('active:bg-secondary', index % 2 && 'bg-muted/40 ')}
                     onPress={() => {
                       Toast.show({
                         type: 'base',
@@ -133,10 +110,7 @@ export default function TableScreen() {
                     <TableCell style={{ width: columnWidths[2] }}>
                       <Text>{invoice.paymentMethod}</Text>
                     </TableCell>
-                    <TableCell
-                      style={{ width: columnWidths[3] }}
-                      className='items-end '
-                    >
+                    <TableCell style={{ width: columnWidths[3] }} className='items-end '>
                       <Button
                         variant='secondary'
                         size='sm'

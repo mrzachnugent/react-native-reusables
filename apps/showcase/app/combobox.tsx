@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Combobox, ComboboxOption } from '~/components/deprecated-ui/combobox';
+import { DeprecatedUi } from '@rnr/reusables';
+
+const { Combobox } = DeprecatedUi;
 
 const frameworks = [
   {
@@ -26,9 +28,7 @@ const frameworks = [
 ];
 
 export default function ComboboxScreen() {
-  const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
-    null
-  );
+  const [selectedItem, setSelectedItem] = React.useState<DeprecatedUi.ComboboxOption | null>(null);
   return (
     <View className='flex-1 justify-center items-center p-6'>
       <Combobox

@@ -1,28 +1,30 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/typography';
-import {
+import { Ui } from '@rnr/reusables';
+
+const {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Label, LabelText } from '~/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Text,
+  Label,
+  LabelText,
+  Input,
+  Button,
+} = Ui;
 
 export default function TabsScreen() {
   const [value, setValue] = React.useState('account');
   return (
     <View className='flex-1 justify-center items-center p-6'>
-      <Tabs
-        value={value}
-        onValueChange={setValue}
-        className='w-[400px] flex-col gap-1.5'
-      >
+      <Tabs value={value} onValueChange={setValue} className='w-[400px] flex-col gap-1.5'>
         <TabsList className='flex-row w-full'>
           <TabsTrigger value='account' className='flex-1'>
             <Text>Account</Text>
@@ -44,10 +46,7 @@ export default function TabsScreen() {
                 <Label>
                   <LabelText nativeID='name'>Name</LabelText>
                 </Label>
-                <Input
-                  aria-aria-labelledby='name'
-                  defaultValue='Pedro Duarte'
-                />
+                <Input aria-aria-labelledby='name' defaultValue='Pedro Duarte' />
               </View>
               <View className='gap-1'>
                 <Label>
@@ -76,21 +75,13 @@ export default function TabsScreen() {
                 <Label>
                   <LabelText nativeID='current'>Current password</LabelText>
                 </Label>
-                <Input
-                  placeholder='********'
-                  aria-labelledby='current'
-                  secureTextEntry
-                />
+                <Input placeholder='********' aria-labelledby='current' secureTextEntry />
               </View>
               <View className='gap-1'>
                 <Label>
                   <LabelText nativeID='new'>New password</LabelText>
                 </Label>
-                <Input
-                  placeholder='********'
-                  aria-labelledby='new'
-                  secureTextEntry
-                />
+                <Input placeholder='********' aria-labelledby='new' secureTextEntry />
               </View>
             </CardContent>
             <CardFooter>

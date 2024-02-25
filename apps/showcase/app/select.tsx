@@ -1,16 +1,10 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-  type Option,
-} from '~/components/ui/select';
+import { Ui } from '@rnr/reusables';
+
+const { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } =
+  Ui;
 
 const VALUES = {
   apple: 'Apple',
@@ -22,7 +16,7 @@ const VALUES = {
 
 export default function SelectScreen() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState<Option>();
+  const [value, setValue] = React.useState<Ui.Option>();
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -31,17 +25,14 @@ export default function SelectScreen() {
     right: 12,
   };
 
-  function onValueChange(val: Option) {
+  function onValueChange(val: Ui.Option) {
     // prevent unselecting on native to replicate web behavior
     if (val) {
       // On web, the label and the value are the same.
       // Ex: { label: 'apple', value: 'apple' }
       // To replicate the native behavior, we need to set the proper label
       if (Platform.OS === 'web') {
-        val.label =
-          val.label in VALUES
-            ? VALUES[val.label as keyof typeof VALUES]
-            : val.label;
+        val.label = val.label in VALUES ? VALUES[val.label as keyof typeof VALUES] : val.label;
       }
       setValue(val);
     }
@@ -50,12 +41,7 @@ export default function SelectScreen() {
   return (
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
-        <Select
-          open={open}
-          onOpenChange={setOpen}
-          value={value}
-          onValueChange={onValueChange}
-        >
+        <Select open={open} onOpenChange={setOpen} value={value} onValueChange={onValueChange}>
           <SelectTrigger className='w-[250px]'>
             <SelectValue
               className='text-foreground text-sm native:text-lg'

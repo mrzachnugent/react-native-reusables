@@ -1,6 +1,7 @@
 import { View } from 'react-native';
-import { Badge } from '~/components/ui/badge';
-import { Text } from '~/components/ui/typography';
+import { Ui } from '@rnr/reusables';
+
+const { Badge, Text } = Ui;
 
 export default function BadgeScreen() {
   return (

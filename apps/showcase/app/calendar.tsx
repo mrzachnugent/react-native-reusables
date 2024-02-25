@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { Calendar, LocaleConfig } from '~/components/deprecated-ui/calendar';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { Lib, DeprecatedUi } from '@rnr/reusables';
+
+const { Calendar, LocaleConfig } = DeprecatedUi;
+const { useColorScheme } = Lib;
 
 // TODO: refactor to use UI components
 

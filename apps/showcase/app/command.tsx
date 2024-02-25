@@ -1,6 +1,8 @@
+import { DeprecatedUi, Icons, Lib } from '@rnr/reusables';
 import * as React from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
-import {
+
+const {
   Activity,
   Airplay,
   AlarmClockIcon,
@@ -15,33 +17,26 @@ import {
   GalleryHorizontal,
   Lamp,
   Table,
-} from '~/components/Icons';
-import {
+} = Icons;
+const {
   buttonTextVariants,
   buttonVariants,
-} from '~/components/deprecated-ui/button';
-import {
   Command,
   CommandContent,
   CommandInput,
   CommandList,
   CommandListHeader,
-  CommandListHeaderProps,
   CommandListItem,
-  CommandListItemProps,
   CommandTrigger,
-} from '~/components/deprecated-ui/command';
-import { cn } from '~/lib/utils';
+} = DeprecatedUi;
 
+const { cn } = Lib;
 export default function CommandScreen() {
-  const renderSectionHeader = React.useCallback(
-    (props: CommandListHeaderProps) => {
-      return <CommandListHeader>{props.item}</CommandListHeader>;
-    },
-    []
-  );
+  const renderSectionHeader = React.useCallback((props: DeprecatedUi.CommandListHeaderProps) => {
+    return <CommandListHeader>{props.item}</CommandListHeader>;
+  }, []);
   const renderItem = React.useCallback(
-    ({ index, item }: CommandListItemProps<(typeof data)[number]>) => {
+    ({ index, item }: DeprecatedUi.CommandListItemProps<(typeof data)[number]>) => {
       if (typeof item === 'string') return null;
       return (
         <CommandListItem index={index}>
@@ -49,15 +44,9 @@ export default function CommandScreen() {
             const Icon = item.icon;
             return (
               <>
-                <Icon
-                  className={cn(pressed && 'opacity-70', 'text-foreground')}
-                  size={21}
-                />
+                <Icon className={cn(pressed && 'opacity-70', 'text-foreground')} size={21} />
                 <Text
-                  className={cn(
-                    pressed && 'opacity-70',
-                    'text-foreground font-semibold text-lg'
-                  )}
+                  className={cn(pressed && 'opacity-70', 'text-foreground font-semibold text-lg')}
                 >
                   {item.title}
                 </Text>
@@ -99,9 +88,7 @@ export default function CommandScreen() {
             ListEmptyComponent={() => {
               return (
                 <Pressable className='bg-background items-center p-6 rounded-b-2xl'>
-                  <Text className='text-foreground text-lg font-semibold'>
-                    No Results...
-                  </Text>
+                  <Text className='text-foreground text-lg font-semibold'>No Results...</Text>
                 </Pressable>
               );
             }}
