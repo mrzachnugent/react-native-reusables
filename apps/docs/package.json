@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rm -rf .turbo node_modules dist .astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.4",
