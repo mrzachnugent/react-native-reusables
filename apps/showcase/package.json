@@ -8,7 +8,7 @@
     "dev": "expo start -c --ios",
     "dev:web": "expo start -c --web",
     "build": "npx expo export -p web",
-    "serve": "npx serve dist",
+    "serve": "npx serve dist --single",
     "clean": "rm -rf .expo node_modules"
   },
   "dependencies": {
