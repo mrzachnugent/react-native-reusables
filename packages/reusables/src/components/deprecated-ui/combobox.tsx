@@ -20,8 +20,8 @@ import { cn } from '../../lib/utils';
 const HEADER_HEIGHT = 130;
 
 interface ComboboxOption {
-  label: string;
-  value: string;
+  label?: string;
+  value?: string;
 }
 
 const Combobox = React.forwardRef<
@@ -64,7 +64,7 @@ const Combobox = React.forwardRef<
     const listItems = React.useMemo(() => {
       return search
         ? items.filter((item) => {
-            return item.label.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+            return item.label?.toLocaleLowerCase().includes(search.toLocaleLowerCase());
           })
         : items;
     }, [items, search]);
@@ -193,7 +193,7 @@ const Combobox = React.forwardRef<
               paddingBottom: insets.bottom + HEADER_HEIGHT,
             }}
             renderItem={renderItem}
-            keyExtractor={(item) => (item as ComboboxOption).value}
+            keyExtractor={(item, index) => (item as ComboboxOption)?.value ?? index.toString()}
             className={'px-4'}
             keyboardShouldPersistTaps='handled'
             ListEmptyComponent={() => {

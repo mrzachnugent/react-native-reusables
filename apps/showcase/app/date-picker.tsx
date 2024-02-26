@@ -1,7 +1,9 @@
-import { DeprecatedUi, Icons, Lib } from '@rnr/reusables';
+import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-const { Calendar: CalendarIcon } = Icons;
+import { Calendar as CalendarIcon } from '~/components/Icons';
+import { cn } from '~/lib/utils';
+
 const {
   BottomSheet,
   BottomSheetCloseTrigger,
@@ -12,8 +14,6 @@ const {
   Button,
   buttonTextVariants,
 } = DeprecatedUi;
-
-const { cn } = Lib;
 
 export default function DatePickerScreen() {
   const [selectedDate, setSelectedDate] = React.useState('');

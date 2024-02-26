@@ -1,24 +1,18 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
+import { Button } from '~/components/ui/button';
+import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  Text,
-  Label,
-  LabelText,
-  Input,
-  Button,
-} = Ui;
+} from '~/components/ui/card';
+import { Input } from '~/components/ui/input';
+import { Label, LabelText } from '~/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
+import { Text } from '~/components/ui/typography';
 
 export default function TabsScreen() {
   const [value, setValue] = React.useState('account');

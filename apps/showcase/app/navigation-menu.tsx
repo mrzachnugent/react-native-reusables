@@ -1,11 +1,10 @@
+import { TextRef } from '@rnr/types';
 import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { TextRef } from '@rnr/types';
-import { Ui, Icons, Lib } from '@rnr/reusables';
-
-const {
+import { Sparkles } from '~/components/Icons';
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -13,10 +12,9 @@ const {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-  Text,
-} = Ui;
-const { Sparkles } = Icons;
-const { cn } = Lib;
+} from '~/components/ui/navigation-menu';
+import { Text } from '~/components/ui/typography';
+import { cn } from '~/lib/utils';
 
 export default function MenubarScreen() {
   const insets = useSafeAreaInsets();

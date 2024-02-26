@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-
-import { Ui } from '@rnr/reusables';
-
-const { ToggleGroup, ToggleGroupItem, ToggleGroupIcon } = Ui;
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '~/components/ui/toggle-group';
 
 export default function ToggleGroupScreen() {
   const [value, setValue] = React.useState<string[]>([]);

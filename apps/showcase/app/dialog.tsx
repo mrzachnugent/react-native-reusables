@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const {
+import { Button } from '~/components/ui/button';
+import {
   Dialog,
-  DialogTrigger,
+  DialogClose,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
-  Button,
-  Text,
-} = Ui;
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/components/ui/dialog';
+import { Text } from '~/components/ui/typography';
 
 export default function DialogScreen() {
   const [open, setOpen] = React.useState(false);

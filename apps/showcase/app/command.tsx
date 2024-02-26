@@ -1,8 +1,7 @@
-import { DeprecatedUi, Icons, Lib } from '@rnr/reusables';
+import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
-
-const {
+import {
   Activity,
   Airplay,
   AlarmClockIcon,
@@ -17,7 +16,9 @@ const {
   GalleryHorizontal,
   Lamp,
   Table,
-} = Icons;
+} from '~/components/Icons';
+import { cn } from '~/lib/utils';
+
 const {
   buttonTextVariants,
   buttonVariants,
@@ -30,7 +31,6 @@ const {
   CommandTrigger,
 } = DeprecatedUi;
 
-const { cn } = Lib;
 export default function CommandScreen() {
   const renderSectionHeader = React.useCallback((props: DeprecatedUi.CommandListHeaderProps) => {
     return <CommandListHeader>{props.item}</CommandListHeader>;

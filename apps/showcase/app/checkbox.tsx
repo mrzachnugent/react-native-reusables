@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const { Checkbox, Label, LabelText } = Ui;
+import { Checkbox } from '~/components/ui/checkbox';
+import { Label, LabelText } from '~/components/ui/label';
 
 export default function CheckboxScreen() {
   const [checked, setChecked] = React.useState(false);

@@ -3,9 +3,7 @@ import * as React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ui } from '@rnr/reusables';
-
-const {
+import {
   Menubar,
   MenubarCheckboxItem,
   MenubarContent,
@@ -19,8 +17,8 @@ const {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-  Text,
-} = Ui;
+} from '~/components/ui/menubar';
+import { Text } from '~/components/ui/typography';
 
 export default function MenubarScreen() {
   const insets = useSafeAreaInsets();

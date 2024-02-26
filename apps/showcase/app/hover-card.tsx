@@ -1,19 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ui, Icons } from '@rnr/reusables';
-
-const {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-  Button,
-  Text,
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} = Ui;
-const { CalendarDays } = Icons;
+import { CalendarDays } from '~/components/Icons';
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Button } from '~/components/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
+import { Text } from '~/components/ui/typography';
 
 export default function HoverCardScreen() {
   const [open, setOpen] = React.useState(false);

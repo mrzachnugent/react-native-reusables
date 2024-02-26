@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ui } from '@rnr/reusables';
-const {
+import {
   ContextMenu,
   ContextMenuCheckboxItem,
   ContextMenuContent,
@@ -17,8 +16,8 @@ const {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-  Text,
-} = Ui;
+} from '~/components/ui/context-menu';
+import { Text } from '~/components/ui/typography';
 
 export default function ContextScreen() {
   const [open, setOpen] = React.useState(false);

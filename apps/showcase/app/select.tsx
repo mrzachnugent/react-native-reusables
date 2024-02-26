@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ui } from '@rnr/reusables';
-
-const { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } =
-  Ui;
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+  type Option,
+} from '~/components/ui/select';
 
 const VALUES = {
   apple: 'Apple',
@@ -16,7 +22,7 @@ const VALUES = {
 
 export default function SelectScreen() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState<Ui.Option>();
+  const [value, setValue] = React.useState<Option>();
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -25,7 +31,7 @@ export default function SelectScreen() {
     right: 12,
   };
 
-  function onValueChange(val: Ui.Option) {
+  function onValueChange(val: Option) {
     // prevent unselecting on native to replicate web behavior
     if (val) {
       // On web, the label and the value are the same.

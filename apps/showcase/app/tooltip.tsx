@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ui } from '@rnr/reusables';
-
-const { Button, Text, Tooltip, TooltipTrigger, TooltipContent } = Ui;
+import { Button } from '~/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
+import { Text } from '~/components/ui/typography';
 
 export default function TooltipScreen() {
   const [open, setOpen] = React.useState(false);

@@ -4,31 +4,30 @@ import { useForm } from 'react-hook-form';
 import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as z from 'zod';
-import { Ui, Lib } from '@rnr/reusables';
-
-const {
+import { Button } from '~/components/ui/button';
+import {
   Form,
+  FormCheckbox,
+  FormCombobox,
+  FormDatePicker,
   FormField,
   FormInput,
-  FormTextarea,
   FormRadioGroup,
-  FormCombobox,
   FormSelect,
   FormSwitch,
-  FormDatePicker,
-  FormCheckbox,
-  Button,
-  Text,
-  SelectTrigger,
-  SelectValue,
+  FormTextarea,
+} from '~/components/ui/form';
+import { Label, LabelText } from '~/components/ui/label';
+import { RadioGroupItem } from '~/components/ui/radio-group';
+import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  Label,
-  LabelText,
-  RadioGroupItem,
-} = Ui;
-const { cn } = Lib;
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
+import { Text } from '~/components/ui/typography';
+import { cn } from '~/lib/utils';
 
 const frameworks = [
   {

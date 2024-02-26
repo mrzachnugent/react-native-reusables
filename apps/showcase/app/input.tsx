@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Platform, ScrollView, TextInput, View, Text } from 'react-native';
+import { Platform, ScrollView, TextInput, View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import { Ui, Lib } from '@rnr/reusables';
-
-const { Label, LabelText, Input } = Ui;
-const { cn } = Lib;
+import { Input } from '~/components/ui/input';
+import { Label, LabelText } from '~/components/ui/label';
+import { Text } from '~/components/ui/typography';
+import { cn } from '~/lib/utils';
 
 export default function InputScreen() {
   const inputRef = React.useRef<TextInput>(null);

@@ -1,7 +1,6 @@
 import { View } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const { Avatar, AvatarFallback, AvatarImage, Text } = Ui;
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Text } from '~/components/ui/typography';
 
 const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
 

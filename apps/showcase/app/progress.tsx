@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Ui } from '@rnr/reusables';
-
-const { Progress, Button, Text } = Ui;
+import { Button } from '~/components/ui/button';
+import { Progress } from '~/components/ui/progress';
+import { Text } from '~/components/ui/typography';
 
 export default function ProgressScreen() {
   const [progress, setProgress] = React.useState(13);

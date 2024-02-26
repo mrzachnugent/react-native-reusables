@@ -2,12 +2,23 @@ import * as React from 'react';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { Ui, Icons } from '@rnr/reusables';
-
-const {
+import {
+  Cloud,
+  Github,
+  LifeBuoy,
+  LogOut,
+  Mail,
+  MessageSquare,
+  Plus,
+  PlusCircle,
+  UserPlus,
+  Users,
+} from '~/components/Icons';
+import { Button } from '~/components/ui/button';
+import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -16,13 +27,8 @@ const {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-  DropdownMenuGroup,
-  Button,
-  Text,
-} = Ui;
-
-const { Users, UserPlus, Mail, MessageSquare, PlusCircle, Plus, Github, LifeBuoy, Cloud, LogOut } =
-  Icons;
+} from '~/components/ui/dropdown-menu';
+import { Text } from '~/components/ui/typography';
 
 export default function DropdownMenuScreen() {
   const [open, setOpen] = React.useState(false);

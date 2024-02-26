@@ -1,6 +1,10 @@
+import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { Ui, Lib, DeprecatedUi } from '@rnr/reusables';
+import { Button } from '~/components/ui/button';
+import { Label, LabelText } from '~/components/ui/label';
+import { Text } from '~/components/ui/typography';
+import { cn } from '~/lib/utils';
 
 const {
   BottomSheet,
@@ -11,10 +15,6 @@ const {
   BottomSheetTextInput,
   BottomSheetView,
 } = DeprecatedUi;
-
-const { Button, Label, LabelText, Text } = Ui;
-
-const { cn } = Lib;
 
 // TODO: refactor to use UI bottom-sheet component
 export default function BottomSheetScreen() {

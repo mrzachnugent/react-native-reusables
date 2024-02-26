@@ -510,7 +510,7 @@ FormCombobox.displayName = 'FormCombobox';
  */
 const FormSelect = React.forwardRef<
   React.ElementRef<typeof Select>,
-  Omit<FormItemProps<typeof Select, Option>, 'open' | 'onOpenChange' | 'onValueChange'>
+  Omit<FormItemProps<typeof Select, Partial<Option>>, 'open' | 'onOpenChange' | 'onValueChange'>
 >(({ label, description, onChange, value, ...props }, ref) => {
   const [open, setOpen] = React.useState(false);
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
@@ -529,7 +529,7 @@ const FormSelect = React.forwardRef<
         aria-invalid={!!error}
         open={open}
         onOpenChange={setOpen}
-        value={value}
+        value={value ? { label: value?.label ?? '', value: value?.label ?? '' } : undefined}
         onValueChange={onChange}
         {...props}
       />
