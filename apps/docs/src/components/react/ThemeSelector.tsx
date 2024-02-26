@@ -67,7 +67,10 @@ export function ThemeSelector() {
           <Button
             size='sm'
             variant='ghost'
-            className={cn(!mounted && 'opacity-0', 'bg-secondary hover:bg-background')}
+            className={cn(
+              !mounted && 'opacity-0',
+              'text-foreground bg-secondary hover:bg-background'
+            )}
           >
             {theme === 'light' ? <Sun size={18} /> : <Moon size={18} />}
           </Button>

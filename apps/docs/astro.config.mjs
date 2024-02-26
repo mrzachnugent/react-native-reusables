@@ -33,8 +33,8 @@ export default defineConfig({
               link: '/getting-started/introduction/',
             },
             {
-              label: 'Installation',
-              link: '/getting-started/installation/',
+              label: 'Initial Setup',
+              link: '/getting-started/initial-setup/',
             },
           ],
         },

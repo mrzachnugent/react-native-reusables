@@ -3,33 +3,52 @@ title: React Native Reusables
 description: Copy, paste, and tailor Universal React Native components to suit your specific requirements.
 ---
 
-### Powered by [Expo](https://docs.expo.dev/) and styled with [NativeWind v4](https://www.nativewind.dev/v4/overview)
+import { Card } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 
+ ### Universal [shadcn/ui](https://ui.shadcn.com) for React Native
+
+
+Crafted with [NativeWind v4](https://www.nativewind.dev/v4/overview) and accessibility in mind, `react-native-reusables` is open source, offering a foundation for developing high-quality web applications and design systems.
+
+{/* prettier-ignore-start */}
 <video controls>
   <source src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-05a4-4568-b71a-f1e0be13650d" type="video/mp4" />
 Your browser does not support the video tag.
 </video>
+{ /* prettier-ignore-end */}
 
-[shadcn/ui](https://ui.shadcn.com) for React Native with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
+<Card title="Purpose">
+  Build your own component libraries with `react-native-reusables`. Copy, paste, and tailor the code to suit your specific requirements. 
+</Card>
+
+### Features
+- **Universal**: Universal native components for Android, iOS, and the web applications.
+- **Accessibility**: Built with accessibility in mind. Using [radix-ui/primitives](https://www.radix-ui.com/primitives) for the web and re-usable react-native primitives.
+- **Code sharing**: Share code between web and native applications.
+- **Customization**: The code lives in your project, not in your `node_modules` folder. You can customize it to your heart's content.
+- **Dark mode**: Re-usable css variables for light and dark modes.
 
 ### How to use
 
-1. [Install and set up NativeWind in your project](/getting-started/installation#install-nativewind)
-2. [Add light and dark mode colors](/getting-started/installation#add-light-and-dark-mode-colors)
-3. [Install and set up utilities](/getting-started/installation#install-and-set-up-utilities)
-4. [Set up your tailwind config and the navigation theme](/getting-started/installation#configure-colors)
-5. [Browse the components and copy/paste the code into your project for your given use case](/components/accordion)
+1. [Initial setup configuration](/getting-started/initial-setup#install-nativewind)
+2. [Browse and copy/paste into your project](/components/accordion)
+3. Customize the code to suit your specific requirements
 
-### Foundational principles
+<Aside>
+  Most components are built using primitives. This means that you will need to copy the associated primitive as well.
+</Aside>
+
+### The `react-native-reusables` way
 
 This project's goal is to provide as little opinionated code as possible. However, some opinionated code is necessary to provide a consistent and easy-to-use experience.
 
-- The CSS variable names are based on shadcn/ui's naming convention. If you were to use different variable names, you would need to change the CSS variable names in the components that you copy/paste.
+- The CSS variable names are based on shadcn/ui's naming convention.
 - Folder structure:
 
-  - `components/primitives` for unstyled accessible components which uses [radix-ui/primitives](https://www.radix-ui.com/primitives) for the web.
-  - `components/ui` for components styled with NativeWind. Most of these components are built using the primitives components.
-  - `lib` for utilities, hooks, and constants.
+  - `~/components/primitives` for unstyled accessible components which uses [radix-ui/primitives](https://www.radix-ui.com/primitives) for the web.
+  - `~/components/ui` for components styled with NativeWind. Most of these components are built using the primitives components.
+  - `~/lib` for utilities, hooks, and constants.
 
     ```
     ├── components/
