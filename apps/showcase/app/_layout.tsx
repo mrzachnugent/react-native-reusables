@@ -1,17 +1,18 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme, ThemeProvider } from '@react-navigation/native';
+import { PortalHost } from '@rnr/portal';
+import { DeprecatedUi } from '@rnr/reusables';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
+import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { DeprecatedUi } from '@rnr/reusables';
-import { PortalHost } from '@rnr/portal';
+import { ThemeToggle } from '~/components/ThemeToggle';
 import { Text } from '~/components/ui/typography';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
-import { ThemeToggle } from '~/components/ThemeToggle';
 
 const { ToastProvider } = DeprecatedUi;
 
@@ -44,6 +45,10 @@ export default function RootLayout() {
   React.useEffect(() => {
     (async () => {
       const theme = await AsyncStorage.getItem('theme');
+      if (Platform.OS === 'web') {
+        // Adds the background color to the html element to prevent white background on overscroll.
+        document.documentElement.classList.add('bg-background');
+      }
       if (!theme) {
         setAndroidNavigationBar(colorScheme);
         AsyncStorage.setItem('theme', colorScheme);
