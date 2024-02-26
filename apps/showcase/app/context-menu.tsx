@@ -35,7 +35,7 @@ export default function ContextScreen() {
 
   return (
     <>
-      <View className='flex-1 justify-center items-center p-6 gap-12'>
+      <View className='flex-1 justify-center p-6 gap-12'>
         <ContextMenu
           open={open}
           onOpenChange={(newVal) => {
@@ -45,7 +45,7 @@ export default function ContextScreen() {
             }
           }}
         >
-          <ContextMenuTrigger className='flex h-[150px] w-[300px] web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
+          <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
             <Text className='text-foreground text-sm native:text-lg'>
               {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
             </Text>

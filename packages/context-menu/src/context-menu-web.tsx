@@ -116,7 +116,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
       alignOffset = 0,
       avoidCollisions = true,
       insets,
-      loop,
+      loop = true,
       onCloseAutoFocus,
       onEscapeKeyDown,
       onPointerDownOutside,

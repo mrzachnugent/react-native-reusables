@@ -35,13 +35,7 @@ export default function ComponentsScreen() {
         estimatedItemSize={49}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
-          <Link
-            href={{
-              pathname: `/${item}`,
-              params: { showBackButton: 'true' },
-            }}
-            asChild
-          >
+          <Link href={`/${item}`} asChild>
             <Button
               variant='secondary'
               size='lg'

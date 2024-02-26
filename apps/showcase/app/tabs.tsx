@@ -17,8 +17,12 @@ import { Text } from '~/components/ui/typography';
 export default function TabsScreen() {
   const [value, setValue] = React.useState('account');
   return (
-    <View className='flex-1 justify-center items-center p-6'>
-      <Tabs value={value} onValueChange={setValue} className='w-[400px] flex-col gap-1.5'>
+    <View className='flex-1 justify-center p-6'>
+      <Tabs
+        value={value}
+        onValueChange={setValue}
+        className='w-full max-w-[400px] flex-col gap-1.5'
+      >
         <TabsList className='flex-row w-full'>
           <TabsTrigger value='account' className='flex-1'>
             <Text>Account</Text>

@@ -8,10 +8,10 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '~/component
 export default function CollapsibleScreen() {
   const [open, setOpen] = React.useState(false);
   return (
-    <View className='flex-1 justify-center items-center'>
+    <View className='flex-1 justify-center items-center p-6'>
       <Collapsible open={open} onOpenChange={setOpen} asChild>
-        <Animated.View layout={LinearTransition}>
-          <View className='w-[350px] gap-2'>
+        <Animated.View layout={Platform.OS !== 'web' ? LinearTransition : undefined}>
+          <View className='w-full max-w-[350px] gap-2'>
             <View className='flex flex-row items-center justify-between space-x-4 px-4'>
               <Text className='text-foreground text-sm native:text-lg font-semibold'>
                 @peduarte starred 3 repositories

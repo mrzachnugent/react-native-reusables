@@ -116,7 +116,7 @@ const Content = React.forwardRef<PressableRef, SlottablePressableProps & Positio
       alignOffset = 0,
       avoidCollisions = true,
       insets,
-      loop,
+      loop = true,
       onCloseAutoFocus,
       onEscapeKeyDown,
       onPointerDownOutside,

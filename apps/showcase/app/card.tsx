@@ -11,7 +11,7 @@ import { Text } from '~/components/ui/typography';
 
 export default function ButtonScreen() {
   return (
-    <View className='flex-1 justify-center items-center gap-5'>
+    <View className='flex-1 justify-center items-center gap-5 p-6'>
       <Card className='w-full max-w-sm'>
         <CardHeader>
           <CardTitle>Card Title</CardTitle>

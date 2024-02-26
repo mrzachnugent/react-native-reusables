@@ -48,14 +48,14 @@ import { cn } from '~/lib/utils';
 export default function ExampleScreen() {
   const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
   return (
-    <View className='flex-1 p-4 justify-center gap-6'>
+    <View className='flex-1 p-6 justify-center gap-6'>
       <Card className='w-full max-w-lg mx-auto'>
         <CardHeader>
           <View className='flex-row gap-3'>
             <CardTitle className='pt-1'>Team Members</CardTitle>
             <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen} delayDuration={150}>
               <TooltipTrigger>
-                <Info size={18} className='text-foreground' />
+                <Info size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
               </TooltipTrigger>
               <TooltipContent side='bottom' insets={contentInsets} className='gap-1 py-3 px-5'>
                 <Text className='native:text-lg font-bold'>Things to try:</Text>
@@ -85,7 +85,7 @@ export default function ExampleScreen() {
                 </Text>
               </View>
             </View>
-            <RoleDropdownSelect defaultValue='Viewer' />
+            <RoleDropdownSelect defaultValue='Billing' />
           </View>
           <View className='flex-row gap-3'>
             <View className='flex-1 flex-row gap-3'>
@@ -122,7 +122,11 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline' className='flex-row gap-2 native:pr-3'>
+        <Button
+          variant='outline'
+          size={Platform.OS === 'web' ? 'sm' : 'default'}
+          className='flex-row gap-2 native:pr-3'
+        >
           <Text>{value}</Text>
           <ChevronDown size={18} className='text-foreground' />
         </Button>
@@ -168,7 +172,9 @@ function TeamMemberHoverCard({ name }: { name: string }) {
   return (
     <HoverCard open={open} onOpenChange={setOpen}>
       <HoverCardTrigger className='group web:hover:underline'>
-        <Text className='group-active:underline'>{name}</Text>
+        <Text numberOfLines={1} className='group-active:underline'>
+          {name}
+        </Text>
       </HoverCardTrigger>
       <HoverCardContent insets={contentInsets} className='w-80 native:w-96'>
         <View className='flex flex-row justify-between gap-4'>
