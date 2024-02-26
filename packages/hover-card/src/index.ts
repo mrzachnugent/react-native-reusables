@@ -4,7 +4,7 @@ import * as HoverCardWeb from './hover-card-web';
 
 export const Root = Platform.select({
   web: HoverCardWeb.Root,
-  default: HoverCardNative.Root,
+  default: HoverCardNative.Root as typeof HoverCardWeb.Root,
 });
 
 export const Trigger = Platform.select({

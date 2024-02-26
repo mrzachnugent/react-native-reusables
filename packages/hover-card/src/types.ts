@@ -3,6 +3,16 @@ import type { ForceMountable } from '@rnr/types';
 interface HoverCardRootProps {
   open: boolean;
   onOpenChange: (value: boolean) => void;
+  /**
+   * Platform: WEB ONLY
+   * @default 700
+   */
+  openDelay?: number;
+  /**
+   * Platform: WEB ONLY
+   * @default 300
+   */
+  closeDelay?: number;
 }
 
 interface HoverCardPortalProps extends ForceMountable {

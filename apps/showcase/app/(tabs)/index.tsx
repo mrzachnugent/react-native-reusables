@@ -35,6 +35,7 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -54,7 +55,7 @@ export default function ExampleScreen() {
           <View className='flex-row gap-3'>
             <CardTitle className='pt-1'>Team Members</CardTitle>
             <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen} delayDuration={150}>
-              <TooltipTrigger>
+              <TooltipTrigger className='web:focus:outline-none'>
                 <Info size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
               </TooltipTrigger>
               <TooltipContent side='bottom' insets={contentInsets} className='gap-1 py-3 px-5'>
@@ -101,12 +102,14 @@ export default function ExampleScreen() {
           </View>
         </CardContent>
       </Card>
-      <Link href='/form' asChild>
-        <Button variant='link' className='flex-row'>
-          <Text>Go To Form</Text>
-          <ChevronRight className='text-foreground' size={18} />
-        </Button>
-      </Link>
+      <View className='items-center'>
+        <Link href='/form' asChild>
+          <Button variant='link' className='flex-row'>
+            <Text>Go To Form</Text>
+            <ChevronRight className='text-foreground' size={18} />
+          </Button>
+        </Link>
+      </View>
     </View>
   );
 }
@@ -134,33 +137,41 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
       <DropdownMenuContent align='end' insets={contentInsets} className='w-64 native:w-72'>
         <DropdownMenuLabel>Select new role</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onPress={() => {
-            setValue('Viewer');
-          }}
-          className={cn('flex-col items-start gap-1', value === 'Viewer' ? 'bg-secondary' : '')}
-        >
-          <Text>Viewer</Text>
-          <Muted>Can view and comment.</Muted>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onPress={() => {
-            setValue('Billing');
-          }}
-          className={cn('flex-col items-start gap-1', value === 'Billing' ? 'bg-secondary' : '')}
-        >
-          <Text>Billing</Text>
-          <Muted>Can view, comment, and manage billing.</Muted>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onPress={() => {
-            setValue('Owner');
-          }}
-          className={cn('flex-col items-start gap-1', value === 'Owner' ? 'bg-secondary' : '')}
-        >
-          <Text>Owner</Text>
-          <Muted>Admin-level access to all resources</Muted>
-        </DropdownMenuItem>
+        <DropdownMenuGroup className='gap-1'>
+          <DropdownMenuItem
+            onPress={() => {
+              setValue('Viewer');
+            }}
+            className={cn(
+              'flex-col items-start gap-1',
+              value === 'Viewer' ? 'bg-secondary/70' : ''
+            )}
+          >
+            <Text>Viewer</Text>
+            <Muted>Can view and comment.</Muted>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onPress={() => {
+              setValue('Billing');
+            }}
+            className={cn(
+              'flex-col items-start gap-1',
+              value === 'Billing' ? 'bg-secondary/70' : ''
+            )}
+          >
+            <Text>Billing</Text>
+            <Muted>Can view, comment, and manage billing.</Muted>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onPress={() => {
+              setValue('Owner');
+            }}
+            className={cn('flex-col items-start gap-1', value === 'Owner' ? 'bg-secondary/70' : '')}
+          >
+            <Text>Owner</Text>
+            <Muted>Admin-level access to all resources</Muted>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -170,9 +181,9 @@ function TeamMemberHoverCard({ name }: { name: string }) {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <HoverCard open={open} onOpenChange={setOpen}>
-      <HoverCardTrigger className='group web:hover:underline'>
-        <Text numberOfLines={1} className='group-active:underline'>
+    <HoverCard openDelay={0} closeDelay={0} open={open} onOpenChange={setOpen}>
+      <HoverCardTrigger className='group web:focus:outline-none'>
+        <Text numberOfLines={1} className='group-active:underline web:group-hover:underline'>
           {name}
         </Text>
       </HoverCardTrigger>
@@ -220,11 +231,12 @@ function TeamMemberAvatar({
       }}
       relativeTo='trigger'
     >
-      <ContextMenuTrigger className='web:cursor-default'>
+      {/* @ts-expect-error tabIndex is only available on the web */}
+      <ContextMenuTrigger tabIndex={-1} className='web:cursor-default web:focus:outline-none'>
         <Avatar alt={`${name}'s avatar`}>
           <AvatarImage source={{ uri }} />
           <AvatarFallback>
-            <Text>{initials}</Text>
+            <Text className='web:select-none'>{initials}</Text>
           </AvatarFallback>
         </Avatar>
       </ContextMenuTrigger>

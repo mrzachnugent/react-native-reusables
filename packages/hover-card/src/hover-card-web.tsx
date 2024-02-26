@@ -14,11 +14,16 @@ import type { HoverCardOverlayProps, HoverCardPortalProps, HoverCardRootProps } 
 const HoverCardContext = React.createContext<HoverCardRootProps | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open, onOpenChange, openDelay, closeDelay, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
       <HoverCardContext.Provider value={{ open, onOpenChange }}>
-        <HoverCard.Root open={open} onOpenChange={onOpenChange}>
+        <HoverCard.Root
+          open={open}
+          onOpenChange={onOpenChange}
+          openDelay={openDelay}
+          closeDelay={closeDelay}
+        >
           <Component ref={ref} {...viewProps} />
         </HoverCard.Root>
       </HoverCardContext.Provider>
