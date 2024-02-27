@@ -8,19 +8,18 @@ import Code from '@/components/Code.astro';
 {/* prettier-ignore-start */}
 { /* prettier-ignore-end */}
 
-Prepare your environment for copy/pasting and to use NativeWind with Light and Dark Mode.
-
 ### Install NativeWind
 
 Follow the installation guide for NativeWind from the <a target="_blank" href="https://www.nativewind.dev/v4/overview">official documentation</a>.
 
-### Add Light and Dark Mode colors
+### Add CSS variables
 
 - **Add the following css variables to global.css file.**
 
 <Code lang="css" 
-title="global.css"
-code={`@layer base {
+title="~/global.css"
+code={`
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -43,39 +42,40 @@ code={`@layer base {
     --ring: 240 5.9% 10%;
   }
 
-.dark:root {
---background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---primary: 0 0% 98%;
---primary-foreground: 240 5.9% 10%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 72% 51%;
---destructive-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---ring: 240 4.9% 83.9%;
+  .dark:root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
 }
-}`}
+`}
 />
 
 **IMPORTANT**: When customizing, make sure to use `.dark:root` or `@media (prefers-color-scheme: dark)` for the dark mode css selector.
 
 If you want inspiration for your own colors, check out: <a target="_blank" href="https://ui.jln.dev/">ui by jln.dev/</a> or <a target="_blank" href="https://ui.shadcn.com/themes">themes by ui/shadcn</a>
 
-- **Add the following code in the `lib/constants.ts` file for the navigation theme colors:**
+- **Add the following code in the `~/lib/constants.ts` file for the navigation theme colors:**
 
 <Code
   lang='ts'
-  title='lib/constants.ts'
+  title='~/lib/constants.ts'
   code={`
 export const NAV_THEME = {
   light: {
@@ -98,7 +98,7 @@ export const NAV_THEME = {
 `}
 />
 
-If you changed the colors in the `global.css` file, update the `lib/constants.ts` file with the new colors.
+If you changed the colors in the `~/global.css` file, update the `~/lib/constants.ts` file with the new colors.
 Each color has a commented css variable name next to it.
 
 ### Install and set up utilities
@@ -132,7 +132,7 @@ We use the `~` alias. This is how you can configure it in your `tsconfig.json` f
 
 - **Add a cn helper**
 
-Add the following code to the `lib/utils.ts` file:
+Add the following code to the `~/lib/utils.ts` file:
 
 ```ts
 import { clsx, type ClassValue } from 'clsx';
@@ -145,7 +145,7 @@ export function cn(...inputs: ClassValue[]) {
 
 - **Add the useColorScheme hook**
 
-Add the following code to the `lib/useColorScheme.tsx` file:
+Add the following code to the `~/lib/useColorScheme.tsx` file:
 
 ```tsx
 import { useColorScheme as useNativewindColorScheme } from 'nativewind';
@@ -176,66 +176,66 @@ const { hairlineWidth } = require('nativewind/theme');
 
 /** @type {import('tailwindcss').Config} \*/
 module.exports = {
-darkMode: 'class',
-content: ['./app/**/_.{ts,tsx}', './components/\*\*/_.{ts,tsx}'],
-presets: [require('nativewind/preset')],
-theme: {
-extend: {
-colors: {
-border: 'hsl(var(--border))',
-input: 'hsl(var(--input))',
-ring: 'hsl(var(--ring))',
-background: 'hsl(var(--background))',
-foreground: 'hsl(var(--foreground))',
-primary: {
-DEFAULT: 'hsl(var(--primary))',
-foreground: 'hsl(var(--primary-foreground))',
-},
-secondary: {
-DEFAULT: 'hsl(var(--secondary))',
-foreground: 'hsl(var(--secondary-foreground))',
-},
-destructive: {
-DEFAULT: 'hsl(var(--destructive))',
-foreground: 'hsl(var(--destructive-foreground))',
-},
-muted: {
-DEFAULT: 'hsl(var(--muted))',
-foreground: 'hsl(var(--muted-foreground))',
-},
-accent: {
-DEFAULT: 'hsl(var(--accent))',
-foreground: 'hsl(var(--accent-foreground))',
-},
-popover: {
-DEFAULT: 'hsl(var(--popover))',
-foreground: 'hsl(var(--popover-foreground))',
-},
-card: {
-DEFAULT: 'hsl(var(--card))',
-foreground: 'hsl(var(--card-foreground))',
-},
-},
-borderWidth: {
-hairline: hairlineWidth(),
-},
-keyframes: {
-'accordion-down': {
-from: { height: '0' },
-to: { height: 'var(--radix-accordion-content-height)' },
-},
-'accordion-up': {
-from: { height: 'var(--radix-accordion-content-height)' },
-to: { height: '0' },
-},
-},
-animation: {
-'accordion-down': 'accordion-down 0.2s ease-out',
-'accordion-up': 'accordion-up 0.2s ease-out',
-},
-},
-},
-plugins: [require('tailwindcss-animate')], // require('tailwindcss-animate') is only used for web
+  darkMode: 'class',
+  content: ['./app/**/_.{ts,tsx}', './components/\*\*/_.{ts,tsx}'],
+  presets: [require('nativewind/preset')],
+  theme: {
+    extend: {
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      borderWidth: {
+        hairline: hairlineWidth(),
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+    },
+  },
+  plugins: [require('tailwindcss-animate')],
 };
 `}
 />
@@ -255,17 +255,23 @@ import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
+import { Platform } from 'react-native';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
-dark: false,
-colors: NAV_THEME.light,
+  dark: false,
+  colors: NAV_THEME.light,
 };
 const DARK_THEME: Theme = {
-dark: true,
-colors: NAV_THEME.dark,
+  dark: true,
+  colors: NAV_THEME.dark,
 };
+
+export {
+  // Catch any errors thrown by the Layout component.
+  ErrorBoundary,
+} from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
@@ -274,40 +280,91 @@ export default function RootLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
-React.useEffect(() => {
-(async () => {
-const theme = await AsyncStorage.getItem('theme');
-if (!theme) {
-AsyncStorage.setItem('theme', colorScheme);
-setIsColorSchemeLoaded(true);
-return;
-}
-const colorTheme = theme === 'dark' ? 'dark' : 'light';
-if (colorTheme !== colorScheme) {
-setColorScheme(colorTheme);
+  React.useEffect(() => {
+    (async () => {
+      const theme = await AsyncStorage.getItem('theme');
+      if (Platform.OS === 'web') {
+        // Adds the background color to the html element to prevent white background on overscroll.
+        document.documentElement.classList.add('bg-background');
+      }
+      if (!theme) {
+        AsyncStorage.setItem('theme', colorScheme);
+        setIsColorSchemeLoaded(true);
+        return;
+      }
+      const colorTheme = theme === 'dark' ? 'dark' : 'light';
+      if (colorTheme !== colorScheme) {
+        setColorScheme(colorTheme);
 
         setIsColorSchemeLoaded(true);
         return;
       }
       setIsColorSchemeLoaded(true);
-    })()
-      .catch(() => {
-        setIsColorSchemeLoaded(true);
-      })
-      .finally(() => {
-        SplashScreen.hideAsync();
-      });
+    })().finally(() => {
+      SplashScreen.hideAsync();
+    });
+  }, []);
 
-}, []);
+  if (!isColorSchemeLoaded) {
+    return null;
+  }
 
-// Only render the app when the color scheme is loaded.
-if (!isColorSchemeLoaded) {
-return null;
+  return (
+    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+      <Stack />
+    </ThemeProvider>
+  );
 }
-return (
+`} />
 
-<ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-  <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-  <Stack />
-</ThemeProvider>
-); } `} />
+### Add Icons
+
+Add the `interopIcon` function in the `~/components/Icons.tsx` file. This function wraps Lucide Icons for use with Nativewind.
+
+```tsx
+import { cssInterop } from 'nativewind';
+function interopIcon(icon: LucideIcon) {
+  cssInterop(icon, {
+    className: {
+      target: 'style',
+      nativeStyleToProp: {
+        color: true,
+        opacity: true,
+      },
+    },
+  });
+}
+```
+
+In the same file, import the icons you want to use and call the `interopIcon` function for each icon.
+
+```tsx
+import { AlertCircle, CheckCircle, XCircle } from 'lucide-react-native';
+import { cssInterop } from 'nativewind';
+function interopIcon(icon: LucideIcon) {
+  cssInterop(icon, {
+    className: {
+      target: 'style',
+      nativeStyleToProp: {
+        color: true,
+        opacity: true,
+      },
+    },
+  });
+}
+
+interopIcon(AlertCircle);
+interopIcon(CheckCircle);
+interopIcon(XCircle);
+
+export { AlertCircle, CheckCircle, XCircle };
+```
+
+Without the `interopIcon` function, you will not be able to update the `color` and `opacity` props via the `className` prop.
+
+```tsx
+import { AlertCircle } from '~/components/Icons';
+
+const Example = () => <AlertCircle className="text-foreground opacity-65" />
+```
