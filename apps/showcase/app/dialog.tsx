@@ -14,10 +14,9 @@ import {
 import { Text } from '~/components/ui/typography';
 
 export default function DialogScreen() {
-  const [open, setOpen] = React.useState(false);
   return (
     <ScrollView contentContainerClassName='flex-1 justify-center items-center p-6'>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog>
         <DialogTrigger asChild>
           <Button variant='outline'>
             <Text>Edit Profile</Text>

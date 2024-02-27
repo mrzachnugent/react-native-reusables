@@ -14,23 +14,33 @@ import type {
   DialogContentProps,
   DialogOverlayProps,
   DialogPortalProps,
-  DialogRootProps,
+  DialogRootProps as IDialogRootProps,
 } from './types';
+import { useControllableState } from '@rnr/hooks';
 
-interface RootContext extends DialogRootProps {
+interface DialogRootProps extends Partial<IDialogRootProps> {
+  defaultOpen?: boolean;
+}
+
+interface RootContext extends IDialogRootProps {
   nativeID: string;
 }
 const DialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
     const nativeID = React.useId();
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
     const Component = asChild ? Slot.View : View;
     return (
       <DialogContext.Provider
         value={{
           open,
-          onOpenChange,
+          onOpenChange: setOpen,
           nativeID,
         }}
       >
