@@ -56,6 +56,10 @@ export default defineConfig({
           label: 'Primitives',
           items: [
             {
+              label: 'Overview',
+              link: '/primitives/overview/',
+            },
+            {
               label: 'Dialog',
               link: '/primitives/dialog/',
             },
