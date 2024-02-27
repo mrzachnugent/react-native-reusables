@@ -65,19 +65,19 @@ export default defineConfig({
             },
           ],
         },
-        {
-          label: 'Utilities',
-          items: [
-            {
-              label: 'Android Navigation Bar',
-              link: '/utilities/android-navigation-bar/',
-            },
-            {
-              label: 'Keyboard',
-              link: '/utilities/keyboard/',
-            },
-          ],
-        },
+        // {
+        //   label: 'Utilities',
+        //   items: [
+        //     {
+        //       label: 'Android Navigation Bar',
+        //       link: '/utilities/android-navigation-bar/',
+        //     },
+        //     {
+        //       label: 'Keyboard',
+        //       link: '/utilities/keyboard/',
+        //     },
+        //   ],
+        // },
       ],
       customCss: ['./src/tailwind.css'],
     }),

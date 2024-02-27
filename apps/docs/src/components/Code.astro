@@ -6,7 +6,7 @@ import { fixImports } from '@/lib/utils';
 const { title = '', code = '', lang = 'tsx' } = Astro.props;
 ---
 
-<CodeBlockWrapper client:visible>
+<CodeBlockWrapper client:only>
   <StarlightCode title={title} code={fixImports(code)} lang={lang} ins={'inverted'} />
 </CodeBlockWrapper>
 

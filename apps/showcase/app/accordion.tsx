@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/ui/accordion';
+import { Text } from '~/components/ui/typography';
 
 export default function AccordionScreen() {
   const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
@@ -21,24 +22,18 @@ export default function AccordionScreen() {
       >
         <AccordionItem value='item-1'>
           <AccordionTrigger>
-            <Text className='text-foreground text-base native:text-lg font-medium web:group-hover:underline'>
-              Is it accessible?
-            </Text>
+            <Text>Is it accessible?</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <Text className='text-foreground text-base native:text-lg'>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </Text>
+            <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-2'>
           <AccordionTrigger>
-            <Text className='text-secondary-foreground font-medium text-base native:text-lg web:group-hover:underline'>
-              What are universal components?
-            </Text>
+            <Text>What are universal components?</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <Text className='text-foreground text-base native:text-lg'>
+            <Text>
               In the world of React Native, universal components are components that work on both
               web and native platforms.
             </Text>
@@ -46,14 +41,10 @@ export default function AccordionScreen() {
         </AccordionItem>
         <AccordionItem value='item-3'>
           <AccordionTrigger>
-            <Text className='text-foreground text-base native:text-lg font-medium web:group-hover:underline'>
-              Is this component universal?
-            </Text>
+            <Text>Is this component universal?</Text>
           </AccordionTrigger>
           <AccordionContent>
-            <Text className='text-foreground text-base native:text-lg'>
-              Yes. Try it out on the web, iOS, and/or Android.
-            </Text>
+            <Text>Yes. Try it out on the web, iOS, and/or Android.</Text>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

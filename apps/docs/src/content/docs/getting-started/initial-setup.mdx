@@ -7,27 +7,36 @@ description: NativeWind Light and Dark Mode
 { /* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
-import { Aside } from '@astrojs/starlight/components';
-
-
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+import { ExternalLink } from 'lucide-react';
 
 ### Install NativeWind
+<div />
 
-Follow the installation guide for NativeWind from the <a target="_blank" href="https://www.nativewind.dev/v4/getting-started/expo-router">official documentation</a>.
+<div>
+Follow the installation guide for NativeWind from the  <a target="_blank" href="https://www.nativewind.dev/v4/getting-started/expo-router" className='inline-block'><span className='flex gap-1.5'>official documentation <ExternalLink size={12} /></span></a>
+</div>
 
-### Install and set up utilities
+### Dependencies and utilities
 
 - **Install the following packages:**
 
-```bash
-npx expo install @react-native-async-storage/async-storage class-variance-authority clsx tailwind-merge
-```
+<Tabs>
+  <TabItem label="Universal">
+   **Platforms:** Web, iOS, and Android
 
-If you are using the expo-web, also install the following package:
+    ```bash
+    npx expo install tailwindcss-animate @react-native-async-storage/async-storage class-variance-authority clsx tailwind-merge
+    ```
+  </TabItem>
+  <TabItem label="Native only">
+  **Platforms:** iOS and Android
 
-```bash
-npx expo install tailwindcss-animate
-```
+    ```bash
+    npx expo install @react-native-async-storage/async-storage class-variance-authority clsx tailwind-merge
+    ```
+   </TabItem>
+</Tabs>
 
 - **Configure path aliases**
 
@@ -175,11 +184,10 @@ Each color has a commented css variable name next to it.
 
 - **Use the CSS variables in your tailwind.config.js file.**
 
-<Aside type="caution">
-  If you do not develop for **web**, replace the value for the `plugin` key with `[]`
-</Aside>
-
-<Code
+<Tabs>
+  <TabItem label="Universal">
+  **Platforms:** Web, iOS, and Android
+  <Code
   lang='js'
   title='tailwind.config.js'
   code={`
@@ -250,6 +258,70 @@ module.exports = {
 };
 `}
 />
+  </TabItem>
+  <TabItem label="Native only">
+   **Platforms:** iOS and Android
+  <Code
+  lang='js'
+  title='tailwind.config.js'
+  code={`
+const { hairlineWidth } = require('nativewind/theme');
+
+/** @type {import('tailwindcss').Config} \*/
+module.exports = {
+  darkMode: 'class',
+  content: ['./app/**/_.{ts,tsx}', './components/\*\*/_.{ts,tsx}'],
+  presets: [require('nativewind/preset')],
+  theme: {
+    extend: {
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      borderWidth: {
+        hairline: hairlineWidth(),
+      },
+    },
+  },
+  plugins: [],
+};
+`}
+/>
+  </TabItem>
+</Tabs>
+
+
 
 - **Configure React Navigation Theme**
 

@@ -8,8 +8,107 @@ description: A vertically stacked set of interactive headings that each reveal a
 
 import Code from '@/components/Code.astro';
 import importedCode from '@rnr/reusables/components/ui/accordion?raw';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
 
+<LinkButton href="/primitives/accordion">
+  Accordion Primitive
+</LinkButton>
+<LinkButton href="https://rnr-showcase.vercel.app/accordion">
+  Demo
+</LinkButton>
+
+<br />
 
 A vertically stacked set of interactive headings that each reveal a section of content
 
+### Installation
+
+<Aside type="tip" title="Depends on a primitive">
+    Before copy/pasting, add the <a href="/primitives/accordion" className='text-white font-bold'>accordion primitive</a> to your project.
+</Aside>
+
+<br />
+
+**Copy/paste the following code to `~/components/ui/accordion.tsx`:**
+
+
 <Code code={importedCode} lang="tsx" title="~/components/ui/accordion.tsx" />
+
+### Usage
+
+```tsx
+import * as React from 'react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/ui/accordion';
+import { Text } from '~/components/ui/typography';
+
+export default function AccordionScreen() {
+  const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
+
+  return (
+      <Accordion
+        type='multiple'
+        collapsible
+        value={multiple}
+        onValueChange={setMultiple}
+        className='w-full max-w-sm native:max-w-md'
+      >
+        <AccordionItem value='item-1'>
+          <AccordionTrigger>
+            <Text>Is it accessible?</Text>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value='item-2'>
+          <AccordionTrigger>
+            <Text>What are universal components?</Text>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Text>
+              In the world of React Native, universal components are components that work on both
+              web and native platforms.
+            </Text>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value='item-3'>
+          <AccordionTrigger>
+            <Text>Is this component universal?</Text>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Text>Yes. Try it out on the web, iOS, and/or Android.</Text>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+  );
+}
+```
+## Props
+
+TODO
+
+### Accordion
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### AccordionContent
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### AccordionItem
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### AccordionTrigger
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
