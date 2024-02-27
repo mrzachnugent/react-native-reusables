@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from '~/components/ui/card';
 import { Input } from '~/components/ui/input';
-import { Label, LabelText } from '~/components/ui/label';
+import { Label } from '~/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { Text } from '~/components/ui/typography';
 
@@ -41,15 +41,11 @@ export default function TabsScreen() {
             </CardHeader>
             <CardContent className='gap-4 native:gap-2'>
               <View className='gap-1'>
-                <Label>
-                  <LabelText nativeID='name'>Name</LabelText>
-                </Label>
+                <Label nativeID='name'>Name</Label>
                 <Input aria-aria-labelledby='name' defaultValue='Pedro Duarte' />
               </View>
               <View className='gap-1'>
-                <Label>
-                  <LabelText nativeID='username'>Username</LabelText>
-                </Label>
+                <Label nativeID='username'>Username</Label>
                 <Input id='username' defaultValue='@peduarte' />
               </View>
             </CardContent>
@@ -70,15 +66,11 @@ export default function TabsScreen() {
             </CardHeader>
             <CardContent className='gap-4 native:gap-2'>
               <View className='gap-1'>
-                <Label>
-                  <LabelText nativeID='current'>Current password</LabelText>
-                </Label>
+                <Label nativeID='current'>Current password</Label>
                 <Input placeholder='********' aria-labelledby='current' secureTextEntry />
               </View>
               <View className='gap-1'>
-                <Label>
-                  <LabelText nativeID='new'>New password</LabelText>
-                </Label>
+                <Label nativeID='new'>New password</Label>
                 <Input placeholder='********' aria-labelledby='new' secureTextEntry />
               </View>
             </CardContent>

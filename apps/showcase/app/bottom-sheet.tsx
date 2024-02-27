@@ -2,7 +2,7 @@ import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { Button } from '~/components/ui/button';
-import { Label, LabelText } from '~/components/ui/label';
+import { Label } from '~/components/ui/label';
 import { Text } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
 
@@ -48,8 +48,12 @@ export default function BottomSheetScreen() {
           <BottomSheetView className='gap-5 pt-6'>
             <View className='pb-2 gap-6'>
               <View>
-                <Label className={'pb-2.5'} onPress={handleOnLabelPress(nameInputRef)}>
-                  <LabelText nativeID='name'>Name</LabelText>
+                <Label
+                  nativeID='name'
+                  className={'pb-2.5'}
+                  onPress={handleOnLabelPress(nameInputRef)}
+                >
+                  Name
                 </Label>
                 <BottomSheetTextInput
                   defaultValue='Pedro Duarte'
@@ -58,8 +62,12 @@ export default function BottomSheetScreen() {
                 />
               </View>
               <View>
-                <Label className={'pb-2.5'} onPress={handleOnLabelPress(usernameInputRef)}>
-                  <LabelText nativeID='username'>Username</LabelText>
+                <Label
+                  nativeID='username'
+                  className={'pb-2.5'}
+                  onPress={handleOnLabelPress(usernameInputRef)}
+                >
+                  Username
                 </Label>
                 <BottomSheetTextInput
                   defaultValue='@peduarte'

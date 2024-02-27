@@ -3,7 +3,7 @@ import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { Label, LabelText } from '~/components/ui/label';
+import { Label } from '~/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { Text } from '~/components/ui/typography';
 
@@ -67,8 +67,8 @@ function LabelledInput({
 
   return (
     <View className='web:grid web:grid-cols-3 flex-row items-center gap-4'>
-      <Label onPress={onPress} className='w-24'>
-        <LabelText nativeID={id}>{label}</LabelText>
+      <Label nativeID={id} onPress={onPress} className='w-24'>
+        {label}
       </Label>
       <Input
         ref={inputRef}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScrollView, TextInput, View } from 'react-native';
-import { Label, LabelText } from '~/components/ui/label';
+import { Label } from '~/components/ui/label';
 import { Textarea } from '~/components/ui/textarea';
 
 export default function InputScreen() {
@@ -25,10 +25,12 @@ export default function InputScreen() {
   return (
     <ScrollView contentContainerClassName='flex-1 justify-center items-center p-6'>
       <View className='web:max-w-xs w-full'>
-        <Label onPress={handleOnLabelPress}>
-          <LabelText className='pb-2 native:pb-1 pl-0.5' nativeID='textareaLabel'>
-            Label
-          </LabelText>
+        <Label
+          className='pb-2 native:pb-1 pl-0.5'
+          nativeID='textareaLabel'
+          onPress={handleOnLabelPress}
+        >
+          Label
         </Label>
         <Textarea
           ref={inputRef}

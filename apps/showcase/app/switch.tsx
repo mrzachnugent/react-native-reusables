@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Label, LabelText } from '~/components/ui/label';
+import { Label } from '~/components/ui/label';
 import { Switch } from '~/components/ui/switch';
 
 export default function SwitchScreen() {
@@ -12,11 +12,12 @@ export default function SwitchScreen() {
         <View className='flex-row items-center gap-2'>
           <Switch checked={checked} onCheckedChange={setChecked} nativeID='airplane-mode' />
           <Label
+            nativeID='airplane-mode'
             onPress={() => {
               setChecked((prev) => !prev);
             }}
           >
-            <LabelText nativeID='airplane-mode'>Airplane Mode</LabelText>
+            Airplane Mode
           </Label>
         </View>
       </View>

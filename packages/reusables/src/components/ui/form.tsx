@@ -27,7 +27,7 @@ import { Combobox, ComboboxOption } from '../../components/deprecated-ui/combobo
 import { Button, buttonTextVariants } from '../../components/ui/button';
 import { Checkbox } from '../../components/ui/checkbox';
 import { Input } from '../../components/ui/input';
-import { Label, LabelText } from '../../components/ui/label';
+import { Label } from '../../components/ui/label';
 import { RadioGroup } from '../../components/ui/radio-group';
 import { Select, type Option } from '../../components/ui/select';
 import { Switch } from '../../components/ui/switch';
@@ -108,17 +108,16 @@ const FormLabel = React.forwardRef<
   Omit<React.ComponentPropsWithoutRef<typeof Label>, 'children'> & {
     children: string;
   }
->(({ className, ...props }, ref) => {
+>(({ className, nativeID: _nativeID, ...props }, ref) => {
   const { error, formItemNativeID } = useFormField();
 
   return (
     <Label
       ref={ref}
-      className={cn('pb-2 px-px', error && 'text-destructive', className)}
+      className={cn('pb-1 native:pb-2 px-px', error && 'text-destructive', className)}
+      nativeID={formItemNativeID}
       {...props}
-    >
-      <LabelText nativeID={formItemNativeID}>{props.children}</LabelText>
-    </Label>
+    />
   );
 });
 FormLabel.displayName = 'FormLabel';
