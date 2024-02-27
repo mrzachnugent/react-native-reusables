@@ -71,7 +71,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
 
 Root.displayName = 'RootNativeSelect';
 
-function useSelectContext() {
+function useRootContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error('Select compound components cannot be rendered outside the Select component');
@@ -82,7 +82,7 @@ function useSelectContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { open, onOpenChange, disabled: disabledRoot, setTriggerPosition } = useSelectContext();
+    const { open, onOpenChange, disabled: disabledRoot, setTriggerPosition } = useRootContext();
 
     React.useImperativeHandle(
       ref,
@@ -123,7 +123,7 @@ Trigger.displayName = 'TriggerNativeSelect';
 
 const Value = React.forwardRef<TextRef, SlottableTextProps & SelectValueProps>(
   ({ asChild, placeholder, ...props }, ref) => {
-    const { value } = useSelectContext();
+    const { value } = useRootContext();
     const Component = asChild ? Slot.Text : Text;
     return (
       <Component ref={ref} {...props}>
@@ -139,7 +139,7 @@ Value.displayName = 'ValueNativeSelect';
  * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset.
  */
 function Portal({ forceMount, hostName, children }: SelectPortalProps) {
-  const value = useSelectContext();
+  const value = useRootContext();
 
   if (!value.triggerPosition) {
     return null;
@@ -160,7 +160,7 @@ function Portal({ forceMount, hostName, children }: SelectPortalProps) {
 
 const Overlay = React.forwardRef<PressableRef, SlottablePressableProps & SelectOverlayProps>(
   ({ asChild, forceMount, onPress: OnPressProp, closeOnPress = true, ...props }, ref) => {
-    const { open, onOpenChange, setTriggerPosition, setContentLayout } = useSelectContext();
+    const { open, onOpenChange, setTriggerPosition, setContentLayout } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -217,7 +217,7 @@ const Content = React.forwardRef<
       triggerPosition,
       setContentLayout,
       setTriggerPosition,
-    } = useSelectContext();
+    } = useRootContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -293,7 +293,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & SelectItem
     ref
   ) => {
     const { onOpenChange, value, onValueChange, setTriggerPosition, setContentLayout } =
-      useSelectContext();
+      useRootContext();
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
         setTriggerPosition(null);
@@ -355,7 +355,7 @@ ItemText.displayName = 'ItemTextNativeSelect';
 const ItemIndicator = React.forwardRef<ViewRef, SlottableViewProps & ForceMountable>(
   ({ asChild, forceMount, ...props }, ref) => {
     const { itemValue } = useItemContext();
-    const { value } = useSelectContext();
+    const { value } = useRootContext();
 
     if (!forceMount) {
       if (value?.value !== itemValue) {
@@ -392,15 +392,15 @@ const Separator = React.forwardRef<ViewRef, SlottableViewProps & SelectSeparator
 
 Separator.displayName = 'SeparatorNativeSelect';
 
-const ScrollUpButton = ({ children }: { children: React.ReactNode }) => {
+const ScrollUpButton = ({ children }: { children?: React.ReactNode; className?: string }) => {
   return children;
 };
 
-const ScrollDownButton = ({ children }: { children: React.ReactNode }) => {
+const ScrollDownButton = ({ children }: { children?: React.ReactNode; className?: string }) => {
   return children;
 };
 
-const Viewport = ({ children }: { children: React.ReactNode }) => {
+const Viewport = ({ children }: { children?: React.ReactNode; className?: string }) => {
   return children;
 };
 
@@ -421,7 +421,7 @@ export {
   Value,
   Viewport,
   useItemContext,
-  useSelectContext,
+  useRootContext,
 };
 
 function onStartShouldSetResponder() {

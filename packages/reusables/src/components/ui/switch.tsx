@@ -58,7 +58,7 @@ const SwitchNative = React.forwardRef<
       backgroundColor: interpolateColor(
         translateX.value,
         [0, 18],
-        [RGB_COLORS[colorScheme].primary, RGB_COLORS[colorScheme].input]
+        [RGB_COLORS[colorScheme].input, RGB_COLORS[colorScheme].primary]
       ),
     };
   });

@@ -1,1 +1,1 @@
-export * from './slot-native';
+export * from './slot';

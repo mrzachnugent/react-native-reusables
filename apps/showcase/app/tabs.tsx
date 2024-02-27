@@ -21,7 +21,7 @@ export default function TabsScreen() {
       <Tabs
         value={value}
         onValueChange={setValue}
-        className='w-full max-w-[400px] flex-col gap-1.5'
+        className='w-full max-w-[400px] mx-auto flex-col gap-1.5'
       >
         <TabsList className='flex-row w-full'>
           <TabsTrigger value='account' className='flex-1'>

@@ -33,7 +33,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
 
 Root.displayName = 'RootWebTabs';
 
-function useTabsContext() {
+function useRootContext() {
   const context = React.useContext(TabsContext);
   if (!context) {
     throw new Error('Tabs compound components cannot be rendered outside the Tabs component');
@@ -94,4 +94,4 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & TabsContentProps>
 
 Content.displayName = 'ContentWebTabs';
 
-export { Content, List, Root, Trigger, useTabsContext, useTriggerContext };
+export { Content, List, Root, Trigger, useRootContext, useTriggerContext };

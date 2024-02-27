@@ -1,1 +1,1 @@
-export * from './separator-native';
+export * from './separator';

@@ -50,7 +50,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
 
 Root.displayName = 'RootWebSelect';
 
-function useSelectContext() {
+function useRootContext() {
   const context = React.useContext(SelectContext);
   if (!context) {
     throw new Error('Select compound components cannot be rendered outside the Select component');
@@ -61,7 +61,7 @@ function useSelectContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, role: _role, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { open } = useSelectContext();
+    const { open } = useRootContext();
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -276,5 +276,5 @@ export {
   Value,
   Viewport,
   useItemContext,
-  useSelectContext,
+  useRootContext,
 };

@@ -1,1 +1,1 @@
-export * from './table-native';
+export * from './table';

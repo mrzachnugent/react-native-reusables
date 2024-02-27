@@ -41,7 +41,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
 
 Root.displayName = 'RootNativeTabs';
 
-function useTabsContext() {
+function useRootContext() {
   const context = React.useContext(TabsContext);
   if (!context) {
     throw new Error('Tabs compound components cannot be rendered outside the Tabs component');
@@ -64,7 +64,7 @@ const Trigger = React.forwardRef<
     value: string;
   }
 >(({ asChild, onPress: onPressProp, disabled, value: tabValue, ...props }, ref) => {
-  const { onValueChange, value: rootValue, nativeID } = useTabsContext();
+  const { onValueChange, value: rootValue, nativeID } = useRootContext();
 
   function onPress(ev: GestureResponderEvent) {
     if (disabled) return;
@@ -107,7 +107,7 @@ function useTriggerContext() {
 
 const Content = React.forwardRef<ViewRef, SlottableViewProps & TabsContentProps>(
   ({ asChild, forceMount, value: tabValue, ...props }, ref) => {
-    const { value: rootValue, nativeID } = useTabsContext();
+    const { value: rootValue, nativeID } = useRootContext();
 
     if (!forceMount) {
       if (rootValue !== tabValue) {
@@ -130,4 +130,4 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & TabsContentProps>
 
 Content.displayName = 'ContentNativeTabs';
 
-export { Content, List, Root, Trigger, useTabsContext, useTriggerContext };
+export { Content, List, Root, Trigger, useRootContext, useTriggerContext };

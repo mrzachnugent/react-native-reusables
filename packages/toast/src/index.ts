@@ -1,1 +1,1 @@
-export * from './toast-native';
+export * from './toast';

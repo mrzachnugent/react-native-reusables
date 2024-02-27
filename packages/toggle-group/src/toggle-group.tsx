@@ -48,7 +48,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & ToggleGroupRootProps
 
 Root.displayName = 'RootToggleGroup';
 
-function useToggleGroupContext() {
+function useRootContext() {
   const context = React.useContext(ToggleGroupContext);
   if (!context) {
     throw new Error(
@@ -66,7 +66,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & ToggleGrou
     ref
   ) => {
     const id = React.useId();
-    const { type, disabled, value, onValueChange } = useToggleGroupContext();
+    const { type, disabled, value, onValueChange } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled || disabledProp) return;
@@ -120,4 +120,4 @@ function useItemContext() {
   return context;
 }
 
-export { Item, Root, useItemContext, useToggleGroupContext };
+export { Item, Root, useItemContext, useRootContext };
