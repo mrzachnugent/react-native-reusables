@@ -1,16 +1,18 @@
-Work in progress...
+_Work in progress..._
 
 # React Native Reusables
 
 ![banner](https://github.com/mrzachnugent/react-native-reusables/assets/63797719/0eef0a6d-d8eb-4b52-a97d-fa3b1e534215)
 
-## Powered by [Expo](https://docs.expo.dev/) and styled with [NativeWind v4](https://www.nativewind.dev/v4/overview)
+## Universal [shadcn/ui](https://ui.shadcn.com) for React Native
 
-[shadcn/ui](https://ui.shadcn.com) for React Native with the purpose to be used to build your own component libraries. Copy, paste, and tailor the code to suit your specific requirements.
-
-**🌐 Try the web showcase:** https://rnr-showcase.vercel.app/
+Crafted with [NativeWind v4](https://www.nativewind.dev/v4/overview) and accessibility in mind, `react-native-reusables` is open source, offering a foundation for developing your own high-quality component library.
 
 https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-05a4-4568-b71a-f1e0be13650d
+
+**📖 Read the docs** _(wip)_: https://rnr-docs.vercel.app/ 
+
+**🌐 Try the web showcase:** https://rnr-showcase.vercel.app/
 
 <details>
 <summary>Table of contents</summary>
@@ -28,17 +30,17 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 11. [Combobox](#combobox)
 12. [Collapsible](#collapsible)
 13. [Command](#command)
-14. [Context Menu](#context-menu) 🔜
+14. [Context Menu](#context-menu) 
 15. [Data Table](#data-table)
 16. [Date Picker](#date-picker)
 17. [Dialog](#dialog)
-18. [Dropdown Menu](#dropdown-menu) 🔜
+18. [Dropdown Menu](#dropdown-menu) 
 19. [Form](#form)
 20. [Input](#input)
 21. [Label](#label)
-22. [Material Top Tabs](#material-top-tabs) 🔜
-23. [Menubar](#menubar) 🔜
-24. [Navigation Menu](#navigation-menu) 🔜
+22. [Material Top Tabs](#material-top-tabs) 
+23. [Menubar](#menubar) 
+24. [Navigation Menu](#navigation-menu) 
 25. [Popover](#popover)
 26. [Progress](#progress)
 27. [Radio-group](#radio-group)
@@ -70,16 +72,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 <br>
 
-**Tool for creating your own theme**
-<br>
-If you want inspiration for your own theme, check out: https://ui.jln.dev/. And make sure you use `.dark:root` as the selector in your css file instead of `.dark`
+> **Note**: Current screenshots are for the deprecated-ui components (new screenshots to come)
 
-<br>
-<br>
-
-<p style="text-align:center;"><span style="font-weight:700;">Note</span>: Current screenshots are for deprecated-ui (new screenshots to come)</p>
-
-<br>
 
 #### Accordion
 
