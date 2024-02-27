@@ -1,12 +1,13 @@
 ---
 import { Code as StarlightCode } from '@astrojs/starlight/components';
 import { CodeBlockWrapper } from '../components/react/CodeBlockWrapper';
+import { fixImports } from '@/lib/utils';
 
 const { title = '', code = '', lang = 'tsx' } = Astro.props;
 ---
 
 <CodeBlockWrapper client:visible>
-  <StarlightCode title={title} code={code} lang={lang} ins={'inverted'} />
+  <StarlightCode title={title} code={fixImports(code)} lang={lang} ins={'inverted'} />
 </CodeBlockWrapper>
 
 <style>

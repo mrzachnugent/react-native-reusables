@@ -1,0 +1,194 @@
+---
+title: Dialog Primitive
+description: A popup view that appears on top of the main view or another dialog, making the content underneath unclickable.
+---
+
+{/* prettier-ignore-start */}
+{ /* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import importedNativeCode from '@/../node_modules/@rnr/dialog/src/dialog-native.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/dialog/src/dialog-web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/dialog/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/dialog/src/index.ts?raw';
+
+A popup view that appears on top of the main view or another dialog, making the content underneath unclickable.
+
+```tsx
+import { PortalHost } from '~/components/primitives/portal';
+import * as DialogPrimitive from '~/components/primitives/dialog';
+
+function Root() {
+  return (
+    <>
+      <Stack />
+      <PortalHost />
+    </>
+  );
+}
+
+function ExampleDialog() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+      <DialogPrimitive.Trigger>
+        <Text>Edit Profile</Text>
+      </DialogPrimitive.Trigger>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay>
+          <DialogPrimitive.Content>
+            <DialogPrimitive.Title>Edit profile</DialogPrimitive.Title>
+            <DialogPrimitive.Description>
+              Make changes to your profile here. Click save when you're done.
+            </DialogPrimitive.Description>
+            <DialogPrimitive.Close>
+              <Text>OK</Text>
+            </DialogPrimitive.Close>
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Overlay>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
+  );
+}
+```
+
+## Features
+
+- Manages screen reader announcements with `Title` and `Description` components
+- Uses radix-ui/primitives' [Dialog](https://www.radix-ui.com/primitives/docs/components/dialog) component on the web
+
+## How to add
+
+The web component depends on <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/dialog">@radix-ui/react-dialog</a> as well as shared reusables.
+
+### Add shared reusables
+
+If you have aleady added these shared reusables, you do not need to add them again. The following reusables are used by other primitives
+
+- [Portal Primitive](/primitives/portal)
+- [Slot Primitive](/primitives/slot)
+- [Primitive Types](/primitives/types)
+- [useAugmentedRef (web only)](/primitives/use-augmented-ref)
+
+### Install web-only dependency
+
+```bash
+npx expo install @radix-ui/react-dialog
+```
+
+### Copy/Paste
+
+#### Native
+
+Create a file `~/components/primitives/dialog/dialog-native.tsx` and copy/paste the following code into that new file:
+
+<Code title="~/components/primitives/dialog/dialog-native.tsx" code={importedNativeCode} />
+
+#### Types
+
+Add the types for the component. Create `~/components/primitives/dialog/types.ts` and copy/paste the following code into that new file:
+
+<Code title="~/components/primitives/dialog/types.ts" code={importedTypesCode} />
+
+#### Web
+
+If your application is also a web app, create `~/components/primitives/dialog/dialog-web.tsx` and copy/paste the following code into that new file:
+
+<Code title="~/components/primitives/dialog/dialog-web.tsx" code={importedWebCode} />
+
+
+
+Then, create `~/components/primitives/dialog/index.ts` and copy/paste the following code into that new file:
+
+<Code title="~/components/primitives/dialog/index.ts" code={importedIndexCode} />
+
+## Usage
+
+Add the `<PortalHost />` as the last child of your `<Root/>` component (for expo-router, the default export in the root `_layout.tsx`). If you already have one, do not add a second `PortalHost` component.
+
+```tsx
+import { PortalHost } from '~/components/primitives/portal';
+import * as DialogPrimitive from '~/components/primitives/dialog';
+
+function Root() {
+  return (
+    <>
+      <Stack />
+      <PortalHost />
+    </>
+  );
+}
+
+function ExampleDialog() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+      <DialogPrimitive.Trigger>
+        <Text>Edit Profile</Text>
+      </DialogPrimitive.Trigger>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay>
+          <DialogPrimitive.Content>
+            <DialogPrimitive.Title>Edit profile</DialogPrimitive.Title>
+            <DialogPrimitive.Description>
+              Make changes to your profile here. Click save when you're done.
+            </DialogPrimitive.Description>
+            <DialogPrimitive.Close>
+              <Text>OK</Text>
+            </DialogPrimitive.Close>
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Overlay>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
+  );
+}
+```
+
+## Props
+
+TODO
+
+### Root
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Trigger
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Portal
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Overlay
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Content
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Title
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Description
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### Close
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
+
+### useDialogContext
+
+| Prop | Type | Note |
+| :--: | :--: | :--: |
