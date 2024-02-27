@@ -15,7 +15,7 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      favicon: '/public/favicon.png',
+      favicon: '/favicon.png',
       title: 'rnr docs',
       description: 'Documentation for react-native-reusables',
       components: {
