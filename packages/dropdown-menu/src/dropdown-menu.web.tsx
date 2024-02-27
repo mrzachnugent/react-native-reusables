@@ -44,7 +44,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & DropdownMenuRootProp
 
 Root.displayName = 'RootWebDropdownMenu';
 
-function useDropdownMenuContext() {
+function useRootContext() {
   const context = React.useContext(DropdownMenuContext);
   if (!context) {
     throw new Error(
@@ -57,7 +57,7 @@ function useDropdownMenuContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled = false, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { open } = useDropdownMenuContext();
+    const { open } = useRootContext();
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -512,7 +512,7 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useDropdownMenuContext,
+  useRootContext,
   useSubContext,
 };
 

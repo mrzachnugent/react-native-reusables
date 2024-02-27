@@ -1,8 +1,6 @@
-import { cva } from 'class-variance-authority';
-import { ChevronDown } from '../../components/Icons';
-import * as React from 'react';
 import * as NavigationMenuPrimitive from '@rnr/navigation-menu';
-
+import { cva } from 'class-variance-authority';
+import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, {
   Extrapolation,
@@ -13,6 +11,7 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { ChevronDown } from '../../components/Icons';
 import { cn } from '../../lib/utils';
 
 const NavigationMenu = React.forwardRef<

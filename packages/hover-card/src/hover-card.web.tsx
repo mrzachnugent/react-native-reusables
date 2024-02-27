@@ -33,7 +33,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
 
 Root.displayName = 'RootWebHoverCard';
 
-function useHoverCardContext() {
+function useRootContext() {
   const context = React.useContext(HoverCardContext);
   if (!context) {
     throw new Error(
@@ -119,4 +119,4 @@ const Content = React.forwardRef<PressableRef, SlottablePressableProps & Positio
 
 Content.displayName = 'ContentWebHoverCard';
 
-export { Content, Overlay, Portal, Root, Trigger, useHoverCardContext };
+export { Content, Overlay, Portal, Root, Trigger, useRootContext };

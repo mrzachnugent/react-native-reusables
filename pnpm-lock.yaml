@@ -727,9 +727,15 @@ importers:
       '@radix-ui/react-hover-card':
         specifier: ^1.0.7
         version: 1.0.7(@types/react@18.2.58)(react-dom@18.2.0)(react@18.2.0)
+      '@rnr/hooks':
+        specifier: '*'
+        version: link:../hooks
       '@rnr/popover':
         specifier: '*'
         version: link:../popover
+      '@rnr/portal':
+        specifier: '*'
+        version: link:../portal
       '@rnr/slot':
         specifier: '*'
         version: link:../slot

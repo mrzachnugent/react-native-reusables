@@ -61,7 +61,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & NavigationMenuRootPr
 
 Root.displayName = 'RootNativeNavigationMenu';
 
-function useNavigationMenuContext() {
+function useRootContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
@@ -115,7 +115,7 @@ function useItemContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { value, onValueChange, setTriggerPosition } = useNavigationMenuContext();
+    const { value, onValueChange, setTriggerPosition } = useRootContext();
     const { value: menuValue } = useItemContext();
 
     React.useImperativeHandle(
@@ -160,7 +160,7 @@ Trigger.displayName = 'TriggerNativeNavigationMenu';
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
  */
 function Portal({ forceMount, hostName, children }: NavigationMenuPortalProps) {
-  const navigationMenu = useNavigationMenuContext();
+  const navigationMenu = useRootContext();
   const item = useItemContext();
 
   if (!navigationMenu.triggerPosition) {
@@ -213,7 +213,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
       setTriggerPosition,
       contentLayout,
       setContentLayout,
-    } = useNavigationMenuContext();
+    } = useRootContext();
     const { value: menuValue, nativeID } = useItemContext();
 
     React.useEffect(() => {
@@ -307,7 +307,7 @@ export {
   Trigger,
   Viewport,
   useItemContext,
-  useNavigationMenuContext,
+  useRootContext,
 };
 
 function onStartShouldSetResponder() {

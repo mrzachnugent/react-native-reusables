@@ -73,7 +73,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRootProps
 
 Root.displayName = 'RootNativeContextMenu';
 
-function useContextMenuContext() {
+function useRootContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
@@ -97,7 +97,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     ref
   ) => {
     const triggerRef = React.useRef<View>(null);
-    const { open, onOpenChange, relativeTo, setPressPosition } = useContextMenuContext();
+    const { open, onOpenChange, relativeTo, setPressPosition } = useRootContext();
 
     React.useImperativeHandle(
       ref,
@@ -167,7 +167,7 @@ Trigger.displayName = 'TriggerNativeContextMenu';
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
  */
 function Portal({ forceMount, hostName, children }: ContextMenuPortalProps) {
-  const value = useContextMenuContext();
+  const value = useRootContext();
 
   if (!value.pressPosition) {
     return null;
@@ -188,7 +188,7 @@ function Portal({ forceMount, hostName, children }: ContextMenuPortalProps) {
 
 const Overlay = React.forwardRef<PressableRef, SlottablePressableProps & ContextMenuOverlayProps>(
   ({ asChild, forceMount, onPress: OnPressProp, closeOnPress = true, ...props }, ref) => {
-    const { open, onOpenChange, setContentLayout, setPressPosition } = useContextMenuContext();
+    const { open, onOpenChange, setContentLayout, setPressPosition } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -238,7 +238,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
       pressPosition,
       setContentLayout,
       setPressPosition,
-    } = useContextMenuContext();
+    } = useRootContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -300,7 +300,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & ContextMen
     { asChild, textValue, onPress: onPressProp, disabled = false, closeOnPress = true, ...props },
     ref
   ) => {
-    const { onOpenChange, setContentLayout, setPressPosition } = useContextMenuContext();
+    const { onOpenChange, setContentLayout, setPressPosition } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -369,7 +369,7 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange, setContentLayout, setPressPosition, nativeID } = useContextMenuContext();
+    const { onOpenChange, setContentLayout, setPressPosition, nativeID } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
@@ -448,7 +448,7 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange, setContentLayout, setPressPosition } = useContextMenuContext();
+    const { onOpenChange, setContentLayout, setPressPosition } = useRootContext();
 
     const { value, onValueChange } = useFormItemContext() as BothFormItemContext;
     function onPress(ev: GestureResponderEvent) {
@@ -617,7 +617,7 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useContextMenuContext,
+  useRootContext,
   useSubContext,
 };
 

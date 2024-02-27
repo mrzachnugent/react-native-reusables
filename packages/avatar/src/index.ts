@@ -1,1 +1,1 @@
-export * from './avatar-native';
+export * from './avatar';

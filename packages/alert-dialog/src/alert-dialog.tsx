@@ -43,7 +43,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogRootProps
 
 Root.displayName = 'RootNativeAlertDialog';
 
-function useAlertDialogContext() {
+function useRootContext() {
   const context = React.useContext(AlertDialogContext);
   if (!context) {
     throw new Error(
@@ -55,7 +55,7 @@ function useAlertDialogContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const { open: value, onOpenChange } = useAlertDialogContext();
+    const { open: value, onOpenChange } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
@@ -84,7 +84,7 @@ Trigger.displayName = 'TriggerNativeAlertDialog';
  * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset to account for nav elements like headers.
  */
 function Portal({ forceMount, hostName, children }: AlertDialogPortalProps) {
-  const value = useAlertDialogContext();
+  const value = useRootContext();
 
   if (!forceMount) {
     if (!value.open) {
@@ -101,7 +101,7 @@ function Portal({ forceMount, hostName, children }: AlertDialogPortalProps) {
 
 const Overlay = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogOverlayProps>(
   ({ asChild, forceMount, ...props }, ref) => {
-    const { open: value } = useAlertDialogContext();
+    const { open: value } = useRootContext();
 
     if (!forceMount) {
       if (!value) {
@@ -118,7 +118,7 @@ Overlay.displayName = 'OverlayNativeAlertDialog';
 
 const Content = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogContentProps>(
   ({ asChild, forceMount, ...props }, ref) => {
-    const { open: value, nativeID, onOpenChange } = useAlertDialogContext();
+    const { open: value, nativeID, onOpenChange } = useRootContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -156,7 +156,7 @@ Content.displayName = 'ContentNativeAlertDialog';
 
 const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const { onOpenChange } = useAlertDialogContext();
+    const { onOpenChange } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
@@ -182,7 +182,7 @@ Cancel.displayName = 'CloseNativeAlertDialog';
 
 const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const { onOpenChange } = useAlertDialogContext();
+    const { onOpenChange } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
@@ -207,7 +207,7 @@ const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
 Action.displayName = 'ActionNativeAlertDialog';
 
 const Title = React.forwardRef<TextRef, SlottableTextProps>(({ asChild, ...props }, ref) => {
-  const { nativeID } = useAlertDialogContext();
+  const { nativeID } = useRootContext();
   const Component = asChild ? Slot.Text : Text;
   return <Component ref={ref} role='heading' nativeID={`${nativeID}_label`} {...props} />;
 });
@@ -215,7 +215,7 @@ const Title = React.forwardRef<TextRef, SlottableTextProps>(({ asChild, ...props
 Title.displayName = 'TitleNativeAlertDialog';
 
 const Description = React.forwardRef<TextRef, SlottableTextProps>(({ asChild, ...props }, ref) => {
-  const { nativeID } = useAlertDialogContext();
+  const { nativeID } = useRootContext();
   const Component = asChild ? Slot.Text : Text;
   return <Component ref={ref} nativeID={`${nativeID}_desc`} {...props} />;
 });
@@ -232,5 +232,5 @@ export {
   Root,
   Title,
   Trigger,
-  useAlertDialogContext,
+  useRootContext,
 };

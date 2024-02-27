@@ -15,6 +15,8 @@
     "@radix-ui/react-hover-card": "^1.0.7",
     "@rnr/popover": "*",
     "@rnr/slot": "*",
+    "@rnr/hooks": "*",
+    "@rnr/portal": "*",
     "@rnr/types": "*"
   },
   "devDependencies": {

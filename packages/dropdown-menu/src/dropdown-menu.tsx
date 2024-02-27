@@ -71,7 +71,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & DropdownMenuRootProp
 
 Root.displayName = 'RootNativeDropdownMenu';
 
-function useDropdownMenuContext() {
+function useRootContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
@@ -84,7 +84,7 @@ function useDropdownMenuContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { open, onOpenChange, setTriggerPosition } = useDropdownMenuContext();
+    const { open, onOpenChange, setTriggerPosition } = useRootContext();
 
     React.useImperativeHandle(
       ref,
@@ -128,7 +128,7 @@ Trigger.displayName = 'TriggerNativeDropdownMenu';
  * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset to account for nav elements like headers.
  */
 function Portal({ forceMount, hostName, children }: DropdownMenuPortalProps) {
-  const value = useDropdownMenuContext();
+  const value = useRootContext();
 
   if (!value.triggerPosition) {
     return null;
@@ -149,7 +149,7 @@ function Portal({ forceMount, hostName, children }: DropdownMenuPortalProps) {
 
 const Overlay = React.forwardRef<PressableRef, SlottablePressableProps & DropdownMenuOverlayProps>(
   ({ asChild, forceMount, onPress: OnPressProp, closeOnPress = true, ...props }, ref) => {
-    const { open, onOpenChange, setContentLayout, setTriggerPosition } = useDropdownMenuContext();
+    const { open, onOpenChange, setContentLayout, setTriggerPosition } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -202,7 +202,7 @@ const Content = React.forwardRef<PressableRef, SlottablePressableProps & Positio
       setTriggerPosition,
       contentLayout,
       setContentLayout,
-    } = useDropdownMenuContext();
+    } = useRootContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -263,7 +263,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & DropdownMe
     { asChild, textValue, onPress: onPressProp, disabled = false, closeOnPress = true, ...props },
     ref
   ) => {
-    const { onOpenChange, setTriggerPosition, setContentLayout } = useDropdownMenuContext();
+    const { onOpenChange, setTriggerPosition, setContentLayout } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -332,8 +332,7 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange, setContentLayout, setTriggerPosition, nativeID } =
-      useDropdownMenuContext();
+    const { onOpenChange, setContentLayout, setTriggerPosition, nativeID } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
@@ -412,7 +411,7 @@ const RadioItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onOpenChange, setContentLayout, setTriggerPosition } = useDropdownMenuContext();
+    const { onOpenChange, setContentLayout, setTriggerPosition } = useRootContext();
 
     const { value, onValueChange } = useFormItemContext() as BothFormItemContext;
     function onPress(ev: GestureResponderEvent) {
@@ -580,6 +579,6 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useDropdownMenuContext,
+  useRootContext,
   useSubContext,
 };

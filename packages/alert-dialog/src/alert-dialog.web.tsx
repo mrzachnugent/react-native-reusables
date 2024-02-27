@@ -35,7 +35,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogRootProps
 
 Root.displayName = 'RootAlertWebDialog';
 
-function useAlertDialogContext() {
+function useRootContext() {
   const context = React.useContext(AlertDialogContext);
   if (!context) {
     throw new Error(
@@ -48,7 +48,7 @@ function useAlertDialogContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = useAlertDialogContext();
+    const { onOpenChange, open } = useRootContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
         onPressProp(ev);
@@ -112,7 +112,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogConten
     ref
   ) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { open } = useAlertDialogContext();
+    const { open } = useRootContext();
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -141,7 +141,7 @@ Content.displayName = 'ContentAlertWebDialog';
 const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = useAlertDialogContext();
+    const { onOpenChange, open } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
@@ -179,7 +179,7 @@ Cancel.displayName = 'CancelAlertWebDialog';
 const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = useAlertDialogContext();
+    const { onOpenChange, open } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
@@ -246,5 +246,5 @@ export {
   Root,
   Title,
   Trigger,
-  useAlertDialogContext,
+  useRootContext,
 };

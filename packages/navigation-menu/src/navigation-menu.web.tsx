@@ -54,7 +54,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & NavigationMenuRootPr
 
 Root.displayName = 'RootWebNavigationMenu';
 
-function useNavigationMenuContext() {
+function useRootContext() {
   const context = React.useContext(NavigationMenuContext);
   if (!context) {
     throw new Error(
@@ -66,7 +66,7 @@ function useNavigationMenuContext() {
 
 const List = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
   const augmentedRef = useAugmentedRef({ ref });
-  const { orientation } = useNavigationMenuContext();
+  const { orientation } = useRootContext();
 
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
@@ -117,7 +117,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     { asChild, onPress: onPressProp, disabled = false, onKeyDown: onKeyDownProp, ...props },
     ref
   ) => {
-    const { value: rootValue, onValueChange } = useNavigationMenuContext();
+    const { value: rootValue, onValueChange } = useRootContext();
     const { value } = useItemContext();
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
@@ -193,7 +193,7 @@ Content.displayName = 'ContentWebNavigationMenu';
 
 const Link = React.forwardRef<PressableRef, SlottablePressableProps & NavigationMenuLinkProps>(
   ({ asChild, active, onPress: onPressProp, onKeyDown: onKeyDownProp, ...props }, ref) => {
-    const { onValueChange } = useNavigationMenuContext();
+    const { onValueChange } = useRootContext();
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
       if (ev.key === 'Enter' || ev.key === ' ') {
@@ -260,5 +260,5 @@ export {
   Trigger,
   Viewport,
   useItemContext,
-  useNavigationMenuContext,
+  useRootContext,
 };

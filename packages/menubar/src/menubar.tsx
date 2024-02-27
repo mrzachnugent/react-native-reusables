@@ -72,7 +72,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & MenubarRootProps>(
 
 Root.displayName = 'RootMenubar';
 
-function useMenubarContext() {
+function useMenuContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error('Menubar compound components cannot be rendered outside the Menubar component');
@@ -99,7 +99,7 @@ const Menu = React.forwardRef<ViewRef, SlottableViewProps & MenubarMenuProps>(
 
 Menu.displayName = 'MenuMenubar';
 
-function useMenuContext() {
+function useRootContext() {
   const context = React.useContext(MenuContext);
   if (!context) {
     throw new Error('Menubar compound components cannot be rendered outside the Menubar component');
@@ -110,8 +110,8 @@ function useMenuContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
     const triggerRef = React.useRef<View>(null);
-    const { value, onValueChange, setTriggerPosition } = useMenubarContext();
-    const { value: menuValue } = useMenuContext();
+    const { value, onValueChange, setTriggerPosition } = useMenuContext();
+    const { value: menuValue } = useRootContext();
 
     React.useImperativeHandle(
       ref,
@@ -155,8 +155,8 @@ Trigger.displayName = 'TriggerMenubar';
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
  */
 function Portal({ forceMount, hostName, children }: MenubarPortalProps) {
-  const menubar = useMenubarContext();
-  const menu = useMenuContext();
+  const menubar = useMenuContext();
+  const menu = useRootContext();
 
   if (!menubar.triggerPosition) {
     return null;
@@ -181,7 +181,7 @@ function Portal({ forceMount, hostName, children }: MenubarPortalProps) {
 
 const Overlay = React.forwardRef<PressableRef, SlottablePressableProps & MenubarOverlayProps>(
   ({ asChild, forceMount, onPress: OnPressProp, closeOnPress = true, ...props }, ref) => {
-    const { value, onValueChange, setContentLayout, setTriggerPosition } = useMenubarContext();
+    const { value, onValueChange, setContentLayout, setTriggerPosition } = useMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -234,8 +234,8 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
       setContentLayout,
       nativeID,
       setTriggerPosition,
-    } = useMenubarContext();
-    const { value: menuValue } = useMenuContext();
+    } = useMenuContext();
+    const { value: menuValue } = useRootContext();
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -297,7 +297,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & MenubarIte
     { asChild, textValue, onPress: onPressProp, disabled = false, closeOnPress = true, ...props },
     ref
   ) => {
-    const { onValueChange, setContentLayout, setTriggerPosition } = useMenubarContext();
+    const { onValueChange, setContentLayout, setTriggerPosition } = useMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (closeOnPress) {
@@ -366,7 +366,7 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
-    const { onValueChange, setTriggerPosition, setContentLayout, nativeID } = useMenubarContext();
+    const { onValueChange, setTriggerPosition, setContentLayout, nativeID } = useMenuContext();
 
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
@@ -446,7 +446,7 @@ const RadioItem = React.forwardRef<PressableRef, SlottablePressableProps & Menub
       onValueChange: onRootValueChange,
       setTriggerPosition,
       setContentLayout,
-    } = useMenubarContext();
+    } = useMenuContext();
 
     const { value, onValueChange } = useFormItemContext() as BothFormItemContext;
     function onPress(ev: GestureResponderEvent) {
@@ -614,8 +614,8 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
+  useRootContext,
   useMenuContext,
-  useMenubarContext,
   useSubContext,
 };
 

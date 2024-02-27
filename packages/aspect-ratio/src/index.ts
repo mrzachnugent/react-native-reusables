@@ -1,1 +1,1 @@
-export * from './aspect-ratio-native';
+export * from './aspect-ratio';

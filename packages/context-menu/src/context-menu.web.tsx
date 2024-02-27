@@ -1,8 +1,8 @@
-import * as Menubar from '@radix-ui/react-menubar';
+import * as ContextMenu from '@radix-ui/react-context-menu';
 import * as React from 'react';
 import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
+import { useAugmentedRef } from '@rnr/hooks';
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -13,67 +13,43 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
-import { EmptyGestureResponderEvent } from '@rnr/utils';
 import type {
-  MenubarCheckboxItemProps,
-  MenubarItemProps,
-  MenubarMenuProps,
-  MenubarOverlayProps,
-  MenubarPortalProps,
-  MenubarRadioGroupProps,
-  MenubarRadioItemProps,
-  MenubarRootProps,
-  MenubarSeparatorProps,
-  MenubarSubProps,
-  MenubarSubTriggerProps,
+  ContextMenuCheckboxItemProps,
+  ContextMenuItemProps,
+  ContextMenuOverlayProps,
+  ContextMenuPortalProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemProps,
+  ContextMenuRootProps,
+  ContextMenuSeparatorProps,
+  ContextMenuSubProps,
+  ContextMenuSubTriggerProps,
 } from './types';
+import { EmptyGestureResponderEvent } from '@rnr/utils';
 
-const MenubarContext = React.createContext<MenubarRootProps | null>(null);
+const ContextMenuContext = React.createContext<ContextMenuRootProps | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps & MenubarRootProps>(
-  ({ asChild, value, onValueChange, ...viewProps }, ref) => {
+const Root = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRootProps>(
+  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <MenubarContext.Provider value={{ value, onValueChange }}>
-        <Menubar.Root value={value} onValueChange={onValueChange}>
+      <ContextMenuContext.Provider value={{ open, onOpenChange }}>
+        <ContextMenu.Root onOpenChange={onOpenChange}>
           <Component ref={ref} {...viewProps} />
-        </Menubar.Root>
-      </MenubarContext.Provider>
+        </ContextMenu.Root>
+      </ContextMenuContext.Provider>
     );
   }
 );
 
-Root.displayName = 'RootWebMenubar';
+Root.displayName = 'RootWebContextMenu';
 
-function useMenubarContext() {
-  const context = React.useContext(MenubarContext);
+function useRootContext() {
+  const context = React.useContext(ContextMenuContext);
   if (!context) {
-    throw new Error('Menubar compound components cannot be rendered outside the Menubar component');
-  }
-  return context;
-}
-
-const MenubarMenuContext = React.createContext<MenubarMenuProps | null>(null);
-
-const Menu = React.forwardRef<ViewRef, SlottableViewProps & MenubarMenuProps>(
-  ({ asChild, value, ...viewProps }, ref) => {
-    const Component = asChild ? Slot.View : View;
-    return (
-      <MenubarMenuContext.Provider value={{ value }}>
-        <Menubar.Menu value={value}>
-          <Component ref={ref} {...viewProps} />
-        </Menubar.Menu>
-      </MenubarMenuContext.Provider>
+    throw new Error(
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
     );
-  }
-);
-
-Menu.displayName = 'MenuWebMenubar';
-
-function useMenubarMenuContext() {
-  const context = React.useContext(MenubarMenuContext);
-  if (!context) {
-    throw new Error('Menubar compound components cannot be rendered outside the Menubar component');
   }
   return context;
 }
@@ -81,13 +57,12 @@ function useMenubarMenuContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled = false, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { value: menuValue } = useMenubarMenuContext();
-    const { value } = useMenubarContext();
+    const { open } = useRootContext();
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
-        augRef.dataset.state = value && menuValue === value ? 'open' : 'closed';
+        augRef.dataset.state = open ? 'open' : 'closed';
       }
     }, [open]);
 
@@ -104,29 +79,29 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Menubar.Trigger disabled={disabled ?? undefined} asChild>
+      <ContextMenu.Trigger disabled={disabled ?? undefined} asChild>
         <Component ref={augmentedRef} disabled={disabled} {...props} />
-      </Menubar.Trigger>
+      </ContextMenu.Trigger>
     );
   }
 );
 
-Trigger.displayName = 'TriggerWebMenubar';
+Trigger.displayName = 'TriggerWebContextMenu';
 
-function Portal({ forceMount, container, children }: MenubarPortalProps) {
-  return <Menubar.Portal forceMount={forceMount} container={container} children={children} />;
+function Portal({ forceMount, container, children }: ContextMenuPortalProps) {
+  return <ContextMenu.Portal forceMount={forceMount} container={container} children={children} />;
 }
 
-const Overlay = React.forwardRef<PressableRef, SlottablePressableProps & MenubarOverlayProps>(
+const Overlay = React.forwardRef<PressableRef, SlottablePressableProps & ContextMenuOverlayProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return <Component ref={ref} {...props} />;
   }
 );
 
-Overlay.displayName = 'OverlayWebMenubar';
+Overlay.displayName = 'OverlayWebContextMenu';
 
-const MenubarContentContext = React.createContext<{
+const ContextMenuContentContext = React.createContext<{
   close: () => void;
 } | null>(null);
 
@@ -135,13 +110,13 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
     {
       asChild = false,
       forceMount,
-      align,
-      side,
-      sideOffset,
+      align: _align,
+      side: _side,
+      sideOffset: _sideOffset,
       alignOffset = 0,
       avoidCollisions = true,
       insets,
-      loop,
+      loop = true,
       onCloseAutoFocus,
       onEscapeKeyDown,
       onPointerDownOutside,
@@ -162,8 +137,8 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
 
     const Component = asChild ? Slot.View : View;
     return (
-      <MenubarContentContext.Provider value={{ close }}>
-        <Menubar.Content
+      <ContextMenuContentContext.Provider value={{ close }}>
+        <ContextMenu.Content
           forceMount={forceMount}
           alignOffset={alignOffset}
           avoidCollisions={avoidCollisions}
@@ -177,12 +152,9 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
           collisionBoundary={collisionBoundary}
           sticky={sticky}
           hideWhenDetached={hideWhenDetached}
-          align={align}
-          side={side}
-          sideOffset={sideOffset}
         >
           <Component ref={ref} {...props} />
-          <Menubar.Item
+          <ContextMenu.Item
             ref={itemRef}
             aria-hidden
             style={{ position: 'fixed', top: 0, left: 0, zIndex: -999999999 }}
@@ -190,40 +162,29 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
             tabIndex={-1}
             hidden
           />
-        </Menubar.Content>
-      </MenubarContentContext.Provider>
+        </ContextMenu.Content>
+      </ContextMenuContentContext.Provider>
     );
   }
 );
 
-Content.displayName = 'ContentWebMenubar';
+Content.displayName = 'ContentWebContextMenu';
 
-function useMenubarContentContext() {
-  const context = React.useContext(MenubarContentContext);
+function useContextMenuContentContext() {
+  const context = React.useContext(ContextMenuContentContext);
   if (!context) {
     throw new Error(
-      'MenubarContent compound components cannot be rendered outside the MenubarContent component'
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
     );
   }
   return context;
 }
 
-const Item = React.forwardRef<PressableRef, SlottablePressableProps & MenubarItemProps>(
-  (
-    {
-      asChild,
-      textValue,
-      closeOnPress = true,
-      onPress: onPressProp,
-      onKeyDown: onKeyDownProp,
-      ...props
-    },
-    ref
-  ) => {
-    const { close } = useMenubarContentContext();
+const Item = React.forwardRef<PressableRef, SlottablePressableProps & ContextMenuItemProps>(
+  ({ asChild, textValue, closeOnPress = true, onPress: onPressProp, ...props }, ref) => {
+    const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
-      onKeyDownProp?.(ev);
       if (ev.key === 'Enter' || ev.key === ' ') {
         onPressProp?.(EmptyGestureResponderEvent);
         if (closeOnPress) {
@@ -241,51 +202,45 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & MenubarIte
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Menubar.Item
+      <ContextMenu.Item
         textValue={textValue}
         disabled={props.disabled ?? undefined}
         onSelect={closeOnPress ? undefined : onSelected}
         asChild
       >
-        <Component
-          ref={ref}
-          // @ts-expect-error web only
-          onKeyDown={onKeyDown}
-          onPress={onPress}
-          {...props}
-        />
-      </Menubar.Item>
+        <Component ref={ref} role='button' onPress={onPress} onKeyDown={onKeyDown} {...props} />
+      </ContextMenu.Item>
     );
   }
 );
 
-Item.displayName = 'ItemWebMenubar';
+Item.displayName = 'ItemWebContextMenu';
 
 const Group = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
-    <Menubar.Group asChild>
+    <ContextMenu.Group asChild>
       <Component ref={ref} {...props} />
-    </Menubar.Group>
+    </ContextMenu.Group>
   );
 });
 
-Group.displayName = 'GroupWebMenubar';
+Group.displayName = 'GroupWebContextMenu';
 
 const Label = React.forwardRef<TextRef, SlottableTextProps>(({ asChild, ...props }, ref) => {
   const Component = asChild ? Slot.Text : Text;
   return (
-    <Menubar.Label asChild>
+    <ContextMenu.Label asChild>
       <Component ref={ref} {...props} />
-    </Menubar.Label>
+    </ContextMenu.Label>
   );
 });
 
-Label.displayName = 'LabelWebMenubar';
+Label.displayName = 'LabelWebContextMenu';
 
 const CheckboxItem = React.forwardRef<
   PressableRef,
-  SlottablePressableProps & MenubarCheckboxItemProps
+  SlottablePressableProps & ContextMenuCheckboxItemProps
 >(
   (
     {
@@ -301,6 +256,8 @@ const CheckboxItem = React.forwardRef<
     },
     ref
   ) => {
+    const { close } = useContextMenuContentContext();
+
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
       if (ev.key === 'Enter' || ev.key === ' ') {
@@ -319,9 +276,10 @@ const CheckboxItem = React.forwardRef<
         close();
       }
     }
+
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Menubar.CheckboxItem
+      <ContextMenu.CheckboxItem
         textValue={textValue}
         checked={checked}
         onCheckedChange={onCheckedChange}
@@ -331,50 +289,54 @@ const CheckboxItem = React.forwardRef<
       >
         <Component
           ref={ref}
+          disabled={disabled}
           // @ts-expect-error web only
           onKeyDown={onKeyDown}
           onPress={onPress}
           role='button'
           {...props}
         />
-      </Menubar.CheckboxItem>
+      </ContextMenu.CheckboxItem>
     );
   }
 );
 
-CheckboxItem.displayName = 'CheckboxItemWebMenubar';
+CheckboxItem.displayName = 'CheckboxItemWebContextMenu';
 
-const MenubarRadioGroupContext = React.createContext<{
+const ContextMenuRadioGroupContext = React.createContext<{
   value?: string;
   onValueChange?: (value: string) => void;
 } | null>(null);
 
-const RadioGroup = React.forwardRef<ViewRef, SlottableViewProps & MenubarRadioGroupProps>(
+const RadioGroup = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRadioGroupProps>(
   ({ asChild, value, onValueChange, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <MenubarRadioGroupContext.Provider value={{ value, onValueChange }}>
-        <Menubar.RadioGroup value={value} onValueChange={onValueChange} asChild>
+      <ContextMenuRadioGroupContext.Provider value={{ value, onValueChange }}>
+        <ContextMenu.RadioGroup value={value} onValueChange={onValueChange} asChild>
           <Component ref={ref} {...props} />
-        </Menubar.RadioGroup>
-      </MenubarRadioGroupContext.Provider>
+        </ContextMenu.RadioGroup>
+      </ContextMenuRadioGroupContext.Provider>
     );
   }
 );
 
-RadioGroup.displayName = 'RadioGroupWebMenubar';
+RadioGroup.displayName = 'RadioGroupWebContextMenu';
 
-function useMenubarRadioGroupContext() {
-  const context = React.useContext(MenubarRadioGroupContext);
+function useContextMenuRadioGroupContext() {
+  const context = React.useContext(ContextMenuRadioGroupContext);
   if (!context) {
     throw new Error(
-      'MenubarRadioGroup compound components cannot be rendered outside the MenubarRadioGroup component'
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
     );
   }
   return context;
 }
 
-const RadioItem = React.forwardRef<PressableRef, SlottablePressableProps & MenubarRadioItemProps>(
+const RadioItem = React.forwardRef<
+  PressableRef,
+  SlottablePressableProps & ContextMenuRadioItemProps
+>(
   (
     {
       asChild,
@@ -387,8 +349,8 @@ const RadioItem = React.forwardRef<PressableRef, SlottablePressableProps & Menub
     },
     ref
   ) => {
-    const { onValueChange } = useMenubarRadioGroupContext();
-    const { close } = useMenubarContentContext();
+    const { onValueChange } = useContextMenuRadioGroupContext();
+    const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
@@ -410,7 +372,7 @@ const RadioItem = React.forwardRef<PressableRef, SlottablePressableProps & Menub
     }
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Menubar.RadioItem
+      <ContextMenu.RadioItem
         value={value}
         textValue={textValue}
         disabled={props.disabled ?? undefined}
@@ -424,96 +386,97 @@ const RadioItem = React.forwardRef<PressableRef, SlottablePressableProps & Menub
           onPress={onPress}
           {...props}
         />
-      </Menubar.RadioItem>
+      </ContextMenu.RadioItem>
     );
   }
 );
 
-RadioItem.displayName = 'RadioItemWebMenubar';
+RadioItem.displayName = 'RadioItemWebContextMenu';
 
 const ItemIndicator = React.forwardRef<ViewRef, SlottableViewProps & ForceMountable>(
   ({ asChild, forceMount, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <Menubar.ItemIndicator forceMount={forceMount} asChild>
+      <ContextMenu.ItemIndicator forceMount={forceMount} asChild>
         <Component ref={ref} {...props} />
-      </Menubar.ItemIndicator>
+      </ContextMenu.ItemIndicator>
     );
   }
 );
 
-ItemIndicator.displayName = 'ItemIndicatorWebMenubar';
+ItemIndicator.displayName = 'ItemIndicatorWebContextMenu';
 
-const Separator = React.forwardRef<ViewRef, SlottableViewProps & MenubarSeparatorProps>(
+const Separator = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuSeparatorProps>(
   ({ asChild, decorative, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <Menubar.Separator asChild>
+      <ContextMenu.Separator asChild>
         <Component ref={ref} {...props} />
-      </Menubar.Separator>
+      </ContextMenu.Separator>
     );
   }
 );
 
-Separator.displayName = 'SeparatorWebMenubar';
+Separator.displayName = 'SeparatorWebContextMenu';
 
-const MenubarSubContext = React.createContext<{
+const ContextMenuSubContext = React.createContext<{
   open: boolean;
   onOpenChange: (open: boolean) => void;
 } | null>(null);
 
-const Sub = React.forwardRef<ViewRef, SlottableViewProps & MenubarSubProps>(
+const Sub = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuSubProps>(
   ({ asChild, open, onOpenChange, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <MenubarSubContext.Provider value={{ open, onOpenChange }}>
-        <Menubar.Sub open={open} onOpenChange={onOpenChange}>
+      <ContextMenuSubContext.Provider value={{ open, onOpenChange }}>
+        <ContextMenu.Sub open={open} onOpenChange={onOpenChange}>
           <Component ref={ref} {...props} />
-        </Menubar.Sub>
-      </MenubarSubContext.Provider>
+        </ContextMenu.Sub>
+      </ContextMenuSubContext.Provider>
     );
   }
 );
 
-Sub.displayName = 'SubWebMenubar';
+Sub.displayName = 'SubWebContextMenu';
 
 function useSubContext() {
-  const context = React.useContext(MenubarSubContext);
+  const context = React.useContext(ContextMenuSubContext);
   if (!context) {
     throw new Error(
-      'MenubarSub compound components cannot be rendered outside the MenubarSub component'
+      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
     );
   }
   return context;
 }
 
-const SubTrigger = React.forwardRef<PressableRef, SlottablePressableProps & MenubarSubTriggerProps>(
-  ({ asChild, textValue, disabled = false, ...props }, ref) => {
+const SubTrigger = React.forwardRef<
+  PressableRef,
+  SlottablePressableProps & ContextMenuSubTriggerProps
+>(({ asChild, textValue, disabled = false, ...props }, ref) => {
+  const Component = asChild ? Slot.Pressable : Pressable;
+  return (
+    <ContextMenu.SubTrigger disabled={disabled ?? undefined} textValue={textValue} asChild>
+      <Component ref={ref} {...props} />
+    </ContextMenu.SubTrigger>
+  );
+});
+
+SubTrigger.displayName = 'SubTriggerWebContextMenu';
+
+const SubContent = React.forwardRef<PressableRef, SlottablePressableProps & ForceMountable>(
+  ({ asChild = false, forceMount, ...props }, ref) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Menubar.SubTrigger disabled={disabled ?? undefined} textValue={textValue} asChild>
-        <Component ref={ref} {...props} />
-      </Menubar.SubTrigger>
-    );
-  }
-);
-
-SubTrigger.displayName = 'SubTriggerWebMenubar';
-
-const SubContent = React.forwardRef<ViewRef, SlottableViewProps & ForceMountable>(
-  ({ asChild = false, forceMount, ...props }, ref) => {
-    const Component = asChild ? Slot.View : View;
-    return (
-      <Menubar.Portal>
-        <Menubar.SubContent forceMount={forceMount}>
+      <ContextMenu.Portal>
+        <ContextMenu.SubContent forceMount={forceMount}>
           <Component ref={ref} {...props} />
-        </Menubar.SubContent>
-      </Menubar.Portal>
+        </ContextMenu.SubContent>
+      </ContextMenu.Portal>
     );
   }
 );
 
-Content.displayName = 'ContentWebMenubar';
+Content.displayName = 'ContentWebContextMenu';
 
 export {
   CheckboxItem,
@@ -522,7 +485,6 @@ export {
   Item,
   ItemIndicator,
   Label,
-  Menu,
   Overlay,
   Portal,
   RadioGroup,
@@ -533,9 +495,8 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useMenubarContext,
-  useMenubarMenuContext,
   useSubContext,
+  useRootContext,
 };
 
 function onSelected(ev: Event) {
