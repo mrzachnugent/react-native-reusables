@@ -40,7 +40,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
 
 Root.displayName = 'RootNativeAccordion';
 
-function useAccordionContext() {
+function useRootContext() {
   const context = React.useContext(AccordionContext);
   if (!context) {
     throw new Error(
@@ -59,7 +59,7 @@ const AccordionItemContext = React.createContext<AccordionItemContext | null>(nu
 
 const Item = React.forwardRef<ViewRef, SlottableViewProps & AccordionItemProps>(
   ({ asChild, value, disabled, ...viewProps }, ref) => {
-    const { value: rootValue } = useAccordionContext();
+    const { value: rootValue } = useRootContext();
     const nativeID = React.useId();
 
     const Component = asChild ? Slot.View : View;
@@ -80,7 +80,7 @@ const Item = React.forwardRef<ViewRef, SlottableViewProps & AccordionItemProps>(
 
 Item.displayName = 'ItemNativeAccordion';
 
-function useAccordionItemContext() {
+function useItemContext() {
   const context = React.useContext(AccordionItemContext);
   if (!context) {
     throw new Error(
@@ -91,8 +91,8 @@ function useAccordionItemContext() {
 }
 
 const Header = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...props }, ref) => {
-  const { disabled: rootDisabled } = useAccordionContext();
-  const { disabled: itemDisabled, isExpanded } = useAccordionItemContext();
+  const { disabled: rootDisabled } = useRootContext();
+  const { disabled: itemDisabled, isExpanded } = useItemContext();
 
   const Component = asChild ? Slot.View : View;
   return (
@@ -116,8 +116,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       onValueChange,
       value: rootValue,
       collapsible,
-    } = useAccordionContext();
-    const { nativeID, disabled: itemDisabled, value, isExpanded } = useAccordionItemContext();
+    } = useRootContext();
+    const { nativeID, disabled: itemDisabled, value, isExpanded } = useItemContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (rootDisabled || itemDisabled) return;
@@ -162,8 +162,8 @@ Trigger.displayName = 'TriggerNativeAccordion';
 
 const Content = React.forwardRef<ViewRef, SlottableViewProps & AccordionContentProps>(
   ({ asChild, forceMount, ...props }, ref) => {
-    const { type } = useAccordionContext();
-    const { nativeID, isExpanded } = useAccordionItemContext();
+    const { type } = useRootContext();
+    const { nativeID, isExpanded } = useItemContext();
 
     if (!forceMount) {
       if (!isExpanded) {
@@ -186,7 +186,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & AccordionContentP
 
 Content.displayName = 'ContentNativeAccordion';
 
-export { Content, Header, Item, Root, Trigger, useAccordionContext, useAccordionItemContext };
+export { Content, Header, Item, Root, Trigger, useRootContext, useItemContext };
 
 function toStringArray(value?: string | string[]) {
   return Array.isArray(value) ? value : value ? [value] : [];

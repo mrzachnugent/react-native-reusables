@@ -7,8 +7,8 @@ description: A popup view that appears on top of the main view or another dialog
 { /* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
-import importedNativeCode from '@/../node_modules/@rnr/dialog/src/dialog-native.tsx?raw';
-import importedWebCode from '@/../node_modules/@rnr/dialog/src/dialog-web.tsx?raw';
+import importedNativeCode from '@/../node_modules/@rnr/dialog/src/dialog.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/dialog/src/dialog.web.tsx?raw';
 import importedTypesCode from '@/../node_modules/@rnr/dialog/src/types.ts?raw';
 import importedIndexCode from '@/../node_modules/@rnr/dialog/src/index.ts?raw';
 
@@ -80,9 +80,9 @@ npx expo install @radix-ui/react-dialog
 
 #### Native
 
-Create a file `~/components/primitives/dialog/dialog-native.tsx` and copy/paste the following code into that new file:
+Create a file `~/components/primitives/dialog/dialog.tsx` and copy/paste the following code into that new file:
 
-<Code title="~/components/primitives/dialog/dialog-native.tsx" code={importedNativeCode} />
+<Code title="~/components/primitives/dialog/dialog.tsx" code={importedNativeCode} />
 
 #### Types
 
@@ -92,9 +92,9 @@ Add the types for the component. Create `~/components/primitives/dialog/types.ts
 
 #### Web
 
-If your application is also a web app, create `~/components/primitives/dialog/dialog-web.tsx` and copy/paste the following code into that new file:
+If your application is also a web app, create `~/components/primitives/dialog/dialog.web.tsx` and copy/paste the following code into that new file:
 
-<Code title="~/components/primitives/dialog/dialog-web.tsx" code={importedWebCode} />
+<Code title="~/components/primitives/dialog/dialog.web.tsx" code={importedWebCode} />
 
 
 

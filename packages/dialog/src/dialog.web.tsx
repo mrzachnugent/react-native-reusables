@@ -35,7 +35,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
 
 Root.displayName = 'RootWebDialog';
 
-function useDialogContext() {
+function useRootContext() {
   const context = React.useContext(DialogContext);
   if (!context) {
     throw new Error('Dialog compound components cannot be rendered outside the Dialog component');
@@ -46,7 +46,7 @@ function useDialogContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = useDialogContext();
+    const { onOpenChange, open } = useRootContext();
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
         onPressProp(ev);
@@ -131,7 +131,7 @@ Content.displayName = 'ContentWebDialog';
 const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = useDialogContext();
+    const { onOpenChange, open } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
@@ -188,4 +188,4 @@ const Description = React.forwardRef<TextRef, SlottableTextProps>(({ asChild, ..
 
 Description.displayName = 'DescriptionWebDialog';
 
-export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger, useDialogContext };
+export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger, useRootContext };

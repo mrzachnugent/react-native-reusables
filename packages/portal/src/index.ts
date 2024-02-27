@@ -1,1 +1,1 @@
-export { Portal, PortalHost } from './portal-native';
+export { Portal, PortalHost } from './portal';

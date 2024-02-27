@@ -17,7 +17,7 @@ const DialogOverlayWeb = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => {
-  const { open } = DialogPrimitive.useContext();
+  const { open } = DialogPrimitive.useRootContext();
   return (
     <DialogPrimitive.Overlay
       style={StyleSheet.absoluteFill}
@@ -63,7 +63,7 @@ const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
-  const { open } = DialogPrimitive.useContext();
+  const { open } = DialogPrimitive.useRootContext();
   return (
     <DialogPortal>
       <DialogOverlay>

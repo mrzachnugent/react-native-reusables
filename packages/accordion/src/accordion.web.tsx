@@ -72,7 +72,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
 
 Root.displayName = 'RootWebAccordion';
 
-function useAccordionContext() {
+function useRootContext() {
   const context = React.useContext(AccordionContext);
   if (!context) {
     throw new Error(
@@ -89,7 +89,7 @@ const AccordionItemContext = React.createContext<
 const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
   ({ asChild, value: itemValue, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { value, orientation, disabled: disabledRoot } = useAccordionContext();
+    const { value, orientation, disabled: disabledRoot } = useRootContext();
 
     useIsomorphicLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -130,7 +130,7 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
 
 Item.displayName = 'ItemWebAccordion';
 
-function useAccordionItemContext() {
+function useItemContext() {
   const context = React.useContext(AccordionItemContext);
   if (!context) {
     throw new Error(
@@ -142,8 +142,8 @@ function useAccordionItemContext() {
 
 const Header = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...props }, ref) => {
   const augmentedRef = useAugmentedRef({ ref });
-  const { disabled, isExpanded } = useAccordionItemContext();
-  const { orientation, disabled: disabledRoot } = useAccordionContext();
+  const { disabled, isExpanded } = useItemContext();
+  const { orientation, disabled: disabledRoot } = useRootContext();
 
   useIsomorphicLayoutEffect(() => {
     if (augmentedRef.current) {
@@ -184,8 +184,8 @@ const HIDDEN_STYLE: React.CSSProperties = {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled: disabledProp, ...props }, ref) => {
-    const { disabled: disabledRoot } = useAccordionContext();
-    const { disabled, isExpanded } = useAccordionItemContext();
+    const { disabled: disabledRoot } = useRootContext();
+    const { disabled, isExpanded } = useItemContext();
     const triggerRef = React.useRef<HTMLButtonElement>(null);
     const augmentedRef = useAugmentedRef({ ref });
 
@@ -246,8 +246,8 @@ const Content = React.forwardRef<ViewRef, AccordionContentProps & SlottableViewP
   ({ asChild, forceMount, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
 
-    const { orientation, disabled: disabledRoot } = useAccordionContext();
-    const { disabled, isExpanded } = useAccordionItemContext();
+    const { orientation, disabled: disabledRoot } = useRootContext();
+    const { disabled, isExpanded } = useItemContext();
     useIsomorphicLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
@@ -279,7 +279,7 @@ const Content = React.forwardRef<ViewRef, AccordionContentProps & SlottableViewP
 
 Content.displayName = 'ContentWebAccordion';
 
-export { Content, Header, Item, Root, Trigger, useAccordionContext, useAccordionItemContext };
+export { Content, Header, Item, Root, Trigger, useRootContext, useItemContext };
 
 function isItemExpanded(rootValue: string | string[] | undefined, value: string) {
   return Array.isArray(rootValue) ? rootValue.includes(value) : rootValue === value;
