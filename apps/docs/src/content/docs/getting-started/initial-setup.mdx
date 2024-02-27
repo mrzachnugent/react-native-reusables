@@ -20,7 +20,7 @@ Follow the installation guide for NativeWind from the <a target="_blank" href="h
 - **Install the following packages:**
 
 ```bash
-npx expo install @react-native-async-storage/async-storage lucide-react-native class-variance-authority clsx tailwind-merge
+npx expo install @react-native-async-storage/async-storage class-variance-authority clsx tailwind-merge
 ```
 
 If you are using the expo-web, also install the following package:
@@ -175,7 +175,9 @@ Each color has a commented css variable name next to it.
 
 - **Use the CSS variables in your tailwind.config.js file.**
 
-If you do not use react-native-web, replace the value for the `plugin` key with `[]`
+<Aside type="caution">
+  If you do not develop for **web**, replace the value for the `plugin` key with `[]`
+</Aside>
 
 <Code
   lang='js'
@@ -329,28 +331,24 @@ export default function RootLayout() {
 
 ### Add Icons
 
-Add the `interopIcon` function in the `~/components/Icons.tsx` file. This function wraps Lucide Icons for use with Nativewind.
+- **Install the following packages:**
 
-```tsx
-import { cssInterop } from 'nativewind';
-function interopIcon(icon: LucideIcon) {
-  cssInterop(icon, {
-    className: {
-      target: 'style',
-      nativeStyleToProp: {
-        color: true,
-        opacity: true,
-      },
-    },
-  });
-}
+```bash
+  npx expo install react-native-svg lucide-react-native
 ```
 
-In the same file, import the icons you want to use and call the `interopIcon` function for each icon.
+- **Resolve the className strings into icon styles**
+
+Add the `interopIcon` function in the `~/components/Icons.tsx` file. Import the icons you want to use, wrap them with `interopIcon`, and export the icons.
+
+<Aside type="caution">
+Neglecting to wrap icons with `interopIcon` will prevent you from being able to update the `color` or `opacity` props via the `className` prop.
+</Aside>
 
 ```tsx
 import { AlertCircle, CheckCircle, XCircle } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
+
 function interopIcon(icon: LucideIcon) {
   cssInterop(icon, {
     className: {
@@ -368,12 +366,4 @@ interopIcon(CheckCircle);
 interopIcon(XCircle);
 
 export { AlertCircle, CheckCircle, XCircle };
-```
-
-Without the `interopIcon` function, you will not be able to update the `color` or `opacity` props via the `className` prop.
-
-```tsx
-import { AlertCircle } from '~/components/Icons';
-
-const Example = () => <AlertCircle className="text-foreground opacity-65" />
 ```
