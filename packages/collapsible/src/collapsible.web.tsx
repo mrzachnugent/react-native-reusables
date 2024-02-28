@@ -51,7 +51,12 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
           onOpenChange: setOpen,
         }}
       >
-        <Collapsible.Root open={open} onOpenChange={onOpenChange} disabled={disabled}>
+        <Collapsible.Root
+          open={open}
+          defaultOpen={defaultOpen}
+          onOpenChange={onOpenChange}
+          disabled={disabled}
+        >
           <Component ref={ref} {...viewProps} />
         </Collapsible.Root>
       </CollapsibleContext.Provider>

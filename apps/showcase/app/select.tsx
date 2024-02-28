@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   Select,
@@ -9,16 +9,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-  type Option,
 } from '~/components/ui/select';
-
-const VALUES = {
-  apple: 'Apple',
-  banana: 'Banana',
-  blueberry: 'Blueberry',
-  grapes: 'Grapes',
-  pineapple: 'Pineapple',
-};
 
 export default function SelectScreen() {
   const insets = useSafeAreaInsets();
@@ -32,7 +23,7 @@ export default function SelectScreen() {
   return (
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
-        <Select defaultOpen defaultValue={{ value: 'apple', label: 'apple' }}>
+        <Select defaultOpen defaultValue={{ value: 'apple', label: 'Apple' }}>
           <SelectTrigger className='w-[250px]'>
             <SelectValue
               className='text-foreground text-sm native:text-lg'

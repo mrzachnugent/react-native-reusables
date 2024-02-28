@@ -254,7 +254,7 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
       if (disabled) return;
       setTriggerPosition(null);
       setContentLayout(null);
-      onOpenChange!(false);
+      onOpenChange(false);
       onPressProp?.(ev);
     }
 

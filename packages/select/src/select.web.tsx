@@ -24,15 +24,11 @@ import type {
   Option,
 } from './types';
 
-interface IRootContext extends SelectRootProps {
-  value?: Option;
-  onValueChange?: (option: Option) => void;
+interface IRootContext extends Omit<SelectRootProps, 'defaultValue' | 'defaultOpen'> {
+  value: Option;
+  onValueChange: (option: Option) => void;
   open: boolean;
   onOpenChange: (value: boolean) => void;
-  disabled?: boolean;
-  dir?: 'ltr' | 'rtl';
-  name?: string;
-  required?: boolean;
 }
 
 const SelectContext = React.createContext<IRootContext | null>(null);
@@ -41,7 +37,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
   (
     {
       asChild,
-      value,
+      value: valueProp,
       defaultValue,
       onValueChange: onValueChangeProp,
       open: openProp,
@@ -57,14 +53,22 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       onChange: onOpenChange,
     });
 
+    const [value, setValue] = useControllableState({
+      prop: valueProp,
+      defaultProp: defaultValue,
+      onChange: onValueChangeProp,
+    });
+
     function onValueChange(val: string) {
-      onValueChangeProp?.({ value: val, label: val });
+      setValue({ value: val, label: val });
     }
+
     const Component = asChild ? Slot.View : View;
     return (
       <SelectContext.Provider
         value={{
           value,
+          onValueChange: setValue,
           open,
           onOpenChange: setOpen,
         }}

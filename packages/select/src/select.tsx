@@ -32,12 +32,11 @@ import type {
   Option,
 } from './types';
 
-interface IRootContext extends SelectRootProps {
+interface IRootContext extends Omit<SelectRootProps, 'defaultValue' | 'defaultOpen'> {
   value: Option;
   onValueChange: (option: Option) => void;
   open: boolean;
   onOpenChange: (value: boolean) => void;
-  disabled?: boolean;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
