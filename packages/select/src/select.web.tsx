@@ -18,18 +18,24 @@ import type {
   SelectItemProps,
   SelectOverlayProps,
   SelectPortalProps,
-  SelectRootProps as ISelectRootProps,
+  SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
   Option,
 } from './types';
 
-interface SelectRootProps extends Partial<ISelectRootProps> {
-  defaultOpen?: boolean;
-  defaultValue?: Option;
+interface IRootContext extends SelectRootProps {
+  value?: Option;
+  onValueChange?: (option: Option) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+  disabled?: boolean;
+  dir?: 'ltr' | 'rtl';
+  name?: string;
+  required?: boolean;
 }
 
-const SelectContext = React.createContext<SelectRootProps | null>(null);
+const SelectContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
   (
@@ -60,7 +66,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
         value={{
           value,
           open,
-          onOpenChange,
+          onOpenChange: setOpen,
         }}
       >
         <Select.Root

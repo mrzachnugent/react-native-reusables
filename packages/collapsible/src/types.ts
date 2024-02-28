@@ -1,8 +1,9 @@
 import type { ForceMountable } from '@rnr/types';
 
 interface CollapsibleRootProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
   disabled?: boolean;
 }
 

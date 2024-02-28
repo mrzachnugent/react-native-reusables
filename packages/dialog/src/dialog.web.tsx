@@ -15,14 +15,12 @@ import type {
   DialogContentProps,
   DialogOverlayProps,
   DialogPortalProps,
-  DialogRootProps as IDialogRootProps,
+  DialogRootProps,
 } from './types';
 
-interface DialogRootProps extends Partial<IDialogRootProps> {
-  defaultOpen?: boolean;
-}
+type RootContext = Required<Omit<DialogRootProps, 'defaultOpen'>>;
 
-const DialogContext = React.createContext<IDialogRootProps | null>(null);
+const DialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
   ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {

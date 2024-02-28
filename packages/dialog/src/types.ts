@@ -1,8 +1,9 @@
 import type { ForceMountable } from '@rnr/types';
 
 type DialogRootProps = {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (value: boolean) => void;
 };
 
 interface DialogPortalProps extends ForceMountable {

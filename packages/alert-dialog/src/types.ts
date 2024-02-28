@@ -1,8 +1,9 @@
 import type { ForceMountable } from '@rnr/types';
 
 type AlertDialogRootProps = {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (value: boolean) => void;
 };
 
 interface AlertDialogPortalProps extends ForceMountable {

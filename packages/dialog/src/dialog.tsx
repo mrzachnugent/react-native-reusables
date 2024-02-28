@@ -14,17 +14,14 @@ import type {
   DialogContentProps,
   DialogOverlayProps,
   DialogPortalProps,
-  DialogRootProps as IDialogRootProps,
+  DialogRootProps,
 } from './types';
 import { useControllableState } from '@rnr/hooks';
 
-interface DialogRootProps extends Partial<IDialogRootProps> {
-  defaultOpen?: boolean;
-}
-
-interface RootContext extends IDialogRootProps {
+interface RootContext extends Required<Omit<DialogRootProps, 'defaultOpen'>> {
   nativeID: string;
 }
+
 const DialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(

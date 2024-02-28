@@ -16,22 +16,28 @@ import type {
   AlertDialogPortalProps,
   AlertDialogRootProps,
 } from './types';
+import { useControllableState } from '@rnr/hooks';
 
-type AlertDialogContext = AlertDialogRootProps & {
+interface RootContext extends Required<Omit<AlertDialogRootProps, 'defaultOpen'>> {
   nativeID: string;
-};
+}
 
-const AlertDialogContext = React.createContext<AlertDialogContext | null>(null);
+const AlertDialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogRootProps>(
-  ({ asChild, open: value, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
     const nativeID = React.useId();
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
     const Component = asChild ? Slot.View : View;
     return (
       <AlertDialogContext.Provider
         value={{
-          open: value,
-          onOpenChange,
+          open,
+          onOpenChange: setOpen,
           nativeID,
         }}
       >

@@ -8,7 +8,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover
 import { Text } from '~/components/ui/typography';
 
 export default function PopoverScreen() {
-  const [open, setOpen] = React.useState(false);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -19,7 +18,7 @@ export default function PopoverScreen() {
 
   return (
     <View className='flex-1 justify-center items-center p-6'>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover>
         <PopoverTrigger asChild>
           <Button variant='outline'>
             <Text>Open popover</Text>

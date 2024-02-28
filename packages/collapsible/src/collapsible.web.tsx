@@ -1,7 +1,7 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
 import * as React from 'react';
 import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PressableRef,
@@ -11,10 +11,17 @@ import type {
 } from '@rnr/types';
 import type { CollapsibleContentProps, CollapsibleRootProps } from './types';
 
-const CollapsibleContext = React.createContext<CollapsibleRootProps | null>(null);
+type RootContext = Required<Omit<CollapsibleRootProps, 'defaultOpen'>>;
+
+const CollapsibleContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps>(
-  ({ asChild, disabled = false, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, disabled = false, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
     const augmentedRef = useAugmentedRef({ ref });
 
     React.useLayoutEffect(() => {
@@ -41,7 +48,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
         value={{
           disabled,
           open,
-          onOpenChange,
+          onOpenChange: setOpen,
         }}
       >
         <Collapsible.Root open={open} onOpenChange={onOpenChange} disabled={disabled}>

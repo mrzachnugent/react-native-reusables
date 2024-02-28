@@ -26,18 +26,18 @@ import type {
   SelectItemProps,
   SelectOverlayProps,
   SelectPortalProps,
-  SelectRootProps as ISelectRootProps,
+  SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
   Option,
 } from './types';
 
-interface SelectRootProps extends Partial<ISelectRootProps> {
-  defaultOpen?: boolean;
-  defaultValue?: Option;
-}
-
-interface IRootContext extends ISelectRootProps {
+interface IRootContext extends SelectRootProps {
+  value: Option;
+  onValueChange: (option: Option) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+  disabled?: boolean;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;

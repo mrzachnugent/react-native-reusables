@@ -32,7 +32,7 @@ export default function SelectScreen() {
   return (
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
-        <Select>
+        <Select defaultOpen defaultValue={{ value: 'apple', label: 'apple' }}>
           <SelectTrigger className='w-[250px]'>
             <SelectValue
               className='text-foreground text-sm native:text-lg'

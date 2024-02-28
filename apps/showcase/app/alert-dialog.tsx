@@ -15,10 +15,9 @@ import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/typography';
 
 export default function AlertDialogScreen() {
-  const [open, setOpen] = React.useState(false);
   return (
     <View className='flex-1 justify-center items-center'>
-      <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialog defaultOpen>
         <AlertDialogTrigger asChild>
           <Button variant='outline'>
             <Text>Show Alert Dialog</Text>
