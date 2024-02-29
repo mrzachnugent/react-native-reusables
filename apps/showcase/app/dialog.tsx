@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ScrollView } from 'react-native';
 import { Button } from '~/components/ui/button';
 import {
