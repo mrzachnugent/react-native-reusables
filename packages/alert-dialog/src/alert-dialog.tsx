@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { BackHandler, Pressable, Text, View, type GestureResponderEvent } from 'react-native';
+import { useControllableState } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -10,34 +9,32 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import { BackHandler, Pressable, Text, View, type GestureResponderEvent } from 'react-native';
 import type {
   AlertDialogContentProps,
   AlertDialogOverlayProps,
   AlertDialogPortalProps,
   AlertDialogRootProps,
+  RootContext,
 } from './types';
-import { useControllableState } from '@rnr/hooks';
 
-interface RootContext extends Required<Omit<AlertDialogRootProps, 'defaultOpen'>> {
-  nativeID: string;
-}
-
-const AlertDialogContext = React.createContext<RootContext | null>(null);
+const AlertDialogContext = React.createContext<(RootContext & { nativeID: string }) | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogRootProps>(
-  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open: openProp, defaultOpen, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
     const nativeID = React.useId();
-    const [open = false, setOpen] = useControllableState({
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
     const Component = asChild ? Slot.View : View;
     return (
       <AlertDialogContext.Provider
         value={{
           open,
-          onOpenChange: setOpen,
+          onOpenChange,
           nativeID,
         }}
       >

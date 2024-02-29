@@ -45,7 +45,7 @@ export default function ContextScreen() {
             }
           }}
         >
-          <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
+          <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] mx-auto web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
             <Text className='text-foreground text-sm native:text-lg'>
               {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
             </Text>

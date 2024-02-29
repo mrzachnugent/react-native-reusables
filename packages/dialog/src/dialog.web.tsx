@@ -1,6 +1,4 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import * as React from 'react';
-import { Pressable, Text, View, type GestureResponderEvent } from 'react-native';
 import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
@@ -11,27 +9,28 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import { Pressable, Text, View, type GestureResponderEvent } from 'react-native';
 import type {
   DialogContentProps,
   DialogOverlayProps,
   DialogPortalProps,
   DialogRootProps,
+  RootContext,
 } from './types';
-
-type RootContext = Required<Omit<DialogRootProps, 'defaultOpen'>>;
 
 const DialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
-  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
-    const [open = false, setOpen] = useControllableState({
+  ({ asChild, open: openProp, defaultOpen, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
     const Component = asChild ? Slot.View : View;
     return (
-      <DialogContext.Provider value={{ open, onOpenChange: setOpen }}>
+      <DialogContext.Provider value={{ open, onOpenChange }}>
         <Dialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
           <Component ref={ref} {...viewProps} />
         </Dialog.Root>

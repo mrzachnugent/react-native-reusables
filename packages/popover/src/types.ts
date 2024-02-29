@@ -1,5 +1,10 @@
 import type { ForceMountable } from '@rnr/types';
 
+interface RootContext {
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+}
+
 interface PopoverRootProps {
   open?: boolean;
   defaultOpen?: boolean;
@@ -22,4 +27,4 @@ interface PopoverOverlayProps extends ForceMountable {
   closeOnPress?: boolean;
 }
 
-export type { PopoverRootProps, PopoverPortalProps, PopoverOverlayProps };
+export type { PopoverRootProps, PopoverPortalProps, PopoverOverlayProps, RootContext };

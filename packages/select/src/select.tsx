@@ -1,14 +1,4 @@
-import * as React from 'react';
-import {
-  BackHandler,
-  Pressable,
-  Text,
-  View,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useRelativePosition, type LayoutPosition, useControllableState } from '@rnr/hooks';
+import { useControllableState, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -21,7 +11,18 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  Text,
+  View,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
 import type {
+  RootContext,
   SelectContentProps,
   SelectItemProps,
   SelectOverlayProps,
@@ -29,14 +30,9 @@ import type {
   SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
-  Option,
 } from './types';
 
-interface IRootContext extends Omit<SelectRootProps, 'defaultValue' | 'defaultOpen'> {
-  value: Option;
-  onValueChange: (option: Option) => void;
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+interface IRootContext extends RootContext {
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -52,25 +48,25 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       asChild,
       value: valueProp,
       defaultValue,
-      onValueChange,
+      onValueChange: onValueChangeProp,
       open: openProp,
       defaultOpen,
-      onOpenChange,
+      onOpenChange: onOpenChangeProp,
       disabled,
       ...viewProps
     },
     ref
   ) => {
     const nativeID = React.useId();
-    const [open = false, setOpen] = useControllableState({
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
-    const [value, setValue] = useControllableState({
+    const [value, onValueChange] = useControllableState({
       prop: valueProp,
       defaultProp: defaultValue,
-      onChange: onValueChange,
+      onChange: onValueChangeProp,
     });
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
@@ -80,9 +76,9 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       <RootContext.Provider
         value={{
           value,
-          onValueChange: setValue,
+          onValueChange,
           open,
-          onOpenChange: setOpen,
+          onOpenChange,
           disabled,
           contentLayout,
           nativeID,
@@ -329,7 +325,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps & SelectItem
         onOpenChange(false);
       }
 
-      onValueChange(value?.value === itemValue ? undefined : { value: itemValue, label });
+      onValueChange({ value: itemValue, label });
       onPressProp?.(ev);
     }
 

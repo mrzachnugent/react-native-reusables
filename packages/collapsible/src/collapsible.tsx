@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import { useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PressableRef,
@@ -7,21 +6,29 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
-import type { CollapsibleContentProps, CollapsibleRootProps } from './types';
-import { useControllableState } from '@rnr/hooks';
+import * as React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import type { CollapsibleContentProps, CollapsibleRootProps, RootContext } from './types';
 
-interface RootContext extends Required<Omit<CollapsibleRootProps, 'defaultOpen'>> {
-  nativeID: string;
-}
-const CollapsibleContext = React.createContext<RootContext | null>(null);
+const CollapsibleContext = React.createContext<(RootContext & { nativeID: string }) | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps>(
-  ({ asChild, disabled = false, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
+  (
+    {
+      asChild,
+      disabled = false,
+      open: openProp,
+      defaultOpen,
+      onOpenChange: onOpenChangeProp,
+      ...viewProps
+    },
+    ref
+  ) => {
     const nativeID = React.useId();
-    const [open = false, setOpen] = useControllableState({
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
 
     const Component = asChild ? Slot.View : View;
@@ -30,7 +37,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
         value={{
           disabled,
           open,
-          onOpenChange: setOpen,
+          onOpenChange,
           nativeID,
         }}
       >

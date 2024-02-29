@@ -1,6 +1,4 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
-import * as React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
 import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
@@ -9,18 +7,28 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
-import type { CollapsibleContentProps, CollapsibleRootProps } from './types';
-
-type RootContext = Required<Omit<CollapsibleRootProps, 'defaultOpen'>>;
+import * as React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+import type { CollapsibleContentProps, CollapsibleRootProps, RootContext } from './types';
 
 const CollapsibleContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps>(
-  ({ asChild, disabled = false, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
-    const [open = false, setOpen] = useControllableState({
+  (
+    {
+      asChild,
+      disabled = false,
+      open: openProp,
+      defaultOpen,
+      onOpenChange: onOpenChangeProp,
+      ...viewProps
+    },
+    ref
+  ) => {
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
     const augmentedRef = useAugmentedRef({ ref });
 
@@ -48,7 +56,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
         value={{
           disabled,
           open,
-          onOpenChange: setOpen,
+          onOpenChange,
         }}
       >
         <Collapsible.Root

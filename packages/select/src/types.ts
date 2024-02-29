@@ -7,6 +7,14 @@ type Option =
     }
   | undefined;
 
+interface RootContext {
+  value: Option;
+  onValueChange: (option: Option) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+  disabled?: boolean;
+}
+
 interface SelectRootProps {
   value?: Option;
   defaultValue?: Option;
@@ -68,6 +76,7 @@ interface SelectSeparatorProps {
 
 export type {
   Option,
+  RootContext,
   SelectContentProps,
   SelectItemProps,
   SelectOverlayProps,

@@ -1,5 +1,10 @@
 import type { ForceMountable } from '@rnr/types';
 
+type RootContext = {
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+};
+
 type DialogRootProps = {
   open?: boolean;
   defaultOpen?: boolean;
@@ -46,4 +51,10 @@ type DialogContentProps = ForceMountable & {
   onPointerDownOutside?: (ev: Event) => void;
 };
 
-export type { DialogRootProps, DialogPortalProps, DialogOverlayProps, DialogContentProps };
+export type {
+  DialogContentProps,
+  DialogOverlayProps,
+  DialogPortalProps,
+  DialogRootProps,
+  RootContext,
+};

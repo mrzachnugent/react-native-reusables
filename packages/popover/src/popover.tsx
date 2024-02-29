@@ -1,13 +1,4 @@
-import * as React from 'react';
-import {
-  BackHandler,
-  Pressable,
-  View,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useRelativePosition, type LayoutPosition, useControllableState } from '@rnr/hooks';
+import { useControllableState, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -17,9 +8,23 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
-import type { PopoverOverlayProps, PopoverPortalProps, PopoverRootProps } from './types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  View,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
+import type {
+  PopoverOverlayProps,
+  PopoverPortalProps,
+  PopoverRootProps,
+  RootContext,
+} from './types';
 
-interface IRootContext extends Required<Omit<PopoverRootProps, 'defaultOpen'>> {
+interface IRootContext extends RootContext {
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -30,11 +35,11 @@ interface IRootContext extends Required<Omit<PopoverRootProps, 'defaultOpen'>> {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
-  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
-    const [open = false, setOpen] = useControllableState({
+  ({ asChild, open: openProp, defaultOpen, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
     const nativeID = React.useId();
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
@@ -45,7 +50,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
       <RootContext.Provider
         value={{
           open,
-          onOpenChange: setOpen,
+          onOpenChange,
           contentLayout,
           nativeID,
           setContentLayout,

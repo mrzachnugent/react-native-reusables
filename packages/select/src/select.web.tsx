@@ -1,6 +1,4 @@
 import * as Select from '@radix-ui/react-select';
-import * as React from 'react';
-import { Pressable, Text, View } from 'react-native';
 import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
@@ -13,7 +11,10 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import { Pressable, Text, View } from 'react-native';
 import type {
+  RootContext,
   SelectContentProps,
   SelectItemProps,
   SelectOverlayProps,
@@ -21,18 +22,14 @@ import type {
   SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
-  Option,
 } from './types';
 
-interface IRootContext extends Omit<SelectRootProps, 'defaultValue' | 'defaultOpen'> {
-  value: Option;
-  onValueChange: (option: Option) => void;
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
-}
+const SelectContext = React.createContext<RootContext | null>(null);
 
-const SelectContext = React.createContext<IRootContext | null>(null);
-
+/**
+ * @web Parameter of `onValueChange` has the value of `value` for the `value` and the `label` of the selected Option
+ * @ex When an Option with a label of Green Apple, the parameter passed to `onValueChange` is { value: 'green-apple', label: 'green-apple' }
+ */
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
   (
     {
@@ -42,25 +39,25 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       onValueChange: onValueChangeProp,
       open: openProp,
       defaultOpen,
-      onOpenChange,
+      onOpenChange: onOpenChangeProp,
       ...viewProps
     },
     ref
   ) => {
-    const [open = false, setOpen] = useControllableState({
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
 
-    const [value, setValue] = useControllableState({
+    const [value, onValueChange] = useControllableState({
       prop: valueProp,
       defaultProp: defaultValue,
       onChange: onValueChangeProp,
     });
 
-    function onValueChange(val: string) {
-      setValue({ value: val, label: val });
+    function onStrValueChange(val: string) {
+      onValueChange({ value: val, label: val });
     }
 
     const Component = asChild ? Slot.View : View;
@@ -68,18 +65,18 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       <SelectContext.Provider
         value={{
           value,
-          onValueChange: setValue,
+          onValueChange,
           open,
-          onOpenChange: setOpen,
+          onOpenChange,
         }}
       >
         <Select.Root
           value={value?.value}
           defaultValue={defaultValue?.value}
-          onValueChange={onValueChange}
+          onValueChange={onStrValueChange}
           open={open}
           defaultOpen={defaultOpen}
-          onOpenChange={setOpen}
+          onOpenChange={onOpenChange}
         >
           <Component ref={ref} {...viewProps} />
         </Select.Root>

@@ -16,7 +16,7 @@ import { Text } from '~/components/ui/typography';
 export default function AlertDialogScreen() {
   return (
     <View className='flex-1 justify-center items-center'>
-      <AlertDialog defaultOpen>
+      <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant='outline'>
             <Text>Show Alert Dialog</Text>

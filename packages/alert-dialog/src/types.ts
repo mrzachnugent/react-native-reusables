@@ -2,9 +2,14 @@ import type { ForceMountable } from '@rnr/types';
 
 type AlertDialogRootProps = {
   open?: boolean;
-  defaultOpen?: boolean;
   onOpenChange?: (value: boolean) => void;
+  defaultOpen?: boolean;
 };
+
+interface RootContext {
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+}
 
 interface AlertDialogPortalProps extends ForceMountable {
   children: React.ReactNode;
@@ -40,4 +45,5 @@ export type {
   AlertDialogPortalProps,
   AlertDialogOverlayProps,
   AlertDialogContentProps,
+  RootContext,
 };

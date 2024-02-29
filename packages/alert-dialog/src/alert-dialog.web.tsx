@@ -16,22 +16,21 @@ import type {
   AlertDialogOverlayProps,
   AlertDialogPortalProps,
   AlertDialogRootProps,
+  RootContext,
 } from './types';
-
-type RootContext = Required<Omit<AlertDialogRootProps, 'defaultOpen'>>;
 
 const AlertDialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogRootProps>(
-  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
-    const [open = false, setOpen] = useControllableState({
+  ({ asChild, open: openProp, defaultOpen, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
+    const [open = false, onOpenChange] = useControllableState({
       prop: openProp,
       defaultProp: defaultOpen,
-      onChange: onOpenChange,
+      onChange: onOpenChangeProp,
     });
     const Component = asChild ? Slot.View : View;
     return (
-      <AlertDialogContext.Provider value={{ open, onOpenChange: setOpen }}>
+      <AlertDialogContext.Provider value={{ open, onOpenChange }}>
         <AlertDialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
           <Component ref={ref} {...viewProps} />
         </AlertDialog.Root>
