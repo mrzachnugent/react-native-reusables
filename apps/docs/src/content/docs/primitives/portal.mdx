@@ -4,138 +4,49 @@ description: Portals let you render its children into a different part of your a
 ---
 
 {/* prettier-ignore-start */}
-{ /* prettier-ignore-end */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Card } from '@astrojs/starlight/components';
+import importedIndexCode from '@/../node_modules/@rnr/portal/src/index.ts?raw';
+import importedPortalCode from '@/../node_modules/@rnr/portal/src/portal.tsx?raw';
+
+<LinkButton target="_blank" href="https://github.com/pmndrs/zustand">
+  Zustand
+</LinkButton>
+
+<br />
 
 Portals let you render its children into a different part of your app.
 
-```tsx
-import { Portal, PortalHost } from '~/components/primitives/portal';
-
-function Root() {
-  return (
-    <>
-      <Header />
-      <Body />
-      {/* Children of <Portal /> will render here */}
-      <PortalHost />
-    </>
-  );
-}
-
-function Body() {
-  return (
-    <>
-      <Hero />
-      {/* <Footer /> will render as a child of <PortalHost /> in the < Root/> */}
-      {/* It will not render between <Hero /> and <Section /> */}
-      <Portal name='unique-name'>
-        <Footer />
-      </Portal>
-      <Section />
-      <Section2 />
-    </>
-  );
-}
-```
-
-## Features
+<Card title="Features">
 
 - Defaults to a single host
 - Supports multiple hosts
 - Supports multiple portals for a single host
 
-## How to add
+</Card>
 
-The portal primitive depends on one external library (<a target="_blank" href="https://github.com/pmndrs/zustand">zustand</a>).
-Once it is installed, you can copy the primitive to your codebase.
+## Installation
 
-### Install dependency
+**Install <a target="_blank" href="https://github.com/pmndrs/zustand">zustand</a>**
 
 ```bash
 npx expo install zustand
 ```
 
-### Copy/Paste
+**Copy/paste the following code to  `~/components/primitives/portal/portal.tsx`**
 
-Create a file `~/components/primitives/portal/portal-native.tsx` and copy/paste the following code into that new file:
+<Code code={importedPortalCode} lang="tsx" title="~/components/primitives/portal/portal.tsx" />
 
-```tsx
-import * as React from 'react';
-import { create } from 'zustand';
+**Then, copy/paste the following code to `~/components/primitives/portal/index.ts`**
 
-const DEFAULT_PORTAL_HOST = 'INTERNAL_PRIMITIVE_DEFAULT_HOST_NAME';
+<Code code={importedIndexCode} lang="tsx" title="~/components/primitives/portal/index.ts" />
 
-type PortalMap = Map<string, React.ReactNode>;
-type PortalHostMap = Map<string, PortalMap>;
-
-const usePortal = create<{ map: PortalHostMap }>(() => ({
-  map: new Map<string, PortalMap>().set(
-    DEFAULT_PORTAL_HOST,
-    new Map<string, React.ReactNode>()
-  ),
-}));
-
-const updatePortal = (
-  hostName: string,
-  name: string,
-  children: React.ReactNode
-) => {
-  usePortal.setState((prev) => {
-    const next = new Map(prev.map);
-    const portal = next.get(hostName) ?? new Map<string, React.ReactNode>();
-    portal.set(name, children);
-    next.set(hostName, portal);
-    return { map: next };
-  });
-};
-const removePortal = (hostName: string, name: string) => {
-  usePortal.setState((prev) => {
-    const next = new Map(prev.map);
-    const portal = next.get(hostName) ?? new Map<string, React.ReactNode>();
-    portal.delete(name);
-    next.set(hostName, portal);
-    return { map: next };
-  });
-};
-
-export function PortalHost({ name = DEFAULT_PORTAL_HOST }: { name?: string }) {
-  const portalMap =
-    usePortal((state) => state.map).get(name) ??
-    new Map<string, React.ReactNode>();
-  if (portalMap.size === 0) return null;
-  return <>{Array.from(portalMap.values())}</>;
-}
-
-export function Portal({
-  name,
-  hostName = DEFAULT_PORTAL_HOST,
-  children,
-}: {
-  name: string;
-  hostName?: string;
-  children: React.ReactNode;
-}) {
-  React.useEffect(() => {
-    updatePortal(hostName, name, children);
-  }, [hostName, name, children]);
-
-  React.useEffect(() => {
-    return () => {
-      removePortal(hostName, name);
-    };
-  }, [hostName, name]);
-
-  return null;
-}
-```
-
-Then, create `~/components/primitives/portal/index.ts` and copy/paste the following code into that new file:
-
-```ts
-export * from './portal-native';
-```
-
-To use a portal on the web, it is recommended to use [createPortal](https://react.dev/reference/react-dom/createPortal) from `react-dom` instead.
+<Aside>
+  On the web, it is recommended to use [createPortal](https://react.dev/reference/react-dom/createPortal) from `react-dom` instead.
+</Aside>
 
 ## Usage
 
@@ -150,7 +61,7 @@ function Root() {
   return (
     <>
       <Stack />
-      {/* The default host does not require a `name` props */}
+      {/* Children of <Portal /> will render here */}
       <PortalHost />
     </>
   );
@@ -166,6 +77,8 @@ function Card() {
   return (
     <Wrapper>
       <Content />
+      {/* Children of `Portal` will be rendered as a child of `PortalHost` */}
+      {/* It will not render in the `Card` component */}
       <Portal name='card-portal'>
         <View
           style={[
