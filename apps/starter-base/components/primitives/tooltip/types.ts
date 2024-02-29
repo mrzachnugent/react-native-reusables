@@ -1,4 +1,4 @@
-import type { ForceMountable } from '@rnr/types';
+import type { ForceMountable } from '~/components/primitives/types';
 
 interface RootContext extends TooltipRootProps {
   open: boolean;

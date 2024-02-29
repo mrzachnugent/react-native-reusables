@@ -4,7 +4,7 @@ description: NativeWind Light and Dark Mode
 ---
 
 {/* prettier-ignore-start */}
-{ /* prettier-ignore-end */}
+{/* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
 import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
@@ -92,6 +92,10 @@ export function useColorScheme() {
 <Code lang="css" 
 title="~/global.css"
 code={`
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -270,7 +274,7 @@ const { hairlineWidth } = require('nativewind/theme');
 /** @type {import('tailwindcss').Config} \*/
 module.exports = {
   darkMode: 'class',
-  content: ['./app/**/_.{ts,tsx}', './components/\*\*/_.{ts,tsx}'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
@@ -333,6 +337,8 @@ and store the selected theme in the async storage.
   lang='tsx'
   title='_layout.tsx'
   code={`
+import '~/global.css';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
@@ -418,7 +424,7 @@ Neglecting to wrap icons with `interopIcon` will prevent you from being able to 
 </Aside>
 
 ```tsx
-import { AlertCircle, CheckCircle, XCircle } from 'lucide-react-native';
+import { AlertCircle, CheckCircle, LucideIcon, XCircle } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
 
 function interopIcon(icon: LucideIcon) {

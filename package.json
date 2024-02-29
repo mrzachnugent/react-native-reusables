@@ -3,9 +3,11 @@
   "private": true,
   "scripts": {
     "dev": "turbo dev",
+    "dev:docs": "turbo dev --filter=docs",
     "dev:showcase": "turbo dev --filter=showcase --concurrency 32",
     "dev:showcase:web": "turbo dev:web --filter=showcase --concurrency 32",
-    "dev:docs": "turbo dev --filter=docs",
+    "dev:starter-base": "turbo dev --filter=starter-base",
+    "dev:starter-base:web": "turbo dev:web --filter=starter-base",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",

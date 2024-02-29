@@ -7,16 +7,20 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { useControllableState, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
-import { Portal as RNPPortal } from '@rnr/portal';
-import * as Slot from '@rnr/slot';
+import {
+  useControllableState,
+  useRelativePosition,
+  type LayoutPosition,
+} from '~/components/primitives/hooks';
+import { Portal as RNPPortal } from '~/components/primitives/portal';
+import * as Slot from '~/components/primitives/slot';
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rnr/types';
+} from '~/components/primitives/types';
 import type {
   RootContext,
   TooltipOverlayProps,

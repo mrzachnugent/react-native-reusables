@@ -9,7 +9,7 @@ import {
 } from '~/components/ui/card';
 import { Text } from '~/components/ui/text';
 
-export default function ButtonScreen() {
+export default function CardScreen() {
   return (
     <View className='flex-1 justify-center items-center gap-5 p-6'>
       <Card className='w-full max-w-sm'>
