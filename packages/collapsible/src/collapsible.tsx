@@ -8,15 +8,21 @@ import type {
   ViewRef,
 } from '@rnr/types';
 import type { CollapsibleContentProps, CollapsibleRootProps } from './types';
+import { useControllableState } from '@rnr/hooks';
 
-interface RootContext extends CollapsibleRootProps {
+interface RootContext extends Required<Omit<CollapsibleRootProps, 'defaultOpen'>> {
   nativeID: string;
 }
 const CollapsibleContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps>(
-  ({ asChild, disabled = false, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, disabled = false, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
     const nativeID = React.useId();
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -24,7 +30,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
         value={{
           disabled,
           open,
-          onOpenChange,
+          onOpenChange: setOpen,
           nativeID,
         }}
       >

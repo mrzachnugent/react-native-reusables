@@ -1,7 +1,7 @@
 import * as Select from '@radix-ui/react-select';
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   ForceMountable,
@@ -21,25 +21,65 @@ import type {
   SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
+  Option,
 } from './types';
 
-const SelectContext = React.createContext<SelectRootProps | null>(null);
+interface IRootContext extends Omit<SelectRootProps, 'defaultValue' | 'defaultOpen'> {
+  value: Option;
+  onValueChange: (option: Option) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+}
+
+const SelectContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
-  ({ asChild, value, onValueChange: onValueChangeProp, open, onOpenChange, ...viewProps }, ref) => {
+  (
+    {
+      asChild,
+      value: valueProp,
+      defaultValue,
+      onValueChange: onValueChangeProp,
+      open: openProp,
+      defaultOpen,
+      onOpenChange,
+      ...viewProps
+    },
+    ref
+  ) => {
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
+
+    const [value, setValue] = useControllableState({
+      prop: valueProp,
+      defaultProp: defaultValue,
+      onChange: onValueChangeProp,
+    });
+
     function onValueChange(val: string) {
-      onValueChangeProp({ value: val, label: val });
+      setValue({ value: val, label: val });
     }
+
     const Component = asChild ? Slot.View : View;
     return (
       <SelectContext.Provider
-        value={{ value, onValueChange: onValueChangeProp, open, onOpenChange }}
+        value={{
+          value,
+          onValueChange: setValue,
+          open,
+          onOpenChange: setOpen,
+        }}
       >
         <Select.Root
           value={value?.value}
+          defaultValue={defaultValue?.value}
           onValueChange={onValueChange}
           open={open}
-          onOpenChange={onOpenChange}
+          defaultOpen={defaultOpen}
+          onOpenChange={setOpen}
         >
           <Component ref={ref} {...viewProps} />
         </Select.Root>

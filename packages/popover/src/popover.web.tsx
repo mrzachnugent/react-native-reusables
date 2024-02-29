@@ -1,7 +1,7 @@
 import * as Popover from '@radix-ui/react-popover';
 import * as React from 'react';
 import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PositionedContentProps,
@@ -12,14 +12,21 @@ import type {
 } from '@rnr/types';
 import type { PopoverOverlayProps, PopoverPortalProps, PopoverRootProps } from './types';
 
-const RootContext = React.createContext<PopoverRootProps | null>(null);
+type RootContext = Required<Omit<PopoverRootProps, 'defaultOpen'>>;
+
+const RootContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
     const Component = asChild ? Slot.View : View;
     return (
-      <RootContext.Provider value={{ open, onOpenChange }}>
-        <Popover.Root open={open} onOpenChange={onOpenChange}>
+      <RootContext.Provider value={{ open, onOpenChange: setOpen }}>
+        <Popover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
           <Component ref={ref} {...viewProps} />
         </Popover.Root>
       </RootContext.Provider>

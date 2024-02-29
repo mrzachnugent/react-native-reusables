@@ -10,6 +10,7 @@ packages/*/build
 .expo
 __generated__
 web-build
+expo-env.d.ts
 
 # macOS
 .DS_Store

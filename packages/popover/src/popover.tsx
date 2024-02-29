@@ -7,7 +7,7 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+import { useRelativePosition, type LayoutPosition, useControllableState } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -19,7 +19,7 @@ import type {
 } from '@rnr/types';
 import type { PopoverOverlayProps, PopoverPortalProps, PopoverRootProps } from './types';
 
-interface IRootContext extends PopoverRootProps {
+interface IRootContext extends Required<Omit<PopoverRootProps, 'defaultOpen'>> {
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -30,7 +30,12 @@ interface IRootContext extends PopoverRootProps {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
     const nativeID = React.useId();
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
@@ -40,7 +45,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
       <RootContext.Provider
         value={{
           open,
-          onOpenChange,
+          onOpenChange: setOpen,
           contentLayout,
           nativeID,
           setContentLayout,

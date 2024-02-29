@@ -1,7 +1,7 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import * as React from 'react';
 import { Pressable, Text, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PressableRef,
@@ -18,14 +18,21 @@ import type {
   AlertDialogRootProps,
 } from './types';
 
-const AlertDialogContext = React.createContext<AlertDialogRootProps | null>(null);
+type RootContext = Required<Omit<AlertDialogRootProps, 'defaultOpen'>>;
+
+const AlertDialogContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AlertDialogRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, open: openProp, defaultOpen, onOpenChange, ...viewProps }, ref) => {
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
     const Component = asChild ? Slot.View : View;
     return (
-      <AlertDialogContext.Provider value={{ open, onOpenChange }}>
-        <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
+      <AlertDialogContext.Provider value={{ open, onOpenChange: setOpen }}>
+        <AlertDialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
           <Component ref={ref} {...viewProps} />
         </AlertDialog.Root>
       </AlertDialogContext.Provider>

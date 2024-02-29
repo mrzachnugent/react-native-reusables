@@ -8,7 +8,7 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+import { useRelativePosition, type LayoutPosition, useControllableState } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -29,9 +29,14 @@ import type {
   SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
+  Option,
 } from './types';
 
-interface IRootContext extends SelectRootProps {
+interface IRootContext extends Omit<SelectRootProps, 'defaultValue' | 'defaultOpen'> {
+  value: Option;
+  onValueChange: (option: Option) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -42,8 +47,31 @@ interface IRootContext extends SelectRootProps {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
-  ({ asChild, value, onValueChange, open, onOpenChange, disabled, ...viewProps }, ref) => {
+  (
+    {
+      asChild,
+      value: valueProp,
+      defaultValue,
+      onValueChange,
+      open: openProp,
+      defaultOpen,
+      onOpenChange,
+      disabled,
+      ...viewProps
+    },
+    ref
+  ) => {
     const nativeID = React.useId();
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange,
+    });
+    const [value, setValue] = useControllableState({
+      prop: valueProp,
+      defaultProp: defaultValue,
+      onChange: onValueChange,
+    });
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
 
@@ -52,9 +80,9 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       <RootContext.Provider
         value={{
           value,
-          onValueChange,
+          onValueChange: setValue,
           open,
-          onOpenChange,
+          onOpenChange: setOpen,
           disabled,
           contentLayout,
           nativeID,

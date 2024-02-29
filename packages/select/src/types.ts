@@ -8,10 +8,12 @@ type Option =
   | undefined;
 
 interface SelectRootProps {
-  value: Option;
-  onValueChange: (option: Option) => void;
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  value?: Option;
+  defaultValue?: Option;
+  onValueChange?: (option: Option) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (value: boolean) => void;
   disabled?: boolean;
   /**
    * Platform: WEB ONLY
