@@ -28,7 +28,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 
 export default function DropdownMenuScreen() {
   const [open, setOpen] = React.useState(false);

@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 
 export default function ButtonScreen() {
   return (

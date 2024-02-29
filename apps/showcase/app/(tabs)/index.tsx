@@ -43,7 +43,8 @@ import {
 } from '~/components/ui/dropdown-menu';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
-import { Muted, Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
+import { Muted } from '~/components/ui/typography';
 import { cn } from '~/lib/utils';
 
 export default function ExampleScreen() {

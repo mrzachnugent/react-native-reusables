@@ -1,26 +1,8 @@
 import * as Slot from '@rnr/slot';
 import { SlottableTextProps, TextRef } from '@rnr/types';
-import { Platform } from 'react-native';
-import { cn } from '../../lib/utils';
 import * as React from 'react';
-import { Text as RNText } from 'react-native';
-
-const TextClassContext = React.createContext<string | undefined>(undefined);
-
-const Text = React.forwardRef<TextRef, SlottableTextProps>(
-  ({ className, asChild = false, ...props }, ref) => {
-    const textClass = React.useContext(TextClassContext);
-    const Component = asChild ? Slot.Text : RNText;
-    return (
-      <Component
-        className={cn('text-base text-foreground web:select-text', textClass, className)}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Text.displayName = 'Text';
+import { Platform, Text as RNText } from 'react-native';
+import { cn } from '../../lib/utils';
 
 const H1 = React.forwardRef<TextRef, SlottableTextProps>(
   ({ className, asChild = false, ...props }, ref) => {
@@ -102,7 +84,19 @@ const H4 = React.forwardRef<TextRef, SlottableTextProps>(
 
 H4.displayName = 'H4';
 
-const P = Text;
+const P = React.forwardRef<TextRef, SlottableTextProps>(
+  ({ className, asChild = false, ...props }, ref) => {
+    const Component = asChild ? Slot.Text : RNText;
+    return (
+      <Component
+        className={cn('text-base text-foreground web:select-text', className)}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+P.displayName = 'P';
 
 const BlockQuote = React.forwardRef<TextRef, SlottableTextProps>(
   ({ className, asChild = false, ...props }, ref) => {
@@ -207,4 +201,4 @@ const Muted = React.forwardRef<TextRef, SlottableTextProps>(
 
 Muted.displayName = 'Muted';
 
-export { H1, H2, H3, H4, P, BlockQuote, Code, Lead, Large, Small, Muted, Text, TextClassContext };
+export { BlockQuote, Code, H1, H2, H3, H4, Large, Lead, Muted, P, Small };

@@ -3,7 +3,7 @@ import { Platform, ScrollView, TextInput, View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
 export default function InputScreen() {

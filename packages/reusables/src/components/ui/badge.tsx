@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import * as Slot from '@rnr/slot';
 import type { SlottableViewProps } from '@rnr/types';
 import { cn } from '../../lib/utils';
-import { TextClassContext } from './typography';
+import { TextClassContext } from './text';
 
 const badgeVariants = cva(
   'web:inline-flex items-center rounded-full border border-border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2',

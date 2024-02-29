@@ -5,7 +5,7 @@ import { CalendarDays } from '~/components/Icons';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 
 export default function HoverCardScreen() {
   const [open, setOpen] = React.useState(false);

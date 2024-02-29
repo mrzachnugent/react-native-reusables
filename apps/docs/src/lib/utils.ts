@@ -9,6 +9,7 @@ export function fixImports(rawfile: string) {
   return rawfile
     .replace('../Icons', '~/components/Icons')
     .replace('../../lib', '~/lib')
-    .replace('../../components', '~/components')
-    .replace('@rnr', '~/components/primitives');
+    .replace('./typography', '~/components/ui/typography')
+    .replaceAll('../../components', '~/components')
+    .replaceAll('@rnr', '~/components/primitives');
 }

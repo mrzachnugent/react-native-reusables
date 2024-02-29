@@ -17,7 +17,7 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from '~/components/ui/context-menu';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 
 export default function ContextScreen() {
   const [open, setOpen] = React.useState(false);

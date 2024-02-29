@@ -1,0 +1,53 @@
+---
+title: Typography
+description: Accessible styled typography components with an inheritance system.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+import importedTypographyCode from '@rnr/reusables/components/ui/typography?raw';
+
+
+<LinkButton href="/primitives/slot">
+  Slot primitive
+</LinkButton>
+<LinkButton href="/primitives/types">
+  Types primitive
+</LinkButton>
+<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/typography">
+  Demo
+</LinkButton>
+
+<br />
+
+Semantic and styled typography components.
+
+- `H1`
+- `H2`
+- `H3`
+- `H4`
+- `P`
+- `BlockQuote`
+- `Code`
+- `Lead`
+- `Large`
+- `Small`
+- `Muted`
+
+## Installation
+
+<Aside type="tip" title="Uses shared primitives">
+    Before copy/pasting, add the <a href="/primitives/slot" className='text-white font-bold'>slot primitive</a> and <a href="/primitives/types" className='text-white font-bold'>types primitive</a> to your project.
+</Aside>
+
+**Copy/paste the following code to `~/components/ui/typography.tsx`:**
+
+<Code code={importedTypographyCode} lang="tsx" title="~/components/ui/typography.tsx" />
+
+#### Props and usage
+
+Accepts all the props of the React-Native [`Text`](https://reactnative.dev/docs/text) component and is used the same way.

@@ -32,7 +32,7 @@ import { RadioGroup } from '../../components/ui/radio-group';
 import { Select, type Option } from '../../components/ui/select';
 import { Switch } from '../../components/ui/switch';
 import { Textarea } from '../../components/ui/textarea';
-import { Text } from './typography';
+import { Text } from './text';
 import { cn } from '../../lib/utils';
 
 const Form = FormProvider;

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import { PRIMITIVES } from '~/lib/constants';
 import { cn } from '~/lib/utils';
 

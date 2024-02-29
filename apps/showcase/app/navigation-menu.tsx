@@ -13,7 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '~/components/ui/navigation-menu';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
 export default function MenubarScreen() {

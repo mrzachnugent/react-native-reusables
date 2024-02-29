@@ -47,8 +47,12 @@ export default defineConfig({
               link: '/components/accordion/',
             },
             {
-              label: 'Dialog',
-              link: '/components/dialog/',
+              label: 'Text',
+              link: '/components/text/',
+            },
+            {
+              label: 'Typography',
+              link: '/components/typography/',
             },
           ],
         },
@@ -60,28 +64,11 @@ export default defineConfig({
               link: '/primitives/overview/',
             },
             {
-              label: 'Dialog',
-              link: '/primitives/dialog/',
-            },
-            {
               label: 'Portal',
               link: '/primitives/portal/',
             },
           ],
         },
-        // {
-        //   label: 'Utilities',
-        //   items: [
-        //     {
-        //       label: 'Android Navigation Bar',
-        //       link: '/utilities/android-navigation-bar/',
-        //     },
-        //     {
-        //       label: 'Keyboard',
-        //       link: '/utilities/keyboard/',
-        //     },
-        //   ],
-        // },
       ],
       customCss: ['./src/tailwind.css'],
     }),

@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { View } from 'react-native';
-import { H1, Muted, Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
+import { H1, Muted } from '~/components/ui/typography';
 
 export default function GreenScreen() {
   return (

@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui/table';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
 const MIN_COLUMN_WIDTHS = [120, 120, 100, 120];

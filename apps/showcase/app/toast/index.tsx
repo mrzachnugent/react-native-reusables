@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import Toast from 'react-native-toast-message';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

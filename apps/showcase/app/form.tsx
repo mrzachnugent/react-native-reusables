@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
 const frameworks = [

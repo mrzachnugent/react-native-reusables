@@ -1,7 +1,7 @@
 import { Check, ChevronDown, ChevronRight, ChevronUp } from '../../components/Icons';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { TextClassContext } from './typography';
+import { TextClassContext } from './text';
 import * as DropdownMenuPrimitive from '@rnr/dropdown-menu';
 import { cn } from '../../lib/utils';
 

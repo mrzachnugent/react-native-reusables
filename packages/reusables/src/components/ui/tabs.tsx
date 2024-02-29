@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextClassContext } from './typography';
+import { TextClassContext } from './text';
 import * as TabsPrimitive from '@rnr/tabs';
 import { cn } from '../../lib/utils';
 

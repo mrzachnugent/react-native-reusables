@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import { ChevronRight } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/typography';
+import { Text } from '~/components/ui/text';
 import { COMPONENTS } from '~/lib/constants';
 import { cn } from '~/lib/utils';
 

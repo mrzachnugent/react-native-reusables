@@ -27,6 +27,7 @@ export * from './skeleton';
 export * from './switch';
 export * from './table';
 export * from './tabs';
+export * from './text';
 export * from './textarea';
 export * from './toggle-group';
 export * from './toggle';

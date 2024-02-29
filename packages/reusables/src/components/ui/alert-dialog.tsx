@@ -4,7 +4,7 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { buttonTextVariants, buttonVariants } from '../../components/ui/button';
 import * as AlertDialogPrimitive from '@rnr/alert-dialog';
 import { cn } from '../../lib/utils';
-import { TextClassContext } from './typography';
+import { TextClassContext } from './text';
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
