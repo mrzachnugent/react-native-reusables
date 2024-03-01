@@ -62,7 +62,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 - **[Documentation Project](https://github.com/users/mrzachnugent/projects/1)**
    <br>
-   _Backlog for documentation. If you'd like to contribute, assign yourself the issue and track its proression in the project's backlog._
+   _Backlog for documentation. If you'd like to contribute, assign yourself the issue and track its progression in the project's backlog._
 
 - **Add missing universal components**
   <br>
