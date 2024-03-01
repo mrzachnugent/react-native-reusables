@@ -15,7 +15,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 **🌐 Try the web showcase:** https://rnr-showcase.vercel.app/
 
 <details>
-<summary>Table of contents</summary>
+<summary>List of components</summary>
 
 1. [Accordion](#accordion)
 2. [Alert](#alert)
@@ -60,15 +60,20 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 ### Backlog
 
-1. **Create a documentation website _(in progress)_**
+- **[Documentation Project](https://github.com/users/mrzachnugent/projects/1)**
    <br>
-   _Document initial setup, installation, and use for each component with their dependencies_
+   _Backlog for documentation. If you'd like to contribute, assign yourself the issue and track its proression in the project's backlog._
 
-2. Complete Github Community Standards Checklist
-   <br>
-   _Code of conduct, Contributing, Security policy, Issue templates, and Pull request template_
+- **Add missing universal components**
+  <br>
+  _Refactor native components missing in `/ui` that are found in `/deprecated-ui` and add their web components from [ui/shadcn](https://ui.shadcn.com/)_
 
-3. Tackle all commented `TODO`s
+- **Create following custom components**
+  <br>
+  _Replace 3rd party packages with custom components_
+
+  - [ ] Calendar
+  - [ ] Toast
 
 <br>
 
