@@ -1,0 +1,20 @@
+---
+title: Types Primitives
+description: A collection of types shared across the core primitives.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Card } from '@astrojs/starlight/components';
+import importedCode from '@/../node_modules/@rnr/types/src/index.ts?raw';
+
+A collection of types shared across the core primitives.
+
+## Installation
+
+**Copy/paste the following code to  `~/components/primitives/types.ts`**
+
+<Code code={importedCode} lang="tsx" title="~/components/primitives/types.ts" />

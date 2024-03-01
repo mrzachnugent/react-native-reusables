@@ -1,4 +1,0 @@
----
-title: Types
-description: Types
----

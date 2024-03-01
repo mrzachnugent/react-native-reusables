@@ -71,6 +71,9 @@ importers:
       '@rnr/dropdown-menu':
         specifier: '*'
         version: link:../../packages/dropdown-menu
+      '@rnr/hooks':
+        specifier: '*'
+        version: link:../../packages/hooks
       '@rnr/hover-card':
         specifier: '*'
         version: link:../../packages/hover-card

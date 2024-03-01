@@ -27,6 +27,7 @@
     "@rnr/context-menu": "*",
     "@rnr/dialog": "*",
     "@rnr/dropdown-menu": "*",
+    "@rnr/hooks": "*",
     "@rnr/hover-card": "*",
     "@rnr/label": "*",
     "@rnr/menubar": "*",

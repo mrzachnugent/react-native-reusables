@@ -64,8 +64,16 @@ export default defineConfig({
               link: '/primitives/overview/',
             },
             {
+              label: 'Hooks',
+              link: '/primitives/hooks/',
+            },
+            {
               label: 'Portal',
               link: '/primitives/portal/',
+            },
+            {
+              label: 'Types',
+              link: '/primitives/types/',
             },
           ],
         },
