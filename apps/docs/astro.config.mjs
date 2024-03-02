@@ -63,35 +63,40 @@ export default defineConfig({
               label: 'Overview',
               link: '/primitives/overview/',
             },
-            // {
-            //   label: 'Core',
-            //   items: [],
-            // },
-            // {
-            //   label: 'Shared',
-            //   items: [
             {
-              label: 'Hooks',
-              link: '/primitives/hooks/',
+              label: 'Core',
+              items: [
+                {
+                  label: 'Accordion',
+                  link: '/primitives/accordion/',
+                },
+              ],
             },
             {
-              label: 'Portal',
-              link: '/primitives/portal/',
+              label: 'Shared',
+              items: [
+                {
+                  label: 'Hooks',
+                  link: '/primitives/hooks/',
+                },
+                {
+                  label: 'Portal',
+                  link: '/primitives/portal/',
+                },
+                {
+                  label: 'Slot',
+                  link: '/primitives/slot/',
+                },
+                {
+                  label: 'Types',
+                  link: '/primitives/types/',
+                },
+                {
+                  label: 'Utils',
+                  link: '/primitives/utils/',
+                },
+              ],
             },
-            {
-              label: 'Slot',
-              link: '/primitives/slot/',
-            },
-            {
-              label: 'Types',
-              link: '/primitives/types/',
-            },
-            {
-              label: 'Utils',
-              link: '/primitives/utils/',
-            },
-            // ],
-            // },
           ],
         },
       ],

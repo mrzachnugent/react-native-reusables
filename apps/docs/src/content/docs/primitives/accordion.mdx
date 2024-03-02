@@ -1,0 +1,177 @@
+---
+title: Accordion Primitive
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/accordion/src/accordion.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/accordion/src/accordion.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/accordion/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/accordion/src/index.ts?raw';
+
+<LinkButton href="/primitives/types">
+  Types Primitives
+</LinkButton>
+<LinkButton href="/primitives/hooks">
+  Hooks Primitives
+</LinkButton>
+<LinkButton href="/primitives/slot">
+  Slot Primitives
+</LinkButton>
+<LinkButton target="_blank" href="https://www.radix-ui.com/primitives/docs/components/accordion">
+  @radix-ui/react-accordion
+</LinkButton>
+
+<br />
+
+A vertically stacked set of interactive headings that each reveal a section of content.
+
+## Installation
+<Aside title="Uses shared primitives">
+    If you do not already have these primitives in your project, you will need to add them.
+
+    - [Types Primitive](/primitives/types)
+    - [Hooks Primitive](/primitives/hooks)
+    - [Slot Primitive](/primitives/slot)
+
+</Aside>
+
+<Tabs>
+    <TabItem label="Universal">
+        **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/accordion">@radix-ui/react-accordion</a>**
+
+        ```bash
+        npx expo install @radix-ui/react-accordion
+        ```
+
+        **Copy/paste the following code for web to  `~/components/primitives/accordion/accordion.web.tsx`**
+
+        <Code code={importedWebCode} lang="tsx" title="~/components/primitives/accordion/accordion.web.tsx" />
+
+        **Copy/paste the following code for native to  `~/components/primitives/accordion/accordion.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/accordion/accordion.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/accordion/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/accordion/types.ts" />
+
+        **Copy/paste the following code for exporting to  `~/components/primitives/accordion/index.ts`**
+
+        <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/accordion/index.ts" />
+    </TabItem>
+    <TabItem label="Native Only">
+        **Copy/paste the following code for native to  `~/components/primitives/accordion/index.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/accordion/index.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/accordion/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/accordion/types.ts" />
+    </TabItem>
+</Tabs>
+
+
+
+## Usage
+
+```tsx
+import * as AccordionPrimitive from '~/components/primitives/accordion';
+
+function Example() {
+  return (
+    <AccordionPrimitive.Root
+        type='multiple'
+        collapsible
+        defaultValue={['item-1']}
+      >
+        <AccordionPrimitive.Item value='item-1'>
+          <AccordionPrimitive.Trigger>
+            <Text>Is it accessible?</Text>
+          </AccordionPrimitive.Trigger>
+          <AccordionPrimitive.Content>
+            <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+          </AccordionPrimitive.Content>
+        </AccordionPrimitive.Item>
+        <AccordionPrimitive.Item value='item-2'>
+          <AccordionPrimitive.Trigger>
+            <Text>What are universal components?</Text>
+          </AccordionPrimitive.Trigger>
+          <AccordionPrimitive.Content>
+            <Text>
+              In the world of React Native, universal components are components that work on both
+              web and native platforms.
+            </Text>
+          </AccordionPrimitive.Content>
+        </AccordionPrimitive.Item>
+      </AccordionPrimitive.Root>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|     Prop      |                          Type                           |           Note            |
+| :-----------: | :-----------------------------------------------------: | :-----------------------: |
+|    type\*     |                 'single' \| 'multiple'                  |                           |
+|    asChild    |                         boolean                         |       _(optional)_        |
+| defaultValue  |            (string \| undefined) \| string[]            |       _(optional)_        |
+|     value     |            (string \| undefined) \| string[]            |       _(optional)_        |
+| onValueChange | ((string \| undefined) => void) \| ((string[]) => void) |       _(optional)_        |
+|      dir      |                     'ltr' \| 'rtl'                      | **Web only** _(optional)_ |
+|  orientation  |               'vertical' \| 'horizontal'                | **Web only** _(optional)_ |
+
+### Item
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|   Prop   |  Type   |     Note     |
+| :------: | :-----: | :----------: |
+| asChild  | boolean | _(optional)_ |
+|  value   | string  | _(optional)_ |
+| disabled | boolean | _(optional)_ |
+
+### Header
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Trigger
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Content
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|    Prop    |       Type        |     Note     |
+| :--------: | :---------------: | :----------: |
+|  asChild   |      boolean      | _(optional)_ |
+| forceMount | true \| undefined | _(optional)_ |
+
+
+### useRootContext
+
+Must be used within a `Root` component. It provides the following values from the accordion: `type`, `disabled`, `collapsible`, `value`, and `onValueChange`.
+
+### useItemContext
+
+Must be used within an `Item` component. It provides the following values from the accordion item: `value`, `disabled`, `nativeID`, and `isExpanded`.
+
+
