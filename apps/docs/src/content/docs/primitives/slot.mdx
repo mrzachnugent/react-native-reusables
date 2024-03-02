@@ -1,0 +1,97 @@
+---
+title: Slot Primitive
+description: Merges its props onto its immediate child.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Card } from '@astrojs/starlight/components';
+import importedCode from '@/../node_modules/@rnr/slot/src/slot.tsx?raw';
+
+Merges its props onto its immediate child. 
+
+<Aside type="tip">
+  Can be used to support your own `asChild` prop.
+</Aside>
+
+
+## Installation
+
+**Copy/paste the following code to  `~/components/primitives/slot.tsx`**
+
+<Code code={importedCode} lang="tsx" title="~/components/primitives/slot.tsx" />
+
+## Usage
+
+### View Slot
+
+```tsx
+import * as Slot from '~/components/primitives/slot';
+
+function CustomView({ isChild = true }) {
+  const Component = isChild ? Slot.View : View;
+  return (
+    <Component className="bg-red-500">
+      {/* The `className` is passed down to the `View` with `key="x"` when `isChild` is `true` */}
+      <View key="x" />
+    </Component>
+  );
+}
+```
+
+### Pressable Slot
+
+```tsx
+import * as Slot from '~/components/primitives/slot';
+
+function CustomPressable() {
+  return (
+    <Slot.Pressable onPress={() => { console.log("Pressed")}}>
+      {/* The `onPress` prop is passed down to the `Pressable` */}
+      <Pressable />
+    </Slot.Pressable>
+  );
+}
+```
+
+### Text Slot
+
+```tsx
+import * as Slot from '~/components/primitives/slot';
+
+function CustomText() {
+  return (
+    <Slot.Text className="text-blue-500">
+      {/* The `className` is passed down to the `View` */}
+      <Text />
+    </Slot.Text>
+  );
+}
+```
+
+### Image Slot
+
+```tsx
+import * as Slot from '~/components/primitives/slot';
+
+function CustomImage() {
+  return (
+    <Slot.Image source={{ uri: "https://avatars.githubusercontent.com/u/63797719?v=4" }}>
+        {/* The `source` is passed down to the `View` */}
+      <Image />
+    </Slot.Image>
+  );
+}
+```
+
+## Props
+
+Inherits all props from its type of Slot. 
+
+- <LinkButton href="https://reactnative.dev/docs/view" target="_blank">Slot.View</LinkButton>
+- <LinkButton href="https://reactnative.dev/docs/pressable" target="_blank">Slot.Pressable</LinkButton>
+- <LinkButton href="https://reactnative.dev/docs/text" target="_blank">Slot.Text</LinkButton>
+- <LinkButton href="https://reactnative.dev/docs/image" target="_blank">Slot.Image</LinkButton>

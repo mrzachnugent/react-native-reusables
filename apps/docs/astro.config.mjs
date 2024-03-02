@@ -72,6 +72,10 @@ export default defineConfig({
               link: '/primitives/portal/',
             },
             {
+              label: 'Slot',
+              link: '/primitives/slot/',
+            },
+            {
               label: 'Types',
               link: '/primitives/types/',
             },
