@@ -17,6 +17,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "expo": "~50.0.8",
+    "expo-linking": "~6.2.2",
+    "expo-navigation-bar": "~2.8.1",
     "expo-router": "~3.4.8",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
