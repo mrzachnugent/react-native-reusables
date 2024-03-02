@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { View } from 'react-native';
 import {
   Accordion,
@@ -9,15 +8,12 @@ import {
 import { Text } from '~/components/ui/text';
 
 export default function AccordionScreen() {
-  const [multiple, setMultiple] = React.useState<string[]>(['item-1']);
-
   return (
     <View className='flex-1 justify-center items-center p-6'>
       <Accordion
         type='multiple'
         collapsible
-        value={multiple}
-        onValueChange={setMultiple}
+        defaultValue={['item-1']}
         className='w-full max-w-sm native:max-w-md'
       >
         <AccordionItem value='item-1'>

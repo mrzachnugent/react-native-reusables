@@ -1,23 +1,31 @@
 import { ForceMountable } from '@rnr/types';
 
+type RootContext = {
+  type: 'single' | 'multiple';
+  value: (string | undefined) | string[];
+  onValueChange: (value: string | undefined) => void | ((value: string[]) => void);
+  collapsible: boolean;
+  disabled?: boolean;
+};
+
 type SingleRootProps = {
   type: 'single';
-  value: string | undefined;
-  onValueChange: (value: string | undefined) => void;
+  defaultValue?: string | undefined;
+  value?: string | undefined;
+  onValueChange?: (value: string | undefined) => void;
 };
 
 type MultipleRootProps = {
   type: 'multiple';
-  value: string[];
-  onValueChange: (value: string[]) => void;
+  defaultValue?: string[];
+  value?: string[];
+  onValueChange?: (value: string[]) => void;
 };
 
-type AccordionContext = (SingleRootProps | MultipleRootProps) & {
+type AccordionRootProps = (SingleRootProps | MultipleRootProps) & {
+  defaultValue?: string | string[];
   disabled?: boolean;
   collapsible?: boolean;
-};
-
-type AccordionRootProps = AccordionContext & {
   /**
    * Platform: WEB ONLY
    */
@@ -34,4 +42,4 @@ type AccordionItemProps = {
 };
 type AccordionContentProps = ForceMountable;
 
-export type { AccordionContentProps, AccordionContext, AccordionItemProps, AccordionRootProps };
+export type { AccordionContentProps, AccordionItemProps, AccordionRootProps, RootContext };

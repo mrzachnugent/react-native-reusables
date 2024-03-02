@@ -11,26 +11,44 @@ import type {
   AccordionContentProps,
   AccordionItemProps,
   AccordionRootProps,
-  AccordionContext as IAccordionContext,
+  RootContext,
 } from './types';
+import { useControllableState } from '@rnr/hooks';
 
-const AccordionContext = React.createContext<IAccordionContext | null>(null);
+const AccordionContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
-  ({ asChild, type, disabled, collapsible = true, value, onValueChange, ...viewProps }, ref) => {
-    const Component = asChild ? Slot.View : View;
+  (
+    {
+      asChild,
+      type,
+      disabled,
+      collapsible = true,
+      value: valueProp,
+      onValueChange: onValueChangeProps,
+      defaultValue,
+      ...viewProps
+    },
+    ref
+  ) => {
+    const [value = type === 'multiple' ? [] : undefined, onValueChange] = useControllableState<
+      (string | undefined) | string[]
+    >({
+      prop: valueProp,
+      defaultProp: defaultValue,
+      onChange: onValueChangeProps as (state: string | string[] | undefined) => void,
+    });
 
+    const Component = asChild ? Slot.View : View;
     return (
       <AccordionContext.Provider
-        value={
-          {
-            type,
-            disabled,
-            collapsible,
-            value,
-            onValueChange,
-          } as IAccordionContext
-        }
+        value={{
+          type,
+          disabled,
+          collapsible,
+          value,
+          onValueChange,
+        }}
       >
         <Component ref={ref} {...viewProps} />
       </AccordionContext.Provider>
@@ -132,6 +150,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
             ? rootToArray.filter((val) => val !== value)
             : rootToArray.concat(value)
           : [...new Set(rootToArray.concat(value))];
+        // @ts-ignore - `newValue` is of type `string[]` which is OK
         onValueChange(newValue);
       }
       onPressProp?.(ev);

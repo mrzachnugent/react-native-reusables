@@ -1,7 +1,5 @@
 import * as Accordion from '@radix-ui/react-accordion';
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PressableRef,
@@ -9,6 +7,8 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
 import type { AccordionContentProps, AccordionItemProps, AccordionRootProps } from './types';
 
 function useIsomorphicLayoutEffect(
@@ -28,8 +28,9 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
   (
     {
       asChild,
-      value,
-      onValueChange,
+      value: valueProp,
+      onValueChange: onValueChangeProps,
+      defaultValue,
       type,
       disabled,
       dir,
@@ -39,6 +40,14 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
     },
     ref
   ) => {
+    const [value = type === 'multiple' ? [] : undefined, onValueChange] = useControllableState<
+      (string | undefined) | string[]
+    >({
+      prop: valueProp,
+      defaultProp: defaultValue,
+      onChange: onValueChangeProps as (state: string | string[] | undefined) => void,
+    });
+
     const Component = asChild ? Slot.View : View;
     return (
       <AccordionContext.Provider
@@ -279,7 +288,7 @@ const Content = React.forwardRef<ViewRef, AccordionContentProps & SlottableViewP
 
 Content.displayName = 'ContentWebAccordion';
 
-export { Content, Header, Item, Root, Trigger, useRootContext, useItemContext };
+export { Content, Header, Item, Root, Trigger, useItemContext, useRootContext };
 
 function isItemExpanded(rootValue: string | string[] | undefined, value: string) {
   return Array.isArray(rootValue) ? rootValue.includes(value) : rootValue === value;
