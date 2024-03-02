@@ -7,11 +7,145 @@ description: NativeWind Light and Dark Mode
 {/* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
-import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+import { Aside, Card, Code as StarlightCode, TabItem, Tabs } from '@astrojs/starlight/components';
 import { ExternalLink } from 'lucide-react';
 import importedTwUniversalCondig from '@/code-samples/tw-universal-config.js?raw';
 import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
 
+<Tabs>
+<TabItem label="Template">
+
+## Starter base
+
+A starting point to help you set up your project quickly and use the common components provided by `react-native-reusables`. The idea is to make it easier for you to get started.
+
+<Aside type="tip" title="Features">
+
+- NativeWind v4
+- Dark and light mode
+    - Android Navigation Bar matches mode
+    - Persistant mode
+- Common components
+  - Icons, ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+
+</ Aside>
+
+## Installation
+
+  1. **Clone the `react-native-reusables` repository**
+  ```bash
+    git clone https://github.com/mrzachnugent/react-native-reusables.git
+  ```
+  <br />
+
+  2. **Use the following bash command and rename `my-project` to the name of your new project.** 
+
+  > This will copy the folder `react-native-reusables/apps/starter-base`, paste it as a sibling, and rename it to your new project name.
+
+  <StarlightCode lang='bash' title="bash" code="cp -R react-native-reusables/apps/starter-base/ ./my-project"/>
+
+  <br />
+
+  <Tabs>
+    <TabItem label="npm">
+    
+    3. Change Directory to your project (replace `my-project` with your project's name) and install the dependencies
+
+    ```bash
+      cd my-project && npm install
+    ```
+    <br />
+
+    4. Run the project
+
+      <Tabs>
+      <TabItem label="iOS">
+      ```bash
+        npm run ios
+      ```
+      </TabItem>
+      <TabItem label="Android">
+      ```bash
+        npm run android
+      ```
+      </TabItem>
+      <TabItem label="Web">
+      ```bash
+        npm run web
+      ```
+      </TabItem>
+    </Tabs>
+  </TabItem>
+    <TabItem label="yarn">
+
+    3. Change Directory to your project (replace `my-project` with your project's name) and install the dependencies
+
+    ```bash
+      cd my-project && yarn install
+    ```
+
+    <br />
+
+    4. Run the project
+
+      <Tabs>
+      <TabItem label="iOS">
+      ```bash
+        yarn ios
+      ```
+      </TabItem>
+      <TabItem label="Android">
+      ```bash
+        yarn android
+      ```
+      </TabItem>
+      <TabItem label="Web">
+      ```bash
+        yarn web
+      ```
+      </TabItem>
+    </Tabs>
+  </TabItem>
+    <TabItem label="pnpm">
+    <Aside>
+      **PNPM requires a workaround with Expo.**
+      
+      Follow the instructions in the [expo-monorepo-example by byCedric](https://github.com/byCedric/expo-monorepo-example?tab=readme-ov-file#pnpm-workarounds) to set up PNPM with Expo.
+    </Aside>
+
+
+    3. Change Directory to your project (replace `my-project` with your project's name) and install the dependencies
+
+    ```bash
+      cd my-project && pnpm install
+    ```
+    
+    <br />
+
+    4. Run the project
+
+      <Tabs>
+      <TabItem label="iOS">
+      ```bash
+        pnpm ios
+      ```
+      </TabItem>
+      <TabItem label="Android">
+      ```bash
+        pnpm android
+      ```
+      </TabItem>
+      <TabItem label="Web">
+      ```bash
+        pnpm web
+      ```
+      </TabItem>
+    </Tabs>
+  </TabItem>
+</Tabs>
+</TabItem>
+
+<TabItem label="Manual Installation">
 ### Install NativeWind
 <div />
 
@@ -329,3 +463,5 @@ interopIcon(XCircle);
 
 export { AlertCircle, CheckCircle, XCircle };
 ```
+</TabItem>
+</Tabs>
