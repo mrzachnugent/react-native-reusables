@@ -140,6 +140,9 @@ importers:
       '@rnr/types':
         specifier: '*'
         version: link:../../packages/types
+      '@rnr/utils':
+        specifier: '*'
+        version: link:../../packages/utils
       '@types/react':
         specifier: ^18.2.56
         version: 18.2.58

@@ -63,6 +63,13 @@ export default defineConfig({
               label: 'Overview',
               link: '/primitives/overview/',
             },
+            // {
+            //   label: 'Core',
+            //   items: [],
+            // },
+            // {
+            //   label: 'Shared',
+            //   items: [
             {
               label: 'Hooks',
               link: '/primitives/hooks/',
@@ -79,6 +86,12 @@ export default defineConfig({
               label: 'Types',
               link: '/primitives/types/',
             },
+            {
+              label: 'Utils',
+              link: '/primitives/utils/',
+            },
+            // ],
+            // },
           ],
         },
       ],
