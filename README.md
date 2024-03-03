@@ -32,7 +32,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 **Starter-base:** 
 
-Follow [instruction](https://rnr-docs.vercel.app/getting-started/initial-setup/) or check out the [code](apps/starter-base)
+Follow [instructions](https://rnr-docs.vercel.app/getting-started/initial-setup/) or check out the [code](apps/starter-base)
 
 - NativeWind v4
 - Dark and light mode
