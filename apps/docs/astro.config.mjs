@@ -47,6 +47,10 @@ export default defineConfig({
               link: '/components/accordion/',
             },
             {
+              label: 'Alert Dialog',
+              link: '/components/alert-dialog/',
+            },
+            {
               label: 'Aspect-Ratio',
               link: '/components/aspect-ratio/',
             },
@@ -81,6 +85,10 @@ export default defineConfig({
                 {
                   label: 'Accordion',
                   link: '/primitives/accordion/',
+                },
+                {
+                  label: 'Alert Dialog',
+                  link: '/primitives/alert-dialog/',
                 },
                 {
                   label: 'Aspect-Ratio',

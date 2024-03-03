@@ -22,9 +22,8 @@ interface AlertDialogPortalProps extends ForceMountable {
    */
   container?: HTMLElement | null | undefined;
 }
-type AlertDialogOverlayProps = ForceMountable & {
-  closeOnPress?: boolean;
-};
+type AlertDialogOverlayProps = ForceMountable;
+
 type AlertDialogContentProps = ForceMountable & {
   /**
    * Platform: WEB ONLY

@@ -1,0 +1,191 @@
+---
+title: Alert Dialog Primitive
+description: A modal dialog that interrupts the user with important content and expects a response.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/alert-dialog/src/alert-dialog.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/alert-dialog/src/alert-dialog.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/alert-dialog/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/alert-dialog/src/index.ts?raw';
+
+<LinkButton href='/primitives/types'>Types Primitives</LinkButton>
+<LinkButton href='/primitives/hooks'>Hooks Primitives</LinkButton>
+<LinkButton href='/primitives/slot'>Slot Primitives</LinkButton>
+<LinkButton href='/primitives/portal'>Portal Primitives</LinkButton>
+<LinkButton target='_blank' href='https://www.radix-ui.com/primitives/docs/components/alert-dialog'>
+  @radix-ui/react-alert-dialog
+</LinkButton>
+
+<br />
+
+A modal dialog that interrupts the user with important content and expects a response.
+
+## Installation
+
+<Aside title="Uses shared primitives">
+  If you do not already have these primitives in your project, you will need to add them.
+
+  - [Types Primitive](/primitives/types)
+  - [Hooks Primitive](/primitives/hooks)
+  - [Slot Primitive](/primitives/slot)
+  - [Portal Primitive](/primitives/portal)
+</Aside>
+
+<Tabs>
+  <TabItem label="Universal">
+    **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/alert-dialog">@radix-ui/react-alert-dialog</a>**
+
+    ```bash
+    npx expo install @radix-ui/react-alert-dialog
+    ```
+
+    **Copy/paste the following code for web to  `~/components/primitives/alert-dialog/alert-dialog.web.tsx`**
+
+    <Code code={importedWebCode} lang="tsx" title="~/components/primitives/alert-dialog/alert-dialog.web.tsx" />
+
+    **Copy/paste the following code for native to  `~/components/primitives/alert-dialog/alert-dialog.tsx`**
+
+    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/alert-dialog/alert-dialog.tsx" />
+
+    **Copy/paste the following code for types to  `~/components/primitives/alert-dialog/types.ts`**
+
+    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/alert-dialog/types.ts" />
+
+    **Copy/paste the following code for exporting to  `~/components/primitives/alert-dialog/index.ts`**
+
+    <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/alert-dialog/index.ts" />
+  </TabItem>
+  <TabItem label="Native Only">
+    **Copy/paste the following code for native to  `~/components/primitives/alert-dialog/index.tsx`**
+
+    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/alert-dialog/index.tsx" />
+
+    **Copy/paste the following code for types to  `~/components/primitives/alert-dialog/types.ts`**
+
+    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/alert-dialog/types.ts" />
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import * as AlertDialogPrimitive from '~/components/primitives/accordion';
+import { Text } from 'react-native';
+
+function Example() {
+  return (
+    <AlertDialogPrimitive.Root>
+      <AlertDialogPrimitive.Trigger>
+        <Text>Show Alert Dialog</Text>
+      </AlertDialogPrimitive.Trigger>
+
+      <AlertDialogPrimitive.Content>
+        <AlertDialogPrimitive.Header>
+          <AlertDialogPrimitive.Title>Are you absolutely sure?</AlertDialogPrimitive.Title>
+          <AlertDialogPrimitive.Description>
+            This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+          </AlertDialogPrimitive.Description>
+        </AlertDialogPrimitive.Header>
+
+        <AlertDialogPrimitive.Footer>
+          <AlertDialogPrimitive.Cancel><Text>Cancel</Text></AlertDialogPrimitive.Cancel>
+          <AlertDialogPrimitive.Action><Text>Continue</Text></AlertDialogPrimitive.Action>
+        </AlertDialogPrimitive.Footer>
+      </AlertDialogPrimitive.Content>
+    </AlertDialogPrimitive.Root>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|     Prop     |           Type           |     Note     |
+| :----------: | :----------------------: | :----------: |
+|   asChild    |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
+| defaultOpen  |         boolean          | _(optional)_ |
+
+### Trigger
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Overlay
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|    Prop    |        Type        |     Note     |
+| :--------: | :----------------: | :----------: |
+|  asChild   |      boolean       | _(optional)_ |
+| forceMount | true \| undefined; | _(optional)_ |
+
+### Portal
+
+|    Prop    |               Type               |         Note          |
+| :--------: | :------------------------------: | :-------------------: |
+| children\* |         React.ReactNode          |                       |
+| forceMount |        true \| undefined         |     _(optional)_      |
+|  hostName  |              string              | Web Only _(optional)_ |
+| container  | HTMLElement \| null \| undefined | Web Only _(optional)_ |
+
+### Content
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|       Prop       |        Type         |         Note          |
+| :--------------: | :-----------------: | :-------------------: |
+|     asChild      |       boolean       |     _(optional)_      |
+|    forceMount    |  true \| undefined  |     _(optional)_      |
+| onOpenAutoFocus  | (ev: Event) => void | Web Only _(optional)_ |
+| onCloseAutoFocus | (ev: Event) => void | Web Only _(optional)_ |
+| onEscapeKeyDown  | (ev: Event) => void | Web Only _(optional)_ |
+
+### Title
+
+Extends [`Text`](https://reactnative.dev/docs/text) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Description
+
+Extends [`Text`](https://reactnative.dev/docs/text) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Cancel
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Action
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### useRootContext
+
+Must be used within a `Root` component. It provides the following values from the accordion: `open`, and `onOpenChange`.
