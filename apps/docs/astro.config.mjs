@@ -55,6 +55,10 @@ export default defineConfig({
               link: '/components/avatar/',
             },
             {
+              label: 'Checkbox',
+              link: '/components/checkbox/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -85,6 +89,10 @@ export default defineConfig({
                 {
                   label: 'Avatar',
                   link: '/primitives/avatar/',
+                },
+                {
+                  label: 'Checkbox',
+                  link: '/primitives/checkbox/',
                 },
               ],
             },
