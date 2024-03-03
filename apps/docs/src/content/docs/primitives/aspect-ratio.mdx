@@ -1,0 +1,60 @@
+---
+title: Aspect-Ratio Primitive
+description: Presents content within a chosen aspect ratio.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@/../node_modules/@rnr/aspect-ratio/src/aspect-ratio.tsx?raw';
+
+<LinkButton href="/primitives/types">
+  Types Primitives
+</LinkButton>
+<LinkButton href="/primitives/slot">
+  Slot Primitives
+</LinkButton>
+
+<br />
+
+Presents content within a chosen aspect ratio.
+
+## Installation
+<Aside title="Uses shared primitives">
+    If you do not already have these primitives in your project, you will need to add them.
+
+    - [Types Primitive](/primitives/types)
+    - [Slot Primitive](/primitives/slot)
+
+</Aside>
+
+
+**Copy/paste the following code to `~/components/primitives/aspect-ratio.tsx`**
+
+<Code code={importedCode} lang="tsx" title="~/components/primitives/aspect-ratio.tsx" />
+
+## Usage
+
+```tsx
+import * as AspectRatio from '~/components/primitives/aspect-ratio';
+
+function Example() {
+  return (
+     <AspectRatio.Root ratio={16 / 9} />
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+| Prop  |  Type  |             Note             |
+| :---: | :----: | :--------------------------: |
+| ratio | number | Defaults to `1` _(optional)_ |
+

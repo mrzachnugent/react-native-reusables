@@ -1,0 +1,57 @@
+---
+title: Aspect-Ratio
+description: Presents content within a chosen aspect ratio.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@rnr/reusables/components/ui/aspect-ratio?raw';
+
+<LinkButton href="/primitives/aspect-ratio">
+  Aspect-Ratio
+</LinkButton>
+<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/aspect-ratio">
+  Demo
+</LinkButton>
+
+<br />
+
+Presents content within a chosen aspect ratio.
+
+### Installation
+
+<Aside type="tip" title="Dependency">
+    Before copy/pasting, add the <a href="/primitives/aspect-ratio" className='text-white font-bold'>aspect-ratio primitive</a> to your project.
+</Aside>
+
+<br />
+
+**Copy/paste the following code to `~/components/ui/aspect-ratio.tsx`:**
+
+
+<Code code={importedCode} lang="tsx" title="~/components/ui/aspect-ratio.tsx" />
+
+### Usage
+
+```tsx
+import { AspectRatio } from '~/components/ui/aspect-ratio';
+
+export default function aspect-ratioScreen() {
+  return (
+      <AspectRatio ratio={16 / 9} />
+  );
+}
+```
+## Props
+
+### AspectRatio
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+| Prop  |  Type  |             Note             |
+| :---: | :----: | :--------------------------: |
+| ratio | number | Defaults to `1` _(optional)_ |

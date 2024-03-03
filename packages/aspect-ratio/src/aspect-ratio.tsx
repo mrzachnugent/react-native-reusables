@@ -1,8 +1,14 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, type ViewStyle } from 'react-native';
 import * as Slot from '@rnr/slot';
 import type { SlottableViewProps } from '@rnr/types';
-import type { AspectRatioRootProps } from './types';
+
+interface AspectRatioRootProps {
+  ratio?: number;
+  style?: ViewStyle;
+}
+
+export type { AspectRatioRootProps };
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,

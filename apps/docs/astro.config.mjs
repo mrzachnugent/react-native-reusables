@@ -47,6 +47,10 @@ export default defineConfig({
               link: '/components/accordion/',
             },
             {
+              label: 'Aspect-Ratio',
+              link: '/components/aspect-ratio/',
+            },
+            {
               label: 'Avatar',
               link: '/components/avatar/',
             },
@@ -73,6 +77,10 @@ export default defineConfig({
                 {
                   label: 'Accordion',
                   link: '/primitives/accordion/',
+                },
+                {
+                  label: 'Aspect-Ratio',
+                  link: '/primitives/aspect-ratio/',
                 },
                 {
                   label: 'Avatar',
