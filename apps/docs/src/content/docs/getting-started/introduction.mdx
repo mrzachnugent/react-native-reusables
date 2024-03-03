@@ -6,8 +6,7 @@ description: Copy, paste, and tailor Universal React Native components to suit y
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import { Card } from '@astrojs/starlight/components';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Card, FileTree } from '@astrojs/starlight/components';
 
 ### Universal [shadcn/ui](https://ui.shadcn.com) for React Native
 
@@ -51,9 +50,9 @@ This project aims to provide as little opinionated code as possible. However, so
   - `~/components/ui` for components styled with NativeWind. Most of these components are built using the primitives components.
   - `~/lib` for utilities, hooks, and constants.
 
-    ```
-    ├── components/
-    │ ├── primitives
-    │ └── ui
-    ├── lib/
-    ```
+<FileTree>
+    - components/
+      - primitives/
+      - ui/
+    - lib/
+</FileTree>

@@ -49,6 +49,16 @@ export default defineConfig({
             {
               label: 'Alert Dialog',
               link: '/components/alert-dialog/',
+              label: 'Aspect-Ratio',
+              link: '/components/aspect-ratio/',
+            },
+            {
+              label: 'Avatar',
+              link: '/components/avatar/',
+            },
+            {
+              label: 'Checkbox',
+              link: '/components/checkbox/',
             },
             {
               label: 'Text',
@@ -77,6 +87,16 @@ export default defineConfig({
                 {
                   label: 'Alert Dialog',
                   link: '/primitives/alert-dialog/',
+                  label: 'Aspect-Ratio',
+                  link: '/primitives/aspect-ratio/',
+                },
+                {
+                  label: 'Avatar',
+                  link: '/primitives/avatar/',
+                },
+                {
+                  label: 'Checkbox',
+                  link: '/primitives/checkbox/',
                 },
               ],
             },

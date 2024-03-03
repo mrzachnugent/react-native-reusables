@@ -14,6 +14,63 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 **🌐 Try the web showcase:** https://rnr-showcase.vercel.app/
 
+### How to use
+
+1. Start with a template or manually setup configuration: [Check out the docs](https://rnr-docs.vercel.app/getting-started/initial-setup/)
+
+2. Copy/paste what you need into your project (2 options)
+
+    - Follow instructions in [docs](https://rnr-docs.vercel.app/) **(work in progress)**
+    - Browse [`packages/reusables/src/components/ui/*`](packages/reusables/src/components/ui)
+      1. Copy file in your project to `~/components/ui/*`
+      2. If it uses a primitive, replace `@rnr/*` with `~/components/primitives/*`
+      3. Copy the primitive to `~/components/primitives/*`
+        - _If the primitive uses other primitives repeat steps 2 and 3._
+
+
+### Templates
+
+**Starter-base:** 
+
+Follow [instructions](https://rnr-docs.vercel.app/getting-started/initial-setup/) or check out the [code](apps/starter-base)
+
+- NativeWind v4
+- Dark and light mode
+    - Android Navigation Bar matches mode
+    - Persistant mode
+- Common components
+    - Icons, ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+
+
+<img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
+     alt="starter-base-template"
+     style="width:270px;" />
+
+<br >
+
+
+
+
+
+### Backlog
+
+- **[Documentation Project](https://github.com/users/mrzachnugent/projects/1)**
+   <br>
+   _Backlog for documentation. If you'd like to contribute, assign yourself the issue and track its progression in the project's backlog._
+
+- **Add missing universal components**
+  <br>
+  _Refactor native components missing in `/ui` that are found in `/deprecated-ui` and add their web components from [ui/shadcn](https://ui.shadcn.com/)_
+
+- **Create following custom native components**
+  <br>
+  _Replace 3rd party packages with custom native components_
+
+  - [ ] Calendar
+  - [ ] Toast
+
+<br>
+
 <details>
 <summary>List of components</summary>
 
@@ -58,23 +115,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 39. [Tooltip](#tooltip)
 </details>
 
-### Backlog
-
-- **[Documentation Project](https://github.com/users/mrzachnugent/projects/1)**
-   <br>
-   _Backlog for documentation. If you'd like to contribute, assign yourself the issue and track its progression in the project's backlog._
-
-- **Add missing universal components**
-  <br>
-  _Refactor native components missing in `/ui` that are found in `/deprecated-ui` and add their web components from [ui/shadcn](https://ui.shadcn.com/)_
-
-- **Create following custom components**
-  <br>
-  _Replace 3rd party packages with custom components_
-
-  - [ ] Calendar
-  - [ ] Toast
-
+<br>
 <br>
 
 > **Note**: Current screenshots are for the deprecated-ui components (new screenshots to come)
