@@ -37,7 +37,6 @@ A modal dialog that interrupts the user with important content and expects a res
 ### Usage
 
 ```tsx
-import { View } from 'react-native';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -54,7 +53,6 @@ import { Text } from '~/components/ui/text';
 
 export default function AlertDialogScreen() {
   return (
-    <View className='flex-1 justify-center items-center'>
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant='outline'>
@@ -79,7 +77,6 @@ export default function AlertDialogScreen() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </View>
   );
 }
 ```
@@ -90,79 +87,69 @@ export default function AlertDialogScreen() {
 
 Extends [`View`](https://reactnative.dev/docs/view) props
 
-|  Prop   |  Type   |     Note     |
-| :-----: | :-----: | :----------: |
-| asChild | boolean | _(optional)_ |
+|     Prop     |           Type           |     Note     |
+| :----------: | :----------------------: | :----------: |
+|   asChild    |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
+| defaultOpen  |         boolean          | _(optional)_ |
 
 ### AlertDialogTrigger
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
 
-|   Prop   |                       Type                       |     Note     |
-| :------: | :----------------------------------------------: | :----------: |
-| asChild  |                     boolean                      | _(optional)_ |
-| onPress  | ((event: GestureResponderEvent) => void) \| null | _(optional)_ |
-| disabled |                false \| undefined                | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### AlertDialogContent
 
 Extends [`View`](https://reactnative.dev/docs/view) props
 
-|    Prop    |       Type        |     Note     |
-| :--------: | :---------------: | :----------: |
-|  asChild   |      boolean      | _(optional)_ |
-| forceMount | true \| undefined | _(optional)_ |
+|       Prop       |        Type         |         Note          |
+| :--------------: | :-----------------: | :-------------------: |
+|     asChild      |       boolean       |     _(optional)_      |
+|    forceMount    |  true \| undefined  |     _(optional)_      |
+| onOpenAutoFocus  | (ev: Event) => void | Web Only _(optional)_ |
+| onCloseAutoFocus | (ev: Event) => void | Web Only _(optional)_ |
+| onEscapeKeyDown  | (ev: Event) => void | Web Only _(optional)_ |
 
 ### AlertDialogHeader
 
 Extends [`View`](https://reactnative.dev/docs/view) props
 
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
-
 ### AlertDialogTitle
 
 Extends [`Text`](https://reactnative.dev/docs/text) props
 
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### AlertDialogDescription
 
 Extends [`Text`](https://reactnative.dev/docs/text) props
 
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### AlertDialogFooter
 
 Extends [`View`](https://reactnative.dev/docs/view) props
 
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
-
 ### AlertDialogCancel
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
 
-|   Prop    |                       Type                       |     Note     |
-| :-------: | :----------------------------------------------: | :----------: |
-|  asChild  |                     boolean                      | _(optional)_ |
-| className |                      string                      | _(optional)_ |
-|  onPress  | ((event: GestureResponderEvent) => void) \| null | _(optional)_ |
-| disabled  |                false \| undefined                | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### AlertDialogAction
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
 
-|   Prop    |                       Type                       |     Note     |
-| :-------: | :----------------------------------------------: | :----------: |
-|  asChild  |                     boolean                      | _(optional)_ |
-| className |                      string                      | _(optional)_ |
-|  onPress  | ((event: GestureResponderEvent) => void) \| null | _(optional)_ |
-| disabled  |                false \| undefined                | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |

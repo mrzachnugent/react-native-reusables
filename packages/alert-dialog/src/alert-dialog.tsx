@@ -61,9 +61,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const { open: value, onOpenChange } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
-      if (disabled) return;
-      const newValue = !value;
-      onOpenChange(newValue);
+      onOpenChange(!value);
       onPressProp?.(ev);
     }
 

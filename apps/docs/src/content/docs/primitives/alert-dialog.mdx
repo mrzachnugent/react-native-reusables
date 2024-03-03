@@ -109,84 +109,83 @@ function Example() {
 
 Extends [`View`](https://reactnative.dev/docs/view) props
 
-|  Prop   |  Type   |     Note     |
-| :-----: | :-----: | :----------: |
-| asChild | boolean | _(optional)_ |
+|     Prop     |           Type           |     Note     |
+| :----------: | :----------------------: | :----------: |
+|   asChild    |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
+| defaultOpen  |         boolean          | _(optional)_ |
 
 ### Trigger
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
 
-|   Prop   |                       Type                       |     Note     |
-| :------: | :----------------------------------------------: | :----------: |
-| asChild  |                     boolean                      | _(optional)_ |
-| onPress  | ((event: GestureResponderEvent) => void) \| null | _(optional)_ |
-| disabled |                false \| undefined                | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Overlay
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|    Prop    |        Type        |     Note     |
+| :--------: | :----------------: | :----------: |
+|  asChild   |      boolean       | _(optional)_ |
+| forceMount | true \| undefined; | _(optional)_ |
+
+### Portal
+
+|    Prop    |               Type               |         Note          |
+| :--------: | :------------------------------: | :-------------------: |
+| children\* |         React.ReactNode          |                       |
+| forceMount |        true \| undefined         |     _(optional)_      |
+|  hostName  |              string              | Web Only _(optional)_ |
+| container  | HTMLElement \| null \| undefined | Web Only _(optional)_ |
 
 ### Content
 
 Extends [`View`](https://reactnative.dev/docs/view) props
 
-|    Prop    |       Type        |     Note     |
-| :--------: | :---------------: | :----------: |
-|  asChild   |      boolean      | _(optional)_ |
-| forceMount | true \| undefined | _(optional)_ |
-
-### Header
-
-Extends [`View`](https://reactnative.dev/docs/view) props
-
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
+|       Prop       |        Type         |         Note          |
+| :--------------: | :-----------------: | :-------------------: |
+|     asChild      |       boolean       |     _(optional)_      |
+|    forceMount    |  true \| undefined  |     _(optional)_      |
+| onOpenAutoFocus  | (ev: Event) => void | Web Only _(optional)_ |
+| onCloseAutoFocus | (ev: Event) => void | Web Only _(optional)_ |
+| onEscapeKeyDown  | (ev: Event) => void | Web Only _(optional)_ |
 
 ### Title
 
 Extends [`Text`](https://reactnative.dev/docs/text) props
 
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### Description
 
 Extends [`Text`](https://reactnative.dev/docs/text) props
 
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
-
-### Footer
-
-Extends [`View`](https://reactnative.dev/docs/view) props
-
-|   Prop    |  Type  |     Note     |
-| :-------: | :----: | :----------: |
-| className | string | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### Cancel
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
 
-|   Prop    |                       Type                       |     Note     |
-| :-------: | :----------------------------------------------: | :----------: |
-|  asChild  |                     boolean                      | _(optional)_ |
-| className |                      string                      | _(optional)_ |
-|  onPress  | ((event: GestureResponderEvent) => void) \| null | _(optional)_ |
-| disabled  |                false \| undefined                | _(optional)_ |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### Action
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable) props
 
-|   Prop    |                       Type                       |     Note     |
-| :-------: | :----------------------------------------------: | :----------: |
-|  asChild  |                     boolean                      | _(optional)_ |
-| className |                      string                      | _(optional)_ |
-|  onPress  | ((event: GestureResponderEvent) => void) \| null | _(optional)_ |
-| disabled  |                false \| undefined                | _(optional)_ |
-
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### useRootContext
 
-Must be used within a `Root` component. It provides the following values from the accordion: `type`, `disabled`, `collapsible`, `value`, and `onValueChange`.
+Must be used within a `Root` component. It provides the following values from the accordion: `open`, and `onOpenChange`.

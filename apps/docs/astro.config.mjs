@@ -49,6 +49,8 @@ export default defineConfig({
             {
               label: 'Alert Dialog',
               link: '/components/alert-dialog/',
+            },
+            {
               label: 'Aspect-Ratio',
               link: '/components/aspect-ratio/',
             },
@@ -87,6 +89,8 @@ export default defineConfig({
                 {
                   label: 'Alert Dialog',
                   link: '/primitives/alert-dialog/',
+                },
+                {
                   label: 'Aspect-Ratio',
                   link: '/primitives/aspect-ratio/',
                 },
