@@ -47,6 +47,10 @@ export default defineConfig({
               link: '/components/accordion/',
             },
             {
+              label: 'Alert Dialog',
+              link: '/components/alert-dialog/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -69,6 +73,10 @@ export default defineConfig({
                 {
                   label: 'Accordion',
                   link: '/primitives/accordion/',
+                },
+                {
+                  label: 'Alert Dialog',
+                  link: '/primitives/alert-dialog/',
                 },
               ],
             },
