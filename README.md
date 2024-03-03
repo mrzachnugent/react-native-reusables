@@ -44,7 +44,7 @@ Follow [instruction](https://rnr-docs.vercel.app/getting-started/initial-setup/)
 
 <img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
      alt="starter-base-template"
-     style="max-width:350px;" />
+     style="width:270px;" />
 
 <br >
 
