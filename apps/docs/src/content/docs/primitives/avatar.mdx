@@ -1,0 +1,89 @@
+---
+title: Avatar Primitive
+description: An image component featuring an alternative representation for depicting the user.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/avatar/src/avatar.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/avatar/src/types.ts?raw';
+
+<LinkButton href="/primitives/types">
+  Types Primitives
+</LinkButton>
+<LinkButton href="/primitives/slot">
+  Slot Primitives
+</LinkButton>
+
+<br />
+
+An image component featuring an alternative representation for depicting the user.
+
+## Installation
+<Aside title="Uses shared primitives">
+    If you do not already have these primitives in your project, you will need to add them.
+
+    - [Types Primitive](/primitives/types)
+    - [Slot Primitive](/primitives/slot)
+
+</Aside>
+
+
+**Copy/paste the following code to `~/components/primitives/avatar/index.tsx`**
+
+<Code code={importedNativeCode} lang="tsx" title="~/components/primitives/avatar/index.tsx" />
+
+**Copy/paste the following code for types to  `~/components/primitives/avatar/types.ts`**
+
+<Code code={importedTypesCode} lang="tsx" title="~/components/primitives/avatar/types.ts" />
+
+## Usage
+
+```tsx
+import * as AvatarPrimitive from '~/components/primitives/avatar';
+
+const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
+
+function Example() {
+  return (
+      <Avatar.Root alt="Zach Nugent's Avatar">
+        <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
+        <Avatar.Fallback>
+          <Text>ZN</Text>
+        </Avatar.Fallback>
+      </Avatar.Root>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| alt \*  | string  |              |
+| asChild | boolean | _(optional)_ |
+
+### Image
+
+Extends [`Image`](https://reactnative.dev/docs/image) props except `alt`
+
+|   Prop   |  Type   |     Note     |
+| :------: | :-----: | :----------: |
+| asChild  | boolean | _(optional)_ |
+
+### Fallback
+
+Extends [`View`](https://reactnative.dev/docs/view) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+

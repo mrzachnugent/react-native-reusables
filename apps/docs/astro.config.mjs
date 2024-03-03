@@ -47,6 +47,10 @@ export default defineConfig({
               link: '/components/accordion/',
             },
             {
+              label: 'Avatar',
+              link: '/components/avatar/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -69,6 +73,10 @@ export default defineConfig({
                 {
                   label: 'Accordion',
                   link: '/primitives/accordion/',
+                },
+                {
+                  label: 'Avatar',
+                  link: '/primitives/avatar/',
                 },
               ],
             },
