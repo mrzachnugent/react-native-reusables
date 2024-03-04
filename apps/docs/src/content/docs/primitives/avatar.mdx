@@ -50,12 +50,12 @@ const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
 
 function Example() {
   return (
-      <Avatar.Root alt="Zach Nugent's Avatar">
-        <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
-        <Avatar.Fallback>
+      <AvatarPrimitive.Root alt="Zach Nugent's Avatar">
+        <AvatarPrimitive.Image source={{ uri: GITHUB_AVATAR_URI }} />
+        <AvatarPrimitive.Fallback>
           <Text>ZN</Text>
-        </Avatar.Fallback>
-      </Avatar.Root>
+        </AvatarPrimitive.Fallback>
+      </AvatarPrimitive.Root>
   );
 }
 ```
