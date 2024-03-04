@@ -85,7 +85,7 @@ function Example() {
   const [checked, setChecked] = React.useState(false);
   return (
       <CheckboxPrimitive.Root checked={checked} onCheckedChange={setChecked}>
-        <cCheckboxPrimitive style={{ height: 4, width: 4, backgroundColor: 'red'}} />
+        <CheckboxPrimitive.Indicator style={{ height: 4, width: 4, backgroundColor: 'red'}} />
       </CheckboxPrimitive.Root>
   );
 }
