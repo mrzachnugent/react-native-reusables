@@ -63,6 +63,10 @@ export default defineConfig({
               link: '/components/checkbox/',
             },
             {
+              label: 'Collapsible',
+              link: '/components/collapsible/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -101,6 +105,10 @@ export default defineConfig({
                 {
                   label: 'Checkbox',
                   link: '/primitives/checkbox/',
+                },
+                {
+                  label: 'Collapsible',
+                  link: '/primitives/collapsible/',
                 },
               ],
             },
