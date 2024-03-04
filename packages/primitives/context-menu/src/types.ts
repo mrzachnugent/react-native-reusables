@@ -26,6 +26,9 @@ interface ContextMenuPortalProps extends ForceMountable {
 }
 
 interface ContextMenuOverlayProps extends ForceMountable {
+  /**
+   * Platform: NATIVE ONLY
+   */
   closeOnPress?: boolean;
 }
 

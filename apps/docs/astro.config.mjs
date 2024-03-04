@@ -51,7 +51,7 @@ export default defineConfig({
               link: '/components/alert-dialog/',
             },
             {
-              label: 'Aspect-Ratio',
+              label: 'Aspect Ratio',
               link: '/components/aspect-ratio/',
             },
             {
@@ -65,6 +65,10 @@ export default defineConfig({
             {
               label: 'Collapsible',
               link: '/components/collapsible/',
+            },
+            {
+              label: 'Context Menu',
+              link: '/components/context-menu/',
             },
             {
               label: 'Text',
@@ -95,7 +99,7 @@ export default defineConfig({
                   link: '/primitives/alert-dialog/',
                 },
                 {
-                  label: 'Aspect-Ratio',
+                  label: 'Aspect Ratio',
                   link: '/primitives/aspect-ratio/',
                 },
                 {
@@ -109,6 +113,10 @@ export default defineConfig({
                 {
                   label: 'Collapsible',
                   link: '/primitives/collapsible/',
+                },
+                {
+                  label: 'Context Menu',
+                  link: '/primitives/context-menu/',
                 },
               ],
             },

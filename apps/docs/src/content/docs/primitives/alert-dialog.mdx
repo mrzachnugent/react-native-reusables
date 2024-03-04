@@ -74,8 +74,28 @@ A modal dialog that interrupts the user with important content and expects a res
 
 ## Usage
 
+<Aside type="caution">
+
+  Requires a `<PortalHost />` as the last child of your `<Root/>` (`app/_layout.tsx`) component
+
+  ```tsx
+  import { PortalHost } from '~/components/primitives/portal';
+
+  function Root() {
+    return (
+      <>
+        <Stack />
+        {/* Default Portal Host (one per app) */}
+        <PortalHost />
+      </>
+    );
+  }
+  ```
+
+</Aside>
+
 ```tsx
-import * as AlertDialogPrimitive from '~/components/primitives/accordion';
+import * as AlertDialogPrimitive from '~/components/primitives/alert-dialog';
 import { Text } from 'react-native';
 
 function Example() {
@@ -188,4 +208,4 @@ Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
 
 ### useRootContext
 
-Must be used within a `Root` component. It provides the following values from the accordion: `open`, and `onOpenChange`.
+Must be used within a `Root` component. It provides the following values from the alert-dialog: `open`, and `onOpenChange`.

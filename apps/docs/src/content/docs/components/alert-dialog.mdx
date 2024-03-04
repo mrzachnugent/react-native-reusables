@@ -36,6 +36,26 @@ A modal dialog that interrupts the user with important content and expects a res
 
 ### Usage
 
+<Aside type="caution">
+
+  Requires a `<PortalHost />` as the last child of your `<Root/>` (`app/_layout.tsx`) component
+
+  ```tsx
+  import { PortalHost } from '~/components/primitives/portal';
+
+  function Root() {
+    return (
+      <>
+        <Stack />
+        {/* Default Portal Host (one per app) */}
+        <PortalHost />
+      </>
+    );
+  }
+  ```
+
+</Aside>
+
 ```tsx
 import {
   AlertDialog,
@@ -51,7 +71,7 @@ import {
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 
-export default function AlertDialogScreen() {
+function AlertDialogScreen() {
   return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
