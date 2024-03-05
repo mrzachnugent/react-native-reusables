@@ -24,7 +24,7 @@ import {
 } from '../../components/deprecated-ui/bottom-sheet';
 import { Calendar } from '../../components/deprecated-ui/calendar';
 import { Combobox, ComboboxOption } from '../../components/deprecated-ui/combobox';
-import { Button, buttonTextVariants } from '../../components/ui/button';
+import { Button, buttonVariants } from '../../components/ui/button';
 import { Checkbox } from '../../components/ui/checkbox';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
@@ -32,8 +32,10 @@ import { RadioGroup } from '../../components/ui/radio-group';
 import { Select, type Option } from '../../components/ui/select';
 import { Switch } from '../../components/ui/switch';
 import { Textarea } from '../../components/ui/textarea';
-import { Text } from './text';
 import { cn } from '../../lib/utils';
+import { Text } from './text';
+
+const { container: buttonContainer, label: buttonLabel } = buttonVariants();
 
 const Form = FormProvider;
 
@@ -363,14 +365,14 @@ const FormDatePicker = React.forwardRef<
             {({ pressed }) => (
               <>
                 <CalendarIcon
-                  className={buttonTextVariants({
+                  className={buttonContainer({
                     variant: 'outline',
                     className: cn(!value && 'opacity-80', pressed && 'opacity-60'),
                   })}
                   size={18}
                 />
                 <Text
-                  className={buttonTextVariants({
+                  className={buttonLabel({
                     variant: 'outline',
                     className: cn('font-normal', !value && 'opacity-70', pressed && 'opacity-50'),
                   })}
