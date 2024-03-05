@@ -87,7 +87,7 @@
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.6.0",
     "@hookform/resolvers": "^3.3.4",
-    "@react-native-community/slider": "4.4.2",
+    "@react-native-community/slider": "4.5.0",
     "@react-navigation/native": "^6.0.2",
     "@rnr/accordion": "*",
     "@rnr/alert-dialog": "*",
@@ -123,22 +123,22 @@
     "@tanstack/react-table": "^8.11.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "lucide-react-native": "^0.314.0",
+    "lucide-react-native": "^0.344.0",
     "nativewind": "^4.0.33",
     "react-hook-form": "^7.49.2",
     "react-native-calendars": "^1.1302.0",
-    "react-native-reanimated": "~3.6.2",
-    "react-native-safe-area-context": "4.8.2",
-    "react-native-svg": "14.1.0",
+    "react-native-reanimated": "~3.7.2",
+    "react-native-safe-area-context": "4.9.0",
+    "react-native-svg": "15.1.0",
     "react-native-toast-message": "^2.2.0",
     "tailwind-merge": "^2.1.0",
     "tailwind-variants": "^0.2.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
-    "@types/react": "~18.2.43",
+    "@types/react": "~18.2.63",
     "react": "18.2.0",
-    "react-native": "0.73.4"
+    "react-native": "0.73.5"
   },
   "peerDependencies": {
     "react": "*",
