@@ -1596,9 +1596,6 @@ importers:
       tailwind-merge:
         specifier: ^2.1.0
         version: 2.2.1
-      tailwind-variants:
-        specifier: ^0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.1
@@ -14283,16 +14280,6 @@ packages:
     resolution: {integrity: sha512-o+2GTLkthfa5YUt4JxPfzMIpQzZ3adD1vLVkvKE1Twl9UAhGsEbIZhHHZVRttyW177S8PDJI3bTQNaebyofK3Q==}
     dependencies:
       '@babel/runtime': 7.24.0
-    dev: false
-
-  /tailwind-variants@0.2.0(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-EuW5Sic7c0tzp+p5rJwAgb7398Jb0hi4zkyCstOoZPW0DWwr+EWkNtnZYEo5CjgE1tazHUzyt4oIhss64UXRVA==}
-    engines: {node: '>=16.x', pnpm: '>=7.x'}
-    peerDependencies:
-      tailwindcss: '*'
-    dependencies:
-      tailwind-merge: 2.2.1
-      tailwindcss: 3.4.1
     dev: false
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.4.1):
