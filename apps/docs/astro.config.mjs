@@ -71,6 +71,10 @@ export default defineConfig({
               link: '/components/context-menu/',
             },
             {
+              label: 'Dialog',
+              link: '/components/dialog/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -117,6 +121,10 @@ export default defineConfig({
                 {
                   label: 'Context Menu',
                   link: '/primitives/context-menu/',
+                },
+                {
+                  label: 'Dialog',
+                  link: '/primitives/dialog/',
                 },
               ],
             },

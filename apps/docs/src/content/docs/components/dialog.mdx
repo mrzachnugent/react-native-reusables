@@ -1,40 +1,57 @@
 ---
 title: Dialog
-description: A popup view that appears on top of the main view or another dialog, making the content underneath unclickable.
+description: A modal dialog that interrupts the user with important content and expects a response.
 ---
 {/* prettier-ignore-start */}
-{ /* prettier-ignore-end */}
+{/* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
-import importedCode from '@rnr/reusables/components/ui/dialog?raw';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components'
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@rnr/reusables/components/ui/dialog?raw';
 
-<LinkButton href="/primitives/dialog">
-  Dialog Primitive
-</LinkButton>
-<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/dialog">
+<LinkButton href='/primitives/dialog'>Dialog Primitive</LinkButton>
+<LinkButton target='_blank' href='https://rnr-showcase.vercel.app/dialog'>
   Demo
 </LinkButton>
 
 <br />
 
-A popup view that appears on top of the main view or another dialog, making the content underneath unclickable.
+A modal dialog that interrupts the user with important content and expects a response.
 
 ### Installation
 
-<Aside type="tip" title="Depends on a primitive">
-    Before copy/pasting, add the <a href="/primitives/dialog" className='text-white font-bold'>dialog primitive</a> to your project.
+<Aside type='tip' title='Dependencies'>
+  Before copy/pasting, add the <a href='/primitives/dialog' className='text-white font-bold'> dialog primitive</a> to your project.
 </Aside>
 
 <br />
 
 **Copy/paste the following code to `~/components/ui/dialog.tsx`:**
 
+<Code code={importedCode} lang='tsx' title='~/components/ui/dialog.tsx' />
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/dialog.tsx" />
+### Usage
 
-## Usage
+<Aside type="caution">
+
+  Requires a `<PortalHost />` as the last child of your `<Root/>` (`app/_layout.tsx`) component
+
+  ```tsx
+  import { PortalHost } from '~/components/primitives/portal';
+
+  function Root() {
+    return (
+      <>
+        <Stack />
+        {/* Default Portal Host (one per app) */}
+        <PortalHost />
+      </>
+    );
+  }
+  ```
+
+</Aside>
 
 ```tsx
 import * as React from 'react';
@@ -52,9 +69,8 @@ import {
 import { Text } from '~/components/ui/typography';
 
 export default function DialogScreen() {
-  const [open, setOpen] = React.useState(false);
   return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog>
         <DialogTrigger asChild>
           <Button variant='outline'>
             <Text>Edit Profile</Text>
@@ -82,54 +98,86 @@ export default function DialogScreen() {
 
 ## Props
 
-TODO
+### Dialog
 
-### DialogRoot
+Extends [`View`](https://reactnative.dev/docs/view#props) props
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+|     Prop     |           Type           |     Note     |
+| :----------: | :----------------------: | :----------: |
+|   asChild    |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
+| defaultOpen  |         boolean          | _(optional)_ |
 
 ### DialogTrigger
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
 
-### DialogPortal
-
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### DialogOverlay
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|     Prop     |        Type        |     Note     |
+| :----------: | :----------------: | :----------: |
+|   asChild    |      boolean       | _(optional)_ |
+|  forceMount  | true \| undefined; | _(optional)_ |
+| closeOnPress |      boolean       | _(optional)_ |
+
+### DialogPortal
+
+|    Prop    |               Type               |         Note          |
+| :--------: | :------------------------------: | :-------------------: |
+| children\* |         React.ReactNode          |                       |
+| forceMount |        true \| undefined         |     _(optional)_      |
+|  hostName  |              string              | Web Only _(optional)_ |
+| container  | HTMLElement \| null \| undefined | Web Only _(optional)_ |
 
 ### DialogContent
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|         Prop         |        Type         |         Note          |
+| :------------------: | :-----------------: | :-------------------: |
+|       asChild        |       boolean       |     _(optional)_      |
+|      forceMount      |  true \| undefined  |     _(optional)_      |
+|   onOpenAutoFocus    | (ev: Event) => void | Web Only _(optional)_ |
+|   onCloseAutoFocus   | (ev: Event) => void | Web Only _(optional)_ |
+|   onEscapeKeyDown    | (ev: Event) => void | Web Only _(optional)_ |
+|  onInteractOutside   | (ev: Event) => void | Web Only _(optional)_ |
+| onPointerDownOutside | (ev: Event) => void | Web Only _(optional)_ |
 
 ### DialogHeader
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 ### DialogTitle
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`Text`](https://reactnative.dev/docs/text#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### DialogDescription
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`Text`](https://reactnative.dev/docs/text#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
 
 ### DialogFooter
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 ### DialogClose
 
-| Prop | Type | Note |
-| :--: | :--: | :--: |
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
