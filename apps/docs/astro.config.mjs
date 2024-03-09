@@ -63,6 +63,10 @@ export default defineConfig({
               link: '/components/badge/',
             },
             {
+              label: 'Button',
+              link: '/components/button/',
+            },
+            {
               label: 'Checkbox',
               link: '/components/checkbox/',
             },
