@@ -498,7 +498,7 @@ https://github.com/mrzachnugent/rn-ui-inspired-by-shadcn/assets/63797719/51bd6b5
 <details>
 <summary>Code</summary>
   
-  - [UI](/components/deprecated-ui/table.tsx)
+  - [UI](packages/reusables/src/components/ui/table.tsx)
   - [Example](/apps/showcase/app/table.tsx)
 </details>
 
