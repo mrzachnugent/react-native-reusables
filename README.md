@@ -16,6 +16,8 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 ### How to use
 
+**For your own project:**
+
 1. Start with a template or manually setup configuration: [Check out the docs](https://rnr-docs.vercel.app/getting-started/initial-setup/)
 
 2. Copy/paste what you need into your project (2 options)
@@ -27,6 +29,26 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
       3. Copy the primitive to `~/components/primitives/*`
         - _If the primitive uses other primitives repeat steps 2 and 3._
 
+
+**For this repository:**
+
+1. Clone the repo: `git clone https://github.com/mrzachnugent/react-native-reusables.git` 
+
+2. Change directory into the cloned repo: `cd react-native-reusables`
+
+3. Install the dependencies (**IMPORTANT:** Must use pnpm): `pnpm i`
+
+4. Start up desired app
+
+- Showcase
+  - iOS: `pnpm dev:showcase`
+  - Android: `pnpm dev:showcase:android`
+  - Web: `pnpm dev:showcase:web`
+- Starter-base
+  - iOS: `pnpm dev:starter-base`
+  - Android: `pnpm dev:starter-base:android`
+  - Web: `pnpm dev:starter-base:web`
+- Docs: `pnpm dev:docs`
 
 ### Templates
 

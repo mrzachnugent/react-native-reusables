@@ -6,6 +6,7 @@
     "start": "expo start -c",
     "android": "expo start -c --android",
     "dev": "expo start -c --ios",
+    "dev:android": "expo start -c --android",
     "dev:web": "expo start -c --web",
     "build": "npx expo export -p web",
     "serve": "npx serve dist --single",
