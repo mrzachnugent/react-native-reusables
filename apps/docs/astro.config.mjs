@@ -152,6 +152,7 @@ export default defineConfig({
     }),
     tailwind({
       applyBaseStyles: false,
+      nesting: true,
     }),
     react(),
   ],
