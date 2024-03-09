@@ -59,6 +59,10 @@ export default defineConfig({
               link: '/components/avatar/',
             },
             {
+              label: 'Badge',
+              link: '/components/badge/',
+            },
+            {
               label: 'Checkbox',
               link: '/components/checkbox/',
             },
