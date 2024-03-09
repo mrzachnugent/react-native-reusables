@@ -1,6 +1,6 @@
 ---
-title: Input
-description: Shows an input component.
+title: Textarea
+description: Shows an textarea component.
 ---
 
 {/* prettier-ignore-start */}
@@ -9,37 +9,37 @@ description: Shows an input component.
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
 import { Aside } from '@astrojs/starlight/components';
-import importedCode from '@rnr/reusables/components/ui/input?raw';
+import importedCode from '@rnr/reusables/components/ui/textarea?raw';
 
-<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/input">
+<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/textarea">
   Demo
 </LinkButton>
 
 <br />
 
-Shows an input component.
+Shows an textarea component.
 
 ## Installation
 
-**Copy/paste the following code to `~/components/ui/input.tsx`**
+**Copy/paste the following code to `~/components/ui/textarea.tsx`**
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/input.tsx" />
+<Code code={importedCode} lang="tsx" title="~/components/ui/textarea.tsx" />
 
 ## Usage
 
 ```tsx
-import { Input } from '~/components/ui/input';
+import { Textarea } from '~/components/ui/textarea';
 import { Text } from '~/components/ui/text';
 
 function Example() {
   const [value, setValue] = React.useState('');
   return (
-      <Input
+      <Textarea
+        ref={inputRef}
         placeholder='Write some stuff...'
         value={value}
-        onChangeText={onChangeText}
-        aria-labelledbyledBy='inputLabel'
-        aria-errormessage='inputError'
+        onChangeText={setValue}
+        aria-labelledby='textareaLabel'
       />
   );
 }
@@ -47,7 +47,7 @@ function Example() {
 
 ## Props
 
-### Input
+### Textarea
 
 Extends [`Text Input`](https://reactnative.dev/docs/textinput#props) props
         

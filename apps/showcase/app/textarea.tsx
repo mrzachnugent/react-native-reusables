@@ -37,7 +37,7 @@ export default function InputScreen() {
           placeholder='Write some stuff...'
           value={value}
           onChangeText={onChangeText}
-          aria-labelledbyledBy='textareaLabel'
+          aria-labelledby='textareaLabel'
         />
         <View className='h-20' />
       </View>

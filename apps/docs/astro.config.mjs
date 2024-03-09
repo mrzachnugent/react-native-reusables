@@ -111,6 +111,10 @@ export default defineConfig({
               link: '/components/text/',
             },
             {
+              label: 'Textarea',
+              link: '/components/textarea/',
+            },
+            {
               label: 'Typography',
               link: '/components/typography/',
             },

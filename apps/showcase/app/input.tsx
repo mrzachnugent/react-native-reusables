@@ -49,7 +49,7 @@ export default function InputScreen() {
           value={value}
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
-          aria-labelledbyledBy='inputLabel'
+          aria-labelledby='inputLabel'
           aria-errormessage='inputError'
         />
         {err && <ErrorMessage msg={err} />}
