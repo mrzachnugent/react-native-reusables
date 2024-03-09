@@ -1,0 +1,55 @@
+---
+title: Label
+description: A user-friendly label linked to controls for improved accessibility.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@rnr/reusables/components/ui/label?raw';
+
+<LinkButton href="/primitives/label">
+  Label
+</LinkButton>
+<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/label">
+  Demo
+</LinkButton>
+
+<br />
+
+A user-friendly label linked to controls for improved accessibility.
+
+### Installation
+
+<Aside type="tip" title="Dependency">
+    Before copy/pasting, add the <a href="/primitives/label" className='text-white font-bold'>label primitive</a> to your project.
+</Aside>
+
+<br />
+
+**Copy/paste the following code to `~/components/ui/label.tsx`:**
+
+
+<Code code={importedCode} lang="tsx" title="~/components/ui/label.tsx" />
+
+### Usage
+
+```tsx
+import { label } from '~/components/ui/checkbox';
+
+function Example() {
+  return <Label nativeID='name'>Name</Label>
+}
+```
+## Props
+
+### Label
+
+Extends [`Text`](https://reactnative.dev/docs/text#props) props
+
+|    Prop    |  Type  |                               Note                               |
+| :--------: | :----: | :--------------------------------------------------------------: |
+| nativeID\* | string | the same value needs be use by aria-labelledby from form field   |

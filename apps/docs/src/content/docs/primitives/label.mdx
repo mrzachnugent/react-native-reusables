@@ -1,0 +1,112 @@
+---
+title: Label Primitive
+description: A user-friendly label linked to controls for improved accessibility.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/label/src/label.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/label/src/label.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/label/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/label/src/index.ts?raw';
+
+<LinkButton href="/primitives/slot">
+  Slot Primitives
+</LinkButton>
+<LinkButton href="/primitives/types">
+  Types Primitives
+</LinkButton>
+<LinkButton target="_blank" href="https://www.radix-ui.com/primitives/docs/components/label">
+  @radix-ui/react-label
+</LinkButton>
+
+<br />
+
+A user-friendly label linked to controls for improved accessibility.
+
+## Installation
+<Aside title="Uses shared primitives">
+    If you do not already have these primitives in your project, you will need to add them.
+
+    - [Types Primitive](/primitives/types)
+    - [Slot Primitive](/primitives/slot)
+
+</Aside>
+
+<Tabs>
+    <TabItem label="Universal">
+        **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/label">@radix-ui/react-label</a>**
+
+        ```bash
+        npx expo install @radix-ui/react-label
+        ```
+
+        **Copy/paste the following code for web to  `~/components/primitives/label/label.web.tsx`**
+
+        <Code code={importedWebCode} lang="tsx" title="~/components/primitives/label/label.web.tsx" />
+
+        **Copy/paste the following code for native to  `~/components/primitives/label/label.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/label/label.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/label/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/label/types.ts" />
+
+        **Copy/paste the following code for exporting to  `~/components/primitives/label/index.ts`**
+
+        <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/label/index.ts" />
+    </TabItem>
+    <TabItem label="Native Only">
+        **Copy/paste the following code for native to  `~/components/primitives/label/index.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/label/index.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/label/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/label/types.ts" />
+    </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import * as LabelPrimitive from '~/components/primitives/label';
+
+function Example() {
+  const [checked, setChecked] = React.useState(false);
+  return (
+     <Label.Root>
+        <Label.Text
+          nativeID='to-be-use-by-aria-labelledby-from-form-field'
+        >
+          Label
+        </Label.Text>
+      </Label.Root>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props except `children` | `hitSlop` | `style`
+
+|    Prop    |      Type       |     Note     |
+| :--------: | :-------------: | :----------: |
+| children\* | React.ReactNode |              |
+|   style    |    ViewStyle    | _(optional)_ |
+
+### Text
+
+Extends [`Text`](https://reactnative.dev/docs/text#props) props
+
+|    Prop    |  Type  |                               Note                               |
+| :--------: | :----: | :--------------------------------------------------------------: |
+| nativeID\* | string | the same value needs be use by aria-labelledby from form field   |
+

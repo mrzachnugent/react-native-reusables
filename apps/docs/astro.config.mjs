@@ -83,6 +83,10 @@ export default defineConfig({
               link: '/components/hover-card/',
             },
             {
+              label: 'Label',
+              link: '/components/label/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -141,6 +145,10 @@ export default defineConfig({
                 {
                   label: 'Hover Card',
                   link: '/primitives/hover-card/',
+                },
+                {
+                  label: 'Label',
+                  link: '/primitives/label/',
                 },
               ],
             },
