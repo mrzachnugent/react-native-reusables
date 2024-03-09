@@ -107,6 +107,10 @@ export default defineConfig({
               link: '/components/menubar/',
             },
             {
+              label: 'Skeleton',
+              link: '/components/skeleton/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
