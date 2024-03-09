@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { ArrowDown, ArrowUp } from '~/components/Icons';
+import { ArrowDown, ArrowUp, Info } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { DataTable } from '~/components/ui/data-table';
 import { Skeleton } from '~/components/ui/skeleton';
@@ -126,7 +126,7 @@ export default function DataTableScreen() {
             text1: `${row.getValue('name')}`,
             text2: 'The row was pressed.',
             props: {
-              icon: 'Rows',
+              icon: Info,
             },
             visibilityTime: 1000,
             topOffset: insets.top === 0 ? 12 : insets.top,

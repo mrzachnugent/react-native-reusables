@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Alert, ScrollView, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { ChevronDown } from '~/components/Icons';
+import { ChevronDown, Info } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import {
@@ -90,7 +90,7 @@ export default function TableScreen() {
                         text1: `${invoice.invoice}`,
                         text2: 'The row was pressed.',
                         props: {
-                          icon: 'Rows',
+                          icon: Info,
                         },
                         visibilityTime: 1500,
                         topOffset: insets.top === 0 ? 12 : insets.top,

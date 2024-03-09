@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import * as LucideIcon from 'lucide-react-native';
+import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
 import { cn } from '../../lib/utils';
@@ -25,25 +25,24 @@ const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
   Omit<React.ComponentPropsWithoutRef<typeof View>, 'style'> &
     VariantProps<typeof alertVariants> & {
-      icon?: keyof typeof LucideIcon;
+      icon?: LucideIcon;
       style?: ViewStyle;
     }
->(({ children, icon, className, variant, style: styleProp, ...props }, ref) => {
+>(({ children, icon: Icon, className, variant, style: styleProp, ...props }, ref) => {
   const { colors } = useTheme();
 
-  const Icon = LucideIcon[icon ?? 'AlertTriangle'] as LucideIcon.LucideIcon;
   return (
     <View
       ref={ref}
       role='alert'
       className={cn(
         alertVariants({ variant }),
-        icon && 'ios:pl-[50] android:pl-[50] pl-[50px]',
+        !!Icon && 'ios:pl-[50] android:pl-[50] pl-[50px]',
         className
       )}
       {...props}
     >
-      {icon && (
+      {!!Icon && (
         <View className='absolute left-[16px] top-[18px] native:left-[15] native:top-[15]'>
           <Icon
             size={21}
@@ -82,11 +81,7 @@ const AlertDescription = React.forwardRef<
   React.ElementRef<typeof Text>,
   React.ComponentPropsWithoutRef<typeof Text>
 >(({ className, ...props }, ref) => (
-  <Text
-    ref={ref}
-    className={cn('text-muted-foreground', className)}
-    {...props}
-  />
+  <Text ref={ref} className={cn('text-muted-foreground', className)} {...props} />
 ));
 AlertDescription.displayName = 'AlertDescription';
 

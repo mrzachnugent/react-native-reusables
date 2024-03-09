@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import * as LucideIcon from 'lucide-react-native';
+import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { cn } from '../../lib/utils';
@@ -24,13 +24,12 @@ const Alert = React.forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> &
     VariantProps<typeof alertVariants> & {
-      icon: keyof typeof LucideIcon;
+      icon: LucideIcon;
       iconSize?: number;
       iconClassName?: string;
     }
->(({ className, variant, children, icon, iconSize = 16, iconClassName, ...props }, ref) => {
+>(({ className, variant, children, icon: Icon, iconSize = 16, iconClassName, ...props }, ref) => {
   const { colors } = useTheme();
-  const Icon = LucideIcon[icon] as LucideIcon.LucideIcon;
   return (
     <View ref={ref} role='alert' className={alertVariants({ variant, className })} {...props}>
       <View className='absolute left-3.5 top-4 -translate-y-0.5'>

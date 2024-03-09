@@ -1,6 +1,7 @@
+import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { DeprecatedUi } from '@rnr/reusables';
+import { Code } from '~/components/Icons';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 const { Slider } = DeprecatedUi;
@@ -10,7 +11,7 @@ export default function SliderScreen() {
   return (
     <>
       <View className='p-6 w-full'>
-        <Alert icon='Code' className='max-w-xl'>
+        <Alert icon={Code} className='max-w-xl'>
           <AlertTitle>FYI</AlertTitle>
           <AlertDescription>This reusable does not use "rn-primitives"</AlertDescription>
         </Alert>

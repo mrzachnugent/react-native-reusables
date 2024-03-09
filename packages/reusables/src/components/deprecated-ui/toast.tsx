@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast, { ToastConfig } from 'react-native-toast-message';
+import { AlertTriangle, CheckSquare, Info } from '../../components/Icons';
 import { Alert, AlertDescription, AlertTitle } from '../../components/deprecated-ui/alert';
 
 /**
@@ -9,6 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from '../../components/deprecated
  * https://github.com/calintamas/react-native-toast-message/issues/530
  */
 if (typeof document === 'undefined') {
+  // @ts-ignore
   React.useLayoutEffect = React.useEffect;
 }
 
@@ -16,7 +18,7 @@ if (typeof document === 'undefined') {
  * @docs https://github.com/calintamas/react-native-toast-message/blob/main/docs/quick-start.md
  */
 const TOAST_CONFIG: ToastConfig = {
-  success: ({ text1, text2, onPress, props: { icon = 'CheckSquare' } }) => (
+  success: ({ text1, text2, onPress, props: { icon = CheckSquare } }) => (
     <Pressable onPress={onPress} className='w-full max-w-xl px-6'>
       <Alert icon={icon} variant='success'>
         <AlertTitle>{text1}</AlertTitle>
@@ -24,7 +26,7 @@ const TOAST_CONFIG: ToastConfig = {
       </Alert>
     </Pressable>
   ),
-  error: ({ text1, text2, onPress, props: { icon = 'AlertTriangle' } }) => (
+  error: ({ text1, text2, onPress, props: { icon = AlertTriangle } }) => (
     <Pressable onPress={onPress} className='w-full max-w-xl px-6'>
       <Alert icon={icon} variant='destructive'>
         <AlertTitle>{text1}</AlertTitle>
@@ -32,7 +34,7 @@ const TOAST_CONFIG: ToastConfig = {
       </Alert>
     </Pressable>
   ),
-  base: ({ text1, text2, onPress, props: { icon = 'Info' } }) => (
+  base: ({ text1, text2, onPress, props: { icon = Info } }) => (
     <Pressable onPress={onPress} className='w-full max-w-xl px-6'>
       <Alert icon={icon} variant='default'>
         <AlertTitle>{text1}</AlertTitle>

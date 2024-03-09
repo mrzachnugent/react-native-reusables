@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { Bold } from '~/components/Icons';
 import { Toggle, ToggleIcon } from '~/components/ui/toggle';
 
 export default function ToggleUniversalcreen() {
@@ -12,7 +13,7 @@ export default function ToggleUniversalcreen() {
         aria-label='Toggle bold'
         variant='outline'
       >
-        <ToggleIcon name='Bold' size={18} />
+        <ToggleIcon icon={Bold} size={18} />
       </Toggle>
     </View>
   );
