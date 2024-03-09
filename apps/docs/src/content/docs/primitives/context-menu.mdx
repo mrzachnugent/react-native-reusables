@@ -126,18 +126,18 @@ function Example() {
           <ContextMenuPrimitive.Portal>
             <ContextMenuPrimitive.Overlay>
               <ContextMenu.Content>
-                <ContextMenu.Item inset>
+                <ContextMenu.Item >
                   <Text>Back</Text>
                 </ContextMenu.Item>
-                <ContextMenu.Item inset>
+                <ContextMenu.Item >
                   <Text>Forward</Text>
                 </ContextMenu.Item>
-                <ContextMenu.Item inset>
+                <ContextMenu.Item >
                   <Text>Reload</Text>
                 </ContextMenu.Item>
 
                 <ContextMenu.Sub open={openSub} onOpenChange={setOpenSub}>
-                  <ContextMenu.SubTrigger inset>
+                  <ContextMenu.SubTrigger >
                     <Text>More Tools</Text>
                   </ContextMenu.SubTrigger>
                   <ContextMenu.SubContent>
@@ -172,7 +172,7 @@ function Example() {
                 </ContextMenu.CheckboxItem>
                 <ContextMenu.Separator />
                 <ContextMenu.RadioGroup value={radioValue} onValueChange={setRadioValue}>
-                  <ContextMenu.Label inset>People</ContextMenu.Label>
+                  <ContextMenu.Label >People</ContextMenu.Label>
                   <ContextMenu.Separator />
                   <ContextMenu.RadioItem value='pedro' closeOnPress={false}>
                     <Text>Elmer Fudd</Text>

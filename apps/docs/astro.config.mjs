@@ -75,6 +75,10 @@ export default defineConfig({
               link: '/components/dialog/',
             },
             {
+              label: 'Dropdown Menu',
+              link: '/components/dropdown-menu/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -125,6 +129,10 @@ export default defineConfig({
                 {
                   label: 'Dialog',
                   link: '/primitives/dialog/',
+                },
+                {
+                  label: 'Dropdown Menu',
+                  link: '/primitives/dropdown-menu/',
                 },
               ],
             },
