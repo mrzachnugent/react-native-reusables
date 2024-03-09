@@ -79,6 +79,10 @@ export default defineConfig({
               link: '/components/dropdown-menu/',
             },
             {
+              label: 'Hover Card',
+              link: '/components/hover-card/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -133,6 +137,10 @@ export default defineConfig({
                 {
                   label: 'Dropdown Menu',
                   link: '/primitives/dropdown-menu/',
+                },
+                {
+                  label: 'Hover Card',
+                  link: '/primitives/hover-card/',
                 },
               ],
             },
