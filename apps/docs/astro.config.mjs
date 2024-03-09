@@ -95,6 +95,10 @@ export default defineConfig({
               link: '/components/hover-card/',
             },
             {
+              label: 'Input',
+              link: '/components/input/',
+            },
+            {
               label: 'Label',
               link: '/components/label/',
             },

@@ -1,0 +1,53 @@
+---
+title: Input
+description: Shows an input component.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@rnr/reusables/components/ui/input?raw';
+
+<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/button">
+  Demo
+</LinkButton>
+
+<br />
+
+Shows an input component.
+
+## Installation
+
+**Copy/paste the following code to `~/components/ui/input.tsx`**
+
+<Code code={importedCode} lang="tsx" title="~/components/ui/input.tsx" />
+
+## Usage
+
+```tsx
+import { Input } from '~/components/ui/input';
+import { Text } from '~/components/ui/text';
+
+function Example() {
+  const [value, setValue] = React.useState('');
+  return (
+      <Input
+        placeholder='Write some stuff...'
+        value={value}
+        onChangeText={onChangeText}
+        aria-labelledbyledBy='inputLabel'
+        aria-errormessage='inputError'
+      />
+  );
+}
+```
+
+## Props
+
+### Input
+
+Extends [`Text Input`](https://reactnative.dev/docs/textinput#props) props
+        
