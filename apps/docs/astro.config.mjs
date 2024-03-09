@@ -87,6 +87,10 @@ export default defineConfig({
               link: '/components/label/',
             },
             {
+              label: 'Menubar',
+              link: '/components/menubar/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -149,6 +153,10 @@ export default defineConfig({
                 {
                   label: 'Label',
                   link: '/primitives/label/',
+                },
+                {
+                  label: 'Menubar',
+                  link: '/primitives/menubar/',
                 },
               ],
             },

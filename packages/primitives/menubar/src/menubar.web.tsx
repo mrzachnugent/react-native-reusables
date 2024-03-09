@@ -28,17 +28,17 @@ import type {
   MenubarSubTriggerProps,
 } from './types';
 
-const MenubarContext = React.createContext<MenubarRootProps | null>(null);
+const RootContext = React.createContext<MenubarRootProps | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & MenubarRootProps>(
   ({ asChild, value, onValueChange, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <MenubarContext.Provider value={{ value, onValueChange }}>
+      <RootContext.Provider value={{ value, onValueChange }}>
         <Menubar.Root value={value} onValueChange={onValueChange}>
           <Component ref={ref} {...viewProps} />
         </Menubar.Root>
-      </MenubarContext.Provider>
+      </RootContext.Provider>
     );
   }
 );
@@ -46,24 +46,24 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & MenubarRootProps>(
 Root.displayName = 'RootWebMenubar';
 
 function useRootContext() {
-  const context = React.useContext(MenubarContext);
+  const context = React.useContext(RootContext);
   if (!context) {
     throw new Error('Menubar compound components cannot be rendered outside the Menubar component');
   }
   return context;
 }
 
-const MenubarMenuContext = React.createContext<MenubarMenuProps | null>(null);
+const MenuContext = React.createContext<MenubarMenuProps | null>(null);
 
 const Menu = React.forwardRef<ViewRef, SlottableViewProps & MenubarMenuProps>(
   ({ asChild, value, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
     return (
-      <MenubarMenuContext.Provider value={{ value }}>
+      <MenuContext.Provider value={{ value }}>
         <Menubar.Menu value={value}>
           <Component ref={ref} {...viewProps} />
         </Menubar.Menu>
-      </MenubarMenuContext.Provider>
+      </MenuContext.Provider>
     );
   }
 );
@@ -71,7 +71,7 @@ const Menu = React.forwardRef<ViewRef, SlottableViewProps & MenubarMenuProps>(
 Menu.displayName = 'MenuWebMenubar';
 
 function useMenuContext() {
-  const context = React.useContext(MenubarMenuContext);
+  const context = React.useContext(MenuContext);
   if (!context) {
     throw new Error('Menubar compound components cannot be rendered outside the Menubar component');
   }
