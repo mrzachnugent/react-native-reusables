@@ -67,6 +67,10 @@ export default defineConfig({
               link: '/components/button/',
             },
             {
+              label: 'Card',
+              link: '/components/card/',
+            },
+            {
               label: 'Checkbox',
               link: '/components/checkbox/',
             },
