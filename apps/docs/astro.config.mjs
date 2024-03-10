@@ -107,6 +107,10 @@ export default defineConfig({
               link: '/components/menubar/',
             },
             {
+              label: 'Navigation Menu',
+              link: '/components/navigation-menu/',
+            },
+            {
               label: 'Skeleton',
               link: '/components/skeleton/',
             },
@@ -185,6 +189,10 @@ export default defineConfig({
                 {
                   label: 'Menubar',
                   link: '/primitives/menubar/',
+                },
+                {
+                  label: 'Navigation Menu',
+                  link: '/primitives/navigation-menu/',
                 },
                 {
                   label: 'Table',

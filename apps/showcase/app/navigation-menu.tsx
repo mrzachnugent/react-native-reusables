@@ -16,7 +16,7 @@ import {
 import { Text } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
-export default function MenubarScreen() {
+export default function NavigationMenuScreen() {
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
