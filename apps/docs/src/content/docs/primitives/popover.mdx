@@ -1,6 +1,6 @@
 ---
-title: Dialog Primitive
-description: A modal dialog that interrupts the user with important content and expects a response.
+title: Popover Primitive
+description: Dynamic content within a portal, activated by a button press.
 ---
 
 {/* prettier-ignore-start */}
@@ -9,22 +9,22 @@ description: A modal dialog that interrupts the user with important content and 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
-import importedNativeCode from '@/../node_modules/@rnr/dialog/src/dialog.tsx?raw';
-import importedWebCode from '@/../node_modules/@rnr/dialog/src/dialog.web.tsx?raw';
-import importedTypesCode from '@/../node_modules/@rnr/dialog/src/types.ts?raw';
-import importedIndexCode from '@/../node_modules/@rnr/dialog/src/index.ts?raw';
+import importedNativeCode from '@/../node_modules/@rnr/popover/src/popover.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/popover/src/popover.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/popover/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/popover/src/index.ts?raw';
 
 <LinkButton href='/primitives/types'>Types Primitives</LinkButton>
 <LinkButton href='/primitives/hooks'>Hooks Primitives</LinkButton>
 <LinkButton href='/primitives/slot'>Slot Primitives</LinkButton>
 <LinkButton href='/primitives/portal'>Portal Primitives</LinkButton>
-<LinkButton target='_blank' href='https://www.radix-ui.com/primitives/docs/components/dialog'>
-  @radix-ui/react-dialog
+<LinkButton target='_blank' href='https://www.radix-ui.com/primitives/docs/components/popover'>
+  @radix-ui/react-popover
 </LinkButton>
 
 <br />
 
-A modal dialog that interrupts the user with important content and expects a response.
+Dynamic content within a portal, activated by a button press.
 
 ## Installation
 
@@ -39,36 +39,36 @@ A modal dialog that interrupts the user with important content and expects a res
 
 <Tabs>
   <TabItem label="Universal">
-    **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/dialog">@radix-ui/react-dialog</a>**
+    **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/popover">@radix-ui/react-popover</a>**
 
     ```bash
-    npx expo install @radix-ui/react-dialog
+    npx expo install @radix-ui/react-popover
     ```
 
-    **Copy/paste the following code for web to  `~/components/primitives/dialog/dialog.web.tsx`**
+    **Copy/paste the following code for web to  `~/components/primitives/popover/popover.web.tsx`**
 
-    <Code code={importedWebCode} lang="tsx" title="~/components/primitives/dialog/dialog.web.tsx" />
+    <Code code={importedWebCode} lang="tsx" title="~/components/primitives/popover/popover.web.tsx" />
 
-    **Copy/paste the following code for native to  `~/components/primitives/dialog/dialog.tsx`**
+    **Copy/paste the following code for native to  `~/components/primitives/popover/popover.tsx`**
 
-    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/dialog/dialog.tsx" />
+    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/popover/popover.tsx" />
 
-    **Copy/paste the following code for types to  `~/components/primitives/dialog/types.ts`**
+    **Copy/paste the following code for types to  `~/components/primitives/popover/types.ts`**
 
-    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/dialog/types.ts" />
+    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/popover/types.ts" />
 
-    **Copy/paste the following code for exporting to  `~/components/primitives/dialog/index.ts`**
+    **Copy/paste the following code for exporting to  `~/components/primitives/popover/index.ts`**
 
-    <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/dialog/index.ts" />
+    <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/popover/index.ts" />
   </TabItem>
   <TabItem label="Native Only">
-    **Copy/paste the following code for native to  `~/components/primitives/dialog/index.tsx`**
+    **Copy/paste the following code for native to  `~/components/primitives/popover/index.tsx`**
 
-    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/dialog/index.tsx" />
+    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/popover/index.tsx" />
 
-    **Copy/paste the following code for types to  `~/components/primitives/dialog/types.ts`**
+    **Copy/paste the following code for types to  `~/components/primitives/popover/types.ts`**
 
-    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/dialog/types.ts" />
+    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/popover/types.ts" />
   </TabItem>
 </Tabs>
 
@@ -95,28 +95,21 @@ A modal dialog that interrupts the user with important content and expects a res
 </Aside>
 
 ```tsx
-import * as DialogPrimitive from '~/components/primitives/dialog';
+import * as PopoverPrimitive from '~/components/primitives/popover';
 import { Text } from 'react-native';
 
 function Example() {
   return (
-    <DialogPrimitive.Root>
-      <DialogPrimitive.Trigger>
-        <Text>Show Dialog</Text>
-      </DialogPrimitive.Trigger>
-
-      <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay>
-          <DialogPrimitive.Content>
-              <DialogPrimitive.Title>Dialog Title</DialogPrimitive.Title>
-              <DialogPrimitive.Description>
-                Dialog description.
-              </DialogPrimitive.Description>
-              <DialogPrimitive.Close><Text>Close</Text></DialogPrimitive.Close>
-          </DialogPrimitive.Content>
-        </DialogPrimitive.Overlay>
-      </DialogPrimitive.Portal>
-    </DialogPrimitive.Root>
+  <Popover.Root>
+    <Popover.Trigger>
+       <Text>Open Popover</Text>
+    </Popover.Trigger>
+    <Popover.Portal>
+      <Popover.Content>
+         <Text>Popover Content</Text>
+       </Popover.Content>
+    </Popover.Portal>
+  </Popover.Root>
   );
 }
 ```
@@ -175,21 +168,6 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 |  onInteractOutside   | (ev: Event) => void | Web Only _(optional)_ |
 | onPointerDownOutside | (ev: Event) => void | Web Only _(optional)_ |
 
-### Title
-
-Extends [`Text`](https://reactnative.dev/docs/text#props) props
-
-|  Prop   |  Type   |     Note     |
-| :-----: | :-----: | :----------: |
-| asChild | boolean | _(optional)_ |
-
-### Description
-
-Extends [`Text`](https://reactnative.dev/docs/text#props) props
-
-|  Prop   |  Type   |     Note     |
-| :-----: | :-----: | :----------: |
-| asChild | boolean | _(optional)_ |
 
 ### Close
 

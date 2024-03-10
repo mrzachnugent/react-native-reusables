@@ -111,6 +111,10 @@ export default defineConfig({
               link: '/components/navigation-menu/',
             },
             {
+              label: 'Popover',
+              link: '/components/popover/',
+            },
+            {
               label: 'Skeleton',
               link: '/components/skeleton/',
             },
@@ -193,6 +197,10 @@ export default defineConfig({
                 {
                   label: 'Navigation Menu',
                   link: '/primitives/navigation-menu/',
+                },
+                {
+                  label: 'Popover',
+                  link: '/primitives/popover/',
                 },
                 {
                   label: 'Table',
