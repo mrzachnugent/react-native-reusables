@@ -9,17 +9,40 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
-import type { HoverCardOverlayProps, HoverCardPortalProps, HoverCardRootProps } from './types';
+import type {
+  HoverCardOverlayProps,
+  HoverCardPortalProps,
+  HoverCardRootProps,
+  RootContext,
+} from './types';
+import { useControllableState } from '@rnr/hooks';
 
-const HoverCardContext = React.createContext<HoverCardRootProps | null>(null);
+const HoverCardContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
-  ({ asChild, open, onOpenChange, openDelay, closeDelay, ...viewProps }, ref) => {
+  (
+    {
+      asChild,
+      open: openProp,
+      defaultOpen,
+      onOpenChange: onOpenChangeProp,
+      openDelay,
+      closeDelay,
+      ...viewProps
+    },
+    ref
+  ) => {
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
     const Component = asChild ? Slot.View : View;
     return (
       <HoverCardContext.Provider value={{ open, onOpenChange }}>
         <HoverCard.Root
           open={open}
+          defaultOpen={defaultOpen}
           onOpenChange={onOpenChange}
           openDelay={openDelay}
           closeDelay={closeDelay}

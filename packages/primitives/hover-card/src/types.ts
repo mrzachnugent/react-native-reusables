@@ -1,8 +1,16 @@
 import type { ForceMountable } from '@rnr/types';
 
-interface HoverCardRootProps {
+interface RootContext {
   open: boolean;
   onOpenChange: (value: boolean) => void;
+  openDelay?: number;
+  closeDelay?: number;
+}
+
+interface HoverCardRootProps {
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (value: boolean) => void;
   /**
    * Platform: WEB ONLY
    * @default 700
@@ -31,4 +39,4 @@ interface HoverCardOverlayProps extends ForceMountable {
   closeOnPress?: boolean;
 }
 
-export type { HoverCardRootProps, HoverCardOverlayProps, HoverCardPortalProps };
+export type { HoverCardRootProps, HoverCardOverlayProps, HoverCardPortalProps, RootContext };

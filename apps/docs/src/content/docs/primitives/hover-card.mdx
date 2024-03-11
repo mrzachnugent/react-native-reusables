@@ -95,15 +95,12 @@ Allows users with vision to preview the content hidden behind an element before 
 </Aside>
 
 ```tsx
-import * as React from 'react';
 import * as HoverCardPrimitive from '~/components/primitives/hover-card';
 import { Text, View } from 'react-native';
 
 export default function Example() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-        <HoverCardPrimitive.Root open={open} onOpenChange={setOpen}>
+        <HoverCardPrimitive.Root>
           <HoverCardPrimitive.Trigger>
               <Text>@nextjs</Text>
           </HoverCardPrimitive.Trigger>
@@ -133,8 +130,9 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
-|     open*    |         boolean          |                         |
-| onOpenChange*| (value: boolean) => void |                         |
+|     open     |         boolean          |       _(optional)_      |
+| onOpenChange | (value: boolean) => void |       _(optional)_      |
+| defaultOpen  |         boolean          |       _(optional)_      |
 |   asChild    |         boolean          |       _(optional)_      |
 |  relativeTo  | 'longPress' \| 'trigger' | Native Only_(optional)_ |
 

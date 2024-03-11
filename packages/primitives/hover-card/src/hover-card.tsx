@@ -7,7 +7,7 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
-import { useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+import { useRelativePosition, type LayoutPosition, useControllableState } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -17,9 +17,14 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
-import type { HoverCardOverlayProps, HoverCardPortalProps, HoverCardRootProps } from './types';
+import type {
+  HoverCardOverlayProps,
+  HoverCardPortalProps,
+  HoverCardRootProps,
+  RootContext,
+} from './types';
 
-interface IRootContext extends HoverCardRootProps {
+interface IRootContext extends RootContext {
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -31,10 +36,23 @@ const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
   (
-    { asChild, open, onOpenChange, openDelay: _openDelay, closeDelay: _closeDelay, ...viewProps },
+    {
+      asChild,
+      open: openProp,
+      defaultOpen,
+      onOpenChange: onOpenChangeProp,
+      openDelay: _openDelay,
+      closeDelay: _closeDelay,
+      ...viewProps
+    },
     ref
   ) => {
     const nativeID = React.useId();
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
 

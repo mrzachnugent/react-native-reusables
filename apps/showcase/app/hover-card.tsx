@@ -8,7 +8,6 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/h
 import { Text } from '~/components/ui/text';
 
 export default function HoverCardScreen() {
-  const [open, setOpen] = React.useState(false);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -19,7 +18,7 @@ export default function HoverCardScreen() {
   return (
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
-        <HoverCard open={open} onOpenChange={setOpen}>
+        <HoverCard>
           <HoverCardTrigger asChild>
             <Button variant='link' size='lg'>
               <Text>@nextjs</Text>
