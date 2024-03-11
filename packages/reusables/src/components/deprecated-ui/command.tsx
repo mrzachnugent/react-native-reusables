@@ -377,7 +377,7 @@ function CommandSectionListItem<T extends Data>(
       <Button
         ref={ref}
         variant={index === 1 ? 'secondary' : 'ghost'}
-        className={cn('flex-row items-center justify-start px-2 gap-3')}
+        className={cn('flex-row flex-1 items-center justify-start px-2 gap-3')}
         onPress={handleOnPress}
         role='menuitem'
         {...props}

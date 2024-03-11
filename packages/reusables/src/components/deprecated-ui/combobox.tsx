@@ -87,7 +87,7 @@ const Combobox = React.forwardRef<
         return (
           <Button
             variant='ghost'
-            className='items-center flex-row justify-between px-3 py-4'
+            className='items-center flex-row flex-1 justify-between px-3 py-4'
             style={{ minHeight: 70 }}
             onPress={() => {
               if (onSelectedItemChange) {
