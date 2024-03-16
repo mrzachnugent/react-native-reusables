@@ -247,6 +247,10 @@ export default defineConfig({
                   link: '/primitives/separator/',
                 },
                 {
+                  label: 'Slider',
+                  link: '/primitives/slider/',
+                },
+                {
                   label: 'Toast',
                   link: '/primitives/toast/',
                 },
