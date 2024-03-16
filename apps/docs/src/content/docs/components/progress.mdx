@@ -1,0 +1,55 @@
+---
+title: Progress
+description: Shows an indicator representing the advancement status of a task.
+---
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@rnr/reusables/components/ui/progress?raw';
+
+<LinkButton href='/primitives/progress'>Progress Primitive</LinkButton>
+<LinkButton target='_blank' href='https://rnr-showcase.vercel.app/progress'>
+  Demo
+</LinkButton>
+
+<br />
+
+Shows an indicator representing the advancement status of a task.
+
+### Installation
+
+<Aside type='tip' title='Dependencies'>
+  Before copy/pasting, add the <a href='/primitives/progress' className='text-white font-bold'> progress primitive</a> to your project.
+</Aside>
+
+<br />
+
+**Copy/paste the following code to `~/components/ui/progress.tsx`:**
+
+<Code code={importedCode} lang='tsx' title='~/components/ui/progress.tsx' />
+
+### Usage
+
+```tsx
+import { Progress } from '~/components/ui/progress';
+
+function Example() {
+  return <Progress value={87} className='web:w-[60%]' />;
+}
+```
+
+## Props
+
+### Progress
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|     Prop      |                 Type                 |     Note     |
+| :-----------: | :----------------------------------: | :----------: |
+|    asChild    |               boolean                | _(optional)_ |
+|     value     |     number \| null \| undefined      | _(optional)_ |
+|      max      |                number                | _(optional)_ |
+| getValueLabel | (value: number, max: number): string | _(optional)_ |

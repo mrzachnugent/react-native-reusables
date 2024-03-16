@@ -115,6 +115,10 @@ export default defineConfig({
               link: '/components/popover/',
             },
             {
+              label: 'Progress',
+              link: '/components/progress/',
+            },
+            {
               label: 'Skeleton',
               link: '/components/skeleton/',
             },
@@ -201,6 +205,10 @@ export default defineConfig({
                 {
                   label: 'Popover',
                   link: '/primitives/popover/',
+                },
+                {
+                  label: 'Progress',
+                  link: '/primitives/progress/',
                 },
                 {
                   label: 'Table',
