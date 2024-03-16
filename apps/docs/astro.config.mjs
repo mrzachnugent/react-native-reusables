@@ -173,7 +173,25 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Extras',
+          items: [
+            {
+              label: 'Android Navigation Bar',
+              link: '/extras/android-navigation-bar/',
+            },
+            {
+              label: 'Keyboard',
+              link: '/extras/keyboard/',
+            },
+            {
+              label: 'Material Top Tabs',
+              link: '/extras/material-top-tabs/',
+            },
+          ],
+        },
+        {
           label: 'Primitives',
+          collapsed: true,
           items: [
             {
               label: 'Overview',
@@ -316,23 +334,6 @@ export default defineConfig({
                   link: '/primitives/utils/',
                 },
               ],
-            },
-          ],
-        },
-        {
-          label: 'Extras',
-          items: [
-            {
-              label: 'Android Navigation Bar',
-              link: '/extras/android-navigation-bar/',
-            },
-            {
-              label: 'Keyboard',
-              link: '/extras/keyboard/',
-            },
-            {
-              label: 'Material Top Tabs',
-              link: '/extras/material-top-tabs/',
             },
           ],
         },
