@@ -119,6 +119,10 @@ export default defineConfig({
               link: '/components/progress/',
             },
             {
+              label: 'Radio Group',
+              link: '/components/radio-group/',
+            },
+            {
               label: 'Skeleton',
               link: '/components/skeleton/',
             },
@@ -213,6 +217,10 @@ export default defineConfig({
                 {
                   label: 'Progress',
                   link: '/primitives/progress/',
+                },
+                {
+                  label: 'Radio Group',
+                  link: '/primitives/radio-group/',
                 },
                 {
                   label: 'Table',
