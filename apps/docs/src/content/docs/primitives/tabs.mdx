@@ -1,0 +1,153 @@
+---
+title: Tabs Primitive
+description: A collection of layered content sections, referred to as tab panels, displayed individually.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/tabs/src/tabs.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/tabs/src/tabs.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/tabs/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/tabs/src/index.ts?raw';
+
+<LinkButton href='/primitives/types'>Types Primitives</LinkButton>
+<LinkButton href='/primitives/slot'>Slot Primitives</LinkButton>
+<LinkButton target='_blank' href='https://www.radix-ui.com/primitives/docs/components/tabs'>
+  @radix-ui/react-tabs
+</LinkButton>
+
+<br />
+
+A collection of layered content sections, referred to as tab panels, displayed individually.
+
+## Installation
+
+<Aside title="Uses shared primitives">
+  If you do not already have these primitives in your project, you will need to add them.
+
+  - [Types Primitive](/primitives/types)
+  - [Slot Primitive](/primitives/slot)
+</Aside>
+
+<Tabs>
+  <TabItem label="Universal">
+    **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/tabs">@radix-ui/react-tabs</a>**
+
+    ```bash
+    npx expo install @radix-ui/react-tabs
+    ```
+
+    **Copy/paste the following code for web to  `~/components/primitives/tabs/tabs.web.tsx`**
+
+    <Code code={importedWebCode} lang="tsx" title="~/components/primitives/tabs/tabs.web.tsx" />
+
+    **Copy/paste the following code for native to  `~/components/primitives/tabs/tabs.tsx`**
+
+    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/tabs/tabs.tsx" />
+
+    **Copy/paste the following code for types to  `~/components/primitives/tabs/types.ts`**
+
+    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/tabs/types.ts" />
+
+    **Copy/paste the following code for exporting to  `~/components/primitives/tabs/index.ts`**
+
+    <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/tabs/index.ts" />
+  </TabItem>
+  <TabItem label="Native Only">
+    **Copy/paste the following code for native to  `~/components/primitives/tabs/index.tsx`**
+
+    <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/tabs/index.tsx" />
+
+    **Copy/paste the following code for types to  `~/components/primitives/tabs/types.ts`**
+
+    <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/tabs/types.ts" />
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import * as TabsPrimitive from '~/components/primitives/tabs';
+import { Text } from 'react-native';
+
+function Example() {
+  const [value, setValue] = React.useState('account');
+  return (
+    <TabsPrimitive.Root
+      value={value}
+      onValueChange={setValue}
+    >
+      <TabsPrimitive.Primitive.List>
+        <TabsPrimitive.Trigger value='account'>
+          <Text>Account</Text>
+        </TabsPrimitive.Trigger>
+        <TabsPrimitive.Trigger value='password'>
+          <Text>Password</Text>
+        </TabsPrimitive.Trigger>
+      </TabsPrimitive.Primitive.List>
+      <TabsPrimitive.Content value='account'>
+        <Text>Account content</Text>
+      </TabsPrimitive.Content>
+      <TabsPrimitive.Content value='password'>
+        <Text>Password content</Text>
+      </TabsPrimitive.Content>
+    </TabsPrimitive.Root>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|     Prop     |           Type           |     Note     |
+| :----------: | :----------------------: | :----------: |
+|     value     |   string         | |
+| onValueChange | (value: string ) => void |  |
+| asChild | boolean | _(optional)_ |
+|   disabled   |         boolean          | _(optional)_ |
+| orientation | 'horizontal' \| 'vertical' | Web Only _(optional)_ |
+| dir | 'ltr' \| 'rtl' | Web Only _(optional)_ |
+| activationMode | 'automatic' \| 'manual' | Web Only _(optional)_ |
+
+### List
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Trigger
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Content
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| value | string |  |
+| forceMount | boolean | _(optional)_ |
+| asChild | boolean | _(optional)_ |
+
+
+### useRootContext
+
+Must be used within a `Root` component. It provides the following values from the dropdown menu: `value`, and `onValueChange`.
+
+### useTriggerContext
+
+Must be used within a `Trigger` component. It provides the following values from the dropdown menu: `value`.

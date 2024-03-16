@@ -70,12 +70,16 @@ An input allowing the user to choose a value from a specified range.
 
 ## Usage
 
+<Aside type="caution">
+
+   You will have to handle the gesture handling yourself on native
+
+</Aside>
+
 ```tsx
 import * as React from 'react';
 import { View, Text, Platform } from 'react-native';
 import * as SelectPrimitive from '~/components/primitives/select';
-
-// TODO: you will have to handle the gesture handling on native
 
 function Example() {
   const [value, setValue] = React.useState(50);

@@ -143,6 +143,10 @@ export default defineConfig({
               link: '/components/table/',
             },
             {
+              label: 'Tabs',
+              link: '/components/tabs/',
+            },
+            {
               label: 'Text',
               link: '/components/text/',
             },
@@ -259,6 +263,14 @@ export default defineConfig({
                   link: '/primitives/switch/',
                 },
                 {
+                  label: 'Table',
+                  link: '/primitives/table/',
+                },
+                {
+                  label: 'Tabs',
+                  link: '/primitives/tabs/',
+                },
+                {
                   label: 'Toast',
                   link: '/primitives/toast/',
                 },
@@ -269,10 +281,6 @@ export default defineConfig({
                 {
                   label: 'Toggle Group',
                   link: '/primitives/toggle-group/',
-                },
-                {
-                  label: 'Table',
-                  link: '/primitives/table/',
                 },
                 {
                   label: 'Toolbar',
