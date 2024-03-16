@@ -20,6 +20,7 @@ export default defineConfig({
       description: 'Documentation for react-native-reusables',
       components: {
         ThemeSelect: './src/components/ThemeSelect.astro',
+        Head: './src/components/Head.astro',
       },
       social: {
         github: 'https://github.com/mrzachnugent/react-native-reusables',
