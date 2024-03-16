@@ -123,6 +123,10 @@ export default defineConfig({
               link: '/components/radio-group/',
             },
             {
+              label: 'Select',
+              link: '/components/select/',
+            },
+            {
               label: 'Skeleton',
               link: '/components/skeleton/',
             },
@@ -229,6 +233,10 @@ export default defineConfig({
                 {
                   label: 'Radio Group',
                   link: '/primitives/radio-group/',
+                },
+                {
+                  label: 'Select',
+                  link: '/primitives/select/',
                 },
                 {
                   label: 'Toast',
