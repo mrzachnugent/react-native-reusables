@@ -41,7 +41,7 @@ import { View } from 'react-native';
 import { Bold, Italic, Underline } from '~/components/Icons';
 import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '~/components/ui/toggle-group';
 
-export default function ToggleGroupScreen() {
+function Example() {
   const [value, setValue] = React.useState<string[]>([]);
 
   return (
@@ -81,7 +81,7 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 | dir  | 'ltr' \| 'rtl' | Web only _(optional)_ |
 | ltr  | boolean | Web only _(optional)_ |
 
-### ToggleItem
+### ToggleGroupItem
 
 Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
 

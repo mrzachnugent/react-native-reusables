@@ -139,6 +139,10 @@ export default defineConfig({
               link: '/components/textarea/',
             },
             {
+              label: 'Toggle',
+              link: '/components/toggle/',
+            },
+            {
               label: 'Toggle Group',
               link: '/components/toggle-group/',
             },
@@ -225,6 +229,10 @@ export default defineConfig({
                 {
                   label: 'Radio Group',
                   link: '/primitives/radio-group/',
+                },
+                {
+                  label: 'Toggle',
+                  link: '/primitives/toggle/',
                 },
                 {
                   label: 'Toggle Group',

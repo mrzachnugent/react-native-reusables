@@ -83,8 +83,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import * as ToggleGroupPrimitive from '~/components/primitives/toggle-group';
 
-export default function ToolbarScreen() {
-  const [singleValue, setSingleValue] = React.useState<string>();
+function Example() {
   const [multipleValue, setMultipleValue] = React.useState<string[]>([]);
   return (
       <ToggleGroupPrimitive.Root type='multiple' value={multipleValue} onValueChange={setMultipleValue}>

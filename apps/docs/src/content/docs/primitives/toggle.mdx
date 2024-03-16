@@ -1,0 +1,103 @@
+---
+title: Toggle Primitive
+description: A button with a true or false state, which can be activated or deactivated by toggling.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/toggle/src/toggle.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/toggle/src/toggle.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/toggle/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/toggle/src/index.ts?raw';
+
+<LinkButton href="/primitives/slot">
+  Slot Primitives
+</LinkButton>
+<LinkButton href="/primitives/types">
+  Types Primitives
+</LinkButton>
+<LinkButton target='_blank' href='https://www.radix-ui.com/primitives/docs/components/toggle'>
+  @radix-ui/react-toggle
+</LinkButton>
+
+<br />
+
+A button with a true or false state, which can be activated or deactivated by toggling.
+
+## Installation
+<Aside title="Uses shared primitives">
+    If you do not already have these primitives in your project, you will need to add them.
+
+    - [Slot Primitive](/primitives/slot)
+    - [Types Primitive](/primitives/types)
+
+</Aside>
+
+<Tabs>
+    <TabItem label="Universal">
+        **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/toggle">@radix-ui/react-toggle</a>**
+
+        ```bash
+        npx expo install @radix-ui/react-toggle
+        ```
+
+        **Copy/paste the following code for web to  `~/components/primitives/toggle/toggle.web.tsx`**
+
+        <Code code={importedWebCode} lang="tsx" title="~/components/primitives/toggle/toggle.web.tsx" />
+
+        **Copy/paste the following code for native to  `~/components/primitives/toggle/toggle.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/toggle/toggle.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/toggle/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/toggle/types.ts" />
+
+        **Copy/paste the following code for exporting to  `~/components/primitives/toggle/index.ts`**
+
+        <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/toggle/index.ts" />
+    </TabItem>
+    <TabItem label="Native Only">
+        **Copy/paste the following code for native to  `~/components/primitives/toggle/index.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/toggle/index.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/toggle/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/toggle/types.ts" />
+    </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import { Text } from 'react-native';
+import * as TogglePrimitive from '~/components/primitives/toggle';
+
+function Example() {
+  const [isActive, setIsActive] = React.useState(false);
+  return (
+      <TogglePrimitive.Root pressed={isActive} onPressedChange={setIsActive}>
+         <Text>Bold</Text>
+      </TogglePrimitive.Root>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|   Prop   |  Type   |     Note     |
+| :------: | :-----: | :----------: |
+| pressed  | boolean | |
+| onPressedChange  | (val: boolean) => void | |
+| asChild  | boolean | _(optional)_ |
+| disabled  | boolean | _(optional)_ |
