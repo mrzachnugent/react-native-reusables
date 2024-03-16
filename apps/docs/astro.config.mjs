@@ -319,6 +319,23 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: 'Extras',
+          items: [
+            {
+              label: 'Android Navigation Bar',
+              link: '/extras/android-navigation-bar/',
+            },
+            {
+              label: 'Keyboard',
+              link: '/extras/keyboard/',
+            },
+            {
+              label: 'Material Top Tabs',
+              link: '/extras/material-top-tabs/',
+            },
+          ],
+        },
       ],
       customCss: ['./src/tailwind.css'],
     }),
