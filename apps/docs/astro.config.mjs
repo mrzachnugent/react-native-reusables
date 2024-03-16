@@ -231,6 +231,10 @@ export default defineConfig({
                   link: '/primitives/radio-group/',
                 },
                 {
+                  label: 'Toast',
+                  link: '/primitives/toast/',
+                },
+                {
                   label: 'Toggle',
                   link: '/primitives/toggle/',
                 },

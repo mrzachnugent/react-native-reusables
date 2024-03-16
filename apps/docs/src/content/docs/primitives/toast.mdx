@@ -1,0 +1,186 @@
+---
+title: Toast Primitive
+description: A concise message that appears briefly.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside } from '@astrojs/starlight/components';
+import importedCode from '@/../node_modules/@rnr/toast/src/toast.tsx?raw';
+
+<LinkButton href='/primitives/slot'>Slot Primitives</LinkButton>
+<LinkButton href='/primitives/types'>Types Primitives</LinkButton>
+
+<br />
+
+A concise message that appears briefly.
+
+## Installation
+
+<Aside title="Uses shared primitives">
+  If you do not already have these primitives in your project, you will need to add them.
+
+  - [Slot Primitive](/primitives/slot)
+  - [Types Primitive](/primitives/types)
+  
+</Aside>
+
+
+**Copy/paste the following code to `~/components/primitives/toast.tsx`**
+
+<Code code={importedCode} lang="tsx" title="~/components/primitives/toast.tsx" />
+
+## Usage
+
+<Aside type="caution">
+
+  Requires a `<PortalHost />` as the last child of your `<Root/>` (`app/_layout.tsx`) component
+
+  ```tsx
+  import { PortalHost } from '~/components/primitives/portal';
+
+  function Root() {
+    return (
+      <>
+        <Stack />
+        {/* Default Portal Host (one per app) */}
+        <PortalHost />
+      </>
+    );
+  }
+  ```
+
+</Aside>
+
+```tsx
+import * React from 'react';
+import { Pressable, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Portal } from '~/components/primitives/portal';
+import * as ToastPrimitive from '~/components/primitives/toast';
+
+function Example() {
+  const [open, setOpen] = React.useState(false);
+  const [seconds, setSeconds] = React.useState(3);
+  const insets = useSafeAreaInsets();
+
+  React.useEffect(() => {
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    if (open) {
+      interval = setInterval(() => {
+        setSeconds((prevSeconds) => {
+          if (prevSeconds <= 1) {
+            setOpen(false);
+            if (interval) {
+              clearInterval(interval);
+            }
+            return 3;
+          }
+          return prevSeconds - 1;
+        });
+      }, 1000);
+    } else {
+      if (interval) {
+        clearInterval(interval);
+      }
+      setSeconds(3);
+    }
+
+    if (interval && !open) {
+      clearInterval(interval);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [open, seconds]);
+
+  return (
+    <>
+      {open && (
+        <Portal name='toast-example'>
+          <View style={{ top: insets.top + 4 }} className='px-4 absolute w-full'>
+            <ToastPrimitive.Root
+              type='foreground'
+              open={open}
+              onOpenChange={setOpen}
+              className='opacity-95 bg-secondary border-border flex-row justify-between items-center p-4 rounded-xl'
+            >
+              <View className='gap-1.5'>
+                <ToastPrimitive.Title className='text-foreground text-3xl'>Here is a toast</ToastPrimitive.Title>
+                <ToastPrimitive.Description className='text-foreground text-lg'>
+                  It will disappear in {seconds} seconds
+                </ToastPrimitive.Description>
+              </View>
+              <View className='gap-2'>
+                <ToastPrimitive.Action className='border border-primary px-4 py-2'>
+                  <Text className='text-foreground'>Action</Text>
+                </ToastPrimitive.Action>
+                <ToastPrimitive.Close className='border border-primary px-4 py-2'>
+                  <Text className='text-foreground'>Close</Text>
+                </ToastPrimitive.Close>
+              </View>
+            </ToastPrimitive.Root>
+          </View>
+        </Portal>
+      )}
+      <View className='flex-1 justify-center items-center p-6 gap-12'>
+        <Pressable onPress={() => setOpen((prev) => !prev)}>
+          <Text className='text-foreground text-xl'>Show Toast</Text>
+        </Pressable>
+      </View>
+    </>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| open    | boolean |              |
+| onOpenChange | (open: boolean) => void |              |
+| type | 'foreground' \| 'background' | defaults to `foreground` _(optional)_ |
+| asChild | boolean | _(optional)_ |
+
+### Action
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Close
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Title
+
+Extends [`Text`](https://reactnative.dev/docs/text#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
+
+### Description
+
+Extends [`Text`](https://reactnative.dev/docs/text#props) props
+
+|  Prop   |  Type   |     Note     |
+| :-----: | :-----: | :----------: |
+| asChild | boolean | _(optional)_ |
