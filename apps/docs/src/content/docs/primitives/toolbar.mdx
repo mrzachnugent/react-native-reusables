@@ -81,39 +81,37 @@ A container designed for organizing a collection of controls, such as buttons, t
 ```tsx
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import * as Toolbar from '@rnr/toolbar';
+import * as ToolbarPrimitive from '~/components/primitives/toolbar';
 
 export default function ToolbarScreen() {
   const [singleValue, setSingleValue] = React.useState<string>();
   const [multipleValue, setMultipleValue] = React.useState<string[]>([]);
   return (
-     <View>
-      <Toolbar.Root>
-        <Toolbar.ToggleGroup type='multiple' value={multipleValue} onValueChange={setMultipleValue}>
-          <Toolbar.ToggleItem value='bold'>
-            <Text>Bold</Text>
-          </Toolbar.ToggleItem>
-          <Toolbar.ToggleItem value='italic'>
-            <Text>Italic</Text>
-          </Toolbar.ToggleItem>
-        </Toolbar.ToggleGroup>
-        <Toolbar.Separator />
-        <Toolbar.ToggleGroup type='single' value={singleValue} onValueChange={setSingleValue}>
-          <Toolbar.ToggleItem value='left'>
-            <Text>AlignLeft</Text>
-          </Toolbar.ToggleItem>
-          <Toolbar.ToggleItem value='center'>
-            <Text>AlignCenter</Text>
-          </Toolbar.ToggleItem>
-        </Toolbar.ToggleGroup>
-        <Toolbar.Separator />
-        <View>
-          <Toolbar.Button>
-            <Text>Button</Text>
-          </Toolbar.Button>
-        </View>
-      </Toolbar.Root>
-    </View>
+    <ToolbarPrimitive.Root>
+      <ToolbarPrimitive.ToggleGroup type='multiple' value={multipleValue} onValueChange={setMultipleValue}>
+        <ToolbarPrimitive.ToggleItem value='bold'>
+          <Text>Bold</Text>
+        </ToolbarPrimitive.ToggleItem>
+        <ToolbarPrimitive.ToggleItem value='italic'>
+          <Text>Italic</Text>
+        </ToolbarPrimitive.ToggleItem>
+      </ToolbarPrimitive.ToggleGroup>
+      <ToolbarPrimitive.Separator />
+      <ToolbarPrimitive.ToggleGroup type='single' value={singleValue} onValueChange={setSingleValue}>
+        <ToolbarPrimitive.ToggleItem value='left'>
+          <Text>AlignLeft</Text>
+        </ToolbarPrimitive.ToggleItem>
+        <ToolbarPrimitive.ToggleItem value='center'>
+          <Text>AlignCenter</Text>
+        </ToolbarPrimitive.ToggleItem>
+      </ToolbarPrimitive.ToggleGroup>
+      <ToolbarPrimitive.Separator />
+      <View>
+        <ToolbarPrimitive.Button>
+          <Text>Button</Text>
+        </ToolbarPrimitive.Button>
+      </View>
+    </ToolbarPrimitive.Root>
   );
 }
 ```
