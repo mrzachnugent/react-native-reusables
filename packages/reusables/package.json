@@ -80,7 +80,7 @@
     "./components/ui/typography": "./src/components/ui/typography.tsx",
     "./components/Icons": "./src/components/Icons.tsx",
     "./lib/contants": "./src/lib/contants.ts",
-    "./lib/keyboard": "./src/lib/keyboard.ts",
+    "./lib/keyboard": "./src/lib/keyboard.tsx",
     "./lib/useColorScheme": "./src/lib/useColorScheme.tsx",
     "./lib/utils": "./src/lib/utils.ts"
   },
