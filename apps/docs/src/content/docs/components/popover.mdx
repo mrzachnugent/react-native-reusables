@@ -62,7 +62,7 @@ import { Button } from '~/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { Text } from '~/components/ui/text';
 
-export default function PopoverScreen() {
+function Example() {
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -124,6 +124,13 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 | :------------------: | :-----------------: | :-------------------: |
 |       asChild        |       boolean       |     _(optional)_      |
 |      forceMount      |  true \| undefined  |     _(optional)_      |
+|       alignOffset       |                    number                    | Native Only _(optional)_       |
+|         insets          |                    Insets                    | Native Only _(optional)_       |
+|     avoidCollisions     |                   boolean                    | Native Only _(optional)_       |
+|          align          |         'start' \| 'center' \| 'end'         | Native Only _(optional)_       |
+|          side           |              'top' \| 'bottom'               | Native Only _(optional)_       |
+|       sideOffset        |                    number                    | Native Only _(optional)_       |
+| disablePositioningStyle |                   boolean                    | Native Only _(optional)_ |
 |   onOpenAutoFocus    | (ev: Event) => void | Web Only _(optional)_ |
 |   onCloseAutoFocus   | (ev: Event) => void | Web Only _(optional)_ |
 |   onEscapeKeyDown    | (ev: Event) => void | Web Only _(optional)_ |

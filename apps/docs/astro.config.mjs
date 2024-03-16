@@ -135,6 +135,10 @@ export default defineConfig({
               link: '/components/textarea/',
             },
             {
+              label: 'Tooltip',
+              link: '/components/tooltip/',
+            },
+            {
               label: 'Typography',
               link: '/components/typography/',
             },
@@ -213,6 +217,10 @@ export default defineConfig({
                 {
                   label: 'Table',
                   link: '/primitives/table/',
+                },
+                {
+                  label: 'Tooltip',
+                  link: '/primitives/tooltip/',
                 },
               ],
             },
