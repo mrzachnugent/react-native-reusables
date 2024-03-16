@@ -1,0 +1,169 @@
+---
+title: Toolbar Primitive
+description: A dynamic element that facilitates the expansion or collapse of a panel.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedNativeCode from '@/../node_modules/@rnr/toolbar/src/toolbar.tsx?raw';
+import importedWebCode from '@/../node_modules/@rnr/toolbar/src/toolbar.web.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/toolbar/src/types.ts?raw';
+import importedIndexCode from '@/../node_modules/@rnr/toolbar/src/index.ts?raw';
+
+<LinkButton href="/primitives/slot">
+  Slot Primitives
+</LinkButton>
+<LinkButton href="/primitives/types">
+  Types Primitives
+</LinkButton>
+<LinkButton href="/primitives/utils">
+  Utils Primitives
+</LinkButton>
+<LinkButton target='_blank' href='https://www.radix-ui.com/primitives/docs/components/toolbar'>
+  @radix-ui/react-toolbar
+</LinkButton>
+
+<br />
+
+A dynamic element that facilitates the expansion or collapse of a panel.
+
+## Installation
+<Aside title="Uses shared primitives">
+    If you do not already have these primitives in your project, you will need to add them.
+
+    - [Slot Primitive](/primitives/slot)
+    - [Types Primitive](/primitives/types)
+    - [Utils Primitive](/primitives/utils)
+
+</Aside>
+
+<Tabs>
+    <TabItem label="Universal">
+        **Install <a target="_blank" href="https://www.radix-ui.com/primitives/docs/components/toolbar">@radix-ui/react-toolbar</a>**
+
+        ```bash
+        npx expo install @radix-ui/react-toolbar
+        ```
+
+        **Copy/paste the following code for web to  `~/components/primitives/toolbar/toolbar.web.tsx`**
+
+        <Code code={importedWebCode} lang="tsx" title="~/components/primitives/toolbar/toolbar.web.tsx" />
+
+        **Copy/paste the following code for native to  `~/components/primitives/toolbar/toolbar.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/toolbar/toolbar.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/toolbar/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/toolbar/types.ts" />
+
+        **Copy/paste the following code for exporting to  `~/components/primitives/toolbar/index.ts`**
+
+        <Code code={importedIndexCode} lang="tsx" title="~/components/primitives/toolbar/index.ts" />
+    </TabItem>
+    <TabItem label="Native Only">
+        **Copy/paste the following code for native to  `~/components/primitives/toolbar/index.tsx`**
+
+        <Code code={importedNativeCode} lang="tsx" title="~/components/primitives/toolbar/index.tsx" />
+
+        **Copy/paste the following code for types to  `~/components/primitives/toolbar/types.ts`**
+
+        <Code code={importedTypesCode} lang="tsx" title="~/components/primitives/toolbar/types.ts" />
+    </TabItem>
+</Tabs>
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import * as Toolbar from '@rnr/toolbar';
+
+export default function ToolbarScreen() {
+  const [singleValue, setSingleValue] = React.useState<string>();
+  const [multipleValue, setMultipleValue] = React.useState<string[]>([]);
+  return (
+     <View>
+      <Toolbar.Root>
+        <Toolbar.ToggleGroup type='multiple' value={multipleValue} onValueChange={setMultipleValue}>
+          <Toolbar.ToggleItem value='bold'>
+            <Text>Bold</Text>
+          </Toolbar.ToggleItem>
+          <Toolbar.ToggleItem value='italic'>
+            <Text>Italic</Text>
+          </Toolbar.ToggleItem>
+        </Toolbar.ToggleGroup>
+        <Toolbar.Separator />
+        <Toolbar.ToggleGroup type='single' value={singleValue} onValueChange={setSingleValue}>
+          <Toolbar.ToggleItem value='left'>
+            <Text>AlignLeft</Text>
+          </Toolbar.ToggleItem>
+          <Toolbar.ToggleItem value='center'>
+            <Text>AlignCenter</Text>
+          </Toolbar.ToggleItem>
+        </Toolbar.ToggleGroup>
+        <Toolbar.Separator />
+        <View>
+          <Toolbar.Button>
+            <Text>Button</Text>
+          </Toolbar.Button>
+        </View>
+      </Toolbar.Root>
+    </View>
+  );
+}
+```
+
+## Props
+
+### Root
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|     Prop     |           Type           |     Note     |
+| :----------: | :----------------------: | :----------: |
+|   asChild    |         boolean          | _(optional)_ |
+|     orientation     |         'horizontal' \| 'vertical'          | Web Only _(optional)_ |
+| dir | (value: boolean) => void | Web Only _(optional)_ |
+|   loop   |         boolean          | Web Only _(optional)_ |
+
+### ToggleGroup
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|   Prop   |  Type   |     Note     |
+| :------: | :-----: | :----------: |
+| type  | 'single' \| 'multiple' | |
+| value  | string \| undefined \| string[] | |
+| onValueChange  | (val: string \| undefined \| string[]) => void | |
+| asChild  | boolean | _(optional)_ |
+| disabled  | boolean | _(optional)_ |
+
+### ToggleItem
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|    Prop    |        Type        |     Note     |
+| :--------: | :----------------: | :----------: |
+|  asChild   |      boolean       | _(optional)_ |
+| value | string |  |
+
+### Separator
+
+Extends [`View`](https://reactnative.dev/docs/view#props) props
+
+|    Prop    |        Type        |     Note     |
+| :--------: | :----------------: | :----------: |
+|  asChild   |      boolean       | _(optional)_ |
+
+### Link
+
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+
+|    Prop    |        Type        |     Note     |
+| :--------: | :----------------: | :----------: |
+|  asChild   |      boolean       | _(optional)_ |

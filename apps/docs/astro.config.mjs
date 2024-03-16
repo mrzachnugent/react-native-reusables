@@ -219,6 +219,10 @@ export default defineConfig({
                   link: '/primitives/table/',
                 },
                 {
+                  label: 'Toolbar',
+                  link: '/primitives/toolbar/',
+                },
+                {
                   label: 'Tooltip',
                   link: '/primitives/tooltip/',
                 },
