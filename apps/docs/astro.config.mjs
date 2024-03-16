@@ -135,6 +135,10 @@ export default defineConfig({
               link: '/components/skeleton/',
             },
             {
+              label: 'Switch',
+              link: '/components/switch/',
+            },
+            {
               label: 'Table',
               link: '/components/table/',
             },
@@ -249,6 +253,10 @@ export default defineConfig({
                 {
                   label: 'Slider',
                   link: '/primitives/slider/',
+                },
+                {
+                  label: 'Switch',
+                  link: '/primitives/switch/',
                 },
                 {
                   label: 'Toast',
