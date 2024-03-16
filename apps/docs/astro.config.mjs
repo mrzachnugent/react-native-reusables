@@ -127,6 +127,10 @@ export default defineConfig({
               link: '/components/select/',
             },
             {
+              label: 'Separator',
+              link: '/components/separator/',
+            },
+            {
               label: 'Skeleton',
               link: '/components/skeleton/',
             },
@@ -237,6 +241,10 @@ export default defineConfig({
                 {
                   label: 'Select',
                   link: '/primitives/select/',
+                },
+                {
+                  label: 'Separator',
+                  link: '/primitives/separator/',
                 },
                 {
                   label: 'Toast',

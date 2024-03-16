@@ -10,6 +10,7 @@ import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
 import { Aside } from '@astrojs/starlight/components';
 import importedCode from '@/../node_modules/@rnr/toast/src/toast.tsx?raw';
+import importedTypesCode from '@/../node_modules/@rnr/toast/src/types.ts?raw';
 
 <LinkButton href='/primitives/slot'>Slot Primitives</LinkButton>
 <LinkButton href='/primitives/types'>Types Primitives</LinkButton>
@@ -29,9 +30,13 @@ A concise message that appears briefly.
 </Aside>
 
 
-**Copy/paste the following code to `~/components/primitives/toast.tsx`**
+**Copy/paste the following code to `~/components/primitives/toast/index.tsx`**
 
-<Code code={importedCode} lang="tsx" title="~/components/primitives/toast.tsx" />
+<Code code={importedCode} lang="tsx" title="~/components/primitives/toast/index.tsx" />
+
+**Copy/paste the following code to `~/components/primitives/toast/types.ts`**
+
+<Code code={importedTypesCode} lang="tsx" title="~/components/primitives/toast/types.ts" />
 
 ## Usage
 
