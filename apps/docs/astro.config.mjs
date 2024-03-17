@@ -38,6 +38,10 @@ export default defineConfig({
               label: 'Initial Setup',
               link: '/getting-started/initial-setup/',
             },
+            {
+              label: 'Common patterns',
+              link: '/getting-started/common-patterns/',
+            },
           ],
         },
         {

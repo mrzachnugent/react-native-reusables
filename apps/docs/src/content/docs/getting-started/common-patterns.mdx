@@ -1,0 +1,131 @@
+---
+title: Common Patterns
+description: Frequently used code patterns.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import { Aside, Card, Code, FileTree } from '@astrojs/starlight/components';
+
+Frequently used code patterns.
+
+## `asChild` prop
+
+Most primitive components have an `asChild` prop. When it is set to `true`, it passes all of its props to its immediate child and renders the child instead of the primitive. To make this possible, the internal implementation of the primitive uses the `Slot` primitive.
+
+
+<Aside type="tip" title='The Slot Primitive'>
+  This primitive merges all of its props with its first child's props and renders the child. It is useful for creating components that can be used as a wrapper around other components.
+</ Aside>
+
+### Examples
+
+#### Implementation with an `asChild` prop
+
+Using the `asChild` prop to conditionally render a custom `Button` as a `Pressable` or a `Slot.Pressable`.
+
+<Code lang='tsx' title="~/example/button" code={`
+import * as Slot from '~/components/primitives/slot'
+import { Pressable, PressableProps } from 'react-native'
+
+export function Button({ asChild, onPress: onPressProp, ...props }: PressableProps & { asChild?: boolean }) {
+  function onPress(ev) {
+    console.log('Button pressed')
+    onPressProp?.(ev)
+  }
+
+  // If asChild is true, it does not render a Pressable, instead it passes all of its props to the first child (which needs to be of type Pressable).
+  const Component = asChild ? Pressable : Slot.Pressable
+  return <Component onPress={onPress} {...props} />
+}
+`} />
+
+#### Use of a componnent that has an `asChild` prop
+
+Setting the `asChild` prop to `true` to pass all of the `Button` props to the `Pressable` component.
+
+<Code lang='tsx' title="~/other/thing" code={`
+import { Button } from '~/example/button'
+import { Pressable, Text } from 'react-native'
+
+function Thing(){
+    return (
+        <Button asChild>
+            {/* On Press, it will also log "Button pressed" since the \`Button\` props will be merged and passed to the \`Pressable\` */}
+            <Pressable onPress={() => {
+                console.log('Pressed')
+            }}>
+                <Text>Press me</Text>
+            </Pressable>
+        </Button>
+    )
+}
+`} />
+
+
+## Forwarding Refs
+
+Refs are used for [Direct Manipulation](https://reactnative.dev/docs/direct-manipulation). A common pratice is to set a ref to a component, then use the ref to call methods or access properties of the component.
+
+### Passing a ref to `react-native` components
+
+Passing a `ref` to the `TextInput` component, allows us to call the `focus` method when the `Pressable` is pressed.
+
+<Code lang='tsx' title="~/example/button" code={`
+import * as React from 'react'
+import { TextInput, View, Pressable, View } from 'react-native'
+
+function Example() {
+  const inputRef = React.useRef<TextInput>(null)
+
+  function onPress() {
+    inputRef.current?.focus()
+  }
+
+  return (
+    <View>
+      <Pressable onPress={onPress}>
+        <Text>Focus</Text>
+      </Pressable>
+      <TextInput ref={inputRef} />
+    </View>
+    )
+}
+`} />
+
+### Custom components with ref
+
+In React, the `ref` prop is a reserved prop since it needs to be handled differently. To forward a ref to a child component, you must use the `React.forwardRef` function.
+
+**Creating a component that accepts a `ref`**
+
+<Code lang='tsx' title="~/example/custom-input" code={`
+import * as React from 'react'
+import { TextInput, TextInputProps, View, Pressable, View } from 'react-native'
+
+const CustomInput = React.forwardRef<TextInput, TextInputProps>((props, ref) => {
+  return <TextInput ref={ref} {...props} />
+})
+
+function Example() {
+  const inputRef = React.useRef<TextInput>(null)
+
+  function onPress() {
+    inputRef.current?.focus()
+  }
+
+  return (
+    <View>
+      <Pressable onPress={onPress}>
+        <Text>Focus</Text>
+      </Pressable>
+      <CustomInput ref={inputRef} />
+    </View>
+    )
+}
+`} />
+
+<Aside>
+  Most `/ui` and `/primitive` components are wrapped with a `React.forwardRef` function, so you can pass a `ref` to them.
+</Aside>
