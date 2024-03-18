@@ -60,6 +60,6 @@ const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(
   }
 );
 
-Root.displayName = 'RootNativeSwitch';
+Thumb.displayName = 'ThumbNativeSwitch';
 
 export { Root, Thumb };

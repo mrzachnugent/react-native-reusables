@@ -45,7 +45,7 @@ const RGB_COLORS = {
     primary: 'rgb(250, 250, 250)',
     input: 'rgb(39, 39, 42)',
   },
-};
+} as const;
 
 const SwitchNative = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
