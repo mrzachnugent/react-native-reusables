@@ -62,6 +62,6 @@ const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...props
   );
 });
 
-Root.displayName = 'RootWebSwitch';
+Thumb.displayName = 'ThumbWebSwitch';
 
 export { Root, Thumb };
