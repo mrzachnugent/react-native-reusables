@@ -120,4 +120,6 @@ function useItemContext() {
   return context;
 }
 
-export { Item, Root, useItemContext, useRootContext };
+const utils = ToggleGroupUtils;
+
+export { Item, Root, useItemContext, useRootContext, utils };

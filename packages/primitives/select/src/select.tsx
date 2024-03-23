@@ -448,6 +448,8 @@ export {
   useRootContext,
 };
 
+export type { Option } from './types';
+
 function onStartShouldSetResponder() {
   return true;
 }

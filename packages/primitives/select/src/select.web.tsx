@@ -315,3 +315,5 @@ export {
   useItemContext,
   useRootContext,
 };
+
+export type { Option } from './types';
