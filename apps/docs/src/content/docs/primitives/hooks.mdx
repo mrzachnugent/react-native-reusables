@@ -70,7 +70,7 @@ A collection of hooks for core primitives.
 
 ```tsx
 import { useAugmentedRef } from '~/components/primitives/hooks';
-import { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
+import type { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
 
 const Thing = React.forwardRef<PressableRef, SlottablePressableProps>(
   (props, ref) => {
@@ -96,7 +96,7 @@ const Thing = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 ```tsx
 import { useControllableState } from '~/components/primitives/hooks';
-import { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
+import type { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
 
 const Thing = React.forwardRef<PressableRef, SlottablePressableProps & { defaultOpen?: boolean, open?: boolean, onOpenChange?: (open: boolean) => void }>(
   ({ defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, onPress: onPressProp, ...props}, ref) => {
@@ -126,7 +126,7 @@ const Thing = React.forwardRef<PressableRef, SlottablePressableProps & { default
 
 ```tsx
 import { useRelativePosition } from '~/components/primitives/hooks';
-import { PositionedContentProps, SlottablePressableProps, ViewRef } from '~/components/primitives/types';
+import type { PositionedContentProps, SlottablePressableProps, ViewRef } from '~/components/primitives/types';
 
 const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContentProps>(
   (

@@ -35,7 +35,7 @@ A collection of utilities for core primitives.
 
 ```tsx
 import { ToggleGroupUtils } from '~/components/primitives/hooks';
-import { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
+import type { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
 
 const Item = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
@@ -82,7 +82,7 @@ const Item = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 ```tsx
 import { EmptyGestureResponderEvent } from '~/components/primitives/hooks';
-import { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
+import type { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
 
 const Item = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({  onPress: onPressProp, onKeyDown: onKeyDownProp, ...props }, ref) => {
