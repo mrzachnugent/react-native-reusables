@@ -1,5 +1,5 @@
 import * as Slot from '~/components/primitives/slot';
-import { SlottableTextProps, TextRef } from '~/components/primitives/types';
+import type { SlottableTextProps, TextRef } from '~/components/primitives/types';
 import * as React from 'react';
 import { Text as RNText } from 'react-native';
 import { cn } from '~/lib/utils';

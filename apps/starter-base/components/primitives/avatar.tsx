@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import * as Slot from '~/components/primitives/slot';
-import {
+import type {
   ComponentPropsWithAsChild,
   SlottableViewProps,
   ViewRef,
