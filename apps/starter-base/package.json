@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "expo start -c --ios",
-    "dev:web": "expo start -c --web",
     "dev:android": "expo start -c --android",
+    "dev:ios": "expo start -c --ios",
+    "dev:web": "expo start -c --web",
     "android": "expo start -c --android",
     "ios": "expo start -c --ios",
     "web": "expo start -c --web"
