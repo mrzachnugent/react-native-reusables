@@ -8,13 +8,13 @@ import {
   type PressableStateCallbackType,
   type ImageProps as RNImageProps,
   type ImageStyle as RNImageStyle,
-  type PressableProps as RNPressableprops,
+  type PressableProps as RNPressableProps,
   type TextProps as RNTextProps,
   type ViewProps as RNViewProps,
   type StyleProp,
 } from 'react-native';
 
-const Pressable = React.forwardRef<React.ElementRef<typeof RNPressable>, RNPressableprops>(
+const Pressable = React.forwardRef<React.ElementRef<typeof RNPressable>, RNPressableProps>(
   (props, forwardedRef) => {
     const { children, ...pressableslotProps } = props;
 
@@ -154,7 +154,7 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
   return { ...slotProps, ...overrideProps };
 }
 
-type PressableStyle = RNPressableprops['style'];
+type PressableStyle = RNPressableProps['style'];
 type ImageStyle = StyleProp<RNImageStyle>;
 type Style = PressableStyle | ImageStyle;
 
