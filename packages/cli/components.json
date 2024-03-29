@@ -1,0 +1,7 @@
+{
+  "platforms": "universal",
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils"
+  }
+}
