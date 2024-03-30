@@ -41,7 +41,6 @@ export const add = new Command()
     'the working directory. defaults to the current directory.',
     process.cwd()
   )
-  .option('-p, --path <path>', 'the path to add the component to.')
   .action(async (components, opts) => {
     try {
       const options = addOptionsSchema.parse({
