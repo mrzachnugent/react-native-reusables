@@ -18,7 +18,9 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "lib": ["es2021"],
+    "target": "es2015"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

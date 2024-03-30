@@ -2,6 +2,6 @@
   "platforms": "universal",
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils"
+    "lib": "@/lib"
   }
 }

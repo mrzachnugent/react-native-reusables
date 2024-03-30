@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 export const DEFAULT_PLATFORMS = 'universal';
 export const DEFAULT_COMPONENTS = '~/components';
-export const DEFAULT_UTILS = '~/lib/utils';
+export const DEFAULT_LIB = '~/lib';
 
 const explorer = cosmiconfig('components', {
   searchPlaces: ['components.json'],
@@ -16,7 +16,7 @@ export const rawConfigSchema = z
     platforms: z.string().optional(),
     aliases: z.object({
       components: z.string(),
-      utils: z.string(),
+      lib: z.string(),
     }),
   })
   .strict();
@@ -26,7 +26,7 @@ export type RawConfig = z.infer<typeof rawConfigSchema>;
 export const configSchema = rawConfigSchema.extend({
   platforms: z.string().optional(),
   resolvedPaths: z.object({
-    utils: z.string(),
+    lib: z.string(),
     components: z.string(),
   }),
 });
@@ -54,7 +54,7 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig) {
   return configSchema.parse({
     ...config,
     resolvedPaths: {
-      utils: await resolveImport(config.aliases['utils'], tsConfig),
+      lib: await resolveImport(config.aliases['lib'], tsConfig),
       components: await resolveImport(config.aliases['components'], tsConfig),
     },
   });
