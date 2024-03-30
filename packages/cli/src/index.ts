@@ -13,7 +13,7 @@ async function main() {
   const program = new Command()
     .name('rnr-cli')
     .description('add components and dependencies to your project')
-    .version(packageInfo.version || '1.0.0', '-v, --version', 'display the version number');
+    .version(packageInfo.version || '0.0.0-rc.0', '-v, --version', 'display the version number');
 
   program.addCommand(add);
 

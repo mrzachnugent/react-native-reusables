@@ -1,6 +1,5 @@
 import { detect } from '@antfu/ni';
 
-// TODO: Use `npx expo install` instead
 export async function getPackageManager(
   targetDir: string
 ): Promise<'yarn' | 'pnpm' | 'bun' | 'npm'> {

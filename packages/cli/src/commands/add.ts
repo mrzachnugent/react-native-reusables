@@ -1,9 +1,6 @@
-import { existsSync, promises as fs } from 'fs';
-import path from 'path';
 import {
   Config,
   DEFAULT_COMPONENTS,
-  DEFAULT_PLATFORMS,
   DEFAULT_LIB,
   getConfig,
   rawConfigSchema,
@@ -12,22 +9,16 @@ import {
 import { getPackageManager } from '@/src/utils/get-package-manager';
 import { handleError } from '@/src/utils/handle-error';
 import { logger } from '@/src/utils/logger';
-import {
-  fetchTree,
-  getItemTargetPath,
-  getRegistryBaseColor,
-  getRegistryIndex,
-  resolveTree,
-} from '@/src/utils/registry';
-import { transform } from '@/src/utils/transformers';
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';
+import { existsSync, promises as fs } from 'fs';
 import ora, { Ora } from 'ora';
+import path from 'path';
 import prompts from 'prompts';
 import { z } from 'zod';
-import { COMPONENTS } from '../items/components';
 import { Component, INVALID_COMPONENT_ERROR, getAllComponentsToWrite } from '../items';
+import { COMPONENTS, UI_COMPONENTS } from '../items/components';
 
 const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
@@ -75,7 +66,7 @@ export const add = new Command()
           message: 'Which components would you like to add?',
           hint: 'Space to select. A to toggle all. Enter to submit.',
           instructions: false,
-          choices: COMPONENTS.filter((comp) => comp.type === 'ui').map((entry) => ({
+          choices: UI_COMPONENTS.map((entry) => ({
             title: entry.name,
             value: entry.name,
             selected: false,
@@ -110,54 +101,30 @@ export const add = new Command()
         spinner.text = `Installing ${comp.name}...`;
 
         if (Array.isArray(comp.paths)) {
-          await writeFiles(comp, comp.paths, config, options, spinner);
+          await writeFiles(comp, comp.paths, config, spinner);
         } else {
           await writeFiles(
             comp,
             comp.paths[config.platforms === 'universal' ? 'universal' : 'native-only'],
             config,
-            options,
             spinner
           );
         }
 
-        // TODO: Install npm dependencies
+        const packageManager = await getPackageManager(cwd);
 
-        console.log(
-          'NPM PACKAGES',
-          comp.npmPackages[config.platforms === 'universal' ? 'universal' : 'native-only']
-        );
-
-        // const packageManager = await getPackageManager(cwd)
-
-        // // Install dependencies.
-        // if (item.dependencies?.length) {
-        //   await execa(
-        //     packageManager,
-        //     [
-        //       packageManager === "npm" ? "install" : "add",
-        //       ...item.dependencies,
-        //     ],
-        //     {
-        //       cwd,
-        //     }
-        //   )
-        // }
-
-        // // Install devDependencies.
-        // if (item.devDependencies?.length) {
-        //   await execa(
-        //     packageManager,
-        //     [
-        //       packageManager === "npm" ? "install" : "add",
-        //       "-D",
-        //       ...item.devDependencies,
-        //     ],
-        //     {
-        //       cwd,
-        //     }
-        //   )
-        // }
+        const npmPackages =
+          comp.npmPackages[config.platforms === 'universal' ? 'universal' : 'native-only'];
+        if (npmPackages.length) {
+          spinner.text = `Installing ${npmPackages.join(', ')}...`;
+          await execa(
+            packageManager,
+            [packageManager === 'npm' ? 'install' : 'add', ...npmPackages],
+            {
+              cwd,
+            }
+          );
+        }
       }
       spinner.succeed(`Done.`);
     } catch (error) {
@@ -169,12 +136,6 @@ async function writeFiles(
   comp: Component,
   paths: Array<{ from: string; to: { folder: string; file: string } }>,
   config: Config,
-  options: {
-    overwrite: boolean;
-    cwd: string;
-    components?: string[] | undefined;
-    path?: string | undefined;
-  },
   spinner: Ora
 ) {
   for (const compPath of paths) {
@@ -183,23 +144,15 @@ async function writeFiles(
       await fs.mkdir(targetDir, { recursive: true });
     }
 
-    if (!options.overwrite && existsSync(path.join(targetDir, compPath.to.file))) {
-      spinner.stop();
-      const { overwrite } = await prompts({
-        type: 'confirm',
-        name: 'overwrite',
-        message: `File ${[compPath.to.folder, compPath.to.file].join(
-          '/'
-        )} already exists. Would you like to overwrite?`,
-        initial: false,
-      });
+    spinner.stop();
 
-      if (!overwrite) {
-        logger.info(
-          `Skipped ${comp.name}. To overwrite, run with the ${chalk.green('--overwrite')} flag.`
-        );
-        continue;
-      }
+    if (existsSync(path.join(targetDir, compPath.to.file))) {
+      logger.info(
+        `File already exists: ${chalk.bgCyan(
+          [compPath.to.folder, compPath.to.file].join('/')
+        )} was skipped. To overwrite, run with the ${chalk.green('--overwrite')} flag.`
+      );
+      continue;
     }
 
     spinner.start(`Installing ${comp.name}...`);

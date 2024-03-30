@@ -1,7 +1,6 @@
-export const COMPONENTS = [
+export const UI_COMPONENTS = [
   {
     name: 'accordion',
-    type: 'ui',
     dependencies: ['accordion-primitive', 'text'],
     npmPackages: {
       universal: [],
@@ -18,8 +17,24 @@ export const COMPONENTS = [
     ],
   },
   {
+    name: 'text',
+    dependencies: ['slot-primitive', 'types-primitive'],
+    npmPackages: {
+      universal: [],
+      'native-only': [],
+    },
+    paths: [
+      {
+        from: './node_modules/@rnr/reusables/src/components/ui/text.tsx',
+        to: { folder: 'ui', file: 'text.tsx' },
+      },
+    ],
+  },
+];
+
+const PRIMITIVE_COMPONENTS = [
+  {
     name: 'accordion-primitive',
-    type: 'primitive',
     dependencies: ['hooks-primitive', 'slot-primitive', 'types-primitive'],
     npmPackages: {
       universal: ['@radix-ui/react-accordion'],
@@ -57,23 +72,7 @@ export const COMPONENTS = [
     },
   },
   {
-    name: 'text',
-    type: 'ui',
-    dependencies: ['slot-primitive', 'types-primitive'],
-    npmPackages: {
-      universal: [],
-      'native-only': [],
-    },
-    paths: [
-      {
-        from: './node_modules/@rnr/reusables/src/components/ui/text.tsx',
-        to: { folder: 'ui', file: 'text.tsx' },
-      },
-    ],
-  },
-  {
     name: 'hooks-primitive',
-    type: 'primitive',
     dependencies: ['types-primitive'],
     npmPackages: {
       universal: [],
@@ -100,7 +99,6 @@ export const COMPONENTS = [
   },
   {
     name: 'slot-primitive',
-    type: 'primitive',
     dependencies: [],
     npmPackages: {
       universal: [],
@@ -115,7 +113,6 @@ export const COMPONENTS = [
   },
   {
     name: 'types-primitive',
-    type: 'primitive',
     dependencies: [],
     npmPackages: {
       universal: [],
@@ -129,3 +126,5 @@ export const COMPONENTS = [
     ],
   },
 ];
+
+export const COMPONENTS = [...UI_COMPONENTS, ...PRIMITIVE_COMPONENTS];
