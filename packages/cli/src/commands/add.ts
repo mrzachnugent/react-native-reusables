@@ -97,6 +97,8 @@ export const add = new Command()
         logger.error(err);
       }
 
+      const npmPackages: Array<string> = [];
+
       for (const comp of componentsToWrite) {
         spinner.text = `Installing ${comp.name}...`;
 
@@ -111,20 +113,22 @@ export const add = new Command()
           );
         }
 
-        const packageManager = await getPackageManager(cwd);
+        npmPackages.push(
+          ...comp.npmPackages[config.platforms === 'universal' ? 'universal' : 'native-only']
+        );
+      }
 
-        const npmPackages =
-          comp.npmPackages[config.platforms === 'universal' ? 'universal' : 'native-only'];
-        if (npmPackages.length) {
-          spinner.text = `Installing ${npmPackages.join(', ')}...`;
-          await execa(
-            packageManager,
-            [packageManager === 'npm' ? 'install' : 'add', ...npmPackages],
-            {
-              cwd,
-            }
-          );
-        }
+      const packageManager = await getPackageManager(cwd);
+
+      if (npmPackages.length) {
+        spinner.text = `Installing ${npmPackages.join(', ')}...`;
+        await execa(
+          packageManager,
+          [packageManager === 'npm' ? 'install' : 'add', ...npmPackages],
+          {
+            cwd,
+          }
+        );
       }
       spinner.succeed(`Done.`);
     } catch (error) {
