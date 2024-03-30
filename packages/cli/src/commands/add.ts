@@ -19,6 +19,10 @@ import prompts from 'prompts';
 import { z } from 'zod';
 import { Component, INVALID_COMPONENT_ERROR, getAllComponentsToWrite } from '../items';
 import { COMPONENTS, UI_COMPONENTS } from '../items/components';
+import { fileURLToPath } from 'url';
+
+const filePath = fileURLToPath(import.meta.url);
+const fileDir = path.dirname(filePath);
 
 const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
@@ -162,7 +166,9 @@ async function writeFiles(
     spinner.start(`Installing ${comp.name}...`);
     try {
       const content = await fs.readFile(
-        path.resolve(path.join('./generated/components', compPath.to.folder, compPath.to.file)),
+        path.resolve(
+          path.join(fileDir, 'generated/components', compPath.to.folder, compPath.to.file)
+        ),
         'utf8'
       );
       await fs.writeFile(

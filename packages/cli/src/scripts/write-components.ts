@@ -18,7 +18,7 @@ main();
 
 async function writeFiles(paths: Array<{ from: string; to: { folder: string; file: string } }>) {
   for (const compPath of paths) {
-    const targetDir = path.join('generated/components', compPath.to.folder);
+    const targetDir = path.join('dist/generated/components', compPath.to.folder);
     if (!existsSync(targetDir)) {
       await fs.mkdir(targetDir, { recursive: true });
     }

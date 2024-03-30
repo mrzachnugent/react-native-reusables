@@ -20,7 +20,8 @@
     "skipLibCheck": true,
     "strict": true,
     "lib": ["es2021"],
-    "target": "es2015"
+    "module": "ESNext",
+    "target": "ESNext"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "generated"]

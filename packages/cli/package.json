@@ -1,6 +1,6 @@
 {
   "name": "@react-native-reusables/cli",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "description": "Add Universal components and primitives to your React-Native project.",
   "publishConfig": {
     "access": "public"
@@ -44,7 +44,7 @@
     "release": "changeset version",
     "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta",
     "pub:next": "pnpm build && pnpm publish --no-git-checks --access public --tag next",
-    "pub:release": "pnpm build && pnpm publish --access public",
+    "pub:release": "pnpm build && pnpm publish --no-git-checks --access public",
     "test": "vitest run"
   },
   "dependencies": {
