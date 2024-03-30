@@ -161,7 +161,10 @@ async function writeFiles(
 
     spinner.start(`Installing ${comp.name}...`);
     try {
-      const content = await fs.readFile(path.resolve(compPath.from), 'utf8');
+      const content = await fs.readFile(
+        path.resolve(path.join('./generated/components', compPath.to.folder, compPath.to.file)),
+        'utf8'
+      );
       await fs.writeFile(
         path.join(targetDir, compPath.to.file),
         fixImports(content, config.aliases.components, config.aliases.lib)
