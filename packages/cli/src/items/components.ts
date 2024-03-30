@@ -543,7 +543,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/accordion', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/accordion/src/types.tsx',
+          from: './node_modules/@rnr/accordion/src/types.ts',
           to: { folder: 'primitives/accordion', file: ' types.ts' },
         },
       ],
@@ -581,7 +581,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/alert-dialog', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/alert-dialog/src/types.tsx',
+          from: './node_modules/@rnr/alert-dialog/src/types.ts',
           to: { folder: 'primitives/alert-dialog', file: ' types.ts' },
         },
       ],
@@ -614,7 +614,7 @@ const PRIMITIVE_COMPONENTS = [
         to: { folder: 'primitives/avatar', file: 'index.tsx' },
       },
       {
-        from: './node_modules/@rnr/avatar/src/types.tsx',
+        from: './node_modules/@rnr/avatar/src/types.ts',
         to: { folder: 'primitives/avatar', file: ' types.ts' },
       },
     ],
@@ -651,7 +651,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/checkbox', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/checkbox/src/types.tsx',
+          from: './node_modules/@rnr/checkbox/src/types.ts',
           to: { folder: 'primitives/checkbox', file: ' types.ts' },
         },
       ],
@@ -689,7 +689,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/collapsible', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/collapsible/src/types.tsx',
+          from: './node_modules/@rnr/collapsible/src/types.ts',
           to: { folder: 'primitives/collapsible', file: ' types.ts' },
         },
       ],
@@ -733,7 +733,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/context-menu', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/context-menu/src/types.tsx',
+          from: './node_modules/@rnr/context-menu/src/types.ts',
           to: { folder: 'primitives/context-menu', file: ' types.ts' },
         },
       ],
@@ -771,7 +771,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/dialog', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/dialog/src/types.tsx',
+          from: './node_modules/@rnr/dialog/src/types.ts',
           to: { folder: 'primitives/dialog', file: ' types.ts' },
         },
       ],
@@ -815,7 +815,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/dropdown-menu', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/dropdown-menu/src/types.tsx',
+          from: './node_modules/@rnr/dropdown-menu/src/types.ts',
           to: { folder: 'primitives/dropdown-menu', file: ' types.ts' },
         },
       ],
@@ -853,7 +853,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/hover-card', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/hover-card/src/types.tsx',
+          from: './node_modules/@rnr/hover-card/src/types.ts',
           to: { folder: 'primitives/hover-card', file: ' types.ts' },
         },
       ],
@@ -891,7 +891,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/label', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/label/src/types.tsx',
+          from: './node_modules/@rnr/label/src/types.ts',
           to: { folder: 'primitives/label', file: ' types.ts' },
         },
       ],
@@ -935,7 +935,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/menubar', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/menubar/src/types.tsx',
+          from: './node_modules/@rnr/menubar/src/types.ts',
           to: { folder: 'primitives/menubar', file: ' types.ts' },
         },
       ],
@@ -979,7 +979,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/navigation-menu', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/navigation-menu/src/types.tsx',
+          from: './node_modules/@rnr/navigation-menu/src/types.ts',
           to: { folder: 'primitives/navigation-menu', file: ' types.ts' },
         },
       ],
@@ -1017,7 +1017,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/popover', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/popover/src/types.tsx',
+          from: './node_modules/@rnr/popover/src/types.ts',
           to: { folder: 'primitives/popover', file: ' types.ts' },
         },
       ],
@@ -1055,7 +1055,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/progress', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/progress/src/types.tsx',
+          from: './node_modules/@rnr/progress/src/types.ts',
           to: { folder: 'primitives/progress', file: ' types.ts' },
         },
       ],
@@ -1093,7 +1093,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/radio-group', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/radio-group/src/types.tsx',
+          from: './node_modules/@rnr/radio-group/src/types.ts',
           to: { folder: 'primitives/radio-group', file: ' types.ts' },
         },
       ],
@@ -1131,7 +1131,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/select', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/select/src/types.tsx',
+          from: './node_modules/@rnr/select/src/types.ts',
           to: { folder: 'primitives/select', file: ' types.ts' },
         },
       ],
@@ -1150,7 +1150,7 @@ const PRIMITIVE_COMPONENTS = [
         to: { folder: 'primitives/separator', file: 'index.tsx' },
       },
       {
-        from: './node_modules/@rnr/separator/src/types.tsx',
+        from: './node_modules/@rnr/separator/src/types.ts',
         to: { folder: 'primitives/separator', file: ' types.ts' },
       },
     ],
@@ -1187,7 +1187,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/slider', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/slider/src/types.tsx',
+          from: './node_modules/@rnr/slider/src/types.ts',
           to: { folder: 'primitives/slider', file: ' types.ts' },
         },
       ],
@@ -1225,7 +1225,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/switch', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/switch/src/types.tsx',
+          from: './node_modules/@rnr/switch/src/types.ts',
           to: { folder: 'primitives/switch', file: ' types.ts' },
         },
       ],
@@ -1277,7 +1277,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/tabs', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/tabs/src/types.tsx',
+          from: './node_modules/@rnr/tabs/src/types.ts',
           to: { folder: 'primitives/tabs', file: ' types.ts' },
         },
       ],
@@ -1296,7 +1296,7 @@ const PRIMITIVE_COMPONENTS = [
         to: { folder: 'primitives/toast', file: 'index.tsx' },
       },
       {
-        from: './node_modules/@rnr/toast/src/types.tsx',
+        from: './node_modules/@rnr/toast/src/types.ts',
         to: { folder: 'primitives/toast', file: ' types.ts' },
       },
     ],
@@ -1333,7 +1333,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/toggle', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/toggle/src/types.tsx',
+          from: './node_modules/@rnr/toggle/src/types.ts',
           to: { folder: 'primitives/toggle', file: ' types.ts' },
         },
       ],
@@ -1371,7 +1371,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/toggle-group', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/toggle-group/src/types.tsx',
+          from: './node_modules/@rnr/toggle-group/src/types.ts',
           to: { folder: 'primitives/toggle-group', file: ' types.ts' },
         },
       ],
@@ -1409,7 +1409,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/toolbar', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/toolbar/src/types.tsx',
+          from: './node_modules/@rnr/toolbar/src/types.ts',
           to: { folder: 'primitives/toolbar', file: ' types.ts' },
         },
       ],
@@ -1447,7 +1447,7 @@ const PRIMITIVE_COMPONENTS = [
           to: { folder: 'primitives/tooltip', file: 'index.tsx' },
         },
         {
-          from: './node_modules/@rnr/tooltip/src/types.tsx',
+          from: './node_modules/@rnr/tooltip/src/types.ts',
           to: { folder: 'primitives/tooltip', file: ' types.ts' },
         },
       ],
