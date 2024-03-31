@@ -8,7 +8,7 @@ description: Shows a collection of navigation links.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/navigation-menu?raw';
 
 <LinkButton href='/primitives/navigation-menu'>Navigation Menu Primitive</LinkButton>
@@ -22,15 +22,25 @@ Shows a collection of navigation links.
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/navigation-menu' className='text-white font-bold'> navigation-menu primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add navigation-menu
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/navigation-menu' className='text-white font-bold'> navigation-menu primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/navigation-menu.tsx`:**
+    **Copy/paste the following code to `~/components/ui/navigation-menu.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/navigation-menu.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/navigation-menu.tsx' />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

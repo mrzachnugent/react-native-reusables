@@ -8,7 +8,7 @@ description: A user-friendly label linked to controls for improved accessibility
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/label?raw';
 
 <LinkButton href="/primitives/label">
@@ -24,16 +24,26 @@ A user-friendly label linked to controls for improved accessibility.
 
 ### Installation
 
-<Aside type="tip" title="Dependency">
-    Before copy/pasting, add the <a href="/primitives/label" className='text-white font-bold'>label primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add label
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type="tip" title="Dependency">
+        Before copy/pasting, add the <a href="/primitives/label" className='text-white font-bold'>label primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/label.tsx`:**
+    **Copy/paste the following code to `~/components/ui/label.tsx`:**
 
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/label.tsx" />
+    <Code code={importedCode} lang="tsx" title="~/components/ui/label.tsx" />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

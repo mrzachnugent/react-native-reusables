@@ -8,7 +8,7 @@ description: Shows an input component.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/input?raw';
 
 <LinkButton target="_blank" href="https://rnr-showcase.vercel.app/input">
@@ -21,9 +21,19 @@ Shows an input component.
 
 ## Installation
 
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add input
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
 **Copy/paste the following code to `~/components/ui/input.tsx`**
 
 <Code code={importedCode} lang="tsx" title="~/components/ui/input.tsx" />
+  </TabItem>
+</Tabs>
+
 
 ## Usage
 

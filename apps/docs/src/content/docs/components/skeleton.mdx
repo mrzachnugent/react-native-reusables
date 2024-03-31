@@ -8,7 +8,7 @@ description: Shows an skeleton component.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/skeleton?raw';
 
 <LinkButton target="_blank" href="https://rnr-showcase.vercel.app/skeleton">
@@ -21,9 +21,19 @@ Shows an skeleton component.
 
 ## Installation
 
-**Copy/paste the following code to `~/components/ui/skeleton.tsx`**
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add skeleton
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    **Copy/paste the following code to `~/components/ui/skeleton.tsx`**
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/skeleton.tsx" />
+    <Code code={importedCode} lang="tsx" title="~/components/ui/skeleton.tsx" />
+  </TabItem>
+</Tabs>
+
 
 ## Usage
 

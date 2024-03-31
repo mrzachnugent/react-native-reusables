@@ -7,7 +7,7 @@ description: Presents a selection of options for the user to choose from, activa
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/select?raw';
 
 <LinkButton href='/primitives/select'>Select Primitive</LinkButton>
@@ -21,15 +21,25 @@ Presents a selection of options for the user to choose from, activated by a butt
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/select' className='text-white font-bold'> select primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add select
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/select' className='text-white font-bold'> select primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/select.tsx`:**
+    **Copy/paste the following code to `~/components/ui/select.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/select.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/select.tsx' />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

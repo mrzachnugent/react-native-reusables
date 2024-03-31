@@ -7,7 +7,7 @@ description: Shows an indicator representing the advancement status of a task.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/progress?raw';
 
 <LinkButton href='/primitives/progress'>Progress Primitive</LinkButton>
@@ -21,15 +21,25 @@ Shows an indicator representing the advancement status of a task.
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/progress' className='text-white font-bold'> progress primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add progress
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/progress' className='text-white font-bold'> progress primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/progress.tsx`:**
+    **Copy/paste the following code to `~/components/ui/progress.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/progress.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/progress.tsx' />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

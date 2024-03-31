@@ -8,7 +8,7 @@ description: Shows an textarea component.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/textarea?raw';
 
 <LinkButton target="_blank" href="https://rnr-showcase.vercel.app/textarea">
@@ -21,9 +21,19 @@ Shows an textarea component.
 
 ## Installation
 
-**Copy/paste the following code to `~/components/ui/textarea.tsx`**
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add textarea
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    **Copy/paste the following code to `~/components/ui/textarea.tsx`**
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/textarea.tsx" />
+    <Code code={importedCode} lang="tsx" title="~/components/ui/textarea.tsx" />
+  </TabItem>
+</Tabs>
+
 
 ## Usage
 

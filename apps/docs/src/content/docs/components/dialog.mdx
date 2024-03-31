@@ -7,7 +7,7 @@ description: A modal dialog that interrupts the user with important content and 
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/dialog?raw';
 
 <LinkButton href='/primitives/dialog'>Dialog Primitive</LinkButton>
@@ -21,15 +21,24 @@ A modal dialog that interrupts the user with important content and expects a res
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/dialog' className='text-white font-bold'> dialog primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add dialog
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/dialog' className='text-white font-bold'> dialog primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/dialog.tsx`:**
+    **Copy/paste the following code to `~/components/ui/dialog.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/dialog.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/dialog.tsx' />
+  </TabItem>
+</Tabs>
 
 ### Usage
 

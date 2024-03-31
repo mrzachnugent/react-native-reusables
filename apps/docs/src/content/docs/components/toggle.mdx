@@ -8,7 +8,7 @@ description: A button with a true or false state, which can be activated or deac
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/toggle?raw';
 
 <LinkButton href='/primitives/toggle'>Toggle Primitive</LinkButton>
@@ -23,15 +23,25 @@ A button with a true or false state, which can be activated or deactivated by to
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/toggle' className='text-white font-bold'>toggle primitive</a> and the <a href='/components/text' className='text-white font-bold'>text component</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add toggle
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/toggle' className='text-white font-bold'>toggle primitive</a> and the <a href='/components/text' className='text-white font-bold'>text component</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/toggle.tsx`:**
+    **Copy/paste the following code to `~/components/ui/toggle.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/toggle.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/toggle.tsx' />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

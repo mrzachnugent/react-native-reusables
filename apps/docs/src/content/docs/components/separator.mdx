@@ -8,7 +8,7 @@ description: Creates a visual or semantic distinction between content.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/separator?raw';
 
 <LinkButton href="/primitives/separator">
@@ -24,14 +24,24 @@ Creates a visual or semantic distinction between content.
 
 ## Installation
 
-<Aside type="tip" title="Dependencies">
-  Before copy/pasting, add the <a href='/primitives/separator' className='text-white font-bold'> separator primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add separator
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type="tip" title="Dependencies">
+      Before copy/pasting, add the <a href='/primitives/separator' className='text-white font-bold'> separator primitive</a> to your project.
+    </Aside>
 
 
-**Copy/paste the following code to `~/components/ui/separator.tsx`**
+    **Copy/paste the following code to `~/components/ui/separator.tsx`**
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/separator.tsx" />
+    <Code code={importedCode} lang="tsx" title="~/components/ui/separator.tsx" />
+  </TabItem>
+</Tabs>
+
 
 ## Usage
 

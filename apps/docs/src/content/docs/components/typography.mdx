@@ -8,7 +8,7 @@ description: Accessible styled typography components with an inheritance system.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedTypographyCode from '@rnr/reusables/components/ui/typography?raw';
 
 
@@ -40,13 +40,23 @@ Semantic and styled typography components.
 
 ## Installation
 
-<Aside type="tip" title="Dependencies">
-    Before copy/pasting, add the <a href="/primitives/slot" className='text-white font-bold'>slot primitive</a> and <a href="/primitives/types" className='text-white font-bold'>types primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add typography
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type="tip" title="Dependencies">
+        Before copy/pasting, add the <a href="/primitives/slot" className='text-white font-bold'>slot primitive</a> and <a href="/primitives/types" className='text-white font-bold'>types primitive</a> to your project.
+    </Aside>
 
-**Copy/paste the following code to `~/components/ui/typography.tsx`:**
+    **Copy/paste the following code to `~/components/ui/typography.tsx`:**
 
-<Code code={importedTypographyCode} lang="tsx" title="~/components/ui/typography.tsx" />
+    <Code code={importedTypographyCode} lang="tsx" title="~/components/ui/typography.tsx" />
+  </TabItem>
+</Tabs>
+
 
 #### Props and usage
 

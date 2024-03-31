@@ -8,7 +8,7 @@ description: A group of selectable buttons, commonly referred to as radio button
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/radio-group?raw';
 
 <LinkButton href='/primitives/radio-group'>Radio Group Primitive</LinkButton>
@@ -22,15 +22,25 @@ A group of selectable buttons, commonly referred to as radio buttons, wherein on
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/radio-group' className='text-white font-bold'> radio group primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add radio-group
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/radio-group' className='text-white font-bold'> radio group primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/radio-group.tsx`:**
+    **Copy/paste the following code to `~/components/ui/radio-group.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/radio-group.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/radio-group.tsx' />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

@@ -7,7 +7,7 @@ description: Allows users with vision to preview the content hidden behind an el
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/hover-card?raw';
 
 <LinkButton href='/primitives/hover-card'>Hover Card Primitive</LinkButton>
@@ -21,15 +21,25 @@ Allows users with vision to preview the content hidden behind an element before 
 
 ### Installation
 
-<Aside type='tip' title='Dependencies'>
-  Before copy/pasting, add the <a href='/primitives/hover-card' className='text-white font-bold'> hover-card primitive</a> to your project.
-</Aside>
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add hover-card
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type='tip' title='Dependencies'>
+      Before copy/pasting, add the <a href='/primitives/hover-card' className='text-white font-bold'> hover-card primitive</a> to your project.
+    </Aside>
 
-<br />
+    <br />
 
-**Copy/paste the following code to `~/components/ui/hover-card.tsx`:**
+    **Copy/paste the following code to `~/components/ui/hover-card.tsx`:**
 
-<Code code={importedCode} lang='tsx' title='~/components/ui/hover-card.tsx' />
+    <Code code={importedCode} lang='tsx' title='~/components/ui/hover-card.tsx' />
+  </TabItem>
+</Tabs>
+
 
 ### Usage
 

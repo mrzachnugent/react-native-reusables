@@ -8,7 +8,7 @@ description: Shows a badge or a badge-like component.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/badge?raw';
 
 <LinkButton href="/primitives/types">
@@ -26,16 +26,23 @@ import importedCode from '@rnr/reusables/components/ui/badge?raw';
 Shows a badge or a badge-like component.
 
 ## Installation
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add badge
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type="tip" title="Dependencies">
+      Before copy/pasting, add the <a href='/primitives/slot' className='text-white font-bold'> slot primitive</a> and the <a href='/components/text' className='text-white font-bold'>text component</a> to your project.
+    </Aside>
 
-<Aside type="tip" title="Dependencies">
-  Before copy/pasting, add the <a href='/primitives/slot' className='text-white font-bold'> slot primitive</a> and the <a href='/components/text' className='text-white font-bold'>text component</a> to your project.
-</Aside>
 
+    **Copy/paste the following code to `~/components/ui/badge.tsx`**
 
-**Copy/paste the following code to `~/components/ui/badge.tsx`**
-
-<Code code={importedCode} lang="tsx" title="~/components/ui/badge.tsx" />
-
+    <Code code={importedCode} lang="tsx" title="~/components/ui/badge.tsx" />
+  </TabItem>
+</Tabs>
 ## Usage
 
 ```tsx

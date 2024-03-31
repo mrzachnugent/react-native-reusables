@@ -8,7 +8,7 @@ description: An image component featuring an alternative representation for depi
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/avatar?raw';
 
 <LinkButton href="/primitives/avatar">
@@ -23,18 +23,25 @@ import importedCode from '@rnr/reusables/components/ui/avatar?raw';
 An image component featuring an alternative representation for depicting the user.
 
 ### Installation
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add avatar
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type="tip" title="Dependency">
+        Before copy/pasting, add the <a href="/primitives/avatar" className='text-white font-bold'>avatar primitive</a> to your project.
+    </Aside>
 
-<Aside type="tip" title="Dependency">
-    Before copy/pasting, add the <a href="/primitives/avatar" className='text-white font-bold'>avatar primitive</a> to your project.
-</Aside>
+    <br />
 
-<br />
-
-**Copy/paste the following code to `~/components/ui/avatar.tsx`:**
+    **Copy/paste the following code to `~/components/ui/avatar.tsx`:**
 
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/avatar.tsx" />
-
+    <Code code={importedCode} lang="tsx" title="~/components/ui/avatar.tsx" />
+  </TabItem>
+</Tabs>
 ### Usage
 
 ```tsx

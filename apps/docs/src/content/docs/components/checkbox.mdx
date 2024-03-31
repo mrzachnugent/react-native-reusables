@@ -8,7 +8,7 @@ description: A box that is a checked (ticked) indicator when activated.
 
 import Code from '@/components/Code.astro';
 import { LinkButton } from '@/components/react/LinkButton';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/checkbox?raw';
 
 <LinkButton href="/primitives/checkbox">
@@ -23,18 +23,25 @@ import importedCode from '@rnr/reusables/components/ui/checkbox?raw';
 A box that is a checked (ticked) indicator when activated.
 
 ### Installation
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add checkbox
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+    <Aside type="tip" title="Dependency">
+        Before copy/pasting, add the <a href="/primitives/checkbox" className='text-white font-bold'>checkbox primitive</a> to your project.
+    </Aside>
 
-<Aside type="tip" title="Dependency">
-    Before copy/pasting, add the <a href="/primitives/checkbox" className='text-white font-bold'>checkbox primitive</a> to your project.
-</Aside>
+    <br />
 
-<br />
-
-**Copy/paste the following code to `~/components/ui/checkbox.tsx`:**
+    **Copy/paste the following code to `~/components/ui/checkbox.tsx`:**
 
 
-<Code code={importedCode} lang="tsx" title="~/components/ui/checkbox.tsx" />
-
+    <Code code={importedCode} lang="tsx" title="~/components/ui/checkbox.tsx" />
+  </TabItem>
+</Tabs>
 ### Usage
 
 ```tsx
