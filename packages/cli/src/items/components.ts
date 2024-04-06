@@ -540,10 +540,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/accordion/src/accordion.tsx',
+          distFrom: 'primitives/accordion/accordion.tsx',
           to: { folder: 'primitives/accordion', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/accordion/src/types.ts',
+          distFrom: 'primitives/accordion/types.ts',
           to: { folder: 'primitives/accordion', file: ' types.ts' },
         },
       ],
@@ -578,10 +580,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/alert-dialog/src/alert-dialog.tsx',
+          distFrom: 'primitives/alert-dialog/alert-dialog.tsx',
           to: { folder: 'primitives/alert-dialog', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/alert-dialog/src/types.ts',
+          distFrom: 'primitives/alert-dialog/types.ts',
           to: { folder: 'primitives/alert-dialog', file: ' types.ts' },
         },
       ],
@@ -648,10 +652,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/checkbox/src/checkbox.tsx',
+          distFrom: 'primitives/checkbox/checkbox.tsx',
           to: { folder: 'primitives/checkbox', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/checkbox/src/types.ts',
+          distFrom: 'primitives/checkbox/types.ts',
           to: { folder: 'primitives/checkbox', file: ' types.ts' },
         },
       ],
@@ -686,10 +692,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/collapsible/src/collapsible.tsx',
+          distFrom: 'primitives/collapsible/collapsible.tsx',
           to: { folder: 'primitives/collapsible', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/collapsible/src/types.ts',
+          distFrom: 'primitives/collapsible/types.ts',
           to: { folder: 'primitives/collapsible', file: ' types.ts' },
         },
       ],
@@ -730,10 +738,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/context-menu/src/context-menu.tsx',
+          distFrom: 'primitives/context-menu/context-menu.tsx',
           to: { folder: 'primitives/context-menu', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/context-menu/src/types.ts',
+          distFrom: 'primitives/context-menu/types.ts',
           to: { folder: 'primitives/context-menu', file: ' types.ts' },
         },
       ],
@@ -768,10 +778,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/dialog/src/dialog.tsx',
+          distFrom: 'primitives/dialog/dialog.tsx',
           to: { folder: 'primitives/dialog', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/dialog/src/types.ts',
+          distFrom: 'primitives/dialog/types.ts',
           to: { folder: 'primitives/dialog', file: ' types.ts' },
         },
       ],
@@ -812,10 +824,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/dropdown-menu/src/dropdown-menu.tsx',
+          distFrom: 'primitives/dropdown-menu/dropdown-menu.tsx',
           to: { folder: 'primitives/dropdown-menu', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/dropdown-menu/src/types.ts',
+          distFrom: 'primitives/dropdown-menu/types.ts',
           to: { folder: 'primitives/dropdown-menu', file: ' types.ts' },
         },
       ],
@@ -850,10 +864,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/hover-card/src/hover-card.tsx',
+          distFrom: 'primitives/hover-card/hover-card.tsx',
           to: { folder: 'primitives/hover-card', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/hover-card/src/types.ts',
+          distFrom: 'primitives/hover-card/types.ts',
           to: { folder: 'primitives/hover-card', file: ' types.ts' },
         },
       ],
@@ -888,10 +904,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/label/src/label.tsx',
+          distFrom: 'primitives/label/label.tsx',
           to: { folder: 'primitives/label', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/label/src/types.ts',
+          distFrom: 'primitives/label/types.ts',
           to: { folder: 'primitives/label', file: ' types.ts' },
         },
       ],
@@ -932,10 +950,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/menubar/src/menubar.tsx',
+          distFrom: 'primitives/menubar/menubar.tsx',
           to: { folder: 'primitives/menubar', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/menubar/src/types.ts',
+          distFrom: 'primitives/menubar/types.ts',
           to: { folder: 'primitives/menubar', file: ' types.ts' },
         },
       ],
@@ -976,10 +996,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/navigation-menu/src/navigation-menu.tsx',
+          distFrom: 'primitives/navigation-menu/navigation-menu.tsx',
           to: { folder: 'primitives/navigation-menu', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/navigation-menu/src/types.ts',
+          distFrom: 'primitives/navigation-menu/types.ts',
           to: { folder: 'primitives/navigation-menu', file: ' types.ts' },
         },
       ],
@@ -1014,10 +1036,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/popover/src/popover.tsx',
+          distFrom: 'primitives/popover/popover.tsx',
           to: { folder: 'primitives/popover', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/popover/src/types.ts',
+          distFrom: 'primitives/popover/types.ts',
           to: { folder: 'primitives/popover', file: ' types.ts' },
         },
       ],
@@ -1052,10 +1076,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/progress/src/progress.tsx',
+          distFrom: 'primitives/progress/progress.tsx',
           to: { folder: 'primitives/progress', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/progress/src/types.ts',
+          distFrom: 'primitives/progress/types.ts',
           to: { folder: 'primitives/progress', file: ' types.ts' },
         },
       ],
@@ -1090,10 +1116,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/radio-group/src/radio-group.tsx',
+          distFrom: 'primitives/radio-group/radio-group.tsx',
           to: { folder: 'primitives/radio-group', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/radio-group/src/types.ts',
+          distFrom: 'primitives/radio-group/types.ts',
           to: { folder: 'primitives/radio-group', file: ' types.ts' },
         },
       ],
@@ -1128,10 +1156,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/select/src/select.tsx',
+          distFrom: 'primitives/select/select.tsx',
           to: { folder: 'primitives/select', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/select/src/types.ts',
+          distFrom: 'primitives/select/types.ts',
           to: { folder: 'primitives/select', file: ' types.ts' },
         },
       ],
@@ -1184,10 +1214,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/slider/src/slider.tsx',
+          distFrom: 'primitives/slider/slider.tsx',
           to: { folder: 'primitives/slider', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/slider/src/types.ts',
+          distFrom: 'primitives/slider/types.ts',
           to: { folder: 'primitives/slider', file: ' types.ts' },
         },
       ],
@@ -1222,10 +1254,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/switch/src/switch.tsx',
+          distFrom: 'primitives/switch/switch.tsx',
           to: { folder: 'primitives/switch', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/switch/src/types.ts',
+          distFrom: 'primitives/switch/types.ts',
           to: { folder: 'primitives/switch', file: ' types.ts' },
         },
       ],
@@ -1274,10 +1308,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/tabs/src/tabs.tsx',
+          distFrom: 'primitives/tabs/tabs.tsx',
           to: { folder: 'primitives/tabs', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/tabs/src/types.ts',
+          distFrom: 'primitives/tabs/types.ts',
           to: { folder: 'primitives/tabs', file: ' types.ts' },
         },
       ],
@@ -1330,10 +1366,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/toggle/src/toggle.tsx',
+          distFrom: 'primitives/toggle/toggle.tsx',
           to: { folder: 'primitives/toggle', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/toggle/src/types.ts',
+          distFrom: 'primitives/toggle/types.ts',
           to: { folder: 'primitives/toggle', file: ' types.ts' },
         },
       ],
@@ -1368,10 +1406,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/toggle-group/src/toggle-group.tsx',
+          distFrom: 'primitives/toggle-group/toggle-group.tsx',
           to: { folder: 'primitives/toggle-group', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/toggle-group/src/types.ts',
+          distFrom: 'primitives/toggle-group/types.ts',
           to: { folder: 'primitives/toggle-group', file: ' types.ts' },
         },
       ],
@@ -1406,10 +1446,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/toolbar/src/toolbar.tsx',
+          distFrom: 'primitives/toolbar/toolbar.tsx',
           to: { folder: 'primitives/toolbar', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/toolbar/src/types.ts',
+          distFrom: 'primitives/toolbar/types.ts',
           to: { folder: 'primitives/toolbar', file: ' types.ts' },
         },
       ],
@@ -1444,10 +1486,12 @@ const PRIMITIVE_COMPONENTS = [
       'native-only': [
         {
           from: './node_modules/@rnr/tooltip/src/tooltip.tsx',
+          distFrom: 'primitives/tooltip/tooltip.tsx',
           to: { folder: 'primitives/tooltip', file: 'index.tsx' },
         },
         {
           from: './node_modules/@rnr/tooltip/src/types.ts',
+          distFrom: 'primitives/tooltip/types.ts',
           to: { folder: 'primitives/tooltip', file: ' types.ts' },
         },
       ],

@@ -141,7 +141,7 @@ export const add = new Command()
 
 async function writeFiles(
   comp: Component,
-  paths: Array<{ from: string; to: { folder: string; file: string } }>,
+  paths: Array<{ from: string; distFrom?: string; to: { folder: string; file: string } }>,
   config: Config,
   spinner: Ora
 ) {
@@ -163,13 +163,11 @@ async function writeFiles(
     }
 
     spinner.start(`Installing ${comp.name}...`);
+    const readFromPath = compPath.distFrom
+      ? path.join(fileDir, 'generated/components', compPath.distFrom)
+      : path.join(fileDir, 'generated/components', compPath.to.folder, compPath.to.file);
     try {
-      const content = await fs.readFile(
-        path.resolve(
-          path.join(fileDir, 'generated/components', compPath.to.folder, compPath.to.file)
-        ),
-        'utf8'
-      );
+      const content = await fs.readFile(path.resolve(readFromPath), 'utf8');
       await fs.writeFile(
         path.join(targetDir, compPath.to.file),
         fixImports(content, config.aliases.components, config.aliases.lib)
