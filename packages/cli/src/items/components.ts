@@ -546,7 +546,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/accordion/src/types.ts',
           distFrom: 'primitives/accordion/types.ts',
-          to: { folder: 'primitives/accordion', file: ' types.ts' },
+          to: { folder: 'primitives/accordion', file: 'types.ts' },
         },
       ],
     },
@@ -586,7 +586,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/alert-dialog/src/types.ts',
           distFrom: 'primitives/alert-dialog/types.ts',
-          to: { folder: 'primitives/alert-dialog', file: ' types.ts' },
+          to: { folder: 'primitives/alert-dialog', file: 'types.ts' },
         },
       ],
     },
@@ -619,7 +619,7 @@ const PRIMITIVE_COMPONENTS = [
       },
       {
         from: './node_modules/@rnr/avatar/src/types.ts',
-        to: { folder: 'primitives/avatar', file: ' types.ts' },
+        to: { folder: 'primitives/avatar', file: 'types.ts' },
       },
     ],
   },
@@ -658,7 +658,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/checkbox/src/types.ts',
           distFrom: 'primitives/checkbox/types.ts',
-          to: { folder: 'primitives/checkbox', file: ' types.ts' },
+          to: { folder: 'primitives/checkbox', file: 'types.ts' },
         },
       ],
     },
@@ -698,7 +698,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/collapsible/src/types.ts',
           distFrom: 'primitives/collapsible/types.ts',
-          to: { folder: 'primitives/collapsible', file: ' types.ts' },
+          to: { folder: 'primitives/collapsible', file: 'types.ts' },
         },
       ],
     },
@@ -744,7 +744,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/context-menu/src/types.ts',
           distFrom: 'primitives/context-menu/types.ts',
-          to: { folder: 'primitives/context-menu', file: ' types.ts' },
+          to: { folder: 'primitives/context-menu', file: 'types.ts' },
         },
       ],
     },
@@ -784,7 +784,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/dialog/src/types.ts',
           distFrom: 'primitives/dialog/types.ts',
-          to: { folder: 'primitives/dialog', file: ' types.ts' },
+          to: { folder: 'primitives/dialog', file: 'types.ts' },
         },
       ],
     },
@@ -830,7 +830,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/dropdown-menu/src/types.ts',
           distFrom: 'primitives/dropdown-menu/types.ts',
-          to: { folder: 'primitives/dropdown-menu', file: ' types.ts' },
+          to: { folder: 'primitives/dropdown-menu', file: 'types.ts' },
         },
       ],
     },
@@ -870,7 +870,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/hover-card/src/types.ts',
           distFrom: 'primitives/hover-card/types.ts',
-          to: { folder: 'primitives/hover-card', file: ' types.ts' },
+          to: { folder: 'primitives/hover-card', file: 'types.ts' },
         },
       ],
     },
@@ -910,7 +910,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/label/src/types.ts',
           distFrom: 'primitives/label/types.ts',
-          to: { folder: 'primitives/label', file: ' types.ts' },
+          to: { folder: 'primitives/label', file: 'types.ts' },
         },
       ],
     },
@@ -956,7 +956,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/menubar/src/types.ts',
           distFrom: 'primitives/menubar/types.ts',
-          to: { folder: 'primitives/menubar', file: ' types.ts' },
+          to: { folder: 'primitives/menubar', file: 'types.ts' },
         },
       ],
     },
@@ -1002,7 +1002,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/navigation-menu/src/types.ts',
           distFrom: 'primitives/navigation-menu/types.ts',
-          to: { folder: 'primitives/navigation-menu', file: ' types.ts' },
+          to: { folder: 'primitives/navigation-menu', file: 'types.ts' },
         },
       ],
     },
@@ -1042,7 +1042,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/popover/src/types.ts',
           distFrom: 'primitives/popover/types.ts',
-          to: { folder: 'primitives/popover', file: ' types.ts' },
+          to: { folder: 'primitives/popover', file: 'types.ts' },
         },
       ],
     },
@@ -1082,7 +1082,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/progress/src/types.ts',
           distFrom: 'primitives/progress/types.ts',
-          to: { folder: 'primitives/progress', file: ' types.ts' },
+          to: { folder: 'primitives/progress', file: 'types.ts' },
         },
       ],
     },
@@ -1122,7 +1122,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/radio-group/src/types.ts',
           distFrom: 'primitives/radio-group/types.ts',
-          to: { folder: 'primitives/radio-group', file: ' types.ts' },
+          to: { folder: 'primitives/radio-group', file: 'types.ts' },
         },
       ],
     },
@@ -1162,7 +1162,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/select/src/types.ts',
           distFrom: 'primitives/select/types.ts',
-          to: { folder: 'primitives/select', file: ' types.ts' },
+          to: { folder: 'primitives/select', file: 'types.ts' },
         },
       ],
     },
@@ -1181,7 +1181,7 @@ const PRIMITIVE_COMPONENTS = [
       },
       {
         from: './node_modules/@rnr/separator/src/types.ts',
-        to: { folder: 'primitives/separator', file: ' types.ts' },
+        to: { folder: 'primitives/separator', file: 'types.ts' },
       },
     ],
   },
@@ -1220,7 +1220,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/slider/src/types.ts',
           distFrom: 'primitives/slider/types.ts',
-          to: { folder: 'primitives/slider', file: ' types.ts' },
+          to: { folder: 'primitives/slider', file: 'types.ts' },
         },
       ],
     },
@@ -1260,7 +1260,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/switch/src/types.ts',
           distFrom: 'primitives/switch/types.ts',
-          to: { folder: 'primitives/switch', file: ' types.ts' },
+          to: { folder: 'primitives/switch', file: 'types.ts' },
         },
       ],
     },
@@ -1314,7 +1314,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/tabs/src/types.ts',
           distFrom: 'primitives/tabs/types.ts',
-          to: { folder: 'primitives/tabs', file: ' types.ts' },
+          to: { folder: 'primitives/tabs', file: 'types.ts' },
         },
       ],
     },
@@ -1333,7 +1333,7 @@ const PRIMITIVE_COMPONENTS = [
       },
       {
         from: './node_modules/@rnr/toast/src/types.ts',
-        to: { folder: 'primitives/toast', file: ' types.ts' },
+        to: { folder: 'primitives/toast', file: 'types.ts' },
       },
     ],
   },
@@ -1372,7 +1372,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/toggle/src/types.ts',
           distFrom: 'primitives/toggle/types.ts',
-          to: { folder: 'primitives/toggle', file: ' types.ts' },
+          to: { folder: 'primitives/toggle', file: 'types.ts' },
         },
       ],
     },
@@ -1412,7 +1412,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/toggle-group/src/types.ts',
           distFrom: 'primitives/toggle-group/types.ts',
-          to: { folder: 'primitives/toggle-group', file: ' types.ts' },
+          to: { folder: 'primitives/toggle-group', file: 'types.ts' },
         },
       ],
     },
@@ -1452,7 +1452,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/toolbar/src/types.ts',
           distFrom: 'primitives/toolbar/types.ts',
-          to: { folder: 'primitives/toolbar', file: ' types.ts' },
+          to: { folder: 'primitives/toolbar', file: 'types.ts' },
         },
       ],
     },
@@ -1492,7 +1492,7 @@ const PRIMITIVE_COMPONENTS = [
         {
           from: './node_modules/@rnr/tooltip/src/types.ts',
           distFrom: 'primitives/tooltip/types.ts',
-          to: { folder: 'primitives/tooltip', file: ' types.ts' },
+          to: { folder: 'primitives/tooltip', file: 'types.ts' },
         },
       ],
     },
