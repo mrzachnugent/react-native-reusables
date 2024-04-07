@@ -2,7 +2,7 @@
 
 import { existsSync, promises as fs } from 'fs';
 import path from 'path';
-import { COMPONENTS } from '../items/components';
+import { COMPONENTS } from '../src/items/components';
 
 async function main() {
   for (const comp of COMPONENTS) {
@@ -18,7 +18,7 @@ main();
 
 async function writeFiles(paths: Array<{ from: string; to: { folder: string; file: string } }>) {
   for (const compPath of paths) {
-    const targetDir = path.join('dist/generated/components', compPath.to.folder);
+    const targetDir = path.join('__generated/components', compPath.to.folder);
     if (!existsSync(targetDir)) {
       await fs.mkdir(targetDir, { recursive: true });
     }

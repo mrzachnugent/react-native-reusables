@@ -16,7 +16,8 @@
     "directory": "packages/cli"
   },
   "files": [
-    "dist"
+    "dist",
+    "__generated"
   ],
   "keywords": [
     "expo",
@@ -32,11 +33,11 @@
   "exports": "./dist/index.js",
   "bin": "./dist/index.js",
   "scripts": {
-    "gen": "tsx src/scripts/write-components.ts",
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "gen": "tsx scripts/generate-source-files.ts",
+    "dev": "pnpm gen && tsup --watch",
+    "build": "pnpm gen && tsup",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist && rimraf components",
+    "clean": "rimraf dist && rimraf testing",
     "start:dev": "node dist/index.js",
     "start": "node dist/index.js",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
