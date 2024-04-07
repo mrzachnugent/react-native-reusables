@@ -106,13 +106,14 @@ export const add = new Command()
         spinner.text = `Installing ${comp.name}...`;
 
         if (Array.isArray(comp.paths)) {
-          await writeFiles(comp, comp.paths, config, spinner);
+          await writeFiles(comp, comp.paths, config, spinner, options.overwrite);
         } else {
           await writeFiles(
             comp,
             comp.paths[config.platforms === 'universal' ? 'universal' : 'native-only'],
             config,
-            spinner
+            spinner,
+            options.overwrite
           );
         }
 
@@ -143,7 +144,8 @@ async function writeFiles(
   comp: Component,
   paths: Array<{ from: string; distFrom?: string; to: { folder: string; file: string } }>,
   config: Config,
-  spinner: Ora
+  spinner: Ora,
+  overwriteFlag: boolean
 ) {
   for (const compPath of paths) {
     const targetDir = path.join(config.resolvedPaths.components, compPath.to.folder);
@@ -154,12 +156,27 @@ async function writeFiles(
     spinner.stop();
 
     if (existsSync(path.join(targetDir, compPath.to.file))) {
-      logger.info(
-        `File already exists: ${chalk.bgCyan(
-          [compPath.to.folder, compPath.to.file].join('/')
-        )} was skipped. To overwrite, run with the ${chalk.green('--overwrite')} flag.`
-      );
-      continue;
+      const filePath = [compPath.to.folder, compPath.to.file].join('/');
+      if (!overwriteFlag) {
+        logger.info(
+          `File already exists: ${chalk.bgCyan(
+            filePath
+          )} was skipped. To overwrite, run with the ${chalk.green('--overwrite')} flag.`
+        );
+        continue;
+      }
+
+      const { overwrite } = await prompts({
+        type: 'confirm',
+        name: 'overwrite',
+        message: `File already exists: ${chalk.yellow(filePath)}. Would you like to overwrite?`,
+        initial: false,
+      });
+
+      if (!overwrite) {
+        logger.info(`Skipped`);
+        continue;
+      }
     }
 
     spinner.start(`Installing ${comp.name}...`);
