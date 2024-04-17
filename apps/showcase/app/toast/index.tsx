@@ -4,7 +4,7 @@ import { Text } from '~/components/ui/text';
 import Toast from 'react-native-toast-message';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AlertCircle, Terminal } from '~/components/Icons';
+import { Code, Terminal } from '~/components/Icons';
 
 export default function ToastScreen() {
   const insets = useSafeAreaInsets();
@@ -49,7 +49,7 @@ export default function ToastScreen() {
         </Button>
       </View>
       <View className='p-6 w-full'>
-        <Alert icon={AlertCircle} className='max-w-xl mx-auto'>
+        <Alert icon={Code} className='max-w-xl mx-auto'>
           <AlertTitle>FYI</AlertTitle>
           <AlertDescription>This reusable does not use "rn-primitives"</AlertDescription>
         </Alert>
