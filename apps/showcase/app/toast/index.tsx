@@ -4,6 +4,7 @@ import { Text } from '~/components/ui/text';
 import Toast from 'react-native-toast-message';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Code, Terminal } from '~/components/Icons';
 
 export default function ToastScreen() {
   const insets = useSafeAreaInsets();
@@ -29,7 +30,7 @@ export default function ToastScreen() {
       text1: 'Heads up!',
       text2: 'You can use a terminal to run commands on your computer.',
       props: {
-        icon: 'Terminal',
+        icon: Terminal,
       },
       topOffset: insets.top === 0 ? 12 : insets.top,
     });
@@ -48,7 +49,7 @@ export default function ToastScreen() {
         </Button>
       </View>
       <View className='p-6 w-full'>
-        <Alert icon='Code' className='max-w-xl mx-auto'>
+        <Alert icon={Code} className='max-w-xl mx-auto'>
           <AlertTitle>FYI</AlertTitle>
           <AlertDescription>This reusable does not use "rn-primitives"</AlertDescription>
         </Alert>
