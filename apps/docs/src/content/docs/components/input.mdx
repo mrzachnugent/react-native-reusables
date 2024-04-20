@@ -43,6 +43,11 @@ import { Text } from '~/components/ui/text';
 
 function Example() {
   const [value, setValue] = React.useState('');
+
+  const onChangeText = (text: string) => {
+    setValue(text);
+  };
+
   return (
       <Input
         placeholder='Write some stuff...'
