@@ -37,11 +37,11 @@ export default function ModalScreen() {
             </Muted>
           </View>
           <Input placeholder='name@example.com' />
-          <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
+          <Select>
             <SelectTrigger>
               <SelectValue
                 className='text-foreground text-sm native:text-lg'
-                placeholder='Select a fruit'
+                placeholder='Select a role'
               />
             </SelectTrigger>
             <SelectContent
@@ -51,21 +51,15 @@ export default function ModalScreen() {
               portalHost='modal-example'
             >
               <SelectGroup>
-                <SelectLabel>Fruits</SelectLabel>
-                <SelectItem label='Apple' value='apple'>
-                  Apple
+                <SelectLabel>Roles</SelectLabel>
+                <SelectItem label='Staff' value='staff'>
+                  Staff
                 </SelectItem>
-                <SelectItem label='Banana' value='banana'>
-                  Banana
+                <SelectItem label='Manager' value='manager'>
+                  Manager
                 </SelectItem>
-                <SelectItem label='Blueberry' value='blueberry'>
-                  Blueberry
-                </SelectItem>
-                <SelectItem label='Grapes' value='grapes'>
-                  Grapes
-                </SelectItem>
-                <SelectItem label='Pineapple' value='pineapple'>
-                  Pineapple
+                <SelectItem label='Admin' value='admin'>
+                  Admin
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
