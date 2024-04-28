@@ -76,18 +76,19 @@ const ContextMenuContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & {
     overlayStyle?: StyleProp<ViewStyle>;
     overlayClassName?: string;
+    portalHost?: string;
   }
->(({ className, overlayClassName, overlayStyle, ...props }, ref) => {
+>(({ className, overlayClassName, overlayStyle, portalHost, ...props }, ref) => {
   const { open } = ContextMenuPrimitive.useRootContext();
   return (
-    <ContextMenuPrimitive.Portal>
+    <ContextMenuPrimitive.Portal hostName={portalHost}>
       <ContextMenuPrimitive.Overlay
         style={
           overlayStyle
             ? StyleSheet.flatten([
                 Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined,
                 overlayStyle,
-              ])
+              ] as ViewStyle)
             : Platform.OS !== 'web'
             ? StyleSheet.absoluteFill
             : undefined

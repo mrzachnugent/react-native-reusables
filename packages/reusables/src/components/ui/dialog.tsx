@@ -61,11 +61,11 @@ const DialogOverlay = Platform.select({
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { portalHost?: string }
+>(({ className, children, portalHost, ...props }, ref) => {
   const { open } = DialogPrimitive.useRootContext();
   return (
-    <DialogPortal>
+    <DialogPortal hostName={portalHost}>
       <DialogOverlay>
         <DialogPrimitive.Content
           ref={ref}

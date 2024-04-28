@@ -11,10 +11,10 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ className, align = 'center', sideOffset = 4, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & { portalHost?: string }
+>(({ className, align = 'center', sideOffset = 4, portalHost, ...props }, ref) => {
   return (
-    <PopoverPrimitive.Portal>
+    <PopoverPrimitive.Portal hostName={portalHost}>
       <PopoverPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
         <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut}>
           <TextClassContext.Provider value='text-popover-foreground'>

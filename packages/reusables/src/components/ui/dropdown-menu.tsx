@@ -76,18 +76,19 @@ const DropdownMenuContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content> & {
     overlayStyle?: StyleProp<ViewStyle>;
     overlayClassName?: string;
+    portalHost?: string;
   }
->(({ className, overlayClassName, overlayStyle, ...props }, ref) => {
+>(({ className, overlayClassName, overlayStyle, portalHost, ...props }, ref) => {
   const { open } = DropdownMenuPrimitive.useRootContext();
   return (
-    <DropdownMenuPrimitive.Portal>
+    <DropdownMenuPrimitive.Portal hostName={portalHost}>
       <DropdownMenuPrimitive.Overlay
         style={
           overlayStyle
             ? StyleSheet.flatten([
                 Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined,
                 overlayStyle,
-              ])
+              ] as ViewStyle)
             : Platform.OS !== 'web'
             ? StyleSheet.absoluteFill
             : undefined

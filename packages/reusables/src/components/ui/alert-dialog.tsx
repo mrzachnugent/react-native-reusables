@@ -61,12 +61,12 @@ const AlertDialogOverlay = Platform.select({
 
 const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
->(({ className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & { portalHost?: string }
+>(({ className, portalHost, ...props }, ref) => {
   const { open } = AlertDialogPrimitive.useRootContext();
 
   return (
-    <AlertDialogPortal>
+    <AlertDialogPortal hostName={portalHost}>
       <AlertDialogOverlay>
         <AlertDialogPrimitive.Content
           ref={ref}

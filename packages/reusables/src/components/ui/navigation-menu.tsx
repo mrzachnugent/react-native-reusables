@@ -91,12 +91,14 @@ NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;
 
 const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>
->(({ className, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content> & {
+    portalHost?: string;
+  }
+>(({ className, children, portalHost, ...props }, ref) => {
   const { value } = NavigationMenuPrimitive.useRootContext();
   const { value: itemValue } = NavigationMenuPrimitive.useItemContext();
   return (
-    <NavigationMenuPrimitive.Portal>
+    <NavigationMenuPrimitive.Portal hostName={portalHost}>
       <NavigationMenuPrimitive.Content
         ref={ref}
         className={cn(

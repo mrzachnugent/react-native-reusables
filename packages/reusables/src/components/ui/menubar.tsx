@@ -107,12 +107,12 @@ MenubarSubContent.displayName = MenubarPrimitive.SubContent.displayName;
 
 const MenubarContent = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Content>
->(({ className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Content> & { portalHost?: string }
+>(({ className, portalHost, ...props }, ref) => {
   const { value } = MenubarPrimitive.useRootContext();
   const { value: itemValue } = MenubarPrimitive.useMenuContext();
   return (
-    <MenubarPrimitive.Portal>
+    <MenubarPrimitive.Portal hostName={portalHost}>
       <MenubarPrimitive.Content
         ref={ref}
         className={cn(
