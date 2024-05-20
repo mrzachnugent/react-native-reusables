@@ -1,6 +1,7 @@
 import { View } from 'react-native';
-import { AlertTriangle, Terminal } from '~/components/Icons';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { AlertTriangle } from '~/lib/icons/AlertTriangle';
+import { Terminal } from '~/lib/icons/Terminal';
 
 export default function AlertScreen() {
   return (

@@ -197,7 +197,6 @@ async function writeFiles(
 
 function fixImports(rawfile: string, componentsAlias: string, libAlias: string) {
   return rawfile
-    .replace('../Icons', `${componentsAlias}/Icons`)
     .replace('./typography', `${componentsAlias}/ui/typography`)
     .replace('./text', `${componentsAlias}/ui/text`)
     .replaceAll('../../components', componentsAlias)

@@ -1,7 +1,8 @@
 import { Tabs } from 'expo-router';
-import { LayoutPanelLeft, MenuSquare } from '~/components/Icons';
 import { ModalToggle } from '~/components/ModalToggle';
 import { ThemeToggle } from '~/components/ThemeToggle';
+import { LayoutPanelLeft } from '~/lib/icons/LayoutPanelLeft';
+import { MenuSquare } from '~/lib/icons/MenuSquare';
 
 export default function TabsLayout() {
   return (

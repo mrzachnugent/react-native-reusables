@@ -1,9 +1,12 @@
-import { Check, ChevronDown, ChevronRight, ChevronUp } from '../../components/Icons';
+import * as DropdownMenuPrimitive from '@rnr/dropdown-menu';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { TextClassContext } from './text';
-import * as DropdownMenuPrimitive from '@rnr/dropdown-menu';
+import { Check } from '../../lib/icons/Check';
+import { ChevronDown } from '../../lib/icons/ChevronDown';
+import { ChevronRight } from '../../lib/icons/ChevronRight';
+import { ChevronUp } from '../../lib/icons/ChevronUp';
 import { cn } from '../../lib/utils';
+import { TextClassContext } from './text';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Alert, ScrollView, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { ChevronDown, Info } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import {
@@ -17,6 +16,8 @@ import {
   TableRow,
 } from '~/components/ui/table';
 import { Text } from '~/components/ui/text';
+import { ChevronDown } from '~/lib/icons/ChevronDown';
+import { Info } from '~/lib/icons/Info';
 import { cn } from '~/lib/utils';
 
 const MIN_COLUMN_WIDTHS = [120, 120, 100, 120];

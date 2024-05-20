@@ -1,7 +1,6 @@
 import { Link } from 'expo-router';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { CalendarDays, ChevronDown, ChevronRight, Info } from '~/components/Icons';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,9 +41,13 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Text } from '~/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Muted } from '~/components/ui/typography';
+import { CalendarDays } from '~/lib/icons/CalendarDays';
+import { ChevronDown } from '~/lib/icons/ChevronDown';
+import { ChevronRight } from '~/lib/icons/ChevronRight';
+import { Info } from '~/lib/icons/Info';
 import { cn } from '~/lib/utils';
 
 export default function ExampleScreen() {
@@ -232,7 +235,6 @@ function TeamMemberAvatar({
       }}
       relativeTo='trigger'
     >
-      {/* @ts-expect-error tabIndex is only available on the web */}
       <ContextMenuTrigger tabIndex={-1} className='web:cursor-default web:focus:outline-none'>
         <Avatar alt={`${name}'s avatar`}>
           <AvatarImage source={{ uri }} />

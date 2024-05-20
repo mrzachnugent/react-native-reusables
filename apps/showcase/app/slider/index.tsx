@@ -1,8 +1,8 @@
 import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Code } from '~/components/Icons';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Code } from '~/lib/icons/Code';
 
 const { Slider } = DeprecatedUi;
 

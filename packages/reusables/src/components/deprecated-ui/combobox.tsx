@@ -1,4 +1,3 @@
-import { Check, ChevronsUpDown, Search } from '../../components/Icons';
 import * as React from 'react';
 import { ListRenderItemInfo, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,6 +11,9 @@ import {
   useBottomSheet,
 } from '../../components/deprecated-ui/bottom-sheet';
 import { Button, buttonTextVariants, buttonVariants } from '../../components/deprecated-ui/button';
+import { Check } from '../../lib/icons/Check';
+import { ChevronsUpDown } from '../../lib/icons/ChevronsUpDown';
+import { Search } from '../../lib/icons/Search';
 import { cn } from '../../lib/utils';
 
 // TODO: refactor and move to UI

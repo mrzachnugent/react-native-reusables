@@ -1,10 +1,11 @@
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Code, Terminal } from '~/components/Icons';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+import { Code } from '~/lib/icons/Code';
+import { Terminal } from '~/lib/icons/Terminal';
 
 export default function ToastScreen() {
   const insets = useSafeAreaInsets();

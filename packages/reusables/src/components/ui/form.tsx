@@ -14,7 +14,6 @@ import {
 } from 'react-hook-form';
 import { View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import { Calendar as CalendarIcon, X } from '../../components/Icons';
 import {
   BottomSheet,
   BottomSheetCloseTrigger,
@@ -32,8 +31,10 @@ import { RadioGroup } from '../../components/ui/radio-group';
 import { Select, type Option } from '../../components/ui/select';
 import { Switch } from '../../components/ui/switch';
 import { Textarea } from '../../components/ui/textarea';
-import { Text } from './text';
+import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
+import { X } from '../../lib/icons/X';
 import { cn } from '../../lib/utils';
+import { Text } from './text';
 
 const Form = FormProvider;
 

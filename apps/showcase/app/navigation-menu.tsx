@@ -3,7 +3,6 @@ import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Sparkles } from '~/components/Icons';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,6 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from '~/components/ui/navigation-menu';
 import { Text } from '~/components/ui/text';
+import { Sparkles } from '~/lib/icons/Sparkles';
 import { cn } from '~/lib/utils';
 
 export default function NavigationMenuScreen() {

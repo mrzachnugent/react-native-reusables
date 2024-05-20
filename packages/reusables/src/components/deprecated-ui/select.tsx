@@ -1,5 +1,4 @@
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
-import { Check, ChevronDown } from '../../components/Icons';
 import * as React from 'react';
 import { GestureResponderEvent, Text, View, ViewStyle } from 'react-native';
 import {
@@ -8,6 +7,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '../../components/deprecated-ui/popover';
+import { Check } from '../../lib/icons/Check';
+import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { cn } from '../../lib/utils';
 import { Button, buttonTextVariants } from './button';
 
@@ -195,4 +196,4 @@ const SelectItem = React.forwardRef<
 
 SelectItem.displayName = 'SelectItem';
 
-export { Select, SelectTrigger, SelectList, SelectItem, type RenderSelectItem, type SelectOption };
+export { Select, SelectItem, SelectList, SelectTrigger, type RenderSelectItem, type SelectOption };

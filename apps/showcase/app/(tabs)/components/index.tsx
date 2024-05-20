@@ -3,11 +3,11 @@ import { FlashList } from '@shopify/flash-list';
 import { Link } from 'expo-router';
 import * as React from 'react';
 import { View } from 'react-native';
-import { ChevronRight } from '~/components/Icons';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
 import { COMPONENTS } from '~/lib/constants';
+import { ChevronRight } from '~/lib/icons/ChevronRight';
 import { cn } from '~/lib/utils';
 
 export default function ComponentsScreen() {

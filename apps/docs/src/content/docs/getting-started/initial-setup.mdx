@@ -26,7 +26,7 @@ A starting point to help you set up your project quickly and use the common comp
     - Android Navigation Bar matches mode
     - Persistant mode
 - Common components
-  - Icons, ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+  - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
 
 </ Aside>
 
@@ -429,7 +429,7 @@ export default function RootLayout() {
 }
 `} />
 
-### Add Icons
+### Install and Set Up Icons
 
 - **Install the following packages:**
 
@@ -439,17 +439,13 @@ export default function RootLayout() {
 
 - **Resolve the className strings into icon styles**
 
-Add the `interopIcon` function in the `~/components/Icons.tsx` file. Import the icons you want to use, wrap them with `interopIcon`, and export the icons.
-
-<Aside type="caution">
-Neglecting to wrap icons with `interopIcon` will prevent you from being able to update the `color` or `opacity` props via the `className` prop.
-</Aside>
+Add the `iconWithClassName` function in the `~/lib/icons/iconWithClassName.ts` file. 
 
 ```tsx
-import { AlertCircle, CheckCircle, LucideIcon, XCircle } from 'lucide-react-native';
+import type { LucideIcon } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
 
-function interopIcon(icon: LucideIcon) {
+export function iconWithClassName(icon: LucideIcon) {
   cssInterop(icon, {
     className: {
       target: 'style',
@@ -460,12 +456,31 @@ function interopIcon(icon: LucideIcon) {
     },
   });
 }
-
-interopIcon(AlertCircle);
-interopIcon(CheckCircle);
-interopIcon(XCircle);
-
-export { AlertCircle, CheckCircle, XCircle };
 ```
+
+- **Create the Icon files for switching between light and dark mode**
+
+Create `~/lib/icons/Sun.tsx`
+
+```tsx
+import { Sun } from 'lucide-react-native';
+import { iconWithClassName } from './iconWithClassName';
+iconWithClassName(Sun);
+export { Sun };
+```
+
+Create `~/lib/icons/MoonStar.tsx`
+
+```tsx
+import { MoonStar } from 'lucide-react-native';
+import { iconWithClassName } from './iconWithClassName';
+iconWithClassName(MoonStar);
+export { MoonStar };
+```
+
+<Aside type="caution">
+Neglecting to wrap icons with `iconWithClassName` will prevent you from being able to update the `color` or `opacity` props via the `className` prop.
+</Aside>
+
 </TabItem>
 </Tabs>

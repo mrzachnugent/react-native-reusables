@@ -67,7 +67,7 @@ Follow [instructions](https://rnr-docs.vercel.app/getting-started/initial-setup/
     - Android Navigation Bar matches mode
     - Persistant mode
 - Common components
-    - Icons, ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+    - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
 
 ### Backlog
 

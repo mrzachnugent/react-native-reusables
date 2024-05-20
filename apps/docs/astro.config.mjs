@@ -39,6 +39,10 @@ export default defineConfig({
               link: '/getting-started/initial-setup/',
             },
             {
+              label: 'Adding Icons',
+              link: '/getting-started/adding-icons/',
+            },
+            {
               label: 'Common patterns',
               link: '/getting-started/common-patterns/',
             },

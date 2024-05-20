@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CalendarDays } from '~/components/Icons';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
 import { Text } from '~/components/ui/text';
+import { CalendarDays } from '~/lib/icons/CalendarDays';
 
 export default function HoverCardScreen() {
   const insets = useSafeAreaInsets();

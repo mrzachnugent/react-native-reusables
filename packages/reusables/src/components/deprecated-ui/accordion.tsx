@@ -1,4 +1,4 @@
-import { ChevronDown } from '../../components/Icons';
+import { ChevronDown } from '../../lib/icons/ChevronDown';
 import * as React from 'react';
 import { LayoutChangeEvent, Pressable, View } from 'react-native';
 import Animated, {

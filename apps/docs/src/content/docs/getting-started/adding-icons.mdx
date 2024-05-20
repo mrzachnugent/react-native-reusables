@@ -1,0 +1,34 @@
+---
+title: Adding Icons
+description: Wrap your icon components with `iconWithClassName` to add a class name to the icon.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import { Aside, Code } from '@astrojs/starlight/components';
+
+Wrap your icon components with `iconWithClassName` to add a class name to the icon.
+
+<Aside type="caution">
+    Use the Starter-Base template or follow the **Install and Set Up Icons** steps from [initial setup](/getting-started/initial-setup) before following the steps below.
+</Aside>
+
+### Create a file for each icon in `~/lib/icons/`
+
+For each icon you want to add, create a new file in the `~/lib/icons/` directory with the name of the [LucideIcon](https://lucide.dev/icons/).
+
+In each file:
+- Import the Icon from LucideIcon
+- Import the `iconWithClassName` function
+- Call the `iconWithClassName` function and pass the icon as its argument
+- Export the Icon as a named export
+
+### Example
+
+<Code title="~/lib/icons/Copy" lang="tsx" code={`
+import { Copy } from 'lucide-react-native';
+import { iconWithClassName } from './iconWithClassName';
+iconWithClassName(Copy);
+export { Copy };`} />
+
