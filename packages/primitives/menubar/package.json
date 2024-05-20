@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "@radix-ui/react-menubar": "^1.0.4",
-    "@rnr/hooks": "*",
-    "@rnr/utils": "*",
-    "@rnr/slot": "*",
-    "@rnr/types": "*",
-    "@rnr/portal": "*"
+    "@rnr/hooks": "workspace:*",
+    "@rnr/utils": "workspace:*",
+    "@rnr/slot": "workspace:*",
+    "@rnr/types": "workspace:*",
+    "@rnr/portal": "workspace:*"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
-    "@types/react": "~18.2.43",
+    "@types/react": "~18.2.79",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-native": "0.74.1"
   },
   "peerDependencies": {
     "react": "*",
