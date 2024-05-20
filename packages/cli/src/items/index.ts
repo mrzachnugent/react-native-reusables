@@ -1,6 +1,6 @@
 import { COMPONENTS } from './components';
 
-export type Component = (typeof COMPONENTS)[number];
+export type Component = (typeof COMPONENTS)[number] & { icons?: string[] };
 type ComponentName = (typeof COMPONENTS)[number]['name'];
 
 function getComponentDependencies(

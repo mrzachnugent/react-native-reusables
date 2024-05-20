@@ -2,6 +2,7 @@ export const UI_COMPONENTS = [
   {
     name: 'accordion',
     dependencies: ['accordion-primitive', 'text'],
+    icons: ['ChevronDown'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -19,6 +20,7 @@ export const UI_COMPONENTS = [
   {
     name: 'alert-dialog',
     dependencies: ['alert-dialog-primitive', 'button', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -36,6 +38,7 @@ export const UI_COMPONENTS = [
   {
     name: 'aspect-ratio',
     dependencies: [],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -53,6 +56,7 @@ export const UI_COMPONENTS = [
   {
     name: 'avatar',
     dependencies: ['avatar-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -70,6 +74,7 @@ export const UI_COMPONENTS = [
   {
     name: 'badge',
     dependencies: ['slot-primitive', 'types-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -87,6 +92,7 @@ export const UI_COMPONENTS = [
   {
     name: 'button',
     dependencies: ['text', 'types-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -104,6 +110,7 @@ export const UI_COMPONENTS = [
   {
     name: 'card',
     dependencies: ['text', 'types-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -121,6 +128,7 @@ export const UI_COMPONENTS = [
   {
     name: 'checkbox',
     dependencies: ['checkbox-primitive'],
+    icons: ['Check'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -138,6 +146,7 @@ export const UI_COMPONENTS = [
   {
     name: 'collapsible',
     dependencies: ['collapsible-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -155,6 +164,7 @@ export const UI_COMPONENTS = [
   {
     name: 'context-menu',
     dependencies: ['context-menu-primitive', 'text'],
+    icons: ['Check', 'ChevronDown', 'ChevronRight', 'ChevronUp'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -172,6 +182,7 @@ export const UI_COMPONENTS = [
   {
     name: 'dialog',
     dependencies: ['dialog-primitive'],
+    icons: ['X'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -189,6 +200,7 @@ export const UI_COMPONENTS = [
   {
     name: 'dropdown-menu',
     dependencies: ['dropdown-menu-primitive', 'text'],
+    icons: ['Check', 'ChevronDown', 'ChevronRight', 'ChevronUp'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -206,6 +218,7 @@ export const UI_COMPONENTS = [
   {
     name: 'hover-card',
     dependencies: ['hover-card-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -223,6 +236,7 @@ export const UI_COMPONENTS = [
   {
     name: 'input',
     dependencies: [],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -240,6 +254,7 @@ export const UI_COMPONENTS = [
   {
     name: 'label',
     dependencies: ['label-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -257,6 +272,7 @@ export const UI_COMPONENTS = [
   {
     name: 'menubar',
     dependencies: ['menubar-primitive', 'text'],
+    icons: ['Check', 'ChevronDown', 'ChevronRight', 'ChevronUp'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -274,6 +290,7 @@ export const UI_COMPONENTS = [
   {
     name: 'navigation-menu',
     dependencies: ['navigation-menu-primitive'],
+    icons: ['ChevronDown'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -291,6 +308,7 @@ export const UI_COMPONENTS = [
   {
     name: 'popover',
     dependencies: ['popover-primitive', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -308,6 +326,7 @@ export const UI_COMPONENTS = [
   {
     name: 'radio-group',
     dependencies: ['radio-group-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -325,6 +344,7 @@ export const UI_COMPONENTS = [
   {
     name: 'select',
     dependencies: ['select-primitive'],
+    icons: ['Check', 'ChevronDown', 'ChevronUp'],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -342,6 +362,7 @@ export const UI_COMPONENTS = [
   {
     name: 'separator',
     dependencies: ['separator-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -359,6 +380,7 @@ export const UI_COMPONENTS = [
   {
     name: 'skeleton',
     dependencies: [],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -376,6 +398,7 @@ export const UI_COMPONENTS = [
   {
     name: 'switch',
     dependencies: ['switch-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -393,6 +416,7 @@ export const UI_COMPONENTS = [
   {
     name: 'table',
     dependencies: ['table-primitive', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -410,6 +434,7 @@ export const UI_COMPONENTS = [
   {
     name: 'tabs',
     dependencies: ['tabs-primitive', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -427,6 +452,7 @@ export const UI_COMPONENTS = [
   {
     name: 'text',
     dependencies: ['slot-primitive', 'types-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -441,6 +467,7 @@ export const UI_COMPONENTS = [
   {
     name: 'textarea',
     dependencies: [],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -455,6 +482,7 @@ export const UI_COMPONENTS = [
   {
     name: 'toggle',
     dependencies: ['toggle-primitive', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -469,6 +497,7 @@ export const UI_COMPONENTS = [
   {
     name: 'toggle-group',
     dependencies: ['toggle-group-primitive', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -483,6 +512,7 @@ export const UI_COMPONENTS = [
   {
     name: 'tooltip',
     dependencies: ['tooltip-primitive', 'text'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],
@@ -497,6 +527,7 @@ export const UI_COMPONENTS = [
   {
     name: 'typography',
     dependencies: ['slot-primitive', 'types-primitive'],
+    icons: [],
     npmPackages: {
       universal: [],
       'native-only': [],

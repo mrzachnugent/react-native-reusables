@@ -193,6 +193,56 @@ async function writeFiles(
       handleError(error);
     }
   }
+
+  for (const icon of comp.icons ?? []) {
+    const targetDir = path.resolve(config.resolvedPaths.lib, 'icons');
+    if (!existsSync(targetDir)) {
+      await fs.mkdir(targetDir, { recursive: true });
+      try {
+        await fs.writeFile(
+          path.join(targetDir, `iconWithClassName.ts`),
+          `import type { LucideIcon } from 'lucide-react-native';\nimport { cssInterop } from 'nativewind';\n\nexport function iconWithClassName(icon: LucideIcon) {\ncssInterop(icon, {\n  className: {\n    target: 'style',\n    nativeStyleToProp: {\n      color: true,\n      opacity: true,\n    },\n  },\n});\n}`
+        );
+      } catch (error) {
+        handleError(error);
+      }
+    }
+
+    if (existsSync(path.join(targetDir, `${icon}.tsx`))) {
+      const filePath = path.join(targetDir, `${icon}.tsx`);
+      if (!overwriteFlag) {
+        logger.info(
+          `File already exists: ${chalk.bgCyan(
+            `${icon}.tsx`
+          )} was skipped. To overwrite, run with the ${chalk.green('--overwrite')} flag.`
+        );
+        continue;
+      }
+
+      const { overwrite } = await prompts({
+        type: 'confirm',
+        name: 'overwrite',
+        message: `File already exists: ${chalk.yellow(filePath)}. Would you like to overwrite?`,
+        initial: false,
+      });
+
+      if (!overwrite) {
+        logger.info(`Skipped ${icon}.tsx`);
+        continue;
+      }
+    }
+
+    spinner.start(`Adding the ${icon} icon...`);
+
+    try {
+      await fs.writeFile(
+        path.join(targetDir, `${icon}.tsx`),
+        `import { ${icon} } from 'lucide-react-native';\nimport { iconWithClassName } from './iconWithClassName';\niconWithClassName(${icon});\nexport { ${icon} };`
+      );
+    } catch (error) {
+      handleError(error);
+    }
+  }
 }
 
 function fixImports(rawfile: string, componentsAlias: string, libAlias: string) {
