@@ -15,7 +15,10 @@ const TooltipContent = React.forwardRef<
 >(({ className, sideOffset = 4, portalHost, ...props }, ref) => (
   <TooltipPrimitive.Portal hostName={portalHost}>
     <TooltipPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
-      <Animated.View entering={FadeIn} exiting={FadeOut}>
+      <Animated.View
+        entering={Platform.select({ web: undefined, default: FadeIn })}
+        exiting={Platform.select({ web: undefined, default: FadeOut })}
+      >
         <TextClassContext.Provider value='text-sm native:text-base text-popover-foreground'>
           <TooltipPrimitive.Content
             ref={ref}
