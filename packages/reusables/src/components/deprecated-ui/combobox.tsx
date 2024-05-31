@@ -89,7 +89,7 @@ const Combobox = React.forwardRef<
         return (
           <Button
             variant='ghost'
-            className='items-center flex-row flex-1 justify-between px-3 py-4'
+            className='items-center flex-row android:flex-1 justify-between px-3 py-4'
             style={{ minHeight: 70 }}
             onPress={() => {
               if (onSelectedItemChange) {
@@ -198,16 +198,16 @@ const Combobox = React.forwardRef<
             keyExtractor={(item, index) => (item as ComboboxOption)?.value ?? index.toString()}
             className={'px-4'}
             keyboardShouldPersistTaps='handled'
-            ListEmptyComponent={() => {
-              return (
-                <View
-                  className='items-center flex-row justify-center flex-1  px-3 py-5'
-                  style={{ minHeight: 70 }}
-                >
-                  <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
-                </View>
-              );
-            }}
+            // ListEmptyComponent={() => {
+            //   return (
+            //     <View
+            //       className='items-center flex-row justify-center flex-1  px-3 py-5'
+            //       style={{ minHeight: 70 }}
+            //     >
+            //       <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
+            //     </View>
+            //   );
+            // }}
           />
         </BottomSheetContent>
       </BottomSheet>
