@@ -37,7 +37,7 @@ export const UI_COMPONENTS = [
   },
   {
     name: 'aspect-ratio',
-    dependencies: [],
+    dependencies: ['aspect-ratio-primitive'],
     icons: [],
     npmPackages: {
       universal: [],
@@ -319,6 +319,24 @@ export const UI_COMPONENTS = [
         to: {
           folder: 'ui',
           file: 'popover.tsx',
+        },
+      },
+    ],
+  },
+  {
+    name: 'progress',
+    dependencies: ['progress-primitive'],
+    icons: [],
+    npmPackages: {
+      universal: [],
+      'native-only': [],
+    },
+    paths: [
+      {
+        from: './node_modules/@rnr/reusables/src/components/ui/progress.tsx',
+        to: {
+          folder: 'ui',
+          file: 'progress.tsx',
         },
       },
     ],
