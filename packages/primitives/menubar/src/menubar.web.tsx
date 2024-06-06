@@ -1,7 +1,5 @@
 import * as Menubar from '@radix-ui/react-menubar';
-import * as React from 'react';
-import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   ForceMountable,
@@ -14,6 +12,8 @@ import type {
   ViewRef,
 } from '@rnr/types';
 import { EmptyGestureResponderEvent } from '@rnr/utils';
+import * as React from 'react';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import type {
   MenubarCheckboxItemProps,
   MenubarItemProps,
@@ -463,7 +463,12 @@ const MenubarSubContext = React.createContext<{
 } | null>(null);
 
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & MenubarSubProps>(
-  ({ asChild, open, onOpenChange, ...props }, ref) => {
+  ({ asChild, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }, ref) => {
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
     const Component = asChild ? Slot.View : View;
     return (
       <MenubarSubContext.Provider value={{ open, onOpenChange }}>
@@ -533,8 +538,8 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useRootContext,
   useMenuContext,
+  useRootContext,
   useSubContext,
 };
 

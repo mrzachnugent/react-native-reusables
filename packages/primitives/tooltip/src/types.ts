@@ -1,14 +1,6 @@
-import type { ForceMountable } from '@rnr/types';
-
-interface RootContext extends TooltipRootProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
-}
+import type { ForceMountable, PressableRef } from '@rnr/types';
 
 interface TooltipRootProps {
-  defaultOpen?: boolean;
-  open?: boolean;
-  onOpenChange?: (value: boolean) => void;
   /**
    * Platform: WEB ONLY
    * @default 700
@@ -41,4 +33,9 @@ interface TooltipOverlayProps extends ForceMountable {
   closeOnPress?: boolean;
 }
 
-export type { RootContext, TooltipOverlayProps, TooltipPortalProps, TooltipRootProps };
+interface TooltipTriggerRef extends PressableRef {
+  open: () => void;
+  close: () => void;
+}
+
+export type { TooltipOverlayProps, TooltipPortalProps, TooltipRootProps, TooltipTriggerRef };

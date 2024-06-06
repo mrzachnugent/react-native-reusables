@@ -24,7 +24,13 @@ import type {
   SelectValueProps,
 } from './types';
 
-const SelectContext = React.createContext<RootContext | null>(null);
+const SelectContext = React.createContext<
+  | (RootContext & {
+      open: boolean;
+      onOpenChange: (open: boolean) => void;
+    })
+  | null
+>(null);
 
 /**
  * @web Parameter of `onValueChange` has the value of `value` for the `value` and the `label` of the selected Option
@@ -32,23 +38,10 @@ const SelectContext = React.createContext<RootContext | null>(null);
  */
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
   (
-    {
-      asChild,
-      value: valueProp,
-      defaultValue,
-      onValueChange: onValueChangeProp,
-      open: openProp,
-      defaultOpen,
-      onOpenChange: onOpenChangeProp,
-      ...viewProps
-    },
+    { asChild, value: valueProp, defaultValue, onValueChange: onValueChangeProp, ...viewProps },
     ref
   ) => {
-    const [open = false, onOpenChange] = useControllableState({
-      prop: openProp,
-      defaultProp: defaultOpen,
-      onChange: onOpenChangeProp,
-    });
+    const [open, onOpenChange] = React.useState(false);
 
     const [value, onValueChange] = useControllableState({
       prop: valueProp,
@@ -75,7 +68,6 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
           defaultValue={defaultValue?.value}
           onValueChange={onStrValueChange}
           open={open}
-          defaultOpen={defaultOpen}
           onOpenChange={onOpenChange}
         >
           <Component ref={ref} {...viewProps} />
@@ -97,8 +89,18 @@ function useRootContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = useAugmentedRef({ ref });
-    const { open } = useRootContext();
+    const { open, onOpenChange } = useRootContext();
+    const augmentedRef = useAugmentedRef({
+      ref,
+      methods: {
+        open() {
+          onOpenChange(true);
+        },
+        close() {
+          onOpenChange(false);
+        },
+      },
+    });
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -316,4 +318,4 @@ export {
   useRootContext,
 };
 
-export type { Option } from './types';
+export type { Option, SelectTriggerRef } from './types';

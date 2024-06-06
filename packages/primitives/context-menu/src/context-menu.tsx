@@ -1,15 +1,9 @@
-import * as React from 'react';
 import {
-  BackHandler,
-  Pressable,
-  Text,
-  View,
-  type AccessibilityActionEvent,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+  useAugmentedRef,
+  useControllableState,
+  useRelativePosition,
+  type LayoutPosition,
+} from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -22,6 +16,17 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  Text,
+  View,
+  type AccessibilityActionEvent,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
 import type {
   ContextMenuCheckboxItemProps,
   ContextMenuItemProps,
@@ -33,9 +38,12 @@ import type {
   ContextMenuSeparatorProps,
   ContextMenuSubProps,
   ContextMenuSubTriggerProps,
+  ContextMenuTriggerRef,
 } from './types';
 
 interface IRootContext extends ContextMenuRootProps {
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   pressPosition: LayoutPosition | null;
   setPressPosition: (pressPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -46,10 +54,11 @@ interface IRootContext extends ContextMenuRootProps {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRootProps>(
-  ({ asChild, open, onOpenChange, relativeTo = 'longPress', ...viewProps }, ref) => {
+  ({ asChild, relativeTo = 'longPress', ...viewProps }, ref) => {
     const nativeID = React.useId();
     const [pressPosition, setPressPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
+    const [open, onOpenChange] = React.useState(false);
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -85,7 +94,7 @@ function useRootContext() {
 
 const accessibilityActions = [{ name: 'longpress' }];
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<ContextMenuTriggerRef, SlottablePressableProps>(
   (
     {
       asChild,
@@ -96,19 +105,22 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     },
     ref
   ) => {
-    const triggerRef = React.useRef<View>(null);
     const { open, onOpenChange, relativeTo, setPressPosition } = useRootContext();
-
-    React.useImperativeHandle(
+    const augmentedRef = useAugmentedRef({
       ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
+      methods: {
+        open: () => {
+          onOpenChange(true);
+          augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+            setPressPosition({ width, pageX, pageY: pageY, height });
+          });
+        },
+        close: () => {
+          setPressPosition(null);
+          onOpenChange(false);
+        },
       },
-      [triggerRef.current]
-    );
+    });
 
     function onLongPress(ev: GestureResponderEvent) {
       if (disabled) return;
@@ -121,11 +133,11 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         });
       }
       if (relativeTo === 'trigger') {
-        triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+        augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
           setPressPosition({ width, pageX, pageY: pageY, height });
         });
       }
-      onOpenChange(!open);
+      onOpenChange((prev) => !prev);
       onLongPressProp?.(ev);
     }
 
@@ -147,7 +159,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={triggerRef}
+        ref={augmentedRef}
         aria-disabled={disabled ?? undefined}
         role='button'
         onLongPress={onLongPress}
@@ -386,7 +398,6 @@ const CheckboxItem = React.forwardRef<
       <FormItemContext.Provider value={{ checked }}>
         <Component
           ref={ref}
-          key={`checkbox-${nativeID}-${checked}`}
           role='checkbox'
           aria-checked={checked}
           onPress={onPress}
@@ -524,8 +535,13 @@ const SubContext = React.createContext<{
 } | null>(null);
 
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuSubProps>(
-  ({ asChild, open, onOpenChange, ...props }, ref) => {
+  ({ asChild, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }, ref) => {
     const nativeID = React.useId();
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -567,7 +583,6 @@ const SubTrigger = React.forwardRef<
   return (
     <Component
       ref={ref}
-      key={`sub-trigger-${nativeID}-${open}`}
       aria-valuetext={textValue}
       role='menuitem'
       aria-expanded={open}
@@ -620,6 +635,8 @@ export {
   useRootContext,
   useSubContext,
 };
+
+export type { ContextMenuTriggerRef };
 
 function onStartShouldSetResponder() {
   return true;

@@ -1,14 +1,9 @@
-import * as React from 'react';
 import {
-  BackHandler,
-  Pressable,
-  Text,
-  View,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+  useAugmentedRef,
+  useControllableState,
+  useRelativePosition,
+  type LayoutPosition,
+} from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -21,6 +16,16 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  Text,
+  View,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
 import type {
   DropdownMenuCheckboxItemProps,
   DropdownMenuItemProps,
@@ -28,13 +33,15 @@ import type {
   DropdownMenuPortalProps,
   DropdownMenuRadioGroupProps,
   DropdownMenuRadioItemProps,
-  DropdownMenuRootProps,
   DropdownMenuSeparatorProps,
   DropdownMenuSubProps,
   DropdownMenuSubTriggerProps,
+  DropdownMenuTriggerRef,
 } from './types';
 
-interface IRootContext extends DropdownMenuRootProps {
+interface IRootContext {
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -44,30 +51,29 @@ interface IRootContext extends DropdownMenuRootProps {
 
 const RootContext = React.createContext<IRootContext | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps & DropdownMenuRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
-    const nativeID = React.useId();
-    const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
-    const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
+const Root = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
+  const nativeID = React.useId();
+  const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
+  const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
+  const [open, onOpenChange] = React.useState(false);
 
-    const Component = asChild ? Slot.View : View;
-    return (
-      <RootContext.Provider
-        value={{
-          open,
-          onOpenChange,
-          contentLayout,
-          setContentLayout,
-          nativeID,
-          setTriggerPosition,
-          triggerPosition,
-        }}
-      >
-        <Component ref={ref} {...viewProps} />
-      </RootContext.Provider>
-    );
-  }
-);
+  const Component = asChild ? Slot.View : View;
+  return (
+    <RootContext.Provider
+      value={{
+        open,
+        onOpenChange,
+        contentLayout,
+        setContentLayout,
+        nativeID,
+        setTriggerPosition,
+        triggerPosition,
+      }}
+    >
+      <Component ref={ref} {...viewProps} />
+    </RootContext.Provider>
+  );
+});
 
 Root.displayName = 'RootNativeDropdownMenu';
 
@@ -81,25 +87,29 @@ function useRootContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<DropdownMenuTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const triggerRef = React.useRef<View>(null);
     const { open, onOpenChange, setTriggerPosition } = useRootContext();
 
-    React.useImperativeHandle(
+    const augmentedRef = useAugmentedRef({
       ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
+      methods: {
+        open: () => {
+          onOpenChange(true);
+          augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+            setTriggerPosition({ width, pageX, pageY: pageY, height });
+          });
+        },
+        close: () => {
+          setTriggerPosition(null);
+          onOpenChange(false);
+        },
       },
-      [triggerRef.current]
-    );
+    });
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+      augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
       const newValue = !open;
@@ -110,7 +120,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={triggerRef}
+        ref={augmentedRef}
         aria-disabled={disabled ?? undefined}
         role='button'
         onPress={onPress}
@@ -349,7 +359,6 @@ const CheckboxItem = React.forwardRef<
       <FormItemContext.Provider value={{ checked }}>
         <Component
           ref={ref}
-          key={`checkbox-${nativeID}-${checked}`}
           role='checkbox'
           aria-checked={checked}
           onPress={onPress}
@@ -487,8 +496,13 @@ const SubContext = React.createContext<{
 } | null>(null);
 
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & DropdownMenuSubProps>(
-  ({ asChild, open, onOpenChange, ...props }, ref) => {
+  ({ asChild, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }, ref) => {
     const nativeID = React.useId();
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -582,3 +596,5 @@ export {
   useRootContext,
   useSubContext,
 };
+
+export type { DropdownMenuTriggerRef };

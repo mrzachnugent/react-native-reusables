@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover
 import { Text } from '~/components/ui/text';
 
 export default function PopoverScreen() {
+  const triggerRef = React.useRef<React.ElementRef<typeof PopoverTrigger>>(null);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -18,8 +19,15 @@ export default function PopoverScreen() {
 
   return (
     <View className='flex-1 justify-center items-center p-6'>
+      <Pressable
+        className='absolute top-0 right-0 w-16 h-16 active:bg-primary/5'
+        onPress={() => {
+          // open programmatically
+          triggerRef.current?.open();
+        }}
+      />
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger ref={triggerRef} asChild>
           <Button variant='outline'>
             <Text>Open popover</Text>
           </Button>

@@ -1,12 +1,6 @@
-import { ForceMountable } from '@rnr/types';
+import { ForceMountable, PressableRef } from '@rnr/types';
 
 interface ContextMenuRootProps {
-  /**
-   * Platform: NATIVE ONLY
-   */
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
-
   /**
    * Platform: NATIVE ONLY
    */
@@ -60,12 +54,24 @@ interface ContextMenuSeparatorProps {
 }
 
 interface ContextMenuSubProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (value: boolean) => void;
 }
 
 interface ContextMenuSubTriggerProps {
   textValue?: string;
+}
+
+interface ContextMenuTriggerRef extends PressableRef {
+  /**
+   * Platform: NATIVE ONLY
+   */
+  open: () => void;
+  /**
+   * Platform: NATIVE ONLY
+   */
+  close: () => void;
 }
 
 export type {
@@ -79,4 +85,5 @@ export type {
   ContextMenuSeparatorProps,
   ContextMenuSubProps,
   ContextMenuSubTriggerProps,
+  ContextMenuTriggerRef,
 };

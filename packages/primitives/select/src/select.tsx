@@ -1,4 +1,9 @@
-import { useControllableState, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+import {
+  useAugmentedRef,
+  useControllableState,
+  useRelativePosition,
+  type LayoutPosition,
+} from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -29,10 +34,13 @@ import type {
   SelectPortalProps,
   SelectRootProps,
   SelectSeparatorProps,
+  SelectTriggerRef,
   SelectValueProps,
 } from './types';
 
 interface IRootContext extends RootContext {
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -49,20 +57,13 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       value: valueProp,
       defaultValue,
       onValueChange: onValueChangeProp,
-      open: openProp,
-      defaultOpen,
-      onOpenChange: onOpenChangeProp,
       disabled,
       ...viewProps
     },
     ref
   ) => {
     const nativeID = React.useId();
-    const [open = false, onOpenChange] = useControllableState({
-      prop: openProp,
-      defaultProp: defaultOpen,
-      onChange: onOpenChangeProp,
-    });
+    const [open, onOpenChange] = React.useState(false);
     const [value, onValueChange] = useControllableState({
       prop: valueProp,
       defaultProp: defaultValue,
@@ -103,35 +104,39 @@ function useRootContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<SelectTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const triggerRef = React.useRef<View>(null);
     const { open, onOpenChange, disabled: disabledRoot, setTriggerPosition } = useRootContext();
 
-    React.useImperativeHandle(
+    const augmentedRef = useAugmentedRef({
       ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
+      methods: {
+        open: () => {
+          onOpenChange(true);
+          augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+            setTriggerPosition({ width, pageX, pageY: pageY, height });
+          });
+        },
+        close: () => {
+          setTriggerPosition(null);
+          onOpenChange(false);
+        },
       },
-      [triggerRef.current]
-    );
+    });
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+      augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
-      onOpenChange(!open);
+      onOpenChange((prev) => !prev);
       onPressProp?.(ev);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={triggerRef}
+        ref={augmentedRef}
         aria-disabled={disabled ?? undefined}
         role='combobox'
         onPress={onPress}
@@ -448,7 +453,7 @@ export {
   useRootContext,
 };
 
-export type { Option } from './types';
+export type { Option, SelectTriggerRef } from './types';
 
 function onStartShouldSetResponder() {
   return true;

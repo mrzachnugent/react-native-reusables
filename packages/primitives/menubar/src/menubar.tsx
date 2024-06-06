@@ -1,14 +1,9 @@
-import * as React from 'react';
 import {
-  BackHandler,
-  Pressable,
-  Text,
-  View,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+  useAugmentedRef,
+  useControllableState,
+  useRelativePosition,
+  type LayoutPosition,
+} from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -21,6 +16,16 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  Text,
+  View,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
 import type {
   MenubarCheckboxItemProps,
   MenubarItemProps,
@@ -109,20 +114,9 @@ function useMenuContext() {
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const triggerRef = React.useRef<View>(null);
+    const triggerRef = useAugmentedRef({ ref });
     const { value, onValueChange, setTriggerPosition } = useRootContext();
     const { value: menuValue } = useMenuContext();
-
-    React.useImperativeHandle(
-      ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
-      },
-      [triggerRef.current]
-    );
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
@@ -383,7 +377,6 @@ const CheckboxItem = React.forwardRef<
       <FormItemContext.Provider value={{ checked }}>
         <Component
           ref={ref}
-          key={`checkbox-${nativeID}-${checked}`}
           role='checkbox'
           aria-checked={checked}
           onPress={onPress}
@@ -522,8 +515,13 @@ const SubContext = React.createContext<{
 } | null>(null);
 
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & MenubarSubProps>(
-  ({ asChild, open, onOpenChange, ...props }, ref) => {
+  ({ asChild, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }, ref) => {
     const nativeID = React.useId();
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
 
     const Component = asChild ? Slot.View : View;
     return (

@@ -1,15 +1,4 @@
-import type { ForceMountable } from '@rnr/types';
-
-interface RootContext {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
-}
-
-interface PopoverRootProps {
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (value: boolean) => void;
-}
+import type { ForceMountable, PressableRef } from '@rnr/types';
 
 interface PopoverPortalProps extends ForceMountable {
   children: React.ReactNode;
@@ -27,4 +16,9 @@ interface PopoverOverlayProps extends ForceMountable {
   closeOnPress?: boolean;
 }
 
-export type { PopoverRootProps, PopoverPortalProps, PopoverOverlayProps, RootContext };
+interface PopoverTriggerRef extends PressableRef {
+  open: () => void;
+  close: () => void;
+}
+
+export type { PopoverOverlayProps, PopoverPortalProps, PopoverTriggerRef };

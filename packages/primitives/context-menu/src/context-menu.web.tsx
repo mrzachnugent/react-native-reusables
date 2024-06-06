@@ -1,8 +1,6 @@
 import * as ContextMenu from '@radix-ui/react-context-menu';
-import * as React from 'react';
-import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
-import { useAugmentedRef } from '@rnr/hooks';
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -13,6 +11,9 @@ import type {
   TextRef,
   ViewRef,
 } from '@rnr/types';
+import { EmptyGestureResponderEvent } from '@rnr/utils';
+import * as React from 'react';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import type {
   ContextMenuCheckboxItemProps,
   ContextMenuItemProps,
@@ -24,13 +25,18 @@ import type {
   ContextMenuSeparatorProps,
   ContextMenuSubProps,
   ContextMenuSubTriggerProps,
+  ContextMenuTriggerRef,
 } from './types';
-import { EmptyGestureResponderEvent } from '@rnr/utils';
 
-const ContextMenuContext = React.createContext<ContextMenuRootProps | null>(null);
+const ContextMenuContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
+  ({ asChild, ...viewProps }, ref) => {
+    const [open, onOpenChange] = React.useState(false);
+
     const Component = asChild ? Slot.View : View;
     return (
       <ContextMenuContext.Provider value={{ open, onOpenChange }}>
@@ -54,10 +60,20 @@ function useRootContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<ContextMenuTriggerRef, SlottablePressableProps>(
   ({ asChild, disabled = false, ...props }, ref) => {
-    const augmentedRef = useAugmentedRef({ ref });
     const { open } = useRootContext();
+    const augmentedRef = useAugmentedRef({
+      ref,
+      methods: {
+        open() {
+          console.warn('Warning: `open()` is only for Native platforms');
+        },
+        close() {
+          console.warn('Warning: `close()` is only for Native platforms');
+        },
+      },
+    });
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -425,7 +441,13 @@ const ContextMenuSubContext = React.createContext<{
 } | null>(null);
 
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuSubProps>(
-  ({ asChild, open, onOpenChange, ...props }, ref) => {
+  ({ asChild, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }, ref) => {
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
+
     const Component = asChild ? Slot.View : View;
     return (
       <ContextMenuSubContext.Provider value={{ open, onOpenChange }}>
@@ -495,9 +517,11 @@ export {
   SubContent,
   SubTrigger,
   Trigger,
-  useSubContext,
   useRootContext,
+  useSubContext,
 };
+
+export type { ContextMenuTriggerRef };
 
 function onSelected(ev: Event) {
   ev.preventDefault();

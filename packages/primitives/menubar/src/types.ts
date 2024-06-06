@@ -53,8 +53,9 @@ interface MenubarSeparatorProps {
 }
 
 interface MenubarSubProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (value: boolean) => void;
 }
 
 interface MenubarSubTriggerProps {

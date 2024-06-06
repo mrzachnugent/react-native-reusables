@@ -1,4 +1,4 @@
-import type { ForceMountable } from '@rnr/types';
+import type { ForceMountable, PressableRef } from '@rnr/types';
 
 interface RootContext {
   open: boolean;
@@ -8,9 +8,6 @@ interface RootContext {
 }
 
 interface HoverCardRootProps {
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (value: boolean) => void;
   /**
    * Platform: WEB ONLY
    * @default 700
@@ -39,4 +36,15 @@ interface HoverCardOverlayProps extends ForceMountable {
   closeOnPress?: boolean;
 }
 
-export type { HoverCardRootProps, HoverCardOverlayProps, HoverCardPortalProps, RootContext };
+interface HoverCardTriggerRef extends PressableRef {
+  open: () => void;
+  close: () => void;
+}
+
+export type {
+  HoverCardOverlayProps,
+  HoverCardPortalProps,
+  HoverCardRootProps,
+  HoverCardTriggerRef,
+  RootContext,
+};

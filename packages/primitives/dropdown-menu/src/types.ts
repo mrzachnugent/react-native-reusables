@@ -1,9 +1,4 @@
-import type { ForceMountable } from '@rnr/types';
-
-interface DropdownMenuRootProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
-}
+import type { ForceMountable, PressableRef } from '@rnr/types';
 
 interface DropdownMenuPortalProps extends ForceMountable {
   children: React.ReactNode;
@@ -49,12 +44,18 @@ interface DropdownMenuSeparatorProps {
 }
 
 interface DropdownMenuSubProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (value: boolean) => void;
 }
 
 interface DropdownMenuSubTriggerProps {
   textValue?: string;
+}
+
+interface DropdownMenuTriggerRef extends PressableRef {
+  open: () => void;
+  close: () => void;
 }
 
 export type {
@@ -64,8 +65,8 @@ export type {
   DropdownMenuPortalProps,
   DropdownMenuRadioGroupProps,
   DropdownMenuRadioItemProps,
-  DropdownMenuRootProps,
   DropdownMenuSeparatorProps,
   DropdownMenuSubProps,
   DropdownMenuSubTriggerProps,
+  DropdownMenuTriggerRef,
 };

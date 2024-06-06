@@ -1,5 +1,5 @@
 import * as Popover from '@radix-ui/react-popover';
-import { useAugmentedRef, useControllableState } from '@rnr/hooks';
+import { useAugmentedRef } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PositionedContentProps,
@@ -10,36 +10,28 @@ import type {
 } from '@rnr/types';
 import * as React from 'react';
 import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import type {
-  PopoverOverlayProps,
-  PopoverPortalProps,
-  PopoverRootProps,
-  RootContext,
-} from './types';
+import type { PopoverOverlayProps, PopoverPortalProps, PopoverTriggerRef } from './types';
 
-const RootContext = React.createContext<RootContext | null>(null);
+const RootContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
-  ({ asChild, open: openProp, defaultOpen, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
-    const [open = false, onOpenChange] = useControllableState({
-      prop: openProp,
-      defaultProp: defaultOpen,
-      onChange: onOpenChangeProp,
-    });
-    const Component = asChild ? Slot.View : View;
-    return (
-      <RootContext.Provider value={{ open, onOpenChange }}>
-        <Popover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
-          <Component ref={ref} {...viewProps} />
-        </Popover.Root>
-      </RootContext.Provider>
-    );
-  }
-);
+const Root = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
+  const [open, onOpenChange] = React.useState(false);
+  const Component = asChild ? Slot.View : View;
+  return (
+    <RootContext.Provider value={{ open, onOpenChange }}>
+      <Popover.Root open={open} onOpenChange={onOpenChange}>
+        <Component ref={ref} {...viewProps} />
+      </Popover.Root>
+    </RootContext.Provider>
+  );
+});
 
 Root.displayName = 'RootWebPopover';
 
-function usePopoverContext() {
+function useRootContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error('Popover compound components cannot be rendered outside the Popover component');
@@ -47,10 +39,20 @@ function usePopoverContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<PopoverTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = usePopoverContext();
+    const { onOpenChange, open } = useRootContext();
+    const augmentedRef = useAugmentedRef({
+      ref,
+      methods: {
+        open() {
+          onOpenChange(true);
+        },
+        close() {
+          onOpenChange(false);
+        },
+      },
+    });
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
         onPressProp(ev);
@@ -141,7 +143,7 @@ Content.displayName = 'ContentWebPopover';
 const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
     const augmentedRef = useAugmentedRef({ ref });
-    const { onOpenChange, open } = usePopoverContext();
+    const { onOpenChange, open } = useRootContext();
 
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
@@ -176,4 +178,6 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
 
 Close.displayName = 'CloseWebPopover';
 
-export { Close, Content, Overlay, Portal, Root, Trigger, usePopoverContext };
+export { Close, Content, Overlay, Portal, Root, Trigger, useRootContext };
+
+export type { PopoverTriggerRef };

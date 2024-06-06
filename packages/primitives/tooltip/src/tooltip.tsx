@@ -1,13 +1,4 @@
-import * as React from 'react';
-import {
-  BackHandler,
-  Pressable,
-  View,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useControllableState, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
+import { useAugmentedRef, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -17,14 +8,25 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  View,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
 import type {
-  RootContext,
   TooltipOverlayProps,
   TooltipPortalProps,
   TooltipRootProps,
+  TooltipTriggerRef,
 } from './types';
 
-interface IRootContext extends RootContext {
+interface IRootContext {
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -38,9 +40,6 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
   (
     {
       asChild,
-      defaultOpen,
-      open: openProp,
-      onOpenChange: onOpenChangeProp,
       delayDuration: _delayDuration,
       skipDelayDuration: _skipDelayDuration,
       disableHoverableContent: _disableHoverableContent,
@@ -51,12 +50,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
     const nativeID = React.useId();
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
-
-    const [open = false, onOpenChange] = useControllableState({
-      prop: openProp,
-      defaultProp: defaultOpen,
-      onChange: onOpenChangeProp,
-    });
+    const [open, onOpenChange] = React.useState(false);
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -87,25 +81,29 @@ function useTooltipContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<TooltipTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const triggerRef = React.useRef<View>(null);
     const { open, onOpenChange, setTriggerPosition } = useTooltipContext();
 
-    React.useImperativeHandle(
+    const augmentedRef = useAugmentedRef({
       ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
+      methods: {
+        open: () => {
+          onOpenChange(true);
+          augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+            setTriggerPosition({ width, pageX, pageY: pageY, height });
+          });
+        },
+        close: () => {
+          setTriggerPosition(null);
+          onOpenChange(false);
+        },
       },
-      [triggerRef.current]
-    );
+    });
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+      augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
       const newValue = !open;
@@ -116,7 +114,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={triggerRef}
+        ref={augmentedRef}
         aria-disabled={disabled ?? undefined}
         role='button'
         onPress={onPress}
@@ -265,6 +263,8 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
 Content.displayName = 'ContentNativeTooltip';
 
 export { Content, Overlay, Portal, Root, Trigger };
+
+export type { TooltipTriggerRef };
 
 function onStartShouldSetResponder() {
   return true;

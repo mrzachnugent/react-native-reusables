@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
@@ -29,7 +29,7 @@ import { UserPlus } from '~/lib/icons/UserPlus';
 import { Users } from '~/lib/icons/Users';
 
 export default function DropdownMenuScreen() {
-  const [open, setOpen] = React.useState(false);
+  const triggerRef = React.useRef<React.ElementRef<typeof DropdownMenuTrigger>>(null);
   const [openSub, setOpenSub] = React.useState(false);
   const insets = useSafeAreaInsets();
   const contentInsets = {
@@ -41,16 +41,15 @@ export default function DropdownMenuScreen() {
 
   return (
     <View className='flex-1 justify-center items-center p-6 gap-12'>
-      <DropdownMenu
-        open={open}
-        onOpenChange={(newVal) => {
-          if (!newVal) {
-            setOpenSub(false);
-          }
-          setOpen(newVal);
+      <Pressable
+        className='absolute top-0 right-0 w-16 h-16 active:bg-primary/5'
+        onPress={() => {
+          // open menu programmatically
+          triggerRef.current?.open();
         }}
-      >
-        <DropdownMenuTrigger asChild>
+      />
+      <DropdownMenu>
+        <DropdownMenuTrigger ref={triggerRef} asChild>
           <Button variant='outline'>
             <Text>Open</Text>
           </Button>

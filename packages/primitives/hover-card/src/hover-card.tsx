@@ -1,13 +1,4 @@
-import * as React from 'react';
-import {
-  BackHandler,
-  Pressable,
-  View,
-  type GestureResponderEvent,
-  type LayoutChangeEvent,
-  type LayoutRectangle,
-} from 'react-native';
-import { useRelativePosition, type LayoutPosition, useControllableState } from '@rnr/hooks';
+import { useAugmentedRef, useRelativePosition, type LayoutPosition } from '@rnr/hooks';
 import { Portal as RNPPortal } from '@rnr/portal';
 import * as Slot from '@rnr/slot';
 import type {
@@ -17,14 +8,26 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import {
+  BackHandler,
+  Pressable,
+  View,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
 import type {
   HoverCardOverlayProps,
   HoverCardPortalProps,
   HoverCardRootProps,
+  HoverCardTriggerRef,
   RootContext,
 } from './types';
 
 interface IRootContext extends RootContext {
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -35,26 +38,11 @@ interface IRootContext extends RootContext {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
-  (
-    {
-      asChild,
-      open: openProp,
-      defaultOpen,
-      onOpenChange: onOpenChangeProp,
-      openDelay: _openDelay,
-      closeDelay: _closeDelay,
-      ...viewProps
-    },
-    ref
-  ) => {
+  ({ asChild, openDelay: _openDelay, closeDelay: _closeDelay, ...viewProps }, ref) => {
     const nativeID = React.useId();
-    const [open = false, onOpenChange] = useControllableState({
-      prop: openProp,
-      defaultProp: defaultOpen,
-      onChange: onOpenChangeProp,
-    });
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
+    const [open, onOpenChange] = React.useState(false);
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -87,36 +75,40 @@ function useRootContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<HoverCardTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const triggerRef = React.useRef<View>(null);
     const { open, onOpenChange, setTriggerPosition } = useRootContext();
 
-    React.useImperativeHandle(
+    const augmentedRef = useAugmentedRef({
       ref,
-      () => {
-        if (!triggerRef.current) {
-          return new View({});
-        }
-        return triggerRef.current;
+      methods: {
+        open: () => {
+          onOpenChange(true);
+          augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+            setTriggerPosition({ width, pageX, pageY: pageY, height });
+          });
+        },
+        close: () => {
+          setTriggerPosition(null);
+          onOpenChange(false);
+        },
       },
-      [triggerRef.current]
-    );
+    });
 
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
-      triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+      augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
       const newValue = !open;
-      onOpenChange(newValue);
+      onOpenChange((prev) => !prev);
       onPressProp?.(ev);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
       <Component
-        ref={triggerRef}
+        ref={augmentedRef}
         aria-disabled={disabled ?? undefined}
         role='button'
         onPress={onPress}
@@ -265,6 +257,8 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
 Content.displayName = 'ContentNativeHoverCard';
 
 export { Content, Overlay, Portal, Root, Trigger, useRootContext };
+
+export type { HoverCardTriggerRef };
 
 function onStartShouldSetResponder() {
   return true;

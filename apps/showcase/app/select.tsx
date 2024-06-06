@@ -1,4 +1,5 @@
-import { View } from 'react-native';
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   Select,
@@ -11,6 +12,7 @@ import {
 } from '~/components/ui/select';
 
 export default function SelectScreen() {
+  const triggerRef = React.useRef<React.ElementRef<typeof SelectTrigger>>(null);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -22,8 +24,15 @@ export default function SelectScreen() {
   return (
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
+        <Pressable
+          className='absolute top-0 right-0 w-16 h-16 active:bg-primary/5'
+          onPress={() => {
+            // open programmatically
+            triggerRef.current?.open();
+          }}
+        />
         <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
-          <SelectTrigger className='w-[250px]'>
+          <SelectTrigger ref={triggerRef} className='w-[250px]'>
             <SelectValue
               className='text-foreground text-sm native:text-lg'
               placeholder='Select a fruit'

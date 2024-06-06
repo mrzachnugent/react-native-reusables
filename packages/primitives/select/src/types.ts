@@ -1,4 +1,4 @@
-import type { ForceMountable } from '@rnr/types';
+import type { ForceMountable, PressableRef } from '@rnr/types';
 
 type Option =
   | {
@@ -10,8 +10,6 @@ type Option =
 interface RootContext {
   value: Option;
   onValueChange: (option: Option) => void;
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
   disabled?: boolean;
 }
 
@@ -19,9 +17,6 @@ interface SelectRootProps {
   value?: Option;
   defaultValue?: Option;
   onValueChange?: (option: Option) => void;
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (value: boolean) => void;
   disabled?: boolean;
   /**
    * Platform: WEB ONLY
@@ -74,6 +69,11 @@ interface SelectSeparatorProps {
   decorative?: boolean;
 }
 
+interface SelectTriggerRef extends PressableRef {
+  open: () => void;
+  close: () => void;
+}
+
 export type {
   Option,
   RootContext,
@@ -83,5 +83,6 @@ export type {
   SelectPortalProps,
   SelectRootProps,
   SelectSeparatorProps,
+  SelectTriggerRef,
   SelectValueProps,
 };

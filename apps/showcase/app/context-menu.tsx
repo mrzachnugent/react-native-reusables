@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -20,8 +20,7 @@ import {
 import { Text } from '~/components/ui/text';
 
 export default function ContextScreen() {
-  const [open, setOpen] = React.useState(false);
-  const [openSub, setOpenSub] = React.useState(false);
+  const triggerRef = React.useRef<React.ElementRef<typeof ContextMenuTrigger>>(null);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -36,16 +35,18 @@ export default function ContextScreen() {
   return (
     <>
       <View className='flex-1 justify-center p-6 gap-12'>
-        <ContextMenu
-          open={open}
-          onOpenChange={(newVal) => {
-            setOpen(newVal);
-            if (!newVal) {
-              setOpenSub(false);
-            }
+        <Pressable
+          className='absolute top-0 right-0 w-16 h-16 active:bg-primary/5'
+          onPress={() => {
+            // Only for Native platforms: open menu programmatically
+            triggerRef.current?.open();
           }}
-        >
-          <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] mx-auto web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
+        />
+        <ContextMenu>
+          <ContextMenuTrigger
+            ref={triggerRef}
+            className='flex h-[150px] w-full max-w-[300px] mx-auto web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'
+          >
             <Text className='text-foreground text-sm native:text-lg'>
               {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
             </Text>
@@ -65,7 +66,7 @@ export default function ContextScreen() {
               <ContextMenuShortcut>⌘R</ContextMenuShortcut>
             </ContextMenuItem>
 
-            <ContextMenuSub open={openSub} onOpenChange={setOpenSub}>
+            <ContextMenuSub>
               <ContextMenuSubTrigger inset>
                 <Text>More Tools</Text>
               </ContextMenuSubTrigger>

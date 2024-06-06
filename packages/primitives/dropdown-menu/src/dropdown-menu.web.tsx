@@ -1,7 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import * as React from 'react';
-import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
-import { useAugmentedRef } from '@rnr/hooks';
+import { useAugmentedRef, useControllableState } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   ForceMountable,
@@ -14,6 +12,8 @@ import type {
   ViewRef,
 } from '@rnr/types';
 import { EmptyGestureResponderEvent } from '@rnr/utils';
+import * as React from 'react';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import type {
   DropdownMenuCheckboxItemProps,
   DropdownMenuItemProps,
@@ -21,26 +21,29 @@ import type {
   DropdownMenuPortalProps,
   DropdownMenuRadioGroupProps,
   DropdownMenuRadioItemProps,
-  DropdownMenuRootProps,
   DropdownMenuSeparatorProps,
   DropdownMenuSubProps,
   DropdownMenuSubTriggerProps,
+  DropdownMenuTriggerRef,
 } from './types';
 
-const DropdownMenuContext = React.createContext<DropdownMenuRootProps | null>(null);
+const DropdownMenuContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps & DropdownMenuRootProps>(
-  ({ asChild, open, onOpenChange, ...viewProps }, ref) => {
-    const Component = asChild ? Slot.View : View;
-    return (
-      <DropdownMenuContext.Provider value={{ open, onOpenChange }}>
-        <DropdownMenu.Root open={open} onOpenChange={onOpenChange}>
-          <Component ref={ref} {...viewProps} />
-        </DropdownMenu.Root>
-      </DropdownMenuContext.Provider>
-    );
-  }
-);
+const Root = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
+  const [open, onOpenChange] = React.useState(false);
+
+  const Component = asChild ? Slot.View : View;
+  return (
+    <DropdownMenuContext.Provider value={{ open, onOpenChange }}>
+      <DropdownMenu.Root open={open} onOpenChange={onOpenChange}>
+        <Component ref={ref} {...viewProps} />
+      </DropdownMenu.Root>
+    </DropdownMenuContext.Provider>
+  );
+});
 
 Root.displayName = 'RootWebDropdownMenu';
 
@@ -54,10 +57,20 @@ function useRootContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<DropdownMenuTriggerRef, SlottablePressableProps>(
   ({ asChild, disabled = false, ...props }, ref) => {
-    const augmentedRef = useAugmentedRef({ ref });
-    const { open } = useRootContext();
+    const { open, onOpenChange } = useRootContext();
+    const augmentedRef = useAugmentedRef({
+      ref,
+      methods: {
+        open() {
+          onOpenChange(true);
+        },
+        close() {
+          onOpenChange(false);
+        },
+      },
+    });
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
@@ -442,7 +455,13 @@ const DropdownMenuSubContext = React.createContext<{
 } | null>(null);
 
 const Sub = React.forwardRef<ViewRef, SlottableViewProps & DropdownMenuSubProps>(
-  ({ asChild, open, onOpenChange, ...props }, ref) => {
+  ({ asChild, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }, ref) => {
+    const [open = false, onOpenChange] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChangeProp,
+    });
+
     const Component = asChild ? Slot.View : View;
     return (
       <DropdownMenuSubContext.Provider value={{ open, onOpenChange }}>
@@ -515,6 +534,8 @@ export {
   useRootContext,
   useSubContext,
 };
+
+export type { DropdownMenuTriggerRef };
 
 function onSelected(ev: Event) {
   ev.preventDefault();

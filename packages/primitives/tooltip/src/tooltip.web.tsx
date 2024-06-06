@@ -1,7 +1,5 @@
 import * as Tooltip from '@radix-ui/react-tooltip';
-import * as React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef, useControllableState } from '@rnr/hooks';
+import { useAugmentedRef } from '@rnr/hooks';
 import * as Slot from '@rnr/slot';
 import type {
   PositionedContentProps,
@@ -10,34 +8,23 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '@rnr/types';
+import * as React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
 import type {
-  RootContext,
   TooltipOverlayProps,
   TooltipPortalProps,
   TooltipRootProps,
+  TooltipTriggerRef,
 } from './types';
 
-const RootContext = React.createContext<RootContext | null>(null);
+const RootContext = React.createContext<{
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+} | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
-  (
-    {
-      asChild,
-      defaultOpen,
-      open: openProp,
-      onOpenChange: onOpenChangeProp,
-      delayDuration,
-      skipDelayDuration,
-      disableHoverableContent,
-      ...viewProps
-    },
-    ref
-  ) => {
-    const [open = false, onOpenChange] = useControllableState({
-      prop: openProp,
-      defaultProp: defaultOpen,
-      onChange: onOpenChangeProp,
-    });
+  ({ asChild, delayDuration, skipDelayDuration, disableHoverableContent, ...viewProps }, ref) => {
+    const [open, onOpenChange] = React.useState(false);
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -71,10 +58,20 @@ function useTooltipContext() {
   return context;
 }
 
-const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
+const Trigger = React.forwardRef<TooltipTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, role: _role, disabled, ...props }, ref) => {
-    const augmentedRef = useAugmentedRef({ ref });
     const { onOpenChange, open } = useTooltipContext();
+    const augmentedRef = useAugmentedRef({
+      ref,
+      methods: {
+        open() {
+          onOpenChange(true);
+        },
+        close() {
+          onOpenChange(false);
+        },
+      },
+    });
     function onPress(ev: GestureResponderEvent) {
       if (onPressProp) {
         onPressProp(ev);
@@ -165,3 +162,5 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
 Content.displayName = 'ContentWebTooltip';
 
 export { Content, Overlay, Portal, Root, Trigger };
+
+export type { TooltipTriggerRef };

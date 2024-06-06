@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
@@ -8,6 +8,7 @@ import { Text } from '~/components/ui/text';
 import { CalendarDays } from '~/lib/icons/CalendarDays';
 
 export default function HoverCardScreen() {
+  const triggerRef = React.useRef<React.ElementRef<typeof HoverCardTrigger>>(null);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -18,8 +19,15 @@ export default function HoverCardScreen() {
   return (
     <>
       <View className='flex-1 justify-center items-center p-6 gap-12'>
+        <Pressable
+          className='absolute top-0 right-0 w-16 h-16 active:bg-primary/5'
+          onPress={() => {
+            // open programmatically
+            triggerRef.current?.open();
+          }}
+        />
         <HoverCard>
-          <HoverCardTrigger asChild>
+          <HoverCardTrigger ref={triggerRef} asChild>
             <Button variant='link' size='lg'>
               <Text>@nextjs</Text>
             </Button>
