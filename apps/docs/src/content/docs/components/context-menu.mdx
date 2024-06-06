@@ -87,8 +87,6 @@ import {
 import { Text } from '~/components/ui/text';
 
 function Example() {
-  const [open, setOpen] = React.useState(false);
-  const [openSub, setOpenSub] = React.useState(false);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -101,15 +99,7 @@ function Example() {
   const [radioValue, setRadioValue] = React.useState('pedro');
 
   return (
-        <ContextMenu
-          open={open}
-          onOpenChange={(newVal) => {
-            setOpen(newVal);
-            if (!newVal) {
-              setOpenSub(false);
-            }
-          }}
-        >
+        <ContextMenu>
           <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] mx-auto web:cursor-default items-center justify-center rounded-md border border-foreground border-dashed'>
             <Text className='text-foreground text-sm native:text-lg'>
               {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
@@ -130,7 +120,7 @@ function Example() {
               <ContextMenuShortcut>⌘R</ContextMenuShortcut>
             </ContextMenuItem>
 
-            <ContextMenuSub open={openSub} onOpenChange={setOpenSub}>
+            <ContextMenuSub>
               <ContextMenuSubTrigger inset>
                 <Text>More Tools</Text>
               </ContextMenuSubTrigger>
@@ -193,8 +183,7 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
-|     open*    |         boolean          |                         |
-| onOpenChange*| (value: boolean) => void |                         |
+| onOpenChange| (value: boolean) => void |                         |
 |   asChild    |         boolean          |       _(optional)_      |
 |  relativeTo  | 'longPress' \| 'trigger' | Native Only_(optional)_ |
 
@@ -318,8 +307,9 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
 |   asChild    |         boolean          | _(optional)_ |
-|     open*    |         boolean          |              |
-| onOpenChange*| (value: boolean) => void |              |
+| defaultOpen  |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
 
 ### ContextMenuSubTrigger
 

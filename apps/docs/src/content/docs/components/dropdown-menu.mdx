@@ -85,19 +85,9 @@ import {
 import { Text } from '~/components/ui/text';
 
 function Example() {
-  const [open, setOpen] = React.useState(false);
-  const [openSub, setOpenSub] = React.useState(false);
 
   return (
-      <DropdownMenu
-        open={open}
-        onOpenChange={(newVal) => {
-          if (!newVal) {
-            setOpenSub(false);
-          }
-          setOpen(newVal);
-        }}
-      >
+      <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='outline'>
             <Text>Open</Text>
@@ -110,7 +100,7 @@ function Example() {
             <DropdownMenuItem>
               <Text>Team</Text>
             </DropdownMenuItem>
-            <DropdownMenuSub open={openSub} onOpenChange={setOpenSub}>
+            <DropdownMenuSub>
               <DropdownMenuSubTrigger>
                 <Text>Invite users</Text>
               </DropdownMenuSubTrigger>
@@ -163,8 +153,7 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
-|     open*    |         boolean          |                         |
-| onOpenChange*| (value: boolean) => void |                         |
+| onOpenChange| (value: boolean) => void |                         |
 |   asChild    |         boolean          |       _(optional)_      |
 |  relativeTo  | 'longPress' \| 'trigger' | Native Only_(optional)_ |
 
@@ -288,8 +277,9 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
 |   asChild    |         boolean          | _(optional)_ |
-|     open*    |         boolean          |              |
-| onOpenChange*| (value: boolean) => void |              |
+| defaultOpen  |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
 
 ### DropdownMenuSubTrigger
 

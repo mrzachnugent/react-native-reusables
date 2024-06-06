@@ -123,9 +123,7 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
 |   asChild    |         boolean          | _(optional)_ |
-|     open     |         boolean          | _(optional)_ |
 | onOpenChange | (value: boolean) => void | _(optional)_ |
-| defaultOpen  |         boolean          | _(optional)_ |
 | delayDuration  |         number          | Web Only - defaults to 700 _(optional)_ |
 | skipDelayDuration  |         number          | Web Only - defaults to 300 _(optional)_ |
 | disableHoverableContent  |         boolean          | _(optional)_ |
@@ -137,6 +135,13 @@ Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
 |  Prop   |  Type   |     Note     |
 | :-----: | :-----: | :----------: |
 | asChild | boolean | _(optional)_ |
+
+#### TYPE: `TooltipTriggerRef`
+
+| Methods |  args   |          Note            |
+| :-----: | :-----: | :----------------------: |
+|  open   |         | opens the tooltip |
+|  close  |         | closes the tooltip|
 
 ### Overlay
 

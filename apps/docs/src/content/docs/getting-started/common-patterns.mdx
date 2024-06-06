@@ -129,3 +129,140 @@ function Example() {
 <Aside>
   Most `/ui` and `/primitive` components are wrapped with a `React.forwardRef` function, so you can pass a `ref` to them.
 </Aside>
+
+## Programmatically Showing and Hiding Components
+
+For most components, you can use props to manipulate the visibility of it or its children components. For example, you can pass the `open` prop to the [`AlertDialog`](/components/alert-dialog/#alertdialog) to show or hide it.
+However, for some components, the position of its content depends on the `onPress` or `onLongPress` events. In this case, you will need to pass a `ref` to the trigger component and call a method to show or hide it.
+
+#### Example with content that depends on the trigger position
+
+```tsx
+import * as HoverCardPrimitive from '~/components/primitives/hover-card';
+import { Text, View } from 'react-native';
+import * as React from 'react';
+
+function OnMountExample() {
+  const triggerRef = React.useRef<React.ElementRef<typeof HoverCardPrimitive.Trigger>>(null);
+
+   React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      triggerRef.current?.open();
+      // Wait for items to be properly layed out and wait for the animation to finish
+    }, 100 + 200);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  return (
+        <HoverCardPrimitive.Root>
+          <HoverCardPrimitive.Trigger ref={triggerRef}>
+              <Text>@nextjs</Text>
+          </HoverCardPrimitive.Trigger>
+          <HoverCardPrimitive.Content>
+            <View>
+              <Text>@nextjs</Text>
+              <Text>
+                The React Framework – created and maintained by @vercel.
+              </Text>
+              <View>
+                <Text>
+                  Joined December 2021
+                </Text>
+              </View>
+            </View>
+          </HoverCardPrimitive.Content>
+        </HoverCardPrimitive.Root>
+  );
+}
+```
+
+## A Portal Component inside a Presentation Modal screen
+
+1. Use the `useModalPortalRoot` hook in the screen with the presentation of `modal`. 
+2. Adjust the bottom content insets to make sure the content is not hidden by the bottom safe area.
+3. Wrap the screen content with a View and pass the rootProps to it.
+4. Place the `PortalHost` inside the View with the rootProps as its last child.
+5. Pass the sideOffset from the `useModalPortalRoot` hook to the `SelectContent` component.
+6. Pass the `portalHost` name to the `SelectContent` component to render the content inside the `PortalHost` with the same name
+
+```tsx
+import { PortalHost, useModalPortalRoot } from '~/components/primitives/portal';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
+
+/**
+ * This screen is a Stack.Screen with a presentation of `modal`.
+*/
+export default function ModalScreen() {
+  const insets = useSafeAreaInsets();
+  const { sideOffset, ...rootProps } = useModalPortalRoot();
+  const contentInsets = {
+    top: insets.top,
+    // Make sure the content is not hidden by the bottom safe area
+    bottom: insets.bottom + Math.abs(sideOffset),
+    left: 16,
+    right: 16,
+  };
+
+// Wrap the screen content with a View and pass the rootProps to it
+  return (
+     <View {...rootProps}>
+        <View className='flex-1 justify-center items-center'>
+        <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
+            <SelectTrigger>
+              <SelectValue
+                className='text-foreground text-sm native:text-lg'
+                placeholder='Select a fruit'
+              />
+            </SelectTrigger>
+            <SelectContent
+              insets={contentInsets}
+              // Pass the sideOffset from the useModalPortalRoot hook
+              sideOffset={sideOffset}
+              className='w-full'
+              // Pass the portalHost name from below to the SelectContent
+              portalHost='modal-example'
+            >
+              <SelectGroup>
+                <SelectLabel>Fruits</SelectLabel>
+                <SelectItem label='Apple' value='apple'>
+                  Apple
+                </SelectItem>
+                <SelectItem label='Banana' value='banana'>
+                  Banana
+                </SelectItem>
+                <SelectItem label='Blueberry' value='blueberry'>
+                  Blueberry
+                </SelectItem>
+                <SelectItem label='Grapes' value='grapes'>
+                  Grapes
+                </SelectItem>
+                <SelectItem label='Pineapple' value='pineapple'>
+                  Pineapple
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </View>
+        {/* Place the Postal Host inside the View with the rootProps */}
+        <PortalHost name='modal-example' />
+     </View>
+  )
+}
+```
+
+<Aside type="caution" title="For the web">
+ It has been reported that the web might require additional adjustments. Please check out the [Github Issue](https://github.com/mrzachnugent/react-native-reusables/issues/136#issuecomment-2133941424) for the solution
+</Aside>

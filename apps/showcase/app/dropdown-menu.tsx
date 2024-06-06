@@ -30,7 +30,6 @@ import { Users } from '~/lib/icons/Users';
 
 export default function DropdownMenuScreen() {
   const triggerRef = React.useRef<React.ElementRef<typeof DropdownMenuTrigger>>(null);
-  const [openSub, setOpenSub] = React.useState(false);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -62,7 +61,7 @@ export default function DropdownMenuScreen() {
               <Users className='text-foreground' size={14} />
               <Text>Team</Text>
             </DropdownMenuItem>
-            <DropdownMenuSub open={openSub} onOpenChange={setOpenSub}>
+            <DropdownMenuSub>
               <DropdownMenuSubTrigger>
                 <UserPlus className='text-foreground' size={14} />
                 <Text>Invite users</Text>

@@ -102,21 +102,12 @@ import * as DropdownMenuPrimitive from '~/components/primitives/dropdown-menu';
 import { Text } from 'react-native';
 
 function Example() {
-  const [open, setOpen] = React.useState(false);
-  const [openSub, setOpenSub] = React.useState(false);
   const [checkboxValue, setCheckboxValue] = React.useState(false);
   const [subCheckboxValue, setSubCheckboxValue] = React.useState(false);
   const [radioValue, setRadioValue] = React.useState('pedro');
 
   return (
-    <DropdownMenu.Root
-      open={open}
-      onOpenChange={(newVal) => {
-        setOpen(newVal);
-        if (!newVal) {
-          setOpenSub(false);
-        }
-      }}>
+    <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             <Text>
               Open Dropdown Menu
@@ -136,7 +127,7 @@ function Example() {
                   <Text>Reload</Text>
                 </DropdownMenu.Item>
 
-                <DropdownMenu.Sub open={openSub} onOpenChange={setOpenSub}>
+                <DropdownMenu.Sub>
                   <DropdownMenu.SubTrigger>
                     <Text>More Tools</Text>
                   </DropdownMenu.SubTrigger>
@@ -197,9 +188,7 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
-|     open*    |         boolean          |                         |
-| onOpenChange*| (open: boolean) => void  |                         |
-|   asChild    |         boolean          |       _(optional)_      |
+| onOpenChange | (open: boolean) => void | _(optional)_ ||   asChild    |         boolean          |       _(optional)_      |
 
 ### Trigger
 
@@ -208,6 +197,13 @@ Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
 |  Prop   |  Type   |     Note     |
 | :-----: | :-----: | :----------: |
 | asChild | boolean | _(optional)_ |
+
+#### TYPE: `DropdownMenuTriggerRef`
+
+| Methods |  args   |          Note            |
+| :-----: | :-----: | :----------------------: |
+|  open   |         | opens the dropdown menu  |
+|  close  |         | closes the dropdown menu |
 
 ### Portal
 
@@ -336,8 +332,9 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
 |   asChild    |         boolean          | _(optional)_ |
-|     open*    |         boolean          |              |
-| onOpenChange*| (value: boolean) => void |              |
+| defaultOpen  |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
 
 ### SubTrigger
 

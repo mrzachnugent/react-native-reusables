@@ -102,21 +102,12 @@ import * as ContextMenuPrimitive from '~/components/primitives/context-menu';
 import { Text } from 'react-native';
 
 function Example() {
-  const [open, setOpen] = React.useState(false);
-  const [openSub, setOpenSub] = React.useState(false);
   const [checkboxValue, setCheckboxValue] = React.useState(false);
   const [subCheckboxValue, setSubCheckboxValue] = React.useState(false);
   const [radioValue, setRadioValue] = React.useState('pedro');
 
   return (
-    <ContextMenu.Root
-      open={open}
-      onOpenChange={(newVal) => {
-        setOpen(newVal);
-        if (!newVal) {
-          setOpenSub(false);
-        }
-      }}>
+    <ContextMenu.Root>
           <ContextMenu.Trigger>
             <Text>
               {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
@@ -136,7 +127,7 @@ function Example() {
                   <Text>Reload</Text>
                 </ContextMenu.Item>
 
-                <ContextMenu.Sub open={openSub} onOpenChange={setOpenSub}>
+                <ContextMenu.Sub>
                   <ContextMenu.SubTrigger >
                     <Text>More Tools</Text>
                   </ContextMenu.SubTrigger>
@@ -197,8 +188,7 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
-|     open*    |         boolean          |                         |
-| onOpenChange*| (open: boolean) => void  |                         |
+| onOpenChange | (open: boolean) => void |                         |
 |   asChild    |         boolean          |       _(optional)_      |
 |  relativeTo  | 'longPress' \| 'trigger' | Native Only_(optional)_ |
 
@@ -209,6 +199,13 @@ Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
 |  Prop   |  Type   |     Note     |
 | :-----: | :-----: | :----------: |
 | asChild | boolean | _(optional)_ |
+
+#### TYPE: `ContextMenuTriggerRef`
+
+| Methods |  args   |          Note            |
+| :-----: | :-----: | :----------------------: |
+|  open   |         | Native ONLY: opens the context menu  |
+|  close  |         | Native ONLY: closes the context menu |
 
 ### Portal
 
@@ -337,8 +334,9 @@ Extends [`View`](https://reactnative.dev/docs/view#props) props
 |     Prop     |           Type           |     Note     |
 | :----------: | :----------------------: | :----------: |
 |   asChild    |         boolean          | _(optional)_ |
-|     open*    |         boolean          |              |
-| onOpenChange*| (value: boolean) => void |              |
+| defaultOpen  |         boolean          | _(optional)_ |
+|     open     |         boolean          | _(optional)_ |
+| onOpenChange | (value: boolean) => void | _(optional)_ |
 
 ### SubTrigger
 
