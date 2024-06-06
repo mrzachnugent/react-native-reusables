@@ -1,6 +1,7 @@
 import { ForceMountable, PressableRef } from '@rnr/types';
 
 interface ContextMenuRootProps {
+  onOpenChange?: (open: boolean) => void;
   /**
    * Platform: NATIVE ONLY
    */

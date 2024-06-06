@@ -41,7 +41,7 @@ import type {
 
 interface IRootContext {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (open: boolean) => void;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -51,11 +51,19 @@ interface IRootContext {
 
 const RootContext = React.createContext<IRootContext | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
+const Root = React.forwardRef<
+  ViewRef,
+  SlottableViewProps & { onOpenChange?: (open: boolean) => void }
+>(({ asChild, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
   const nativeID = React.useId();
   const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
   const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
-  const [open, onOpenChange] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  function onOpenChange(open: boolean) {
+    setOpen(open);
+    onOpenChangeProp?.(open);
+  }
 
   const Component = asChild ? Slot.View : View;
   return (

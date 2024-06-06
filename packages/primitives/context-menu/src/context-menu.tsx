@@ -43,7 +43,7 @@ import type {
 
 interface IRootContext extends ContextMenuRootProps {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (open: boolean) => void;
   pressPosition: LayoutPosition | null;
   setPressPosition: (pressPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -54,11 +54,16 @@ interface IRootContext extends ContextMenuRootProps {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRootProps>(
-  ({ asChild, relativeTo = 'longPress', ...viewProps }, ref) => {
+  ({ asChild, relativeTo = 'longPress', onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
     const nativeID = React.useId();
     const [pressPosition, setPressPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
-    const [open, onOpenChange] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -137,7 +142,7 @@ const Trigger = React.forwardRef<ContextMenuTriggerRef, SlottablePressableProps>
           setPressPosition({ width, pageX, pageY: pageY, height });
         });
       }
-      onOpenChange((prev) => !prev);
+      onOpenChange(!open);
       onLongPressProp?.(ev);
     }
 

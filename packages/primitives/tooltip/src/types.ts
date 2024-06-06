@@ -1,6 +1,7 @@
 import type { ForceMountable, PressableRef } from '@rnr/types';
 
 interface TooltipRootProps {
+  onOpenChange?: (open: boolean) => void;
   /**
    * Platform: WEB ONLY
    * @default 700

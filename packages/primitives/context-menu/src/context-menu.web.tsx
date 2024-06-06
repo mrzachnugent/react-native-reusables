@@ -34,8 +34,13 @@ const ContextMenuContext = React.createContext<{
 } | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuRootProps>(
-  ({ asChild, ...viewProps }, ref) => {
-    const [open, onOpenChange] = React.useState(false);
+  ({ asChild, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     const Component = asChild ? Slot.View : View;
     return (

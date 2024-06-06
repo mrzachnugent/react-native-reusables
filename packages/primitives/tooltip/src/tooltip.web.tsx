@@ -23,8 +23,23 @@ const RootContext = React.createContext<{
 } | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
-  ({ asChild, delayDuration, skipDelayDuration, disableHoverableContent, ...viewProps }, ref) => {
-    const [open, onOpenChange] = React.useState(false);
+  (
+    {
+      asChild,
+      delayDuration,
+      skipDelayDuration,
+      disableHoverableContent,
+      onOpenChange: onOpenChangeProp,
+      ...viewProps
+    },
+    ref
+  ) => {
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     const Component = asChild ? Slot.View : View;
     return (

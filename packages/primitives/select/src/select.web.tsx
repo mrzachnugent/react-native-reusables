@@ -38,16 +38,27 @@ const SelectContext = React.createContext<
  */
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
   (
-    { asChild, value: valueProp, defaultValue, onValueChange: onValueChangeProp, ...viewProps },
+    {
+      asChild,
+      value: valueProp,
+      defaultValue,
+      onValueChange: onValueChangeProp,
+      onOpenChange: onOpenChangeProp,
+      ...viewProps
+    },
     ref
   ) => {
-    const [open, onOpenChange] = React.useState(false);
-
     const [value, onValueChange] = useControllableState({
       prop: valueProp,
       defaultProp: defaultValue,
       onChange: onValueChangeProp,
     });
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     function onStrValueChange(val: string) {
       onValueChange({ value: val, label: val });

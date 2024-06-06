@@ -27,7 +27,7 @@ import type {
 
 interface IRootContext extends RootContext {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (open: boolean) => void;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -38,11 +38,25 @@ interface IRootContext extends RootContext {
 const RootContext = React.createContext<IRootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
-  ({ asChild, openDelay: _openDelay, closeDelay: _closeDelay, ...viewProps }, ref) => {
+  (
+    {
+      asChild,
+      openDelay: _openDelay,
+      closeDelay: _closeDelay,
+      onOpenChange: onOpenChangeProp,
+      ...viewProps
+    },
+    ref
+  ) => {
     const nativeID = React.useId();
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
-    const [open, onOpenChange] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -100,8 +114,8 @@ const Trigger = React.forwardRef<HoverCardTriggerRef, SlottablePressableProps>(
       augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
-      const newValue = !open;
-      onOpenChange((prev) => !prev);
+
+      onOpenChange(!open);
       onPressProp?.(ev);
     }
 

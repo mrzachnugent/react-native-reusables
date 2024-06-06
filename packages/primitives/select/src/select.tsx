@@ -40,7 +40,7 @@ import type {
 
 interface IRootContext extends RootContext {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (open: boolean) => void;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -57,13 +57,13 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       value: valueProp,
       defaultValue,
       onValueChange: onValueChangeProp,
+      onOpenChange: onOpenChangeProp,
       disabled,
       ...viewProps
     },
     ref
   ) => {
     const nativeID = React.useId();
-    const [open, onOpenChange] = React.useState(false);
     const [value, onValueChange] = useControllableState({
       prop: valueProp,
       defaultProp: defaultValue,
@@ -71,6 +71,12 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
     });
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     const Component = asChild ? Slot.View : View;
     return (
@@ -129,7 +135,7 @@ const Trigger = React.forwardRef<SelectTriggerRef, SlottablePressableProps>(
       augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
-      onOpenChange((prev) => !prev);
+      onOpenChange(!open);
       onPressProp?.(ev);
     }
 

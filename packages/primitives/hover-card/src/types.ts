@@ -8,6 +8,7 @@ interface RootContext {
 }
 
 interface HoverCardRootProps {
+  onOpenChange?: (open: boolean) => void;
   /**
    * Platform: WEB ONLY
    * @default 700

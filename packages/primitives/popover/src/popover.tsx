@@ -21,7 +21,7 @@ import type { PopoverOverlayProps, PopoverPortalProps, PopoverTriggerRef } from 
 
 interface IRootContext {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (open: boolean) => void;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -31,11 +31,19 @@ interface IRootContext {
 
 const RootContext = React.createContext<IRootContext | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
+const Root = React.forwardRef<
+  ViewRef,
+  SlottableViewProps & { onOpenChange?: (open: boolean) => void }
+>(({ asChild, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
   const nativeID = React.useId();
   const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
   const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
-  const [open, onOpenChange] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  function onOpenChange(value: boolean) {
+    setOpen(value);
+    onOpenChangeProp?.(value);
+  }
 
   const Component = asChild ? Slot.View : View;
   return (
@@ -90,7 +98,7 @@ const Trigger = React.forwardRef<PopoverTriggerRef, SlottablePressableProps>(
       augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
-      onOpenChange((prev) => !prev);
+      onOpenChange(!open);
       onPressProp?.(ev);
     }
 

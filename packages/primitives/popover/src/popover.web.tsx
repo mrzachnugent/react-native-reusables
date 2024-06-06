@@ -17,8 +17,16 @@ const RootContext = React.createContext<{
   onOpenChange: (open: boolean) => void;
 } | null>(null);
 
-const Root = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...viewProps }, ref) => {
-  const [open, onOpenChange] = React.useState(false);
+const Root = React.forwardRef<
+  ViewRef,
+  SlottableViewProps & { onOpenChange?: (open: boolean) => void }
+>(({ asChild, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
+  const [open, setOpen] = React.useState(false);
+
+  function onOpenChange(value: boolean) {
+    setOpen(value);
+    onOpenChangeProp?.(value);
+  }
   const Component = asChild ? Slot.View : View;
   return (
     <RootContext.Provider value={{ open, onOpenChange }}>

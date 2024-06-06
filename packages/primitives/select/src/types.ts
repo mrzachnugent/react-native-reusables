@@ -17,6 +17,7 @@ interface SelectRootProps {
   value?: Option;
   defaultValue?: Option;
   onValueChange?: (option: Option) => void;
+  onOpenChange?: (open: boolean) => void;
   disabled?: boolean;
   /**
    * Platform: WEB ONLY

@@ -26,7 +26,7 @@ import type {
 
 interface IRootContext {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (open: boolean) => void;
   triggerPosition: LayoutPosition | null;
   setTriggerPosition: (triggerPosition: LayoutPosition | null) => void;
   contentLayout: LayoutRectangle | null;
@@ -43,6 +43,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
       delayDuration: _delayDuration,
       skipDelayDuration: _skipDelayDuration,
       disableHoverableContent: _disableHoverableContent,
+      onOpenChange: onOpenChangeProp,
       ...viewProps
     },
     ref
@@ -50,7 +51,12 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
     const nativeID = React.useId();
     const [triggerPosition, setTriggerPosition] = React.useState<LayoutPosition | null>(null);
     const [contentLayout, setContentLayout] = React.useState<LayoutRectangle | null>(null);
-    const [open, onOpenChange] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
 
     const Component = asChild ? Slot.View : View;
     return (

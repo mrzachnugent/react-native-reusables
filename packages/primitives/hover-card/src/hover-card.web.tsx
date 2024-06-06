@@ -21,8 +21,13 @@ import type {
 const HoverCardContext = React.createContext<RootContext | null>(null);
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
-  ({ asChild, openDelay, closeDelay, ...viewProps }, ref) => {
-    const [open, onOpenChange] = React.useState(false);
+  ({ asChild, openDelay, closeDelay, onOpenChange: onOpenChangeProp, ...viewProps }, ref) => {
+    const [open, setOpen] = React.useState(false);
+
+    function onOpenChange(value: boolean) {
+      setOpen(value);
+      onOpenChangeProp?.(value);
+    }
     const Component = asChild ? Slot.View : View;
     return (
       <HoverCardContext.Provider value={{ open, onOpenChange }}>
