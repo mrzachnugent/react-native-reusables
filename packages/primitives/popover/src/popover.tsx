@@ -75,7 +75,7 @@ function useRootContext() {
 
 const Trigger = React.forwardRef<PopoverTriggerRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled = false, ...props }, ref) => {
-    const { onOpenChange, setTriggerPosition } = useRootContext();
+    const { onOpenChange, open, setTriggerPosition } = useRootContext();
 
     const augmentedRef = useAugmentedRef({
       ref,
