@@ -1,4 +1,4 @@
-import * as NavigationMenuPrimitive from '@rnr/navigation-menu';
+import * as NavigationMenuPrimitive from '@rn-primitives/navigation-menu/dist/navigation-menu';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -13,6 +13,18 @@ import Animated, {
 } from 'react-native-reanimated';
 import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { cn } from '../../lib/utils';
+import { addCn } from '../../lib/addCn';
+
+addCn([
+  NavigationMenuPrimitive.Content,
+  NavigationMenuPrimitive.Indicator,
+  NavigationMenuPrimitive.Item,
+  NavigationMenuPrimitive.Link,
+  NavigationMenuPrimitive.List,
+  NavigationMenuPrimitive.Root,
+  NavigationMenuPrimitive.Trigger,
+  NavigationMenuPrimitive.Viewport,
+]);
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -102,7 +114,7 @@ const NavigationMenuContent = React.forwardRef<
       <NavigationMenuPrimitive.Content
         ref={ref}
         className={cn(
-          'left-0 top-0 w-full native:border native:border-border native:rounded-lg native:shadow-lg native:bg-popover native:text-popover-foreground native:overflow-hidden',
+          'w-full native:border native:border-border native:rounded-lg native:shadow-lg native:bg-popover native:text-popover-foreground native:overflow-hidden',
           value === itemValue
             ? 'web:animate-in web:fade-in web:slide-in-from-right-20'
             : 'web:animate-out web:fade-out web:slide-out-to-left-20',
@@ -130,14 +142,16 @@ const NavigationMenuViewport = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <View className={cn('absolute left-0 top-full flex justify-center')}>
-      <NavigationMenuPrimitive.Viewport
+      <View
         className={cn(
           'web:origin-top-center relative mt-1.5 web:h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-lg web:animate-in web:zoom-in-90',
           className
         )}
         ref={ref}
         {...props}
-      />
+      >
+        <NavigationMenuPrimitive.Viewport />
+      </View>
     </View>
   );
 });

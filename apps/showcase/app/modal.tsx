@@ -1,4 +1,4 @@
-import { PortalHost, useModalPortalRoot } from '@rnr/portal';
+import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

@@ -1,4 +1,7 @@
-import * as CollapsiblePrimitive from '@rnr/collapsible';
+import * as CollapsiblePrimitive from '@rn-primitives/collapsible/dist/collapsible';
+import { addCn } from '../../lib/addCn';
+
+addCn([CollapsiblePrimitive.Root, CollapsiblePrimitive.Trigger, CollapsiblePrimitive.Content]);
 
 const Collapsible = CollapsiblePrimitive.Root;
 

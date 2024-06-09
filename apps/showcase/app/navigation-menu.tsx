@@ -1,4 +1,4 @@
-import { TextRef } from '@rnr/types';
+import { TextRef } from '@rn-primitives/types';
 import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';

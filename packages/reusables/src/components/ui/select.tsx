@@ -1,4 +1,4 @@
-import * as SelectPrimitive from '@rnr/select';
+import * as SelectPrimitive from '@rn-primitives/select/dist/select';
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -6,6 +6,24 @@ import { Check } from '../../lib/icons/Check';
 import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { ChevronUp } from '../../lib/icons/ChevronUp';
 import { cn } from '../../lib/utils';
+import { addCn } from '../../lib/addCn';
+
+addCn([
+  SelectPrimitive.Content,
+  SelectPrimitive.Group,
+  SelectPrimitive.Item,
+  SelectPrimitive.ItemIndicator,
+  SelectPrimitive.ItemText,
+  SelectPrimitive.Label,
+  SelectPrimitive.Overlay,
+  SelectPrimitive.Root,
+  SelectPrimitive.ScrollDownButton,
+  SelectPrimitive.ScrollUpButton,
+  SelectPrimitive.Separator,
+  SelectPrimitive.Trigger,
+  SelectPrimitive.Value,
+  SelectPrimitive.Viewport,
+]);
 
 type Option = SelectPrimitive.Option;
 
@@ -99,15 +117,17 @@ const SelectContent = React.forwardRef<
             {...props}
           >
             <SelectScrollUpButton />
-            <SelectPrimitive.Viewport
-              className={cn(
-                'p-1',
-                position === 'popper' &&
-                  'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
-              )}
-            >
-              {children}
-            </SelectPrimitive.Viewport>
+            <View>
+              <SelectPrimitive.Viewport
+                className={cn(
+                  'p-1',
+                  position === 'popper' &&
+                    'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
+                )}
+              >
+                {children}
+              </SelectPrimitive.Viewport>
+            </View>
             <SelectScrollDownButton />
           </SelectPrimitive.Content>
         </Animated.View>
@@ -139,7 +159,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative web:group flex flex-row w-full web:cursor-default web:select-none items-center rounded-sm py-1.5 native:py-2 pl-8 native:pl-10 pr-2 active:bg-accent web:outline-none web:focus:bg-accent',
+      'relative web:group flex flex-row w-full web:cursor-default web:select-none items-center rounded-sm py-1.5 native:py-2 pl-8 native:pl-10 pr-2 web:hover:bg-accent/50 active:bg-accent web:outline-none web:focus:bg-accent',
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}
@@ -150,7 +170,6 @@ const SelectItem = React.forwardRef<
         <Check size={16} strokeWidth={3} className='text-popover-foreground' />
       </SelectPrimitive.ItemIndicator>
     </View>
-
     <SelectPrimitive.ItemText className='text-sm native:text-lg text-popover-foreground native:text-base web:group-focus:text-accent-foreground' />
   </SelectPrimitive.Item>
 ));

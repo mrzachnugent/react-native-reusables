@@ -1,7 +1,18 @@
 import * as React from 'react';
-import * as TablePrimitive from '@rnr/table';
+import * as TablePrimitive from '@rn-primitives/table';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
+import { addCn } from '../../lib/addCn';
+
+addCn([
+  TablePrimitive.Root,
+  TablePrimitive.Header,
+  TablePrimitive.Body,
+  TablePrimitive.Footer,
+  TablePrimitive.Row,
+  TablePrimitive.Head,
+  TablePrimitive.Cell,
+]);
 
 const Table = React.forwardRef<
   React.ElementRef<typeof TablePrimitive.Root>,

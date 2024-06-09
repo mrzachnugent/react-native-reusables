@@ -203,99 +203,33 @@ importers:
       '@react-navigation/native':
         specifier: ^6.0.2
         version: 6.1.14(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rnr/accordion':
-        specifier: workspace:*
-        version: link:../../packages/primitives/accordion
-      '@rnr/alert-dialog':
-        specifier: workspace:*
-        version: link:../../packages/primitives/alert-dialog
-      '@rnr/aspect-ratio':
-        specifier: workspace:*
-        version: link:../../packages/primitives/aspect-ratio
-      '@rnr/avatar':
-        specifier: workspace:*
-        version: link:../../packages/primitives/avatar
-      '@rnr/checkbox':
-        specifier: workspace:*
-        version: link:../../packages/primitives/checkbox
-      '@rnr/collapsible':
-        specifier: workspace:*
-        version: link:../../packages/primitives/collapsible
-      '@rnr/context-menu':
-        specifier: workspace:*
-        version: link:../../packages/primitives/context-menu
-      '@rnr/dialog':
-        specifier: workspace:*
-        version: link:../../packages/primitives/dialog
-      '@rnr/dropdown-menu':
-        specifier: workspace:*
-        version: link:../../packages/primitives/dropdown-menu
-      '@rnr/hover-card':
-        specifier: workspace:*
-        version: link:../../packages/primitives/hover-card
-      '@rnr/label':
-        specifier: workspace:*
-        version: link:../../packages/primitives/label
-      '@rnr/menubar':
-        specifier: workspace:*
-        version: link:../../packages/primitives/menubar
-      '@rnr/navigation-menu':
-        specifier: workspace:*
-        version: link:../../packages/primitives/navigation-menu
-      '@rnr/popover':
-        specifier: workspace:*
-        version: link:../../packages/primitives/popover
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../../packages/primitives/portal
-      '@rnr/progress':
-        specifier: workspace:*
-        version: link:../../packages/primitives/progress
-      '@rnr/radio-group':
-        specifier: workspace:*
-        version: link:../../packages/primitives/radio-group
+      '@rn-primitives/aspect-ratio':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/collapsible':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/label':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slider':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/toast':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/toolbar':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
       '@rnr/reusables':
         specifier: workspace:*
         version: link:../../packages/reusables
-      '@rnr/select':
-        specifier: workspace:*
-        version: link:../../packages/primitives/select
-      '@rnr/separator':
-        specifier: workspace:*
-        version: link:../../packages/primitives/separator
-      '@rnr/slider':
-        specifier: workspace:*
-        version: link:../../packages/primitives/slider
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../../packages/primitives/slot
-      '@rnr/switch':
-        specifier: workspace:*
-        version: link:../../packages/primitives/switch
-      '@rnr/table':
-        specifier: workspace:*
-        version: link:../../packages/primitives/table
-      '@rnr/tabs':
-        specifier: workspace:*
-        version: link:../../packages/primitives/tabs
-      '@rnr/toast':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toast
-      '@rnr/toggle':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toggle
-      '@rnr/toggle-group':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toggle-group
-      '@rnr/toolbar':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toolbar
-      '@rnr/tooltip':
-        specifier: workspace:*
-        version: link:../../packages/primitives/tooltip
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../../packages/primitives/types
       '@shopify/flash-list':
         specifier: 1.6.4
         version: 1.6.4(@babel/runtime@7.24.0)(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
@@ -435,6 +369,24 @@ importers:
       '@react-navigation/native':
         specifier: ^6.0.2
         version: 6.1.14(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/avatar':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/progress':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/tooltip':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1657,96 +1609,96 @@ importers:
       '@react-navigation/native':
         specifier: ^6.0.2
         version: 6.1.14(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rnr/accordion':
-        specifier: workspace:*
-        version: link:../primitives/accordion
-      '@rnr/alert-dialog':
-        specifier: workspace:*
-        version: link:../primitives/alert-dialog
-      '@rnr/aspect-ratio':
-        specifier: workspace:*
-        version: link:../primitives/aspect-ratio
-      '@rnr/avatar':
-        specifier: workspace:*
-        version: link:../primitives/avatar
-      '@rnr/checkbox':
-        specifier: workspace:*
-        version: link:../primitives/checkbox
-      '@rnr/collapsible':
-        specifier: workspace:*
-        version: link:../primitives/collapsible
-      '@rnr/context-menu':
-        specifier: workspace:*
-        version: link:../primitives/context-menu
-      '@rnr/dialog':
-        specifier: workspace:*
-        version: link:../primitives/dialog
-      '@rnr/dropdown-menu':
-        specifier: workspace:*
-        version: link:../primitives/dropdown-menu
-      '@rnr/hover-card':
-        specifier: workspace:*
-        version: link:../primitives/hover-card
-      '@rnr/label':
-        specifier: workspace:*
-        version: link:../primitives/label
-      '@rnr/menubar':
-        specifier: workspace:*
-        version: link:../primitives/menubar
-      '@rnr/navigation-menu':
-        specifier: workspace:*
-        version: link:../primitives/navigation-menu
-      '@rnr/popover':
-        specifier: workspace:*
-        version: link:../primitives/popover
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../primitives/portal
-      '@rnr/progress':
-        specifier: workspace:*
-        version: link:../primitives/progress
-      '@rnr/radio-group':
-        specifier: workspace:*
-        version: link:../primitives/radio-group
-      '@rnr/select':
-        specifier: workspace:*
-        version: link:../primitives/select
-      '@rnr/separator':
-        specifier: workspace:*
-        version: link:../primitives/separator
-      '@rnr/slider':
-        specifier: workspace:*
-        version: link:../primitives/slider
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../primitives/slot
-      '@rnr/switch':
-        specifier: workspace:*
-        version: link:../primitives/switch
-      '@rnr/table':
-        specifier: workspace:*
-        version: link:../primitives/table
-      '@rnr/tabs':
-        specifier: workspace:*
-        version: link:../primitives/tabs
-      '@rnr/toast':
-        specifier: workspace:*
-        version: link:../primitives/toast
-      '@rnr/toggle':
-        specifier: workspace:*
-        version: link:../primitives/toggle
-      '@rnr/toggle-group':
-        specifier: workspace:*
-        version: link:../primitives/toggle-group
-      '@rnr/toolbar':
-        specifier: workspace:*
-        version: link:../primitives/toolbar
-      '@rnr/tooltip':
-        specifier: workspace:*
-        version: link:../primitives/tooltip
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../primitives/types
+      '@rn-primitives/accordion':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/alert-dialog':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/aspect-ratio':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/avatar':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/checkbox':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/collapsible':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/context-menu':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/dialog':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/dropdown-menu':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hover-card':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/label':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/menubar':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/navigation-menu':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/popover':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/progress':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/radio-group':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/select':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/separator':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slider':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/switch':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/table':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/tabs':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/toast':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/toggle':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/toggle-group':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/toolbar':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/tooltip':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types':
+        specifier: 1.0.0-rc.2
+        version: 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
       '@shopify/flash-list':
         specifier: 1.6.4
         version: 1.6.4(@babel/runtime@7.24.0)(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
@@ -3962,6 +3914,400 @@ packages:
   '@remix-run/web-stream@1.1.0':
     resolution: {integrity: sha512-KRJtwrjRV5Bb+pM7zxcTJkhIqWWSy+MYsIxHK+0m5atcznsf15YwUBWHWulZerV2+vvHH1Lp1DD7pw6qKW8SgA==}
 
+  '@rn-primitives/accordion@1.0.0-rc.2':
+    resolution: {integrity: sha512-SysrovYph4tR1GsmIN15aGYssYiZ9vFiuL7WrZXLaoudvHw/fdZBOsL1Q8D80P2asD9IxWpdaYevHiIwibpbQA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/alert-dialog@1.0.0-rc.2':
+    resolution: {integrity: sha512-/4W4uEpMUt0QN/fpDDqDI6UeeXsKdTMwtS1QFwa2EtLD1hrLIrY486Kinjeq5/hApnlgWSL/tI9xIeYTyZVLsQ==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/aspect-ratio@1.0.0-rc.2':
+    resolution: {integrity: sha512-e+1ya3oJYoMOCqwdXql02YiJiSFR2CP4aYc8fiACoTv1GKjumxdzeSv2Gi9vZklIkvfiERSKs4E6NyKo+WZ4yA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/avatar@1.0.0-rc.2':
+    resolution: {integrity: sha512-1gSfudMZoFAHDpw8YpzoF0vdxWswKFtdi7QzQGY2rJPY76QWZ5yPHpFaHEWc541RZy5Znuu0TCkdEBCT2i3gsg==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/checkbox@1.0.0-rc.2':
+    resolution: {integrity: sha512-Mv+p3kRSlUuQRyMnMCcz/iGxDJlTffKlvsRk23Yq8PegsXEHhFILBcelsE55YijHiOMHJZPdx/w3AwvS9bKsQA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/collapsible@1.0.0-rc.2':
+    resolution: {integrity: sha512-6YPJfkIwbQDCZ0UkWyliEM55AyIsu1oSg4XuEZDeZZdCXKdmEg3omQwANTrtDrN+J66k1evv8IpRLoK5Z1SbqQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/context-menu@1.0.0-rc.2':
+    resolution: {integrity: sha512-9id4gPjAq4vwhFmWEmYAdB6FA1uoBemD2fi3zfwZ/YSANeFA1zrly0nZfq2oi/7zMkXb0Lo6hFRotJnmKlf4Tw==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/dialog@1.0.0-rc.2':
+    resolution: {integrity: sha512-5jz7gULuSisN+pv9YBWHNqUs8qwfLzA4DLEhnupXLQU//msSs3dMc8lewbd7KH82vLYkvJK6U54CCM1nVhO8BQ==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/dropdown-menu@1.0.0-rc.2':
+    resolution: {integrity: sha512-FX6Ip+qt6bxhhK+Rs1A97MqNUe/15uvguioRihOxmsGQgpu2esa0rXt4HvnezCK8APUszlfo5gAfrJ/ZV9dqlw==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/hooks@1.0.0-rc.2':
+    resolution: {integrity: sha512-Yd/HQ2x8IIAGve7UrnrQUYA7N/lXOgcVRPwRvfcKMqUtpxtgfdmkiXHYyJmO/2Tlvl/Pf/qTTKQlbi7+3qtXDg==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/hover-card@1.0.0-rc.2':
+    resolution: {integrity: sha512-aodXL/PkfK9lGQp0Lty8NHHH3IurNNeYTRZUKJN3FlPpbSvh7WIuOCRGFSZQ3WD8AR9Ic6IuUUeqKdpK5UUI4w==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/label@1.0.0-rc.2':
+    resolution: {integrity: sha512-/rTkJlkeLkPcfIqLUDnCWlud2/WJYVz+m1aSboznZtO+sPkRzzTMd4etIRfKbTsVTcdiMKJw88CbssZSeHLsGw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/menubar@1.0.0-rc.2':
+    resolution: {integrity: sha512-ysEkdpWntZyA1sn9uAuF1rp+b0zIDwuBZHlIjA4I9XRoq3Wk6FGHEsQ1c4hkrildr33h+8M28I3EJjtXFOH2Jg==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/navigation-menu@1.0.0-rc.2':
+    resolution: {integrity: sha512-nvfuHTVHxAMw8OliqN3iPXqftf0wQTsQ6SPQeuIITWxEx9ZFdjd4UEiF6hqImHGypTkTE0gGwW3Qvp69UAQkzg==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/popover@1.0.0-rc.2':
+    resolution: {integrity: sha512-lSe/NU7TST3r/AOdnDH2iXmQ43Ewdb3Col5urTfeZUPolbhPthtOGrB1tF9rYZLBOtdbZhd9sdQPAqaiBECDhg==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/portal@1.0.0-rc.2':
+    resolution: {integrity: sha512-qdIDlyeMDhb61xUmMK9D+E/VNYLCbcgzDVI9XuN1bxT4ZM9Gc1fSf51fqsdRBu2DMW8Ei74mVJyYPCXiImekRw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/progress@1.0.0-rc.2':
+    resolution: {integrity: sha512-9KedxFC24OHZy5+EfVvk276dAxMxBciX1ZtrfLHDLD5McwSWSvdrXjbkFlNNrO+rKxCk+Xtg12wXlKPop29Jnw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/radio-group@1.0.0-rc.2':
+    resolution: {integrity: sha512-Yz61wXnx+V4BMSKtBmubs/F/uiYglVgueWU2xfwerwJK63ioWUZF4JKcjYVNRuM/wZ2RWkBokj3EhZfMZMD8dw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/select@1.0.0-rc.2':
+    resolution: {integrity: sha512-n71qZppG+GuWvZzc43qQTdxN2CzBDd+iNY8GgZVCXHwNaS4L6LuaMThRT/Qq+NepXua4S/XuvkD6GFiuSD9SIg==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/separator@1.0.0-rc.2':
+    resolution: {integrity: sha512-MflPe0c1UXGrDbdTFacxZdtSJj6TpnBv+YvR4YFzOpxIRfeS5TFTo6InbZNudwlH1tLRyWgiRP6VG8F0mHSexQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/slider@1.0.0-rc.2':
+    resolution: {integrity: sha512-mq6/3aMPpPmuVEJrvFLWcK3jViOZ2hueh7PKVtIwLyqFThHYLXUR3lq+GVw7P1NAKNy7Rv7ph6vIGAevuHmTuA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/slot@1.0.0-rc.2':
+    resolution: {integrity: sha512-bTBlHaQxVmZP6uGHDoXPIXKag+CmL4BB9a2gPq+AubSRjW9EV8uXXm9Hv98SDaiu6lHueJIrpSNpgd792bLe9g==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/switch@1.0.0-rc.2':
+    resolution: {integrity: sha512-l7qJu1OeCVr8hR+5l7ivQgleW8g/8nq9AD/uIJ7oUJTQmFFz/4aqm5HLV6poEk8r18X2UKEhyfRwbstTDXxdxQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/table@1.0.0-rc.2':
+    resolution: {integrity: sha512-m3zdNO/Kkwt8ILu7PqMNUJtZkwQPhlXWK1C1i6b6rsy0m8SCSEaM2c9mwfOWhPcR5CKc1DI5nG3LalstO9qj4A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/tabs@1.0.0-rc.2':
+    resolution: {integrity: sha512-Nv4Nf7ay+zF5IO81t4QzOwbanFaPmJj4sCfBZQ4mFTzVozWEe4AW5ou9EW1h+xQzU00qTL2ok2KmAU6QISz6dQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/toast@1.0.0-rc.2':
+    resolution: {integrity: sha512-oC1Jd+u7EU/EfbWDmgVTp5h80SApyBrwINRN+mMXniXIjbYQpQdLv0EdKrJlmw6l9nOlYuYJLD5vACIQ3nlC2g==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/toggle-group@1.0.0-rc.2':
+    resolution: {integrity: sha512-uZPjo+quzruNyyA1XFy9eK1jk1F5FhD+pOqI67JRPwUaee+l33nA3fKUY3uJGvaif16sZ5Ao6YvnjxRoWdpmJA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/toggle@1.0.0-rc.2':
+    resolution: {integrity: sha512-mIcUA+9h1KtI79ZsgQwqELanQ7Dmc6a0ZxC/i4OWDuxan8HgdsUC7Yxxv43Wu8L0M7LdlvDPJGU+XZlRQH+tjA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/toolbar@1.0.0-rc.2':
+    resolution: {integrity: sha512-cQR6pmSHkD6F7MwpWzxJeP+/IxFOBJzLvTc4q9BiLQYEF2g4SlSjH+AE4sVnkHO3GArlWmODmPh7y9MA8DZY6A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/tooltip@1.0.0-rc.2':
+    resolution: {integrity: sha512-vbY/inQYcZsD1o1gXseGgKMTWnGIVhD21zKLpeq946fdcdHDoPKORDODOJ9XuE2dnVPyMmal7ZTAVVk4d4JSEQ==}
+    peerDependencies:
+      '@rn-primitives/portal': '*'
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/types@1.0.0-rc.2':
+    resolution: {integrity: sha512-8JhDANQ3VzkfRbJhShuy5PBJ0upyEPyibNS4ABZd2QqsNiRSbi6lpO73qgGowJYO5ZePzu18WGTnK0xz4les1A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
+  '@rn-primitives/utils@1.0.0-rc.2':
+    resolution: {integrity: sha512-v8qsx9xhdW8JKYatEjopDIBufchEmHWXrnkZyQkeI+d2/jvkwYu4O8yzx9PLjkRosggepOp9JucqO6l9bc9EFA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native:
+        optional: true
+      react-native-web:
+        optional: true
+
   '@rnx-kit/chromium-edge-launcher@1.0.0':
     resolution: {integrity: sha512-lzD84av1ZQhYUS+jsGqJiCMaJO2dn9u+RTT9n9q6D3SaKVwWqv+7AoRKqBu19bkwyE+iFRl1ymr40QS90jVFYg==}
     engines: {node: '>=14.15'}
@@ -4396,6 +4742,7 @@ packages:
   are-we-there-yet@2.0.0:
     resolution: {integrity: sha512-Ci/qENmwHnsYo9xKIcUJN5LeDKdJ6R1Z1j9V/J5wyq8nh/mYPEpIKJbBZXtZjG04HiK7zV/p6Vs9952MrMeUIw==}
     engines: {node: '>=10'}
+    deprecated: This package is no longer supported.
 
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
@@ -5562,6 +5909,7 @@ packages:
   gauge@3.0.2:
     resolution: {integrity: sha512-+5J6MS/5XksCuXq++uFRsnUd7Ovu1XenbeuIuNRJxYWjgQbPuFhT14lAvsWfqfAmnwluf1OwMjz39HjfLPci0Q==}
     engines: {node: '>=10'}
+    deprecated: This package is no longer supported.
 
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
@@ -5627,12 +5975,15 @@ packages:
 
   glob@6.0.4:
     resolution: {integrity: sha512-MKZeRNyYZAVVVG1oZeLaWie1uweH40m9AZwIwxyPbTSX4hHrVYSzLg0Ro5Z5R7XKkIX+Cc6oD1rqeDJnwsB8/A==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@9.3.5:
     resolution: {integrity: sha512-e1LleDykUz2Iu+MTYdkSsuWX8lvAjAcs0Xef0lNIu0S2wOAzuTxCJtcd9S3cijlwYF18EsU3rzb8jPVobxDh9Q==}
@@ -5845,6 +6196,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -6939,6 +7291,7 @@ packages:
 
   npmlog@5.0.1:
     resolution: {integrity: sha512-AqZtDUWOMKs1G/8lwylVjrdYgqA4d9nu8hc+0gzRxlDb1I10+FHBGMXs6aiQHFdCUUlqH99MUMuLfzWDNDtfxw==}
+    deprecated: This package is no longer supported.
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -7023,6 +7376,7 @@ packages:
 
   osenv@0.1.5:
     resolution: {integrity: sha512-0CWcCECdMVc2Rw3U5w9ZjqX6ga6ubk1xDVKxtBQPK7wis/0F2r9T6k4ydGYhecl7YUBxBVxhL5oisPsNxAPe2g==}
+    deprecated: This package is no longer supported.
 
   p-finally@1.0.0:
     resolution: {integrity: sha512-LICb2p9CB7FS+0eR1oqWnHhp0FljGLZCWBE9aix0Uye9W8LTQPwMTYVGWQWIw9RdQiDg4+epXQODwIYJtSJaow==}
@@ -7680,18 +8034,22 @@ packages:
 
   rimraf@2.4.5:
     resolution: {integrity: sha512-J5xnxTyqaiw06JjMftq7L9ouA448dw/E7dKghkP9WpKNuwmARNNg+Gk8/u5ryb9N/Yo2+z3MCwuqFK/+qPOPfQ==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@4.4.1:
@@ -11716,6 +12074,434 @@ snapshots:
   '@remix-run/web-stream@1.1.0':
     dependencies:
       web-streams-polyfill: 3.3.3
+
+  '@rn-primitives/accordion@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/alert-dialog@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-alert-dialog': 1.0.5(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/aspect-ratio@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/avatar@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/checkbox@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/collapsible@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/context-menu@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-context-menu': 2.1.5(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/utils': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/dialog@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/dropdown-menu@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-dropdown-menu': 2.0.6(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/utils': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/hooks@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/hover-card@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-hover-card': 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/popover': 1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/label@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-label': 2.0.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/menubar@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-menubar': 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/utils': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/navigation-menu@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-navigation-menu': 1.1.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/utils': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/popover@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-popover': 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
+      zustand: 4.5.2(@types/react@18.2.79)(react@18.2.0)
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+
+  '@rn-primitives/progress@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-progress': 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/radio-group@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-radio-group': 1.1.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/select@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-select': 2.0.0(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/separator@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-separator': 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/slider@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-slider': 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/slot@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/switch@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-switch': 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/table@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/tabs@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-tabs': 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/toast@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/toggle-group@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-toggle-group': 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/utils': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/toggle@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-toggle': 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/toolbar@1.0.0-rc.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-toolbar': 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/utils': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/tooltip@1.0.0-rc.2(@rn-primitives/portal@1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@radix-ui/react-tooltip': 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/hooks': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal': 1.0.0-rc.2(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types': 1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-dom
+
+  '@rn-primitives/types@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@rn-primitives/utils@1.0.0-rc.2(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
+    optionalDependencies:
+      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-web: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   '@rnx-kit/chromium-edge-launcher@1.0.0':
     dependencies:

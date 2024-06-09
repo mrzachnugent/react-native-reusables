@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GestureResponderEvent, Modal, Pressable, Text, View } from 'react-native';
 import { Button } from '../../components/deprecated-ui/button';
-import * as Slot from '@rnr/slot';
+import * as Slot from '@rn-primitives/slot';
 import { cn } from '../../lib/utils';
 
 interface AlertDialogProps {

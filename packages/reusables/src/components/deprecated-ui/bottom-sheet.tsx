@@ -8,7 +8,7 @@ import {
   BottomSheetView as GBottomSheetView,
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
-import * as Slot from '@rnr/slot';
+import * as Slot from '@rn-primitives/slot';
 import React, { useCallback } from 'react';
 import { GestureResponderEvent, Keyboard, Pressable, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

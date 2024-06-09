@@ -2,8 +2,16 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { TextClassContext } from './text';
-import * as HoverCardPrimitive from '@rnr/hover-card';
+import * as HoverCardPrimitive from '@rn-primitives/hover-card/dist/hover-card';
 import { cn } from '../../lib/utils';
+import { addCn } from '../../lib/addCn';
+
+addCn([
+  HoverCardPrimitive.Root,
+  HoverCardPrimitive.Trigger,
+  HoverCardPrimitive.Content,
+  HoverCardPrimitive.Overlay,
+]);
 
 const HoverCard = HoverCardPrimitive.Root;
 

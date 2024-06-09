@@ -1,6 +1,9 @@
 import * as React from 'react';
-import * as SeparatorPrimitive from '@rnr/separator';
+import * as SeparatorPrimitive from '@rn-primitives/separator';
 import { cn } from '../../lib/utils';
+import { addCn } from '../../lib/addCn';
+
+addCn([SeparatorPrimitive.Root]);
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,

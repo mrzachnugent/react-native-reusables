@@ -1,4 +1,4 @@
-import * as ContextMenuPrimitive from '@rnr/context-menu';
+import * as ContextMenuPrimitive from '@rn-primitives/context-menu/dist/context-menu';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Check } from '../../lib/icons/Check';
@@ -7,17 +7,30 @@ import { ChevronRight } from '../../lib/icons/ChevronRight';
 import { ChevronUp } from '../../lib/icons/ChevronUp';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
+import { addCn } from '../../lib/addCn';
+
+addCn([
+  ContextMenuPrimitive.CheckboxItem,
+  ContextMenuPrimitive.Content,
+  ContextMenuPrimitive.Group,
+  ContextMenuPrimitive.Item,
+  ContextMenuPrimitive.ItemIndicator,
+  ContextMenuPrimitive.Label,
+  ContextMenuPrimitive.Overlay,
+  ContextMenuPrimitive.RadioGroup,
+  ContextMenuPrimitive.RadioItem,
+  ContextMenuPrimitive.Root,
+  ContextMenuPrimitive.Separator,
+  ContextMenuPrimitive.Sub,
+  ContextMenuPrimitive.SubContent,
+  ContextMenuPrimitive.SubTrigger,
+  ContextMenuPrimitive.Trigger,
+]);
 
 const ContextMenu = ContextMenuPrimitive.Root;
-
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
-
 const ContextMenuGroup = ContextMenuPrimitive.Group;
-
-const ContextMenuPortal = ContextMenuPrimitive.Portal;
-
 const ContextMenuSub = ContextMenuPrimitive.Sub;
-
 const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;
 
 const ContextMenuSubTrigger = React.forwardRef<
@@ -139,7 +152,7 @@ ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName;
 const ContextMenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>
->(({ className, children, checked, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <ContextMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
@@ -147,7 +160,6 @@ const ContextMenuCheckboxItem = React.forwardRef<
       props.disabled && 'web:pointer-events-none opacity-50',
       className
     )}
-    checked={checked}
     {...props}
   >
     <View className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
@@ -233,10 +245,10 @@ export {
   ContextMenu,
   ContextMenuCheckboxItem,
   ContextMenuContent,
+  ContextMenuTrigger,
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuLabel,
-  ContextMenuPortal,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
   ContextMenuSeparator,
@@ -244,5 +256,4 @@ export {
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
-  ContextMenuTrigger,
 };

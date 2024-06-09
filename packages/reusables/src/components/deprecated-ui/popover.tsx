@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Slot from '@rnr/slot';
+import * as Slot from '@rn-primitives/slot';
 import { cn } from '../../lib/utils';
 import { Button, buttonVariants } from './button';
 
