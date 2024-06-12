@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
-  useWindowDimensions,
+  Dimensions,
+  Platform,
   type LayoutRectangle,
   type ScaledSize,
   type ViewStyle,
@@ -37,7 +38,11 @@ export function useRelativePosition({
   side,
   disablePositioningStyle,
 }: UseRelativePositionArgs) {
-  const dimensions = useWindowDimensions();
+  const dimensions = Platform.select({
+    ios: Dimensions.get('window'),
+    default: Dimensions.get('screen'),
+  });
+
   return React.useMemo(() => {
     if (disablePositioningStyle) {
       return {};
@@ -56,7 +61,17 @@ export function useRelativePosition({
       sideOffset,
       dimensions,
     });
-  }, [triggerPosition, contentLayout, dimensions.width, dimensions.height]);
+  }, [
+    align,
+    avoidCollisions,
+    side,
+    alignOffset,
+    insets,
+    triggerPosition,
+    contentLayout,
+    dimensions.width,
+    dimensions.height,
+  ]);
 }
 
 export interface LayoutPosition {
@@ -101,7 +116,10 @@ function getSidePosition({
 
   if (side === 'top') {
     return {
-      top: Math.max(insetTop, positionTop),
+      top: Math.min(
+        Math.max(insetTop, positionTop),
+        dimensions.height - insetBottom - contentLayout.height
+      ),
     };
   }
 
