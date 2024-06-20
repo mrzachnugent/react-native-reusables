@@ -1,11 +1,8 @@
-import * as CheckboxPrimitive from '@rn-primitives/checkbox/dist/checkbox';
+import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import * as React from 'react';
 import { Platform } from 'react-native';
-import { addCn } from '../../lib/addCn';
 import { Check } from '../../lib/icons/Check';
 import { cn } from '../../lib/utils';
-
-addCn([CheckboxPrimitive.Root, CheckboxPrimitive.Indicator]);
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,

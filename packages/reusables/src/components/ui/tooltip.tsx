@@ -2,16 +2,8 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextClassContext } from './text';
-import * as TooltipPrimitive from '@rn-primitives/tooltip/dist/tooltip';
+import * as TooltipPrimitive from '@rn-primitives/tooltip';
 import { cn } from '../../lib/utils';
-import { addCn } from '../../lib/addCn';
-
-addCn([
-  TooltipPrimitive.Root,
-  TooltipPrimitive.Trigger,
-  TooltipPrimitive.Content,
-  TooltipPrimitive.Overlay,
-]);
 
 const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;

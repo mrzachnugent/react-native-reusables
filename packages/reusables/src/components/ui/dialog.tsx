@@ -1,20 +1,9 @@
-import * as DialogPrimitive from '@rn-primitives/dialog/dist/dialog';
+import * as DialogPrimitive from '@rn-primitives/dialog';
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { X } from '../../lib/icons/X';
 import { cn } from '../../lib/utils';
-import { addCn } from '../../lib/addCn';
-
-addCn([
-  DialogPrimitive.Root,
-  DialogPrimitive.Trigger,
-  DialogPrimitive.Close,
-  DialogPrimitive.Overlay,
-  DialogPrimitive.Content,
-  DialogPrimitive.Title,
-  DialogPrimitive.Description,
-]);
 
 const Dialog = DialogPrimitive.Root;
 

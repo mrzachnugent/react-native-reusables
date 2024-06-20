@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import * as Label from '@rn-primitives/label/dist/label';
-import { addCn } from '~/lib/addCn';
-
-addCn([Label.Root, Label.Text]);
+import * as Label from '@rn-primitives/label';
 
 export default function LabelScreen() {
   return (

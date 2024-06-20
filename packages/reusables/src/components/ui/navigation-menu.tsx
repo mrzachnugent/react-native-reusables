@@ -1,4 +1,4 @@
-import * as NavigationMenuPrimitive from '@rn-primitives/navigation-menu/dist/navigation-menu';
+import * as NavigationMenuPrimitive from '@rn-primitives/navigation-menu';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -13,18 +13,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { cn } from '../../lib/utils';
-import { addCn } from '../../lib/addCn';
-
-addCn([
-  NavigationMenuPrimitive.Content,
-  NavigationMenuPrimitive.Indicator,
-  NavigationMenuPrimitive.Item,
-  NavigationMenuPrimitive.Link,
-  NavigationMenuPrimitive.List,
-  NavigationMenuPrimitive.Root,
-  NavigationMenuPrimitive.Trigger,
-  NavigationMenuPrimitive.Viewport,
-]);
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,

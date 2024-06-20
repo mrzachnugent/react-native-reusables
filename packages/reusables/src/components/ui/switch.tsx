@@ -1,4 +1,4 @@
-import * as SwitchPrimitives from '@rn-primitives/switch/dist/switch';
+import * as SwitchPrimitives from '@rn-primitives/switch';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, {
@@ -7,11 +7,8 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { addCn } from '../../lib/addCn';
 import { useColorScheme } from '../../lib/useColorScheme';
 import { cn } from '../../lib/utils';
-
-addCn([SwitchPrimitives.Root, SwitchPrimitives.Thumb]);
 
 const SwitchWeb = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,

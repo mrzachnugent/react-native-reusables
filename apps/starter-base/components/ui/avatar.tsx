@@ -1,9 +1,6 @@
 import * as React from 'react';
-import * as AvatarPrimitive from '@rn-primitives/avatar/dist/avatar';
-import { addCn } from '~/lib/addCn';
+import * as AvatarPrimitive from '@rn-primitives/avatar';
 import { cn } from '~/lib/utils';
-
-addCn([AvatarPrimitive.Root, AvatarPrimitive.Image, AvatarPrimitive.Fallback]);
 
 const AvatarPrimitiveRoot = AvatarPrimitive.Root;
 const AvatarPrimitiveImage = AvatarPrimitive.Image;

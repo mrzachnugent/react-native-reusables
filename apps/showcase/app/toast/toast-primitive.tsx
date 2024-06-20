@@ -3,9 +3,6 @@ import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Portal } from '@rn-primitives/portal';
 import * as Toast from '@rn-primitives/toast';
-import { addCn } from '~/lib/addCn';
-
-addCn([Toast.Root, Toast.Title, Toast.Description, Toast.Action, Toast.Close]);
 
 export default function ToastScreen() {
   const [open, setOpen] = React.useState(false);

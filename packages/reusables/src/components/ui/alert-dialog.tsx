@@ -2,21 +2,9 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { buttonTextVariants, buttonVariants } from '../../components/ui/button';
-import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog/dist/alert-dialog';
+import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
-import { addCn } from '../../lib/addCn';
-
-addCn([
-  AlertDialogPrimitive.Action,
-  AlertDialogPrimitive.Cancel,
-  AlertDialogPrimitive.Content,
-  AlertDialogPrimitive.Description,
-  AlertDialogPrimitive.Overlay,
-  AlertDialogPrimitive.Root,
-  AlertDialogPrimitive.Title,
-  AlertDialogPrimitive.Trigger,
-]);
 
 const AlertDialog = AlertDialogPrimitive.Root;
 

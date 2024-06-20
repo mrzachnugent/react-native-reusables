@@ -1,21 +1,11 @@
-import * as Toolbar from '@rn-primitives/toolbar/dist/toolbar';
+import * as Toolbar from '@rn-primitives/toolbar';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { addCn } from '~/lib/addCn';
 import { AlignCenter } from '~/lib/icons/AlignCenter';
 import { AlignLeft } from '~/lib/icons/AlignLeft';
 import { Bold } from '~/lib/icons/Bold';
 import { Italic } from '~/lib/icons/Italic';
 import { cn } from '~/lib/utils';
-
-addCn([
-  Toolbar.Root,
-  Toolbar.ToggleGroup,
-  Toolbar.ToggleItem,
-  Toolbar.Separator,
-  Toolbar.Button,
-  Toolbar.Link,
-]);
 
 export default function ToolbarScreen() {
   const [singleValue, setSingleValue] = React.useState<string>();

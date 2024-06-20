@@ -1,4 +1,4 @@
-import * as ContextMenuPrimitive from '@rn-primitives/context-menu/dist/context-menu';
+import * as ContextMenuPrimitive from '@rn-primitives/context-menu';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Check } from '../../lib/icons/Check';
@@ -7,25 +7,6 @@ import { ChevronRight } from '../../lib/icons/ChevronRight';
 import { ChevronUp } from '../../lib/icons/ChevronUp';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
-import { addCn } from '../../lib/addCn';
-
-addCn([
-  ContextMenuPrimitive.CheckboxItem,
-  ContextMenuPrimitive.Content,
-  ContextMenuPrimitive.Group,
-  ContextMenuPrimitive.Item,
-  ContextMenuPrimitive.ItemIndicator,
-  ContextMenuPrimitive.Label,
-  ContextMenuPrimitive.Overlay,
-  ContextMenuPrimitive.RadioGroup,
-  ContextMenuPrimitive.RadioItem,
-  ContextMenuPrimitive.Root,
-  ContextMenuPrimitive.Separator,
-  ContextMenuPrimitive.Sub,
-  ContextMenuPrimitive.SubContent,
-  ContextMenuPrimitive.SubTrigger,
-  ContextMenuPrimitive.Trigger,
-]);
 
 const ContextMenu = ContextMenuPrimitive.Root;
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger;

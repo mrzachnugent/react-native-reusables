@@ -1,4 +1,4 @@
-import * as DropdownMenuPrimitive from '@rn-primitives/dropdown-menu/dist/dropdown-menu';
+import * as DropdownMenuPrimitive from '@rn-primitives/dropdown-menu';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Check } from '../../lib/icons/Check';
@@ -7,25 +7,6 @@ import { ChevronRight } from '../../lib/icons/ChevronRight';
 import { ChevronUp } from '../../lib/icons/ChevronUp';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
-import { addCn } from '../../lib/addCn';
-
-addCn([
-  DropdownMenuPrimitive.CheckboxItem,
-  DropdownMenuPrimitive.Content,
-  DropdownMenuPrimitive.Group,
-  DropdownMenuPrimitive.Item,
-  DropdownMenuPrimitive.ItemIndicator,
-  DropdownMenuPrimitive.Label,
-  DropdownMenuPrimitive.Overlay,
-  DropdownMenuPrimitive.RadioGroup,
-  DropdownMenuPrimitive.RadioItem,
-  DropdownMenuPrimitive.Root,
-  DropdownMenuPrimitive.Separator,
-  DropdownMenuPrimitive.Sub,
-  DropdownMenuPrimitive.SubContent,
-  DropdownMenuPrimitive.SubTrigger,
-  DropdownMenuPrimitive.Trigger,
-]);
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 

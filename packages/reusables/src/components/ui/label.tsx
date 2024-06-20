@@ -1,9 +1,6 @@
-import * as LabelPrimitive from '@rn-primitives/label/dist/label';
+import * as LabelPrimitive from '@rn-primitives/label';
 import * as React from 'react';
 import { cn } from '../../lib/utils';
-import { addCn } from '../../lib/addCn';
-
-addCn([LabelPrimitive.Root, LabelPrimitive.Text]);
 
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Text>,
