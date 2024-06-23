@@ -18,7 +18,7 @@ import path from 'path';
 import prompts from 'prompts';
 import { z } from 'zod';
 import { Component, INVALID_COMPONENT_ERROR, getAllComponentsToWrite } from '../items';
-import { COMPONENTS, UI_COMPONENTS } from '../items/components';
+import { COMPONENTS } from '../items/components';
 import { fileURLToPath } from 'url';
 
 const filePath = fileURLToPath(import.meta.url);
@@ -69,7 +69,7 @@ export const add = new Command()
           message: 'Which components would you like to add?',
           hint: 'Space to select. A to toggle all. Enter to submit.',
           instructions: false,
-          choices: UI_COMPONENTS.map((entry) => ({
+          choices: COMPONENTS.map((entry) => ({
             title: entry.name,
             value: entry.name,
             selected: false,
@@ -117,18 +117,18 @@ export const add = new Command()
           );
         }
 
-        npmPackages.push(
-          ...comp.npmPackages[config.platforms === 'universal' ? 'universal' : 'native-only']
-        );
+        npmPackages.push(...comp.npmPackages);
       }
 
       const packageManager = await getPackageManager(cwd);
 
-      if (npmPackages.length) {
-        spinner.text = `Installing ${npmPackages.join(', ')}...`;
+      const uniqueNpmPackages = Array.from(new Set(npmPackages));
+
+      if (uniqueNpmPackages.length) {
+        spinner.text = `Installing ${uniqueNpmPackages.join(', ')}...`;
         await execa(
           packageManager,
-          [packageManager === 'npm' ? 'install' : 'add', ...npmPackages],
+          [packageManager === 'npm' ? 'install' : 'add', ...uniqueNpmPackages],
           {
             cwd,
           }
@@ -250,8 +250,7 @@ function fixImports(rawfile: string, componentsAlias: string, libAlias: string) 
     .replace('./typography', `${componentsAlias}/ui/typography`)
     .replace('./text', `${componentsAlias}/ui/text`)
     .replaceAll('../../components', componentsAlias)
-    .replaceAll('../../lib', libAlias)
-    .replaceAll('@rnr', `${componentsAlias}/primitives`);
+    .replaceAll('../../lib', libAlias);
 }
 
 async function promptForConfig(cwd: string) {
