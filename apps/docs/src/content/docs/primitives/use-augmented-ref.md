@@ -1,4 +1,0 @@
----
-title: useAugmentedRef
-description: useAugmentedRef
----

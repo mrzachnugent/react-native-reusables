@@ -10,7 +10,7 @@ import { LinkButton } from '@/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/dialog?raw';
 
-<LinkButton href='/primitives/dialog'>Dialog Primitive</LinkButton>
+<LinkButton href='https://rn-primitives.vercel.app/dialog'>Dialog Primitive</LinkButton>
 <LinkButton target='_blank' href='https://rnr-showcase.vercel.app/dialog'>
   Demo
 </LinkButton>
@@ -29,7 +29,7 @@ A modal dialog that interrupts the user with important content and expects a res
   </TabItem>
   <TabItem label='Manual'>
     <Aside type='tip' title='Dependencies'>
-      Before copy/pasting, add the <a href='/primitives/dialog' className='text-white font-bold'> dialog primitive</a> to your project.
+      Before copy/pasting, add the <a href='https://rn-primitives.vercel.app/dialog' className='text-white font-bold'> dialog primitive</a> to your project.
     </Aside>
 
     <br />
@@ -47,7 +47,7 @@ A modal dialog that interrupts the user with important content and expects a res
   Requires a `<PortalHost />` as the last child of your `<Root/>` (`app/_layout.tsx`) component
 
   ```tsx
-  import { PortalHost } from '~/components/primitives/portal';
+  import { PortalHost } from '@rn-primitives/portal';
 
   function Root() {
     return (

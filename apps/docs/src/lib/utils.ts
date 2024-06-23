@@ -10,6 +10,5 @@ export function fixImports(rawfile: string) {
     .replace('./typography', '~/components/ui/typography')
     .replace('./text', '~/components/ui/text')
     .replaceAll('../../components', '~/components')
-    .replaceAll('../../lib', '~/lib')
-    .replaceAll('@rnr', '~/components/primitives');
+    .replaceAll('../../lib', '~/lib');
 }
