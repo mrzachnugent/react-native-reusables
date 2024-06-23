@@ -44,105 +44,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.0.2
         version: 1.0.2(@types/react@18.2.79)(react@18.2.0)
-      '@rnr/accordion':
-        specifier: workspace:*
-        version: link:../../packages/primitives/accordion
-      '@rnr/alert-dialog':
-        specifier: workspace:*
-        version: link:../../packages/primitives/alert-dialog
-      '@rnr/aspect-ratio':
-        specifier: workspace:*
-        version: link:../../packages/primitives/aspect-ratio
-      '@rnr/avatar':
-        specifier: workspace:*
-        version: link:../../packages/primitives/avatar
-      '@rnr/checkbox':
-        specifier: workspace:*
-        version: link:../../packages/primitives/checkbox
-      '@rnr/collapsible':
-        specifier: workspace:*
-        version: link:../../packages/primitives/collapsible
-      '@rnr/context-menu':
-        specifier: workspace:*
-        version: link:../../packages/primitives/context-menu
-      '@rnr/dialog':
-        specifier: workspace:*
-        version: link:../../packages/primitives/dialog
-      '@rnr/dropdown-menu':
-        specifier: workspace:*
-        version: link:../../packages/primitives/dropdown-menu
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../../packages/primitives/hooks
-      '@rnr/hover-card':
-        specifier: workspace:*
-        version: link:../../packages/primitives/hover-card
-      '@rnr/label':
-        specifier: workspace:*
-        version: link:../../packages/primitives/label
-      '@rnr/menubar':
-        specifier: workspace:*
-        version: link:../../packages/primitives/menubar
-      '@rnr/navigation-menu':
-        specifier: workspace:*
-        version: link:../../packages/primitives/navigation-menu
-      '@rnr/popover':
-        specifier: workspace:*
-        version: link:../../packages/primitives/popover
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../../packages/primitives/portal
-      '@rnr/progress':
-        specifier: workspace:*
-        version: link:../../packages/primitives/progress
-      '@rnr/radio-group':
-        specifier: workspace:*
-        version: link:../../packages/primitives/radio-group
       '@rnr/reusables':
         specifier: workspace:*
         version: link:../../packages/reusables
-      '@rnr/select':
-        specifier: workspace:*
-        version: link:../../packages/primitives/select
-      '@rnr/separator':
-        specifier: workspace:*
-        version: link:../../packages/primitives/separator
-      '@rnr/slider':
-        specifier: workspace:*
-        version: link:../../packages/primitives/slider
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../../packages/primitives/slot
-      '@rnr/switch':
-        specifier: workspace:*
-        version: link:../../packages/primitives/switch
-      '@rnr/table':
-        specifier: workspace:*
-        version: link:../../packages/primitives/table
-      '@rnr/tabs':
-        specifier: workspace:*
-        version: link:../../packages/primitives/tabs
-      '@rnr/toast':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toast
-      '@rnr/toggle':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toggle
-      '@rnr/toggle-group':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toggle-group
-      '@rnr/toolbar':
-        specifier: workspace:*
-        version: link:../../packages/primitives/toolbar
-      '@rnr/tooltip':
-        specifier: workspace:*
-        version: link:../../packages/primitives/tooltip
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../../packages/primitives/types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../../packages/primitives/utils
       '@types/react':
         specifier: ~18.2.79
         version: 18.2.79
@@ -530,105 +434,9 @@ importers:
         specifier: ^3.20.2
         version: 3.22.4
     devDependencies:
-      '@rnr/accordion':
-        specifier: workspace:*
-        version: link:../primitives/accordion
-      '@rnr/alert-dialog':
-        specifier: workspace:*
-        version: link:../primitives/alert-dialog
-      '@rnr/aspect-ratio':
-        specifier: workspace:*
-        version: link:../primitives/aspect-ratio
-      '@rnr/avatar':
-        specifier: workspace:*
-        version: link:../primitives/avatar
-      '@rnr/checkbox':
-        specifier: workspace:*
-        version: link:../primitives/checkbox
-      '@rnr/collapsible':
-        specifier: workspace:*
-        version: link:../primitives/collapsible
-      '@rnr/context-menu':
-        specifier: workspace:*
-        version: link:../primitives/context-menu
-      '@rnr/dialog':
-        specifier: workspace:*
-        version: link:../primitives/dialog
-      '@rnr/dropdown-menu':
-        specifier: workspace:*
-        version: link:../primitives/dropdown-menu
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../primitives/hooks
-      '@rnr/hover-card':
-        specifier: workspace:*
-        version: link:../primitives/hover-card
-      '@rnr/label':
-        specifier: workspace:*
-        version: link:../primitives/label
-      '@rnr/menubar':
-        specifier: workspace:*
-        version: link:../primitives/menubar
-      '@rnr/navigation-menu':
-        specifier: workspace:*
-        version: link:../primitives/navigation-menu
-      '@rnr/popover':
-        specifier: workspace:*
-        version: link:../primitives/popover
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../primitives/portal
-      '@rnr/progress':
-        specifier: workspace:*
-        version: link:../primitives/progress
-      '@rnr/radio-group':
-        specifier: workspace:*
-        version: link:../primitives/radio-group
       '@rnr/reusables':
         specifier: workspace:*
         version: link:../reusables
-      '@rnr/select':
-        specifier: workspace:*
-        version: link:../primitives/select
-      '@rnr/separator':
-        specifier: workspace:*
-        version: link:../primitives/separator
-      '@rnr/slider':
-        specifier: workspace:*
-        version: link:../primitives/slider
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../primitives/slot
-      '@rnr/switch':
-        specifier: workspace:*
-        version: link:../primitives/switch
-      '@rnr/table':
-        specifier: workspace:*
-        version: link:../primitives/table
-      '@rnr/tabs':
-        specifier: workspace:*
-        version: link:../primitives/tabs
-      '@rnr/toast':
-        specifier: workspace:*
-        version: link:../primitives/toast
-      '@rnr/toggle':
-        specifier: workspace:*
-        version: link:../primitives/toggle
-      '@rnr/toggle-group':
-        specifier: workspace:*
-        version: link:../primitives/toggle-group
-      '@rnr/toolbar':
-        specifier: workspace:*
-        version: link:../primitives/toolbar
-      '@rnr/tooltip':
-        specifier: workspace:*
-        version: link:../primitives/tooltip
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../primitives/types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../primitives/utils
       '@types/babel__core':
         specifier: ^7.20.1
         version: 7.20.5
@@ -659,941 +467,6 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
-
-  packages/primitives/accordion:
-    dependencies:
-      '@radix-ui/react-accordion':
-        specifier: ^1.1.2
-        version: 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/alert-dialog:
-    dependencies:
-      '@radix-ui/react-alert-dialog':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/aspect-ratio:
-    dependencies:
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/avatar:
-    dependencies:
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/checkbox:
-    dependencies:
-      '@radix-ui/react-checkbox':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/collapsible:
-    dependencies:
-      '@radix-ui/react-collapsible':
-        specifier: ^1.0.3
-        version: 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/context-menu:
-    dependencies:
-      '@radix-ui/react-context-menu':
-        specifier: ^2.1.5
-        version: 2.1.5(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/dialog:
-    dependencies:
-      '@radix-ui/react-dialog':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/dropdown-menu:
-    dependencies:
-      '@radix-ui/react-dropdown-menu':
-        specifier: ^2.0.6
-        version: 2.0.6(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/hooks:
-    dependencies:
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/hover-card:
-    dependencies:
-      '@radix-ui/react-hover-card':
-        specifier: ^1.0.7
-        version: 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/popover':
-        specifier: workspace:*
-        version: link:../popover
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/label:
-    dependencies:
-      '@radix-ui/react-label':
-        specifier: ^2.0.2
-        version: 2.0.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/menubar:
-    dependencies:
-      '@radix-ui/react-menubar':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/navigation-menu:
-    dependencies:
-      '@radix-ui/react-navigation-menu':
-        specifier: ^1.1.4
-        version: 1.1.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/popover:
-    dependencies:
-      '@radix-ui/react-popover':
-        specifier: ^1.0.7
-        version: 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/portal:
-    dependencies:
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      zustand:
-        specifier: ^4.4.7
-        version: 4.5.2(@types/react@18.2.79)(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/progress:
-    dependencies:
-      '@radix-ui/react-progress':
-        specifier: ^1.0.3
-        version: 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/radio-group:
-    dependencies:
-      '@radix-ui/react-radio-group':
-        specifier: ^1.1.3
-        version: 1.1.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/select:
-    dependencies:
-      '@radix-ui/react-select':
-        specifier: ^2.0.0
-        version: 2.0.0(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/separator:
-    dependencies:
-      '@radix-ui/react-separator':
-        specifier: ^1.0.3
-        version: 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/slider:
-    dependencies:
-      '@radix-ui/react-slider':
-        specifier: ^1.1.2
-        version: 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/slot:
-    dependencies:
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/switch:
-    dependencies:
-      '@radix-ui/react-switch':
-        specifier: ^1.0.3
-        version: 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/table:
-    dependencies:
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/tabs:
-    dependencies:
-      '@radix-ui/react-tabs':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/toast:
-    dependencies:
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/toggle:
-    dependencies:
-      '@radix-ui/react-toggle':
-        specifier: ^1.0.3
-        version: 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/toggle-group:
-    dependencies:
-      '@radix-ui/react-toggle-group':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/toolbar:
-    dependencies:
-      '@radix-ui/react-toolbar':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      '@rnr/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/tooltip:
-    dependencies:
-      '@radix-ui/react-tooltip':
-        specifier: ^1.0.7
-        version: 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@rnr/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@rnr/portal':
-        specifier: workspace:*
-        version: link:../portal
-      '@rnr/slot':
-        specifier: workspace:*
-        version: link:../slot
-      '@rnr/types':
-        specifier: workspace:*
-        version: link:../types
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/types:
-    dependencies:
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-
-  packages/primitives/utils:
-    dependencies:
-      react-native-web:
-        specifier: '*'
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    devDependencies:
-      '@tsconfig/recommended':
-        specifier: ^1.0.1
-        version: 1.0.3
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-native:
-        specifier: 0.74.1
-        version: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
 
   packages/reusables:
     dependencies:
@@ -3721,76 +2594,38 @@ packages:
     peerDependencies:
       react-native: ^0.0.0-0 || >=0.60 <1.0
 
-  '@react-native-community/cli-clean@13.6.6':
-    resolution: {integrity: sha512-cBwJTwl0NyeA4nyMxbhkWZhxtILYkbU3TW3k8AXLg+iGphe0zikYMGB3T+haTvTc6alTyEFwPbimk9bGIqkjAQ==}
-
   '@react-native-community/cli-clean@13.6.8':
     resolution: {integrity: sha512-B1uxlm1N4BQuWFvBL3yRl3LVvydjswsdbTi7tMrHMtSxfRio1p9HjcmDzlzKco09Y+8qBGgakm3jcMZGLbhXQQ==}
-
-  '@react-native-community/cli-config@13.6.6':
-    resolution: {integrity: sha512-mbG425zCKr8JZhv/j11382arezwS/70juWMsn8j2lmrGTrP1cUdW0MF15CCIFtJsqyK3Qs+FTmqttRpq81QfSg==}
 
   '@react-native-community/cli-config@13.6.8':
     resolution: {integrity: sha512-RabCkIsWdP4Ex/sf1uSP9qxc30utm+0uIJAjrZkNQynm7T4Lyqn/kT3LKm4yM6M0Qk61YxGguiaXF4601vAduw==}
 
-  '@react-native-community/cli-debugger-ui@13.6.6':
-    resolution: {integrity: sha512-Vv9u6eS4vKSDAvdhA0OiQHoA7y39fiPIgJ6biT32tN4avHDtxlc6TWZGiqv7g98SBvDWvoVAmdPLcRf3kU+c8g==}
-
   '@react-native-community/cli-debugger-ui@13.6.8':
     resolution: {integrity: sha512-2cS+MX/Su6sVSjqpDftFOXbK7EuPg98xzsPkdPhkQnkZwvXqodK9CAMuDMbx3lBHHtrPrpMbBCpFmPN8iVOnlA==}
-
-  '@react-native-community/cli-doctor@13.6.6':
-    resolution: {integrity: sha512-TWZb5g6EmQe2Ua2TEWNmyaEayvlWH4GmdD9ZC+p8EpKFpB1NpDGMK6sXbpb42TDvwZg5s4TDRplK0PBEA/SVDg==}
 
   '@react-native-community/cli-doctor@13.6.8':
     resolution: {integrity: sha512-/3Vdy9J3hyiu0y3nd/CU3kBqPlTRxnLXg7V6jrA1jbTOlZAMyV9imEkrqEaGK0SMOyMhh9Pipf98Ozhk0Nl4QA==}
 
-  '@react-native-community/cli-hermes@13.6.6':
-    resolution: {integrity: sha512-La5Ie+NGaRl3klei6WxKoOxmCUSGGxpOk6vU5pEGf0/O7ky+Ay0io+zXYUZqlNMi/cGpO7ZUijakBYOB/uyuFg==}
-
   '@react-native-community/cli-hermes@13.6.8':
     resolution: {integrity: sha512-lZi/OBFuZUj5cLK94oEgtrtmxGoqeYVRcnHXl/R5c4put9PDl+qH2bEMlGZkFiw57ae3UZKr3TMk+1s4jh3FYQ==}
-
-  '@react-native-community/cli-platform-android@13.6.6':
-    resolution: {integrity: sha512-/tMwkBeNxh84syiSwNlYtmUz/Ppc+HfKtdopL/5RB+fd3SV1/5/NPNjMlyLNgFKnpxvKCInQ7dnl6jGHJjeHjg==}
 
   '@react-native-community/cli-platform-android@13.6.8':
     resolution: {integrity: sha512-vWrqeLRRTwp2kO33nbrAgbYn8HR2c2CpIfyVJY9Ckk7HGUSwDyxdcSu7YBvt2ShdfLZH0HctWFNXsgGrfg6BDw==}
 
-  '@react-native-community/cli-platform-apple@13.6.6':
-    resolution: {integrity: sha512-bOmSSwoqNNT3AmCRZXEMYKz1Jf1l2F86Nhs7qBcXdY/sGiJ+Flng564LOqvdAlVLTbkgz47KjNKCS2pP4Jg0Mg==}
-
   '@react-native-community/cli-platform-apple@13.6.8':
     resolution: {integrity: sha512-1JPohnlXPqU44zns3ALEzIbH2cKRw6JtEDJERgLuEUbs2r2NeJgqDbKyZ7fTTO8o+pegDnn6+Rr7qGVVOuUzzg==}
-
-  '@react-native-community/cli-platform-ios@13.6.6':
-    resolution: {integrity: sha512-vjDnRwhlSN5ryqKTas6/DPkxuouuyFBAqAROH4FR1cspTbn6v78JTZKDmtQy9JMMo7N5vZj1kASU5vbFep9IOQ==}
 
   '@react-native-community/cli-platform-ios@13.6.8':
     resolution: {integrity: sha512-/IIcIRM8qaoD7iZqsvtf6Qq1AwtChWYfB9sTn3mTiolZ5Zd5bXH37g+6liPfAICRkj2Ptq3iXmjrDVUQAxrOXw==}
 
-  '@react-native-community/cli-server-api@13.6.6':
-    resolution: {integrity: sha512-ZtCXxoFlM7oDv3iZ3wsrT3SamhtUJuIkX2WePLPlN5bcbq7zimbPm2lHyicNJtpcGQ5ymsgpUWPCNZsWQhXBqQ==}
-
   '@react-native-community/cli-server-api@13.6.8':
     resolution: {integrity: sha512-Lx664oWTzpVfbKUTy+3GIX7e+Mt5Zn+zdkM4ehllNdik/lbB3tM9Nrg8PSvOfI+tTXs2w55+nIydLfH+0FqJVg==}
-
-  '@react-native-community/cli-tools@13.6.6':
-    resolution: {integrity: sha512-ptOnn4AJczY5njvbdK91k4hcYazDnGtEPrqIwEI+k/CTBHNdb27Rsm2OZ7ye6f7otLBqF8gj/hK6QzJs8CEMgw==}
 
   '@react-native-community/cli-tools@13.6.8':
     resolution: {integrity: sha512-1MYlae9EkbjC7DBYOGMH5xF9yDoeNYUKgEdDjL6WAUBoF2gtwiZPM6igLKi/+dhb5sCtC7fiLrLi0Oevdf+RmQ==}
 
-  '@react-native-community/cli-types@13.6.6':
-    resolution: {integrity: sha512-733iaYzlmvNK7XYbnWlMjdE+2k0hlTBJW071af/xb6Bs+hbJqBP9c03FZuYH2hFFwDDntwj05bkri/P7VgSxug==}
-
   '@react-native-community/cli-types@13.6.8':
     resolution: {integrity: sha512-C4mVByy0i+/NPuPhdMLBR7ubEVkjVS1VwoQu/BoG1crJFNE+167QXAzH01eFbXndsjZaMWmD4Gerx7TYc6lHfA==}
-
-  '@react-native-community/cli@13.6.6':
-    resolution: {integrity: sha512-IqclB7VQ84ye8Fcs89HOpOscY4284VZg2pojHNl8H0Lzd4DadXJWQoxC7zWm8v2f8eyeX2kdhxp2ETD5tceIgA==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   '@react-native-community/cli@13.6.8':
     resolution: {integrity: sha512-0lRdgLNaXixWY4BfFRl1J6Ao9Lapo2z+++iE7TD4GAbuxOWJSyFi+KUA8XNfSDyML4jFO02MZgyBPxAWdaminQ==}
@@ -3803,27 +2638,13 @@ packages:
   '@react-native-community/slider@4.5.2':
     resolution: {integrity: sha512-DbFyCyI7rwl0FkBkp0lzEVp+5mNfS5qU/nM2sK2aSguWhj0Odkt1aKHP2iW/ljruOhgS/O4dEixXlne4OdZJDQ==}
 
-  '@react-native/assets-registry@0.74.83':
-    resolution: {integrity: sha512-2vkLMVnp+YTZYTNSDIBZojSsjz8sl5PscP3j4GcV6idD8V978SZfwFlk8K0ti0BzRs11mzL0Pj17km597S/eTQ==}
-    engines: {node: '>=18'}
-
   '@react-native/assets-registry@0.74.84':
     resolution: {integrity: sha512-dzUhwyaX04QosWZ8zyaaNB/WYZIdeDN1lcpfQbqiOhZJShRH+FLTDVONE/dqlMQrP+EO7lDqF0RrlIt9lnOCQQ==}
-    engines: {node: '>=18'}
-
-  '@react-native/babel-plugin-codegen@0.74.83':
-    resolution: {integrity: sha512-+S0st3t4Ro00bi9gjT1jnK8qTFOU+CwmziA7U9odKyWrCoRJrgmrvogq/Dr1YXlpFxexiGIupGut1VHxr+fxJA==}
     engines: {node: '>=18'}
 
   '@react-native/babel-plugin-codegen@0.74.84':
     resolution: {integrity: sha512-UR4uiii5szIJA84mSC6GJOfYKDq7/ThyetOQT62+BBcyGeHVtHlNLNRzgaMeLqIQaT8Fq4pccMI+7QqLOMXzdw==}
     engines: {node: '>=18'}
-
-  '@react-native/babel-preset@0.74.83':
-    resolution: {integrity: sha512-KJuu3XyVh3qgyUer+rEqh9a/JoUxsDOzkJNfRpDyXiAyjDRoVch60X/Xa/NcEQ93iCVHAWs0yQ+XGNGIBCYE6g==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@babel/core': '*'
 
   '@react-native/babel-preset@0.74.84':
     resolution: {integrity: sha512-WUfu6Y4aGuVdocQZvx33BJiQWFH6kRCHYbZfBn2psgFrSRLgQWEQrDCxqPFObNAVSayM0rNhp2FvI5K/Eyeqlg==}
@@ -3831,63 +2652,31 @@ packages:
     peerDependencies:
       '@babel/core': '*'
 
-  '@react-native/codegen@0.74.83':
-    resolution: {integrity: sha512-GgvgHS3Aa2J8/mp1uC/zU8HuTh8ZT5jz7a4mVMWPw7+rGyv70Ba8uOVBq6UH2Q08o617IATYc+0HfyzAfm4n0w==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@babel/preset-env': ^7.1.6
-
   '@react-native/codegen@0.74.84':
     resolution: {integrity: sha512-0hXlnu9i0o8v+gXKQi+x6T471L85kCDwW4WrJiYAeOheWrQdNNW6rC3g8+LL7HXAf7QcHGU/8/d57iYfdVK2BQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@babel/preset-env': ^7.1.6
 
-  '@react-native/community-cli-plugin@0.74.83':
-    resolution: {integrity: sha512-7GAFjFOg1mFSj8bnFNQS4u8u7+QtrEeflUIDVZGEfBZQ3wMNI5ycBzbBGycsZYiq00Xvoc6eKFC7kvIaqeJpUQ==}
-    engines: {node: '>=18'}
-
   '@react-native/community-cli-plugin@0.74.84':
     resolution: {integrity: sha512-GBKE+1sUh86fS2XXV46gMCNHMc1KetshMbYJ0AhDhldpaILZHqRBX50mdVsiYVvkzp4QjM0nmYqefuJ9NVwicQ==}
-    engines: {node: '>=18'}
-
-  '@react-native/debugger-frontend@0.74.83':
-    resolution: {integrity: sha512-RGQlVUegBRxAUF9c1ss1ssaHZh6CO+7awgtI9sDeU0PzDZY/40ImoPD5m0o0SI6nXoVzbPtcMGzU+VO590pRfA==}
     engines: {node: '>=18'}
 
   '@react-native/debugger-frontend@0.74.84':
     resolution: {integrity: sha512-YUEA03UNFbiYzHpYxlcS2D9+3eNT5YLGkl5yRg3nOSN6KbCc/OttGnNZme+tuSOJwjMN/vcvtDKYkTqjJw8U0A==}
     engines: {node: '>=18'}
 
-  '@react-native/dev-middleware@0.74.83':
-    resolution: {integrity: sha512-UH8iriqnf7N4Hpi20D7M2FdvSANwTVStwFCSD7VMU9agJX88Yk0D1T6Meh2RMhUu4kY2bv8sTkNRm7LmxvZqgA==}
-    engines: {node: '>=18'}
-
   '@react-native/dev-middleware@0.74.84':
     resolution: {integrity: sha512-veYw/WmyrAOQHUiIeULzn2duJQnXDPiKq2jZ/lcmDo6jsLirpp+Q73lx09TYgy/oVoPRuV0nfmU3x9B6EV/7qQ==}
-    engines: {node: '>=18'}
-
-  '@react-native/gradle-plugin@0.74.83':
-    resolution: {integrity: sha512-Pw2BWVyOHoBuJVKxGVYF6/GSZRf6+v1Ygc+ULGz5t20N8qzRWPa2fRZWqoxsN7TkNLPsECYY8gooOl7okOcPAQ==}
     engines: {node: '>=18'}
 
   '@react-native/gradle-plugin@0.74.84':
     resolution: {integrity: sha512-wYWC5WWXqzCCe4PDogz9pNc4xH5ZamahW5XGSbrrYJ5V3walZ+7z43V6iEBJkZbLjj9YBcSttkXYGr1Xh4veAg==}
     engines: {node: '>=18'}
 
-  '@react-native/js-polyfills@0.74.83':
-    resolution: {integrity: sha512-/t74n8r6wFhw4JEoOj3bN71N1NDLqaawB75uKAsSjeCwIR9AfCxlzZG0etsXtOexkY9KMeZIQ7YwRPqUdNXuqw==}
-    engines: {node: '>=18'}
-
   '@react-native/js-polyfills@0.74.84':
     resolution: {integrity: sha512-+PgxuUjBw9JVlz6m4ECsIJMLbDopnr4rpLmsG32hQaJrg0wMuvHtsgAY/J/aVCSG2GNUXexfjrnhc+O9yGOZXQ==}
     engines: {node: '>=18'}
-
-  '@react-native/metro-babel-transformer@0.74.83':
-    resolution: {integrity: sha512-hGdx5N8diu8y+GW/ED39vTZa9Jx1di2ZZ0aapbhH4egN1agIAusj5jXTccfNBwwWF93aJ5oVbRzfteZgjbutKg==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@babel/core': '*'
 
   '@react-native/metro-babel-transformer@0.74.84':
     resolution: {integrity: sha512-YtVGq7jkgyUECv5yt4BOFbOXyW4ddUn8+dnwGGpJKdfhXYL5o5++AxNdE+2x+SZdkj3JUVekGKPwRabFECABaw==}
@@ -3898,22 +2687,8 @@ packages:
   '@react-native/normalize-color@2.1.0':
     resolution: {integrity: sha512-Z1jQI2NpdFJCVgpY+8Dq/Bt3d+YUi1928Q+/CZm/oh66fzM0RUl54vvuXlPJKybH4pdCZey1eDTPaLHkMPNgWA==}
 
-  '@react-native/normalize-colors@0.74.83':
-    resolution: {integrity: sha512-jhCY95gRDE44qYawWVvhTjTplW1g+JtKTKM3f8xYT1dJtJ8QWv+gqEtKcfmOHfDkSDaMKG0AGBaDTSK8GXLH8Q==}
-
   '@react-native/normalize-colors@0.74.84':
     resolution: {integrity: sha512-Y5W6x8cC5RuakUcTVUFNAIhUZ/tYpuqHZlRBoAuakrTwVuoNHXfQki8lj1KsYU7rW6e3VWgdEx33AfOQpdNp6A==}
-
-  '@react-native/virtualized-lists@0.74.83':
-    resolution: {integrity: sha512-rmaLeE34rj7py4FxTod7iMTC7BAsm+HrGA8WxYmEJeyTV7WSaxAkosKoYBz8038mOiwnG9VwA/7FrB6bEQvn1A==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@types/react': ^18.2.6
-      react: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
 
   '@react-native/virtualized-lists@0.74.84':
     resolution: {integrity: sha512-XcV+qdqt2WihaY4iRm/M1FdSy+18lecU9mRXNmy9YK8g9Th/8XbNtmmKI0qWBx3KxyuXMH/zd0ps05YTrX16kw==}
@@ -7908,17 +6683,6 @@ packages:
       react: ^18.0.0
       react-dom: ^18.0.0
 
-  react-native@0.74.1:
-    resolution: {integrity: sha512-0H2XpmghwOtfPpM2LKqHIN7gxy+7G/r1hwJHKLV6uoyXGC/gCojRtoo5NqyKrWpFC8cqyT6wTYCLuG7CxEKilg==}
-    engines: {node: '>=18'}
-    hasBin: true
-    peerDependencies:
-      '@types/react': ^18.2.6
-      react: 18.2.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-
   react-native@0.74.2:
     resolution: {integrity: sha512-EBMBjPPL4/GjHMP4NqsZabT3gI5WU9cSmduABGAGrd8uIcmTZ5F2Ng9k6gFmRm7n8e8CULxDNu98ZpQfBjl7Bw==}
     engines: {node: '>=18'}
@@ -11798,32 +10562,12 @@ snapshots:
       merge-options: 3.0.4
       react-native: 0.74.2(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
 
-  '@react-native-community/cli-clean@13.6.6':
-    dependencies:
-      '@react-native-community/cli-tools': 13.6.6
-      chalk: 4.1.2
-      execa: 5.1.1
-      fast-glob: 3.3.2
-    transitivePeerDependencies:
-      - encoding
-
   '@react-native-community/cli-clean@13.6.8':
     dependencies:
       '@react-native-community/cli-tools': 13.6.8
       chalk: 4.1.2
       execa: 5.1.1
       fast-glob: 3.3.2
-    transitivePeerDependencies:
-      - encoding
-
-  '@react-native-community/cli-config@13.6.6':
-    dependencies:
-      '@react-native-community/cli-tools': 13.6.6
-      chalk: 4.1.2
-      cosmiconfig: 5.2.1
-      deepmerge: 4.3.1
-      fast-glob: 3.3.2
-      joi: 17.12.2
     transitivePeerDependencies:
       - encoding
 
@@ -11838,39 +10582,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@react-native-community/cli-debugger-ui@13.6.6':
-    dependencies:
-      serve-static: 1.15.0
-    transitivePeerDependencies:
-      - supports-color
-
   '@react-native-community/cli-debugger-ui@13.6.8':
     dependencies:
       serve-static: 1.15.0
     transitivePeerDependencies:
       - supports-color
-
-  '@react-native-community/cli-doctor@13.6.6':
-    dependencies:
-      '@react-native-community/cli-config': 13.6.6
-      '@react-native-community/cli-platform-android': 13.6.6
-      '@react-native-community/cli-platform-apple': 13.6.6
-      '@react-native-community/cli-platform-ios': 13.6.6
-      '@react-native-community/cli-tools': 13.6.6
-      chalk: 4.1.2
-      command-exists: 1.2.9
-      deepmerge: 4.3.1
-      envinfo: 7.11.1
-      execa: 5.1.1
-      hermes-profile-transformer: 0.0.6
-      node-stream-zip: 1.15.0
-      ora: 5.4.1
-      semver: 7.6.0
-      strip-ansi: 5.2.0
-      wcwidth: 1.0.1
-      yaml: 2.4.0
-    transitivePeerDependencies:
-      - encoding
 
   '@react-native-community/cli-doctor@13.6.8':
     dependencies:
@@ -11894,32 +10610,12 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@react-native-community/cli-hermes@13.6.6':
-    dependencies:
-      '@react-native-community/cli-platform-android': 13.6.6
-      '@react-native-community/cli-tools': 13.6.6
-      chalk: 4.1.2
-      hermes-profile-transformer: 0.0.6
-    transitivePeerDependencies:
-      - encoding
-
   '@react-native-community/cli-hermes@13.6.8':
     dependencies:
       '@react-native-community/cli-platform-android': 13.6.8
       '@react-native-community/cli-tools': 13.6.8
       chalk: 4.1.2
       hermes-profile-transformer: 0.0.6
-    transitivePeerDependencies:
-      - encoding
-
-  '@react-native-community/cli-platform-android@13.6.6':
-    dependencies:
-      '@react-native-community/cli-tools': 13.6.6
-      chalk: 4.1.2
-      execa: 5.1.1
-      fast-glob: 3.3.2
-      fast-xml-parser: 4.3.5
-      logkitty: 0.7.1
     transitivePeerDependencies:
       - encoding
 
@@ -11934,17 +10630,6 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@react-native-community/cli-platform-apple@13.6.6':
-    dependencies:
-      '@react-native-community/cli-tools': 13.6.6
-      chalk: 4.1.2
-      execa: 5.1.1
-      fast-glob: 3.3.2
-      fast-xml-parser: 4.3.5
-      ora: 5.4.1
-    transitivePeerDependencies:
-      - encoding
-
   '@react-native-community/cli-platform-apple@13.6.8':
     dependencies:
       '@react-native-community/cli-tools': 13.6.8
@@ -11956,34 +10641,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@react-native-community/cli-platform-ios@13.6.6':
-    dependencies:
-      '@react-native-community/cli-platform-apple': 13.6.6
-    transitivePeerDependencies:
-      - encoding
-
   '@react-native-community/cli-platform-ios@13.6.8':
     dependencies:
       '@react-native-community/cli-platform-apple': 13.6.8
     transitivePeerDependencies:
       - encoding
-
-  '@react-native-community/cli-server-api@13.6.6':
-    dependencies:
-      '@react-native-community/cli-debugger-ui': 13.6.6
-      '@react-native-community/cli-tools': 13.6.6
-      compression: 1.7.4
-      connect: 3.7.0
-      errorhandler: 1.5.1
-      nocache: 3.0.4
-      pretty-format: 26.6.2
-      serve-static: 1.15.0
-      ws: 6.2.2
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
 
   '@react-native-community/cli-server-api@13.6.8':
     dependencies:
@@ -12002,22 +10664,6 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@react-native-community/cli-tools@13.6.6':
-    dependencies:
-      appdirsjs: 1.2.7
-      chalk: 4.1.2
-      execa: 5.1.1
-      find-up: 5.0.0
-      mime: 2.6.0
-      node-fetch: 2.7.0
-      open: 6.4.0
-      ora: 5.4.1
-      semver: 7.6.0
-      shell-quote: 1.8.1
-      sudo-prompt: 9.2.1
-    transitivePeerDependencies:
-      - encoding
-
   '@react-native-community/cli-tools@13.6.8':
     dependencies:
       appdirsjs: 1.2.7
@@ -12034,38 +10680,9 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@react-native-community/cli-types@13.6.6':
-    dependencies:
-      joi: 17.12.2
-
   '@react-native-community/cli-types@13.6.8':
     dependencies:
       joi: 17.12.2
-
-  '@react-native-community/cli@13.6.6':
-    dependencies:
-      '@react-native-community/cli-clean': 13.6.6
-      '@react-native-community/cli-config': 13.6.6
-      '@react-native-community/cli-debugger-ui': 13.6.6
-      '@react-native-community/cli-doctor': 13.6.6
-      '@react-native-community/cli-hermes': 13.6.6
-      '@react-native-community/cli-server-api': 13.6.6
-      '@react-native-community/cli-tools': 13.6.6
-      '@react-native-community/cli-types': 13.6.6
-      chalk: 4.1.2
-      commander: 9.5.0
-      deepmerge: 4.3.1
-      execa: 5.1.1
-      find-up: 4.1.0
-      fs-extra: 8.1.0
-      graceful-fs: 4.2.11
-      prompts: 2.4.2
-      semver: 7.6.0
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
 
   '@react-native-community/cli@13.6.8':
     dependencies:
@@ -12096,69 +10713,11 @@ snapshots:
 
   '@react-native-community/slider@4.5.2': {}
 
-  '@react-native/assets-registry@0.74.83': {}
-
   '@react-native/assets-registry@0.74.84': {}
-
-  '@react-native/babel-plugin-codegen@0.74.83(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
-    dependencies:
-      '@react-native/codegen': 0.74.83(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-    transitivePeerDependencies:
-      - '@babel/preset-env'
-      - supports-color
 
   '@react-native/babel-plugin-codegen@0.74.84(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
     dependencies:
       '@react-native/codegen': 0.74.84(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-    transitivePeerDependencies:
-      - '@babel/preset-env'
-      - supports-color
-
-  '@react-native/babel-preset@0.74.83(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
-    dependencies:
-      '@babel/core': 7.24.0
-      '@babel/plugin-proposal-async-generator-functions': 7.20.7(@babel/core@7.24.0)
-      '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.24.0)
-      '@babel/plugin-proposal-export-default-from': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-proposal-logical-assignment-operators': 7.20.7(@babel/core@7.24.0)
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.24.0)
-      '@babel/plugin-proposal-numeric-separator': 7.18.6(@babel/core@7.24.0)
-      '@babel/plugin-proposal-object-rest-spread': 7.20.7(@babel/core@7.24.0)
-      '@babel/plugin-proposal-optional-catch-binding': 7.18.6(@babel/core@7.24.0)
-      '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.24.0)
-      '@babel/plugin-syntax-dynamic-import': 7.8.3(@babel/core@7.24.0)
-      '@babel/plugin-syntax-export-default-from': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-syntax-flow': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.24.0)
-      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-arrow-functions': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-async-to-generator': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-block-scoping': 7.23.4(@babel/core@7.24.0)
-      '@babel/plugin-transform-classes': 7.23.8(@babel/core@7.24.0)
-      '@babel/plugin-transform-computed-properties': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-destructuring': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-flow-strip-types': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-function-name': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-literals': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-modules-commonjs': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-named-capturing-groups-regex': 7.22.5(@babel/core@7.24.0)
-      '@babel/plugin-transform-parameters': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-private-methods': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-private-property-in-object': 7.23.4(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-display-name': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-jsx-self': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-runtime': 7.24.0(@babel/core@7.24.0)
-      '@babel/plugin-transform-shorthand-properties': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-spread': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-sticky-regex': 7.23.3(@babel/core@7.24.0)
-      '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.24.0)
-      '@babel/plugin-transform-unicode-regex': 7.23.3(@babel/core@7.24.0)
-      '@babel/template': 7.24.0
-      '@react-native/babel-plugin-codegen': 0.74.83(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      babel-plugin-transform-flow-enums: 0.0.2(@babel/core@7.24.0)
-      react-refresh: 0.14.2
     transitivePeerDependencies:
       - '@babel/preset-env'
       - supports-color
@@ -12212,19 +10771,6 @@ snapshots:
       - '@babel/preset-env'
       - supports-color
 
-  '@react-native/codegen@0.74.83(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
-    dependencies:
-      '@babel/parser': 7.24.0
-      '@babel/preset-env': 7.24.0(@babel/core@7.24.0)
-      glob: 7.2.3
-      hermes-parser: 0.19.1
-      invariant: 2.2.4
-      jscodeshift: 0.14.0(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      mkdirp: 0.5.6
-      nullthrows: 1.1.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@react-native/codegen@0.74.84(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
     dependencies:
       '@babel/parser': 7.24.0
@@ -12237,28 +10783,6 @@ snapshots:
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - supports-color
-
-  '@react-native/community-cli-plugin@0.74.83(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
-    dependencies:
-      '@react-native-community/cli-server-api': 13.6.6
-      '@react-native-community/cli-tools': 13.6.6
-      '@react-native/dev-middleware': 0.74.83
-      '@react-native/metro-babel-transformer': 0.74.83(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      chalk: 4.1.2
-      execa: 5.1.1
-      metro: 0.80.6
-      metro-config: 0.80.6
-      metro-core: 0.80.6
-      node-fetch: 2.7.0
-      querystring: 0.2.1
-      readline: 1.3.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@babel/preset-env'
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
 
   '@react-native/community-cli-plugin@0.74.84(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
     dependencies:
@@ -12282,30 +10806,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@react-native/debugger-frontend@0.74.83': {}
-
   '@react-native/debugger-frontend@0.74.84': {}
-
-  '@react-native/dev-middleware@0.74.83':
-    dependencies:
-      '@isaacs/ttlcache': 1.4.1
-      '@react-native/debugger-frontend': 0.74.83
-      '@rnx-kit/chromium-edge-launcher': 1.0.0
-      chrome-launcher: 0.15.2
-      connect: 3.7.0
-      debug: 2.6.9
-      node-fetch: 2.7.0
-      nullthrows: 1.1.1
-      open: 7.4.2
-      selfsigned: 2.4.1
-      serve-static: 1.15.0
-      temp-dir: 2.0.0
-      ws: 6.2.2
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
 
   '@react-native/dev-middleware@0.74.84':
     dependencies:
@@ -12328,23 +10829,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@react-native/gradle-plugin@0.74.83': {}
-
   '@react-native/gradle-plugin@0.74.84': {}
 
-  '@react-native/js-polyfills@0.74.83': {}
-
   '@react-native/js-polyfills@0.74.84': {}
-
-  '@react-native/metro-babel-transformer@0.74.83(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
-    dependencies:
-      '@babel/core': 7.24.0
-      '@react-native/babel-preset': 0.74.83(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      hermes-parser: 0.19.1
-      nullthrows: 1.1.1
-    transitivePeerDependencies:
-      - '@babel/preset-env'
-      - supports-color
 
   '@react-native/metro-babel-transformer@0.74.84(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))':
     dependencies:
@@ -12358,18 +10845,7 @@ snapshots:
 
   '@react-native/normalize-color@2.1.0': {}
 
-  '@react-native/normalize-colors@0.74.83': {}
-
   '@react-native/normalize-colors@0.74.84': {}
-
-  '@react-native/virtualized-lists@0.74.83(@types/react@18.2.79)(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
-    dependencies:
-      invariant: 2.2.4
-      nullthrows: 1.1.1
-      react: 18.2.0
-      react-native: 0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-    optionalDependencies:
-      '@types/react': 18.2.79
 
   '@react-native/virtualized-lists@0.74.84(@types/react@18.2.79)(react-native@0.74.2(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -17122,56 +15598,6 @@ snapshots:
       styleq: 0.1.3
     transitivePeerDependencies:
       - encoding
-
-  react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0):
-    dependencies:
-      '@jest/create-cache-key-function': 29.7.0
-      '@react-native-community/cli': 13.6.6
-      '@react-native-community/cli-platform-android': 13.6.6
-      '@react-native-community/cli-platform-ios': 13.6.6
-      '@react-native/assets-registry': 0.74.83
-      '@react-native/codegen': 0.74.83(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      '@react-native/community-cli-plugin': 0.74.83(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      '@react-native/gradle-plugin': 0.74.83
-      '@react-native/js-polyfills': 0.74.83
-      '@react-native/normalize-colors': 0.74.83
-      '@react-native/virtualized-lists': 0.74.83(@types/react@18.2.79)(react-native@0.74.1(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      abort-controller: 3.0.0
-      anser: 1.4.10
-      ansi-regex: 5.0.1
-      base64-js: 1.5.1
-      chalk: 4.1.2
-      event-target-shim: 5.0.1
-      flow-enums-runtime: 0.0.6
-      invariant: 2.2.4
-      jest-environment-node: 29.7.0
-      jsc-android: 250231.0.0
-      memoize-one: 5.2.1
-      metro-runtime: 0.80.6
-      metro-source-map: 0.80.6
-      mkdirp: 0.5.6
-      nullthrows: 1.1.1
-      pretty-format: 26.6.2
-      promise: 8.3.0
-      react: 18.2.0
-      react-devtools-core: 5.2.0
-      react-refresh: 0.14.0
-      react-shallow-renderer: 16.15.0(react@18.2.0)
-      regenerator-runtime: 0.13.11
-      scheduler: 0.24.0-canary-efb381bbf-20230505
-      stacktrace-parser: 0.1.10
-      whatwg-fetch: 3.6.20
-      ws: 6.2.2
-      yargs: 17.7.2
-    optionalDependencies:
-      '@types/react': 18.2.79
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@babel/preset-env'
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
 
   react-native@0.74.2(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0):
     dependencies:
