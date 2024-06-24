@@ -17,8 +17,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        gray: colors.zinc,
-
+        gray: colors.slate,
+        accent: colors.slate,
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -48,7 +48,6 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        accent: colors.zinc,
       },
       borderRadius: {
         lg: 'var(--radius)',

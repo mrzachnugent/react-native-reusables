@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { View } from 'react-native';
-import * as Slot from '@rnr/slot';
-import type { SlottableViewProps } from '@rnr/types';
+import * as Slot from '@rn-primitives/slot';
+import type { SlottableViewProps } from '@rn-primitives/types';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
 

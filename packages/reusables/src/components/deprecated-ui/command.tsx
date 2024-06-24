@@ -1,4 +1,4 @@
-import * as Slot from '@rnr/slot';
+import * as Slot from '@rn-primitives/slot';
 import { type ListRenderItemInfo } from '@shopify/flash-list';
 import React, { useImperativeHandle } from 'react';
 import { GestureResponderEvent, Modal, Pressable, Text, View } from 'react-native';

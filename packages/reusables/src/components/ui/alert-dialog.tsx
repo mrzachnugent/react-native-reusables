@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { buttonTextVariants, buttonVariants } from '../../components/ui/button';
-import * as AlertDialogPrimitive from '@rnr/alert-dialog';
+import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
 
@@ -19,9 +19,8 @@ const AlertDialogOverlayWeb = React.forwardRef<
   const { open } = AlertDialogPrimitive.useRootContext();
   return (
     <AlertDialogPrimitive.Overlay
-      style={StyleSheet.absoluteFill}
       className={cn(
-        'z-50 bg-black/80 flex justify-center items-center p-2',
+        'z-50 bg-black/80 flex justify-center items-center p-2 absolute top-0 right-0 bottom-0 left-0',
         open ? 'web:animate-in web:fade-in-0' : 'web:animate-out web:fade-out-0',
         className
       )}

@@ -1,36 +1,40 @@
 import * as React from 'react';
-import * as AvatarPrimitive from '~/components/primitives/avatar';
+import * as AvatarPrimitive from '@rn-primitives/avatar';
 import { cn } from '~/lib/utils';
 
+const AvatarPrimitiveRoot = AvatarPrimitive.Root;
+const AvatarPrimitiveImage = AvatarPrimitive.Image;
+const AvatarPrimitiveFallback = AvatarPrimitive.Fallback;
+
 const Avatar = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+  React.ElementRef<typeof AvatarPrimitiveRoot>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitiveRoot>
 >(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root
+  <AvatarPrimitiveRoot
     ref={ref}
     className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
     {...props}
   />
 ));
-Avatar.displayName = AvatarPrimitive.Root.displayName;
+Avatar.displayName = AvatarPrimitiveRoot.displayName;
 
 const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+  React.ElementRef<typeof AvatarPrimitiveImage>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitiveImage>
 >(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
+  <AvatarPrimitiveImage
     ref={ref}
     className={cn('aspect-square h-full w-full', className)}
     {...props}
   />
 ));
-AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+AvatarImage.displayName = AvatarPrimitiveImage.displayName;
 
 const AvatarFallback = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Fallback>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+  React.ElementRef<typeof AvatarPrimitiveFallback>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitiveFallback>
 >(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Fallback
+  <AvatarPrimitiveFallback
     ref={ref}
     className={cn(
       'flex h-full w-full items-center justify-center rounded-full bg-muted',
@@ -39,6 +43,6 @@ const AvatarFallback = React.forwardRef<
     {...props}
   />
 ));
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+AvatarFallback.displayName = AvatarPrimitiveFallback.displayName;
 
 export { Avatar, AvatarFallback, AvatarImage };

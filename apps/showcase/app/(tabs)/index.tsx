@@ -51,14 +51,13 @@ import { Info } from '~/lib/icons/Info';
 import { cn } from '~/lib/utils';
 
 export default function ExampleScreen() {
-  const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
   return (
     <View className='flex-1 p-6 justify-center gap-6'>
       <Card className='w-full max-w-lg mx-auto'>
         <CardHeader>
           <View className='flex-row gap-3'>
             <CardTitle className='pt-1'>Team Members</CardTitle>
-            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen} delayDuration={150}>
+            <Tooltip delayDuration={150}>
               <TooltipTrigger className='web:focus:outline-none'>
                 <Info size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
               </TooltipTrigger>
@@ -124,10 +123,9 @@ const contentInsets = {
 };
 
 function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
-  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue);
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant='outline'
@@ -182,10 +180,8 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
 }
 
 function TeamMemberHoverCard({ name }: { name: string }) {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <HoverCard openDelay={0} closeDelay={0} open={open} onOpenChange={setOpen}>
+    <HoverCard openDelay={0} closeDelay={0}>
       <HoverCardTrigger className='group web:focus:outline-none'>
         <Text numberOfLines={1} className='group-active:underline web:group-hover:underline'>
           {name}
@@ -224,22 +220,15 @@ function TeamMemberAvatar({
   initials: string;
   uri: string;
 }) {
-  const [open, setOpen] = React.useState(false);
   const [isDialogOpen, setDialogOpen] = React.useState(false);
   const [isAlertDialogOpen, setAlertDialogOpen] = React.useState(false);
   return (
-    <ContextMenu
-      open={open}
-      onOpenChange={(newVal) => {
-        setOpen(newVal);
-      }}
-      relativeTo='trigger'
-    >
+    <ContextMenu relativeTo='trigger'>
       <ContextMenuTrigger tabIndex={-1} className='web:cursor-default web:focus:outline-none'>
         <Avatar alt={`${name}'s avatar`}>
           <AvatarImage source={{ uri }} />
           <AvatarFallback>
-            <Text className='web:select-none'>{initials}</Text>
+            <Text>{initials}</Text>
           </AvatarFallback>
         </Avatar>
       </ContextMenuTrigger>

@@ -26,7 +26,7 @@ Most primitive components have an `asChild` prop. When it is set to `true`, it p
 Using the `asChild` prop to conditionally render a custom `Button` as a `Pressable` or a `Slot.Pressable`.
 
 <Code lang='tsx' title="~/example/button" code={`
-import * as Slot from '~/components/primitives/slot'
+import * as Slot from '@rn-primitives/slot'
 import { Pressable, PressableProps } from 'react-native'
 
 export function Button({ asChild, onPress: onPressProp, ...props }: PressableProps & { asChild?: boolean }) {
@@ -138,7 +138,7 @@ However, for some components, the position of its content depends on the `onPres
 #### Example with content that depends on the trigger position
 
 ```tsx
-import * as HoverCardPrimitive from '~/components/primitives/hover-card';
+import * as HoverCardPrimitive from '@rn-primitives/hover-card';
 import { Text, View } from 'react-native';
 import * as React from 'react';
 
@@ -189,7 +189,7 @@ function OnMountExample() {
 6. Pass the `portalHost` name to the `SelectContent` component to render the content inside the `PortalHost` with the same name
 
 ```tsx
-import { PortalHost, useModalPortalRoot } from '~/components/primitives/portal';
+import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {

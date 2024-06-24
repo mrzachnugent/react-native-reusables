@@ -13,7 +13,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useTheme } from '@react-navigation/native';
-import * as Slot from '@rnr/slot';
+import * as Slot from '@rn-primitives/slot';
 import * as React from 'react';
 import { GestureResponderEvent, Keyboard, Pressable, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

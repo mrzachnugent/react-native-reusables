@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -7,7 +7,7 @@ import Animated, {
   useDerivedValue,
   withSpring,
 } from 'react-native-reanimated';
-import * as ProgressPrimitive from '~/components/primitives/progress';
+import * as ProgressPrimitive from '@rn-primitives/progress';
 import { cn } from '~/lib/utils';
 
 const Progress = React.forwardRef<
@@ -44,10 +44,12 @@ function Indicator({ value, className }: { value: number | undefined | null; cla
 
   if (Platform.OS === 'web') {
     return (
-      <ProgressPrimitive.Indicator
+      <View
         className={cn('h-full w-full flex-1 bg-primary web:transition-all', className)}
         style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}
-      />
+      >
+        <ProgressPrimitive.Indicator className={cn('h-full w-full ', className)} />
+      </View>
     );
   }
 

@@ -2,11 +2,10 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextClassContext } from './text';
-import * as TooltipPrimitive from '@rnr/tooltip';
+import * as TooltipPrimitive from '@rn-primitives/tooltip';
 import { cn } from '../../lib/utils';
 
 const Tooltip = TooltipPrimitive.Root;
-
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 const TooltipContent = React.forwardRef<

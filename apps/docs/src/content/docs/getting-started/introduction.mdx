@@ -23,7 +23,7 @@ Crafted with [NativeWind v4](https://www.nativewind.dev/v4/overview) and accessi
 
 ### Features
 - **Universal**: Components, hooks, and utilities for Android, iOS, and the web applications.
-- **Accessibility**: Built with accessibility in mind. Using [radix-ui/primitives](https://www.radix-ui.com/primitives) for the web and re-usable react-native primitives.
+- **Accessibility**: Built with accessibility in mind. Using [radix-ui/primitives](https://www.radix-ui.com/primitives) for web and [rn-primitives](https://rn-primitives.vercel.app/) for native platforms.
 - **Incremental adoption**: Use as much or as little as you need at your own pace.
 - **Code sharing**: Share code between web and native applications.
 - **Customization**: The code lives in your project, not in your `node_modules` folder. You can customize it to your heart's content.
@@ -35,9 +35,6 @@ Crafted with [NativeWind v4](https://www.nativewind.dev/v4/overview) and accessi
 2. [Browse and copy/paste into your project](/components/accordion)
 3. Customize the code to suit your specific requirements
 
-<Aside>
-  Most components are built using primitives. This means that you will also need to copy/paste the associated primitive in your project.
-</Aside>
 
 ### The `react-native-reusables` way
 
@@ -46,13 +43,11 @@ This project aims to provide as little opinionated code as possible. However, so
 - The CSS variable names are based on shadcn/ui's naming convention.
 - Folder structure:
 
-  - `~/components/primitives` for unstyled accessible components which uses [radix-ui/primitives](https://www.radix-ui.com/primitives) for the web.
-  - `~/components/ui` for components styled with NativeWind. Most of these components are built using the primitives components.
+  - `~/components/ui` for components styled with NativeWind.
   - `~/lib` for utilities, hooks, and constants.
 
 <FileTree>
     - components/
-      - primitives/
       - ui/
     - lib/
 </FileTree>

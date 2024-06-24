@@ -1,4 +1,4 @@
-import * as DropdownMenuPrimitive from '@rnr/dropdown-menu';
+import * as DropdownMenuPrimitive from '@rn-primitives/dropdown-menu';
 import * as React from 'react';
 import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Check } from '../../lib/icons/Check';

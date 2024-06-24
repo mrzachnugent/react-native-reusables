@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Portal } from '@rnr/portal';
-import * as Toast from '@rnr/toast';
+import { Portal } from '@rn-primitives/portal';
+import * as Toast from '@rn-primitives/toast';
 
 export default function ToastScreen() {
   const [open, setOpen] = React.useState(false);

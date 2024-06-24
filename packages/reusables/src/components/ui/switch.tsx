@@ -1,3 +1,4 @@
+import * as SwitchPrimitives from '@rn-primitives/switch';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, {
@@ -6,9 +7,7 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import * as SwitchPrimitives from '@rnr/switch';
 import { useColorScheme } from '../../lib/useColorScheme';
-
 import { cn } from '../../lib/utils';
 
 const SwitchWeb = React.forwardRef<

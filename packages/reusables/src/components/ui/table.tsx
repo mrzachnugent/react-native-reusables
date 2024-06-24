@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as TablePrimitive from '@rnr/table';
+import * as TablePrimitive from '@rn-primitives/table';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
 

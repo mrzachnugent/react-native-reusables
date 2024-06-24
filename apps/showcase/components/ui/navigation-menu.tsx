@@ -10,5 +10,3 @@ export const {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } = Ui;
-
-// See file: [[packages/reusables/src/components/ui/navigation-menu.tsx]]
