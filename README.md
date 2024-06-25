@@ -10,7 +10,7 @@ Crafted with [NativeWind v4](https://www.nativewind.dev/v4/overview) and accessi
 
 https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-05a4-4568-b71a-f1e0be13650d
 
-**📖 Read the docs** _(wip)_: https://rnr-docs.vercel.app/ 
+**📖 Read the docs**: https://rnr-docs.vercel.app/
 
 **🌐 Try the web showcase:** https://rnr-showcase.vercel.app/
 
@@ -20,25 +20,17 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 1. Start with a template or manually setup configuration: [Check out the docs](https://rnr-docs.vercel.app/getting-started/initial-setup/)
 
-2. Copy/paste what you need into your project (2 options)
-
-    - Follow instructions in [docs](https://rnr-docs.vercel.app/) **(work in progress)**
-    - Browse [`packages/reusables/src/components/ui/*`](packages/reusables/src/components/ui)
-      1. Copy file in your project to `~/components/ui/*`
-      2. If it uses a primitive, replace `@rnr/*` with `~/components/primitives/*`
-      3. Copy the primitive to `~/components/primitives/*`
-        - _If the primitive uses other primitives repeat steps 2 and 3._
-
+2. Browse the [docs](https://rnr-docs.vercel.app/) and use the CLI to add the components to your project
 
 **For this repository:**
 
-1. Clone the repo: `git clone https://github.com/mrzachnugent/react-native-reusables.git` 
+1. Fork this repo, then clone your fork on your machine.
 
 2. Change directory into the cloned repo: `cd react-native-reusables`
 
 3. Install the dependencies (**IMPORTANT:** Must use pnpm): `pnpm i`
 
-4. Start up desired app
+4. From the root directory, start up desired app with the following commands:
 
 - Showcase
   - iOS: `pnpm dev:showcase`
@@ -52,7 +44,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 ### Templates
 
-**Starter-base:** 
+**Starter-base:**
 
 <img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
      alt="starter-base-template"
@@ -64,31 +56,30 @@ Follow [instructions](https://rnr-docs.vercel.app/getting-started/initial-setup/
 
 - NativeWind v4
 - Dark and light mode
-    - Android Navigation Bar matches mode
-    - Persistant mode
+  - Android Navigation Bar matches mode
+  - Persistent mode
 - Common components
-    - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+  - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
 
-### Backlog
+### `rn-primitives`
 
-- **[Documentation Project](https://github.com/users/mrzachnugent/projects/1)**
-   <br>
-   _Backlog for documentation. If you'd like to contribute, assign yourself the issue and track its progression in the project's backlog._
-
-- **Add missing universal components**
-  <br>
-  _Refactor native components missing in `/ui` that are found in `/deprecated-ui` and add their web components from [ui/shadcn](https://ui.shadcn.com/)_
-
-- **Create following custom native components**
-  <br>
-  _Replace 3rd party packages with custom native components_
-
-  - [ ] Calendar
-  - [ ] Toast
+RNR components are built on top of universal _(iOS, Android, and Web)_ style agnostic _(can be used with any styling system)_ [react-native primitives](https://rn-primitives.vercel.app/) which use [radix-ui/primitives](https://www.radix-ui.com/primitives) for the web.
 
 ### Deprecated-UI
 
 [See screenshots](/packages/reusables/src/components/deprecated-ui/README.md)
 
-The first draft of components with little to no focus on the web. The code remains for those who may still want to use it. 
+The first draft of components with little to no focus on the web. The code remains for those who may still want to use it.
 
+#### Community Templates
+
+- [RNR Base Bare](https://github.com/a0m0rajab/rnr-base-bare) by [a0m0rajab](https://github.com/a0m0rajab): _A simple app using Supabase as the backend, featuring sign-in/sign-up and profile functionality._
+
+<br/>
+<br/>
+
+> If you'd like to share a template you've made with react-native-reusables, feel free to open a PR. The format should replicate the other community template items
+
+```md
+[Name of template](https://github.com/your-profile/your-template-repo) by [yourGithubHandle](https://github.com/yourGithubHandle): _A short description_
+```
