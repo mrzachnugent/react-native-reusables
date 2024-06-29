@@ -104,8 +104,8 @@ export default function RootLayout() {
             />
           </Stack>
         </BottomSheetModalProvider>
+        <PortalHost />
       </GestureHandlerRootView>
-      <PortalHost />
       <ToastProvider />
     </ThemeProvider>
   );
