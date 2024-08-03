@@ -15,7 +15,7 @@
     "build": "turbo build",
     "build:showcase": "turbo build --filter=showcase",
     "build:docs": "turbo build --filter=docs",
-    "clean": "rm -rf .turbo node_modules && turbo clean"
+    "clean": "turbo clean && rm -rf .turbo node_modules"
   },
   "devDependencies": {
     "turbo": "^1.12.4",
