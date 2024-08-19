@@ -9,7 +9,8 @@
     "android": "expo start -c --android",
     "ios": "expo start -c --ios",
     "web": "expo start -c --web",
-    "clean": "rm -rf .expo node_modules"
+    "clean": "rm -rf .expo node_modules",
+    "postinstall": "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
