@@ -145,7 +145,7 @@
     "@rn-primitives/accordion": "~1.0.3",
     "@rn-primitives/alert-dialog": "~1.0.3",
     "@rn-primitives/aspect-ratio": "~1.0.3",
-    "@rn-primitives/avatar": "~1.0.3",
+    "@rn-primitives/avatar": "~1.0.4",
     "@rn-primitives/checkbox": "~1.0.3",
     "@rn-primitives/collapsible": "~1.0.3",
     "@rn-primitives/context-menu": "~1.0.3",
