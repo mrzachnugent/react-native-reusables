@@ -1,5 +1,3 @@
-_Work in progress..._
-
 # React Native Reusables
 
 ![banner](https://github.com/mrzachnugent/react-native-reusables/assets/63797719/0eef0a6d-d8eb-4b52-a97d-fa3b1e534215)
@@ -42,24 +40,25 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
   - Web: `pnpm dev:starter-base:web`
 - Docs: `pnpm dev:docs`
 
-### Templates
+## Community
 
-**Starter-base:**
+Explore community-created components and templates that extend the core library and fill in missing shadcn/ui elements. Contributions are welcome!
 
-<img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
-     alt="starter-base-template"
-     style="width:270px;" />
+#### Components
 
-Follow [instructions](https://rnr-docs.vercel.app/getting-started/initial-setup/) or check out the [code](apps/starter-base)
+- [universal-bottom-sheet](https://github.com/adebayoileri/universal-bottom-sheet) by [adebayoileri](https://github.com/adebayoileri): A bottom sheet component that combines Gorhom Bottom Sheet and Vaul for seamless and responsive experience across both mobile and web.
 
-**Includes:**
+#### Templates
 
-- NativeWind v4
-- Dark and light mode
-  - Android Navigation Bar matches mode
-  - Persistent mode
-- Common components
-  - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+- [RNR Base Bare](https://github.com/a0m0rajab/rnr-base-bare) by [a0m0rajab](https://github.com/a0m0rajab): _A simple app using Supabase as the backend, featuring sign-in/sign-up and profile functionality._
+
+<br/>
+
+> If you'd like to share a template you've made with react-native-reusables, feel free to open a PR. The format should replicate the other community template items
+
+```md
+[Name of template/component](https://github.com/your-profile/your-template-repo) by [yourGithubHandle](https://github.com/yourGithubHandle): _A short description_
+```
 
 ### `rn-primitives`
 
@@ -70,16 +69,3 @@ RNR components are built on top of universal _(iOS, Android, and Web)_ style agn
 [See screenshots](/packages/reusables/src/components/deprecated-ui/README.md)
 
 The first draft of components with little to no focus on the web. The code remains for those who may still want to use it.
-
-#### Community Templates
-
-- [RNR Base Bare](https://github.com/a0m0rajab/rnr-base-bare) by [a0m0rajab](https://github.com/a0m0rajab): _A simple app using Supabase as the backend, featuring sign-in/sign-up and profile functionality._
-
-<br/>
-<br/>
-
-> If you'd like to share a template you've made with react-native-reusables, feel free to open a PR. The format should replicate the other community template items
-
-```md
-[Name of template](https://github.com/your-profile/your-template-repo) by [yourGithubHandle](https://github.com/yourGithubHandle): _A short description_
-```
