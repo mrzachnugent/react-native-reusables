@@ -38,7 +38,7 @@ Only **14 out of the 50** shadcn/ui components are excluded from this library. H
 
 #### Carousel
 
-- [React Native ScrollView](https://www.appcoda.com/scrollview-paging/): An article explaining how to create a carousel using the ScrollView component.
+- [Animated.ScrollView](https://medium.com/timeless/building-a-gallery-carousel-in-react-native-using-reanimated-i-19b19e6b6b10): An article explaining how to create a carousel using the ScrollView component.
 
 #### Chart
 
