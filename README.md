@@ -30,7 +30,7 @@ This project includes only components built without third-party libraries or tho
 
 ### Excluded components
 
-Only **14 out of the 50** shadcn/ui components are excluded from this library. However, you can use the following packages or repositories to build your own
+Only **13 out of the 50** shadcn/ui components are excluded from this library. However, you can use the following packages or repositories to build your own
 
 #### Calendar
 
@@ -83,10 +83,6 @@ _TBD_
 #### Sheet (Drawer navigation)
 
 - [Drawer navigation](https://reactnavigation.org/docs/drawer-based-navigation/): A drawer navigation component that slides in from the side.
-
-#### Sonner
-
-- [Burnt](https://www.npmjs.com/package/burnt): Cross-platform toasts for React Native, powered by native elements. On Web, it wraps [Sonner](https://github.com/emilkowalski/sonner).
 
 ### Community Templates
 
