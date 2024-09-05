@@ -33,6 +33,7 @@ export const COMPONENTS = [
   'progress',
   'radio-group',
   'select',
+  'sonner',
   'separator',
   'skeleton',
   'slider',
