@@ -66,8 +66,7 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4",
     "zustand": "^4.4.7",
-    "burnt": "latest",
-    "expo-build-properties": "latest"
+    "burnt": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

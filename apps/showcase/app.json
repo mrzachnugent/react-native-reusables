@@ -39,15 +39,7 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font",
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "deploymentTarget": "13.0"
-          }
-        }
-      ]
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
