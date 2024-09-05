@@ -13,6 +13,7 @@ import { Text } from '~/components/ui/text';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
+import { Toaster } from 'burnt/web';
 
 const { ToastProvider } = DeprecatedUi;
 
@@ -105,6 +106,7 @@ export default function RootLayout() {
           </Stack>
         </BottomSheetModalProvider>
         <PortalHost />
+        <Toaster />
       </GestureHandlerRootView>
       <ToastProvider />
     </ThemeProvider>
