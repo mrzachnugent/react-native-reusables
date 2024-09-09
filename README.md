@@ -86,6 +86,8 @@ _TBD_
 
 #### Sonner
 
+- [Sonner Native](https://github.com/gunnartorfis/sonner-native) by [gunnartorfis](https://github.com/gunnartorfis): An opinionated toast component for React Native. A port of @emilkowalski's sonner.
+
 - [Burnt](https://www.npmjs.com/package/burnt): Cross-platform toasts for React Native, powered by native elements. On Web, it wraps [Sonner](https://github.com/emilkowalski/sonner).
 
 ### Community Templates
