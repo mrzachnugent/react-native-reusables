@@ -26,7 +26,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 ## Project Scope
 
-This project includes only components built without third-party libraries or those that use [@rn-primitives](https://rn-primitives.com) _(universal radix-ui/primitives)_.
+This project includes only components built without third-party libraries or those that use [@rn-primitives](https://rnprimitives.com) _(universal radix-ui/primitives)_.
 
 ### Excluded components
 
