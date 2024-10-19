@@ -1,7 +1,8 @@
-import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
+import { PortalHost } from '@rn-primitives/portal';
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FullWindowOverlay } from 'react-native-screens';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import {
@@ -16,18 +17,20 @@ import {
 import { Text } from '~/components/ui/text';
 import { H1, Muted } from '~/components/ui/typography';
 
+const CUSTOM_PORTAL_HOST_NAME = 'modal-example';
+const WindowOverlay = Platform.OS === 'ios' ? FullWindowOverlay : React.Fragment;
+
 export default function ModalScreen() {
   const insets = useSafeAreaInsets();
-  const { sideOffset, ...rootProps } = useModalPortalRoot();
   const contentInsets = {
     top: insets.top,
-    bottom: insets.bottom + Math.abs(sideOffset),
+    bottom: insets.bottom,
     left: 16,
     right: 16,
   };
 
   return (
-    <View {...rootProps}>
+    <>
       <View className='flex-1 justify-center items-center'>
         <View className='p-4 native:pb-24 max-w-md gap-6'>
           <View className='gap-1'>
@@ -46,9 +49,8 @@ export default function ModalScreen() {
             </SelectTrigger>
             <SelectContent
               insets={contentInsets}
-              sideOffset={sideOffset}
               className='w-full'
-              portalHost='modal-example'
+              portalHost={CUSTOM_PORTAL_HOST_NAME}
             >
               <SelectGroup>
                 <SelectLabel>Roles</SelectLabel>
@@ -81,7 +83,9 @@ export default function ModalScreen() {
           </View>
         </View>
       </View>
-      <PortalHost name='modal-example' />
-    </View>
+      <WindowOverlay>
+        <PortalHost name={CUSTOM_PORTAL_HOST_NAME} />
+      </WindowOverlay>
+    </>
   );
 }
