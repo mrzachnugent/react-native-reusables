@@ -181,16 +181,22 @@ function OnMountExample() {
 
 ## A Portal Component inside a Presentation Modal screen
 
-1. Use the `useModalPortalRoot` hook in the screen with the presentation of `modal`. 
-2. Adjust the bottom content insets to make sure the content is not hidden by the bottom safe area.
-3. Wrap the screen content with a View and pass the rootProps to it.
-4. Place the `PortalHost` inside the View with the rootProps as its last child.
-5. Pass the sideOffset from the `useModalPortalRoot` hook to the `SelectContent` component.
-6. Pass the `portalHost` name to the `SelectContent` component to render the content inside the `PortalHost` with the same name
+1. Import the `PortalHost` component
+2. Import the `FullWindowOverlay` component
+3. Set a custom name for your portal and place it in a variable at the top of the file.
+4. Create a window overlay component that adapts based on the platform (iOS or others)
+5. In the component where you need a portal, pass the custom name
+6. At the bottom of your content (the fragment wrapping everything), place the `WindowOverlay` component. Inside it, add `PortalHost` as a child.
+7. Make sure the `PortalHost` also gets the custom portal name by passing it to the `PortalHost` component.
 
 ```tsx
-import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
+// #1
+import { PortalHost } from '@rn-primitives/portal';
+import * as React from 'react';
+import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// #2
+import { FullWindowOverlay } from "react-native-screens"
 
 import {
   Select,
@@ -202,25 +208,28 @@ import {
   SelectValue,
 } from '~/components/ui/select';
 
+// #3
+const CUSTOM_PORTAL_HOST_NAME = 'modal-example';
+
+// #4
+const WindowOverlay = Platform.OS === "ios" ? FullWindowOverlay : React.Fragment
+
 /**
  * This screen is a Stack.Screen with a presentation of `modal`.
 */
 export default function ModalScreen() {
   const insets = useSafeAreaInsets();
-  const { sideOffset, ...rootProps } = useModalPortalRoot();
   const contentInsets = {
     top: insets.top,
-    // Make sure the content is not hidden by the bottom safe area
-    bottom: insets.bottom + Math.abs(sideOffset),
+    bottom: insets.bottom,
     left: 16,
     right: 16,
   };
 
-// Wrap the screen content with a View and pass the rootProps to it
   return (
-     <View {...rootProps}>
+     <>
         <View className='flex-1 justify-center items-center'>
-        <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
+          <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
             <SelectTrigger>
               <SelectValue
                 className='text-foreground text-sm native:text-lg'
@@ -229,11 +238,9 @@ export default function ModalScreen() {
             </SelectTrigger>
             <SelectContent
               insets={contentInsets}
-              // Pass the sideOffset from the useModalPortalRoot hook
-              sideOffset={sideOffset}
               className='w-full'
-              // Pass the portalHost name from below to the SelectContent
-              portalHost='modal-example'
+              // #5
+              portalHost={CUSTOM_PORTAL_HOST_NAME}
             >
               <SelectGroup>
                 <SelectLabel>Fruits</SelectLabel>
@@ -256,9 +263,12 @@ export default function ModalScreen() {
             </SelectContent>
           </Select>
         </View>
-        {/* Place the Postal Host inside the View with the rootProps */}
-        <PortalHost name='modal-example' />
-     </View>
+        {/* #6 */}
+        <WindowOverlay>
+          {/* #7 */}
+          <PortalHost name={CUSTOM_PORTAL_HOST_NAME} />
+        </WindowOverlay>
+     </>
   )
 }
 ```
