@@ -3,7 +3,6 @@ import { cosmiconfig } from 'cosmiconfig';
 import { loadConfig } from 'tsconfig-paths';
 import { z } from 'zod';
 
-export const DEFAULT_PLATFORMS = 'universal';
 export const DEFAULT_COMPONENTS = '~/components';
 export const DEFAULT_LIB = '~/lib';
 
@@ -13,7 +12,6 @@ const explorer = cosmiconfig('components', {
 
 export const rawConfigSchema = z
   .object({
-    platforms: z.string().optional(),
     aliases: z.object({
       components: z.string(),
       lib: z.string(),
@@ -24,7 +22,6 @@ export const rawConfigSchema = z
 export type RawConfig = z.infer<typeof rawConfigSchema>;
 
 export const configSchema = rawConfigSchema.extend({
-  platforms: z.string().optional(),
   resolvedPaths: z.object({
     lib: z.string(),
     components: z.string(),

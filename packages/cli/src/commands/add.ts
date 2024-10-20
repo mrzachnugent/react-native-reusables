@@ -105,17 +105,7 @@ export const add = new Command()
       for (const comp of componentsToWrite) {
         spinner.text = `Installing ${comp.name}...`;
 
-        if (Array.isArray(comp.paths)) {
-          await writeFiles(comp, comp.paths, config, spinner, options.overwrite);
-        } else {
-          await writeFiles(
-            comp,
-            comp.paths[config.platforms === 'universal' ? 'universal' : 'native-only'],
-            config,
-            spinner,
-            options.overwrite
-          );
-        }
+        await writeFiles(comp, comp.paths, config, spinner, options.overwrite);
 
         npmPackages.push(...comp.npmPackages);
       }
@@ -258,15 +248,6 @@ async function promptForConfig(cwd: string) {
 
   const options = await prompts([
     {
-      type: 'select',
-      name: 'platforms',
-      message: `Which ${highlight('platforms')} do you support?`,
-      choices: [
-        { title: 'Universal (Web, iOS, and Android)', value: 'universal' },
-        { title: 'Native Only (iOS and Android)', value: 'native-only' },
-      ],
-    },
-    {
       type: 'text',
       name: 'components',
       message: `Configure the import alias for ${highlight('components')}:`,
@@ -281,7 +262,6 @@ async function promptForConfig(cwd: string) {
   ]);
 
   const config = rawConfigSchema.parse({
-    platforms: options.platforms,
     aliases: {
       lib: options.lib,
       components: options.components,
