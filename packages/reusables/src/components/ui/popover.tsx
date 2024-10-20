@@ -1,17 +1,17 @@
+import * as PopoverPrimitive from '@rn-primitives/popover';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { TextClassContext } from './text';
-import * as PopoverPrimitive from '@rn-primitives/popover';
 import { cn } from '../../lib/utils';
+import { TextClassContext } from './text';
 
 const Popover = PopoverPrimitive.Root;
 
 const PopoverTrigger = PopoverPrimitive.Trigger;
 
 const PopoverContent = React.forwardRef<
-  React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & { portalHost?: string }
+  PopoverPrimitive.ContentRef,
+  PopoverPrimitive.ContentProps & { portalHost?: string }
 >(({ className, align = 'center', sideOffset = 4, portalHost, ...props }, ref) => {
   return (
     <PopoverPrimitive.Portal hostName={portalHost}>

@@ -1,3 +1,4 @@
+import * as ProgressPrimitive from '@rn-primitives/progress';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, {
@@ -7,12 +8,11 @@ import Animated, {
   useDerivedValue,
   withSpring,
 } from 'react-native-reanimated';
-import * as ProgressPrimitive from '@rn-primitives/progress';
 import { cn } from '~/lib/utils';
 
 const Progress = React.forwardRef<
-  React.ElementRef<typeof ProgressPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
+  ProgressPrimitive.RootRef,
+  ProgressPrimitive.RootProps & {
     indicatorClassName?: string;
   }
 >(({ className, value, indicatorClassName, ...props }, ref) => {

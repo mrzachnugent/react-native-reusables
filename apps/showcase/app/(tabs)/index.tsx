@@ -191,7 +191,9 @@ function TeamMemberHoverCard({ name }: { name: string }) {
         <View className='flex flex-row justify-between gap-4'>
           <Avatar alt='Vercel avatar'>
             <AvatarImage source={{ uri: 'https://github.com/vercel.png' }} />
-            <AvatarFallback>VC</AvatarFallback>
+            <AvatarFallback>
+              <Text>VC</Text>
+            </AvatarFallback>
           </Avatar>
           <View className='gap-1 flex-1'>
             <Text className='text-sm native:text-base font-semibold'>{name}</Text>
