@@ -10,14 +10,12 @@ const explorer = cosmiconfig('components', {
   searchPlaces: ['components.json'],
 });
 
-export const rawConfigSchema = z
-  .object({
-    aliases: z.object({
-      components: z.string(),
-      lib: z.string(),
-    }),
-  })
-  .strict();
+export const rawConfigSchema = z.object({
+  aliases: z.object({
+    components: z.string(),
+    lib: z.string(),
+  }),
+});
 
 export type RawConfig = z.infer<typeof rawConfigSchema>;
 
