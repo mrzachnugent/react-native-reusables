@@ -14,7 +14,7 @@ npx @react-native-reusables/cli@latest add
 
 ### Arguments
 
-If you do not add arguments, you will be promted to select the `ui` components you would like to add to your project.
+If you do not add arguments, you will be prompted to select the `ui` components you would like to add to your project.
 
 #### UI Components
 
