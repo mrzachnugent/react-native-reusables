@@ -259,112 +259,6 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  apps/starter-base:
-    dependencies:
-      '@react-native-async-storage/async-storage':
-        specifier: 1.23.1
-        version: 1.23.1(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))
-      '@react-navigation/native':
-        specifier: ^6.0.2
-        version: 6.1.14(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rn-primitives/avatar':
-        specifier: ~1.1.0
-        version: 1.1.0(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rn-primitives/portal':
-        specifier: ~1.1.0
-        version: 1.1.0(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rn-primitives/progress':
-        specifier: ~1.1.0
-        version: 1.1.0(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rn-primitives/slot':
-        specifier: ~1.1.0
-        version: 1.1.0(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rn-primitives/tooltip':
-        specifier: ~1.1.0
-        version: 1.1.0(@rn-primitives/portal@1.1.0(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      '@rn-primitives/types':
-        specifier: ~1.1.0
-        version: 1.1.0(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.0
-      clsx:
-        specifier: ^2.1.0
-        version: 2.1.0
-      expo:
-        specifier: ^51.0.24
-        version: 51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))
-      expo-linking:
-        specifier: ~6.3.1
-        version: 6.3.1(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
-      expo-navigation-bar:
-        specifier: ~3.0.7
-        version: 3.0.7(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
-      expo-router:
-        specifier: ~3.5.20
-        version: 3.5.20(expo-constants@16.0.1(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))))(expo-linking@6.3.1(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))))(expo-modules-autolinking@1.11.1)(expo-status-bar@1.12.1)(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))(react-native-reanimated@3.10.1(@babel/core@7.24.0)(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-safe-area-context@4.10.5(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-screens@3.31.1(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)(typescript@5.3.3)
-      expo-splash-screen:
-        specifier: ~0.27.5
-        version: 0.27.5(expo-modules-autolinking@1.11.1)(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
-      expo-status-bar:
-        specifier: ~1.12.1
-        version: 1.12.1
-      expo-system-ui:
-        specifier: ~3.0.7
-        version: 3.0.7(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
-      lucide-react-native:
-        specifier: ^0.378.0
-        version: 0.378.0(react-native-svg@15.2.0(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      nativewind:
-        specifier: ^4.0.33
-        version: 4.0.36(@babel/core@7.24.0)(react-native-reanimated@3.10.1(@babel/core@7.24.0)(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-safe-area-context@4.10.5(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-svg@15.2.0(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)(tailwindcss@3.3.5)
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
-      react-native:
-        specifier: 0.74.3
-        version: 0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
-      react-native-reanimated:
-        specifier: ~3.10.1
-        version: 3.10.1(@babel/core@7.24.0)(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      react-native-safe-area-context:
-        specifier: 4.10.5
-        version: 4.10.5(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      react-native-screens:
-        specifier: ~3.31.1
-        version: 3.31.1(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      react-native-svg:
-        specifier: 15.2.0
-        version: 15.2.0(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      react-native-web:
-        specifier: ~0.19.6
-        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      tailwind-merge:
-        specifier: ^2.2.1
-        version: 2.2.1
-      tailwindcss:
-        specifier: 3.3.5
-        version: 3.3.5
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.5)
-      zustand:
-        specifier: ^4.4.7
-        version: 4.5.2(@types/react@18.2.79)(react@18.2.0)
-    devDependencies:
-      '@babel/core':
-        specifier: ^7.20.0
-        version: 7.24.0
-      '@types/react':
-        specifier: ~18.2.79
-        version: 18.2.79
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-
   packages/cli:
     dependencies:
       '@antfu/ni':
@@ -621,6 +515,112 @@ importers:
       react-native:
         specifier: 0.74.3
         version: 0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+
+  packages/templates/starter-base:
+    dependencies:
+      '@react-native-async-storage/async-storage':
+        specifier: 1.23.1
+        version: 1.23.1(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))
+      '@react-navigation/native':
+        specifier: ^6.0.2
+        version: 6.1.14(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/avatar':
+        specifier: ~1.1.0
+        version: 1.1.0(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/portal':
+        specifier: ~1.1.0
+        version: 1.1.0(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/progress':
+        specifier: ~1.1.0
+        version: 1.1.0(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/slot':
+        specifier: ~1.1.0
+        version: 1.1.0(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/tooltip':
+        specifier: ~1.1.0
+        version: 1.1.0(@rn-primitives/portal@1.1.0(@types/react@18.2.79)(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(@types/react-dom@18.2.19)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      '@rn-primitives/types':
+        specifier: ~1.1.0
+        version: 1.1.0(react-native-web@0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
+      expo:
+        specifier: ^51.0.24
+        version: 51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))
+      expo-linking:
+        specifier: ~6.3.1
+        version: 6.3.1(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
+      expo-navigation-bar:
+        specifier: ~3.0.7
+        version: 3.0.7(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
+      expo-router:
+        specifier: ~3.5.20
+        version: 3.5.20(expo-constants@16.0.1(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))))(expo-linking@6.3.1(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))))(expo-modules-autolinking@1.11.1)(expo-status-bar@1.12.1)(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))(react-native-reanimated@3.10.1(@babel/core@7.24.0)(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-safe-area-context@4.10.5(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-screens@3.31.1(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)(typescript@5.3.3)
+      expo-splash-screen:
+        specifier: ~0.27.5
+        version: 0.27.5(expo-modules-autolinking@1.11.1)(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
+      expo-status-bar:
+        specifier: ~1.12.1
+        version: 1.12.1
+      expo-system-ui:
+        specifier: ~3.0.7
+        version: 3.0.7(expo@51.0.24(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0)))
+      lucide-react-native:
+        specifier: ^0.378.0
+        version: 0.378.0(react-native-svg@15.2.0(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      nativewind:
+        specifier: ^4.0.33
+        version: 4.0.36(@babel/core@7.24.0)(react-native-reanimated@3.10.1(@babel/core@7.24.0)(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-safe-area-context@4.10.5(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native-svg@15.2.0(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)(tailwindcss@3.3.5)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-native:
+        specifier: 0.74.3
+        version: 0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0)
+      react-native-reanimated:
+        specifier: ~3.10.1
+        version: 3.10.1(@babel/core@7.24.0)(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-safe-area-context:
+        specifier: 4.10.5
+        version: 4.10.5(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-screens:
+        specifier: ~3.31.1
+        version: 3.31.1(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-svg:
+        specifier: 15.2.0
+        version: 15.2.0(react-native@0.74.3(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
+      react-native-web:
+        specifier: ~0.19.6
+        version: 0.19.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      tailwind-merge:
+        specifier: ^2.2.1
+        version: 2.2.1
+      tailwindcss:
+        specifier: 3.3.5
+        version: 3.3.5
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.3.5)
+      zustand:
+        specifier: ^4.4.7
+        version: 4.5.2(@types/react@18.2.79)(react@18.2.0)
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.20.0
+        version: 7.24.0
+      '@types/react':
+        specifier: ~18.2.79
+        version: 18.2.79
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
 packages:
 
@@ -4006,6 +4006,7 @@ packages:
 
   babel-plugin-react-compiler@0.0.0:
     resolution: {integrity: sha512-Kigl0V36a/6hLVH7+CCe1CCtU3mFBqBd829V//VtuG7I/pyq+B2QZJqOefd63snQmdfCryNhO9XW1FbGPBvYDA==}
+    deprecated: 'This is a bad release: please install from the experimental tag instead'
 
   babel-plugin-react-native-web@0.19.11:
     resolution: {integrity: sha512-0sHf8GgDhsRZxGwlwHHdfL3U8wImFaLw4haEa60U9M3EiO3bg6u3BJ+1vXhwgrevqSq76rMb5j1HJs+dNvMj5g==}
