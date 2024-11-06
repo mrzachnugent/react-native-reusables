@@ -4,7 +4,7 @@
 
 ## Universal [shadcn/ui](https://ui.shadcn.com) for React Native featuring a focused collection of components
 
-Crafted with [NativeWind v4](https://www.nativewind.dev/v4/overview) and accessibility in mind, `react-native-reusables` is open source, offering a foundation for developing your own high-quality component library.
+Crafted with [NativeWind v4](https://www.nativewind.dev/) and accessibility in mind, `react-native-reusables` is open source, offering a foundation for developing your own high-quality component library.
 
 https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-05a4-4568-b71a-f1e0be13650d
 
