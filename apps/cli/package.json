@@ -1,7 +1,7 @@
 {
   "name": "@react-native-reusables/cli",
   "version": "0.1.2",
-  "description": "Add Universal components and primitives to your React-Native project.",
+  "description": "Add react-native-reusables to your project.",
   "publishConfig": {
     "access": "public"
   },
