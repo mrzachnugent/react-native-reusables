@@ -12,6 +12,8 @@ __generated__
 web-build
 expo-env.d.ts
 
+packages/experimental
+
 # macOS
 .DS_Store
 
