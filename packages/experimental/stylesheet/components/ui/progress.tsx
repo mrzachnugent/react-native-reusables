@@ -46,7 +46,7 @@ function Indicator({ value, style }: { value: number | undefined | null; style?:
 
   return (
     <ProgressPrimitive.Indicator asChild>
-      <Animated.View style={cs(indicator)} />
+      <Animated.View style={indicator} />
     </ProgressPrimitive.Indicator>
   );
 }
