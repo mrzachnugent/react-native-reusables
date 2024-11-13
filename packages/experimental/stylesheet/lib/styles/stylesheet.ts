@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {
   I18nManager,
-  ImageStyle,
+  type ImageStyle,
   PixelRatio,
-  TextStyle,
+  type TextStyle,
   useColorScheme,
   useWindowDimensions,
-  ViewStyle,
+  type ViewStyle,
 } from 'react-native';
-import { useSafeAreaInsets, type EdgeInsets } from 'react-native-safe-area-context';
+import { type EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BREAKPOINTS, THEMES } from './themes';
 import { getFontSizes } from './utils/font-size';
-import { getSpaces } from './utils/space';
 import { getRounded } from './utils/rounded';
+import { getSpaces } from './utils/space';
 import { getTracking } from './utils/tracking';
 
 export function useStyleSheet<T extends StyleSheet>(createStyleSheet?: CreateStyleSheet<T>) {

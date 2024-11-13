@@ -2,7 +2,7 @@ import * as TooltipPrimitive from '@rn-primitives/tooltip';
 import * as React from 'react';
 import { Platform, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { TextClassContext } from '~/components/ui/text';
+import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
 import { cs } from '~/lib/styles/utils/combine';
 import { shadow } from '~/lib/styles/utils/shadow';
@@ -18,19 +18,16 @@ const TooltipContent = React.forwardRef<
   const { styles } = useStyleSheet(stylesheet);
   return (
     <TooltipPrimitive.Portal hostName={portalHost}>
-      <TooltipPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
-        <Animated.View
-          entering={Platform.select({ web: undefined, default: FadeIn })}
-          exiting={Platform.select({ web: undefined, default: FadeOut })}
-        >
-          <TextClassContext.Provider value={styles.text}>
+      <TooltipPrimitive.Overlay style={StyleSheet.absoluteFill}>
+        <Animated.View entering={FadeIn} exiting={FadeOut}>
+          <TextStyleContext.Provider value={styles.text}>
             <TooltipPrimitive.Content
               ref={ref}
               sideOffset={sideOffset}
               style={cs(styles.content, style) as ViewStyle}
               {...props}
             />
-          </TextClassContext.Provider>
+          </TextStyleContext.Provider>
         </Animated.View>
       </TooltipPrimitive.Overlay>
     </TooltipPrimitive.Portal>
@@ -54,7 +51,12 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
       backgroundColor: colors.popover,
       paddingHorizontal: space[3],
       paddingVertical: space[1.5],
-      ...shadow['md'],
+      ...Platform.select({
+        ios: shadow['md'] as ViewStyle,
+        android: {
+          borderWidth: 1,
+        },
+      }),
     },
   };
 });

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { PlatformColor, PressableStateCallbackType, View } from 'react-native';
-import Animated, { FadeInUp, FadeOutDown, LayoutAnimationConfig } from 'react-native-reanimated';
 import { Info } from 'lucide-react-native';
+import * as React from 'react';
+import { Platform, type PressableStateCallbackType, View, type ViewStyle } from 'react-native';
+import Animated, { FadeInUp, FadeOutDown, LayoutAnimationConfig } from 'react-native-reanimated';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
 import {
@@ -16,9 +16,9 @@ import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
+import { fontWeight } from '~/lib/styles/utils/font-weight';
 import { shadow } from '~/lib/styles/utils/shadow';
 import { withOpacity } from '~/lib/styles/utils/with-opacity';
-import { fontWeight } from '~/lib/styles/utils/font-weight';
 
 const GITHUB_AVATAR_URI =
   'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
@@ -146,7 +146,10 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
     tooltipContent: {
       paddingVertical: space[2],
       paddingHorizontal: space[4],
-      ...shadow['base'],
+      ...Platform.select({
+        ios: shadow['base'] as ViewStyle,
+        android: {},
+      }),
     },
     cardContent: {
       flexDirection: 'row',
@@ -180,14 +183,14 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
     },
     progressText: {
       fontSize: fontSize['sm'],
-      color: PlatformColor('systemBlue'),
+      color: 'dodgerblue',
       fontWeight: fontWeight['bold'],
     },
     progress: {
       height: space[2],
     },
     progressIndicator: {
-      backgroundColor: PlatformColor('systemBlue'),
+      backgroundColor: 'dodgerblue',
     },
   };
 });

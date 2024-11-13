@@ -1,6 +1,6 @@
 import * as ProgressPrimitive from '@rn-primitives/progress';
 import * as React from 'react';
-import { ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -8,8 +8,8 @@ import Animated, {
   useDerivedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { cs } from '~/lib/styles/utils/combine';
 import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
+import { cs } from '~/lib/styles/utils/combine';
 
 const Progress = React.forwardRef<
   ProgressPrimitive.RootRef,
@@ -42,7 +42,7 @@ function Indicator({ value, style }: { value: number | undefined | null; style?:
       ),
       ...style,
     };
-  }, [style]);
+  }, [style, theme.colors.primary]);
 
   return (
     <ProgressPrimitive.Indicator asChild>

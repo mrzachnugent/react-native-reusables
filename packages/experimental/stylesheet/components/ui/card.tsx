@@ -1,9 +1,9 @@
 import type { TextRef, ViewRef } from '@rn-primitives/types';
 import * as React from 'react';
-import { Text, TextProps, View, ViewProps } from 'react-native';
-import { TextClassContext } from '~/components/ui/text';
-import { cs } from '~/lib/styles/utils/combine';
+import { Text, type TextProps, View, type ViewProps } from 'react-native';
+import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
+import { cs } from '~/lib/styles/utils/combine';
 import { fontWeight } from '~/lib/styles/utils/font-weight';
 import { shadow } from '~/lib/styles/utils/shadow';
 
@@ -38,9 +38,9 @@ CardDescription.displayName = 'CardDescription';
 const CardContent = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
   const { styles } = useStyleSheet(stylesheet);
   return (
-    <TextClassContext.Provider value={styles.contentText}>
+    <TextStyleContext.Provider value={styles.contentText}>
       <View ref={ref} style={cs(styles.content, style)} {...props} />
-    </TextClassContext.Provider>
+    </TextStyleContext.Provider>
   );
 });
 CardContent.displayName = 'CardContent';

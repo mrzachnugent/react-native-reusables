@@ -1,13 +1,17 @@
 import * as React from 'react';
 import {
-  GestureResponderEvent,
+  type GestureResponderEvent,
   Pressable,
-  PressableStateCallbackType,
-  TextStyle,
-  ViewStyle,
+  type PressableStateCallbackType,
+  type TextStyle,
+  type ViewStyle,
 } from 'react-native';
-import { TextClassContext } from '~/components/ui/text';
+import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
+import { cfs } from '~/lib/styles/utils/combine';
+
+type Variant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+type Size = 'default' | 'sm' | 'lg' | 'icon';
 
 type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> & {
   variant?: Variant;
@@ -33,16 +37,16 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     }
 
     return (
-      <TextClassContext.Provider value={styles.text({ variant, size, active })}>
+      <TextStyleContext.Provider value={styles.text({ variant, size, active })}>
         <Pressable
-          style={styles.button({ variant, size, disabled: props.disabled })}
+          style={cfs(styles.button({ variant, size, disabled: props.disabled }), style)}
           ref={ref}
           role='button'
           onPressIn={onPressIn}
           onPressOut={onPressOut}
           {...props}
         />
-      </TextClassContext.Provider>
+      </TextStyleContext.Provider>
     );
   }
 );
@@ -51,20 +55,21 @@ Button.displayName = 'Button';
 export { Button };
 export type { ButtonProps };
 
-type Variant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-type Size = 'default' | 'sm' | 'lg' | 'icon';
+type ButtonStyleSheetArgs = {
+  variant?: Variant;
+  size?: Size;
+  disabled?: boolean | null;
+};
+
+type TextVariantArgs = {
+  variant?: Variant;
+  size?: Size;
+  active?: boolean;
+};
 
 const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) => {
   return {
-    button: ({
-      variant = 'default',
-      size = 'default',
-      disabled = false,
-    }: {
-      variant?: Variant;
-      size?: Size;
-      disabled?: boolean | null;
-    }) => {
+    button: ({ variant = 'default', size = 'default', disabled = false }: ButtonStyleSheetArgs) => {
       return (ev: PressableStateCallbackType) => {
         const style: ViewStyle = {
           flexDirection: 'row',
@@ -133,15 +138,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
         return style;
       };
     },
-    text: ({
-      variant = 'default',
-      size = 'default',
-      active = false,
-    }: {
-      variant?: Variant;
-      size?: Size;
-      active?: boolean;
-    }) => {
+    text: ({ variant = 'default', size = 'default', active = false }: TextVariantArgs) => {
       const style: TextStyle = {
         color: colors.foreground,
         fontSize: size === 'lg' ? fontSize['lg'] : fontSize['base'],

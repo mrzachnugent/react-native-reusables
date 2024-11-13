@@ -1,8 +1,14 @@
 import * as AvatarPrimitive from '@rn-primitives/avatar';
 import * as React from 'react';
-import { ImageStyle } from 'react-native';
-import { cs } from '~/lib/styles/utils/combine';
+import type { ImageStyle } from 'react-native';
 import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
+import { cs } from '~/lib/styles/utils/combine';
+
+const IMAGE_STYLE: ImageStyle = {
+  aspectRatio: 1,
+  height: '100%',
+  width: '100%',
+};
 
 const AvatarPrimitiveRoot = AvatarPrimitive.Root;
 const AvatarPrimitiveImage = AvatarPrimitive.Image;
@@ -18,9 +24,8 @@ Avatar.displayName = AvatarPrimitiveRoot.displayName;
 
 const AvatarImage = React.forwardRef<AvatarPrimitive.ImageRef, AvatarPrimitive.ImageProps>(
   ({ style, ...props }, ref) => {
-    const { styles } = useStyleSheet(stylesheet);
     return (
-      <AvatarPrimitiveImage ref={ref} style={cs(styles.image, style) as ImageStyle} {...props} />
+      <AvatarPrimitiveImage ref={ref} style={cs(IMAGE_STYLE, style) as ImageStyle} {...props} />
     );
   }
 );
@@ -46,11 +51,6 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded }) => {
       borderRadius: rounded['full'],
       overflow: 'hidden',
       flexShrink: 0,
-    },
-    image: {
-      aspectRatio: 1,
-      height: '100%',
-      width: '100%',
     },
     fallback: {
       alignItems: 'center',
