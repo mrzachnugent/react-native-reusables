@@ -2,8 +2,8 @@ import * as Slot from '@rn-primitives/slot';
 import type { SlottableTextProps, TextRef } from '@rn-primitives/types';
 import * as React from 'react';
 import { Text as RNText, type StyleProp, type TextStyle } from 'react-native';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
-import { cs } from '~/lib/styles/utils/combine';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { cs } from '~/styles/utils/combine';
 
 const TextStyleContext = React.createContext<StyleProp<TextStyle> | undefined>(undefined);
 

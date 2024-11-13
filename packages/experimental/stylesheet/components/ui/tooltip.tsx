@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Platform, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextStyleContext } from '~/components/ui/text';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
-import { cs } from '~/lib/styles/utils/combine';
-import { shadow } from '~/lib/styles/utils/shadow';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { cs } from '~/styles/utils/combine';
+import { shadow } from '~/styles/utils/shadow';
 
 const Tooltip = TooltipPrimitive.Root;
 

@@ -1,8 +1,8 @@
 import * as AvatarPrimitive from '@rn-primitives/avatar';
 import * as React from 'react';
 import type { ImageStyle } from 'react-native';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
-import { cs } from '~/lib/styles/utils/combine';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { cs } from '~/styles/utils/combine';
 
 const IMAGE_STYLE: ImageStyle = {
   aspectRatio: 1,

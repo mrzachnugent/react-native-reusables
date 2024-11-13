@@ -7,8 +7,8 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { TextStyleContext } from '~/components/ui/text';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
-import { cfs } from '~/lib/styles/utils/combine';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { cfs } from '~/styles/utils/combine';
 
 type Variant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
 type Size = 'default' | 'sm' | 'lg' | 'icon';

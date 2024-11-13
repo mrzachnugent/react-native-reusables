@@ -8,8 +8,8 @@ import Animated, {
   useDerivedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
-import { cs } from '~/lib/styles/utils/combine';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { cs } from '~/styles/utils/combine';
 
 const Progress = React.forwardRef<
   ProgressPrimitive.RootRef,

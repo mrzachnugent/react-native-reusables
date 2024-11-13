@@ -5,8 +5,8 @@ import {
   type PressableStateCallbackType,
   useColorScheme,
 } from 'react-native';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
+import { setAndroidNavigationBar } from '~/styles/android-navigation-bar';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
 
 export function ThemeToggle() {
   const { styles, theme } = useStyleSheet(stylesheet);
@@ -17,6 +17,7 @@ export function ThemeToggle() {
     Appearance.setColorScheme(newColorScheme);
     setAndroidNavigationBar(newColorScheme);
   }
+
   return (
     <Pressable style={styles.root} onPress={toggleColorScheme}>
       {colorScheme === 'dark' ? (

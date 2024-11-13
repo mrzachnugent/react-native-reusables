@@ -15,10 +15,10 @@ import {
 import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
-import { createStyleSheet, useStyleSheet } from '~/lib/styles/stylesheet';
-import { fontWeight } from '~/lib/styles/utils/font-weight';
-import { shadow } from '~/lib/styles/utils/shadow';
-import { withOpacity } from '~/lib/styles/utils/with-opacity';
+import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { fontWeight } from '~/styles/utils/font-weight';
+import { shadow } from '~/styles/utils/shadow';
+import { withOpacity } from '~/styles/utils/with-opacity';
 
 const GITHUB_AVATAR_URI =
   'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
