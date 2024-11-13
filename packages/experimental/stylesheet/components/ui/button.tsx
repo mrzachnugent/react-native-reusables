@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
   type GestureResponderEvent,
-  Pressable,
   type PressableStateCallbackType,
   type TextStyle,
   type ViewStyle,
+  Pressable,
 } from 'react-native';
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
@@ -50,10 +50,10 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     );
   }
 );
+
 Button.displayName = 'Button';
 
 export { Button };
-export type { ButtonProps };
 
 type ButtonStyleSheetArgs = {
   variant?: Variant;
@@ -68,111 +68,115 @@ type TextVariantArgs = {
 };
 
 const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) => {
-  return {
-    button: ({ variant = 'default', size = 'default', disabled = false }: ButtonStyleSheetArgs) => {
-      return (ev: PressableStateCallbackType) => {
-        const style: ViewStyle = {
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: rounded['md'],
-        };
-        if (ev.pressed) {
-          style.opacity = 0.9;
-        }
-        if (disabled) {
-          style.opacity = 0.5;
-        }
-        switch (variant) {
-          case 'default':
-            style.backgroundColor = colors.primary;
-            break;
-          case 'destructive':
-            style.backgroundColor = colors.destructive;
-            break;
-          case 'outline':
-            style.borderWidth = 1;
-            style.borderColor = colors.input;
-            style.backgroundColor = colors.background;
-            if (ev.pressed) {
-              style.backgroundColor = colors.accent;
-            }
-            break;
-          case 'secondary':
-            style.backgroundColor = colors.secondary;
-            if (ev.pressed) {
-              style.opacity = 0.8;
-            }
-            break;
-          case 'ghost':
-            if (ev.pressed) {
-              style.backgroundColor = colors.accent;
-            }
-            break;
-          case 'link':
-            break;
-          default:
-            break;
-        }
-        switch (size) {
-          case 'default':
-            style.height = space[12];
-            style.paddingHorizontal = space[5];
-            style.paddingVertical = space[3];
-            break;
-          case 'sm':
-            style.height = space[9];
-            style.paddingHorizontal = space[3];
-            break;
-          case 'lg':
-            style.height = space[14];
-            style.paddingHorizontal = space[8];
-            break;
-          case 'icon':
-            style.height = space[10];
-            style.width = space[10];
-            break;
-          default:
-            break;
-        }
-        return style;
-      };
-    },
-    text: ({ variant = 'default', size = 'default', active = false }: TextVariantArgs) => {
-      const style: TextStyle = {
-        color: colors.foreground,
-        fontSize: size === 'lg' ? fontSize['lg'] : fontSize['base'],
-      };
-      switch (variant) {
-        case 'default':
-          style.color = colors.primaryForeground;
-          break;
-        case 'destructive':
-          style.color = colors.destructiveForeground;
-          break;
-        case 'outline':
-          if (active) {
-            style.color = colors.accentForeground;
-          }
-          break;
-        case 'secondary':
-          style.color = colors.secondaryForeground;
-          break;
-        case 'ghost':
-          if (active) {
-            style.color = colors.accentForeground;
-          }
-          break;
-        case 'link':
-          style.color = colors.primary;
-          if (active) {
-            style.textDecorationLine = 'underline';
-          }
-          break;
-        default:
-          break;
-      }
-      return style;
-    },
+  const baseButtonStyle: ViewStyle = {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: rounded['md'],
   };
+
+  function getButtonVariantStyle(variant: string, ev: PressableStateCallbackType): ViewStyle {
+    switch (variant) {
+      case 'default':
+        return { backgroundColor: colors.primary };
+      case 'destructive':
+        return { backgroundColor: colors.destructive };
+      case 'outline':
+        return {
+          borderWidth: 1,
+          borderColor: colors.input,
+          backgroundColor: ev.pressed ? colors.accent : colors.background,
+        };
+      case 'secondary':
+        return { backgroundColor: colors.secondary, opacity: ev.pressed ? 0.8 : 1 };
+      case 'ghost':
+        return ev.pressed ? { backgroundColor: colors.accent } : {};
+      default:
+        return {};
+    }
+  }
+
+  function getButtonSizeStyle(size: string): ViewStyle {
+    switch (size) {
+      case 'default':
+        return {
+          height: space[12],
+          paddingHorizontal: space[5],
+          paddingVertical: space[3],
+        };
+      case 'sm':
+        return {
+          height: space[9],
+          paddingHorizontal: space[3],
+        };
+      case 'lg':
+        return {
+          height: space[14],
+          paddingHorizontal: space[8],
+        };
+      case 'icon':
+        return {
+          height: space[10],
+          width: space[10],
+        };
+      default:
+        return {};
+    }
+  }
+
+  function button({
+    variant = 'default',
+    size = 'default',
+    disabled = false,
+  }: ButtonStyleSheetArgs) {
+    return (ev: PressableStateCallbackType): ViewStyle => {
+      const variantStyle = getButtonVariantStyle(variant, ev);
+      const sizeStyle = getButtonSizeStyle(size);
+
+      return {
+        ...baseButtonStyle,
+        ...variantStyle,
+        ...sizeStyle,
+        opacity: disabled ? 0.5 : ev.pressed ? 0.9 : 1,
+      };
+    };
+  }
+
+  function getTextVariantStyle(variant: string, active: boolean): TextStyle {
+    switch (variant) {
+      case 'default':
+        return { color: colors.primaryForeground };
+      case 'destructive':
+        return { color: colors.destructiveForeground };
+      case 'outline':
+        return active ? { color: colors.accentForeground } : {};
+      case 'secondary':
+        return { color: colors.secondaryForeground };
+      case 'ghost':
+        return active ? { color: colors.accentForeground } : {};
+      case 'link':
+        return {
+          color: colors.primary,
+          textDecorationLine: active ? 'underline' : undefined,
+        };
+      default:
+        return {};
+    }
+  }
+
+  function baseTextStyle(size: string): TextStyle {
+    return {
+      color: colors.foreground,
+      fontSize: size === 'lg' ? fontSize['lg'] : fontSize['base'],
+    };
+  }
+
+  function text({ variant = 'default', size = 'default', active = false }: TextVariantArgs) {
+    return {
+      ...baseTextStyle(size),
+      ...getTextVariantStyle(variant, active),
+    };
+  }
+
+  return { button, text };
 });
