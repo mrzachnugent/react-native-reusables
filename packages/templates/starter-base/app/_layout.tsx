@@ -1,7 +1,7 @@
 import '~/global.css';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Theme, ThemeProvider } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
@@ -13,11 +13,11 @@ import { ThemeToggle } from '~/components/ThemeToggle';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 
 const LIGHT_THEME: Theme = {
-  dark: false,
+  ...DefaultTheme,
   colors: NAV_THEME.light,
 };
 const DARK_THEME: Theme = {
-  dark: true,
+  ...DarkTheme,
   colors: NAV_THEME.dark,
 };
 

@@ -1,6 +1,6 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Theme, ThemeProvider } from '@react-navigation/native';
+import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { DeprecatedUi } from '@rnr/reusables';
 import { SplashScreen, Stack } from 'expo-router';
@@ -17,11 +17,11 @@ import { useColorScheme } from '~/lib/useColorScheme';
 const { ToastProvider } = DeprecatedUi;
 
 const LIGHT_THEME: Theme = {
-  dark: false,
+  ...DefaultTheme,
   colors: NAV_THEME.light,
 };
 const DARK_THEME: Theme = {
-  dark: true,
+  ...DarkTheme,
   colors: NAV_THEME.dark,
 };
 

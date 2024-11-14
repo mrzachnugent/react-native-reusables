@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@antfu/ni": "^0.21.4",
-    "@babel/core": "^7.22.1",
+    "@babel/core": "^7.26.0",
     "@babel/parser": "^7.22.6",
     "@babel/plugin-transform-typescript": "^7.22.5",
     "chalk": "5.2.0",
