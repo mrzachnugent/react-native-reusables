@@ -1,3 +1,4 @@
+import { PixelRatio } from 'react-native';
 import { getBaseUnitScale } from './base-unit';
 
 /**
@@ -41,7 +42,9 @@ export function getTracking(fontScale: number) {
   const adjustedTracking = {} as typeof tracking;
 
   for (const key in tracking) {
-    adjustedTracking[key as TrackingOptions] = tracking[key as TrackingOptions] * fontScale;
+    adjustedTracking[key as TrackingOptions] = PixelRatio.roundToNearestPixel(
+      tracking[key as TrackingOptions] * fontScale
+    );
   }
 
   return adjustedTracking;

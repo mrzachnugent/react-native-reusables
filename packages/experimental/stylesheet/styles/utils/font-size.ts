@@ -1,3 +1,4 @@
+import { PixelRatio } from 'react-native';
 import { getBaseUnitScale } from './base-unit';
 
 /**
@@ -64,7 +65,9 @@ export function getFontSizes(fontScale: number) {
   const adjustedFontSize = {} as typeof fontSize;
 
   for (const key in fontSize) {
-    adjustedFontSize[key as FontSizeOptions] = fontSize[key as FontSizeOptions] * fontScale;
+    adjustedFontSize[key as FontSizeOptions] = PixelRatio.roundToNearestPixel(
+      fontSize[key as FontSizeOptions] * fontScale
+    );
   }
 
   return adjustedFontSize;

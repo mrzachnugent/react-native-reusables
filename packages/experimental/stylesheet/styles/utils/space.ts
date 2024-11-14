@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { PixelRatio, StyleSheet } from 'react-native';
 import { getBaseUnitScale } from './base-unit';
 
 function getSpaceScale(value: number) {
@@ -191,7 +191,9 @@ export function getSpaces(fontScale: number) {
   const adjustedSpace = {} as typeof space;
 
   for (const key in space) {
-    adjustedSpace[key as SpaceOptions] = space[key as SpaceOptions] * fontScale;
+    adjustedSpace[key as SpaceOptions] = PixelRatio.roundToNearestPixel(
+      space[key as SpaceOptions] * fontScale
+    );
   }
 
   return adjustedSpace;

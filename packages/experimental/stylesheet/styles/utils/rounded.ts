@@ -1,3 +1,4 @@
+import { PixelRatio } from 'react-native';
 import { getBaseUnitScale } from './base-unit';
 
 /**
@@ -48,7 +49,9 @@ export function getRounded(fontScale: number) {
   const adjustedRounded = {} as typeof rounded;
 
   for (const key in rounded) {
-    adjustedRounded[key as RoundedOptions] = rounded[key as RoundedOptions] * fontScale;
+    adjustedRounded[key as RoundedOptions] = PixelRatio.roundToNearestPixel(
+      rounded[key as RoundedOptions] * fontScale
+    );
   }
 
   return adjustedRounded;
