@@ -46,11 +46,7 @@ export default function Screen() {
             <CardDescription style={styles.cardDescription}>Scientist</CardDescription>
             <Tooltip delayDuration={150}>
               <TooltipTrigger style={styles.tooltipTrigger}>
-                <Info
-                  size={14}
-                  strokeWidth={2.5}
-                  color={withOpacity(theme.colors.foreground, 0.7)}
-                />
+                <Info size={13} strokeWidth={2.5} color={theme.colors.mutedForeground} />
               </TooltipTrigger>
               <TooltipContent style={styles.tooltipContent}>
                 <Text>Freelance</Text>
@@ -139,7 +135,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
       fontWeight: fontWeight['semiBold'],
     },
     tooltipTrigger: (ev: PressableStateCallbackType) => ({
-      paddingHorizontal: space[2],
+      paddingHorizontal: space[1],
       paddingBottom: space[0.5],
       opacity: ev.pressed ? 0.5 : 1,
     }),
