@@ -24,9 +24,7 @@ Avatar.displayName = AvatarPrimitiveRoot.displayName;
 
 const AvatarImage = React.forwardRef<AvatarPrimitive.ImageRef, AvatarPrimitive.ImageProps>(
   ({ style, ...props }, ref) => {
-    return (
-      <AvatarPrimitiveImage ref={ref} style={cs(IMAGE_STYLE, style) as ImageStyle} {...props} />
-    );
+    return <AvatarPrimitiveImage ref={ref} style={cs(IMAGE_STYLE, style)} {...props} />;
   }
 );
 AvatarImage.displayName = AvatarPrimitiveImage.displayName;
