@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "example",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "runtimeVersion": {
       "policy": "appVersion"
     },
@@ -24,7 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mtlapps.treed"
+      "bundleIdentifier": "com.reactnativereusables.showcase"
     },
     "android": {
       "adaptiveIcon": {
