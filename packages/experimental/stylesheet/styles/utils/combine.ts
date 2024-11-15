@@ -22,14 +22,16 @@ export function cs<T extends Style, U extends Style>(...args: (StyleProp<T> | St
 /**
  * Combine function styles
  */
-export function cfs<T extends Style>(...cbs: Array<StyleProp<T> | ((args: any) => StyleProp<T>)>) {
+export function cfs<T extends Style, U extends Style>(
+  ...cbs: Array<StyleProp<T> | StyleProp<U> | ((args: any) => StyleProp<T> | StyleProp<U>)>
+) {
   return (args: any) => {
     if (cbs.length === 0) return undefined;
 
     const styles = cbs
       .map((cb) => (typeof cb === 'function' ? cb(args) : cb))
       .flat(1)
-      .filter(Boolean) as Array<NonNullable<StyleProp<T>>>;
+      .filter(Boolean) as Array<NonNullable<StyleProp<T> | StyleProp<U>>>;
 
     if (styles.length === 0) return undefined;
 
