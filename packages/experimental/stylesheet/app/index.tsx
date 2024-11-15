@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { Info } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, type PressableStateCallbackType, View, type ViewStyle } from 'react-native';
@@ -90,9 +91,11 @@ export default function Screen() {
             indicatorStyle={styles.progressIndicator}
           />
           <View />
-          <Button variant='outline' onPress={updateProgressValue}>
-            <Text>Update</Text>
-          </Button>
+          <Link href='/accordion' asChild>
+            <Button variant='outline' onPress={updateProgressValue}>
+              <Text>Update</Text>
+            </Button>
+          </Link>
         </CardFooter>
       </Card>
     </View>
