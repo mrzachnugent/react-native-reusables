@@ -53,7 +53,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
 
 Button.displayName = 'Button';
 
-export { Button };
+export { Button, stylesheet as buttonStyleSheet };
 
 type ButtonStyleSheetArgs = {
   variant?: Variant;
@@ -128,7 +128,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
     variant = 'default',
     size = 'default',
     disabled = false,
-  }: ButtonStyleSheetArgs) {
+  }: ButtonStyleSheetArgs = {}) {
     return (ev: PressableStateCallbackType): ViewStyle => {
       const variantStyle = getButtonVariantStyle(variant, ev);
       const sizeStyle = getButtonSizeStyle(size);
@@ -171,7 +171,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
     };
   }
 
-  function text({ variant = 'default', size = 'default', active = false }: TextVariantArgs) {
+  function text({ variant = 'default', size = 'default', active = false }: TextVariantArgs = {}) {
     return {
       ...baseTextStyle(size),
       ...getTextVariantStyle(variant, active),
