@@ -9,29 +9,26 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { type EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BREAKPOINTS, THEMES } from './themes';
+import { THEMES } from './themes';
+import { createIsBreakpointUp, getCurrentBreakpoint } from './utils/breakpoints';
 import { getFontSizes } from './utils/font-size';
 import { getRounded } from './utils/rounded';
 import { getSpaces } from './utils/space';
 import { getTracking } from './utils/tracking';
 
 export function useStyleSheet<T extends StyleSheet>(createStyleSheet?: CreateStyleSheet<T>) {
-  const colorScheme = useColorScheme();
   const { fontScale, height, width } = useWindowDimensions();
+  const colorScheme = useColorScheme() ?? 'light';
   const insets = useSafeAreaInsets();
 
   const breakpoint = React.useMemo(() => {
-    return (
-      Object.keys(BREAKPOINTS).find(
-        (key) => width < BREAKPOINTS[key as keyof typeof BREAKPOINTS]
-      ) ?? 'sm'
-    );
+    return getCurrentBreakpoint(width);
   }, [width]);
 
   const styles = React.useMemo(() => {
     const utils = {
       themeName: colorScheme === 'dark' ? 'dark' : 'light',
-      breakpoint,
+      isBreakpointUp: createIsBreakpointUp(breakpoint),
       screen: { width, height },
       orientation: width > height ? 'landscape' : 'portrait',
       insets,
@@ -44,12 +41,12 @@ export function useStyleSheet<T extends StyleSheet>(createStyleSheet?: CreateSty
       tracking: getTracking(fontScale),
     } satisfies StyleSheetUtils;
 
-    return createStyleSheet ? createStyleSheet(THEMES[colorScheme ?? 'light'], utils) : ({} as T);
+    return createStyleSheet ? createStyleSheet(THEMES[colorScheme], utils) : ({} as T);
   }, [colorScheme, height, width, fontScale, insets, breakpoint]);
 
   return {
     styles,
-    theme: THEMES[colorScheme ?? 'light'],
+    theme: THEMES[colorScheme],
     breakpoint,
   };
 }
@@ -68,7 +65,7 @@ type StyleSheet = {
 
 type StyleSheetUtils = {
   themeName: ThemeName;
-  breakpoint: string;
+  isBreakpointUp: ReturnType<typeof createIsBreakpointUp>;
   screen: { width: number; height: number };
   orientation: 'portrait' | 'landscape';
   insets: EdgeInsets;
