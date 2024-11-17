@@ -5,13 +5,15 @@ import {
   type ViewStyle,
   I18nManager,
   PixelRatio,
+  StatusBar,
   useColorScheme,
   useWindowDimensions,
 } from 'react-native';
 import { type EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { THEMES } from './themes';
-import { createIsBreakpointUp, getCurrentBreakpoint } from './utils/breakpoints';
+import { getCurrentBreakpoint } from './utils/breakpoints';
 import { getFontSizes } from './utils/font-size';
+import { getMediaMinWidth } from './utils/media-min-width';
 import { getRounded } from './utils/rounded';
 import { getSpaces } from './utils/space';
 import { getTracking } from './utils/tracking';
@@ -28,10 +30,12 @@ export function useStyleSheet<T extends StyleSheet>(createStyleSheet?: CreateSty
   const styles = React.useMemo(() => {
     const utils = {
       themeName: colorScheme === 'dark' ? 'dark' : 'light',
-      isBreakpointUp: createIsBreakpointUp(breakpoint),
+      breakpoint,
+      mediaMinWidth: getMediaMinWidth(breakpoint),
       screen: { width, height },
       orientation: width > height ? 'landscape' : 'portrait',
       insets,
+      statusBar: { height: StatusBar.currentHeight },
       pixelRatio: PixelRatio.get(),
       fontScale,
       rtl: I18nManager.isRTL,
@@ -39,7 +43,7 @@ export function useStyleSheet<T extends StyleSheet>(createStyleSheet?: CreateSty
       space: getSpaces(fontScale),
       rounded: getRounded(fontScale),
       tracking: getTracking(fontScale),
-    } satisfies StyleSheetUtils;
+    } satisfies Utils;
 
     return createStyleSheet ? createStyleSheet(THEMES[colorScheme], utils) : ({} as T);
   }, [colorScheme, height, width, fontScale, insets, breakpoint]);
@@ -63,12 +67,16 @@ type StyleSheet = {
     | ((...args: any) => (...args: any) => ImageStyle);
 };
 
-type StyleSheetUtils = {
+type ThemeName = keyof typeof THEMES;
+
+type Utils = {
   themeName: ThemeName;
-  isBreakpointUp: ReturnType<typeof createIsBreakpointUp>;
+  breakpoint: ReturnType<typeof getCurrentBreakpoint>;
+  mediaMinWidth: ReturnType<typeof getMediaMinWidth>;
   screen: { width: number; height: number };
   orientation: 'portrait' | 'landscape';
   insets: EdgeInsets;
+  statusBar: { height: typeof StatusBar.currentHeight };
   pixelRatio: ReturnType<typeof PixelRatio.get>;
   fontScale: ReturnType<typeof useWindowDimensions>['fontScale'];
   rtl: typeof I18nManager.isRTL;
@@ -78,9 +86,7 @@ type StyleSheetUtils = {
   tracking: ReturnType<typeof getTracking>;
 };
 
-type ThemeName = keyof typeof THEMES;
-
 type CreateStyleSheet<T extends StyleSheet> = (
   theme: (typeof THEMES)[ThemeName],
-  utils: StyleSheetUtils
+  utils: Utils
 ) => T;

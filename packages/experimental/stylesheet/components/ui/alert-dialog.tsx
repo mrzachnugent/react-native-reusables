@@ -125,7 +125,7 @@ export {
   AlertDialogTrigger,
 };
 
-const stylesheet = createStyleSheet(({ colors }, { space, rounded, isBreakpointUp, fontSize }) => {
+const stylesheet = createStyleSheet(({ colors }, { space, rounded, mediaMinWidth, fontSize }) => {
   return {
     overlay: {
       backgroundColor: withOpacity('black', 0.8),
@@ -153,7 +153,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, isBreakpointU
       gap: space[2],
     },
     footer: {
-      flexDirection: isBreakpointUp('md') ? 'row-reverse' : 'column',
+      flexDirection: mediaMinWidth['md'] ? 'row-reverse' : 'column',
       gap: space[2],
     },
     title: {
