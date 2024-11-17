@@ -91,7 +91,7 @@ export default function Screen() {
             indicatorStyle={styles.progressIndicator}
           />
           <View />
-          <Link href='/alert-dialog' asChild>
+          <Link href='/alert' asChild>
             <Button variant='outline' onPress={updateProgressValue}>
               <Text>Update</Text>
             </Button>
