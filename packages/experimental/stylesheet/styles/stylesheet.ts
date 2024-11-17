@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
-  I18nManager,
   type ImageStyle,
-  PixelRatio,
   type TextStyle,
+  type ViewStyle,
+  I18nManager,
+  PixelRatio,
   useColorScheme,
   useWindowDimensions,
-  type ViewStyle,
 } from 'react-native';
 import { type EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BREAKPOINTS, THEMES } from './themes';

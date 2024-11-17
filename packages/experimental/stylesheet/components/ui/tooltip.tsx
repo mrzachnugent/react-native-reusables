@@ -5,7 +5,7 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
-import { shadow } from '~/styles/utils/shadow';
+import { SHADOW } from '~/styles/utils/shadow';
 
 const Tooltip = TooltipPrimitive.Root;
 
@@ -52,7 +52,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
       paddingHorizontal: space[3],
       paddingVertical: space[1.5],
       ...Platform.select({
-        ios: shadow['md'] as ViewStyle,
+        ios: SHADOW['md'] as ViewStyle,
         android: {
           borderWidth: 1,
         },

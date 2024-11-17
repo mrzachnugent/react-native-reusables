@@ -5,7 +5,7 @@ import {
   type PressableStateCallbackType,
   useColorScheme,
 } from 'react-native';
-import { setAndroidNavigationBar } from '~/styles/android-navigation-bar';
+import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';
 import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
 
 export function ThemeToggle() {

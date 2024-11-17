@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 const DEFAULT_SHADOW_COLOR = 'rgba(0, 0, 0, 0.25)';
 const DEFAULT_DARKER_SHADOW_COLOR = 'rgba(0, 0, 0, 0.5)';
 
-export const shadow = {
+export const SHADOW = {
   sm: {
     shadowColor: DEFAULT_SHADOW_COLOR,
     shadowOffset: { width: 0, height: 1 },

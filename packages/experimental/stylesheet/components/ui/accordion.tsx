@@ -16,7 +16,7 @@ import { ChevronDown } from 'lucide-react-native';
 import { TextStyleContext } from './text';
 import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
 import { cfs, cs } from '~/styles/utils/combine';
-import { fontWeight } from '~/styles/utils/font-weight';
+import { FONT_WEIGHT } from '~/styles/utils/font-weight';
 
 const OVERFLOW_HIDDEN_STYLE: ViewStyle = {
   overflow: 'hidden',
@@ -136,7 +136,7 @@ const stylesheet = createStyleSheet(({ colors }, { fontSize, space }) => {
     },
     triggerText: {
       fontSize: fontSize['lg'],
-      fontWeight: fontWeight.medium,
+      fontWeight: FONT_WEIGHT.medium,
     },
     trigger: {
       flexDirection: 'row',

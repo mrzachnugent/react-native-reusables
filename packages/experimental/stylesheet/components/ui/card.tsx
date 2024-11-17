@@ -4,8 +4,8 @@ import { Text, type TextProps, View, type ViewProps } from 'react-native';
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
-import { fontWeight } from '~/styles/utils/font-weight';
-import { shadow } from '~/styles/utils/shadow';
+import { FONT_WEIGHT } from '~/styles/utils/font-weight';
+import { SHADOW } from '~/styles/utils/shadow';
 
 const Card = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
   const { styles } = useStyleSheet(stylesheet);
@@ -60,7 +60,7 @@ const stylesheet = createStyleSheet(({ colors }, { fontSize, space, rounded, tra
       borderWidth: space['hairline'],
       borderColor: colors.border,
       backgroundColor: colors.card,
-      ...shadow['sm'],
+      ...SHADOW['sm'],
     },
     header: {
       gap: space['1.5'],
@@ -69,7 +69,7 @@ const stylesheet = createStyleSheet(({ colors }, { fontSize, space, rounded, tra
     title: {
       color: colors.cardForeground,
       fontSize: fontSize['2xl'],
-      fontWeight: fontWeight['semiBold'],
+      fontWeight: FONT_WEIGHT['semiBold'],
       letterSpacing: tracking['tight'],
     },
     description: {

@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, useColorScheme } from 'react-native';
 import { ThemeToggle } from '~/components/ThemeToggle';
-import { setAndroidNavigationBar } from '~/styles/android-navigation-bar';
+import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';
 import { NAV_THEME } from '~/styles/themes';
 
 export {

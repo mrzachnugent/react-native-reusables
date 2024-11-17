@@ -17,8 +17,8 @@ import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
-import { fontWeight } from '~/styles/utils/font-weight';
-import { shadow } from '~/styles/utils/shadow';
+import { FONT_WEIGHT } from '~/styles/utils/font-weight';
+import { SHADOW } from '~/styles/utils/shadow';
 import { withOpacity } from '~/styles/utils/with-opacity';
 
 const GITHUB_AVATAR_URI =
@@ -115,7 +115,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
     card: {
       width: '100%',
       maxWidth: 384 * (14 / 16), // Create utility for this?
-      ...shadow['2xl'],
+      ...SHADOW['2xl'],
       shadowColor: withOpacity('black', 0.3),
       paddingVertical: space[4],
       borderRadius: rounded['xl'],
@@ -135,7 +135,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
       flexDirection: 'row',
     },
     cardDescription: {
-      fontWeight: fontWeight['semiBold'],
+      fontWeight: FONT_WEIGHT['semiBold'],
     },
     tooltipTrigger: (ev: PressableStateCallbackType) => ({
       paddingHorizontal: space[1],
@@ -146,7 +146,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
       paddingVertical: space[2],
       paddingHorizontal: space[4],
       ...Platform.select({
-        ios: shadow['base'] as ViewStyle,
+        ios: SHADOW['base'] as ViewStyle,
         android: {},
       }),
     },
@@ -164,7 +164,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
     },
     cardContentValue: {
       fontSize: fontSize['xl'],
-      fontWeight: fontWeight['semiBold'],
+      fontWeight: FONT_WEIGHT['semiBold'],
     },
     cardFooter: {
       flexDirection: 'column',
@@ -183,7 +183,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
     progressText: {
       fontSize: fontSize['sm'],
       color: 'dodgerblue',
-      fontWeight: fontWeight['bold'],
+      fontWeight: FONT_WEIGHT['bold'],
     },
     progress: {
       height: space[2],
