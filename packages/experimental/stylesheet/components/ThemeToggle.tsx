@@ -6,10 +6,10 @@ import {
   useColorScheme,
 } from 'react-native';
 import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 
 export function ThemeToggle() {
-  const { styles, theme } = useStyleSheet(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
   const colorScheme = useColorScheme();
 
   function toggleColorScheme() {

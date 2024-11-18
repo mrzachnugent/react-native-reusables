@@ -7,7 +7,7 @@ import {
   Pressable,
 } from 'react-native';
 import { TextStyleContext } from '~/components/ui/text';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs } from '~/styles/utils/combine';
 
 type Variant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
@@ -23,7 +23,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     { style, variant, size, onPressIn: onPressInProp, onPressOut: onPressOutProp, ...props },
     ref
   ) => {
-    const { styles } = useStyleSheet(stylesheet);
+    const { styles } = useStyles(stylesheet);
     const [active, setActive] = React.useState(false);
 
     function onPressIn(ev: GestureResponderEvent) {
@@ -67,12 +67,12 @@ type TextVariantArgs = {
   active?: boolean;
 };
 
-const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) => {
+const stylesheet = createStyleSheet(({ colors, utils }) => {
   const baseButtonStyle: ViewStyle = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: rounded['md'],
+    borderRadius: utils.rounded['md'],
   };
 
   function getButtonVariantStyle(variant: string, ev: PressableStateCallbackType): ViewStyle {
@@ -100,24 +100,24 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
     switch (size) {
       case 'default':
         return {
-          height: space[12],
-          paddingHorizontal: space[5],
-          paddingVertical: space[3],
+          height: utils.space[12],
+          paddingHorizontal: utils.space[5],
+          paddingVertical: utils.space[3],
         };
       case 'sm':
         return {
-          height: space[9],
-          paddingHorizontal: space[3],
+          height: utils.space[9],
+          paddingHorizontal: utils.space[3],
         };
       case 'lg':
         return {
-          height: space[14],
-          paddingHorizontal: space[8],
+          height: utils.space[14],
+          paddingHorizontal: utils.space[8],
         };
       case 'icon':
         return {
-          height: space[10],
-          width: space[10],
+          height: utils.space[10],
+          width: utils.space[10],
         };
       default:
         return {};
@@ -167,7 +167,7 @@ const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) =
   function baseTextStyle(size: string): TextStyle {
     return {
       color: colors.foreground,
-      fontSize: size === 'lg' ? fontSize['lg'] : fontSize['base'],
+      fontSize: size === 'lg' ? utils.fontSize['lg'] : utils.fontSize['base'],
     };
   }
 

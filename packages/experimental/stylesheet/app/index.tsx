@@ -16,7 +16,7 @@ import {
 import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { FONT_WEIGHT } from '~/styles/utils/font-weight';
 import { SHADOW } from '~/styles/utils/shadow';
 import { withOpacity } from '~/styles/utils/with-opacity';
@@ -25,7 +25,7 @@ const GITHUB_AVATAR_URI =
   'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
 
 export default function Screen() {
-  const { styles, theme } = useStyleSheet(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
   const [progress, setProgress] = React.useState(78);
 
   function updateProgressValue() {
@@ -102,14 +102,14 @@ export default function Screen() {
   );
 }
 
-const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) => {
+const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     root: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      gap: space[5],
-      padding: space[6],
+      gap: utils.space[5],
+      padding: utils.space[6],
       backgroundColor: withOpacity(colors.secondary, 0.3),
     },
     card: {
@@ -117,18 +117,18 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
       maxWidth: 384 * (14 / 16), // Create utility for this?
       ...SHADOW['2xl'],
       shadowColor: withOpacity('black', 0.3),
-      paddingVertical: space[4],
-      borderRadius: rounded['xl'],
+      paddingVertical: utils.space[4],
+      borderRadius: utils.rounded['xl'],
     },
     cardHeader: {
       alignItems: 'center',
     },
     avatar: {
-      width: space[24],
-      height: space[24],
+      width: utils.space[24],
+      height: utils.space[24],
     },
     cardTitle: {
-      paddingBottom: space[2],
+      paddingBottom: utils.space[2],
       textAlign: 'center',
     },
     flexRow: {
@@ -138,13 +138,13 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
       fontWeight: FONT_WEIGHT['semiBold'],
     },
     tooltipTrigger: (ev: PressableStateCallbackType) => ({
-      paddingHorizontal: space[1],
-      paddingBottom: space[0.5],
+      paddingHorizontal: utils.space[1],
+      paddingBottom: utils.space[0.5],
       opacity: ev.pressed ? 0.5 : 1,
     }),
     tooltipContent: {
-      paddingVertical: space[2],
-      paddingHorizontal: space[4],
+      paddingVertical: utils.space[2],
+      paddingHorizontal: utils.space[4],
       ...Platform.select({
         ios: SHADOW['base'] as ViewStyle,
         android: {},
@@ -153,22 +153,22 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
     cardContent: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      gap: space[3],
+      gap: utils.space[3],
     },
     cardContentItem: {
       alignItems: 'center',
     },
     cardContentKey: {
-      fontSize: fontSize['sm'],
+      fontSize: utils.fontSize['sm'],
       color: colors.mutedForeground,
     },
     cardContentValue: {
-      fontSize: fontSize['xl'],
+      fontSize: utils.fontSize['xl'],
       fontWeight: FONT_WEIGHT['semiBold'],
     },
     cardFooter: {
       flexDirection: 'column',
-      gap: space[3],
+      gap: utils.space[3],
       alignItems: 'center',
     },
     cardFooterContent: {
@@ -177,16 +177,16 @@ const stylesheet = createStyleSheet(({ colors }, { space, fontSize, rounded }) =
       overflow: 'hidden',
     },
     counterWrapper: {
-      width: space[11],
+      width: utils.space[11],
       alignItems: 'center',
     },
     progressText: {
-      fontSize: fontSize['sm'],
+      fontSize: utils.fontSize['sm'],
       color: 'dodgerblue',
       fontWeight: FONT_WEIGHT['bold'],
     },
     progress: {
-      height: space[2],
+      height: utils.space[2],
     },
     progressIndicator: {
       backgroundColor: 'dodgerblue',

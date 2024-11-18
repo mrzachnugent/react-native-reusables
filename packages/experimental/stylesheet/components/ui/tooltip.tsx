@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextStyleContext } from '~/components/ui/text';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
 import { SHADOW } from '~/styles/utils/shadow';
 
@@ -15,7 +15,7 @@ const TooltipContent = React.forwardRef<
   TooltipPrimitive.ContentRef,
   TooltipPrimitive.ContentProps & { portalHost?: string }
 >(({ style, sideOffset = 4, portalHost, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <TooltipPrimitive.Portal hostName={portalHost}>
       <TooltipPrimitive.Overlay style={StyleSheet.absoluteFill}>
@@ -37,20 +37,20 @@ TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
 export { Tooltip, TooltipContent, TooltipTrigger };
 
-const stylesheet = createStyleSheet(({ colors }, { space, rounded, fontSize }) => {
+const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     text: {
       color: colors.popoverForeground,
-      fontSize: fontSize['sm'],
+      fontSize: utils.fontSize['sm'],
     },
     content: {
       zIndex: 50,
-      borderRadius: rounded['md'],
-      borderWidth: space['hairline'],
+      borderRadius: utils.rounded['md'],
+      borderWidth: utils.space['hairline'],
       borderColor: colors.border,
       backgroundColor: colors.popover,
-      paddingHorizontal: space[3],
-      paddingVertical: space[1.5],
+      paddingHorizontal: utils.space[3],
+      paddingVertical: utils.space[1.5],
       ...Platform.select({
         ios: SHADOW['md'] as ViewStyle,
         android: {

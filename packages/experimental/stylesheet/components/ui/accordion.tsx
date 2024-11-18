@@ -1,4 +1,5 @@
 import * as AccordionPrimitive from '@rn-primitives/accordion';
+import { ChevronDown } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, Pressable, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, {
@@ -12,11 +13,10 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { ChevronDown } from 'lucide-react-native';
-import { TextStyleContext } from './text';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs, cs } from '~/styles/utils/combine';
 import { FONT_WEIGHT } from '~/styles/utils/font-weight';
+import { TextStyleContext } from './text';
 
 const OVERFLOW_HIDDEN_STYLE: ViewStyle = {
   overflow: 'hidden',
@@ -42,7 +42,7 @@ Accordion.displayName = AccordionPrimitive.Root.displayName;
 
 const AccordionItem = React.forwardRef<AccordionPrimitive.ItemRef, AccordionPrimitive.ItemProps>(
   ({ style, value, ...props }, ref) => {
-    const { styles } = useStyleSheet(stylesheet);
+    const { styles } = useStyles(stylesheet);
     return (
       <Animated.View style={OVERFLOW_HIDDEN_STYLE} layout={LinearTransition.duration(200)}>
         <AccordionPrimitive.Item
@@ -63,7 +63,7 @@ const AccordionTrigger = React.forwardRef<
   AccordionPrimitive.TriggerRef,
   AccordionPrimitive.TriggerProps
 >(({ style, children, ...props }, ref) => {
-  const { styles, theme } = useStyleSheet(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
   const progress = useDerivedValue(() =>
@@ -95,7 +95,7 @@ const AccordionContent = React.forwardRef<
   AccordionPrimitive.ContentRef,
   AccordionPrimitive.ContentProps
 >(({ style, children, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <TextStyleContext.Provider value={styles.contentText}>
       <AccordionPrimitive.Content style={OVERFLOW_HIDDEN_STYLE} ref={ref} {...props}>
@@ -112,7 +112,7 @@ function InnerContent({
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
 }) {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <Animated.View
       entering={FadeIn}
@@ -128,27 +128,27 @@ AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };
 
-const stylesheet = createStyleSheet(({ colors }, { fontSize, space }) => {
+const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     item: {
       borderBottomWidth: 1,
       borderBottomColor: colors.border,
     },
     triggerText: {
-      fontSize: fontSize['lg'],
+      fontSize: utils.fontSize['lg'],
       fontWeight: FONT_WEIGHT.medium,
     },
     trigger: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingVertical: space[4],
+      paddingVertical: utils.space[4],
     },
     contentText: {
-      fontSize: fontSize['lg'],
+      fontSize: utils.fontSize['lg'],
     },
     innerContent: {
-      paddingBottom: space[4],
+      paddingBottom: utils.space[4],
     },
   };
 });

@@ -8,7 +8,7 @@ import Animated, {
   useDerivedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
 
 const Progress = React.forwardRef<
@@ -17,7 +17,7 @@ const Progress = React.forwardRef<
     indicatorStyle?: ViewStyle;
   }
 >(({ style, value, indicatorStyle, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <ProgressPrimitive.Root ref={ref} style={cs(styles.root, style)} {...props}>
       <Indicator value={value} style={indicatorStyle} />
@@ -29,7 +29,7 @@ Progress.displayName = ProgressPrimitive.Root.displayName;
 export { Progress };
 
 function Indicator({ value, style }: { value: number | undefined | null; style?: ViewStyle }) {
-  const { theme } = useStyleSheet(stylesheet);
+  const { theme } = useStyles(stylesheet);
   const progress = useDerivedValue(() => value ?? 0);
 
   const indicator = useAnimatedStyle(() => {
@@ -51,14 +51,14 @@ function Indicator({ value, style }: { value: number | undefined | null; style?:
   );
 }
 
-const stylesheet = createStyleSheet(({ colors }, { space, rounded }) => {
+const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     root: {
       position: 'relative',
-      height: space[4],
+      height: utils.space[4],
       width: '100%',
       overflow: 'hidden',
-      borderRadius: rounded['full'],
+      borderRadius: utils.rounded['full'],
       backgroundColor: colors.secondary,
     },
   };

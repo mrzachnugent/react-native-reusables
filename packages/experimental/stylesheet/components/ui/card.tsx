@@ -2,26 +2,26 @@ import type { TextRef, ViewRef } from '@rn-primitives/types';
 import * as React from 'react';
 import { Text, type TextProps, View, type ViewProps } from 'react-native';
 import { TextStyleContext } from '~/components/ui/text';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
 import { FONT_WEIGHT } from '~/styles/utils/font-weight';
 import { SHADOW } from '~/styles/utils/shadow';
 
 const Card = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return <View ref={ref} style={cs(styles.root, style)} {...props} />;
 });
 Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return <View ref={ref} style={cs(styles.header, style)} {...props} />;
 });
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = React.forwardRef<TextRef, React.ComponentPropsWithoutRef<typeof Text>>(
   ({ style, ...props }, ref) => {
-    const { styles } = useStyleSheet(stylesheet);
+    const { styles } = useStyles(stylesheet);
     return (
       <Text role='heading' aria-level={3} ref={ref} style={cs(styles.title, style)} {...props} />
     );
@@ -30,13 +30,13 @@ const CardTitle = React.forwardRef<TextRef, React.ComponentPropsWithoutRef<typeo
 CardTitle.displayName = 'CardTitle';
 
 const CardDescription = React.forwardRef<TextRef, TextProps>(({ style, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return <Text ref={ref} style={cs(styles.description, style)} {...props} />;
 });
 CardDescription.displayName = 'CardDescription';
 
 const CardContent = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <TextStyleContext.Provider value={styles.contentText}>
       <View ref={ref} style={cs(styles.content, style)} {...props} />
@@ -46,38 +46,38 @@ const CardContent = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, r
 CardContent.displayName = 'CardContent';
 
 const CardFooter = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return <View ref={ref} style={cs(styles.footer, style)} {...props} />;
 });
 CardFooter.displayName = 'CardFooter';
 
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };
 
-const stylesheet = createStyleSheet(({ colors }, { fontSize, space, rounded, tracking }) => {
+const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     root: {
-      borderRadius: rounded['lg'],
-      borderWidth: space['hairline'],
+      borderRadius: utils.rounded['lg'],
+      borderWidth: utils.space['hairline'],
       borderColor: colors.border,
       backgroundColor: colors.card,
       ...SHADOW['sm'],
     },
     header: {
-      gap: space['1.5'],
-      padding: space[6],
+      gap: utils.space['1.5'],
+      padding: utils.space[6],
     },
     title: {
       color: colors.cardForeground,
-      fontSize: fontSize['2xl'],
+      fontSize: utils.fontSize['2xl'],
       fontWeight: FONT_WEIGHT['semiBold'],
-      letterSpacing: tracking['tight'],
+      letterSpacing: utils.tracking['tight'],
     },
     description: {
-      fontSize: fontSize['sm'],
+      fontSize: utils.fontSize['sm'],
       color: colors.mutedForeground,
     },
     content: {
-      padding: space[6],
+      padding: utils.space[6],
       paddingTop: 0,
     },
     contentText: {
@@ -85,7 +85,7 @@ const stylesheet = createStyleSheet(({ colors }, { fontSize, space, rounded, tra
     },
     footer: {
       flexDirection: 'row',
-      padding: space[6],
+      padding: utils.space[6],
       paddingTop: 0,
     },
   };

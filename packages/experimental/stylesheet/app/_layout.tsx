@@ -6,7 +6,7 @@ import * as React from 'react';
 import { Platform, useColorScheme } from 'react-native';
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';
-import { NAV_THEME } from '~/styles/themes';
+import { NAV_THEME } from '~/styles/nav-theme';
 
 export {
   // Catch any errors thrown by the Layout component.

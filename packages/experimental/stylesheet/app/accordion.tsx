@@ -6,10 +6,10 @@ import {
   AccordionTrigger,
 } from '~/components/ui/accordion';
 import { Text } from '~/components/ui/text';
-import { createStyleSheet, useStyleSheet } from '~/styles/stylesheet';
+import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 
 export default function AccordionScreen() {
-  const { styles } = useStyleSheet(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.root}>
       <Accordion type='multiple' collapsible defaultValue={['item-1']}>
@@ -45,12 +45,12 @@ export default function AccordionScreen() {
   );
 }
 
-const stylesheet = createStyleSheet((_, { space }) => {
+const stylesheet = createStyleSheet(({ utils }) => {
   return {
     root: {
       flex: 1,
       justifyContent: 'center',
-      padding: space[6],
+      padding: utils.space[6],
     },
   };
 });
