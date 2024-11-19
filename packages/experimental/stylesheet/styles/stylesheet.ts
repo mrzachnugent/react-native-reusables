@@ -5,8 +5,8 @@ import {
   type ViewStyle,
   I18nManager,
   PixelRatio,
-  StatusBar,
   StyleSheet as RNStyleSheet,
+  StatusBar,
   useColorScheme,
   useWindowDimensions,
 } from 'react-native';
@@ -14,13 +14,13 @@ import { type EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-conte
 import { DARK_COLORS, LIGHT_COLORS } from './colors';
 import { getCurrentBreakpoint } from './utils/breakpoints';
 import { createFontSize } from './utils/font-size';
+import { getFontWeight } from './utils/font-weight';
 import { createMediaMinWidth } from './utils/media-min-width';
+import { rem } from './utils/rem';
 import { createRounded } from './utils/rounded';
+import { getShadow } from './utils/shadow';
 import { createSpace } from './utils/space';
 import { createTracking } from './utils/tracking';
-import { getFontWeight } from './utils/font-weight';
-import { rem } from './utils/rem';
-import { getShadow } from './utils/shadow';
 
 export function useStyles<T extends StyleSheet>(createStyleSheet?: CreateStyleSheet<T>) {
   const { fontScale, height, width } = useWindowDimensions();
