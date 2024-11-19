@@ -153,7 +153,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     title: {
       fontSize: utils.fontSize('xl'),
       color: colors.foreground,
-      fontWeight: utils.fontWeight('semiBold'),
+      fontWeight: utils.fontWeight('semibold'),
     },
     description: {
       fontSize: utils.fontSize('base'),

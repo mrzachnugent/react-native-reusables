@@ -67,7 +67,7 @@ const stylesheet = createStyleSheet(({ colors, utils }, { hairlineWidth }) => {
     title: {
       color: colors.cardForeground,
       fontSize: utils.fontSize('2xl'),
-      fontWeight: utils.fontWeight('semiBold'),
+      fontWeight: utils.fontWeight('semibold'),
       letterSpacing: utils.tracking('tight'),
     },
     description: {

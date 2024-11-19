@@ -4,9 +4,9 @@ const FONT_WEIGHT = {
    */
   thin: '100',
   /*
-   * extraLight: 200,
+   * extralight: 200,
    */
-  extraLight: '200',
+  extralight: '200',
   /*
    * light: 300,
    */
@@ -20,17 +20,17 @@ const FONT_WEIGHT = {
    */
   medium: '500',
   /*
-   * semiBold: 600,
+   * semibold: 600,
    */
-  semiBold: '600',
+  semibold: '600',
   /*
    * bold: 700,
    */
   bold: '700',
   /*
-   * extraBold: 800,
+   * extrabold: 800,
    */
-  extraBold: '800',
+  extrabold: '800',
   /*
    * black: 900,
    */

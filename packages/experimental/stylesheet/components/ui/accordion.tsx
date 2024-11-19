@@ -75,7 +75,7 @@ const AccordionTrigger = React.forwardRef<
 
   return (
     <TextStyleContext.Provider value={styles.triggerText}>
-      <AccordionPrimitive.Header className='flex'>
+      <AccordionPrimitive.Header>
         <AccordionPrimitive.Trigger ref={ref} {...props} asChild>
           <Trigger style={cfs(styles.trigger, style)}>
             <>{children}</>

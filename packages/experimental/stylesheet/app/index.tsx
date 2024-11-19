@@ -89,7 +89,7 @@ export default function Screen() {
             indicatorStyle={styles.progressIndicator}
           />
           <View />
-          <Link href='/checkbox' asChild>
+          <Link href='/collapsible' asChild>
             <Button variant='outline' onPress={updateProgressValue}>
               <Text>Update</Text>
             </Button>
@@ -133,7 +133,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       flexDirection: 'row',
     },
     cardDescription: {
-      fontWeight: utils.fontWeight('semiBold'),
+      fontWeight: utils.fontWeight('semibold'),
     },
     tooltipTrigger: (ev: PressableStateCallbackType) => ({
       paddingHorizontal: utils.space(1),
@@ -162,7 +162,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     },
     cardContentValue: {
       fontSize: utils.fontSize('xl'),
-      fontWeight: utils.fontWeight('semiBold'),
+      fontWeight: utils.fontWeight('semibold'),
     },
     cardFooter: {
       flexDirection: 'column',
