@@ -5,7 +5,6 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
-import { SHADOW } from '~/styles/utils/shadow';
 
 const Tooltip = TooltipPrimitive.Root;
 
@@ -37,22 +36,22 @@ TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
 export { Tooltip, TooltipContent, TooltipTrigger };
 
-const stylesheet = createStyleSheet(({ colors, utils }) => {
+const stylesheet = createStyleSheet(({ colors, utils }, { hairlineWidth }) => {
   return {
     text: {
       color: colors.popoverForeground,
-      fontSize: utils.fontSize['sm'],
+      fontSize: utils.fontSize('sm'),
     },
     content: {
       zIndex: 50,
-      borderRadius: utils.rounded['md'],
-      borderWidth: utils.space['hairline'],
+      borderRadius: utils.rounded('md'),
+      borderWidth: hairlineWidth,
       borderColor: colors.border,
       backgroundColor: colors.popover,
-      paddingHorizontal: utils.space[3],
-      paddingVertical: utils.space[1.5],
+      paddingHorizontal: utils.space(3),
+      paddingVertical: utils.space(1.5),
       ...Platform.select({
-        ios: SHADOW['md'] as ViewStyle,
+        ios: utils.shadow('md') as ViewStyle,
         android: {
           borderWidth: 1,
         },

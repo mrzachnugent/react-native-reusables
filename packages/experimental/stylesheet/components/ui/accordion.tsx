@@ -15,7 +15,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs, cs } from '~/styles/utils/combine';
-import { FONT_WEIGHT } from '~/styles/utils/font-weight';
 import { TextStyleContext } from './text';
 
 const OVERFLOW_HIDDEN_STYLE: ViewStyle = {
@@ -135,20 +134,20 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       borderBottomColor: colors.border,
     },
     triggerText: {
-      fontSize: utils.fontSize['lg'],
-      fontWeight: FONT_WEIGHT.medium,
+      fontSize: utils.fontSize('lg'),
+      fontWeight: utils.fontWeight('medium'),
     },
     trigger: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingVertical: utils.space[4],
+      paddingVertical: utils.space(4),
     },
     contentText: {
-      fontSize: utils.fontSize['lg'],
+      fontSize: utils.fontSize('lg'),
     },
     innerContent: {
-      paddingBottom: utils.space[4],
+      paddingBottom: utils.space(4),
     },
   };
 });

@@ -44,9 +44,9 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     root: {
       position: 'relative',
-      height: utils.space[10],
-      width: utils.space[10],
-      borderRadius: utils.rounded['full'],
+      height: utils.space(10),
+      width: utils.space(10),
+      borderRadius: utils.rounded('full'),
       overflow: 'hidden',
       flexShrink: 0,
     },
@@ -55,7 +55,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       justifyContent: 'center',
       height: '100%',
       width: '100%',
-      borderRadius: utils.rounded['full'],
+      borderRadius: utils.rounded('full'),
       backgroundColor: colors.muted,
     },
   };

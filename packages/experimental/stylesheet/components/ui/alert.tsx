@@ -3,8 +3,6 @@ import * as React from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
-import { FONT_WEIGHT } from '~/styles/utils/font-weight';
-import { SHADOW } from '~/styles/utils/shadow';
 import { withOpacity } from '~/styles/utils/with-opacity';
 
 const Alert = React.forwardRef<
@@ -69,11 +67,11 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     root: {
       backgroundColor: colors.background,
-      borderRadius: utils.rounded['lg'],
+      borderRadius: utils.rounded('lg'),
       borderWidth: 1,
       borderColor: colors.border,
-      padding: utils.space[4],
-      ...SHADOW['lg'],
+      padding: utils.space(4),
+      ...utils.shadow('lg'),
       shadowColor: withOpacity(colors.foreground, 0.1),
     },
     borderDestructive: {
@@ -81,21 +79,21 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     },
     iconContainer: {
       position: 'absolute',
-      left: utils.space[3.5],
-      top: utils.space[4],
-      transform: [{ translateY: -utils.space[0.5] }],
+      left: utils.space(3.5),
+      top: utils.space(4),
+      transform: [{ translateY: -utils.space(0.5) }],
     },
     title: {
-      paddingLeft: utils.space[7],
-      marginBottom: utils.space[1],
-      fontWeight: FONT_WEIGHT['medium'],
-      fontSize: utils.fontSize['base'],
-      letterSpacing: utils.tracking['tight'],
+      paddingLeft: utils.space(7),
+      marginBottom: utils.space(1),
+      fontWeight: utils.fontWeight('medium'),
+      fontSize: utils.fontSize('base'),
+      letterSpacing: utils.tracking('tight'),
       color: colors.foreground,
     },
     description: {
-      paddingLeft: utils.space[7],
-      fontSize: utils.fontSize['sm'],
+      paddingLeft: utils.space(7),
+      fontSize: utils.fontSize('sm'),
       color: colors.foreground,
     },
   };

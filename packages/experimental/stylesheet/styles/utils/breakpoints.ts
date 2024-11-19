@@ -7,7 +7,9 @@ export const BREAKPOINTS = {
   '2xl': 1536,
 } as const;
 
-export const BREAKPOINT_KEYS = Object.keys(BREAKPOINTS) as (keyof typeof BREAKPOINTS)[];
+export const BREAKPOINT_KEYS = Object.keys(BREAKPOINTS).sort(
+  (a, b) => BREAKPOINTS[a as keyof typeof BREAKPOINTS] - BREAKPOINTS[b as keyof typeof BREAKPOINTS]
+) as (keyof typeof BREAKPOINTS)[];
 
 export function getCurrentBreakpoint(width: number) {
   return BREAKPOINT_KEYS.find((key) => width >= BREAKPOINTS[key]) ?? BREAKPOINT_KEYS[0];

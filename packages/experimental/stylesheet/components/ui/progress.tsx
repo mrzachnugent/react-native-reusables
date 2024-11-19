@@ -55,10 +55,10 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     root: {
       position: 'relative',
-      height: utils.space[4],
+      height: utils.space(4),
       width: '100%',
       overflow: 'hidden',
-      borderRadius: utils.rounded['full'],
+      borderRadius: utils.rounded('full'),
       backgroundColor: colors.secondary,
     },
   };

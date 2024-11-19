@@ -2,7 +2,6 @@ import { AlertTriangle, Terminal } from 'lucide-react-native';
 import { View } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
-import { getBaseUnitScale } from '~/styles/utils/base-unit';
 
 export default function AlertScreen() {
   const { styles } = useStyles(stylesheet);
@@ -29,12 +28,12 @@ const stylesheet = createStyleSheet(({ utils }) => {
     root: {
       flex: 1,
       justifyContent: 'center',
-      padding: utils.space[6],
+      padding: utils.space(6),
       alignItems: 'center',
-      gap: utils.space[6],
+      gap: utils.space(6),
     },
     maxWXL: {
-      maxWidth: getBaseUnitScale(36),
+      maxWidth: utils.rem(36),
       width: '100%',
     },
   };

@@ -1,10 +1,10 @@
 import { PixelRatio } from 'react-native';
-import { getBaseUnitScale } from './base-unit';
+import { rem } from './rem';
 
 /**
- * JsDoc values are based on the default unit scale of 14dp.
+ * Commented values are based on the default unit scale of 14dp.
  */
-const rounded = {
+const ROUNDED = {
   /**
    * none: 0dp
    */
@@ -12,47 +12,39 @@ const rounded = {
   /**
    * sm: 1.75dp
    */
-  sm: getBaseUnitScale(0.125),
+  sm: rem(0.125),
   /**
    * base: 3.5dp
    */
-  base: getBaseUnitScale(0.25),
+  base: rem(0.25),
   /**
    * md: 5.25dp
    */
-  md: getBaseUnitScale(0.375),
+  md: rem(0.375),
   /**
    * lg: 7dp
    */
-  lg: getBaseUnitScale(0.5),
+  lg: rem(0.5),
   /**
    * xl: 10.5dp
    */
-  xl: getBaseUnitScale(0.75),
+  xl: rem(0.75),
   /**
    * 2xl: 14dp
    */
-  '2xl': getBaseUnitScale(1),
+  '2xl': rem(1),
   /**
    * 3xl: 21dp
    */
-  '3xl': getBaseUnitScale(1.5),
+  '3xl': rem(1.5),
   /**
    * full : 9999dp
    */
   full: 9999,
 };
 
-type RoundedOptions = keyof typeof rounded;
-
-export function getRounded(fontScale: number) {
-  const adjustedRounded = {} as typeof rounded;
-
-  for (const key in rounded) {
-    adjustedRounded[key as RoundedOptions] = PixelRatio.roundToNearestPixel(
-      rounded[key as RoundedOptions] * fontScale
-    );
-  }
-
-  return adjustedRounded;
+export function createRounded(fontScale: number) {
+  return (key: keyof typeof ROUNDED) => {
+    return PixelRatio.roundToNearestPixel(ROUNDED[key] * fontScale);
+  };
 }

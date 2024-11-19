@@ -1,14 +1,11 @@
 import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import * as React from 'react';
-import { View, type ViewProps } from 'react-native';
+import { type ViewProps, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
-import { getBaseUnitScale } from '~/styles/utils/base-unit';
 import { cfs, cs } from '~/styles/utils/combine';
-import { FONT_WEIGHT } from '~/styles/utils/font-weight';
-import { SHADOW } from '~/styles/utils/shadow';
 import { withOpacity } from '~/styles/utils/with-opacity';
-import { buttonStyleSheet } from './button';
+import { buttonStyleSheet, withVariantAndState } from './button';
 import { TextStyleContext } from './text';
 
 const AlertDialog = AlertDialogPrimitive.Root;
@@ -85,9 +82,10 @@ const AlertDialogAction = React.forwardRef<
   AlertDialogPrimitive.ActionProps
 >(({ style, ...props }, ref) => {
   const { styles } = useStyles(buttonStyleSheet);
+  const buttonStyle = withVariantAndState(styles.button);
   return (
     <TextStyleContext.Provider value={styles.text()}>
-      <AlertDialogPrimitive.Action ref={ref} style={cfs(styles.button(), style)} {...props} />
+      <AlertDialogPrimitive.Action ref={ref} style={cfs(buttonStyle, style)} {...props} />
     </TextStyleContext.Provider>
   );
 });
@@ -98,14 +96,10 @@ const AlertDialogCancel = React.forwardRef<
   AlertDialogPrimitive.CancelProps
 >(({ style, ...props }, ref) => {
   const { styles } = useStyles(buttonStyleSheet);
-
+  const buttonStyle = withVariantAndState(styles.button, { variant: 'outline' });
   return (
     <TextStyleContext.Provider value={styles.text({ variant: 'outline' })}>
-      <AlertDialogPrimitive.Cancel
-        ref={ref}
-        style={cfs(styles.button({ variant: 'outline' }), style)}
-        {...props}
-      />
+      <AlertDialogPrimitive.Cancel ref={ref} style={cfs(buttonStyle, style)} {...props} />
     </TextStyleContext.Provider>
   );
 });
@@ -131,7 +125,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       backgroundColor: withOpacity('black', 0.8),
       justifyContent: 'center',
       alignItems: 'center',
-      padding: utils.space[2],
+      padding: utils.space(2),
       position: 'absolute',
       top: 0,
       right: 0,
@@ -139,30 +133,30 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       left: 0,
     },
     content: {
-      maxWidth: getBaseUnitScale(32),
-      gap: utils.space[4],
+      maxWidth: utils.rem(32),
+      gap: utils.space(4),
       borderWidth: 1,
       borderColor: colors.border,
       backgroundColor: colors.background,
-      padding: utils.space[6],
-      ...SHADOW['lg'],
+      padding: utils.space(6),
+      ...utils.shadow('lg'),
       shadowColor: withOpacity(colors.foreground, 0.1),
-      borderRadius: utils.rounded['lg'],
+      borderRadius: utils.rounded('lg'),
     },
     header: {
-      gap: utils.space[2],
+      gap: utils.space(2),
     },
     footer: {
-      flexDirection: utils.mediaMinWidth['md'] ? 'row-reverse' : 'column',
-      gap: utils.space[2],
+      flexDirection: utils.mediaMinWidth('md') ? 'row-reverse' : 'column',
+      gap: utils.space(2),
     },
     title: {
-      fontSize: utils.fontSize['xl'],
+      fontSize: utils.fontSize('xl'),
       color: colors.foreground,
-      fontWeight: FONT_WEIGHT['semiBold'],
+      fontWeight: utils.fontWeight('semiBold'),
     },
     description: {
-      fontSize: utils.fontSize['base'],
+      fontSize: utils.fontSize('base'),
       color: colors.mutedForeground,
     },
   };

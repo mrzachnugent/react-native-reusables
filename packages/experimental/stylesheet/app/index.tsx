@@ -17,8 +17,6 @@ import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
-import { FONT_WEIGHT } from '~/styles/utils/font-weight';
-import { SHADOW } from '~/styles/utils/shadow';
 import { withOpacity } from '~/styles/utils/with-opacity';
 
 const GITHUB_AVATAR_URI =
@@ -108,67 +106,67 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      gap: utils.space[5],
-      padding: utils.space[6],
+      gap: utils.space(5),
+      padding: utils.space(6),
       backgroundColor: withOpacity(colors.secondary, 0.3),
     },
     card: {
       width: '100%',
-      maxWidth: 384 * (14 / 16), // Create utility for this?
-      ...SHADOW['2xl'],
+      maxWidth: utils.rem(24),
+      ...utils.shadow('2xl'),
       shadowColor: withOpacity('black', 0.3),
-      paddingVertical: utils.space[4],
-      borderRadius: utils.rounded['xl'],
+      paddingVertical: utils.space(4),
+      borderRadius: utils.rounded('xl'),
     },
     cardHeader: {
       alignItems: 'center',
     },
     avatar: {
-      width: utils.space[24],
-      height: utils.space[24],
+      width: utils.space(24),
+      height: utils.space(24),
     },
     cardTitle: {
-      paddingBottom: utils.space[2],
+      paddingBottom: utils.space(2),
       textAlign: 'center',
     },
     flexRow: {
       flexDirection: 'row',
     },
     cardDescription: {
-      fontWeight: FONT_WEIGHT['semiBold'],
+      fontWeight: utils.fontWeight('semiBold'),
     },
     tooltipTrigger: (ev: PressableStateCallbackType) => ({
-      paddingHorizontal: utils.space[1],
-      paddingBottom: utils.space[0.5],
+      paddingHorizontal: utils.space(1),
+      paddingBottom: utils.space(0.5),
       opacity: ev.pressed ? 0.5 : 1,
     }),
     tooltipContent: {
-      paddingVertical: utils.space[2],
-      paddingHorizontal: utils.space[4],
+      paddingVertical: utils.space(2),
+      paddingHorizontal: utils.space(4),
       ...Platform.select({
-        ios: SHADOW['base'] as ViewStyle,
+        ios: utils.shadow('base') as ViewStyle,
         android: {},
       }),
     },
     cardContent: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      gap: utils.space[3],
+      gap: utils.space(3),
     },
     cardContentItem: {
       alignItems: 'center',
     },
     cardContentKey: {
-      fontSize: utils.fontSize['sm'],
+      fontSize: utils.fontSize('sm'),
       color: colors.mutedForeground,
     },
     cardContentValue: {
-      fontSize: utils.fontSize['xl'],
-      fontWeight: FONT_WEIGHT['semiBold'],
+      fontSize: utils.fontSize('xl'),
+      fontWeight: utils.fontWeight('semiBold'),
     },
     cardFooter: {
       flexDirection: 'column',
-      gap: utils.space[3],
+      gap: utils.space(3),
       alignItems: 'center',
     },
     cardFooterContent: {
@@ -177,16 +175,16 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       overflow: 'hidden',
     },
     counterWrapper: {
-      width: utils.space[11],
+      width: utils.space(11),
       alignItems: 'center',
     },
     progressText: {
-      fontSize: utils.fontSize['sm'],
+      fontSize: utils.fontSize('sm'),
       color: 'dodgerblue',
-      fontWeight: FONT_WEIGHT['bold'],
+      fontWeight: utils.fontWeight('bold'),
     },
     progress: {
-      height: utils.space[2],
+      height: utils.space(2),
     },
     progressIndicator: {
       backgroundColor: 'dodgerblue',

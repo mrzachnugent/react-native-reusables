@@ -50,7 +50,7 @@ const stylesheet = createStyleSheet(({ utils }) => {
     root: {
       flex: 1,
       justifyContent: 'center',
-      padding: utils.space[6],
+      padding: utils.space(6),
     },
   };
 });

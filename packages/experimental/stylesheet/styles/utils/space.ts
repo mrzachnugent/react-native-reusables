@@ -1,19 +1,14 @@
-import { PixelRatio, StyleSheet } from 'react-native';
-import { getBaseUnitScale } from './base-unit';
+import { PixelRatio } from 'react-native';
+import { rem } from './rem';
 
 function getSpaceScale(value: number) {
-  return getBaseUnitScale(value) * 0.25;
+  return rem(value) * 0.25;
 }
 
 /**
- * JsDoc values are based on the default unit scale of 14dp.
+ * Commented values are based on the default unit scale of 14dp.
  */
-const space = {
-  /**
-   * hairline: Hairline width
-   */
-  hairline: StyleSheet.hairlineWidth,
-
+const SPACE = {
   /**
    * 0: 0dp
    */
@@ -185,16 +180,8 @@ const space = {
   96: getSpaceScale(96),
 };
 
-type SpaceOptions = keyof typeof space;
-
-export function getSpaces(fontScale: number) {
-  const adjustedSpace = {} as typeof space;
-
-  for (const key in space) {
-    adjustedSpace[key as SpaceOptions] = PixelRatio.roundToNearestPixel(
-      space[key as SpaceOptions] * fontScale
-    );
-  }
-
-  return adjustedSpace;
+export function createSpace(fontScale: number) {
+  return (key: keyof typeof SPACE) => {
+    return PixelRatio.roundToNearestPixel(SPACE[key] * fontScale);
+  };
 }

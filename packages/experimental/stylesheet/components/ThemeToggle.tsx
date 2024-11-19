@@ -1,8 +1,8 @@
 import { MoonStar, Sun } from 'lucide-react-native';
 import {
+  type PressableStateCallbackType,
   Appearance,
   Pressable,
-  type PressableStateCallbackType,
   useColorScheme,
 } from 'react-native';
 import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';

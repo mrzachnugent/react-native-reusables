@@ -1,4 +1,4 @@
-export const FONT_WEIGHT = {
+const FONT_WEIGHT = {
   /*
    * thin: 100,
    */
@@ -36,3 +36,7 @@ export const FONT_WEIGHT = {
    */
   black: '900',
 } as const;
+
+export function getFontWeight(fontWeight: keyof typeof FONT_WEIGHT) {
+  return FONT_WEIGHT[fontWeight];
+}

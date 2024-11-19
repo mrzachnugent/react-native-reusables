@@ -23,8 +23,14 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     { style, variant, size, onPressIn: onPressInProp, onPressOut: onPressOutProp, ...props },
     ref
   ) => {
-    const { styles } = useStyles(stylesheet);
     const [active, setActive] = React.useState(false);
+    const { styles } = useStyles(stylesheet);
+
+    const buttonStyle = withVariantAndState(styles.button, {
+      variant,
+      size,
+      disabled: props.disabled,
+    });
 
     function onPressIn(ev: GestureResponderEvent) {
       setActive(true);
@@ -39,7 +45,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     return (
       <TextStyleContext.Provider value={styles.text({ variant, size, active })}>
         <Pressable
-          style={cfs(styles.button({ variant, size, disabled: props.disabled }), style)}
+          style={cfs(buttonStyle, style)}
           ref={ref}
           role='button'
           onPressIn={onPressIn}
@@ -53,7 +59,16 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
 
 Button.displayName = 'Button';
 
-export { Button, stylesheet as buttonStyleSheet };
+export { Button, stylesheet as buttonStyleSheet, withVariantAndState };
+
+function withVariantAndState<T>(
+  fn: (state: PressableStateCallbackType, variant?: T) => ViewStyle,
+  variant?: T
+) {
+  return (state: PressableStateCallbackType) => {
+    return fn(state, variant);
+  };
+}
 
 type ButtonStyleSheetArgs = {
   variant?: Variant;
@@ -72,10 +87,10 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: utils.rounded['md'],
+    borderRadius: utils.rounded('md'),
   };
 
-  function getButtonVariantStyle(variant: string, ev: PressableStateCallbackType): ViewStyle {
+  function getButtonVariantStyle(variant: string, state: PressableStateCallbackType): ViewStyle {
     switch (variant) {
       case 'default':
         return { backgroundColor: colors.primary };
@@ -85,12 +100,12 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
         return {
           borderWidth: 1,
           borderColor: colors.input,
-          backgroundColor: ev.pressed ? colors.accent : colors.background,
+          backgroundColor: state.pressed ? colors.accent : colors.background,
         };
       case 'secondary':
-        return { backgroundColor: colors.secondary, opacity: ev.pressed ? 0.8 : 1 };
+        return { backgroundColor: colors.secondary, opacity: state.pressed ? 0.8 : 1 };
       case 'ghost':
-        return ev.pressed ? { backgroundColor: colors.accent } : {};
+        return state.pressed ? { backgroundColor: colors.accent } : {};
       default:
         return {};
     }
@@ -100,45 +115,42 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     switch (size) {
       case 'default':
         return {
-          height: utils.space[12],
-          paddingHorizontal: utils.space[5],
-          paddingVertical: utils.space[3],
+          height: utils.space(12),
+          paddingHorizontal: utils.space(5),
+          paddingVertical: utils.space(3),
         };
       case 'sm':
         return {
-          height: utils.space[9],
-          paddingHorizontal: utils.space[3],
+          height: utils.space(9),
+          paddingHorizontal: utils.space(3),
         };
       case 'lg':
         return {
-          height: utils.space[14],
-          paddingHorizontal: utils.space[8],
+          height: utils.space(14),
+          paddingHorizontal: utils.space(8),
         };
       case 'icon':
         return {
-          height: utils.space[10],
-          width: utils.space[10],
+          height: utils.space(10),
+          width: utils.space(10),
         };
       default:
         return {};
     }
   }
 
-  function button({
-    variant = 'default',
-    size = 'default',
-    disabled = false,
-  }: ButtonStyleSheetArgs = {}) {
-    return (ev: PressableStateCallbackType): ViewStyle => {
-      const variantStyle = getButtonVariantStyle(variant, ev);
-      const sizeStyle = getButtonSizeStyle(size);
+  function button(
+    state: PressableStateCallbackType,
+    { variant = 'default', size = 'default', disabled = false }: ButtonStyleSheetArgs = {}
+  ) {
+    const variantStyle = getButtonVariantStyle(variant, state);
+    const sizeStyle = getButtonSizeStyle(size);
 
-      return {
-        ...baseButtonStyle,
-        ...variantStyle,
-        ...sizeStyle,
-        opacity: disabled ? 0.5 : ev.pressed ? 0.9 : 1,
-      };
+    return {
+      ...baseButtonStyle,
+      ...variantStyle,
+      ...sizeStyle,
+      opacity: disabled ? 0.5 : state.pressed ? 0.9 : 1,
     };
   }
 
@@ -167,7 +179,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
   function baseTextStyle(size: string): TextStyle {
     return {
       color: colors.foreground,
-      fontSize: size === 'lg' ? utils.fontSize['lg'] : utils.fontSize['base'],
+      fontSize: size === 'lg' ? utils.fontSize('lg') : utils.fontSize('base'),
     };
   }
 

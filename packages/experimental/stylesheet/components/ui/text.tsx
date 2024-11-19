@@ -23,7 +23,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
   return {
     text: {
       color: colors.foreground,
-      fontSize: utils.fontSize['base'],
+      fontSize: utils.fontSize('base'),
     },
   };
 });

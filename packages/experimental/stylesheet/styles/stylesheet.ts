@@ -6,17 +6,21 @@ import {
   I18nManager,
   PixelRatio,
   StatusBar,
+  StyleSheet as RNStyleSheet,
   useColorScheme,
   useWindowDimensions,
 } from 'react-native';
 import { type EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DARK_COLORS, LIGHT_COLORS } from './colors';
 import { getCurrentBreakpoint } from './utils/breakpoints';
-import { getFontSizes } from './utils/font-size';
-import { getMediaMinWidth } from './utils/media-min-width';
-import { getRounded } from './utils/rounded';
-import { getSpaces } from './utils/space';
-import { getTracking } from './utils/tracking';
+import { createFontSize } from './utils/font-size';
+import { createMediaMinWidth } from './utils/media-min-width';
+import { createRounded } from './utils/rounded';
+import { createSpace } from './utils/space';
+import { createTracking } from './utils/tracking';
+import { getFontWeight } from './utils/font-weight';
+import { rem } from './utils/rem';
+import { getShadow } from './utils/shadow';
 
 export function useStyles<T extends StyleSheet>(createStyleSheet?: CreateStyleSheet<T>) {
   const { fontScale, height, width } = useWindowDimensions();
@@ -33,21 +37,22 @@ export function useStyles<T extends StyleSheet>(createStyleSheet?: CreateStyleSh
       statusBar: { height: StatusBar.currentHeight },
       pixelRatio: PixelRatio.get(),
       fontScale,
+      hairlineWidth: RNStyleSheet.hairlineWidth,
       rtl: I18nManager.isRTL,
     };
   }, [colorScheme, height, width, fontScale, insets]);
 
   const themes = React.useMemo(() => {
-    // TODO: make functions instead of objects
-    // TODO: add rem()
-    // TODO: add constant utils
     const utils = {
-      mediaMinWidth: getMediaMinWidth(runtime.breakpoint),
-      fontSize: getFontSizes(fontScale),
-      space: getSpaces(fontScale),
-      rounded: getRounded(fontScale),
-      tracking: getTracking(fontScale),
-    };
+      mediaMinWidth: createMediaMinWidth(runtime.breakpoint),
+      fontSize: createFontSize(fontScale),
+      space: createSpace(fontScale),
+      rounded: createRounded(fontScale),
+      tracking: createTracking(fontScale),
+      fontWeight: getFontWeight,
+      shadow: getShadow,
+      rem,
+    } satisfies Utils;
     return {
       light: { colors: LIGHT_COLORS, utils },
       dark: { colors: DARK_COLORS, utils },
@@ -69,21 +74,22 @@ export function createStyleSheet<T extends StyleSheet>(stylesheet?: CreateStyleS
   return stylesheet;
 }
 
-// TODO: check up on unistyles wip branch to see if the cb->cb->style should be removed
 type StyleSheet = {
   [x: string]:
-    | (ViewStyle | ((...args: any) => ViewStyle) | ((...args: any) => (...args: any) => ViewStyle))
-    | (TextStyle | ((...args: any) => TextStyle) | ((...args: any) => (...args: any) => TextStyle))
-    | (ImageStyle | ((...args: any) => ImageStyle))
-    | ((...args: any) => (...args: any) => ImageStyle);
+    | (ViewStyle | ((...args: any) => ViewStyle))
+    | (TextStyle | ((...args: any) => TextStyle))
+    | (ImageStyle | ((...args: any) => ImageStyle));
 };
 
 type Utils = {
-  mediaMinWidth: ReturnType<typeof getMediaMinWidth>;
-  fontSize: ReturnType<typeof getFontSizes>;
-  space: ReturnType<typeof getSpaces>;
-  rounded: ReturnType<typeof getRounded>;
-  tracking: ReturnType<typeof getTracking>;
+  mediaMinWidth: ReturnType<typeof createMediaMinWidth>;
+  fontSize: ReturnType<typeof createFontSize>;
+  space: ReturnType<typeof createSpace>;
+  rounded: ReturnType<typeof createRounded>;
+  tracking: ReturnType<typeof createTracking>;
+  fontWeight: typeof getFontWeight;
+  shadow: typeof getShadow;
+  rem: typeof rem;
 };
 
 type Themes = {
@@ -108,6 +114,7 @@ type Runtime = {
   statusBar: { height: typeof StatusBar.currentHeight };
   pixelRatio: ReturnType<typeof PixelRatio.get>;
   fontScale: ReturnType<typeof useWindowDimensions>['fontScale'];
+  hairlineWidth: typeof RNStyleSheet.hairlineWidth;
   rtl: typeof I18nManager.isRTL;
 };
 

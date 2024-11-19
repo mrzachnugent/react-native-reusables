@@ -4,8 +4,6 @@ import { Text, type TextProps, View, type ViewProps } from 'react-native';
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cs } from '~/styles/utils/combine';
-import { FONT_WEIGHT } from '~/styles/utils/font-weight';
-import { SHADOW } from '~/styles/utils/shadow';
 
 const Card = React.forwardRef<ViewRef, ViewProps>(({ style, ...props }, ref) => {
   const { styles } = useStyles(stylesheet);
@@ -53,31 +51,31 @@ CardFooter.displayName = 'CardFooter';
 
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };
 
-const stylesheet = createStyleSheet(({ colors, utils }) => {
+const stylesheet = createStyleSheet(({ colors, utils }, { hairlineWidth }) => {
   return {
     root: {
-      borderRadius: utils.rounded['lg'],
-      borderWidth: utils.space['hairline'],
+      borderRadius: utils.rounded('lg'),
+      borderWidth: hairlineWidth,
       borderColor: colors.border,
       backgroundColor: colors.card,
-      ...SHADOW['sm'],
+      ...utils.shadow('sm'),
     },
     header: {
-      gap: utils.space['1.5'],
-      padding: utils.space[6],
+      gap: utils.space(1.5),
+      padding: utils.space(6),
     },
     title: {
       color: colors.cardForeground,
-      fontSize: utils.fontSize['2xl'],
-      fontWeight: FONT_WEIGHT['semiBold'],
-      letterSpacing: utils.tracking['tight'],
+      fontSize: utils.fontSize('2xl'),
+      fontWeight: utils.fontWeight('semiBold'),
+      letterSpacing: utils.tracking('tight'),
     },
     description: {
-      fontSize: utils.fontSize['sm'],
+      fontSize: utils.fontSize('sm'),
       color: colors.mutedForeground,
     },
     content: {
-      padding: utils.space[6],
+      padding: utils.space(6),
       paddingTop: 0,
     },
     contentText: {
@@ -85,7 +83,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     },
     footer: {
       flexDirection: 'row',
-      padding: utils.space[6],
+      padding: utils.space(6),
       paddingTop: 0,
     },
   };
