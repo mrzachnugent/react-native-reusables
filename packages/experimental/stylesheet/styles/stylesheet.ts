@@ -27,8 +27,8 @@ export function useStyles<T extends StyleSheet>(createStyleSheet?: CreateStyleSh
   const colorScheme = useColorScheme() ?? 'light';
   const insets = useSafeAreaInsets();
 
-  const runtime = React.useMemo((): Runtime => {
-    return {
+  return React.useMemo(() => {
+    const runtime = {
       themeName: colorScheme === 'dark' ? 'dark' : 'light',
       breakpoint: getCurrentBreakpoint(width),
       screen: { width, height },
@@ -39,10 +39,8 @@ export function useStyles<T extends StyleSheet>(createStyleSheet?: CreateStyleSh
       fontScale,
       hairlineWidth: RNStyleSheet.hairlineWidth,
       rtl: I18nManager.isRTL,
-    };
-  }, [colorScheme, height, width, fontScale, insets]);
+    } satisfies Runtime;
 
-  const themes = React.useMemo(() => {
     const utils = {
       mediaMinWidth: createMediaMinWidth(runtime.breakpoint),
       fontSize: createFontSize(fontScale),
@@ -53,21 +51,20 @@ export function useStyles<T extends StyleSheet>(createStyleSheet?: CreateStyleSh
       shadow: getShadow,
       rem,
     } satisfies Utils;
-    return {
+
+    const themes = {
       light: { colors: LIGHT_COLORS, utils },
       dark: { colors: DARK_COLORS, utils },
+    } satisfies Themes;
+
+    const styles = createStyleSheet ? createStyleSheet(themes[colorScheme], runtime) : ({} as T);
+
+    return {
+      styles,
+      theme: themes[colorScheme],
+      breakpoint: runtime.breakpoint,
     };
-  }, [runtime]);
-
-  const styles = React.useMemo(() => {
-    return createStyleSheet ? createStyleSheet(themes[colorScheme], runtime) : ({} as T);
-  }, [themes, colorScheme, runtime]);
-
-  return {
-    styles,
-    theme: themes[colorScheme],
-    breakpoint: runtime.breakpoint,
-  };
+  }, [colorScheme, height, width, fontScale, insets]);
 }
 
 export function createStyleSheet<T extends StyleSheet>(stylesheet?: CreateStyleSheet<T>) {
