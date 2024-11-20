@@ -9,7 +9,7 @@ import { Text } from '~/components/ui/text';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { withOpacity } from '~/styles/utils/with-opacity';
 
-// TODO(zach): For New Arch - Fix @rn-primitives/hooks -> useRelativePosition - https://stackoverflow.com/a/76888613
+// TODO(zach): Look into (works with showcase app) Fix @rn-primitives/hooks -> useRelativePosition - https://stackoverflow.com/a/76888613
 
 export default function HoverCardScreen() {
   const { styles, theme } = useStyles(stylesheet);
