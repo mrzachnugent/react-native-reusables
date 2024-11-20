@@ -9,6 +9,7 @@ import {
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs } from '~/styles/utils/combine';
+import { withPressableState } from '~/styles/utils/with-pressable-state';
 
 type Variant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
 type Size = 'default' | 'sm' | 'lg' | 'icon';
@@ -26,7 +27,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     const [active, setActive] = React.useState(false);
     const { styles } = useStyles(stylesheet);
 
-    const buttonStyle = withVariantAndState(styles.button, {
+    const buttonStyle = withPressableState(styles.button, {
       variant,
       size,
       disabled: props.disabled,
@@ -59,16 +60,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
 
 Button.displayName = 'Button';
 
-export { Button, stylesheet as buttonStyleSheet, withVariantAndState };
-
-function withVariantAndState<T>(
-  fn: (state: PressableStateCallbackType, variant?: T) => ViewStyle,
-  variant?: T
-) {
-  return (state: PressableStateCallbackType) => {
-    return fn(state, variant);
-  };
-}
+export { Button, stylesheet as buttonStyleSheet };
 
 type ButtonStyleSheetArgs = {
   variant?: Variant;
