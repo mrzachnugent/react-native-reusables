@@ -1,21 +1,28 @@
-import { PixelRatio } from 'react-native';
+import { useWindowDimensions } from 'react-native';
+import { useCallback } from 'react';
 
 const useFontScale = () => {
-  const fontScale = PixelRatio.getFontScale();
+  const { fontScale } = useWindowDimensions();
 
-  const getScaledSize = (size: number) => Math.round(size * fontScale);
+  const getScaledSize = useCallback(
+    (size: number) => Math.round(size * fontScale),
+    [fontScale]
+  );
 
-  const getScaledHeight = (height: number, fontSize: number) => {
-    const scaledFontSize = getScaledSize(fontSize);
-    const additionalHeight = Math.max(0, scaledFontSize - fontSize);
-    return height + additionalHeight;
-  };
+  const getScaledHeight = useCallback(
+    (height: number, fontSize: number) => {
+      const scaledFontSize = getScaledSize(fontSize);
+      const additionalHeight = Math.max(0, scaledFontSize - fontSize);
+      return height + additionalHeight;
+    },
+    [getScaledSize]
+  );
 
   return {
     fontScale,
     getScaledSize,
     getScaledHeight,
   };
-}
+};
 
 export { useFontScale };
