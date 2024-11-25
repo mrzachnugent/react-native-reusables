@@ -32,6 +32,8 @@ export default function RootLayout() {
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <Stack>
         <Stack.Screen name='index' options={SCREEN_OPTIONS} />
+        <Stack.Screen name='hover-card' options={{ headerTransparent: true }} />
+        <Stack.Screen name='dropdown-menu' options={{ headerTransparent: true }} />
       </Stack>
       <PortalHost />
     </ThemeProvider>

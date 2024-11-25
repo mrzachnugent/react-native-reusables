@@ -9,7 +9,7 @@ import { Text } from '~/components/ui/text';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { withOpacity } from '~/styles/utils/with-opacity';
 
-// TODO(zach): Look into (works with showcase app) Fix @rn-primitives/hooks -> useRelativePosition - https://stackoverflow.com/a/76888613
+// TODO(zach): Check up on issue https://github.com/react-navigation/react-navigation/issues/12294
 
 export default function HoverCardScreen() {
   const { styles, theme } = useStyles(stylesheet);
@@ -39,8 +39,6 @@ export default function HoverCardScreen() {
           </HoverCardTrigger>
           <HoverCardContent
             insets={contentInsets}
-            // hack
-            sideOffset={insets.top + insets.bottom}
             side='bottom'
             align='center'
             style={styles.content}
