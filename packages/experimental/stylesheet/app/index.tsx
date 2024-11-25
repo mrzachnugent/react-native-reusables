@@ -89,7 +89,7 @@ export default function Screen() {
             indicatorStyle={styles.progressIndicator}
           />
           <View />
-          <Link href='/dropdown-menu' asChild>
+          <Link href='/input' asChild>
             <Button variant='outline' onPress={updateProgressValue}>
               <Text>Update</Text>
             </Button>
