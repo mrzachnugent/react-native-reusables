@@ -89,7 +89,7 @@ export default function Screen() {
             indicatorStyle={styles.progressIndicator}
           />
           <View />
-          <Link href='/input' asChild>
+          <Link href='/popover' asChild>
             <Button variant='outline' onPress={updateProgressValue}>
               <Text>Update</Text>
             </Button>
