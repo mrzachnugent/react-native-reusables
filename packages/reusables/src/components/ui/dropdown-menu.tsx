@@ -73,7 +73,7 @@ const DropdownMenuSubContent = React.forwardRef<
         'z-50 min-w-[8rem] overflow-hidden rounded-md border border-border mt-1 bg-popover p-1 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         open
           ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
-          : 'web:animate-out web:fade-out-0 web:zoom-out ',
+          : 'web:animate-out web:fade-out-0 web:zoom-out',
         className
       )}
       {...props}
@@ -99,7 +99,7 @@ const DropdownMenuContent = React.forwardRef<
             ? StyleSheet.flatten([
                 Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined,
                 overlayStyle,
-              ] as ViewStyle)
+              ])
             : Platform.OS !== 'web'
             ? StyleSheet.absoluteFill
             : undefined

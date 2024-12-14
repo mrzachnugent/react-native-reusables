@@ -1,6 +1,6 @@
 import * as MenubarPrimitive from '@rn-primitives/menubar';
 import * as React from 'react';
-import { Platform, Text, TextProps, View } from 'react-native';
+import { Platform, Text, type TextProps, View } from 'react-native';
 import { Check } from '../../lib/icons/Check';
 import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { ChevronRight } from '../../lib/icons/ChevronRight';
@@ -117,7 +117,7 @@ const MenubarContent = React.forwardRef<
       <MenubarPrimitive.Content
         ref={ref}
         className={cn(
-          'z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5 ',
+          'z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5',
           value === itemValue
             ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
             : 'web:animate-out web:fade-out-0 web:zoom-out-95',
