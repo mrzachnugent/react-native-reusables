@@ -76,7 +76,7 @@ const SelectContent = React.forwardRef<
   return (
     <SelectPrimitive.Portal hostName={portalHost}>
       <SelectPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
-        <Animated.View entering={FadeIn} exiting={FadeOut}>
+        <Animated.View className='z-50' entering={FadeIn} exiting={FadeOut}>
           <SelectPrimitive.Content
             ref={ref}
             className={cn(
