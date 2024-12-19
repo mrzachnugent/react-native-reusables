@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { add } from '@/src/commands/add';
+import { init } from './commands/init';
+
 import { Command } from 'commander';
 
 import { getPackageInfo } from './utils/get-package-info';
@@ -16,6 +18,7 @@ async function main() {
     .version(packageInfo.version || '0.0.0-rc.0', '-v, --version', 'display the version number');
 
   program.addCommand(add);
+  program.addCommand(init);
 
   program.parse();
 }
