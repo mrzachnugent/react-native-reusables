@@ -53,6 +53,7 @@
     "@babel/core": "^7.26.0",
     "@babel/parser": "^7.22.6",
     "@babel/plugin-transform-typescript": "^7.22.5",
+    "@rnr/starter-base": "workspace:*",
     "chalk": "5.2.0",
     "commander": "^10.0.0",
     "cosmiconfig": "^8.1.3",
