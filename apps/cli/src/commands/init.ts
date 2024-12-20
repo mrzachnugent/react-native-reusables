@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import glob from 'fast-glob';
+import { createRequire } from 'module';
 
 const filePath = fileURLToPath(import.meta.url);
 const fileDir = path.dirname(filePath);
@@ -196,7 +197,9 @@ export const init = new Command()
       }
 
       const spinner = ora(`Initializing project...`).start();
-      const templatesDir = path.join(fileDir, '../../../packages/templates/starter-base');
+      const templatesDir = path.dirname(
+        createRequire(import.meta.url).resolve('@rnr/starter-base/package.json')
+      );
 
       await installDependencies(cwd, spinner);
       await updateTsConfig(cwd, spinner);
