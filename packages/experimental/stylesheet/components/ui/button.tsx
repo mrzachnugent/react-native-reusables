@@ -9,7 +9,6 @@ import {
 import { TextStyleContext } from '~/components/ui/text';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs } from '~/styles/utils/combine';
-import { withPressableState } from '~/styles/utils/with-pressable-state';
 
 type Variant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
 type Size = 'default' | 'sm' | 'lg' | 'icon';
@@ -27,12 +26,6 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     const [active, setActive] = React.useState(false);
     const { styles } = useStyles(stylesheet);
 
-    const buttonStyle = withPressableState(styles.button, {
-      variant,
-      size,
-      disabled: props.disabled,
-    });
-
     function onPressIn(ev: GestureResponderEvent) {
       setActive(true);
       onPressInProp?.(ev);
@@ -46,7 +39,14 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     return (
       <TextStyleContext.Provider value={styles.text({ variant, size, active })}>
         <Pressable
-          style={cfs(buttonStyle, style)}
+          style={cfs(
+            styles.button({
+              variant,
+              size,
+              disabled: props.disabled,
+            }),
+            style
+          )}
           ref={ref}
           role='button'
           onPressIn={onPressIn}
@@ -131,18 +131,21 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
     }
   }
 
-  function button(
-    state: PressableStateCallbackType,
-    { variant = 'default', size = 'default', disabled = false }: ButtonStyleSheetArgs = {}
-  ) {
-    const variantStyle = getButtonVariantStyle(variant, state);
+  function button({
+    variant = 'default',
+    size = 'default',
+    disabled = false,
+  }: ButtonStyleSheetArgs = {}) {
     const sizeStyle = getButtonSizeStyle(size);
 
-    return {
-      ...baseButtonStyle,
-      ...variantStyle,
-      ...sizeStyle,
-      opacity: disabled ? 0.5 : state.pressed ? 0.9 : 1,
+    return (state: PressableStateCallbackType) => {
+      const variantStyle = getButtonVariantStyle(variant, state);
+      return {
+        ...baseButtonStyle,
+        ...variantStyle,
+        ...sizeStyle,
+        opacity: disabled ? 0.5 : state.pressed ? 0.9 : 1,
+      };
     };
   }
 

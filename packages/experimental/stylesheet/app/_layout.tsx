@@ -5,8 +5,9 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, useColorScheme } from 'react-native';
 import { ThemeToggle } from '~/components/ThemeToggle';
-import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';
+import { ITEMS } from '~/constants';
 import { NAV_THEME } from '~/styles/nav-theme';
+import { setAndroidNavigationBar } from '~/styles/set-android-navigation-bar';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -32,8 +33,11 @@ export default function RootLayout() {
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <Stack>
         <Stack.Screen name='index' options={SCREEN_OPTIONS} />
-        <Stack.Screen name='hover-card' options={{ headerTransparent: true }} />
-        <Stack.Screen name='dropdown-menu' options={{ headerTransparent: true }} />
+        {ITEMS.map((item) => {
+          return (
+            <Stack.Screen key={item} name={item} options={{ title: item.toLocaleUpperCase() }} />
+          );
+        })}
       </Stack>
       <PortalHost />
     </ThemeProvider>

@@ -1,4 +1,3 @@
-import { useHeaderHeight } from '@react-navigation/elements';
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,7 +11,6 @@ import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 export default function PopoverScreen() {
   const { styles } = useStyles(stylesheet);
   const insets = useSafeAreaInsets();
-  const headerHeight = useHeaderHeight();
   const contentInsets = {
     top: insets.top,
     bottom: insets.bottom,
@@ -28,12 +26,7 @@ export default function PopoverScreen() {
             <Text>Open popover</Text>
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          side='top'
-          sideOffset={-headerHeight + 4}
-          insets={contentInsets}
-          style={styles.content}
-        >
+        <PopoverContent side='top' insets={contentInsets} style={styles.content}>
           <Text>Popover content</Text>
         </PopoverContent>
       </Popover>
@@ -41,7 +34,7 @@ export default function PopoverScreen() {
   );
 }
 
-const stylesheet = createStyleSheet(({ colors, utils }) => {
+const stylesheet = createStyleSheet(({ utils }) => {
   return {
     root: {
       flex: 1,

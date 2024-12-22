@@ -5,7 +5,6 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs, cs } from '~/styles/utils/combine';
 import { withOpacity } from '~/styles/utils/with-opacity';
-import { withPressableState } from '~/styles/utils/with-pressable-state';
 import { buttonStyleSheet } from './button';
 import { TextStyleContext } from './text';
 
@@ -83,10 +82,9 @@ const AlertDialogAction = React.forwardRef<
   AlertDialogPrimitive.ActionProps
 >(({ style, ...props }, ref) => {
   const { styles } = useStyles(buttonStyleSheet);
-  const buttonStyle = withPressableState(styles.button);
   return (
     <TextStyleContext.Provider value={styles.text()}>
-      <AlertDialogPrimitive.Action ref={ref} style={cfs(buttonStyle, style)} {...props} />
+      <AlertDialogPrimitive.Action ref={ref} style={cfs(styles.button(), style)} {...props} />
     </TextStyleContext.Provider>
   );
 });
@@ -97,10 +95,13 @@ const AlertDialogCancel = React.forwardRef<
   AlertDialogPrimitive.CancelProps
 >(({ style, ...props }, ref) => {
   const { styles } = useStyles(buttonStyleSheet);
-  const buttonStyle = withPressableState(styles.button, { variant: 'outline' });
   return (
     <TextStyleContext.Provider value={styles.text({ variant: 'outline' })}>
-      <AlertDialogPrimitive.Cancel ref={ref} style={cfs(buttonStyle, style)} {...props} />
+      <AlertDialogPrimitive.Cancel
+        ref={ref}
+        style={cfs(styles.button({ variant: 'outline' }), style)}
+        {...props}
+      />
     </TextStyleContext.Provider>
   );
 });

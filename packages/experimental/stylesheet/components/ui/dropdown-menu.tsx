@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { createStyleSheet, useStyles } from '~/styles/stylesheet';
 import { cfs, cs } from '~/styles/utils/combine';
-import { withPressableState } from '~/styles/utils/with-pressable-state';
 import { TextStyleContext } from './text';
 
 const ML_AUTO_STYLE: ViewStyle = {
@@ -40,11 +39,14 @@ const DropdownMenuSubTrigger = React.forwardRef<
   const { styles, theme } = useStyles(stylesheet);
   const { open } = DropdownMenuPrimitive.useSubContext();
 
-  const subTriggerStyle = withPressableState(styles.subTrigger, { open, inset });
   const Icon = open ? ChevronUp : ChevronDown;
   return (
     <TextStyleContext.Provider value={styles.subTriggerText(open)}>
-      <DropdownMenuPrimitive.SubTrigger ref={ref} style={cfs(subTriggerStyle, style)} {...props}>
+      <DropdownMenuPrimitive.SubTrigger
+        ref={ref}
+        style={cfs(styles.subTrigger({ open, inset }), style)}
+        {...props}
+      >
         <>{children}</>
         <Icon size={18} color={theme.colors.foreground} style={ML_AUTO_STYLE} />
       </DropdownMenuPrimitive.SubTrigger>
@@ -93,10 +95,13 @@ const DropdownMenuItem = React.forwardRef<
   }
 >(({ style, inset = false, ...props }, ref) => {
   const { styles } = useStyles(stylesheet);
-  const itemStyle = withPressableState(styles.item, { inset, disabled: props.disabled });
   return (
     <TextStyleContext.Provider value={styles.itemText}>
-      <DropdownMenuPrimitive.Item ref={ref} style={cfs(itemStyle, style)} {...props} />
+      <DropdownMenuPrimitive.Item
+        ref={ref}
+        style={cfs(styles.item({ inset, disabled: props.disabled }), style)}
+        {...props}
+      />
     </TextStyleContext.Provider>
   );
 });
@@ -107,11 +112,10 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   DropdownMenuPrimitive.CheckboxItemProps
 >(({ style, children, checked, ...props }, ref) => {
   const { styles, theme } = useStyles(stylesheet);
-  const checkboxItemStyle = withPressableState(styles.checkboxItem, props.disabled);
   return (
     <DropdownMenuPrimitive.CheckboxItem
       ref={ref}
-      style={cfs(checkboxItemStyle, style)}
+      style={cfs(styles.checkboxItem(props.disabled), style)}
       checked={checked}
       {...props}
     >
@@ -130,10 +134,12 @@ const DropdownMenuRadioItem = React.forwardRef<
 >(({ style, children, ...props }, ref) => {
   const { styles } = useStyles(stylesheet);
 
-  const radioItemStyle = withPressableState(styles.radioItem, props.disabled);
-
   return (
-    <DropdownMenuPrimitive.RadioItem ref={ref} style={cfs(radioItemStyle, style)} {...props}>
+    <DropdownMenuPrimitive.RadioItem
+      ref={ref}
+      style={cfs(styles.radioItem(props.disabled), style)}
+      {...props}
+    >
       <DropdownMenuPrimitive.ItemIndicator style={styles.indicator}>
         <View style={styles.radioItemIndicator} />
       </DropdownMenuPrimitive.ItemIndicator>
@@ -199,20 +205,19 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
         color: open ? colors.accentForeground : colors.primary,
       };
     },
-    subTrigger: (
-      state: PressableStateCallbackType,
-      { open, inset }: { open: boolean; inset: boolean }
-    ) => {
-      return {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: utils.space(2),
-        rounded: 'sm',
-        padding: utils.space(2),
-        backgroundColor: open || state.pressed ? colors.accent : undefined,
-        paddingLeft: inset ? utils.space(8) : undefined,
-      };
-    },
+    subTrigger:
+      ({ open, inset }: { open: boolean; inset: boolean }) =>
+      (state: PressableStateCallbackType) => {
+        return {
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: utils.space(2),
+          rounded: 'sm',
+          padding: utils.space(2),
+          backgroundColor: open || state.pressed ? colors.accent : undefined,
+          paddingLeft: inset ? utils.space(8) : undefined,
+        };
+      },
     subContent: {
       minWidth: utils.rem(8),
       borderRadius: utils.rounded('md'),
@@ -235,23 +240,22 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       fontSize: utils.fontSize('lg'),
       color: colors.popoverForeground,
     },
-    item: (
-      state: PressableStateCallbackType,
-      { inset, disabled }: { inset: boolean; disabled?: boolean | null }
-    ) => {
-      return {
-        position: 'relative',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: utils.space(2),
-        borderRadius: utils.rounded('sm'),
-        padding: utils.space(2),
-        backgroundColor: state.pressed ? colors.accent : undefined,
-        paddingLeft: inset ? utils.space(8) : undefined,
-        opacity: disabled ? 0.5 : 1,
-      };
-    },
-    checkboxItem: (state: PressableStateCallbackType, disabled?: boolean | null) => {
+    item:
+      ({ inset, disabled }: { inset: boolean; disabled?: boolean | null }) =>
+      (state: PressableStateCallbackType) => {
+        return {
+          position: 'relative',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: utils.space(2),
+          borderRadius: utils.rounded('sm'),
+          padding: utils.space(2),
+          backgroundColor: state.pressed ? colors.accent : undefined,
+          paddingLeft: inset ? utils.space(8) : undefined,
+          opacity: disabled ? 0.5 : 1,
+        };
+      },
+    checkboxItem: (disabled?: boolean | null) => (state: PressableStateCallbackType) => {
       return {
         position: 'relative',
         flexDirection: 'row',
@@ -272,7 +276,7 @@ const stylesheet = createStyleSheet(({ colors, utils }) => {
       height: utils.space(3.5),
       width: utils.space(3.5),
     },
-    radioItem: (state: PressableStateCallbackType, disabled?: boolean | null) => {
+    radioItem: (disabled?: boolean | null) => (state: PressableStateCallbackType) => {
       return {
         position: 'relative',
         flexDirection: 'row',

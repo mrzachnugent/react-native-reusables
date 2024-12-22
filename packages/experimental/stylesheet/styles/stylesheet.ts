@@ -74,8 +74,11 @@ export function createStyleSheet<T extends StyleSheet>(stylesheet?: CreateStyleS
 type StyleSheet = {
   [x: string]:
     | (ViewStyle | ((...args: any) => ViewStyle))
+    | ((...args: any) => (...args: any) => ViewStyle)
     | (TextStyle | ((...args: any) => TextStyle))
-    | (ImageStyle | ((...args: any) => ImageStyle));
+    | ((...args: any) => (...args: any) => ViewStyle)
+    | (ImageStyle | ((...args: any) => ImageStyle))
+    | ((...args: any) => (...args: any) => ViewStyle);
 };
 
 type Utils = {
