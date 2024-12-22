@@ -17,7 +17,7 @@ export default function Screen() {
         return (
           <Pressable
             style={styles.item}
-            onPressIn={() => {
+            onPress={() => {
               router.navigate(`/${item}`);
             }}
           >
