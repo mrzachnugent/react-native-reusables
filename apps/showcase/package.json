@@ -16,7 +16,6 @@
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.6.0",
     "@hookform/resolvers": "^3.3.4",
-    "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/slider": "4.5.5",
     "@react-navigation/material-top-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
