@@ -7,6 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "example",
     "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "runtimeVersion": {
       "policy": "appVersion"
     },

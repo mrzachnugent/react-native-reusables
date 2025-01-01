@@ -1,8 +1,7 @@
 import '~/global.css';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
-import { SplashScreen, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
@@ -26,37 +25,23 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
-// Prevent the splash screen from auto-hiding before getting the color scheme.
-SplashScreen.preventAutoHideAsync();
-
 export default function RootLayout() {
-  const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
+  const hasMounted = React.useRef(false);
+  const { colorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
-  React.useEffect(() => {
-    (async () => {
-      const theme = await AsyncStorage.getItem('theme');
-      if (Platform.OS === 'web') {
-        // Adds the background color to the html element to prevent white background on overscroll.
-        document.documentElement.classList.add('bg-background');
-      }
-      if (!theme) {
-        AsyncStorage.setItem('theme', colorScheme);
-        setIsColorSchemeLoaded(true);
-        return;
-      }
-      const colorTheme = theme === 'dark' ? 'dark' : 'light';
-      if (colorTheme !== colorScheme) {
-        setColorScheme(colorTheme);
-        setAndroidNavigationBar(colorTheme);
-        setIsColorSchemeLoaded(true);
-        return;
-      }
-      setAndroidNavigationBar(colorTheme);
-      setIsColorSchemeLoaded(true);
-    })().finally(() => {
-      SplashScreen.hideAsync();
-    });
+  useIsomorphicLayoutEffect(() => {
+    if (hasMounted.current) {
+      return;
+    }
+
+    if (Platform.OS === 'web') {
+      // Adds the background color to the html element to prevent white background on overscroll.
+      document.documentElement.classList.add('bg-background');
+    }
+    setAndroidNavigationBar(colorScheme);
+    setIsColorSchemeLoaded(true);
+    hasMounted.current = true;
   }, []);
 
   if (!isColorSchemeLoaded) {
@@ -79,3 +64,6 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+const useIsomorphicLayoutEffect =
+  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
