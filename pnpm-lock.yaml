@@ -81,6 +81,9 @@ importers:
       '@rnr/reusables':
         specifier: workspace:*
         version: link:../../packages/reusables
+      '@rnr/starter-base':
+        specifier: workspace:*
+        version: link:../../packages/templates/starter-base
       '@types/babel__core':
         specifier: ^7.20.1
         version: 7.20.5
