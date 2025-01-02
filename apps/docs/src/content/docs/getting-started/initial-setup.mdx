@@ -36,18 +36,18 @@ npx @react-native-reusables/cli@latest init
 
 <Aside type="tip" title="Features">
 
-- NativeWind v4
+- [NativeWind](https://www.nativewind.dev/)
 - Dark and light mode configuration
 - Required dependencies
-  - Expo Navigation Bar
-  - Tailwind Animate
-  - AsyncStorage
-  - Class Variance Authority
-  - CLSX
-  - Tailwind Merge
-  - React Native SVG
-  - Lucide React Native
-  - RN Primitives Portal
+  - [Expo Navigation Bar](https://docs.expo.dev/versions/latest/sdk/navigation-bar/)
+  - [Tailwind Animate](https://github.com/jamiebuilds/tailwindcss-animate)
+  - [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+  - [Class Variance Authority](https://cva.style/docs)
+  - [CLSX](https://github.com/lukeed/clsx)
+  - [Tailwind Merge](https://github.com/dcastil/tailwind-merge)
+  - [React Native SVG](https://github.com/software-mansion/react-native-svg)
+  - [Lucide React Native](https://lucide.dev/guide/packages/lucide-react-native)
+  - [RN Primitives Portal](https://rnprimitives.com/)
 - Path aliases configuration
 - Utility files and components
 
@@ -318,49 +318,49 @@ code={`
 @tailwind utilities;
 
 @layer base {
-:root {
---background: 0 0% 100%;
---foreground: 240 10% 3.9%;
---card: 0 0% 100%;
---card-foreground: 240 10% 3.9%;
---popover: 0 0% 100%;
---popover-foreground: 240 10% 3.9%;
---primary: 240 5.9% 10%;
---primary-foreground: 0 0% 98%;
---secondary: 240 4.8% 95.9%;
---secondary-foreground: 240 5.9% 10%;
---muted: 240 4.8% 95.9%;
---muted-foreground: 240 3.8% 46.1%;
---accent: 240 4.8% 95.9%;
---accent-foreground: 240 5.9% 10%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 0 0% 98%;
---border: 240 5.9% 90%;
---input: 240 5.9% 90%;
---ring: 240 5.9% 10%;
-}
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 240 10% 3.9%;
+      --primary: 240 5.9% 10%;
+      --primary-foreground: 0 0% 98%;
+      --secondary: 240 4.8% 95.9%;
+      --secondary-foreground: 240 5.9% 10%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --accent: 240 4.8% 95.9%;
+      --accent-foreground: 240 5.9% 10%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 5.9% 90%;
+      --input: 240 5.9% 90%;
+      --ring: 240 5.9% 10%;
+    }
 
-.dark:root {
---background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---primary: 0 0% 98%;
---primary-foreground: 240 5.9% 10%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 72% 51%;
---destructive-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---ring: 240 4.9% 83.9%;
-}
+    .dark:root {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+      --card: 240 10% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --popover: 240 10% 3.9%;
+      --popover-foreground: 0 0% 98%;
+      --primary: 0 0% 98%;
+      --primary-foreground: 240 5.9% 10%;
+      --secondary: 240 3.7% 15.9%;
+      --secondary-foreground: 0 0% 98%;
+      --muted: 240 3.7% 15.9%;
+      --muted-foreground: 240 5% 64.9%;
+      --accent: 240 3.7% 15.9%;
+      --accent-foreground: 0 0% 98%;
+      --destructive: 0 72% 51%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 3.7% 15.9%;
+      --input: 240 3.7% 15.9%;
+      --ring: 240 4.9% 83.9%;
+    }
 }
 `}
 />
@@ -460,40 +460,39 @@ ErrorBoundary,
 } from 'expo-router';
 
 export default function RootLayout() {
-const hasMounted = React.useRef(false);
-const { colorScheme, isDarkColorScheme } = useColorScheme();
-const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+  const hasMounted = React.useRef(false);
+  const { colorScheme, isDarkColorScheme } = useColorScheme();
+  const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
-useIsomorphicLayoutEffect(() => {
-  if (hasMounted.current) {
-    return;
+  useIsomorphicLayoutEffect(() => {
+    if (hasMounted.current) {
+      return;
+    }
+
+    if (Platform.OS === 'web') {
+      // Adds the background color to the html element to prevent white background on overscroll.
+      document.documentElement.classList.add('bg-background');
+    }
+    setIsColorSchemeLoaded(true);
+    hasMounted.current = true;
+  }, []);
+
+  if (!isColorSchemeLoaded) {
+    return null;
   }
 
-  if (Platform.OS === 'web') {
-    // Adds the background color to the html element to prevent white background on overscroll.
-    document.documentElement.classList.add('bg-background');
-  }
-  setIsColorSchemeLoaded(true);
-  hasMounted.current = true;
-}, []);
-
-if (!isColorSchemeLoaded) {
-  return null;
-}
-
-return (
-  <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-    <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-    <Stack />
-  </ThemeProvider>
-);
+  return (
+    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+      <Stack />
+    </ThemeProvider>
+  );
 }
 
 const useIsomorphicLayoutEffect =
-Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
+  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
+
 `} />
-
-
 
 ### Install and Set Up Icons
 
