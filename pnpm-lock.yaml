@@ -29,9 +29,6 @@ importers:
       '@babel/plugin-transform-typescript':
         specifier: ^7.22.5
         version: 7.26.3(@babel/core@7.26.0)
-      '@rnr/starter-base':
-        specifier: workspace:*
-        version: link:../../packages/templates/starter-base
       chalk:
         specifier: 5.2.0
         version: 5.2.0
@@ -84,6 +81,9 @@ importers:
       '@rnr/reusables':
         specifier: workspace:*
         version: link:../../packages/reusables
+      '@rnr/starter-base':
+        specifier: workspace:*
+        version: link:../../packages/templates/starter-base
       '@types/babel__core':
         specifier: ^7.20.1
         version: 7.20.5
