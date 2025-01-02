@@ -13,6 +13,13 @@ import prompts from 'prompts';
 import glob from 'fast-glob';
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
+import {
+  getConfig,
+  rawConfigSchema,
+  resolveConfigPaths,
+  DEFAULT_COMPONENTS,
+  DEFAULT_LIB,
+} from '@/src/utils/get-config';
 
 const filePath = fileURLToPath(import.meta.url);
 const fileDir = path.dirname(filePath);
@@ -61,7 +68,50 @@ async function installDependencies(cwd: string, spinner: Ora) {
   }
 }
 
-async function updateTsConfig(cwd: string, spinner: Ora) {
+async function promptForConfig(cwd: string) {
+  const highlight = (text: string) => chalk.cyan(text);
+
+  const options = await prompts([
+    {
+      type: 'text',
+      name: 'components',
+      message: `Configure the import alias for ${highlight('components')}:`,
+      initial: DEFAULT_COMPONENTS,
+    },
+    {
+      type: 'text',
+      name: 'lib',
+      message: `Configure the import alias for ${highlight('lib')}:`,
+      initial: DEFAULT_LIB,
+    },
+  ]);
+
+  const config = rawConfigSchema.parse({
+    aliases: {
+      lib: options.lib,
+      components: options.components,
+    },
+  });
+
+  const { proceed } = await prompts({
+    type: 'confirm',
+    name: 'proceed',
+    message: `Write configuration to ${highlight('components.json')}. Proceed?`,
+    initial: true,
+  });
+
+  if (proceed) {
+    logger.info('');
+    const spinner = ora(`Writing components.json...`).start();
+    const targetPath = path.resolve(cwd, 'components.json');
+    await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8');
+    spinner.succeed();
+  }
+
+  return await resolveConfigPaths(cwd, config);
+}
+
+async function updateTsConfig(cwd: string, config: any, spinner: Ora) {
   try {
     spinner.text = 'Configuring path aliases...';
     const tsconfigPath = path.join(cwd, 'tsconfig.json');
@@ -69,11 +119,15 @@ async function updateTsConfig(cwd: string, spinner: Ora) {
       ? JSON.parse(await fs.readFile(tsconfigPath, 'utf8'))
       : {};
 
+    const componentBase = config.aliases.components.split('/')[0];
+    const libBase = config.aliases.lib.split('/')[0];
+    const basePath = componentBase === libBase ? componentBase : '@';
+
     tsconfig.compilerOptions = {
       ...tsconfig.compilerOptions,
       baseUrl: '.',
       paths: {
-        '~/*': ['*'],
+        [`${basePath}/*`]: ['*'],
         ...tsconfig.compilerOptions?.paths,
       },
     };
@@ -195,7 +249,9 @@ async function validateProjectDirectory(cwd: string) {
   }
 
   if (!existsSync(path.join(cwd, 'package.json'))) {
-    logger.error('No package.json found. Please run this command in a React Native project directory.');
+    logger.error(
+      'No package.json found. Please run this command in a React Native project directory.'
+    );
     process.exit(1);
   }
 }
@@ -205,7 +261,8 @@ async function checkGitStatus(cwd: string) {
     const { proceed } = await prompts({
       type: 'confirm',
       name: 'proceed',
-      message: 'The Git repository is dirty (uncommitted changes). It is recommended to commit your changes before proceeding. Do you want to continue?',
+      message:
+        'The Git repository is dirty (uncommitted changes). It is recommended to commit your changes before proceeding. Do you want to continue?',
       initial: false,
     });
 
@@ -218,12 +275,17 @@ async function checkGitStatus(cwd: string) {
 
 async function initializeProject(cwd: string, overwrite: boolean) {
   const spinner = ora(`Initializing project...`).start();
-  const templatesDir = path.dirname(
-    createRequire(import.meta.url).resolve('@rnr/starter-base')
-  );
+
+  let config = await getConfig(cwd);
+
+  if (!config) {
+    config = await promptForConfig(cwd);
+  }
+
+  const templatesDir = path.dirname(createRequire(import.meta.url).resolve('@rnr/starter-base'));
 
   await installDependencies(cwd, spinner);
-  await updateTsConfig(cwd, spinner);
+  await updateTsConfig(cwd, config, spinner);
 
   spinner.text = 'Copying template files...';
   for (const file of TEMPLATE_FILES) {
