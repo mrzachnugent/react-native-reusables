@@ -1,24 +1,26 @@
-import { existsSync } from 'fs';
-import { promises as fs } from 'fs';
-import { Command } from 'commander';
-import { execa } from 'execa';
-import ora, { Ora } from 'ora';
-import path from 'path';
-import { z } from 'zod';
-import { handleError } from '@/src/utils/handle-error';
-import { logger } from '@/src/utils/logger';
-import chalk from 'chalk';
-import prompts from 'prompts';
-import glob from 'fast-glob';
-import { createRequire } from 'module';
-import { execSync } from 'child_process';
 import {
+  DEFAULT_COMPONENTS,
+  DEFAULT_LIB,
   getConfig,
   rawConfigSchema,
   resolveConfigPaths,
-  DEFAULT_COMPONENTS,
-  DEFAULT_LIB,
 } from '@/src/utils/get-config';
+import { handleError } from '@/src/utils/handle-error';
+import { logger } from '@/src/utils/logger';
+import chalk from 'chalk';
+import { execSync } from 'child_process';
+import { Command } from 'commander';
+import { execa } from 'execa';
+import glob from 'fast-glob';
+import { existsSync, promises as fs } from 'fs';
+import ora, { Ora } from 'ora';
+import path from 'path';
+import prompts from 'prompts';
+import { fileURLToPath } from 'url';
+import { z } from 'zod';
+
+const filePath = fileURLToPath(import.meta.url);
+const fileDir = path.dirname(filePath);
 
 const initOptionsSchema = z.object({
   cwd: z.string(),
@@ -29,7 +31,6 @@ const REQUIRED_DEPENDENCIES = [
   'nativewind',
   'expo-navigation-bar',
   'tailwindcss-animate',
-  '@react-native-async-storage/async-storage',
   'class-variance-authority',
   'clsx',
   'tailwind-merge',
@@ -282,7 +283,7 @@ async function initializeProject(cwd: string, overwrite: boolean) {
       spinner.start();
     }
 
-    const templatesDir = path.dirname(createRequire(import.meta.url).resolve('@rnr/starter-base'));
+    const templatesDir = path.join(fileDir, '../__generated/starter-base');
 
     await installDependencies(cwd, spinner);
     await updateTsConfig(cwd, config, spinner);
