@@ -7,7 +7,6 @@ import path from 'path';
 import { z } from 'zod';
 import { handleError } from '@/src/utils/handle-error';
 import { logger } from '@/src/utils/logger';
-import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import glob from 'fast-glob';
@@ -20,9 +19,6 @@ import {
   DEFAULT_COMPONENTS,
   DEFAULT_LIB,
 } from '@/src/utils/get-config';
-
-const filePath = fileURLToPath(import.meta.url);
-const fileDir = path.dirname(filePath);
 
 const initOptionsSchema = z.object({
   cwd: z.string(),
@@ -106,16 +102,13 @@ async function promptForConfig(cwd: string) {
       initial: true,
     });
 
-    if (!proceed) {
-      logger.info('Configuration cancelled.');
-      process.exit(0);
+    if (proceed) {
+      logger.info('');
+      const spinner = ora(`Writing components.json...`).start();
+      const targetPath = path.resolve(cwd, 'components.json');
+      await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8');
+      spinner.succeed();
     }
-
-    logger.info('');
-    const spinner = ora(`Writing components.json...`).start();
-    const targetPath = path.resolve(cwd, 'components.json');
-    await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8');
-    spinner.succeed();
 
     return await resolveConfigPaths(cwd, config);
   } catch (error) {
@@ -124,9 +117,10 @@ async function promptForConfig(cwd: string) {
   }
 }
 
+const NON_PATH_ALIAS_BASES = ['', '.', '/'];
+
 async function updateTsConfig(cwd: string, config: any, spinner: Ora) {
   try {
-    spinner.text = 'Configuring path aliases...';
     const tsconfigPath = path.join(cwd, 'tsconfig.json');
     const tsconfig = existsSync(tsconfigPath)
       ? JSON.parse(await fs.readFile(tsconfigPath, 'utf8'))
@@ -134,13 +128,29 @@ async function updateTsConfig(cwd: string, config: any, spinner: Ora) {
 
     const componentBase = config.aliases.components.split('/')[0];
     const libBase = config.aliases.lib.split('/')[0];
-    const basePath = componentBase === libBase ? componentBase : '@';
+
+    if (NON_PATH_ALIAS_BASES.includes(componentBase) || NON_PATH_ALIAS_BASES.includes(libBase)) {
+      return;
+    }
+
+    const tsconfigPaths = tsconfig.compilerOptions?.paths ?? {};
+
+    if (
+      tsconfigPaths[`${componentBase}/*`]?.[0] === '*' &&
+      tsconfigPaths[`${libBase}/*`]?.[0] === '*'
+    ) {
+      spinner.succeed('Path aliases already configured');
+      return;
+    }
+
+    spinner.text = 'Updating path aliases...';
 
     tsconfig.compilerOptions = {
       ...tsconfig.compilerOptions,
       baseUrl: '.',
       paths: {
-        [`${basePath}/*`]: ['*'],
+        [`${componentBase}/*`]: ['*'],
+        [`${libBase}/*`]: ['*'],
         ...tsconfig.compilerOptions?.paths,
       },
     };
@@ -192,7 +202,6 @@ async function copyTemplateFile(
 
 async function updateLayoutFile(cwd: string, spinner: Ora) {
   try {
-    spinner.text = 'Updating layout file...';
     const layoutFiles = await glob(
       ['app/_layout.{ts,tsx,js,jsx}', '(app)/_layout.{ts,tsx,js,jsx}'],
       {
@@ -202,7 +211,7 @@ async function updateLayoutFile(cwd: string, spinner: Ora) {
     );
 
     if (!layoutFiles.length) {
-      spinner.warn('No _layout file found in app directory');
+      spinner.warn('Could not find the root _layout file');
       return;
     }
 
@@ -210,6 +219,7 @@ async function updateLayoutFile(cwd: string, spinner: Ora) {
     const content = await fs.readFile(layoutPath, 'utf8');
 
     if (!content.includes('import "../global.css"')) {
+      spinner.text = 'Updating layout file...';
       await fs.writeFile(layoutPath, `import "../global.css";\n${content}`);
       spinner.succeed(`Updated ${layoutFiles[0]} with global CSS import`);
     }
@@ -277,7 +287,7 @@ async function initializeProject(cwd: string, overwrite: boolean) {
     await installDependencies(cwd, spinner);
     await updateTsConfig(cwd, config, spinner);
 
-    spinner.text = 'Copying template files...';
+    spinner.text = 'Adding config and utility files...';
     for (const file of TEMPLATE_FILES) {
       await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
     }
@@ -294,7 +304,7 @@ async function initializeProject(cwd: string, overwrite: boolean) {
 
 export const init = new Command()
   .name('init')
-  .description('Initialize the React Native project with required configuration')
+  .description('Initialize the required configuration for your React Native project')
   .option(
     '-c, --cwd <cwd>',
     'the working directory. defaults to the current directory.',
