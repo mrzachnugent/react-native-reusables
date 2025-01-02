@@ -206,32 +206,6 @@ async function updateLayoutFile(cwd: string, spinner: Ora) {
   }
 }
 
-async function updateImportPaths(cwd: string, spinner: Ora) {
-  try {
-    spinner.text = 'Updating import paths...';
-    const files = await glob(['**/*.{ts,tsx,js,jsx}'], {
-      cwd,
-      ignore: ['node_modules/**', 'dist/**', 'build/**', '.expo/**'],
-    });
-
-    for (const file of files) {
-      const filePath = path.join(cwd, file);
-      const content = await fs.readFile(filePath, 'utf8');
-      const updatedContent = content
-        .replace(/(from\s+['"])@\/(.*?['"])/g, '$1~/$2')
-        .replace(/(import\s+['"])@\/(.*?['"])/g, '$1~/$2');
-
-      if (content !== updatedContent) {
-        await fs.writeFile(filePath, updatedContent);
-        spinner.text = `Updated imports in ${file}`;
-      }
-    }
-  } catch (error) {
-    spinner.fail('Failed to update import paths');
-    handleError(error);
-  }
-}
-
 async function shouldPromptGitWarning(cwd: string): Promise<boolean> {
   try {
     execSync('git rev-parse --is-inside-work-tree', { cwd });
@@ -292,7 +266,6 @@ async function initializeProject(cwd: string, overwrite: boolean) {
     await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
   }
 
-  await updateImportPaths(cwd, spinner);
   await updateLayoutFile(cwd, spinner);
 
   spinner.succeed('Initialization completed successfully!');
