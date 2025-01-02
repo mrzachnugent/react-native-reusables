@@ -62,53 +62,66 @@ async function installDependencies(cwd: string, spinner: Ora) {
       cwd,
       stdio: 'inherit',
     });
+    spinner.text = 'Dependencies installed successfully';
   } catch (error) {
     spinner.fail('Failed to install dependencies');
     handleError(error);
+    process.exit(1);
   }
 }
 
 async function promptForConfig(cwd: string) {
   const highlight = (text: string) => chalk.cyan(text);
 
-  const options = await prompts([
-    {
-      type: 'text',
-      name: 'components',
-      message: `Configure the import alias for ${highlight('components')}:`,
-      initial: DEFAULT_COMPONENTS,
-    },
-    {
-      type: 'text',
-      name: 'lib',
-      message: `Configure the import alias for ${highlight('lib')}:`,
-      initial: DEFAULT_LIB,
-    },
-  ]);
+  try {
+    const options = await prompts([
+      {
+        type: 'text',
+        name: 'components',
+        message: `Configure the import alias for ${highlight('components')}:`,
+        initial: DEFAULT_COMPONENTS,
+      },
+      {
+        type: 'text',
+        name: 'lib',
+        message: `Configure the import alias for ${highlight('lib')}:`,
+        initial: DEFAULT_LIB,
+      },
+    ]);
 
-  const config = rawConfigSchema.parse({
-    aliases: {
-      lib: options.lib,
-      components: options.components,
-    },
-  });
+    const components = options.components || DEFAULT_COMPONENTS;
+    const lib = options.lib || DEFAULT_LIB;
 
-  const { proceed } = await prompts({
-    type: 'confirm',
-    name: 'proceed',
-    message: `Write configuration to ${highlight('components.json')}. Proceed?`,
-    initial: true,
-  });
+    const config = rawConfigSchema.parse({
+      aliases: {
+        components,
+        lib,
+      },
+    });
 
-  if (proceed) {
+    const { proceed } = await prompts({
+      type: 'confirm',
+      name: 'proceed',
+      message: `Write configuration to ${highlight('components.json')}. Proceed?`,
+      initial: true,
+    });
+
+    if (!proceed) {
+      logger.info('Configuration cancelled.');
+      process.exit(0);
+    }
+
     logger.info('');
     const spinner = ora(`Writing components.json...`).start();
     const targetPath = path.resolve(cwd, 'components.json');
     await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8');
     spinner.succeed();
-  }
 
-  return await resolveConfigPaths(cwd, config);
+    return await resolveConfigPaths(cwd, config);
+  } catch (error) {
+    logger.error('Failed to configure project.');
+    process.exit(1);
+  }
 }
 
 async function updateTsConfig(cwd: string, config: any, spinner: Ora) {
@@ -250,25 +263,33 @@ async function checkGitStatus(cwd: string) {
 async function initializeProject(cwd: string, overwrite: boolean) {
   const spinner = ora(`Initializing project...`).start();
 
-  let config = await getConfig(cwd);
+  try {
+    let config = await getConfig(cwd);
 
-  if (!config) {
-    config = await promptForConfig(cwd);
+    if (!config) {
+      spinner.stop();
+      config = await promptForConfig(cwd);
+      spinner.start();
+    }
+
+    const templatesDir = path.dirname(createRequire(import.meta.url).resolve('@rnr/starter-base'));
+
+    await installDependencies(cwd, spinner);
+    await updateTsConfig(cwd, config, spinner);
+
+    spinner.text = 'Copying template files...';
+    for (const file of TEMPLATE_FILES) {
+      await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
+    }
+
+    await updateLayoutFile(cwd, spinner);
+
+    spinner.succeed('Initialization completed successfully!');
+  } catch (error) {
+    spinner.fail('Initialization failed');
+    handleError(error);
+    process.exit(1);
   }
-
-  const templatesDir = path.dirname(createRequire(import.meta.url).resolve('@rnr/starter-base'));
-
-  await installDependencies(cwd, spinner);
-  await updateTsConfig(cwd, config, spinner);
-
-  spinner.text = 'Copying template files...';
-  for (const file of TEMPLATE_FILES) {
-    await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
-  }
-
-  await updateLayoutFile(cwd, spinner);
-
-  spinner.succeed('Initialization completed successfully!');
 }
 
 export const init = new Command()
