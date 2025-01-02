@@ -198,7 +198,7 @@ export const init = new Command()
 
       const spinner = ora(`Initializing project...`).start();
       const templatesDir = path.dirname(
-        createRequire(import.meta.url).resolve('@rnr/starter-base/package.json')
+        createRequire(import.meta.url).resolve('@rnr/starter-base')
       );
 
       await installDependencies(cwd, spinner);
