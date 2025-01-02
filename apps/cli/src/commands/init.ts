@@ -12,6 +12,7 @@ import chalk from 'chalk';
 import prompts from 'prompts';
 import glob from 'fast-glob';
 import { createRequire } from 'module';
+import { execSync } from 'child_process';
 
 const filePath = fileURLToPath(import.meta.url);
 const fileDir = path.dirname(filePath);
@@ -177,6 +178,64 @@ async function updateImportPaths(cwd: string, spinner: Ora) {
   }
 }
 
+async function shouldPromptGitWarning(cwd: string): Promise<boolean> {
+  try {
+    execSync('git rev-parse --is-inside-work-tree', { cwd });
+    const status = execSync('git status --porcelain', { cwd }).toString();
+    return !!status;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function validateProjectDirectory(cwd: string) {
+  if (!existsSync(cwd)) {
+    logger.error(`The path ${cwd} does not exist. Please try again.`);
+    process.exit(1);
+  }
+
+  if (!existsSync(path.join(cwd, 'package.json'))) {
+    logger.error('No package.json found. Please run this command in a React Native project directory.');
+    process.exit(1);
+  }
+}
+
+async function checkGitStatus(cwd: string) {
+  if (await shouldPromptGitWarning(cwd)) {
+    const { proceed } = await prompts({
+      type: 'confirm',
+      name: 'proceed',
+      message: 'The Git repository is dirty (uncommitted changes). It is recommended to commit your changes before proceeding. Do you want to continue?',
+      initial: false,
+    });
+
+    if (!proceed) {
+      logger.info('Installation cancelled.');
+      process.exit(0);
+    }
+  }
+}
+
+async function initializeProject(cwd: string, overwrite: boolean) {
+  const spinner = ora(`Initializing project...`).start();
+  const templatesDir = path.dirname(
+    createRequire(import.meta.url).resolve('@rnr/starter-base')
+  );
+
+  await installDependencies(cwd, spinner);
+  await updateTsConfig(cwd, spinner);
+
+  spinner.text = 'Copying template files...';
+  for (const file of TEMPLATE_FILES) {
+    await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
+  }
+
+  await updateImportPaths(cwd, spinner);
+  await updateLayoutFile(cwd, spinner);
+
+  spinner.succeed('Initialization completed successfully!');
+}
+
 export const init = new Command()
   .name('init')
   .description('Initialize the React Native project with required configuration')
@@ -191,28 +250,9 @@ export const init = new Command()
       const options = initOptionsSchema.parse(opts);
       const cwd = path.resolve(options.cwd);
 
-      if (!existsSync(cwd)) {
-        logger.error(`The path ${cwd} does not exist. Please try again.`);
-        process.exit(1);
-      }
-
-      const spinner = ora(`Initializing project...`).start();
-      const templatesDir = path.dirname(
-        createRequire(import.meta.url).resolve('@rnr/starter-base')
-      );
-
-      await installDependencies(cwd, spinner);
-      await updateTsConfig(cwd, spinner);
-
-      spinner.text = 'Copying template files...';
-      for (const file of TEMPLATE_FILES) {
-        await copyTemplateFile(file, templatesDir, cwd, spinner, options.overwrite);
-      }
-
-      await updateImportPaths(cwd, spinner);
-      await updateLayoutFile(cwd, spinner);
-
-      spinner.succeed('Initialization completed successfully!');
+      await validateProjectDirectory(cwd);
+      await checkGitStatus(cwd);
+      await initializeProject(cwd, options.overwrite);
     } catch (error) {
       handleError(error);
     }
