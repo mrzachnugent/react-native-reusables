@@ -4,10 +4,11 @@ import { existsSync, promises as fs } from 'fs';
 import path from 'path';
 import { COMPONENTS } from '../src/items/components';
 import { TEMPLATES } from '../src/items/templates';
+import { copyFolder } from '../src/utils/copy-folder';
 
 async function main() {
   for (const template of TEMPLATES) {
-    await copyFolder(template.path);
+    await copyFolder(template.path, template.name);
   }
   for (const comp of COMPONENTS) {
     if (Array.isArray(comp.paths)) {
@@ -31,36 +32,6 @@ async function writeFiles(paths: Array<{ from: string; to: { folder: string; fil
       await fs.writeFile(path.join(targetDir, compPath.to.file), content);
     } catch (error) {
       console.error(error);
-    }
-  }
-}
-
-async function copyFolder(src: string, destPath?: string) {
-  if (!existsSync(src)) {
-    throw new Error(`Source folder does not exist: ${src}`);
-  }
-
-  const paths = src.split('/');
-  const folderName = paths[paths.length - 1];
-
-  const dest = destPath ?? path.join('__generated', folderName);
-
-  if (!existsSync(dest)) {
-    await fs.mkdir(dest, { recursive: true });
-  }
-
-  const entries = await fs.readdir(src, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-
-    if (entry.isDirectory()) {
-      // Recursively copy subdirectories
-      await copyFolder(srcPath, destPath);
-    } else if (entry.isFile()) {
-      // Copy files
-      await fs.copyFile(srcPath, destPath);
     }
   }
 }
