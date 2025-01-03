@@ -1,14 +1,8 @@
-import {
-  Config,
-  DEFAULT_COMPONENTS,
-  DEFAULT_LIB,
-  getConfig,
-  rawConfigSchema,
-  resolveConfigPaths,
-} from '@/src/utils/get-config';
+import { Config, getConfig } from '@/src/utils/get-config';
 import { getPackageManager } from '@/src/utils/get-package-manager';
 import { handleError } from '@/src/utils/handle-error';
 import { logger } from '@/src/utils/logger';
+import { promptForConfig } from '@/src/utils/prompt-for-config';
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';
@@ -16,10 +10,10 @@ import { existsSync, promises as fs } from 'fs';
 import ora, { Ora } from 'ora';
 import path from 'path';
 import prompts from 'prompts';
+import { fileURLToPath } from 'url';
 import { z } from 'zod';
 import { Component, INVALID_COMPONENT_ERROR, getAllComponentsToWrite } from '../items';
 import { COMPONENTS } from '../items/components';
-import { fileURLToPath } from 'url';
 
 const filePath = fileURLToPath(import.meta.url);
 const fileDir = path.dirname(filePath);
@@ -241,48 +235,4 @@ function fixImports(rawfile: string, componentsAlias: string, libAlias: string) 
     .replace('./text', `${componentsAlias}/ui/text`)
     .replaceAll('../../components', componentsAlias)
     .replaceAll('../../lib', libAlias);
-}
-
-async function promptForConfig(cwd: string) {
-  const highlight = (text: string) => chalk.cyan(text);
-
-  const options = await prompts([
-    {
-      type: 'text',
-      name: 'components',
-      message: `Configure the import alias for ${highlight('components')}:`,
-      initial: DEFAULT_COMPONENTS,
-    },
-    {
-      type: 'text',
-      name: 'lib',
-      message: `Configure the import alias for ${highlight('lib')}:`,
-      initial: DEFAULT_LIB,
-    },
-  ]);
-
-  const config = rawConfigSchema.parse({
-    aliases: {
-      lib: options.lib,
-      components: options.components,
-    },
-  });
-
-  const { proceed } = await prompts({
-    type: 'confirm',
-    name: 'proceed',
-    message: `Write configuration to ${highlight('components.json')}. Proceed?`,
-    initial: true,
-  });
-
-  if (proceed) {
-    // Write to file.
-    logger.info('');
-    const spinner = ora(`Writing components.json...`).start();
-    const targetPath = path.resolve(cwd, 'components.json');
-    await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8');
-    spinner.succeed();
-  }
-
-  return await resolveConfigPaths(cwd, config);
 }

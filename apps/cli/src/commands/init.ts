@@ -1,12 +1,7 @@
-import {
-  DEFAULT_COMPONENTS,
-  DEFAULT_LIB,
-  getConfig,
-  rawConfigSchema,
-  resolveConfigPaths,
-} from '@/src/utils/get-config';
+import { getConfig } from '@/src/utils/get-config';
 import { handleError } from '@/src/utils/handle-error';
 import { logger } from '@/src/utils/logger';
+import { promptForConfig } from '@/src/utils/prompt-for-config';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
 import { Command } from 'commander';
@@ -21,11 +16,6 @@ import { z } from 'zod';
 
 const filePath = fileURLToPath(import.meta.url);
 const fileDir = path.dirname(filePath);
-
-const initOptionsSchema = z.object({
-  cwd: z.string(),
-  overwrite: z.boolean(),
-});
 
 const REQUIRED_DEPENDENCIES = [
   'nativewind',
@@ -52,6 +42,106 @@ const TEMPLATE_FILES = [
   'lib/icons/iconWithClassName.ts',
 ] as const;
 
+const initOptionsSchema = z.object({
+  cwd: z.string(),
+  overwrite: z.boolean(),
+});
+
+export const init = new Command()
+  .name('init')
+  .description('Initialize the required configuration for your React Native project')
+  .option(
+    '-c, --cwd <cwd>',
+    'the working directory. defaults to the current directory.',
+    process.cwd()
+  )
+  .option('-o, --overwrite', 'overwrite existing files', false)
+  .action(async (opts) => {
+    try {
+      const options = initOptionsSchema.parse(opts);
+      const cwd = path.resolve(options.cwd);
+
+      await validateProjectDirectory(cwd);
+      await checkGitStatus(cwd);
+      await initializeProject(cwd, options.overwrite);
+    } catch (error) {
+      handleError(error);
+    }
+  });
+
+async function validateProjectDirectory(cwd: string) {
+  if (!existsSync(cwd)) {
+    logger.error(`The path ${cwd} does not exist. Please try again.`);
+    process.exit(1);
+  }
+
+  if (!existsSync(path.join(cwd, 'package.json'))) {
+    logger.error(
+      'No package.json found. Please run this command in a React Native project directory.'
+    );
+    process.exit(1);
+  }
+}
+
+async function checkGitStatus(cwd: string) {
+  if (await shouldPromptGitWarning(cwd)) {
+    const { proceed } = await prompts({
+      type: 'confirm',
+      name: 'proceed',
+      message:
+        'The Git repository is dirty (uncommitted changes). It is recommended to commit your changes before proceeding. Do you want to continue?',
+      initial: false,
+    });
+
+    if (!proceed) {
+      logger.info('Installation cancelled.');
+      process.exit(0);
+    }
+  }
+}
+
+async function shouldPromptGitWarning(cwd: string): Promise<boolean> {
+  try {
+    execSync('git rev-parse --is-inside-work-tree', { cwd });
+    const status = execSync('git status --porcelain', { cwd }).toString();
+    return !!status;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function initializeProject(cwd: string, overwrite: boolean) {
+  const spinner = ora(`Initializing project...`).start();
+
+  try {
+    let config = await getConfig(cwd);
+
+    if (!config) {
+      spinner.stop();
+      config = await promptForConfig(cwd);
+      spinner.start();
+    }
+
+    const templatesDir = path.join(fileDir, '../__generated/starter-base');
+
+    await installDependencies(cwd, spinner);
+    await updateTsConfig(cwd, config, spinner);
+
+    spinner.text = 'Adding config and utility files...';
+    for (const file of TEMPLATE_FILES) {
+      await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
+    }
+
+    await updateLayoutFile(cwd, spinner);
+
+    spinner.succeed('Initialization completed successfully!');
+  } catch (error) {
+    spinner.fail('Initialization failed');
+    handleError(error);
+    process.exit(1);
+  }
+}
+
 async function installDependencies(cwd: string, spinner: Ora) {
   try {
     spinner.text = 'Installing dependencies...';
@@ -63,57 +153,6 @@ async function installDependencies(cwd: string, spinner: Ora) {
   } catch (error) {
     spinner.fail('Failed to install dependencies');
     handleError(error);
-    process.exit(1);
-  }
-}
-
-async function promptForConfig(cwd: string) {
-  const highlight = (text: string) => chalk.cyan(text);
-
-  try {
-    const options = await prompts([
-      {
-        type: 'text',
-        name: 'components',
-        message: `Configure the import alias for ${highlight('components')}:`,
-        initial: DEFAULT_COMPONENTS,
-      },
-      {
-        type: 'text',
-        name: 'lib',
-        message: `Configure the import alias for ${highlight('lib')}:`,
-        initial: DEFAULT_LIB,
-      },
-    ]);
-
-    const components = options.components || DEFAULT_COMPONENTS;
-    const lib = options.lib || DEFAULT_LIB;
-
-    const config = rawConfigSchema.parse({
-      aliases: {
-        components,
-        lib,
-      },
-    });
-
-    const { proceed } = await prompts({
-      type: 'confirm',
-      name: 'proceed',
-      message: `Write configuration to ${highlight('components.json')}. Proceed?`,
-      initial: true,
-    });
-
-    if (proceed) {
-      logger.info('');
-      const spinner = ora(`Writing components.json...`).start();
-      const targetPath = path.resolve(cwd, 'components.json');
-      await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8');
-      spinner.succeed();
-    }
-
-    return await resolveConfigPaths(cwd, config);
-  } catch (error) {
-    logger.error('Failed to configure project.');
     process.exit(1);
   }
 }
@@ -229,98 +268,3 @@ async function updateLayoutFile(cwd: string, spinner: Ora) {
     handleError(error);
   }
 }
-
-async function shouldPromptGitWarning(cwd: string): Promise<boolean> {
-  try {
-    execSync('git rev-parse --is-inside-work-tree', { cwd });
-    const status = execSync('git status --porcelain', { cwd }).toString();
-    return !!status;
-  } catch (error) {
-    return false;
-  }
-}
-
-async function validateProjectDirectory(cwd: string) {
-  if (!existsSync(cwd)) {
-    logger.error(`The path ${cwd} does not exist. Please try again.`);
-    process.exit(1);
-  }
-
-  if (!existsSync(path.join(cwd, 'package.json'))) {
-    logger.error(
-      'No package.json found. Please run this command in a React Native project directory.'
-    );
-    process.exit(1);
-  }
-}
-
-async function checkGitStatus(cwd: string) {
-  if (await shouldPromptGitWarning(cwd)) {
-    const { proceed } = await prompts({
-      type: 'confirm',
-      name: 'proceed',
-      message:
-        'The Git repository is dirty (uncommitted changes). It is recommended to commit your changes before proceeding. Do you want to continue?',
-      initial: false,
-    });
-
-    if (!proceed) {
-      logger.info('Installation cancelled.');
-      process.exit(0);
-    }
-  }
-}
-
-async function initializeProject(cwd: string, overwrite: boolean) {
-  const spinner = ora(`Initializing project...`).start();
-
-  try {
-    let config = await getConfig(cwd);
-
-    if (!config) {
-      spinner.stop();
-      config = await promptForConfig(cwd);
-      spinner.start();
-    }
-
-    const templatesDir = path.join(fileDir, '../__generated/starter-base');
-
-    await installDependencies(cwd, spinner);
-    await updateTsConfig(cwd, config, spinner);
-
-    spinner.text = 'Adding config and utility files...';
-    for (const file of TEMPLATE_FILES) {
-      await copyTemplateFile(file, templatesDir, cwd, spinner, overwrite);
-    }
-
-    await updateLayoutFile(cwd, spinner);
-
-    spinner.succeed('Initialization completed successfully!');
-  } catch (error) {
-    spinner.fail('Initialization failed');
-    handleError(error);
-    process.exit(1);
-  }
-}
-
-export const init = new Command()
-  .name('init')
-  .description('Initialize the required configuration for your React Native project')
-  .option(
-    '-c, --cwd <cwd>',
-    'the working directory. defaults to the current directory.',
-    process.cwd()
-  )
-  .option('-o, --overwrite', 'overwrite existing files', false)
-  .action(async (opts) => {
-    try {
-      const options = initOptionsSchema.parse(opts);
-      const cwd = path.resolve(options.cwd);
-
-      await validateProjectDirectory(cwd);
-      await checkGitStatus(cwd);
-      await initializeProject(cwd, options.overwrite);
-    } catch (error) {
-      handleError(error);
-    }
-  });
