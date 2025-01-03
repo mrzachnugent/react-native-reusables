@@ -1,3 +1,4 @@
+import { copyFolder } from '@/src/utils/copy-folder';
 import { getConfig } from '@/src/utils/get-config';
 import { handleError } from '@/src/utils/handle-error';
 import { logger } from '@/src/utils/logger';
@@ -76,10 +77,80 @@ async function validateProjectDirectory(cwd: string) {
   }
 
   if (!existsSync(path.join(cwd, 'package.json'))) {
-    logger.error(
-      'No package.json found. Please run this command in a React Native project directory.'
-    );
+    const { proceed } = await prompts({
+      type: 'confirm',
+      name: 'proceed',
+      message: 'No package.json found. Would you like to create a new project?',
+      initial: false,
+    });
+
+    if (!proceed) {
+      logger.info('Initialization cancelled.');
+      process.exit(0);
+    }
+
+    const { projectName } = await prompts({
+      type: 'text',
+      name: 'projectName',
+      message: `What is the name of your project?`,
+      initial: 'starter-base',
+    });
+
+    const spinner = ora(`Initializing ${projectName}...`).start();
+
+    const projectPath = path.join(cwd, projectName);
+
+    await copyFolder(path.join(fileDir, '../__generated/starter-base'), projectPath);
+
+    await Promise.all([
+      replaceAllInJsonFile(path.join(cwd, projectName, 'app.json'), 'starter-base', projectName),
+      replaceAllInJsonFile(
+        path.join(cwd, projectName, 'package.json'),
+        '@rnr/starter-base',
+        projectName
+      ),
+    ]);
+
+    spinner.stop();
+    const { packageManager } = await prompts({
+      type: 'select',
+      name: 'packageManager',
+      message: 'Which package manager would you like to use?',
+      choices: [
+        { title: 'npm', value: 'npm' },
+        { title: 'yarn', value: 'yarn' },
+        { title: 'pnpm', value: 'pnpm' },
+        { title: 'bun', value: 'bun' },
+      ],
+    });
+
+    spinner.start('Installing dependencies...');
+    await execa(packageManager, ['install'], {
+      cwd: projectPath,
+    });
+    spinner.text = 'Verifying and updating any invalid package versions if needed...';
+    await execa('npx', ['expo', 'install', '--fix'], {
+      cwd: projectPath,
+    });
+
+    spinner.succeed('New project initialized successfully!');
     process.exit(1);
+  }
+}
+
+async function replaceAllInJsonFile(path: string, searchValue: string, replaceValue: string) {
+  try {
+    if (!existsSync(path)) {
+      logger.error(`The path ${path} does not exist.`);
+      process.exit(1);
+    }
+
+    const jsonValue = await fs.readFile(path, 'utf8');
+    const replacedValue = jsonValue.replaceAll(searchValue, replaceValue);
+
+    await fs.writeFile(path, replacedValue);
+  } catch (error) {
+    handleError(error);
   }
 }
 
