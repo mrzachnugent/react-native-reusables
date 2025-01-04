@@ -8,7 +8,7 @@ import { copyFolder } from '../src/utils/copy-folder';
 
 async function main() {
   for (const template of TEMPLATES) {
-    await copyFolder(template.path, template.name);
+    await copyFolder(template.path, path.join('__generated', template.name));
   }
   for (const comp of COMPONENTS) {
     if (Array.isArray(comp.paths)) {

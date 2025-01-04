@@ -1,12 +1,10 @@
 import { existsSync, promises as fs } from 'fs';
 import path from 'path';
 
-export async function copyFolder(src: string, name: string, destPath?: string) {
+export async function copyFolder(src: string, dest: string) {
   if (!existsSync(src)) {
     throw new Error(`Source folder does not exist: ${src}`);
   }
-
-  const dest = destPath ?? path.join('__generated', name);
 
   if (!existsSync(dest)) {
     await fs.mkdir(dest, { recursive: true });
