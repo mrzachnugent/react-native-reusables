@@ -71,12 +71,7 @@ export const init = new Command()
   });
 
 async function validateProjectDirectory(cwd: string) {
-  if (!existsSync(cwd)) {
-    logger.error(`The path ${cwd} does not exist. Please try again.`);
-    process.exit(1);
-  }
-
-  if (!existsSync(path.join(cwd, 'package.json'))) {
+  if (!existsSync(cwd) || !existsSync(path.join(cwd, 'package.json'))) {
     const { proceed } = await prompts({
       type: 'confirm',
       name: 'proceed',
@@ -99,13 +94,16 @@ async function validateProjectDirectory(cwd: string) {
     const spinner = ora(`Initializing ${projectName}...`).start();
 
     const projectPath = path.join(cwd, projectName);
+    if (!existsSync(projectPath)) {
+      await fs.mkdir(projectPath, { recursive: true });
+    }
 
     await copyFolder(path.join(fileDir, '../__generated/starter-base'), projectPath);
 
     await Promise.all([
-      replaceAllInJsonFile(path.join(cwd, projectName, 'app.json'), 'starter-base', projectName),
+      replaceAllInJsonFile(path.join(projectPath, 'app.json'), 'starter-base', projectName),
       replaceAllInJsonFile(
-        path.join(cwd, projectName, 'package.json'),
+        path.join(projectPath, 'package.json'),
         '@rnr/starter-base',
         projectName
       ),
@@ -134,7 +132,7 @@ async function validateProjectDirectory(cwd: string) {
     });
 
     spinner.succeed('New project initialized successfully!');
-    process.exit(1);
+    process.exit(0);
   }
 }
 
