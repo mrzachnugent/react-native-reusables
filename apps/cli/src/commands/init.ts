@@ -132,6 +132,13 @@ async function validateProjectDirectory(cwd: string) {
     });
 
     spinner.succeed('New project initialized successfully!');
+    console.log(`\nTo get started, run the following commands:\n`);
+    console.log(chalk.cyan(`cd ${projectName}`));
+    console.log(
+      chalk.cyan(
+        `${packageManager} ${packageManager === 'npm' || packageManager === 'bun' ? 'run ' : ''}dev`
+      )
+    );
     process.exit(0);
   }
 }
