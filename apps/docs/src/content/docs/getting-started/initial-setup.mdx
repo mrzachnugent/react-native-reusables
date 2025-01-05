@@ -7,545 +7,398 @@ description: NativeWind Light and Dark Mode
 {/* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
-import { Aside, Card, Code as StarlightCode, TabItem, Tabs } from '@astrojs/starlight/components';
-import { ExternalLink } from 'lucide-react';
+import { Aside, Card, Code as StarlightCode, TabItem, Tabs, FileTree, Steps } from '@astrojs/starlight/components';
 import importedTwUniversalCondig from '@/code-samples/tw-universal-config.js?raw';
 import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
 
 <Tabs>
-<TabItem label="CLI">
+  <TabItem label="CLI">
 
-## Overview
+    Quickly create a **new project** using the React Native Reusables CLI.
 
-Quickly set up your **existing** project using the React Native Reusables CLI. This command will install all necessary dependencies and automatically configure your project for you.
-
-## Usage
-
-```bash
-npx @react-native-reusables/cli@latest init
-```
-
-### Options
-
-| Option             | Description              | Default           |
-| :----------------- | :----------------------- | :---------------- |
-| `-c, --cwd <path>` | The working directory    | Current directory |
-| `-o, --overwrite`  | Overwrite existing files | `false`           |
-
-## What Gets Installed
-
-<Aside type="tip" title="Features">
-
-- [NativeWind](https://www.nativewind.dev/)
-- Dark and light mode configuration
-- Required dependencies
-  - [Expo Navigation Bar](https://docs.expo.dev/versions/latest/sdk/navigation-bar/)
-  - [Tailwind Animate](https://github.com/jamiebuilds/tailwindcss-animate)
-  - [Class Variance Authority](https://cva.style/docs)
-  - [CLSX](https://github.com/lukeed/clsx)
-  - [Tailwind Merge](https://github.com/dcastil/tailwind-merge)
-  - [React Native SVG](https://github.com/software-mansion/react-native-svg)
-  - [Lucide React Native](https://lucide.dev/guide/packages/lucide-react-native)
-  - [RN Primitives Portal](https://rnprimitives.com/)
-- Path aliases configuration
-- Utility files and components
-
-</Aside>
-
-## Example Usage
-
-Basic initialization in current directory:
-
-```bash
-npx @react-native-reusables/cli@latest init [options]
-```
-
-<Aside type='caution'>
-  Make sure to commit your existing changes before running the initialization command with the
-  `--overwrite` flag, as it may replace existing files.
-</Aside>
-
-</TabItem>
-
-<TabItem label="Template">
-
-## Starter base
-
-A starting point to help you set up your project quickly and use the common components provided by `react-native-reusables`. The idea is to make it easier for you to get started.
-
-<Aside type="tip" title="Features">
-
-- NativeWind v4
-- Dark and light mode
-  - Android Navigation Bar matches mode
-  - Persistant mode
-- Common components
-  - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
-
-</ Aside>
-
-<img
-  src='https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc'
-  alt='starter-base-template'
-  style='width:270px;'
-/>
-
-## Installation
-
-1. **Clone the `react-native-reusables` repository**
-
-```bash
-  git clone https://github.com/mrzachnugent/react-native-reusables.git
-```
-
-{' '}
-
-<br />
-
-2. **Use the following bash command and rename `my-project` to the name of your new project.**
-
-> This will copy the folder `react-native-reusables/apps/starter-base`, paste it as a sibling, and rename it to your new project name.
-
-{' '}
-
-<StarlightCode
-  lang='bash'
-  title='bash'
-  code='cp -R react-native-reusables/packages/templates/starter-base/ ./my-project'
-/>
-
-{' '}
-
-<br />
-
-  <Tabs>
-    <TabItem label="npm">
-    
-    3. Change Directory to your project (replace `my-project` with your project's name), install the dependencies, and fix packages if needed.
-
-    ```bash
-      cd my-project && npm install && npx expo install --fix
-    ```
-    <br />
-
-    4. Run the project
-
-      <Tabs>
-      <TabItem label="iOS">
-      ```bash
-        npm run ios
-      ```
-      </TabItem>
-      <TabItem label="Android">
-      ```bash
-        npm run android
-      ```
-      </TabItem>
-      <TabItem label="Web">
-      ```bash
-        npm run web
-      ```
-      </TabItem>
-    </Tabs>
-
-  </TabItem>
-    <TabItem label="yarn">
-
-    3. Change Directory to your project (replace `my-project` with your project's name), install the dependencies, and fix packages if needed.
-
-    ```bash
-      cd my-project && yarn install && npx expo install --fix
-    ```
-
-    <br />
-
-    4. Run the project
-
-      <Tabs>
-      <TabItem label="iOS">
-      ```bash
-        yarn ios
-      ```
-      </TabItem>
-      <TabItem label="Android">
-      ```bash
-        yarn android
-      ```
-      </TabItem>
-      <TabItem label="Web">
-      ```bash
-        yarn web
-      ```
-      </TabItem>
-    </Tabs>
-
-  </TabItem>
-    <TabItem label="pnpm">
-    <Aside>
-      **PNPM requires a workaround with Expo.**
-      
-      Follow the instructions in the [expo-monorepo-example by byCedric](https://github.com/byCedric/expo-monorepo-example?tab=readme-ov-file#pnpm-workarounds) to set up PNPM with Expo.
+    <Aside type="note" title="For existing projects">
+      If a `package.json` is detected, the CLI will install all [necessary dependencies](#features) and automatically configure your project for you.
     </Aside>
 
-    3. Change Directory to your project (replace `my-project` with your project's name), install the dependencies, and fix packages if needed.
+    <img
+      src='https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc'
+      alt='starter-base-template'
+      style='width:270px;margin-left:auto;margin-right:auto;'
+    />
+
+    ## Usage
+
+    Run the following command in your terminal, answer the prompts, and you're good to go!
 
     ```bash
-      cd my-project && pnpm install && npx expo install --fix
+    npx @react-native-reusables/cli@latest init
     ```
 
     <br />
 
-    4. Run the project
+    <Aside type="tip" title="After initialization">
+      You can add more components with the following command:
 
-      <Tabs>
-      <TabItem label="iOS">
       ```bash
-        pnpm ios
+      npx @react-native-reusables/cli@latest add
       ```
+    </Aside>
+
+    ### Features
+
+      <Aside type="note" title="React Native Reusables">
+        - Dependencies
+          - [NativeWind](https://www.nativewind.dev/)
+          - [Expo Navigation Bar](https://docs.expo.dev/versions/latest/sdk/navigation-bar/)
+          - [Tailwind Animate](https://github.com/jamiebuilds/tailwindcss-animate)
+          - [Class Variance Authority](https://cva.style/docs)
+          - [CLSX](https://github.com/lukeed/clsx)
+          - [Tailwind Merge](https://github.com/dcastil/tailwind-merge)
+          - [React Native SVG](https://github.com/software-mansion/react-native-svg)
+          - [Lucide React Native](https://lucide.dev/guide/packages/lucide-react-native)
+          - [RN Primitives Portal](https://rnprimitives.com/)
+        - Configurations
+          - Dark and light mode
+          - Path aliases
+          - Utility files and components
+      </Aside>
+
+    ### File structure
+
+      <FileTree>
+        - apps
+          - _layout.tsx
+          - +not-found.tsx
+          - index.tsx
+        - assets
+          - images
+            - adaptive-icon.png
+            - favicon.png
+            - icon.png
+            - splash.png
+        - components
+          - ui
+            - avatar.tsx
+            - button.tsx
+            - card.tsx
+            - progress.tsx
+            - text.tsx
+            - tooltip.tsx
+          - ToggleTheme.tsx
+        - lib
+          - icons
+            - iconWithClassName.ts
+            - Info.tsx
+            - MoonStar.tsx
+            - Sun.tsx
+          - android-navigation-bar.tsx
+          - constants.ts
+          - useColorScheme.tsx
+          - utils.ts
+        - .gitignore
+        - app.json
+        - babel.config.js
+        - global.css
+        - index.js
+        - metro.config.js
+        - nativewind-env.d.ts
+        - package.json
+        - README.md
+        - tailwind.config.js
+        - tsconfig.json
+      </FileTree>
+
+    ### Options
+
+    | Option             | Description              | Default           |
+    | :----------------- | :----------------------- | :---------------- |
+    | `-c, --cwd <path>` | The working directory    | Current directory |
+    | `-o, --overwrite`  | Overwrite existing files _(for existing projects)_ | `false`           |
+
+ </TabItem>
+
+  <TabItem label="Manual Installation">
+
+    <Steps>
+      1. Follow the installation guide for NativeWind from the <a target='_blank' href='https://www.nativewind.dev/getting-started/expo-router'>official documentation</a>
+    </Steps>
+
+    <Steps>
+      2. Install the following packages:
+    </Steps>
+    <Tabs>
+      <TabItem label="Universal">
+        **Platforms:** Web, iOS, and Android
+
+        ```bash
+        npx expo install tailwindcss-animate class-variance-authority clsx tailwind-merge
+        ```
+
       </TabItem>
-      <TabItem label="Android">
-      ```bash
-        pnpm android
-      ```
-      </TabItem>
-      <TabItem label="Web">
-      ```bash
-        pnpm web
-      ```
+      <TabItem label="Native only">
+        **Platforms:** iOS and Android
+
+        ```bash
+        npx expo install class-variance-authority clsx tailwind-merge
+        ```
       </TabItem>
     </Tabs>
 
-  </TabItem>
-</Tabs>
-</TabItem>
+    <Steps>
+      3. Configure path aliases
+    </Steps>
 
-<TabItem label="Manual Installation">
-### Install NativeWind
-<div />
+    We use the `~` alias. This is how you can configure it in your `tsconfig.json` file:
 
-<div>
-  Follow the installation guide for NativeWind from the{' '}
-  <a
-    target='_blank'
-    href='https://www.nativewind.dev/v4/getting-started/expo-router'
-    className='inline-block'
-  >
-    <span className='flex gap-1.5'>
-      official documentation <ExternalLink size={12} />
-    </span>
-  </a>
-</div>
-
-### Dependencies and utilities
-
-- **Install the following packages:**
-
-<Tabs>
-  <TabItem label="Universal">
-   **Platforms:** Web, iOS, and Android
-
-    ```bash
-    npx expo install tailwindcss-animate class-variance-authority clsx tailwind-merge
+    ```json
+    {
+      "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+          "~/*": ["*"]
+        }
+      }
+    }
     ```
 
-  </TabItem>
-  <TabItem label="Native only">
-  **Platforms:** iOS and Android
 
-    ```bash
-    npx expo install class-variance-authority clsx tailwind-merge
+    <Steps>
+      4. Add a cn helper
+    </Steps>
+
+    Add the following code to the `~/lib/utils.ts` file:
+
+    ```ts
+    import { clsx, type ClassValue } from 'clsx';
+    import { twMerge } from 'tailwind-merge';
+
+    export function cn(...inputs: ClassValue[]) {
+      return twMerge(clsx(inputs));
+    }
     ```
 
-   </TabItem>
-</Tabs>
 
-- **Configure path aliases**
+    <Steps>
+      5. Add the useColorScheme hook
+    </Steps>
 
-We use the `~` alias. This is how you can configure it in your `tsconfig.json` file:
 
-```json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["*"]
+    Add the following code to the `~/lib/useColorScheme.tsx` file:
+
+    ```tsx
+    import { useColorScheme as useNativewindColorScheme } from 'nativewind';
+
+    export function useColorScheme() {
+      const { colorScheme, setColorScheme, toggleColorScheme } = useNativewindColorScheme();
+      return {
+        colorScheme: colorScheme ?? 'dark',
+        isDarkColorScheme: colorScheme === 'dark',
+        setColorScheme,
+        toggleColorScheme,
+      };
     }
-  }
-}
-```
+    ```
 
-- **Add a cn helper**
+    <Steps>
+      6. Add the following css variables to `~/global.css` file.
+    </Steps>
 
-Add the following code to the `~/lib/utils.ts` file:
+    <Code lang="css" 
+    title="~/global.css"
+    code={`@tailwind base;
+    @tailwind components;
+    @tailwind utilities;
 
-```ts
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+    @layer base {
+        :root {
+          --background: 0 0% 100%;
+          --foreground: 240 10% 3.9%;
+          --card: 0 0% 100%;
+          --card-foreground: 240 10% 3.9%;
+          --popover: 0 0% 100%;
+          --popover-foreground: 240 10% 3.9%;
+          --primary: 240 5.9% 10%;
+          --primary-foreground: 0 0% 98%;
+          --secondary: 240 4.8% 95.9%;
+          --secondary-foreground: 240 5.9% 10%;
+          --muted: 240 4.8% 95.9%;
+          --muted-foreground: 240 3.8% 46.1%;
+          --accent: 240 4.8% 95.9%;
+          --accent-foreground: 240 5.9% 10%;
+          --destructive: 0 84.2% 60.2%;
+          --destructive-foreground: 0 0% 98%;
+          --border: 240 5.9% 90%;
+          --input: 240 5.9% 90%;
+          --ring: 240 5.9% 10%;
+        }
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-```
-
-- **Add the useColorScheme hook**
-
-Add the following code to the `~/lib/useColorScheme.tsx` file:
-
-```tsx
-import { useColorScheme as useNativewindColorScheme } from 'nativewind';
-
-export function useColorScheme() {
-  const { colorScheme, setColorScheme, toggleColorScheme } = useNativewindColorScheme();
-  return {
-    colorScheme: colorScheme ?? 'dark',
-    isDarkColorScheme: colorScheme === 'dark',
-    setColorScheme,
-    toggleColorScheme,
-  };
-}
-```
-
-### Add CSS variables
-
-- **Add the following css variables to `~/global.css` file.**
-
-<Code lang="css" 
-title="~/global.css"
-code={`
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 240 10% 3.9%;
-      --card: 0 0% 100%;
-      --card-foreground: 240 10% 3.9%;
-      --popover: 0 0% 100%;
-      --popover-foreground: 240 10% 3.9%;
-      --primary: 240 5.9% 10%;
-      --primary-foreground: 0 0% 98%;
-      --secondary: 240 4.8% 95.9%;
-      --secondary-foreground: 240 5.9% 10%;
-      --muted: 240 4.8% 95.9%;
-      --muted-foreground: 240 3.8% 46.1%;
-      --accent: 240 4.8% 95.9%;
-      --accent-foreground: 240 5.9% 10%;
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 0 0% 98%;
-      --border: 240 5.9% 90%;
-      --input: 240 5.9% 90%;
-      --ring: 240 5.9% 10%;
+        .dark:root {
+          --background: 240 10% 3.9%;
+          --foreground: 0 0% 98%;
+          --card: 240 10% 3.9%;
+          --card-foreground: 0 0% 98%;
+          --popover: 240 10% 3.9%;
+          --popover-foreground: 0 0% 98%;
+          --primary: 0 0% 98%;
+          --primary-foreground: 240 5.9% 10%;
+          --secondary: 240 3.7% 15.9%;
+          --secondary-foreground: 0 0% 98%;
+          --muted: 240 3.7% 15.9%;
+          --muted-foreground: 240 5% 64.9%;
+          --accent: 240 3.7% 15.9%;
+          --accent-foreground: 0 0% 98%;
+          --destructive: 0 72% 51%;
+          --destructive-foreground: 0 0% 98%;
+          --border: 240 3.7% 15.9%;
+          --input: 240 3.7% 15.9%;
+          --ring: 240 4.9% 83.9%;
+        }
     }
+    `}
+    />
 
-    .dark:root {
-      --background: 240 10% 3.9%;
-      --foreground: 0 0% 98%;
-      --card: 240 10% 3.9%;
-      --card-foreground: 0 0% 98%;
-      --popover: 240 10% 3.9%;
-      --popover-foreground: 0 0% 98%;
-      --primary: 0 0% 98%;
-      --primary-foreground: 240 5.9% 10%;
-      --secondary: 240 3.7% 15.9%;
-      --secondary-foreground: 0 0% 98%;
-      --muted: 240 3.7% 15.9%;
-      --muted-foreground: 240 5% 64.9%;
-      --accent: 240 3.7% 15.9%;
-      --accent-foreground: 0 0% 98%;
-      --destructive: 0 72% 51%;
-      --destructive-foreground: 0 0% 98%;
-      --border: 240 3.7% 15.9%;
-      --input: 240 3.7% 15.9%;
-      --ring: 240 4.9% 83.9%;
-    }
-}
-`}
-/>
+    <Aside type='tip'>
+      <div className='flex gap-2'>
+        If you want inspiration for your own colors, check out:
+        <a className='inline-block' target='_blank' href='https://ui.jln.dev/'>
+        ui by jln.dev/
+        </a>
+        or
+        <a className='inline-block' target='_blank' href='https://ui.shadcn.com/themes'>
+        themes by ui/shadcn
+        </a>
+      </div>
+    </Aside>
 
-<Aside type='tip'>
-  If you want inspiration for your own colors, check out:{' '}
-  <a target='_blank' href='https://ui.jln.dev/'>
-    ui by jln.dev/
-  </a>{' '}
-  or{' '}
-  <a target='_blank' href='https://ui.shadcn.com/themes'>
-    themes by ui/shadcn
-  </a>
-</Aside>
+    <Aside>
+      When customizing, make sure to use `.dark:root` or `@media (prefers-color-scheme: dark)` for the
+      dark mode css selector.
+    </Aside>
 
-<Aside>
-  When customizing, make sure to use `.dark:root` or `@media (prefers-color-scheme: dark)` for the
-  dark mode css selector.
-</Aside>
+    <Steps>
+      7. Add the following code in the `~/lib/constants.ts` file for the navigation theme colors:
+    </Steps>
 
-- **Add the following code in the `~/lib/constants.ts` file for the navigation theme colors:**
-
-<Code
-  lang='ts'
-  title='~/lib/constants.ts'
-  code={`
-export const NAV_THEME = {
-  light: {
-    background: 'hsl(0 0% 100%)', // background
-    border: 'hsl(240 5.9% 90%)', // border
-    card: 'hsl(0 0% 100%)', // card
-    notification: 'hsl(0 84.2% 60.2%)', // destructive
-    primary: 'hsl(240 5.9% 10%)', // primary
-    text: 'hsl(240 10% 3.9%)', // foreground
-  },
-  dark: {
-    background: 'hsl(240 10% 3.9%)', // background
-    border: 'hsl(240 3.7% 15.9%)', // border
-    card: 'hsl(240 10% 3.9%)', // card
-    notification: 'hsl(0 72% 51%)', // destructive
-    primary: 'hsl(0 0% 98%)', // primary
-    text: 'hsl(0 0% 98%)', // foreground
-  },
-};
-`}
-/>
-
-If you changed the colors in the `~/global.css` file, update the `~/lib/constants.ts` file with the new colors.
-Each color has a commented css variable name next to it.
-
-### Configure colors
-
-- **Use the CSS variables in your tailwind.config.js file.**
-
-<Tabs>
-  <TabItem label='Universal'>
-    **Platforms:** Web, iOS, and Android
-    <Code lang='js' title='tailwind.config.js' code={importedTwUniversalCondig} />
-  </TabItem>
-  <TabItem label='Native only'>
-    **Platforms:** iOS and Android
-    <Code lang='js' title='tailwind.config.js' code={importedTwNativeCondig} />
-  </TabItem>
-</Tabs>
-
-- **Configure React Navigation Theme**
-
-In your root component (ex: the root `_layout.tsx` if you're using expo-router), add the following code
-to load the selected theme, prevent the flash of the default theme,
-and store the selected theme in the async storage.
-
-<Code
-  lang='tsx'
-  title='_layout.tsx'
-  code={`import '~/global.css';
-
-import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { Platform } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
-
-const LIGHT_THEME: Theme = {
-  ...DefaultTheme,
-  colors: NAV_THEME.light,
-};
-const DARK_THEME: Theme = {
-  ...DarkTheme,
-  colors: NAV_THEME.dark,
-};
-
-export {
-// Catch any errors thrown by the Layout component.
-ErrorBoundary,
-} from 'expo-router';
-
-export default function RootLayout() {
-  const hasMounted = React.useRef(false);
-  const { colorScheme, isDarkColorScheme } = useColorScheme();
-  const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
-
-  useIsomorphicLayoutEffect(() => {
-    if (hasMounted.current) {
-      return;
-    }
-
-    if (Platform.OS === 'web') {
-      // Adds the background color to the html element to prevent white background on overscroll.
-      document.documentElement.classList.add('bg-background');
-    }
-    setIsColorSchemeLoaded(true);
-    hasMounted.current = true;
-  }, []);
-
-  if (!isColorSchemeLoaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack />
-    </ThemeProvider>
-  );
-}
-
-const useIsomorphicLayoutEffect =
-  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
-
-`} />
-
-### Install and Set Up Icons
-
-- **Install the following packages:**
-
-```bash
-  npx expo install react-native-svg lucide-react-native
-```
-
-- **Resolve the className strings into icon styles**
-
-Add the `iconWithClassName` function in the `~/lib/icons/iconWithClassName.ts` file.
-
-```tsx
-import type { LucideIcon } from 'lucide-react-native';
-import { cssInterop } from 'nativewind';
-
-export function iconWithClassName(icon: LucideIcon) {
-  cssInterop(icon, {
-    className: {
-      target: 'style',
-      nativeStyleToProp: {
-        color: true,
-        opacity: true,
+    <Code
+      lang='ts'
+      title='~/lib/constants.ts'
+      code={`export const NAV_THEME = {
+      light: {
+        background: 'hsl(0 0% 100%)', // background
+        border: 'hsl(240 5.9% 90%)', // border
+        card: 'hsl(0 0% 100%)', // card
+        notification: 'hsl(0 84.2% 60.2%)', // destructive
+        primary: 'hsl(240 5.9% 10%)', // primary
+        text: 'hsl(240 10% 3.9%)', // foreground
       },
-    },
-  });
-}
-```
+      dark: {
+        background: 'hsl(240 10% 3.9%)', // background
+        border: 'hsl(240 3.7% 15.9%)', // border
+        card: 'hsl(240 10% 3.9%)', // card
+        notification: 'hsl(0 72% 51%)', // destructive
+        primary: 'hsl(0 0% 98%)', // primary
+        text: 'hsl(0 0% 98%)', // foreground
+      },
+    };
+    `}
+    />
 
-- **Create the Icon files for switching between light and dark mode**
+    If you changed the colors in the `~/global.css` file, update the `~/lib/constants.ts` file with the new colors.
+    Each color has a commented css variable name next to it.
 
-Create `~/lib/icons/Sun.tsx`
 
-```tsx
-import { Sun } from 'lucide-react-native';
-import { iconWithClassName } from './iconWithClassName';
-iconWithClassName(Sun);
-export { Sun };
-```
+    <Steps>
+      8. Use the CSS variables in your tailwind.config.js file.
+    </Steps>
 
-Create `~/lib/icons/MoonStar.tsx`
+    <Tabs>
+      <TabItem label='Universal'>
+        **Platforms:** Web, iOS, and Android
+        <Code lang='js' title='tailwind.config.js' code={importedTwUniversalCondig} />
+      </TabItem>
+      <TabItem label='Native only'>
+        **Platforms:** iOS and Android
+        <Code lang='js' title='tailwind.config.js' code={importedTwNativeCondig} />
+      </TabItem>
+    </Tabs>
 
-```tsx
-import { MoonStar } from 'lucide-react-native';
-import { iconWithClassName } from './iconWithClassName';
-iconWithClassName(MoonStar);
-export { MoonStar };
-```
 
-<Aside type='caution'>
-  Neglecting to wrap icons with `iconWithClassName` will prevent you from being able to update the
-  `color` or `opacity` props via the `className` prop.
-</Aside>
+    <Steps>
+      9. Configure React Navigation Theme
+    </Steps>
 
-</TabItem>
+    In your root component (ex: the root `_layout.tsx` if you're using expo-router), add the following code
+    to load the selected theme, prevent the flash of the default theme,
+    and store the selected theme in the async storage.
+
+    <Code
+      lang='tsx'
+      title='_layout.tsx'
+      code={`import '~/global.css';
+
+    import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
+    import { Stack } from 'expo-router';
+    import { StatusBar } from 'expo-status-bar';
+    import * as React from 'react';
+    import { Platform } from 'react-native';
+    import { NAV_THEME } from '~/lib/constants';
+    import { useColorScheme } from '~/lib/useColorScheme';
+
+    const LIGHT_THEME: Theme = {
+      ...DefaultTheme,
+      colors: NAV_THEME.light,
+    };
+    const DARK_THEME: Theme = {
+      ...DarkTheme,
+      colors: NAV_THEME.dark,
+    };
+
+    export {
+    // Catch any errors thrown by the Layout component.
+    ErrorBoundary,
+    } from 'expo-router';
+
+    export default function RootLayout() {
+      const hasMounted = React.useRef(false);
+      const { colorScheme, isDarkColorScheme } = useColorScheme();
+      const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+
+      useIsomorphicLayoutEffect(() => {
+        if (hasMounted.current) {
+          return;
+        }
+
+        if (Platform.OS === 'web') {
+          // Adds the background color to the html element to prevent white background on overscroll.
+          document.documentElement.classList.add('bg-background');
+        }
+        setIsColorSchemeLoaded(true);
+        hasMounted.current = true;
+      }, []);
+
+      if (!isColorSchemeLoaded) {
+        return null;
+      }
+
+      return (
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+          <Stack />
+        </ThemeProvider>
+      );
+    }
+
+    const useIsomorphicLayoutEffect =
+      Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
+
+    `} />
+
+
+    <Steps>
+      10. Add the `<ToggleTheme/>` icons
+    </Steps>
+
+    Follow the next step and add the `<Sun/>` and `<MoonStar/>` icons from the examples.
+
+  </TabItem>
 </Tabs>
