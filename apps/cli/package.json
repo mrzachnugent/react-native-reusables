@@ -1,6 +1,6 @@
 {
   "name": "@react-native-reusables/cli",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "description": "Add react-native-reusables to your project.",
   "publishConfig": {
     "access": "public"
@@ -33,7 +33,7 @@
   "exports": "./dist/index.js",
   "bin": "./dist/index.js",
   "scripts": {
-    "gen": "tsx scripts/generate-source-files.ts",
+    "gen": "rm -rf __generated && tsx scripts/generate-source-files.ts",
     "dev": "pnpm gen && tsup --watch",
     "build": "pnpm gen && tsup",
     "typecheck": "tsc --noEmit",

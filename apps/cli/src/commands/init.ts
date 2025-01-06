@@ -71,76 +71,90 @@ export const init = new Command()
   });
 
 async function validateProjectDirectory(cwd: string) {
-  if (!existsSync(cwd) || !existsSync(path.join(cwd, 'package.json'))) {
-    const { proceed } = await prompts({
-      type: 'confirm',
-      name: 'proceed',
-      message: 'No package.json found. Would you like to create a new project?',
+  if (existsSync(cwd) && existsSync(path.join(cwd, 'package.json'))) {
+    const { option } = await prompts({
+      type: 'select',
+      name: 'option',
+      message:
+        'Package.json found. How would you like to proceed? (Selecting "Cancel" will exit the process)',
+      choices: [
+        { title: 'Automatically configure your existing project', value: 'existing-project' },
+        { title: 'Init new project', value: 'new-project' },
+        { title: 'Cancel', value: 'cancel' },
+      ],
       initial: false,
     });
 
-    if (!proceed) {
-      logger.info('Initialization cancelled.');
+    if (option === 'cancel') {
+      logger.info('Installation cancelled.');
       process.exit(0);
     }
 
-    const { projectName } = await prompts({
-      type: 'text',
-      name: 'projectName',
-      message: `What is the name of your project?`,
-      initial: 'starter-base',
-    });
-
-    const spinner = ora(`Initializing ${projectName}...`).start();
-
-    const projectPath = path.join(cwd, projectName);
-    if (!existsSync(projectPath)) {
-      await fs.mkdir(projectPath, { recursive: true });
+    if (option === 'existing-project') {
+      return;
     }
-
-    await copyFolder(path.join(fileDir, '../__generated/starter-base'), projectPath);
-
-    await Promise.all([
-      replaceAllInJsonFile(path.join(projectPath, 'app.json'), 'starter-base', projectName),
-      replaceAllInJsonFile(
-        path.join(projectPath, 'package.json'),
-        '@rnr/starter-base',
-        projectName
-      ),
-    ]);
-
-    spinner.stop();
-    const { packageManager } = await prompts({
-      type: 'select',
-      name: 'packageManager',
-      message: 'Which package manager would you like to use?',
-      choices: [
-        { title: 'npm', value: 'npm' },
-        { title: 'yarn', value: 'yarn' },
-        { title: 'pnpm', value: 'pnpm' },
-        { title: 'bun', value: 'bun' },
-      ],
-    });
-
-    spinner.start('Installing dependencies...');
-    await execa(packageManager, ['install'], {
-      cwd: projectPath,
-    });
-    spinner.text = 'Verifying and updating any invalid package versions if needed...';
-    await execa('npx', ['expo', 'install', '--fix'], {
-      cwd: projectPath,
-    });
-
-    spinner.succeed('New project initialized successfully!');
-    console.log(`\nTo get started, run the following commands:\n`);
-    console.log(chalk.cyan(`cd ${projectName}`));
-    console.log(
-      chalk.cyan(
-        `${packageManager} ${packageManager === 'npm' || packageManager === 'bun' ? 'run ' : ''}dev`
-      )
-    );
-    process.exit(0);
   }
+
+  const { projectName } = await prompts({
+    type: 'text',
+    name: 'projectName',
+    message: `What is the name of your project?`,
+    initial: 'starter-base',
+  });
+
+  const { packageManager } = await prompts({
+    type: 'select',
+    name: 'packageManager',
+    message: 'Which package manager would you like to use?',
+    choices: [
+      { title: 'npm', value: 'npm' },
+      { title: 'yarn', value: 'yarn' },
+      { title: 'pnpm', value: 'pnpm' },
+      { title: 'bun', value: 'bun' },
+    ],
+  });
+
+  const spinner = ora(`Initializing ${projectName}...`).start();
+
+  const projectPath = path.join(cwd, projectName);
+  if (!existsSync(projectPath)) {
+    await fs.mkdir(projectPath, { recursive: true });
+  }
+
+  const filesToIgnore = [];
+
+  if (packageManager !== 'pnpm') {
+    filesToIgnore.push('npmrc-template');
+  }
+
+  await copyFolder(path.join(fileDir, '../__generated/starter-base'), projectPath, {
+    ignore: filesToIgnore,
+    renameTemplateFiles: true,
+  });
+
+  await Promise.all([
+    replaceAllInJsonFile(path.join(projectPath, 'app.json'), 'starter-base', projectName),
+    replaceAllInJsonFile(path.join(projectPath, 'package.json'), '@rnr/starter-base', projectName),
+  ]);
+
+  spinner.start('Installing dependencies...');
+  await execa(packageManager, ['install'], {
+    cwd: projectPath,
+  });
+  spinner.text = 'Verifying and updating any invalid package versions if needed...';
+  await execa('npx', ['expo', 'install', '--fix'], {
+    cwd: projectPath,
+  });
+
+  spinner.succeed('New project initialized successfully!');
+  console.log(`\nTo get started, run the following commands:\n`);
+  console.log(chalk.cyan(`cd ${projectName}`));
+  console.log(
+    chalk.cyan(
+      `${packageManager} ${packageManager === 'npm' || packageManager === 'bun' ? 'run ' : ''}dev`
+    )
+  );
+  process.exit(0);
 }
 
 async function replaceAllInJsonFile(path: string, searchValue: string, replaceValue: string) {
