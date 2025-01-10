@@ -1,0 +1,20 @@
+{
+  "title": "React Native",
+  "description": "Reusables",
+  "icon": "Building2",
+  "root": true,
+  "pages": [
+    "---Getting started---",
+    "index",
+    "comparisons",
+    "...",
+    "---Other---",
+    "manual-installation",
+    "static-export",
+    "(integrations)",
+    "---Components---",
+    "markdown",
+    "page-conventions",
+    "navigation"
+  ]
+}

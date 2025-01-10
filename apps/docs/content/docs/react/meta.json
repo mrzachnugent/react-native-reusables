@@ -1,0 +1,20 @@
+{
+  "title": "React",
+  "description": "Web",
+  "icon": "Building2",
+  "root": true,
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "comparisons",
+    "...",
+    "---Installation---",
+    "manual-installation",
+    "static-export",
+    "(integrations)",
+    "---Components---",
+    "markdown",
+    "page-conventions",
+    "navigation"
+  ]
+}
