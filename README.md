@@ -8,13 +8,29 @@ Crafted with [NativeWind v4](https://www.nativewind.dev/) and accessibility in m
 
 https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-05a4-4568-b71a-f1e0be13650d
 
-### Get started with our [📖 Docs](https://rnr-docs.vercel.app/getting-started/initial-setup/) or checkout the [🌐 web demo](https://rnr-showcase.vercel.app/)
+[📖 Docs](https://rnr-docs.vercel.app/)
+<br/>
+[🌐 Web demo](https://rnr-showcase.vercel.app/)
 
 ### How to use
 
-1. Follow our [documentation](https://rnr-docs.vercel.app/getting-started/initial-setup/) to get started with a template or with a manual configuration.
+**Init**
 
-2. Browse our [components](https://rnr-docs.vercel.app/components/accordion/) and use the CLI to add the components to your project
+Quickly create a new project using the React Native Reusables CLI.
+
+> If a `package.json` is detected, the CLI will install all necessary dependencies and automatically configure your project for you.
+
+```bash
+npx @react-native-reusables/cli@latest init
+```
+
+**Add**
+
+Add components to an existing project using the React Native Reusables CLI.
+
+```bash
+npx @react-native-reusables/cli@latest add
+```
 
 #### Upcoming components
 
@@ -28,9 +44,9 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 This project includes only components built without third-party libraries or those that use [@rn-primitives](https://rnprimitives.com) _(universal radix-ui/primitives)_.
 
-### Excluded components
+**Excluded components**
 
-Only **14 out of the 50** shadcn/ui components are excluded from this library. However, you can use the following packages or repositories to build your own
+Only **14 out of the 51** shadcn/ui components are excluded from this library. However, you can use the following packages or repositories to build your own
 
 #### Calendar
 
