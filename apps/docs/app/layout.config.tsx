@@ -9,14 +9,14 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    // can be JSX too!
-    title: 'My App',
+    title: <div>Logo</div>,
   },
   links: [
     {
-      text: 'Documentation',
-      url: '/docs',
-      active: 'nested-url',
+      text: 'rn-primitives',
+      url: 'https://rnprimitives.com',
+      icon: <p className='bold px-1.5'>i</p>,
     },
   ],
+  githubUrl: 'https://github.com/mrzachnugent/react-native-reusables',
 };
