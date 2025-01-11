@@ -1,3 +1,24 @@
 {
-  "pages": ["react", "react-native"]
+  "title": "React Native Reusables",
+  "description": "",
+  "icon": "Building2",
+  "root": true,
+  "pages": [
+    "---Getting started---",
+    "introduction",
+    "installation",
+    "recipes",
+    "---Customization---",
+    "cli",
+    "icons",
+    "components-json",
+    "theming",
+    "dark-mode",
+    "---Components---",
+    "...",
+    "---Bonus---",
+    "android-navigation-bar",
+    "use-keyboard",
+    "material-top-tabs"
+  ]
 }
