@@ -16,6 +16,8 @@ export const baseOptions: BaseLayoutProps = {
       text: 'rn-primitives',
       url: 'https://rnprimitives.com',
       icon: <p className='bold px-1.5'>i</p>,
+      external: true,
+      on: 'menu',
     },
   ],
   githubUrl: 'https://github.com/mrzachnugent/react-native-reusables',
