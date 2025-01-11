@@ -19,6 +19,7 @@ If you do not add arguments, you will be prompted to select the `ui` components 
 #### UI Components
 
 - `accordion`
+- `alert`
 - `alert-dialog`
 - `aspect-ratio`
 - `avatar`

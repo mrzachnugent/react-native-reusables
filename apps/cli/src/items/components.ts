@@ -15,6 +15,21 @@ export const COMPONENTS = [
     ],
   },
   {
+    name: 'alert',
+    dependencies: ['text'],
+    icons: [],
+    npmPackages: [],
+    paths: [
+      {
+        from: './node_modules/@rnr/reusables/src/components/ui/alert.tsx',
+        to: {
+          folder: 'ui',
+          file: 'alert.tsx',
+        },
+      },
+    ],
+  },
+  {
     name: 'alert-dialog',
     dependencies: ['button', 'text'],
     icons: [],
