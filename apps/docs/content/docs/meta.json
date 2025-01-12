@@ -5,20 +5,19 @@
   "root": true,
   "pages": [
     "---Getting started---",
-    "introduction",
+    "index",
     "installation",
-    "recipes",
-    "---Customization---",
-    "cli",
     "icons",
+    "cli",
+    "---Customization---",
     "components-json",
     "theming",
-    "dark-mode",
+    "recipes",
     "---Components---",
     "...",
     "---Bonus---",
     "android-navigation-bar",
-    "use-keyboard",
-    "material-top-tabs"
+    "material-top-tabs",
+    "use-keyboard"
   ]
 }
