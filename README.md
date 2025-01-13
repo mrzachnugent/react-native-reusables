@@ -46,7 +46,7 @@ This project includes only components built without third-party libraries or tho
 
 **Excluded components**
 
-Only **14 out of the 51** shadcn/ui components are excluded from this library. However, you can use the following packages or repositories to build your own
+Only **15 out of the 51** shadcn/ui components are excluded from this library. However, you can use the following packages or repositories to build your own
 
 #### Calendar
 
