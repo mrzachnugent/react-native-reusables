@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
+    "jsxImportSource": "nativewind",
     "baseUrl": ".",
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,14 +21,24 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

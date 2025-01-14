@@ -64,13 +64,17 @@ function AccordionTrigger({
 }) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
-  const progress = useDerivedValue(() =>
-    isExpanded ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })
+  const progress = useDerivedValue(
+    () => (isExpanded ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })),
+    [isExpanded]
   );
-  const chevronStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${progress.value * 180}deg` }],
-    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
-  }));
+  const chevronStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ rotate: `${progress.value * 180}deg` }],
+      opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
+    }),
+    [progress]
+  );
 
   return (
     <TextClassContext.Provider value='native:text-lg font-medium web:group-hover:underline'>
