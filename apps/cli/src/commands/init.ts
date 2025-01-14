@@ -21,6 +21,7 @@ const fileDir = path.dirname(filePath);
 const REQUIRED_DEPENDENCIES = [
   'nativewind',
   'expo-navigation-bar',
+  'tailwindcss',
   'tailwindcss-animate',
   'class-variance-authority',
   'clsx',
