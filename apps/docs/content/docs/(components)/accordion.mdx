@@ -1,0 +1,72 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Text,
+} from "@/components/reusables"
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
+import AccordionCodeContent from '@/__registry__/content/accordion';
+
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+  <div className=" flex justify-center py-8">
+
+ <Accordion
+        type='multiple'
+        collapsible
+        defaultValue={['item-1']}
+        className='w-full max-w-sm native:max-w-md'
+      >
+        <AccordionItem value='item-1'>
+          <AccordionTrigger>
+            <Text>Is it accessible?</Text>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value='item-2'>
+          <AccordionTrigger>
+            <Text>What are universal components?</Text>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Text>
+              In the world of React Native, universal components are components that work on both
+              web and native platforms.
+            </Text>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value='item-3'>
+          <AccordionTrigger>
+            <Text>Is this component universal?</Text>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Text>Yes. Try it out on the web, iOS, and/or Android.</Text>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      
+      </div></Tab>
+  <Tab value="Code">
+    ```tsx
+    // Code is code
+    ```
+  </Tab>
+</Tabs>
+
+
+## What is Next?
+
+<Cards>
+  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
+  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+</Cards>

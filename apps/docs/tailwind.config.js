@@ -14,7 +14,6 @@ const config = {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('nativewind/preset'),
     createPreset({
-      cssPrefix: '',
       preset: 'black',
     }),
   ],
