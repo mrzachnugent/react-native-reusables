@@ -21,11 +21,14 @@ const fileDir = path.dirname(filePath);
 const REQUIRED_DEPENDENCIES = [
   'nativewind',
   'expo-navigation-bar',
+  'tailwindcss',
   'tailwindcss-animate',
   'class-variance-authority',
   'clsx',
   'tailwind-merge',
   'react-native-svg',
+  'react-native-reanimated',
+  'react-native-safe-area-context',
   'lucide-react-native',
   '@rn-primitives/portal',
 ] as const;
