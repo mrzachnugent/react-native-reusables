@@ -21,6 +21,8 @@
     "[Palette][Theming](/docs/theming)",
     "[ListOrdered][Recipes](/docs/recipes)",
     "---Components---",
+    "!/(components)",
+    ".../(components)",
     "..."
   ]
 }
