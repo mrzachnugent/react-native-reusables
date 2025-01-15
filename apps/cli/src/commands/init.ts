@@ -27,6 +27,8 @@ const REQUIRED_DEPENDENCIES = [
   'clsx',
   'tailwind-merge',
   'react-native-svg',
+  'react-native-reanimated',
+  'react-native-safe-area-context',
   'lucide-react-native',
   '@rn-primitives/portal',
 ] as const;
