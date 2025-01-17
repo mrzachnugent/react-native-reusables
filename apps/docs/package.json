@@ -10,10 +10,13 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-tabs": "^1.1.2",
     "@rnr/reusables": "workspace:*",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "fumadocs-core": "14.7.2",
+    "fumadocs-docgen": "^1.3.4",
     "fumadocs-mdx": "11.2.3",
     "fumadocs-ui": "14.7.2",
     "lucide-react": "^0.471.1",
@@ -24,6 +27,8 @@
     "react-native-reanimated": "~3.16.1",
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
+    "remark-variables": "^1.4.9",
+    "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
