@@ -1,7 +1,16 @@
-import { defineDocs, defineConfig } from 'fumadocs-mdx/config';
+import { fileGenerator, remarkDocGen } from 'fumadocs-docgen';
+import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 
 export const { docs, meta } = defineDocs({
   dir: 'content/docs',
 });
 
-export default defineConfig();
+export default defineConfig({
+  mdxOptions: {
+    rehypeCodeOptions: {
+      themes: { light: 'github-dark-default', dark: 'github-dark-default' },
+      theme: 'github-dark-default',
+    },
+    remarkPlugins: [[remarkDocGen, { generators: [fileGenerator()] }]],
+  },
+});

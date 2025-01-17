@@ -1,3 +1,4 @@
+import { UiIcon } from '@/components/ui-icon';
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
 /**
@@ -12,6 +13,13 @@ export const baseOptions: BaseLayoutProps = {
     title: <div>Logo</div>,
   },
   links: [
+    {
+      text: 'shadcn/ui',
+      url: 'https://ui.shadcn.com/',
+      icon: <UiIcon />,
+      external: true,
+      on: 'menu',
+    },
     {
       text: 'rn-primitives',
       url: 'https://rnprimitives.com',
