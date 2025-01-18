@@ -29,7 +29,7 @@ export function CopyButton({
           variant: 'ghost',
           size: 'icon',
         }),
-        'transition-opacity group-hover:opacity-100 size-8',
+        'transition-opacity group-hover:opacity-100 size-7',
         !checked && 'opacity-0',
         className
       )}

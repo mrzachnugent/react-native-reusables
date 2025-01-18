@@ -7,6 +7,7 @@ import alertPreview from "!!raw-loader!@/previews/alert";
 import alertDestructivePreview from "!!raw-loader!@/previews/alert-destructive";
 import { CommandTabs } from "@/components/command-tabs";
 import { CopyButton } from "@/components/copy-button";
+import { PreviewCard } from "@/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
 import { AlertPreview } from "@/previews/alert";
 import { AlertDestructive } from "@/previews/alert-destructive";
@@ -20,10 +21,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
-      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={alertPreview}/>
-      <AlertPreview />
-    </div>
+    <PreviewCard copyContent={alertPreview} webPreview={<AlertPreview />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
 
