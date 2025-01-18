@@ -1,0 +1,225 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+---
+
+import badgePreview from "!!raw-loader!@/previews/badge";
+import badgeDestructivePreview from "!!raw-loader!@/previews/badge-destructive";
+import badgeOutlinePreview from "!!raw-loader!@/previews/badge-outline";
+import badgeSecondaryPreview from "!!raw-loader!@/previews/badge-secondary";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { ExternalLinks } from "@/components/external-links";
+import { PreviewCard } from "@/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { BadgePreview } from "@/previews/badge";
+import { BadgeDestructivePreview } from "@/previews/badge-destructive";
+import { BadgeOutlinePreview } from "@/previews/badge-outline";
+import { BadgeSecondaryPreview } from "@/previews/badge-secondary";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={badgePreview} webPreview={<BadgePreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/badge.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "badge"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        #### Install the following dependencies:
+
+        ```
+        npx expo install @rn-primitives/badge @rn-primitives/types @rn-primitives/slot
+        ```
+
+      </Step>
+      <Step>
+ 
+        #### Copy and paste the following code into your project.
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/badge.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/badge.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+    </Steps>
+
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import { Badge } from '~/components/ui/badge';
+import { Text } from '~/components/ui/text';
+
+```
+
+```tsx
+<Badge>
+  <Text>Badge</Text>
+</Badge>
+```
+
+#### Link
+
+You can use the `badgeVariants` and `badgeTextVariants` helpers to create a link that looks like a badge.
+
+```tsx
+import { badgeVariants, badgeTextVariants } from "~/components/ui/badge"
+```
+
+```tsx
+<Link className={badgeVariants({ variant: 'outline' })}>
+  <Text className={badgeTextVariants({ variant: 'outline' })}>Badge</Text>
+</Link>
+```
+
+### Examples
+
+#### Default
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={badgePreview} webPreview={<BadgePreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/alert.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Secondary
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={badgeSecondaryPreview} webPreview={<BadgeSecondaryPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/badge-secondary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Outline
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={badgeOutlinePreview} webPreview={<BadgeOutlinePreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/badge-outline.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Destructive
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={badgeDestructivePreview} webPreview={<BadgeDestructivePreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/badge-destructive.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
