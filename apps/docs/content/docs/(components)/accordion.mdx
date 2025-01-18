@@ -3,259 +3,166 @@ title: Accordion
 description: A vertically stacked set of interactive headings that each reveal a section of content.
 ---
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  Text,
-} from "@/components/reusables"
-
-import { Tab, Tabs, TabContent } from 'fumadocs-ui/components/tabs'
-import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
-import { ExternalLinkIcon } from "lucide-react"
-import accordion from '!!raw-loader!@rnr/reusables/components/ui/accordion';
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/ui/section-tabs"
-import { CopyButton } from "@/components/copy-button"
+import accordionPreview from "!!raw-loader!@/previews/accordion";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { ExternalLinks } from "@/components/external-links";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { AccordionPreview } from "@/previews/accordion";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
-import { CommandTabs } from "@/components/command-tabs"
 
+<ExternalLinks
+  links={[
+    { title: 'Docs', url: 'https://rnprimitives.com/accordion/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/accordion/#props' },
+  ]}
+/>
 
-<div className="pb-10 flex gap-2">
-<a href="/" className="inline-flex bg-muted border rounded-md no-underline px-2 py-0.5">
-<div className="flex items-center gap-1 text-xs font-medium">Docs <ExternalLinkIcon strokeWidth={2.5} className="w-3 h-3"/></div>
-</a>
-<a href="/" className="inline-flex bg-muted border rounded-md no-underline px-2 py-0.5">
-<div className="flex items-center gap-1 text-xs font-medium">API Reference <ExternalLinkIcon strokeWidth={2.5} className="w-3 h-3"/></div>
-</a>
-</div>
+<div className="h-6"/>
 
-<SectionTabs defaultValue="preview" >
+<SectionTabs defaultValue="preview">
   <SectionTabsList>
     <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
-  <SectionTabsContent value="preview" >
- <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
- <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={`import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '~/components/ui/accordion';
-import { Text } from '~/components/ui/text';
- 
-export function AccordionDemo() {
-  return (
-      <Accordion
-        type='multiple'
-        collapsible
-        className='w-full max-w-sm native:max-w-md'
-      >
-      <AccordionItem value='item-1'>
-        <AccordionTrigger>
-          <Text className="web:text-sm">Is it accessible?</Text>
-        </AccordionTrigger>
-        <AccordionContent>
-          <Text className="web:text-sm">Yes. It adheres to the WAI-ARIA design pattern.</Text>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value='item-2'>
-        <AccordionTrigger>
-          <Text className="web:text-sm">What are universal components?</Text>
-        </AccordionTrigger>
-        <AccordionContent>
-          <Text className="web:text-sm">
-            In the world of React Native, universal components are components that work on both
-            web and native platforms.
-          </Text>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value='item-3'>
-        <AccordionTrigger>
-          <Text className="web:text-sm">Is this component universal?</Text>
-        </AccordionTrigger>
-        <AccordionContent>
-          <Text className="web:text-sm">Yes. Try it out on the web, iOS, and/or Android.</Text>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  )
-}`}/>
-      <Accordion
-        type='multiple'
-        collapsible
-        className='w-full max-w-sm native:max-w-md'
-      >
-        <AccordionItem value='item-1'>
-          <AccordionTrigger>
-            <Text className="web:text-sm">Is it accessible?</Text>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Text className="web:text-sm">Yes. It adheres to the WAI-ARIA design pattern.</Text>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger>
-            <Text className="web:text-sm">What are universal components?</Text>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Text className="web:text-sm">
-              In the world of React Native, universal components are components that work on both
-              web and native platforms.
-            </Text>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value='item-3'>
-          <AccordionTrigger>
-            <Text className="web:text-sm">Is this component universal?</Text>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Text className="web:text-sm">Yes. Try it out on the web, iOS, and/or Android.</Text>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+  <SectionTabsContent value="preview">
+    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
+      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={accordionPreview}/>
+      <AccordionPreview />
     </div>
   </SectionTabsContent>
   <SectionTabsContent value="code">
-```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '~/components/ui/accordion';
-import { Text } from '~/components/ui/text';
 
-export function AccordionDemo() {
-  return (
-      <Accordion
-        type='multiple'
-        collapsible
-        className='w-full max-w-sm native:max-w-md'
-      >
-      <AccordionItem value='item-1'>
-        <AccordionTrigger>
-          <Text className="web:text-sm">Is it accessible?</Text>
-        </AccordionTrigger>
-        <AccordionContent>
-          <Text className="web:text-sm">Yes. It adheres to the WAI-ARIA design pattern.</Text>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value='item-2'>
-        <AccordionTrigger>
-          <Text className="web:text-sm">What are universal components?</Text>
-        </AccordionTrigger>
-        <AccordionContent>
-          <Text className="web:text-sm">
-            In the world of React Native, universal components are components that work on both
-            web and native platforms.
-          </Text>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value='item-3'>
-        <AccordionTrigger>
-          <Text className="web:text-sm">Is this component universal?</Text>
-        </AccordionTrigger>
-        <AccordionContent>
-          <Text className="web:text-sm">Yes. Try it out on the web, iOS, and/or Android.</Text>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  )
-}
-```
+    ```json doc-gen:file
+    {
+      "file": "./previews/accordion.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
   </SectionTabsContent>
 </SectionTabs>
 
 
 ## Installation
 
-<SectionTabs defaultValue="cli" className="mt-4" >
+<SectionTabs defaultValue="cli">
   <SectionTabsList>
     <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
     <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
   </SectionTabsList>
-  <SectionTabsContent value="cli" >
-  <CommandTabs args={["add", "accordion"]}/>
+  <SectionTabsContent value="cli">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "accordion"]}/>
+      </Step>
+      <Step>
 
+        #### Update `tailwind.config.js`
+
+        Add the following animations to your tailwind.config.js file:
+
+        ```js title="tailwind.config.js"
+        /** @type {import('tailwindcss').Config} */
+        module.exports = {
+          theme: {
+            extend: {
+              keyframes: {
+                'accordion-down': {
+                  from: { height: '0' },
+                  to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                'accordion-up': {
+                  from: { height: 'var(--radix-accordion-content-height)' },
+                  to: { height: '0' },
+                },
+              },
+              animation: {
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
+              },
+            },
+          },
+        }
+        ```
+
+      </Step>
+    </Steps>
   </SectionTabsContent>
   <SectionTabsContent value="manual">
-
-  <Steps>
-<Step>
+    <Steps>
+      <Step>
  
-#### Install the following dependency:
+        #### Install the following dependency:
 
-  ```
-  npx expo install @rn-primitives/accordion
-  ```
+        ```
+        npx expo install @rn-primitives/accordion
+        ```
 
-</Step>
-
-<Step>
+      </Step>
+      <Step>
  
-#### Copy and paste the following code into your project.
+        #### Copy and paste the following code into your project.
 
-    ```json doc-gen:file
-{
-  "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
-  "codeblock": {
-    "lang": "tsx",
-    "meta": "title=\"~/components/ui/text.tsx\""
-  }
-}
-```
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/text.tsx\""
+          }
+        }
+        ```
 
-```json doc-gen:file
-{
-  "file": "./node_modules/@rnr/reusables/src/components/ui/accordion.tsx",
-  "codeblock": {
-    "lang": "tsx",
-    "meta": "title=\"~/components/ui/accordion.tsx\""
-  }
-}
-```
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/accordion.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/accordion.tsx\""
+          }
+        }
+        ```
  
-</Step>
+      </Step>
+      <Step>
 
-<Step>
+        #### Update the import paths to match your project setup.
 
-#### Update the import paths to match your project setup.
+      </Step>
+      <Step>
 
-</Step>
-<Step>
+        #### Update `tailwind.config.js`
 
-#### Update `tailwind.config.js`
+        Add the following animations to your tailwind.config.js file:
 
-Add the following animations to your tailwind.config.js file:
+        ```js title="tailwind.config.js"
+        /** @type {import('tailwindcss').Config} */
+        module.exports = {
+          theme: {
+            extend: {
+              keyframes: {
+                'accordion-down': {
+                  from: { height: '0' },
+                  to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                'accordion-up': {
+                  from: { height: 'var(--radix-accordion-content-height)' },
+                  to: { height: '0' },
+                },
+              },
+              animation: {
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
+              },
+            },
+          },
+        }
+        ```
 
-```js title="tailwind.config.js"
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  theme: {
-    extend: {
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-    },
-  },
-}
-```
-
-</Step>
-</Steps>
+      </Step>
+    </Steps>
   </SectionTabsContent>
 </SectionTabs>
 

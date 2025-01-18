@@ -1,4 +1,5 @@
-import { fileGenerator, remarkDocGen } from 'fumadocs-docgen';
+import { fileGenerator } from '@/lib/file-generator';
+import { remarkDocGen } from 'fumadocs-docgen';
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 
 export const { docs, meta } = defineDocs({
