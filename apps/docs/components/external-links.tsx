@@ -9,7 +9,7 @@ type ExternalLinksProps = {
 
 export function ExternalLinks(props: ExternalLinksProps) {
   return (
-    <div className='pb-4 flex flex-wrap gap-2'>
+    <div className='pb-5 flex flex-wrap gap-2'>
       {props.links.map((link) => (
         <a
           key={link.title}

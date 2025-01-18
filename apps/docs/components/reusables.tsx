@@ -1,6 +1,6 @@
 'use client';
 
-import { Ui } from '@rnr/reusables';
+import { Ui, Lib } from '@rnr/reusables';
 
 export const {
   Accordion,
@@ -181,3 +181,7 @@ export const {
   toggleVariants,
   useFormField,
 } = Ui;
+
+const { Icons } = Lib;
+
+export const { Terminal, AlertCircle } = Icons;

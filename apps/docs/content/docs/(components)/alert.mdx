@@ -1,0 +1,148 @@
+---
+title: Alert
+description: Displays a callout for user attention.
+---
+
+import alertPreview from "!!raw-loader!@/previews/alert";
+import alertDestructivePreview from "!!raw-loader!@/previews/alert-destructive";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { AlertPreview } from "@/previews/alert";
+import { AlertDestructive } from "@/previews/alert-destructive";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
+      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={alertPreview}/>
+      <AlertPreview />
+    </div>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/alert.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "alert"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps>
+      <Step>
+ 
+        #### Copy and paste the following code into your project.
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/alert.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/alert.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+      <Step>
+
+        #### Update the import paths to match your project setup.
+
+      </Step>
+    </Steps>
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
+import { Terminal } from '~/lib/icons/Terminal';
+```
+
+```tsx
+<Alert icon={Terminal}>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can use a terminal to run commands on your computer.
+  </AlertDescription>
+</Alert>
+```
+
+### Examples
+
+#### Default
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
+      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={alertPreview}/>
+      <AlertPreview />
+    </div>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/alert.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Destructive
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
+      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={alertDestructivePreview}/>
+      <AlertDestructive />
+    </div>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/alert-destructive.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>

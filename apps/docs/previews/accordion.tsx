@@ -8,21 +8,21 @@ import { Text } from '~/components/ui/text';
 
 export function AccordionPreview() {
   return (
-    <Accordion type='multiple' collapsible className='w-full max-w-sm native:max-w-md'>
+    <Accordion type='single' collapsible className='w-full max-w-sm native:max-w-md'>
       <AccordionItem value='item-1'>
         <AccordionTrigger>
-          <Text className='web:text-sm'>Is it accessible?</Text>
+          <Text>Is it accessible?</Text>
         </AccordionTrigger>
         <AccordionContent>
-          <Text className='web:text-sm'>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+          <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value='item-2'>
         <AccordionTrigger>
-          <Text className='web:text-sm'>What are universal components?</Text>
+          <Text>What are universal components?</Text>
         </AccordionTrigger>
         <AccordionContent>
-          <Text className='web:text-sm'>
+          <Text>
             In the world of React Native, universal components are components that work on both web
             and native platforms.
           </Text>
@@ -30,10 +30,10 @@ export function AccordionPreview() {
       </AccordionItem>
       <AccordionItem value='item-3'>
         <AccordionTrigger>
-          <Text className='web:text-sm'>Is this component universal?</Text>
+          <Text>Is this component universal?</Text>
         </AccordionTrigger>
         <AccordionContent>
-          <Text className='web:text-sm'>Yes. Try it out on the web, iOS, and/or Android.</Text>
+          <Text>Yes. Try it out on the web, iOS, and/or Android.</Text>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
