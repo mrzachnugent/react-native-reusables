@@ -1,0 +1,151 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+---
+
+import alertDialogPreview from "!!raw-loader!@/previews/alert-dialog";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { ExternalLinks } from "@/components/external-links";
+import { PreviewCard } from "@/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { AlertDialogPreview } from "@/previews/alert-dialog";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<ExternalLinks
+  links={[
+    { title: 'Docs', url: 'https://rnprimitives.com/alert-dialog/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/alert-dialog/#props' },
+  ]}
+/>
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={alertDialogPreview} webPreview={<AlertDialogPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/alert-dialog.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+    <CommandTabs args={["add", "alert-dialog"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps>
+      <Step>
+ 
+        #### Install the following dependency:
+
+        ```
+        npx expo install @rn-primitives/alert-dialog
+        ```
+
+      </Step>
+      <Step>
+ 
+        #### Copy and paste the following code into your project.
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/button.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/button.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/alert-dialog.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/alert-dialog.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+      <Step>
+
+        #### Update the import paths to match your project setup.
+
+      </Step>
+    </Steps>
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '~/components/ui/alert-dialog';
+import { Text } from '~/components/ui/text';
+```
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>
+    <Text>Show Alert Dialog</Text>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account and remove
+        your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>
+        <Text>Cancel</Text>
+      </AlertDialogCancel>
+      <AlertDialogAction>
+        <Text>Continue</Text>
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
