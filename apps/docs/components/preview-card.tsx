@@ -58,7 +58,7 @@ function PlatformSwitcher({
 }: SelectProps) {
   return (
     <Select defaultValue={defaultValue} {...props}>
-      <SelectTrigger className='h-7 w-fit gap-1 text-xs [&_svg]:h-4 [&_svg]:w-4'>
+      <SelectTrigger className='h-7 w-fit gap-1 text-xs pl-2.5 pr-1.5 [&_svg]:h-4 [&_svg]:w-4'>
         <span className='text-muted-foreground flex-1 pr-1'>Platform:</span>
         <SelectValue placeholder='Select platform' />
       </SelectTrigger>
