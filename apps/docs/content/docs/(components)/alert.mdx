@@ -99,10 +99,7 @@ import { Terminal } from '~/lib/icons/Terminal';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
-      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={alertPreview}/>
-      <AlertPreview />
-    </div>
+    <PreviewCard copyContent={alertPreview} webPreview={<AlertPreview />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
 
@@ -127,10 +124,7 @@ import { Terminal } from '~/lib/icons/Terminal';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <div className="group/copy relative flex items-center justify-center p-10 min-h-96 border rounded-md bg-card">
-      <CopyButton className="absolute top-2 right-2 group-hover/copy:opacity-100" content={alertDestructivePreview}/>
-      <AlertDestructive />
-    </div>
+    <PreviewCard copyContent={alertDestructivePreview} webPreview={<AlertDestructive />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
 
