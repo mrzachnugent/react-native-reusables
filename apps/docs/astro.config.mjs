@@ -108,6 +108,10 @@ export default defineConfig({
               link: '/components/input/',
             },
             {
+              label: 'Input Otp',
+              link: '/components/input-otp/',
+            },
+            {
               label: 'Label',
               link: '/components/label/',
             },

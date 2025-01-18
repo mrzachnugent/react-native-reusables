@@ -1,0 +1,76 @@
+---
+title: Input OTP
+description: Shows an input OTP component for verification codes.
+---
+
+{/* prettier-ignore-start */}
+{/* prettier-ignore-end */}
+
+import Code from '@/components/Code.astro';
+import { LinkButton } from '@/components/react/LinkButton';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import importedCode from '@rnr/reusables/components/ui/input-otp?raw';
+
+<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/input-otp">
+  Demo
+</LinkButton>
+
+<br />
+
+Shows an input otp component.
+
+## Installation
+
+<Tabs>
+  <TabItem label='CLI'> 
+    ```bash
+    npx @react-native-reusables/cli@latest add input-otp
+    ```
+  </TabItem>
+  <TabItem label='Manual'>
+**Copy/paste the following code to `~/components/ui/input-otp.tsx`**
+
+<Code code={importedCode} lang="tsx" title="~/components/ui/input-otp.tsx" />
+  </TabItem>
+</Tabs>
+
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import { InputOTP } from '~/components/ui/input-otp';
+
+function Example() {
+  const [value, setValue] = React.useState('');
+
+  const onChangeText = (text: string) => {
+    setValue(text);
+  };
+
+  return (
+    <InputOTP
+      value={value}
+      onValueChange={onChangeText}
+      maxLength={6}
+      separator='-'
+      groupSize={3} // Try 1 for X-X-X-X-X-X or 2 for XX-XX-XX
+    />
+  );
+}
+```
+
+## Props
+
+### InputOTP
+Extends `ViewProps` from React Native.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | '' | The current value of the OTP input |
+| maxLength | number | 6 | Maximum number of characters |
+| onValueChange | (value: string) => void | - | Callback when value changes |
+| pattern | RegExp | /^[0-9]$/ | Pattern to validate each character |
+| separator | React.ReactNode | '-' | Separator between groups |
+| groupSize | number | 1 | Number of characters per group |
+| containerClassName | string | - | Additional classes for container |

@@ -25,6 +25,7 @@ export const COMPONENTS = [
   'form',
   'hover-card',
   'input',
+  'input-otp',
   'label',
   'material-top-tabs',
   'menubar',

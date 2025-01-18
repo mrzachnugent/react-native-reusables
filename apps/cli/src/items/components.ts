@@ -210,6 +210,21 @@ export const COMPONENTS = [
     ],
   },
   {
+    name: 'input-otp',
+    dependencies: [],
+    icons: [],
+    npmPackages: [],
+    paths: [
+      {
+        from: './node_modules/@rnr/reusables/src/components/ui/input-otp.tsx',
+        to: {
+          folder: 'ui',
+          file: 'input-otp.tsx',
+        },
+      },
+    ],
+  },
+  {
     name: 'label',
     dependencies: [],
     icons: [],

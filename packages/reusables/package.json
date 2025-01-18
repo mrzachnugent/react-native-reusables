@@ -60,6 +60,7 @@
     "./components/ui/form": "./src/components/ui/form.tsx",
     "./components/ui/hover-card": "./src/components/ui/hover-card.tsx",
     "./components/ui/input": "./src/components/ui/input.tsx",
+    "./components/ui/input-otp": "./src/components/ui/input-otp.tsx",
     "./components/ui/label": "./src/components/ui/label.tsx",
     "./components/ui/menubar": "./src/components/ui/menubar.tsx",
     "./components/ui/navigation-menu": "./src/components/ui/navigation-menu.tsx",

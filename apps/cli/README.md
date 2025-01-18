@@ -32,6 +32,7 @@ If you do not add arguments, you will be prompted to select the `ui` components 
 - `dropdown-menu`
 - `hover-card`
 - `input`
+- `input-otp`
 - `label`
 - `menubar`
 - `navigation-menu`
