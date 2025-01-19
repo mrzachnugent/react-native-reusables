@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast, { ToastConfig } from 'react-native-toast-message';
@@ -10,11 +9,12 @@ import { Info } from '../../lib/icons/Info';
 /**
  * Temporary fix for warning when accessing useLayoutEffect on the server. See issue
  * https://github.com/calintamas/react-native-toast-message/issues/530
+ * Uncomment the following code to remove the warning.
  */
-if (typeof document === 'undefined') {
-  // @ts-ignore
-  React.useLayoutEffect = React.useEffect;
-}
+// if (typeof document === 'undefined') {
+//   // @ts-ignore
+//   React.useLayoutEffect = React.useEffect;
+// }
 
 /**
  * @docs https://github.com/calintamas/react-native-toast-message/blob/main/docs/quick-start.md
