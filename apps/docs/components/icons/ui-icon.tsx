@@ -1,11 +1,12 @@
 import { cn } from '@/lib/utils';
 
-export function UiIcon({ className }: { className?: string }) {
+export function UiIcon({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 256 256'
       className={cn('h-6 w-6', className)}
+      {...props}
     >
       <rect width='256' height='256' fill='none'></rect>
       <line
