@@ -1,4 +1,5 @@
-import { UiIcon } from '@/components/ui-icon';
+import { UiIcon } from '@/components/icons/ui-icon';
+import { RnrIcon } from '@/components/icons/rnr-icon';
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
 /**
@@ -10,7 +11,15 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: <div>Logo</div>,
+    title: (
+      <div className='group flex items-center gap-1.5'>
+        <RnrIcon
+          strokeWidth={32}
+          className='transition-transform duration-500 group-hover:rotate-180 group-hover:scale-90'
+        />
+        <p className='opacity-80 dark:opacity-90 transition-opacity group-hover:opacity-100'>RNR</p>
+      </div>
+    ),
   },
   links: [
     {
