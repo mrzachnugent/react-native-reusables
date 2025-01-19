@@ -5,7 +5,7 @@ import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
 
 const buttonVariants = cva(
-  'group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
+  'group flex flex-row gap-2 items-center justify-center rounded-md web:whitespace-nowrap web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 web:[&_svg]:pointer-events-none web:[&_svg]:size-4 web:[&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -32,7 +32,7 @@ const buttonVariants = cva(
 );
 
 const buttonTextVariants = cva(
-  'web:whitespace-nowrap text-sm native:text-base font-medium text-foreground web:transition-colors',
+  'text-sm native:text-base font-medium text-foreground web:transition-colors',
   {
     variants: {
       variant: {

@@ -37,6 +37,7 @@ export { Italic } from './Italic';
 export { Lamp } from './Lamp';
 export { LayoutPanelLeft } from './LayoutPanelLeft';
 export { LifeBuoy } from './LifeBuoy';
+export { Loader2 } from './Loader2';
 export { LogOut } from './LogOut';
 export { Mail } from './Mail';
 export { MenuSquare } from './MenuSquare';

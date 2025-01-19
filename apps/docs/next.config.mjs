@@ -18,6 +18,18 @@ const config = {
     'react-native-swipe-gestures',
     'react-native-toast-message',
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
   experimental: {
     forceSwcTransforms: true,
   },

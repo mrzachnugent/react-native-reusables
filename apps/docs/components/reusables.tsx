@@ -184,4 +184,4 @@ export const {
 
 const { Icons } = Lib;
 
-export const { Terminal, AlertCircle } = Icons;
+export const { Terminal, AlertCircle, ChevronRight, Mail, Loader2 } = Icons;

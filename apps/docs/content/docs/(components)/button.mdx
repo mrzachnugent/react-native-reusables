@@ -1,0 +1,375 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+---
+
+import buttonPreview from "!!raw-loader!@/previews/button/button-primary";
+import buttonDestructivePreview from "!!raw-loader!@/previews/button/button-destructive";
+import buttonOutlinePreview from "!!raw-loader!@/previews/button/button-outline";
+import buttonSecondaryPreview from "!!raw-loader!@/previews/button/button-secondary";
+import buttonGhostPreview from "!!raw-loader!@/previews/button/button-ghost";
+import buttonLinkPreview from "!!raw-loader!@/previews/button/button-link";
+import buttonIconPreview from "!!raw-loader!@/previews/button/button-icon";
+import buttonWithIconPreview from "!!raw-loader!@/previews/button/button-with-icon";
+import buttonLoadingPreview from "!!raw-loader!@/previews/button/button-loading";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { ExternalLinks } from "@/components/external-links";
+import { PreviewCard } from "@/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { ButtonPreview } from "@/previews/button/button-primary";
+import { ButtonDestructivePreview } from "@/previews/button/button-destructive";
+import { ButtonOutlinePreview } from "@/previews/button/button-outline";
+import { ButtonSecondaryPreview } from "@/previews/button/button-secondary";
+import { ButtonGhostPreview } from "@/previews/button/button-ghost";
+import { ButtonLinkPreview } from "@/previews/button/button-link";
+import { ButtonIconPreview } from "@/previews/button/button-icon";
+import { ButtonWithIconPreview } from "@/previews/button/button-with-icon";
+import { ButtonLoadingPreview } from "@/previews/button/button-loading";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-primary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "button"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        #### Install the following dependencies:
+
+        ```
+        npx expo install @rn-primitives/types @rn-primitives/slot
+        ```
+
+      </Step>
+      <Step>
+ 
+        #### Copy and paste the following code into your project.
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/button.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/button.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+    </Steps>
+
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+
+```
+
+```tsx
+<Button>
+  <Text>Button</Text>
+</Button>
+```
+
+#### Link
+
+You can use the `buttonVariants` and `buttonTextVariants` helpers to create a link that looks like a button.
+
+```tsx
+import { buttonVariants, buttonTextVariants } from "~/components/ui/button"
+```
+
+```tsx
+<Link className={buttonVariants({ variant: 'outline' })}>
+  <Text className={buttonTextVariants({ variant: 'outline' })}>Click here</Text>
+</Link>
+```
+
+Alternatively, you can set the `asChild` parameter and nest the link component.
+
+```tsx
+<Button asChild>
+  <Link href="/login">
+    <Text>Login</Text>
+  </Link>
+</Button>
+```
+
+### Examples
+
+#### Primary
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-primary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Secondary
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonSecondaryPreview} webPreview={<ButtonSecondaryPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-secondary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Destructive
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonDestructivePreview} webPreview={<ButtonDestructivePreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-destructive.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Outline
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonOutlinePreview} webPreview={<ButtonOutlinePreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-outline.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Ghost
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonGhostPreview} webPreview={<ButtonGhostPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-ghost.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Link
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonLinkPreview} webPreview={<ButtonLinkPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-link.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Icon
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonIconPreview} webPreview={<ButtonIconPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-icon.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### With Icon
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonWithIconPreview} webPreview={<ButtonWithIconPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-with-icon.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>
+
+<div className="h-5"/>
+
+#### Loading
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={buttonLoadingPreview} webPreview={<ButtonLoadingPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/button/button-loading.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+
+  </SectionTabsContent>
+</SectionTabs>

@@ -29,7 +29,7 @@
       ],
       "~/lib/icons/*": [
         "./components/reusables"
-      ],
+      ]
     },
     "plugins": [
       {
