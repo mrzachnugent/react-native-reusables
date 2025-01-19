@@ -59,7 +59,7 @@ const AccordionItem = React.forwardRef<
         innerContentRef,
         contentHeight,
         open,
-        progress,
+        progress: progress as SharedValue<number>,
         nativeID,
       }}
     >
