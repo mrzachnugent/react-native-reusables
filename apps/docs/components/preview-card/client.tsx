@@ -37,15 +37,22 @@ export function PreviewCardClient({
   platformCookie,
 }: PreviewCardClientProps) {
   const [platform, setPlatform] = React.useState<Platform>(platformCookie ?? 'web');
+
+  function onValueChange(value: Platform) {
+    setPlatform(value);
+    setCookie('platform', value);
+    const event = new CustomEvent('cookieChange', { detail: { name: 'platform', value } });
+    window.dispatchEvent(event);
+  }
+
   return (
     <div className='group/copy relative flex flex-col min-h-96 border rounded-md bg-card p-4'>
       <div className='flex items-center justify-between'>
         <PlatformSwitcher
-          onValueChange={(value: Platform) => {
-            setPlatform(value);
-            setCookie('platform', value);
-          }}
+          onValueChange={onValueChange}
           defaultValue={platformCookie}
+          setPlatform={setPlatform}
+          value={platform}
         />
         <CopyButton className='group-hover/copy:opacity-100' content={copyContent} />
       </div>
@@ -56,20 +63,34 @@ export function PreviewCardClient({
   );
 }
 
-function PlatformSwitcher({ defaultValue = 'web', ...props }: SelectProps) {
+function PlatformSwitcher({
+  setPlatform,
+  ...props
+}: SelectProps & { setPlatform: (value: Platform) => void }) {
   const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
     setIsClient(true);
+    function handleCookieChange(ev: Event) {
+      const detail = (ev as Event & { detail: { name: string; value: Platform } }).detail;
+      if (detail.name === 'platform') {
+        setPlatform(detail.value);
+      }
+    }
+
+    window.addEventListener('cookieChange', handleCookieChange);
+    return () => {
+      window.removeEventListener('cookieChange', handleCookieChange);
+    };
   }, []);
 
   return (
-    <Select defaultValue={defaultValue} {...props}>
+    <Select {...props}>
       <SelectTrigger className='h-7 w-fit gap-1 text-xs pl-2.5 pr-1.5 [&_svg]:h-4 [&_svg]:w-4'>
         <span className='text-muted-foreground flex-1 pr-1'>Platform:</span>
         {!isClient ? (
           <span className='opacity-50'>
-            {PLATFORMS.find((platform) => platform.name === defaultValue)?.label}
+            {PLATFORMS.find((platform) => platform.name === props.value)?.label}
           </span>
         ) : (
           <SelectValue placeholder='Select platform' />
