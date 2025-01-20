@@ -1,0 +1,143 @@
+---
+title: Card
+description: Displays a card with header, content, and footer.
+---
+
+import cardPreview from "!!raw-loader!@/previews/card/card-default";
+import cardExample from "!!raw-loader!@/previews/card/card-example";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { ExternalLinks } from "@/components/external-links";
+import { PreviewCard } from "@/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { CardPreview } from "@/previews/card/card-default";
+import { CardExample } from "@/previews/card/card-example";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={cardPreview} webPreview={<CardPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/card/card-default.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "card"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        #### Install the following dependencies:
+
+        ```
+        npx expo install @rn-primitives/types
+        ```
+
+      </Step>
+      <Step>
+ 
+        #### Copy and paste the following code into your project.
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/card.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/card.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+    </Steps>
+
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '~/components/ui/card';
+import { Text } from '~/components/ui/text';
+
+```
+
+```tsx
+<Card className='w-full max-w-sm'>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card Description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Card Content</Text>
+  </CardContent>
+  <CardFooter>
+    <Text>Card Footer</Text>
+  </CardFooter>
+</Card>
+```
+
+### Example
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={cardExample} webPreview={<CardExample />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/card/card-example.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
