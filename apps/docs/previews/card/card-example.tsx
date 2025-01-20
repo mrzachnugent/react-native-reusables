@@ -44,6 +44,7 @@ export function CardExample() {
               Send notifications to device.
             </Text>
           </View>
+          {/* TODO */}
           {/* @ts-expect-error requires onCheckedChange prop */}
           <Switch disabled checked={false} />
         </View>
