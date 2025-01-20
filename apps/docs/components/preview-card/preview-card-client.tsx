@@ -46,7 +46,7 @@ export function PreviewCardClient({
   }
 
   return (
-    <div className='group/copy relative flex flex-col min-h-96 border rounded-md bg-card p-4'>
+    <div className='group/copy relative flex flex-col min-h-96 border rounded-md bg-card p-4 not-prose'>
       <div className='flex items-center justify-between'>
         <PlatformSwitcher
           onValueChange={onValueChange}
@@ -56,7 +56,7 @@ export function PreviewCardClient({
         />
         <CopyButton className='group-hover/copy:opacity-100' content={copyContent} />
       </div>
-      <div className='flex items-center justify-center p-6 flex-1'>
+      <div className='flex flex-col items-center justify-center p-6 flex-1'>
         {platform === 'android' ? androidPreview : platform === 'ios' ? iosPreview : webPreview}
       </div>
     </div>
