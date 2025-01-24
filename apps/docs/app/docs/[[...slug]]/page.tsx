@@ -34,7 +34,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
               </CodeBlock>
             ),
             h3: ({ className, ...props }) => (
-              <h3 className={cn(className, 'mt-8 mb-6')} {...props} />
+              <h3 className={cn(className, 'mt-10 mb-6')} {...props} />
             ),
           }}
         />
