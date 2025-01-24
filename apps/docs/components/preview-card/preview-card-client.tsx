@@ -57,7 +57,11 @@ export function PreviewCardClient({
         <CopyButton className='group-hover/copy:opacity-100' content={copyContent} />
       </div>
       <div className='flex flex-col items-center justify-center p-6 flex-1'>
-        {platform === 'android' ? androidPreview : platform === 'ios' ? iosPreview : webPreview}
+        {platform === 'android'
+          ? androidPreview ?? <span className='text-sm'>Coming soon...</span>
+          : platform === 'ios'
+          ? iosPreview ?? <span className='text-sm'>Coming soon...</span>
+          : webPreview}
       </div>
     </div>
   );
