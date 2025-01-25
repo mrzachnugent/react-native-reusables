@@ -1,22 +1,22 @@
 ---
-title: Context Menu
-description: Displays a menu to the user — such as a set of actions or functions — triggered by a button.
+title: Dialog
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
 ---
 
-import contextMenuPreview from "!!raw-loader!@/previews/context-menu/context-menu-web";
+import dialogPreview from "!!raw-loader!@/previews/dialog/dialog-native";
 import { CommandTabs } from "@/components/command-tabs";
 import { CopyButton } from "@/components/copy-button";
 import { ExternalLinks } from "@/components/external-links";
 import { PortalInfoAlert } from '@/components/portal-info-alert';
 import { PreviewCard } from "@/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { ContextMenuPreview } from "@/previews/context-menu/context-menu-web";
+import { DialogPreview } from "@/previews/dialog/dialog-web";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
   links={[
-    { title: 'Docs', url: 'https://rnprimitives.com/context-menu/' },
-    { title: 'API Reference', url: 'https://rnprimitives.com/context-menu/#props' },
+    { title: 'Docs', url: 'https://rnprimitives.com/dialog/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/dialog/#props' },
   ]}
 />
 
@@ -28,13 +28,13 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={contextMenuPreview} webPreview={<ContextMenuPreview />}/>
+    <PreviewCard copyContent={dialogPreview} webPreview={<DialogPreview />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
 
     ```json doc-gen:file
     {
-      "file": "./previews/context-menu/context-menu-native.tsx",
+      "file": "./previews/dialog/dialog-native.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -52,7 +52,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="cli">
-     <CommandTabs args={["add", "context-menu"]}/>
+     <CommandTabs args={["add", "dialog"]}/>
   </SectionTabsContent>
   <SectionTabsContent value="manual">
     <Steps> 
@@ -61,7 +61,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         #### Install the following dependency:
 
         ```
-        npx expo install @rn-primitives/context-menu
+        npx expo install @rn-primitives/dialog
         ```
 
       </Step>
@@ -69,23 +69,12 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
  
         #### Copy and paste the following code into your project.
 
-
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "file": "./node_modules/@rnr/reusables/src/components/ui/dialog.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/text.tsx\""
-          }
-        }
-        ```
-
-        ```json doc-gen:file
-        {
-          "file": "./node_modules/@rnr/reusables/src/components/ui/context-menu.tsx",
-          "codeblock": {
-            "lang": "tsx",
-            "meta": "title=\"~/components/ui/context-menu.tsx\""
+            "meta": "title=\"~/components/ui/dialog.tsx\""
           }
         }
         ```
@@ -102,33 +91,28 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ```tsx
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from '~/components/ui/context-menu';
-import { Text } from '~/components/ui/text';
-
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 ```
 
 ```tsx
-<ContextMenu>
-  <ContextMenuTrigger>
-    <Text>Right click</Text>
-  </ContextMenuTrigger>
-  <ContextMenuContent>
-    <ContextMenuItem>
-      <Text>Profile</Text>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Text>Billing</Text>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Text>Team</Text>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Text>Subscription</Text>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>
+<Dialog>
+  <DialogTrigger>
+    <Text>Open</Text>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you absolutely sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone. This will permanently delete your account and remove your data
+        from our servers.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
 ```
