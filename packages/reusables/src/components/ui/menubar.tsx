@@ -71,10 +71,7 @@ function MenubarSubTrigger({
   const Icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
     <TextClassContext.Provider
-      value={cn(
-        'select-none text-sm native:text-lg text-primary',
-        open && 'native:text-accent-foreground'
-      )}
+      value={cn('select-none text-sm text-foreground', open && 'native:text-accent-foreground')}
     >
       <MenubarPrimitive.SubTrigger
         className={cn(
