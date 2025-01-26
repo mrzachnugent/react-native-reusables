@@ -52,5 +52,6 @@ export { Table } from './Table';
 export { Terminal } from './Terminal';
 export { Underline } from './Underline';
 export { UserPlus } from './UserPlus';
+export { User } from './User';
 export { Users } from './Users';
 export { X } from './X';

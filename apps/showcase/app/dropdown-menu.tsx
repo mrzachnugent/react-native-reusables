@@ -25,6 +25,7 @@ import { Mail } from '~/lib/icons/Mail';
 import { MessageSquare } from '~/lib/icons/MessageSquare';
 import { Plus } from '~/lib/icons/Plus';
 import { PlusCircle } from '~/lib/icons/PlusCircle';
+import { User } from '~/lib/icons/User';
 import { UserPlus } from '~/lib/icons/UserPlus';
 import { Users } from '~/lib/icons/Users';
 
@@ -57,6 +58,10 @@ export default function DropdownMenuScreen() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
+            <DropdownMenuItem>
+              <User className='text-foreground' size={14} />
+              <Text>Profile</Text>
+            </DropdownMenuItem>
             <DropdownMenuItem>
               <Users className='text-foreground' size={14} />
               <Text>Team</Text>
