@@ -1,9 +1,10 @@
 'use client';
 
+import { CopyButton } from '@/components/copy-button';
 import { type SelectProps } from '@radix-ui/react-select';
 import * as React from 'react';
-import { CopyButton } from '@/components/copy-button';
 
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -45,6 +46,10 @@ export function PreviewCardClient({
     window.dispatchEvent(event);
   }
 
+  function selectWebPreview() {
+    onValueChange('web');
+  }
+
   return (
     <div className='group/copy relative flex flex-col min-h-96 border rounded-md bg-card p-4 not-prose'>
       <div className='flex items-center justify-between'>
@@ -58,9 +63,9 @@ export function PreviewCardClient({
       </div>
       <div className='flex flex-col items-center justify-center p-6 flex-1'>
         {platform === 'android'
-          ? androidPreview ?? <span className='text-sm'>Coming soon...</span>
+          ? androidPreview ?? <ComingSoon selectWebPreview={selectWebPreview} />
           : platform === 'ios'
-          ? iosPreview ?? <span className='text-sm'>Coming soon...</span>
+          ? iosPreview ?? <ComingSoon selectWebPreview={selectWebPreview} />
           : webPreview}
       </div>
     </div>
@@ -108,5 +113,28 @@ function PlatformSwitcher({
         ))}
       </SelectContent>
     </Select>
+  );
+}
+
+function ComingSoon({ selectWebPreview }: { selectWebPreview: () => void }) {
+  return (
+    <div className='p-4 max-w-sm text-center space-y-1'>
+      <div className='flex justify-center'>
+        <p className='text-lg'>Coming soon</p>
+        <span className='text-[0.5rem] pt-1'>TM</span>
+      </div>
+      <p className='text-sm text-fd-muted-foreground pb-4'>
+        We&apos;re working on this preview. In the meantime, check out the web preview.
+      </p>
+
+      <Button
+        variant='secondary'
+        size='sm'
+        className='border border-border/50 text-xs'
+        onClick={selectWebPreview}
+      >
+        View Web Preview
+      </Button>
+    </div>
   );
 }
