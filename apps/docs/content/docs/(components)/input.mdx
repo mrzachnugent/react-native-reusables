@@ -1,23 +1,16 @@
 ---
-title: Checkbox
-description: A control that allows the user to toggle between checked and not checked.
+title: Input
+description: Displays a form input field or a component that looks like an input field.
 ---
 
-import checkboxPreview from "!!raw-loader!@/previews/avatar";
+import inputPreview from "!!raw-loader!@/previews/input";
 import { CommandTabs } from "@/components/command-tabs";
 import { CopyButton } from "@/components/copy-button";
 import { ExternalLinks } from "@/components/external-links";
 import { PreviewCard } from "@/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { CheckboxPreview } from "@/previews/checkbox/checkbox-default";
+import { InputPreview } from "@/previews/input";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
-
-<ExternalLinks
-  links={[
-    { title: 'Docs', url: 'https://rnprimitives.com/checkbox/' },
-    { title: 'API Reference', url: 'https://rnprimitives.com/checkbox/#props' },
-  ]}
-/>
 
 <div className="h-5"/>
 
@@ -27,13 +20,20 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={checkboxPreview} webPreview={<CheckboxPreview />}/>
+    <PreviewCard
+      copyContent={inputPreview}
+      webPreview={
+        <div className='w-full max-w-80'>
+          <InputPreview />
+        </div>
+      }
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
 
     ```json doc-gen:file
     {
-      "file": "./previews/checkbox/checkbox-default.tsx",
+      "file": "./previews/input.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -51,16 +51,16 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="cli">
-     <CommandTabs args={["add", "checkbox"]}/>
+    <CommandTabs args={["add", "input"]}/>
   </SectionTabsContent>
   <SectionTabsContent value="manual">
-    <Steps> 
+    <Steps>
       <Step>
  
         #### Install the following dependency:
 
         ```
-        npx expo install @rn-primitives/checkbox
+        npx expo install @rn-primitives/input
         ```
 
       </Step>
@@ -70,29 +70,32 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/reusables/src/components/ui/checkbox.tsx",
+          "file": "./node_modules/@rnr/reusables/src/components/ui/input.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/checkbox.tsx\""
+            "meta": "title=\"~/components/ui/input.tsx\""
           }
         }
         ```
  
       </Step>
-    </Steps>
+      <Step>
 
+        #### Update the import paths to match your project setup.
+
+      </Step>
+    </Steps>
   </SectionTabsContent>
 </SectionTabs>
 
 ### Usage
 
 ```tsx
-import { Checkbox } from "@/components/ui/checkbox"
-
+import { Input } from "@/components/ui/input"
 ```
 
 ```tsx
-<Checkbox />
+<Input />
 ```
 
 {/* TODO(examples) */}
