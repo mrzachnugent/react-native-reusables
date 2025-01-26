@@ -1,0 +1,141 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+---
+
+import menubarPreview from "!!raw-loader!@/previews/menubar/menubar-web";
+import { CommandTabs } from "@/components/command-tabs";
+import { CopyButton } from "@/components/copy-button";
+import { ExternalLinks } from "@/components/external-links";
+import { PortalInfoAlert } from '@/components/portal-info-alert';
+import { PreviewCard } from "@/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
+import { MenubarPreview } from "@/previews/menubar/menubar-web";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<ExternalLinks
+  links={[
+    { title: 'Docs', url: 'https://rnprimitives.com/menubar/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/menubar/#props' },
+  ]}
+/>
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={menubarPreview} webPreview={<MenubarPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./previews/menubar/menubar-native.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "menubar"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        #### Install the following dependency:
+
+        ```
+        npx expo install @rn-primitives/menubar
+        ```
+
+      </Step>
+      <Step>
+ 
+        #### Copy and paste the following code into your project.
+
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/menubar.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"~/components/ui/menubar.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+    </Steps>
+
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+<PortalInfoAlert />
+
+```tsx
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "~/components/ui/menubar"
+import { Text } from '~/components/ui/text';
+
+```
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <Text>New Tab</Text> <MenubarShortcut>⌘T</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>New Window</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Share</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Print</Text>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
