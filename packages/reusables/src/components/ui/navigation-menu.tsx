@@ -11,6 +11,7 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { TextClassContext } from './text';
 import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { cn } from '../../lib/utils';
 
@@ -66,13 +67,18 @@ function NavigationMenuTrigger({
   const { value } = NavigationMenuPrimitive.useRootContext();
   const { value: itemValue } = NavigationMenuPrimitive.useItemContext();
 
-  const progress = useDerivedValue(() =>
-    value === itemValue ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 })
+  const progress = useDerivedValue(
+    () =>
+      value === itemValue ? withTiming(1, { duration: 250 }) : withTiming(0, { duration: 200 }),
+    [value === itemValue]
   );
-  const chevronStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${progress.value * 180}deg` }],
-    opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
-  }));
+  const chevronStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ rotate: `${progress.value * 180}deg` }],
+      opacity: interpolate(progress.value, [0, 1], [1, 0.8], Extrapolation.CLAMP),
+    }),
+    [progress]
+  );
 
   return (
     <NavigationMenuPrimitive.Trigger

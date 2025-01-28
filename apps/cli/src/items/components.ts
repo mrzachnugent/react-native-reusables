@@ -256,7 +256,7 @@ export const COMPONENTS = [
   },
   {
     name: 'navigation-menu',
-    dependencies: [],
+    dependencies: ['text'],
     icons: ['ChevronDown'],
     npmPackages: ['@rn-primitives/navigation-menu'],
     paths: [
