@@ -42,7 +42,7 @@ export const init = new Command()
       const { projectPath } = await prompts({
         type: 'text',
         name: 'projectPath',
-        message: `What is the name of your project? (Include the path)`,
+        message: `Enter the project name or relative path (e.g., 'my-app' or './apps/my-app'):`,
         initial: './starter-base',
       });
 
@@ -89,11 +89,11 @@ export const init = new Command()
       ]);
 
       if (packageManager !== 'none') {
-        spinner.start('Installing dependencies...');
+        spinner.start(`Installing dependencies using ${packageManager}...`);
         await execa(packageManager, ['install'], {
           cwd: fullProjectPath,
         });
-        spinner.text = 'Verifying and updating any invalid package versions if needed...';
+        spinner.text = 'Running expo doctor to fix package version conflicts...';
         await execa('npx', ['expo', 'install', '--fix'], {
           cwd: fullProjectPath,
         });
@@ -110,9 +110,9 @@ export const init = new Command()
         spinner.start('Initializing Git repository...');
         try {
           execSync('git init', { stdio: 'inherit', cwd: fullProjectPath });
-          console.log('Git repository initialized successfully.');
+          spinner.succeed('Git repository initialized successfully.');
         } catch (error) {
-          console.error('Failed to initialize Git repository:', error);
+          logger.error('Failed to initialize Git repository:', error);
         }
       }
 
@@ -132,6 +132,9 @@ export const init = new Command()
         console.log('Install the dependencies manually using your package manager of choice.');
         console.log('Then run the dev script.');
       }
+      console.log('\nAdditional resources:');
+      console.log('- Documentation: https://rnr-docs.vercel.app');
+      console.log('- Report issues: https://github.com/mrzachnugent/react-native-reusables/issues');
       process.exit(0);
     } catch (error) {
       handleError(error);
