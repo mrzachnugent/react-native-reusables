@@ -16,9 +16,7 @@ https://github.com/mrzachnugent/react-native-reusables/assets/63797719/ae7e074f-
 
 **Init**
 
-Quickly create a new project using the React Native Reusables CLI.
-
-> If a `package.json` is detected, the CLI will install all necessary dependencies and automatically configure your project for you.
+Quickly create a **new project** using the React Native Reusables CLI.
 
 ```bash
 npx @react-native-reusables/cli@latest init
