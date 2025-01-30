@@ -59,7 +59,7 @@ export const init = new Command()
         ],
       });
 
-      const projectName: string = projectPath.split('/').pop();
+      const projectName = path.basename(projectPath);
 
       const spinner = ora(`Initializing ${projectName}...`).start();
 
