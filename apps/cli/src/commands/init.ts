@@ -43,7 +43,7 @@ export const init = new Command()
         type: 'text',
         name: 'projectPath',
         message: `Enter the project name or relative path (e.g., 'my-app' or './apps/my-app'):`,
-        initial: './starter-base',
+        initial: './my-app',
       });
 
       const { packageManager } = await prompts({
@@ -89,11 +89,13 @@ export const init = new Command()
       ]);
 
       if (packageManager !== 'none') {
-        spinner.start(`Installing dependencies using ${packageManager}...`);
+        spinner.start(
+          `Installing dependencies using ${packageManager} (this may take a few minutes)...`
+        );
         await execa(packageManager, ['install'], {
           cwd: fullProjectPath,
         });
-        spinner.text = 'Running expo doctor to fix package version conflicts...';
+        spinner.text = 'Running expo doctor to ensure package compatibility...';
         await execa('npx', ['expo', 'install', '--fix'], {
           cwd: fullProjectPath,
         });
@@ -110,6 +112,13 @@ export const init = new Command()
         spinner.start('Initializing Git repository...');
         try {
           execSync('git init', { stdio: 'inherit', cwd: fullProjectPath });
+
+          execSync('git add -A', { stdio: 'inherit', cwd: fullProjectPath });
+          execSync('git commit -m "initialize project with @react-native-reusables/cli"', {
+            stdio: 'inherit',
+            cwd: fullProjectPath,
+          });
+
           spinner.succeed('Git repository initialized successfully.');
         } catch (error) {
           logger.error('Failed to initialize Git repository:', error);
