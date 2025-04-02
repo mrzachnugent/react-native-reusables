@@ -24,27 +24,27 @@ import { Aside, Code, Steps } from '@astrojs/starlight/components';
     Add the `iconWithClassName` function in the `~/lib/icons/iconWithClassName.ts` file.
 
     ```tsx
-    import type { LucideIcon } from 'lucide-react-native';
+    import type { LucideIcon, LucideProps } from 'lucide-react-native';
     import { cssInterop } from 'nativewind';
+    import { FC } from 'react';
+    import { IconProps } from './Icon';
 
-    export function iconWithClassName(icon: LucideIcon) {
-    cssInterop(icon, {
-        className: {
-        target: 'style',
-        nativeStyleToProp: {
-            color: true,
-            opacity: true,
-        },
-        },
-    });
+    export function iconWithClassName(icon: LucideIcon | FC<IconProps & LucideProps>) {
+        cssInterop(icon, {
+            className: {
+                target: 'style',
+                nativeStyleToProp: {
+                    color: true,
+                    opacity: true,
+                },
+            },
+        });
     }
     ```
 
     <Steps>
         3. Create a file for each Icon component
     </Steps>
-
-
 
 ## Create Icon Components
 
@@ -57,7 +57,7 @@ import { Aside, Code, Steps } from '@astrojs/starlight/components';
 
 ### Create a file for each icon in `~/lib/icons/`
 
-    Wrap your icon components with `iconWithClassName` to add a class name to the icon. 
+    Wrap your icon components with `iconWithClassName` to add a class name to the icon.
 
     **First**, create a new file in the `~/lib/icons/` directory with the name of the [LucideIcon](https://lucide.dev/icons/).
 
@@ -95,3 +95,24 @@ import { Aside, Code, Steps } from '@astrojs/starlight/components';
     iconWithClassName(MoonStar);
     export { MoonStar };`} />
 
+    **Dynamic Icon**
+
+    <Code title="~/lib/icons/Icon.tsx" lang="tsx" code={`
+    import { icons, LucideProps } from "lucide-react-native";
+
+    import { FC } from "react";
+    import { iconWithClassName } from "./iconWithClassName";
+
+    export interface IconProps {
+        name: keyof typeof icons;
+    }
+
+    const Icon: FC<IconProps & LucideProps> = ({ name,  ...stuff }) => {
+        const LucideIcon = icons[name];
+
+        return <LucideIcon {...stuff} />;
+    };
+
+    iconWithClassName(Icon);
+
+    export default Icon;`} />

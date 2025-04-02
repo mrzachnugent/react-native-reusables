@@ -7,7 +7,15 @@ description: NativeWind Light and Dark Mode
 {/* prettier-ignore-end */}
 
 import Code from '@/components/Code.astro';
-import { Aside, Card, Code as StarlightCode, TabItem, Tabs, FileTree, Steps } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Card,
+  Code as StarlightCode,
+  TabItem,
+  Tabs,
+  FileTree,
+  Steps,
+} from '@astrojs/starlight/components';
 import importedTwUniversalCondig from '@/code-samples/tw-universal-config.js?raw';
 import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
 
@@ -91,6 +99,7 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
           - ToggleTheme.tsx
         - lib
           - icons
+            - DynamicIcon.tsx
             - iconWithClassName.ts
             - Info.tsx
             - MoonStar.tsx
@@ -200,7 +209,7 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
       6. Add the following css variables to `~/global.css` file.
     </Steps>
 
-    <Code lang="css" 
+    <Code lang="css"
     title="~/global.css"
     code={`@tailwind base;
     @tailwind components;
