@@ -15,6 +15,7 @@ import { Text } from '~/components/ui/text';
 
 export default function SelectScreen() {
   const triggerRef = React.useRef<React.ElementRef<typeof SelectTrigger>>(null);
+  const triggerScollableRef = React.useRef<React.ElementRef<typeof SelectTrigger>>(null);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -37,7 +38,14 @@ export default function SelectScreen() {
       />
       <View className='flex-1 justify-center items-center'>
         <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
-          <SelectTrigger ref={triggerRef} className='w-[250px]'>
+          <SelectTrigger
+            ref={triggerRef}
+            className='w-[250px]'
+            onTouchStart={() => {
+              // Temporary fix for https://github.com/mrzachnugent/react-native-reusables/issues/343#issuecomment-2779827475
+              triggerRef.current?.open();
+            }}
+          >
             <SelectValue
               className='text-foreground text-sm native:text-lg'
               placeholder='Select a fruit'
@@ -68,7 +76,14 @@ export default function SelectScreen() {
       <View>
         <Text className='text-center text-muted-foreground pb-2'>With scroll view</Text>
         <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
-          <SelectTrigger className='w-[250px]'>
+          <SelectTrigger
+            ref={triggerScollableRef}
+            className='w-[250px]'
+            onTouchStart={() => {
+              // Temporary fix for https://github.com/mrzachnugent/react-native-reusables/issues/343#issuecomment-2779827475
+              triggerScollableRef.current?.open();
+            }}
+          >
             <SelectValue
               className='text-foreground text-sm native:text-lg'
               placeholder='Select a fruit'
