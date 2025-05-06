@@ -1,6 +1,6 @@
 {
   "name": "@react-native-reusables/cli",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Add react-native-reusables to your project.",
   "publishConfig": {
     "access": "public"
