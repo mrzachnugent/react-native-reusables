@@ -138,7 +138,7 @@
     "./lib/utils": "./src/lib/utils.ts"
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "^4.6.0",
+    "@gorhom/bottom-sheet": "^5.1.4",
     "@hookform/resolvers": "^3.3.4",
     "@react-native-community/slider": "4.5.5",
     "@react-navigation/native": "^7.0.0",
@@ -156,7 +156,7 @@
     "@rn-primitives/menubar": "~1.1.0",
     "@rn-primitives/navigation-menu": "~1.1.0",
     "@rn-primitives/popover": "~1.1.0",
-    "@rn-primitives/portal": "~1.1.0",
+    "@rn-primitives/portal": "~1.2.0",
     "@rn-primitives/progress": "~1.1.0",
     "@rn-primitives/radio-group": "~1.1.0",
     "@rn-primitives/select": "~1.1.0",
@@ -172,25 +172,25 @@
     "@rn-primitives/toolbar": "~1.1.0",
     "@rn-primitives/tooltip": "~1.1.0",
     "@rn-primitives/types": "~1.1.0",
-    "@shopify/flash-list": "1.7.1",
+    "@shopify/flash-list": "1.7.6",
     "@tanstack/react-table": "^8.11.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "lucide-react-native": "^0.378.0",
+    "lucide-react-native": "^0.507.0",
     "nativewind": "^4.1.23",
     "react-hook-form": "^7.49.2",
     "react-native-calendars": "^1.1302.0",
-    "react-native-reanimated": "~3.16.1",
-    "react-native-safe-area-context": "4.12.0",
-    "react-native-svg": "15.8.0",
+    "react-native-reanimated": "~3.17.5",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-svg": "15.11.2",
     "react-native-toast-message": "^2.2.0",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
-    "@types/react": "~18.3.12",
-    "react": "18.3.1",
-    "react-native": "0.76.6"
+    "@types/react": "~19.0.14",
+    "react": "19.0.0",
+    "react-native": "0.79.2"
   },
   "peerDependencies": {
     "react": "*",
