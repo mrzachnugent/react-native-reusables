@@ -526,7 +526,7 @@ const FormSelect = React.forwardRef<
             : `${formDescriptionNativeID} ${formMessageNativeID}`
         }
         aria-invalid={!!error}
-        value={value ? { label: value?.label ?? '', value: value?.label ?? '' } : undefined}
+        value={value ? { label: value?.label ?? '', value: value?.value ?? '' } : undefined}
         onValueChange={onChange}
         {...props}
       />
