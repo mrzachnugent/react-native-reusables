@@ -6,7 +6,11 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  adapters: [vercel()],
+  adapters: [
+    vercel({
+      webAnalytics: { enabled: true },
+    }),
+  ],
   build: {
     redirects: false,
   },
