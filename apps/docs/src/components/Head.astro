@@ -1,6 +1,7 @@
 ---
 import type { Props } from '@astrojs/starlight/props'
 import Default from '@astrojs/starlight/components/Head.astro'
+import Analytics from '@vercel/analytics/astro';
 ---
 
 <!-- Render the default <Head/> component. -->
@@ -9,3 +10,5 @@ import Default from '@astrojs/starlight/components/Head.astro'
 <!-- Render the <meta/> tags for the Open Graph images. -->
 <meta property="og:image" content="https://rnr-docs.vercel.app/og.jpeg" />
 <meta name="twitter:image" content="https://rnr-docs.vercel.app/og.jpeg" />
+
+<Analytics />
