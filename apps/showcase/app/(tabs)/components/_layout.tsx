@@ -3,14 +3,10 @@ import type {
   MaterialTopTabNavigationOptions,
 } from '@react-navigation/material-top-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import {
-  useTheme,
-  type ParamListBase,
-  type TabNavigationState,
-} from '@react-navigation/native';
+import { useTheme, type ParamListBase, type TabNavigationState } from '@react-navigation/native';
 import { Stack, withLayoutContext } from 'expo-router';
+import React from 'react';
 import { useWindowDimensions } from 'react-native';
-
 const { Navigator } = createMaterialTopTabNavigator();
 
 const MaterialTopTabs = withLayoutContext<
@@ -24,9 +20,10 @@ export default function MaterialTopTabsLayout() {
   const { colors } = useTheme();
   const { width } = useWindowDimensions();
   return (
-    <>
+    <React.Fragment>
       <Stack.Screen options={{ headerShadowVisible: false }} />
       <MaterialTopTabs
+        id={undefined}
         initialRouteName='index'
         screenOptions={{
           tabBarActiveTintColor: colors.text,
@@ -56,6 +53,6 @@ export default function MaterialTopTabsLayout() {
           }}
         />
       </MaterialTopTabs>
-    </>
+    </React.Fragment>
   );
 }
