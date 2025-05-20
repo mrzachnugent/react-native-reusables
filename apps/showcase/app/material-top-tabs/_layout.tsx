@@ -3,11 +3,7 @@ import type {
   MaterialTopTabNavigationOptions,
 } from '@react-navigation/material-top-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import {
-  useTheme,
-  type ParamListBase,
-  type TabNavigationState,
-} from '@react-navigation/native';
+import { useTheme, type ParamListBase, type TabNavigationState } from '@react-navigation/native';
 import { withLayoutContext } from 'expo-router';
 
 const { Navigator } = createMaterialTopTabNavigator();
@@ -23,6 +19,7 @@ export default function MaterialTopTabsLayout() {
   const { colors } = useTheme();
   return (
     <MaterialTopTabs
+      id={undefined}
       initialRouteName='index'
       screenOptions={{
         tabBarActiveTintColor: colors.text,

@@ -24,7 +24,6 @@ const MIN_COLUMN_WIDTHS = [120, 120, 100, 120];
 
 export default function TableScreen() {
   const { width } = useWindowDimensions();
-  const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
   const insets = useSafeAreaInsets();
 
   const columnWidths = React.useMemo(() => {
@@ -42,7 +41,7 @@ export default function TableScreen() {
           <TableHeader>
             <TableRow>
               <TableHead className='px-0.5' style={{ width: columnWidths[0] }}>
-                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                <Popover>
                   <PopoverTrigger asChild>
                     <Button variant='ghost' size='sm' className='flex-row justify-start gap-3'>
                       <Text className={cn('text-base text-muted-foreground font-medium')}>

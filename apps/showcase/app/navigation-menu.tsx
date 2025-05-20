@@ -1,4 +1,4 @@
-import { TextRef } from '@rn-primitives/types';
+import type { ViewRef } from '@rn-primitives/types';
 import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
@@ -154,8 +154,8 @@ const components: { title: string; href: string; description: string }[] = [
 ];
 
 const ListItem = React.forwardRef<
-  TextRef,
-  React.ComponentPropsWithoutRef<typeof Text> & { title: string; href: string }
+  ViewRef,
+  React.ComponentPropsWithoutRef<typeof View> & { title: string; href: string }
 >(({ className, title, children, ...props }, ref) => {
   return (
     <View role='listitem'>
