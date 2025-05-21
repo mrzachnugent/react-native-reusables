@@ -1,4 +1,3 @@
-import { Link } from 'expo-router';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import {
@@ -46,7 +45,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip
 import { Muted } from '~/components/ui/typography';
 import { CalendarDays } from '~/lib/icons/CalendarDays';
 import { ChevronDown } from '~/lib/icons/ChevronDown';
-import { ChevronRight } from '~/lib/icons/ChevronRight';
 import { Info } from '~/lib/icons/Info';
 import { cn } from '~/lib/utils';
 
@@ -57,7 +55,7 @@ export default function ExampleScreen() {
         <CardHeader>
           <View className='flex-row gap-3'>
             <CardTitle className='pt-1'>Team Members</CardTitle>
-            <Tooltip delayDuration={150}>
+            <Tooltip delayDuration={300}>
               <TooltipTrigger className='web:focus:outline-none'>
                 <Info size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
               </TooltipTrigger>
@@ -105,14 +103,6 @@ export default function ExampleScreen() {
           </View>
         </CardContent>
       </Card>
-      <View className='items-center'>
-        <Link href='/form' asChild>
-          <Button variant='link' className='flex-row'>
-            <Text>Go To Form</Text>
-            <ChevronRight className='text-foreground' size={18} />
-          </Button>
-        </Link>
-      </View>
     </View>
   );
 }
