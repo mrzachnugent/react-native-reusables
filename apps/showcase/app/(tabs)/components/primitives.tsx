@@ -1,11 +1,13 @@
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
+import { Link } from 'expo-router';
 import * as React from 'react';
 import { View } from 'react-native';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
 import { PRIMITIVES } from '~/lib/constants';
+import { ExternalLink } from '~/lib/icons/ExternalLink';
 import { cn } from '~/lib/utils';
 
 export default function PrimitivesScreen() {
@@ -33,18 +35,20 @@ export default function PrimitivesScreen() {
         estimatedItemSize={49}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
-          <Button
-            disabled
-            variant='secondary'
-            size='lg'
-            className={cn(
-              'opacity-100 bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-center',
-              index === 0 && 'rounded-t-lg',
-              index === data.length - 1 && 'border-b rounded-b-lg'
-            )}
-          >
-            <Text className='text-xl'>{toOptions(item)}</Text>
-          </Button>
+          <Link href={`https://rnprimitives.com/${item}`} asChild>
+            <Button
+              variant='secondary'
+              size='lg'
+              className={cn(
+                'bg-secondary/40 px-4 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
+                index === 0 && 'rounded-t-lg',
+                index === data.length - 1 && 'border-b rounded-b-lg'
+              )}
+            >
+              <Text className='text-xl'>@rn-primitives/{item}</Text>
+              <ExternalLink size={16} className='text-foreground/50' />
+            </Button>
+          </Link>
         )}
         ListFooterComponent={<View className='py-4' />}
       />
