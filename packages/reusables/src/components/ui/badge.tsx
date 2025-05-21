@@ -1,7 +1,6 @@
 import * as Slot from '@rn-primitives/slot';
-import type { SlottableViewProps } from '@rn-primitives/types';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { View } from 'react-native';
+import { View, ViewProps } from 'react-native';
 import { cn } from '../../lib/utils';
 import { TextClassContext } from './text';
 
@@ -36,7 +35,9 @@ const badgeTextVariants = cva('text-xs font-semibold ', {
   },
 });
 
-type BadgeProps = SlottableViewProps & VariantProps<typeof badgeVariants>;
+type BadgeProps = ViewProps & {
+  asChild?: boolean;
+} & VariantProps<typeof badgeVariants>;
 
 function Badge({ className, variant, asChild, ...props }: BadgeProps) {
   const Component = asChild ? Slot.View : View;

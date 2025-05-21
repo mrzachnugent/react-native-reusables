@@ -17,8 +17,7 @@ import {
 import { Text } from '~/components/ui/text';
 import { H1, Muted } from '~/components/ui/typography';
 
-const CUSTOM_PORTAL_HOST_NAME = 'modal-example';
-const WindowOverlay = Platform.OS === 'ios' ? FullWindowOverlay : React.Fragment;
+const IOS_PORTAL_HOST_NAME = 'modal-example';
 
 export default function ModalScreen() {
   const insets = useSafeAreaInsets();
@@ -50,7 +49,8 @@ export default function ModalScreen() {
             <SelectContent
               insets={contentInsets}
               className='w-full'
-              portalHost={CUSTOM_PORTAL_HOST_NAME}
+              portalHost={Platform.select({ ios: IOS_PORTAL_HOST_NAME })}
+              sideOffset={Platform.select({ ios: 16 })}
             >
               <SelectGroup>
                 <SelectLabel>Roles</SelectLabel>
@@ -83,9 +83,11 @@ export default function ModalScreen() {
           </View>
         </View>
       </View>
-      <WindowOverlay>
-        <PortalHost name={CUSTOM_PORTAL_HOST_NAME} />
-      </WindowOverlay>
+      {Platform.OS === 'ios' && (
+        <FullWindowOverlay>
+          <PortalHost name={IOS_PORTAL_HOST_NAME} />
+        </FullWindowOverlay>
+      )}
     </>
   );
 }

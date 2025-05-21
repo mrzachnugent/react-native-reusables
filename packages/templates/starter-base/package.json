@@ -19,7 +19,6 @@
     "@rn-primitives/progress": "~1.2.0",
     "@rn-primitives/slot": "~1.2.0",
     "@rn-primitives/tooltip": "~1.2.0",
-    "@rn-primitives/types": "~1.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "expo": "^53.0.9",
@@ -41,8 +40,7 @@
     "react-native-web": "~0.20.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "3.3.5",
-    "tailwindcss-animate": "^1.0.7",
-    "zustand": "^4.4.7"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

@@ -78,7 +78,7 @@ export const COMPONENTS = [
     name: 'badge',
     dependencies: [],
     icons: [],
-    npmPackages: ['@rn-primitives/slot', '@rn-primitives/types'],
+    npmPackages: ['@rn-primitives/slot'],
     paths: [
       {
         from: './node_modules/@rnr/reusables/src/components/ui/badge.tsx',
@@ -93,7 +93,7 @@ export const COMPONENTS = [
     name: 'button',
     dependencies: ['text'],
     icons: [],
-    npmPackages: ['@rn-primitives/types'],
+    npmPackages: [],
     paths: [
       {
         from: './node_modules/@rnr/reusables/src/components/ui/button.tsx',
@@ -108,7 +108,7 @@ export const COMPONENTS = [
     name: 'card',
     dependencies: ['text'],
     icons: [],
-    npmPackages: ['@rn-primitives/types'],
+    npmPackages: [],
     paths: [
       {
         from: './node_modules/@rnr/reusables/src/components/ui/card.tsx',
@@ -408,7 +408,7 @@ export const COMPONENTS = [
     name: 'text',
     dependencies: [],
     icons: [],
-    npmPackages: ['@rn-primitives/slot', '@rn-primitives/types'],
+    npmPackages: ['@rn-primitives/slot'],
     paths: [
       {
         from: './node_modules/@rnr/reusables/src/components/ui/text.tsx',
@@ -468,7 +468,7 @@ export const COMPONENTS = [
     name: 'typography',
     dependencies: [],
     icons: [],
-    npmPackages: ['@rn-primitives/slot', '@rn-primitives/types'],
+    npmPackages: ['@rn-primitives/slot'],
     paths: [
       {
         from: './node_modules/@rnr/reusables/src/components/ui/typography.tsx',

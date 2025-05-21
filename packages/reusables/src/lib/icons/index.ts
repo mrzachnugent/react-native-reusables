@@ -28,6 +28,7 @@ export { Code } from './Code';
 export { Copy } from './Copy';
 export { Database } from './Database';
 export { Ear } from './Ear';
+export { ExternalLink } from './ExternalLink';
 export { Fan } from './Fan';
 export { GalleryHorizontal } from './GalleryHorizontal';
 export { Github } from './Github';

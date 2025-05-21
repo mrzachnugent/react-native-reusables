@@ -10,23 +10,24 @@ import Animated, {
 } from 'react-native-reanimated';
 import { cn } from '~/lib/utils';
 
-const Progress = React.forwardRef<
-  ProgressPrimitive.RootRef,
-  ProgressPrimitive.RootProps & {
-    indicatorClassName?: string;
-  }
->(({ className, value, indicatorClassName, ...props }, ref) => {
+function Progress({
+  className,
+  value,
+  indicatorClassName,
+  ...props
+}: ProgressPrimitive.RootProps & {
+  ref?: React.RefObject<ProgressPrimitive.RootRef>;
+  indicatorClassName?: string;
+}) {
   return (
     <ProgressPrimitive.Root
-      ref={ref}
       className={cn('relative h-4 w-full overflow-hidden rounded-full bg-secondary', className)}
       {...props}
     >
       <Indicator value={value} className={indicatorClassName} />
     </ProgressPrimitive.Root>
   );
-});
-Progress.displayName = ProgressPrimitive.Root.displayName;
+}
 
 export { Progress };
 
@@ -48,7 +49,7 @@ function Indicator({ value, className }: { value: number | undefined | null; cla
         className={cn('h-full w-full flex-1 bg-primary web:transition-all', className)}
         style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}
       >
-        <ProgressPrimitive.Indicator className={cn('h-full w-full ', className)} />
+        <ProgressPrimitive.Indicator className={cn('h-full w-full', className)} />
       </View>
     );
   }

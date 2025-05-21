@@ -8,20 +8,27 @@ import { cn } from '../../lib/utils';
 
 const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants> | null>(null);
 
-const ToggleGroup = React.forwardRef<
-  ToggleGroupPrimitive.RootRef,
-  ToggleGroupPrimitive.RootProps & VariantProps<typeof toggleVariants>
->(({ className, variant, size, children, ...props }, ref) => (
-  <ToggleGroupPrimitive.Root
-    ref={ref}
-    className={cn('flex flex-row items-center justify-center gap-1', className)}
-    {...props}
-  >
-    <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
-  </ToggleGroupPrimitive.Root>
-));
-
-ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
+function ToggleGroup({
+  className,
+  variant,
+  size,
+  children,
+  ...props
+}: ToggleGroupPrimitive.RootProps &
+  VariantProps<typeof toggleVariants> & {
+    ref?: React.RefObject<ToggleGroupPrimitive.RootRef>;
+  }) {
+  return (
+    <ToggleGroupPrimitive.Root
+      className={cn('flex flex-row items-center justify-center gap-1', className)}
+      {...props}
+    >
+      <ToggleGroupContext.Provider value={{ variant, size }}>
+        {children}
+      </ToggleGroupContext.Provider>
+    </ToggleGroupPrimitive.Root>
+  );
+}
 
 function useToggleGroupContext() {
   const context = React.useContext(ToggleGroupContext);
@@ -33,10 +40,16 @@ function useToggleGroupContext() {
   return context;
 }
 
-const ToggleGroupItem = React.forwardRef<
-  ToggleGroupPrimitive.ItemRef,
-  ToggleGroupPrimitive.ItemProps & VariantProps<typeof toggleVariants>
->(({ className, children, variant, size, ...props }, ref) => {
+function ToggleGroupItem({
+  className,
+  children,
+  variant,
+  size,
+  ...props
+}: ToggleGroupPrimitive.ItemProps &
+  VariantProps<typeof toggleVariants> & {
+    ref?: React.RefObject<ToggleGroupPrimitive.ItemRef>;
+  }) {
   const context = useToggleGroupContext();
   const { value } = ToggleGroupPrimitive.useRootContext();
 
@@ -50,7 +63,6 @@ const ToggleGroupItem = React.forwardRef<
       )}
     >
       <ToggleGroupPrimitive.Item
-        ref={ref}
         className={cn(
           toggleVariants({
             variant: context.variant || variant,
@@ -66,9 +78,7 @@ const ToggleGroupItem = React.forwardRef<
       </ToggleGroupPrimitive.Item>
     </TextClassContext.Provider>
   );
-});
-
-ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;
+}
 
 function ToggleGroupIcon({
   className,
