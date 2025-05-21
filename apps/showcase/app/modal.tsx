@@ -51,6 +51,7 @@ export default function ModalScreen() {
               insets={contentInsets}
               className='w-full'
               portalHost={CUSTOM_PORTAL_HOST_NAME}
+              sideOffset={Platform.select({ ios: 16 })}
             >
               <SelectGroup>
                 <SelectLabel>Roles</SelectLabel>
