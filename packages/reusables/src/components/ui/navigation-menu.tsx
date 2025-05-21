@@ -14,35 +14,40 @@ import Animated, {
 import { ChevronDown } from '../../lib/icons/ChevronDown';
 import { cn } from '../../lib/utils';
 
-const NavigationMenu = React.forwardRef<
-  NavigationMenuPrimitive.RootRef,
-  NavigationMenuPrimitive.RootProps
->(({ className, children, ...props }, ref) => (
-  <NavigationMenuPrimitive.Root
-    ref={ref}
-    className={cn('relative z-10 flex flex-row max-w-max items-center justify-center', className)}
-    {...props}
-  >
-    {children}
-    {Platform.OS === 'web' && <NavigationMenuViewport />}
-  </NavigationMenuPrimitive.Root>
-));
-NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;
+function NavigationMenu({
+  className,
+  children,
+  ...props
+}: NavigationMenuPrimitive.RootProps & {
+  ref?: React.RefObject<NavigationMenuPrimitive.RootRef>;
+}) {
+  return (
+    <NavigationMenuPrimitive.Root
+      className={cn('relative z-10 flex flex-row max-w-max items-center justify-center', className)}
+      {...props}
+    >
+      {children}
+      {Platform.OS === 'web' && <NavigationMenuViewport />}
+    </NavigationMenuPrimitive.Root>
+  );
+}
 
-const NavigationMenuList = React.forwardRef<
-  NavigationMenuPrimitive.ListRef,
-  NavigationMenuPrimitive.ListProps
->(({ className, ...props }, ref) => (
-  <NavigationMenuPrimitive.List
-    ref={ref}
-    className={cn(
-      'web:group flex flex-1 flex-row web:list-none items-center justify-center gap-1',
-      className
-    )}
-    {...props}
-  />
-));
-NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
+function NavigationMenuList({
+  className,
+  ...props
+}: NavigationMenuPrimitive.ListProps & {
+  ref?: React.RefObject<NavigationMenuPrimitive.ListRef>;
+}) {
+  return (
+    <NavigationMenuPrimitive.List
+      className={cn(
+        'web:group flex flex-1 flex-row web:list-none items-center justify-center gap-1',
+        className
+      )}
+      {...props}
+    />
+  );
+}
 
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
@@ -50,10 +55,14 @@ const navigationMenuTriggerStyle = cva(
   'web:group web:inline-flex flex-row h-10 native:h-12 native:px-3 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium web:transition-colors web:hover:bg-accent active:bg-accent web:hover:text-accent-foreground web:focus:bg-accent web:focus:text-accent-foreground web:focus:outline-none web:disabled:pointer-events-none disabled:opacity-50 web:data-[active]:bg-accent/50 web:data-[state=open]:bg-accent/50'
 );
 
-const NavigationMenuTrigger = React.forwardRef<
-  NavigationMenuPrimitive.TriggerRef,
-  NavigationMenuPrimitive.TriggerProps
->(({ className, children, ...props }, ref) => {
+function NavigationMenuTrigger({
+  className,
+  children,
+  ...props
+}: Omit<NavigationMenuPrimitive.TriggerProps, 'children'> & {
+  children?: React.ReactNode;
+  ref?: React.RefObject<NavigationMenuPrimitive.TriggerRef>;
+}) {
   const { value } = NavigationMenuPrimitive.useRootContext();
   const { value: itemValue } = NavigationMenuPrimitive.useItemContext();
 
@@ -67,7 +76,6 @@ const NavigationMenuTrigger = React.forwardRef<
 
   return (
     <NavigationMenuPrimitive.Trigger
-      ref={ref}
       className={cn(
         navigationMenuTriggerStyle(),
         'web:group gap-1.5',
@@ -76,7 +84,7 @@ const NavigationMenuTrigger = React.forwardRef<
       )}
       {...props}
     >
-      <>{children}</>
+      {children}
       <Animated.View style={chevronStyle}>
         <ChevronDown
           size={12}
@@ -86,21 +94,22 @@ const NavigationMenuTrigger = React.forwardRef<
       </Animated.View>
     </NavigationMenuPrimitive.Trigger>
   );
-});
-NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;
+}
 
-const NavigationMenuContent = React.forwardRef<
-  NavigationMenuPrimitive.ContentRef,
-  NavigationMenuPrimitive.ContentProps & {
-    portalHost?: string;
-  }
->(({ className, children, portalHost, ...props }, ref) => {
+function NavigationMenuContent({
+  className,
+  children,
+  portalHost,
+  ...props
+}: NavigationMenuPrimitive.ContentProps & {
+  portalHost?: string;
+  ref?: React.RefObject<NavigationMenuPrimitive.ContentRef>;
+}) {
   const { value } = NavigationMenuPrimitive.useRootContext();
   const { value: itemValue } = NavigationMenuPrimitive.useItemContext();
   return (
     <NavigationMenuPrimitive.Portal hostName={portalHost}>
       <NavigationMenuPrimitive.Content
-        ref={ref}
         className={cn(
           'w-full native:border native:border-border native:rounded-lg native:shadow-lg native:bg-popover native:text-popover-foreground native:overflow-hidden',
           value === itemValue
@@ -119,15 +128,16 @@ const NavigationMenuContent = React.forwardRef<
       </NavigationMenuPrimitive.Content>
     </NavigationMenuPrimitive.Portal>
   );
-});
-NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName;
+}
 
 const NavigationMenuLink = NavigationMenuPrimitive.Link;
 
-const NavigationMenuViewport = React.forwardRef<
-  NavigationMenuPrimitive.ViewportRef,
-  NavigationMenuPrimitive.ViewportProps
->(({ className, ...props }, ref) => {
+function NavigationMenuViewport({
+  className,
+  ...props
+}: NavigationMenuPrimitive.ViewportProps & {
+  ref?: React.RefObject<NavigationMenuPrimitive.ViewportRef>;
+}) {
   return (
     <View className={cn('absolute left-0 top-full flex justify-center')}>
       <View
@@ -135,20 +145,21 @@ const NavigationMenuViewport = React.forwardRef<
           'web:origin-top-center relative mt-1.5 web:h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-lg web:animate-in web:zoom-in-90',
           className
         )}
-        ref={ref}
         {...props}
       >
         <NavigationMenuPrimitive.Viewport />
       </View>
     </View>
   );
-});
-NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName;
+}
 
-const NavigationMenuIndicator = React.forwardRef<
-  NavigationMenuPrimitive.IndicatorRef,
-  NavigationMenuPrimitive.IndicatorProps
->(({ className, ...props }, ref) => {
+function NavigationMenuIndicator({
+  ref,
+  className,
+  ...props
+}: NavigationMenuPrimitive.IndicatorProps & {
+  ref?: React.RefObject<NavigationMenuPrimitive.IndicatorRef>;
+}) {
   const { value } = NavigationMenuPrimitive.useRootContext();
   const { value: itemValue } = NavigationMenuPrimitive.useItemContext();
 
@@ -165,8 +176,7 @@ const NavigationMenuIndicator = React.forwardRef<
       <View className='relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md shadow-foreground/5' />
     </NavigationMenuPrimitive.Indicator>
   );
-});
-NavigationMenuIndicator.displayName = NavigationMenuPrimitive.Indicator.displayName;
+}
 
 export {
   NavigationMenu,

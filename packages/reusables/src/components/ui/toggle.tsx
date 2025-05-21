@@ -45,31 +45,36 @@ const toggleTextVariants = cva('text-sm native:text-base text-foreground font-me
   },
 });
 
-const Toggle = React.forwardRef<
-  TogglePrimitive.RootRef,
-  TogglePrimitive.RootProps & VariantProps<typeof toggleVariants>
->(({ className, variant, size, ...props }, ref) => (
-  <TextClassContext.Provider
-    value={cn(
-      toggleTextVariants({ variant, size }),
-      props.pressed ? 'text-accent-foreground' : 'web:group-hover:text-muted-foreground',
-      className
-    )}
-  >
-    <TogglePrimitive.Root
-      ref={ref}
-      className={cn(
-        toggleVariants({ variant, size }),
-        props.disabled && 'web:pointer-events-none opacity-50',
-        props.pressed && 'bg-accent',
+function Toggle({
+  className,
+  variant,
+  size,
+  ...props
+}: TogglePrimitive.RootProps &
+  VariantProps<typeof toggleVariants> &
+  VariantProps<typeof toggleVariants> & {
+    ref?: React.RefObject<TogglePrimitive.RootRef>;
+  }) {
+  return (
+    <TextClassContext.Provider
+      value={cn(
+        toggleTextVariants({ variant, size }),
+        props.pressed ? 'text-accent-foreground' : 'web:group-hover:text-muted-foreground',
         className
       )}
-      {...props}
-    />
-  </TextClassContext.Provider>
-));
-
-Toggle.displayName = TogglePrimitive.Root.displayName;
+    >
+      <TogglePrimitive.Root
+        className={cn(
+          toggleVariants({ variant, size }),
+          props.disabled && 'web:pointer-events-none opacity-50',
+          props.pressed && 'bg-accent',
+          className
+        )}
+        {...props}
+      />
+    </TextClassContext.Provider>
+  );
+}
 
 function ToggleIcon({
   className,

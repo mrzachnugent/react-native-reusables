@@ -1,4 +1,3 @@
-import type { ViewRef } from '@rn-primitives/types';
 import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
@@ -153,14 +152,16 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-const ListItem = React.forwardRef<
-  ViewRef,
-  React.ComponentPropsWithoutRef<typeof View> & { title: string; href: string }
->(({ className, title, children, ...props }, ref) => {
+type ListItemProps = Omit<React.ComponentProps<typeof NavigationMenuLink>, 'children'> & {
+  children: React.ReactNode;
+  title: string;
+  href: string;
+};
+
+function ListItem({ className, title, children, ...props }: ListItemProps) {
   return (
     <View role='listitem'>
       <NavigationMenuLink
-        ref={ref}
         className={cn(
           'web:block web:select-none gap-1 rounded-md p-3 leading-none no-underline text-foreground web:outline-none web:transition-colors web:hover:bg-accent active:bg-accent web:hover:text-accent-foreground web:focus:bg-accent web:focus:text-accent-foreground',
           className
@@ -176,5 +177,4 @@ const ListItem = React.forwardRef<
       </NavigationMenuLink>
     </View>
   );
-});
-ListItem.displayName = 'ListItem';
+}
