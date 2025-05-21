@@ -76,7 +76,6 @@ function Button({ ref, className, variant, size, ...props }: ButtonProps) {
     </TextClassContext.Provider>
   );
 }
-Button.displayName = 'Button';
 
 export { Button, buttonTextVariants, buttonVariants };
 export type { ButtonProps };
