@@ -4,7 +4,7 @@
 // The code is licensed under the MIT License.
 // https://github.com/fuma-nama/fumadocs
 
-import { cn } from '@/lib/utils';
+import { cn } from '@docs/lib/utils';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import * as React from 'react';
 import { buttonVariants } from './ui/button';

@@ -1,5 +1,5 @@
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { AlertCircle } from '~/lib/icons/AlertCircle';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertCircle } from '@/lib/icons/AlertCircle';
 
 export function AlertDestructive() {
   return (

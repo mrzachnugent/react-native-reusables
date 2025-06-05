@@ -17,8 +17,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '~/components/ui/menubar';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/menubar';
+import { Text } from '@/components/ui/text';
 
 export default function MenubarScreen() {
   const insets = useSafeAreaInsets();

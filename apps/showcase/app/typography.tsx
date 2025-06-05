@@ -1,5 +1,5 @@
 import { ScrollView, View } from 'react-native';
-import { BlockQuote, H1, H2, H3, Large, Lead, P } from '~/components/ui/typography';
+import { BlockQuote, H1, H2, H3, Large, Lead, P } from '@/components/ui/typography';
 
 export default function TypographyScreen() {
   return (

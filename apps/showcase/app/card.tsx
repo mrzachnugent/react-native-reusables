@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 export default function CardScreen() {
   return (

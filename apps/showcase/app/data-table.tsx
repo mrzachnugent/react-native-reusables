@@ -4,14 +4,14 @@ import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { Button } from '~/components/ui/button';
-import { DataTable } from '~/components/ui/data-table';
-import { Skeleton } from '~/components/ui/skeleton';
-import { TableCell, TableRow } from '~/components/ui/table';
-import { Text } from '~/components/ui/text';
-import { ArrowDown } from '~/lib/icons/ArrowDown';
-import { ArrowUp } from '~/lib/icons/ArrowUp';
-import { Info } from '~/lib/icons/Info';
+import { Button } from '@/components/ui/button';
+import { DataTable } from '@/components/ui/data-table';
+import { Skeleton } from '@/components/ui/skeleton';
+import { TableCell, TableRow } from '@/components/ui/table';
+import { Text } from '@/components/ui/text';
+import { ArrowDown } from '@/lib/icons/ArrowDown';
+import { ArrowUp } from '@/lib/icons/ArrowUp';
+import { Info } from '@/lib/icons/Info';
 
 const { width, height } = Dimensions.get('screen');
 

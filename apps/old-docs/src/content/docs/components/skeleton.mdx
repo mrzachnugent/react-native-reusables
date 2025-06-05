@@ -6,8 +6,8 @@ description: Shows a skeleton component.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/skeleton?raw';
 
@@ -28,9 +28,9 @@ Shows a skeleton component.
     ```
   </TabItem>
   <TabItem label='Manual'>
-    **Copy/paste the following code to `~/components/ui/skeleton.tsx`**
+    **Copy/paste the following code to `@/components/ui/skeleton.tsx`**
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/skeleton.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/skeleton.tsx" />
   </TabItem>
 </Tabs>
 
@@ -38,7 +38,7 @@ Shows a skeleton component.
 ## Usage
 
 ```tsx
-import { Skeleton } from '~/components/ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function Example() {
   return (

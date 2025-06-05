@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@old-docs/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,8 +7,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
+} from '@old-docs/components/ui/dropdown-menu';
+import { cn } from '@old-docs/lib/utils';
 import { ExternalLink, Moon, Sun } from 'lucide-react';
 import * as React from 'react';
 

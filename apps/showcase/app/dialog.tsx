@@ -1,5 +1,5 @@
 import { ScrollView } from 'react-native';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/ui/dialog';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/dialog';
+import { Text } from '@/components/ui/text';
 
 export default function DialogScreen() {
   return (

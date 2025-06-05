@@ -1,4 +1,4 @@
-import { fileGenerator } from '@/lib/file-generator';
+import { fileGenerator } from '@docs/lib/file-generator';
 import { remarkDocGen } from 'fumadocs-docgen';
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 

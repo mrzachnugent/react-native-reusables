@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Button } from '~/components/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
-import { Text } from '~/components/ui/text';
-import { CalendarDays } from '~/lib/icons/CalendarDays';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Text } from '@/components/ui/text';
+import { CalendarDays } from '@/lib/icons/CalendarDays';
 
 export function HoverCardPreview() {
   const insets = useSafeAreaInsets();

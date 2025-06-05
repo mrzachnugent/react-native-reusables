@@ -1,8 +1,8 @@
 import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Calendar as CalendarIcon } from '~/lib/icons/Calendar';
-import { cn } from '~/lib/utils';
+import { Calendar as CalendarIcon } from '@/lib/icons/Calendar';
+import { cn } from '@/lib/utils';
 
 const {
   BottomSheet,

@@ -6,8 +6,8 @@ description: A menu that stays visible on the screen, often seen in desktop apps
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/menubar?raw';
 
@@ -36,9 +36,9 @@ A menu that stays visible on the screen, often seen in desktop apps, offering ea
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/menubar.tsx`:**
+    **Copy/paste the following code to `@/components/ui/menubar.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/menubar.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/menubar.tsx' />
   </TabItem>
 </Tabs>
 
@@ -84,8 +84,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '~/components/ui/menubar';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/menubar';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   const insets = useSafeAreaInsets();

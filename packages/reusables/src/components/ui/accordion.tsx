@@ -1,3 +1,6 @@
+import { TextClassContext } from '@/components/ui/text';
+import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { cn } from '@/lib/utils';
 import * as AccordionPrimitive from '@rn-primitives/accordion';
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
@@ -12,9 +15,6 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { ChevronDown } from '../../lib/icons/ChevronDown';
-import { cn } from '../../lib/utils';
-import { TextClassContext } from './text';
 
 function Accordion({
   children,

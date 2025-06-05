@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FullWindowOverlay } from 'react-native-screens';
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -13,9 +13,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
-import { Text } from '~/components/ui/text';
-import { H1, Muted } from '~/components/ui/typography';
+} from '@/components/ui/select';
+import { Text } from '@/components/ui/text';
+import { H1, Muted } from '@/components/ui/typography';
 
 const IOS_PORTAL_HOST_NAME = 'modal-example';
 

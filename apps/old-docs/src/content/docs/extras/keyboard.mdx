@@ -6,7 +6,7 @@ description: A hook for observing the state of the keyboard
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
+import Code from '@docs/components/Code.astro';
 import { Aside } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/lib/keyboard?raw';
 
@@ -14,17 +14,17 @@ A hook for observing the state of the keyboard
 
 ### Installation
 
-**Copy/paste the following code to `~/lib/keyboard.tsx`**:
+**Copy/paste the following code to `@/lib/keyboard.tsx`**:
 
 
-<Code code={importedCode} lang="tsx" title="~/lib/keyboard.tsx" />
+<Code code={importedCode} lang="tsx" title="@/lib/keyboard.tsx" />
 
 ### Usage
 
 ```tsx
 import * as React from 'react';
-import { Input } from '~/components/ui/input';
-import { useKeyboard } from '~/lib/keyboard';
+import { Input } from '@/components/ui/input';
+import { useKeyboard } from '@/lib/keyboard';
 
 function Example() {
   const { isKeyboardVisible, keyboardHeight, dismissKeyboard } = useKeyboard();

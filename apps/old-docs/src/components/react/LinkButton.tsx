@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@old-docs/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 
 export function LinkButton({ children, ...props }: React.ComponentProps<'a'>) {

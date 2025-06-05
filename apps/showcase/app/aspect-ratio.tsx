@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { AspectRatio } from '~/components/ui/aspect-ratio';
-import { H1 } from '~/components/ui/typography';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { H1 } from '@/components/ui/typography';
 
 export default function AspectRatioScreen() {
   return (

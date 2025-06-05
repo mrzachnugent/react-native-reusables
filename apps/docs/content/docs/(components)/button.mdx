@@ -3,29 +3,29 @@ title: Button
 description: Displays a button or a component that looks like a button.
 ---
 
-import buttonPreview from "!!raw-loader!@/previews/button/button-primary";
-import buttonDestructivePreview from "!!raw-loader!@/previews/button/button-destructive";
-import buttonOutlinePreview from "!!raw-loader!@/previews/button/button-outline";
-import buttonSecondaryPreview from "!!raw-loader!@/previews/button/button-secondary";
-import buttonGhostPreview from "!!raw-loader!@/previews/button/button-ghost";
-import buttonLinkPreview from "!!raw-loader!@/previews/button/button-link";
-import buttonIconPreview from "!!raw-loader!@/previews/button/button-icon";
-import buttonWithIconPreview from "!!raw-loader!@/previews/button/button-with-icon";
-import buttonLoadingPreview from "!!raw-loader!@/previews/button/button-loading";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { ButtonPreview } from "@/previews/button/button-primary";
-import { ButtonDestructivePreview } from "@/previews/button/button-destructive";
-import { ButtonOutlinePreview } from "@/previews/button/button-outline";
-import { ButtonSecondaryPreview } from "@/previews/button/button-secondary";
-import { ButtonGhostPreview } from "@/previews/button/button-ghost";
-import { ButtonLinkPreview } from "@/previews/button/button-link";
-import { ButtonIconPreview } from "@/previews/button/button-icon";
-import { ButtonWithIconPreview } from "@/previews/button/button-with-icon";
-import { ButtonLoadingPreview } from "@/previews/button/button-loading";
+import buttonPreview from "!!raw-loader!@docs/previews/button/button-primary";
+import buttonDestructivePreview from "!!raw-loader!@docs/previews/button/button-destructive";
+import buttonOutlinePreview from "!!raw-loader!@docs/previews/button/button-outline";
+import buttonSecondaryPreview from "!!raw-loader!@docs/previews/button/button-secondary";
+import buttonGhostPreview from "!!raw-loader!@docs/previews/button/button-ghost";
+import buttonLinkPreview from "!!raw-loader!@docs/previews/button/button-link";
+import buttonIconPreview from "!!raw-loader!@docs/previews/button/button-icon";
+import buttonWithIconPreview from "!!raw-loader!@docs/previews/button/button-with-icon";
+import buttonLoadingPreview from "!!raw-loader!@docs/previews/button/button-loading";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { ButtonPreview } from "@docs/previews/button/button-primary";
+import { ButtonDestructivePreview } from "@docs/previews/button/button-destructive";
+import { ButtonOutlinePreview } from "@docs/previews/button/button-outline";
+import { ButtonSecondaryPreview } from "@docs/previews/button/button-secondary";
+import { ButtonGhostPreview } from "@docs/previews/button/button-ghost";
+import { ButtonLinkPreview } from "@docs/previews/button/button-link";
+import { ButtonIconPreview } from "@docs/previews/button/button-icon";
+import { ButtonWithIconPreview } from "@docs/previews/button/button-with-icon";
+import { ButtonLoadingPreview } from "@docs/previews/button/button-loading";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <div className="h-5"/>
@@ -82,7 +82,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/text.tsx\""
+            "meta": "title=\"@/components/ui/text.tsx\""
           }
         }
         ```
@@ -92,7 +92,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/button.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/button.tsx\""
+            "meta": "title=\"@/components/ui/button.tsx\""
           }
         }
         ```
@@ -106,8 +106,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 ### Usage
 
 ```tsx
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 ```
 
@@ -122,7 +122,7 @@ import { Text } from '~/components/ui/text';
 You can use the `buttonVariants` and `buttonTextVariants` helpers to create a link that looks like a button.
 
 ```tsx
-import { buttonVariants, buttonTextVariants } from "~/components/ui/button"
+import { buttonVariants, buttonTextVariants } from "@/components/ui/button"
 ```
 
 ```tsx

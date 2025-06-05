@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@docs/lib/utils';
 import NextImage, { ImageProps } from 'next/image';
 
 export function View({ className, ...props }: React.ComponentProps<'div'>) {

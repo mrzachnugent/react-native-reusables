@@ -6,10 +6,10 @@ description: NativeWind Light and Dark Mode
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
+import Code from '@docs/components/Code.astro';
 import { Aside, Card, Code as StarlightCode, TabItem, Tabs, FileTree, Steps } from '@astrojs/starlight/components';
-import importedTwUniversalCondig from '@/code-samples/tw-universal-config.js?raw';
-import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
+import importedTwUniversalCondig from '@docs/code-samples/tw-universal-config.js?raw';
+import importedTwNativeCondig from '@docs/code-samples/tw-native-config.js?raw';
 
 <Tabs>
   <TabItem label="CLI">
@@ -152,7 +152,7 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
       "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-          "~/*": ["*"]
+          "@docs/*": ["*"]
         }
       }
     }
@@ -163,7 +163,7 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
       4. Add a cn helper
     </Steps>
 
-    Add the following code to the `~/lib/utils.ts` file:
+    Add the following code to the `@/lib/utils.ts` file:
 
     ```ts
     import { clsx, type ClassValue } from 'clsx';
@@ -180,7 +180,7 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
     </Steps>
 
 
-    Add the following code to the `~/lib/useColorScheme.tsx` file:
+    Add the following code to the `@/lib/useColorScheme.tsx` file:
 
     ```tsx
     import { useColorScheme as useNativewindColorScheme } from 'nativewind';
@@ -197,11 +197,11 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
     ```
 
     <Steps>
-      6. Add the following css variables to `~/global.css` file.
+      6. Add the following css variables to `@/global.css` file.
     </Steps>
 
     <Code lang="css" 
-    title="~/global.css"
+    title="@/global.css"
     code={`@tailwind base;
     @tailwind components;
     @tailwind utilities;
@@ -273,12 +273,12 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
     </Aside>
 
     <Steps>
-      7. Add the following code in the `~/lib/constants.ts` file for the navigation theme colors:
+      7. Add the following code in the `@/lib/constants.ts` file for the navigation theme colors:
     </Steps>
 
     <Code
       lang='ts'
-      title='~/lib/constants.ts'
+      title='@/lib/constants.ts'
       code={`export const NAV_THEME = {
       light: {
         background: 'hsl(0 0% 100%)', // background
@@ -300,7 +300,7 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
     `}
     />
 
-    If you changed the colors in the `~/global.css` file, update the `~/lib/constants.ts` file with the new colors.
+    If you changed the colors in the `@/global.css` file, update the `@/lib/constants.ts` file with the new colors.
     Each color has a commented css variable name next to it.
 
 
@@ -331,15 +331,15 @@ import importedTwNativeCondig from '@/code-samples/tw-native-config.js?raw';
     <Code
       lang='tsx'
       title='_layout.tsx'
-      code={`import '~/global.css';
+      code={`import '@/global.css';
 
     import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
     import { Stack } from 'expo-router';
     import { StatusBar } from 'expo-status-bar';
     import * as React from 'react';
     import { Platform } from 'react-native';
-    import { NAV_THEME } from '~/lib/constants';
-    import { useColorScheme } from '~/lib/useColorScheme';
+    import { NAV_THEME } from '@/lib/constants';
+    import { useColorScheme } from '@/lib/useColorScheme';
 
     const LIGHT_THEME: Theme = {
       ...DefaultTheme,

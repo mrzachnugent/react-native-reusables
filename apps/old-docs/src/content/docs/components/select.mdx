@@ -5,8 +5,8 @@ description: Presents a selection of options for the user to choose from, activa
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/select?raw';
 
@@ -34,9 +34,9 @@ Presents a selection of options for the user to choose from, activated by a butt
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/select.tsx`:**
+    **Copy/paste the following code to `@/components/ui/select.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/select.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/select.tsx' />
   </TabItem>
 </Tabs>
 
@@ -73,7 +73,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
+} from '@/components/ui/select';
 
 function Example() {
   const insets = useSafeAreaInsets();

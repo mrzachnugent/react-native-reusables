@@ -6,8 +6,8 @@ description: A dynamic element that facilitates the expansion or collapse of a p
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/collapsible?raw';
 
@@ -37,18 +37,18 @@ A dynamic element that facilitates the expansion or collapse of a panel.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/collapsible.tsx`:**
+    **Copy/paste the following code to `@/components/ui/collapsible.tsx`:**
 
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/collapsible.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/collapsible.tsx" />
   </TabItem>
 </Tabs>
 
 ## Usage
 
 ```tsx
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '~/components/ui/collapsible';
-import { Text } from '~/components/ui/text';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   return (

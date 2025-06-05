@@ -16,8 +16,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '~/components/ui/context-menu';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/context-menu';
+import { Text } from '@/components/ui/text';
 
 export function ContextMenuPreview() {
   const insets = useSafeAreaInsets();

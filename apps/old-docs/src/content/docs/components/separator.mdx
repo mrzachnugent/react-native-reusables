@@ -6,8 +6,8 @@ description: Creates a visual or semantic distinction between content.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/separator?raw';
 
@@ -36,9 +36,9 @@ Creates a visual or semantic distinction between content.
     </Aside>
 
 
-    **Copy/paste the following code to `~/components/ui/separator.tsx`**
+    **Copy/paste the following code to `@/components/ui/separator.tsx`**
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/separator.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/separator.tsx" />
   </TabItem>
 </Tabs>
 
@@ -47,8 +47,8 @@ Creates a visual or semantic distinction between content.
 
 ```tsx
 import { View } from 'react-native';
-import { Separator } from '~/components/ui/separator';
-import { H4, P, Small } from '~/components/ui/typography';
+import { Separator } from '@/components/ui/separator';
+import { H4, P, Small } from '@/components/ui/typography';
 
 function Example() {
   return (

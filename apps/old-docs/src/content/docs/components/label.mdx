@@ -6,8 +6,8 @@ description: A user-friendly label linked to controls for improved accessibility
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/label?raw';
 
@@ -37,10 +37,10 @@ A user-friendly label linked to controls for improved accessibility.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/label.tsx`:**
+    **Copy/paste the following code to `@/components/ui/label.tsx`:**
 
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/label.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/label.tsx" />
   </TabItem>
 </Tabs>
 
@@ -48,7 +48,7 @@ A user-friendly label linked to controls for improved accessibility.
 ### Usage
 
 ```tsx
-import { Label } from '~/components/ui/label';
+import { Label } from '@/components/ui/label';
 
 function Example() {
   return <Label nativeID='name'>Name</Label>

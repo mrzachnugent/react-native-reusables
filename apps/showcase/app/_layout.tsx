@@ -7,11 +7,11 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Appearance, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ThemeToggle } from '~/components/ThemeToggle';
-import { Text } from '~/components/ui/text';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { ThemeToggle } from '@showcase/components/ThemeToggle';
+import { Text } from '@/components/ui/text';
+import { setAndroidNavigationBar } from '@showcase/lib/android-navigation-bar';
+import { NAV_THEME } from '@/lib/constants';
+import { useColorScheme } from '@/lib/useColorScheme';
 
 const { ToastProvider } = DeprecatedUi;
 

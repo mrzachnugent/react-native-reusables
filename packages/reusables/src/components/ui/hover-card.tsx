@@ -1,9 +1,9 @@
+import { TextClassContext } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 import * as HoverCardPrimitive from '@rn-primitives/hover-card';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { cn } from '../../lib/utils';
-import { TextClassContext } from './text';
 
 const HoverCard = HoverCardPrimitive.Root;
 

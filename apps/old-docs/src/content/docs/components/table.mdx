@@ -6,8 +6,8 @@ description: Shows a table component.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/table?raw';
 
@@ -37,9 +37,9 @@ Shows a table component.
     </Aside>
 
 
-    **Copy/paste the following code to `~/components/ui/table.tsx`**
+    **Copy/paste the following code to `@/components/ui/table.tsx`**
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/table.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/table.tsx" />
   </TabItem>
 </Tabs>
 
@@ -52,7 +52,7 @@ import { Stack } from 'expo-router';
 import * as React from 'react';
 import { Alert, ScrollView, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -61,10 +61,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '~/components/ui/table';
-import { Text } from '~/components/ui/text';
-import { ChevronDown } from '~/lib/icons/ChevronDown';
-import { cn } from '~/lib/utils';
+} from '@/components/ui/table';
+import { Text } from '@/components/ui/text';
+import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { cn } from '@/lib/utils';
 
 const INVOICES = [
   {

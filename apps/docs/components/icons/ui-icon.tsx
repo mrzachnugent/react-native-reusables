@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@docs/lib/utils';
 
 export function UiIcon({ className, ...props }: React.ComponentProps<'svg'>) {
   return (

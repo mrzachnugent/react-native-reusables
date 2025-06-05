@@ -6,8 +6,8 @@ description: An image component featuring an alternative representation for depi
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/avatar?raw';
 
@@ -36,17 +36,17 @@ An image component featuring an alternative representation for depicting the use
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/avatar.tsx`:**
+    **Copy/paste the following code to `@/components/ui/avatar.tsx`:**
 
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/avatar.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/avatar.tsx" />
   </TabItem>
 </Tabs>
 ### Usage
 
 ```tsx
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Text } from '~/components/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
 
 const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
 

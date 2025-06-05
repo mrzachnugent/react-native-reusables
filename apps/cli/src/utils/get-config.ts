@@ -1,10 +1,10 @@
-import { resolveImport } from '@/src/utils/resolve-import';
+import { resolveImport } from '@cli/src/utils/resolve-import';
 import { cosmiconfig } from 'cosmiconfig';
 import { loadConfig } from 'tsconfig-paths';
 import { z } from 'zod';
 
-export const DEFAULT_COMPONENTS = '~/components';
-export const DEFAULT_LIB = '~/lib';
+export const DEFAULT_COMPONENTS = '@/components';
+export const DEFAULT_LIB = '@/lib';
 
 const explorer = cosmiconfig('components', {
   searchPlaces: ['components.json'],

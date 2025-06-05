@@ -1,5 +1,5 @@
-import { UiIcon } from '@/components/icons/ui-icon';
-import { RnrIcon } from '@/components/icons/rnr-icon';
+import { UiIcon } from '@docs/components/icons/ui-icon';
+import { RnrIcon } from '@docs/components/icons/rnr-icon';
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
 /**

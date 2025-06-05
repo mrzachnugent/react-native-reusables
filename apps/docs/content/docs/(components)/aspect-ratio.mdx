@@ -3,13 +3,13 @@ title: Aspect Ratio
 description: Displays content within a desired ratio.
 ---
 
-import aspectRatioPreview from "!!raw-loader!@/previews/aspect-ratio";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { AspectRatioPreview } from "@/previews/aspect-ratio";
+import aspectRatioPreview from "!!raw-loader!@docs/previews/aspect-ratio";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { AspectRatioPreview } from "@docs/previews/aspect-ratio";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -73,7 +73,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/aspect-ratio.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/aspect-ratio.tsx\""
+            "meta": "title=\"@/components/ui/aspect-ratio.tsx\""
           }
         }
         ```
@@ -87,8 +87,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 ### Usage
 
 ```tsx
-import { AspectRatio } from '~/components/ui/aspect-ratio';
-import { Text } from '~/components/ui/text';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Text } from '@/components/ui/text';
 ```
 
 ```tsx

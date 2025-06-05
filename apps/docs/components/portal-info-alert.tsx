@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertTitle, AlertDescription } from '@docs/components/ui/alert';
 import { InfoIcon } from 'lucide-react';
 
 export function PortalInfoAlert() {

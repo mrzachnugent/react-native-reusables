@@ -6,8 +6,8 @@ description: A group of selectable buttons, commonly referred to as radio button
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/radio-group?raw';
 
@@ -35,9 +35,9 @@ A group of selectable buttons, commonly referred to as radio buttons, wherein on
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/radio-group.tsx`:**
+    **Copy/paste the following code to `@/components/ui/radio-group.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/radio-group.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/radio-group.tsx' />
   </TabItem>
 </Tabs>
 
@@ -47,8 +47,8 @@ A group of selectable buttons, commonly referred to as radio buttons, wherein on
 ```tsx
 import * as React from 'react';
 import { View } from 'react-native';
-import { Label } from '~/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 function Example() {
   const [value, setValue] = React.useState('Comfortable');

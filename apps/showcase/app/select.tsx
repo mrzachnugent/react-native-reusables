@@ -10,8 +10,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/select';
+import { Text } from '@/components/ui/text';
 
 export default function SelectScreen() {
   const triggerRef = React.useRef<React.ElementRef<typeof SelectTrigger>>(null);

@@ -6,8 +6,8 @@ description: Shows an textarea component.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/textarea?raw';
 
@@ -28,9 +28,9 @@ Shows an textarea component.
     ```
   </TabItem>
   <TabItem label='Manual'>
-    **Copy/paste the following code to `~/components/ui/textarea.tsx`**
+    **Copy/paste the following code to `@/components/ui/textarea.tsx`**
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/textarea.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/textarea.tsx" />
   </TabItem>
 </Tabs>
 
@@ -38,8 +38,8 @@ Shows an textarea component.
 ## Usage
 
 ```tsx
-import { Textarea } from '~/components/ui/textarea';
-import { Text } from '~/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   const [value, setValue] = React.useState('');

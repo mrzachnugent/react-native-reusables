@@ -6,8 +6,8 @@ description: Shows a button component.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/button?raw';
 
@@ -36,16 +36,16 @@ Shows a button component.
     </Aside>
 
 
-    **Copy/paste the following code to `~/components/ui/button.tsx`**
+    **Copy/paste the following code to `@/components/ui/button.tsx`**
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/button.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/button.tsx" />
   </TabItem>
 </Tabs>
 ## Usage
 
 ```tsx
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   return (

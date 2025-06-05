@@ -1,4 +1,4 @@
-import { View } from '@/components/react-native';
+import { View } from '@docs/components/react-native';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,9 +6,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '~/components/ui/navigation-menu';
-import { Text } from '~/components/ui/text';
-import { Sparkles } from '~/lib/icons/Sparkles';
+} from '@/components/ui/navigation-menu';
+import { Text } from '@/components/ui/text';
+import { Sparkles } from '@/lib/icons/Sparkles';
 
 // TODO(zach)
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '~/components/ui/toggle-group';
-import { Bold } from '~/lib/icons/Bold';
-import { Italic } from '~/lib/icons/Italic';
-import { Underline } from '~/lib/icons/Underline';
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { Bold } from '@/lib/icons/Bold';
+import { Italic } from '@/lib/icons/Italic';
+import { Underline } from '@/lib/icons/Underline';
 
 export default function ToggleGroupScreen() {
   const [value, setValue] = React.useState<string[]>([]);

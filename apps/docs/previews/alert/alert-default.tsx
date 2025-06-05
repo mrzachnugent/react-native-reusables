@@ -1,5 +1,5 @@
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { Terminal } from '~/lib/icons/Terminal';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Terminal } from '@/lib/icons/Terminal';
 
 export function AlertPreview() {
   return (

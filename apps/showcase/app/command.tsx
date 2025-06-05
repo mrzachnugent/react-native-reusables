@@ -1,21 +1,21 @@
 import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
-import { Activity } from '~/lib/icons/Activity';
-import { Airplay } from '~/lib/icons/Airplay';
-import { AlarmClockIcon } from '~/lib/icons/AlarmClockIcon';
-import { AlertCircle } from '~/lib/icons/AlertCircle';
-import { AlignRight } from '~/lib/icons/AlignRight';
-import { Baby } from '~/lib/icons/Baby';
-import { BadgeAlert } from '~/lib/icons/BadgeAlert';
-import { Calendar } from '~/lib/icons/Calendar';
-import { Database } from '~/lib/icons/Database';
-import { Ear } from '~/lib/icons/Ear';
-import { Fan } from '~/lib/icons/Fan';
-import { GalleryHorizontal } from '~/lib/icons/GalleryHorizontal';
-import { Lamp } from '~/lib/icons/Lamp';
-import { Table } from '~/lib/icons/Table';
-import { cn } from '~/lib/utils';
+import { Activity } from '@/lib/icons/Activity';
+import { Airplay } from '@/lib/icons/Airplay';
+import { AlarmClockIcon } from '@/lib/icons/AlarmClockIcon';
+import { AlertCircle } from '@/lib/icons/AlertCircle';
+import { AlignRight } from '@/lib/icons/AlignRight';
+import { Baby } from '@/lib/icons/Baby';
+import { BadgeAlert } from '@/lib/icons/BadgeAlert';
+import { Calendar } from '@/lib/icons/Calendar';
+import { Database } from '@/lib/icons/Database';
+import { Ear } from '@/lib/icons/Ear';
+import { Fan } from '@/lib/icons/Fan';
+import { GalleryHorizontal } from '@/lib/icons/GalleryHorizontal';
+import { Lamp } from '@/lib/icons/Lamp';
+import { Table } from '@/lib/icons/Table';
+import { cn } from '@/lib/utils';
 
 const {
   buttonTextVariants,

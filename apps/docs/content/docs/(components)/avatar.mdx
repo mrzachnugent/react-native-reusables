@@ -3,13 +3,13 @@ title: Avatar
 description: An image element with a fallback for representing the user.
 ---
 
-import avatarPreview from "!!raw-loader!@/previews/avatar";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { AvatarPreview } from "@/previews/avatar";
+import avatarPreview from "!!raw-loader!@docs/previews/avatar";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { AvatarPreview } from "@docs/previews/avatar";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -73,7 +73,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/avatar.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/avatar.tsx\""
+            "meta": "title=\"@/components/ui/avatar.tsx\""
           }
         }
         ```
@@ -87,8 +87,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 ### Usage
 
 ```tsx
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Text } from '~/components/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
 
 ```
 

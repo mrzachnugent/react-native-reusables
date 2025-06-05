@@ -3,12 +3,12 @@ import { FlashList } from '@shopify/flash-list';
 import { Link } from 'expo-router';
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Text } from '~/components/ui/text';
-import { PRIMITIVES } from '~/lib/constants';
-import { ExternalLink } from '~/lib/icons/ExternalLink';
-import { cn } from '~/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
+import { PRIMITIVES } from '@showcase/lib/constants';
+import { ExternalLink } from '@/lib/icons/ExternalLink';
+import { cn } from '@/lib/utils';
 
 export default function PrimitivesScreen() {
   const [search, setSearch] = React.useState('');
@@ -54,16 +54,4 @@ export default function PrimitivesScreen() {
       />
     </View>
   );
-}
-
-function toOptions(name: string) {
-  const title = name
-    .split('-')
-    .map(function (str: string) {
-      return str.replace(/\b\w/g, function (char) {
-        return char.toUpperCase();
-      });
-    })
-    .join(' ');
-  return title;
 }

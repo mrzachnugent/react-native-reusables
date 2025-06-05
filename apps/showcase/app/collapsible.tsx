@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Platform, Text, View } from 'react-native';
 import Animated, { FadeInDown, LinearTransition } from 'react-native-reanimated';
-import { ChevronsDownUp } from '~/lib/icons/ChevronsDownUp';
-import { ChevronsUpDown } from '~/lib/icons/ChevronsUpDown';
-import { Button } from '~/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '~/components/ui/collapsible';
+import { ChevronsDownUp } from '@/lib/icons/ChevronsDownUp';
+import { ChevronsUpDown } from '@/lib/icons/ChevronsUpDown';
+import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 export default function CollapsibleScreen() {
   const [open, setOpen] = React.useState(false);

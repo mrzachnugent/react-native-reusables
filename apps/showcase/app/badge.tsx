@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { Badge } from '~/components/ui/badge';
-import { Text } from '~/components/ui/text';
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
 
 export default function BadgeScreen() {
   return (
