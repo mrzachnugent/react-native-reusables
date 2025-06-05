@@ -7,8 +7,8 @@ import {
 
 type PreviewCardProps = Omit<PreviewCardClientProps, 'platformCookie'>;
 
-export function PreviewCard(props: PreviewCardProps) {
-  const cookieStore = cookies();
+export async function PreviewCard(props: PreviewCardProps) {
+  const cookieStore = await cookies();
   const platformCookie = cookieStore.get('platform')?.value as Platform;
   return <PreviewCardClient platformCookie={platformCookie} {...props} />;
 }

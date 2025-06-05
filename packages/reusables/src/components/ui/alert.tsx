@@ -35,14 +35,20 @@ function Alert({
     iconSize?: number;
     iconClassName?: string;
   }) {
-  const { colors } = useTheme();
   return (
-    <View role='alert' className={alertVariants({ variant, className })} {...props}>
-      <View className='absolute left-3.5 top-4 -translate-y-0.5'>
-        <Icon
-          size={iconSize}
-          color={variant === 'destructive' ? colors.notification : colors.text}
-        />
+    <TextClassContext.Provider value={cn('text-sm text-foreground', className)}>
+      <View role='alert' className={alertVariants({ variant, className })} {...props}>
+        <View className='absolute left-3.5 top-4 -translate-y-0.5'>
+          <Icon
+            size={iconSize}
+            className={cn(
+              iconClassName,
+              'text-foreground',
+              variant === 'destructive' && 'text-destructive'
+            )}
+          />
+        </View>
+        {children}
       </View>
     </TextClassContext.Provider>
   );
