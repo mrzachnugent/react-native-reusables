@@ -1,10 +1,10 @@
 import { DeprecatedUi } from '@rnr/reusables';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Label } from '~/components/ui/label';
-import { Text } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 
 const {
   BottomSheet,

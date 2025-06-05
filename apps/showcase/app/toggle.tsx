@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Toggle, ToggleIcon } from '~/components/ui/toggle';
-import { Bold } from '~/lib/icons/Bold';
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Bold } from '@/lib/icons/Bold';
 
 export default function ToggleUniversalcreen() {
   const [pressed, setPressed] = React.useState(false);

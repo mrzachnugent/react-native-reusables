@@ -1,3 +1,5 @@
+import { useColorScheme } from '@/lib/useColorScheme';
+import { cn } from '@/lib/utils';
 import * as SwitchPrimitives from '@rn-primitives/switch';
 import * as React from 'react';
 import { Platform } from 'react-native';
@@ -7,8 +9,6 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useColorScheme } from '../../lib/useColorScheme';
-import { cn } from '../../lib/utils';
 
 function SwitchWeb({
   className,

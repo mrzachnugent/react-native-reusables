@@ -3,15 +3,15 @@ title: Card
 description: Displays a card with header, content, and footer.
 ---
 
-import cardPreview from "!!raw-loader!@/previews/card/card-default";
-import cardExample from "!!raw-loader!@/previews/card/card-example";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { CardPreview } from "@/previews/card/card-default";
-import { CardExample } from "@/previews/card/card-example";
+import cardPreview from "!!raw-loader!@docs/previews/card/card-default";
+import cardExample from "!!raw-loader!@docs/previews/card/card-example";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { CardPreview } from "@docs/previews/card/card-default";
+import { CardExample } from "@docs/previews/card/card-example";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <div className="h-5"/>
@@ -68,7 +68,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/text.tsx\""
+            "meta": "title=\"@/components/ui/text.tsx\""
           }
         }
         ```
@@ -78,7 +78,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/card.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/card.tsx\""
+            "meta": "title=\"@/components/ui/card.tsx\""
           }
         }
         ```
@@ -99,8 +99,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
 ```
 

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@docs/components/ui/button';
 import Link from 'next/link';
 
 export default function HomePage() {

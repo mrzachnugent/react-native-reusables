@@ -9,9 +9,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '~/components/ui/alert-dialog';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function AlertDialogScreen() {
   return (

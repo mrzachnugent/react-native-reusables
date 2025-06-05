@@ -4,7 +4,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@cli/*": [
+        "./*"
+      ]
     },
     "composite": false,
     "declaration": true,
@@ -19,10 +21,16 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "lib": ["es2021"],
+    "lib": [
+      "es2021"
+    ],
     "module": "ESNext",
     "target": "ESNext"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

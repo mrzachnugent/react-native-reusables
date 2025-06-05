@@ -3,14 +3,14 @@ title: Hover Card
 description: For sighted users to preview content available behind a link.
 ---
 
-import hoverCardPreview from "!!raw-loader!@/previews/hover-card/hover-card-web";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PortalInfoAlert } from '@/components/portal-info-alert';
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { HoverCardPreview } from "@/previews/hover-card/hover-card-web";
+import hoverCardPreview from "!!raw-loader!@docs/previews/hover-card/hover-card-web";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PortalInfoAlert } from '@docs/components/portal-info-alert';
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { HoverCardPreview } from "@docs/previews/hover-card/hover-card-web";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -75,7 +75,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/text.tsx\""
+            "meta": "title=\"@/components/ui/text.tsx\""
           }
         }
         ```
@@ -85,7 +85,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/hover-card.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/hover-card.tsx\""
+            "meta": "title=\"@/components/ui/hover-card.tsx\""
           }
         }
         ```
@@ -105,8 +105,8 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "~/components/ui/hover-card"
-import { Text } from '~/components/ui/text';
+} from "@/components/ui/hover-card"
+import { Text } from '@/components/ui/text';
 
 ```
 

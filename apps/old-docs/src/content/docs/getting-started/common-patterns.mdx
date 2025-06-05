@@ -25,7 +25,7 @@ Most primitive components have an `asChild` prop. When it is set to `true`, it p
 
 Using the `asChild` prop to conditionally render a custom `Button` as a `Pressable` or a `Slot.Pressable`.
 
-<Code lang='tsx' title="~/example/button" code={`
+<Code lang='tsx' title="@/example/button" code={`
 import * as Slot from '@rn-primitives/slot'
 import { Pressable, PressableProps } from 'react-native'
 
@@ -45,8 +45,8 @@ export function Button({ asChild, onPress: onPressProp, ...props }: PressablePro
 
 Setting the `asChild` prop to `true` to pass all of the `Button` props to the `Pressable` component.
 
-<Code lang='tsx' title="~/other/thing" code={`
-import { Button } from '~/example/button'
+<Code lang='tsx' title="@/other/thing" code={`
+import { Button } from '@/example/button'
 import { Pressable, Text } from 'react-native'
 
 function Thing(){
@@ -72,7 +72,7 @@ Refs are used for [Direct Manipulation](https://reactnative.dev/docs/direct-mani
 
 Passing a `ref` to the `TextInput` component, allows us to call the `focus` method when the `Pressable` is pressed.
 
-<Code lang='tsx' title="~/example/button" code={`
+<Code lang='tsx' title="@/example/button" code={`
 import * as React from 'react'
 import { TextInput, View, Pressable, View } from 'react-native'
 
@@ -100,7 +100,7 @@ In React, the `ref` prop is a reserved prop since it needs to be handled differe
 
 **Creating a component that accepts a `ref`**
 
-<Code lang='tsx' title="~/example/custom-input" code={`
+<Code lang='tsx' title="@/example/custom-input" code={`
 import * as React from 'react'
 import { TextInput, TextInputProps, View, Pressable, View } from 'react-native'
 
@@ -206,7 +206,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
+} from '@/components/ui/select';
 
 // #3
 const CUSTOM_PORTAL_HOST_NAME = 'modal-example';

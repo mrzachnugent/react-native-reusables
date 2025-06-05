@@ -6,8 +6,8 @@ description: Shows a menu with options or actions when a user clicks the trigger
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/dropdown-menu?raw';
 
@@ -36,9 +36,9 @@ Shows a menu with options or actions when a user clicks the trigger button.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/dropdown-menu.tsx`:**
+    **Copy/paste the following code to `@/components/ui/dropdown-menu.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/dropdown-menu.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/dropdown-menu.tsx' />
   </TabItem>
 </Tabs>
 
@@ -68,7 +68,7 @@ Shows a menu with options or actions when a user clicks the trigger button.
 ```tsx
 import * as React from 'react';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -81,8 +81,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/dropdown-menu';
+import { Text } from '@/components/ui/text';
 
 function Example() {
 

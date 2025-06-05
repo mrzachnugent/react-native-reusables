@@ -5,8 +5,8 @@ description: Allows users with vision to preview the content hidden behind an el
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/hover-card?raw';
 
@@ -34,9 +34,9 @@ Allows users with vision to preview the content hidden behind an element before 
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/hover-card.tsx`:**
+    **Copy/paste the following code to `@/components/ui/hover-card.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/hover-card.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/hover-card.tsx' />
   </TabItem>
 </Tabs>
 
@@ -65,11 +65,11 @@ Allows users with vision to preview the content hidden behind an element before 
 
 ```tsx
 import { View } from 'react-native';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Button } from '~/components/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
-import { Text } from '~/components/ui/text';
-import { CalendarDays } from '~/lib/icons/CalendarDays';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Text } from '@/components/ui/text';
+import { CalendarDays } from '@/lib/icons/CalendarDays';
 
 function Example() {
   return (

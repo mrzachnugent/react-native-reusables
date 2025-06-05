@@ -6,8 +6,8 @@ description: Shows a collection of navigation links.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/navigation-menu?raw';
 
@@ -35,9 +35,9 @@ Shows a collection of navigation links.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/navigation-menu.tsx`:**
+    **Copy/paste the following code to `@/components/ui/navigation-menu.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/navigation-menu.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/navigation-menu.tsx' />
   </TabItem>
 </Tabs>
 
@@ -78,10 +78,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '~/components/ui/navigation-menu';
-import { Text } from '~/components/ui/text';
-  import { Sparkles } from '~/lib/icons/Sparkles';
-import { cn } from '~/lib/utils';
+} from '@/components/ui/navigation-menu';
+import { Text } from '@/components/ui/text';
+  import { Sparkles } from '@/lib/icons/Sparkles';
+import { cn } from '@/lib/utils';
 
 const components: { title: string; href: string; description: string }[] = [
   {

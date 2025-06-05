@@ -5,8 +5,8 @@ description: Dynamic content within a portal, activated by a button press.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/popover?raw';
 
@@ -35,9 +35,9 @@ Dynamic content within a portal, activated by a button press.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/popover.tsx`:**
+    **Copy/paste the following code to `@/components/ui/popover.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/popover.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/popover.tsx' />
   </TabItem>
 </Tabs>
 
@@ -68,9 +68,9 @@ Dynamic content within a portal, activated by a button press.
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   const insets = useSafeAreaInsets();

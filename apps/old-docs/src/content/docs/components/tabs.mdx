@@ -6,8 +6,8 @@ description: A collection of layered content sections, referred to as tab panels
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/tabs?raw';
 
@@ -36,9 +36,9 @@ A collection of layered content sections, referred to as tab panels, displayed i
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/tabs.tsx`:**
+    **Copy/paste the following code to `@/components/ui/tabs.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/tabs.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/tabs.tsx' />
   </TabItem>
 </Tabs>
 
@@ -48,7 +48,7 @@ A collection of layered content sections, referred to as tab panels, displayed i
 ```tsx
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -56,11 +56,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Text } from '@/components/ui/text';
 
 export default function TabsScreen() {
   const [value, setValue] = React.useState('account');

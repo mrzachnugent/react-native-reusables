@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function TooltipScreen() {
   const triggerRef = React.useRef<React.ElementRef<typeof TooltipTrigger>>(null);

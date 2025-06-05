@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
-import { Text } from '~/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Text } from '@/components/ui/text';
 
 export default function PopoverScreen() {
   const triggerRef = React.useRef<React.ElementRef<typeof PopoverTrigger>>(null);

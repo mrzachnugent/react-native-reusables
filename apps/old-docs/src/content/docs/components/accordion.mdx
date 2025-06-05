@@ -6,8 +6,8 @@ description: A vertically stacked set of interactive headings that each reveal a
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/accordion?raw';
 
@@ -40,10 +40,10 @@ A vertically stacked set of interactive headings that each reveal a section of c
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/accordion.tsx`:**
+    **Copy/paste the following code to `@/components/ui/accordion.tsx`:**
 
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/accordion.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/accordion.tsx" />
   </TabItem>
 </Tabs>
 
@@ -55,8 +55,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '~/components/ui/accordion';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/accordion';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   return (

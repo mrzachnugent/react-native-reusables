@@ -1,11 +1,11 @@
 import * as Toolbar from '@rn-primitives/toolbar';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { AlignCenter } from '~/lib/icons/AlignCenter';
-import { AlignLeft } from '~/lib/icons/AlignLeft';
-import { Bold } from '~/lib/icons/Bold';
-import { Italic } from '~/lib/icons/Italic';
-import { cn } from '~/lib/utils';
+import { AlignCenter } from '@/lib/icons/AlignCenter';
+import { AlignLeft } from '@/lib/icons/AlignLeft';
+import { Bold } from '@/lib/icons/Bold';
+import { Italic } from '@/lib/icons/Italic';
+import { cn } from '@/lib/utils';
 
 export default function ToolbarScreen() {
   const [singleValue, setSingleValue] = React.useState<string>();

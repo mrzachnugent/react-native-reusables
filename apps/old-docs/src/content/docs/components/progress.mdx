@@ -5,8 +5,8 @@ description: Shows an indicator representing the advancement status of a task.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/progress?raw';
 
@@ -34,9 +34,9 @@ Shows an indicator representing the advancement status of a task.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/progress.tsx`:**
+    **Copy/paste the following code to `@/components/ui/progress.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/progress.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/progress.tsx' />
   </TabItem>
 </Tabs>
 
@@ -44,7 +44,7 @@ Shows an indicator representing the advancement status of a task.
 ### Usage
 
 ```tsx
-import { Progress } from '~/components/ui/progress';
+import { Progress } from '@/components/ui/progress';
 
 function Example() {
   return <Progress value={87} className='web:w-[60%]' />;

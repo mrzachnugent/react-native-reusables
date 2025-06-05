@@ -6,8 +6,8 @@ description: A function to set the android navigation bar's content color based 
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Card } from '@astrojs/starlight/components';
 
 <LinkButton target="_blank" href="https://docs.expo.dev/versions/latest/sdk/navigation-bar/">
@@ -26,14 +26,14 @@ A function to set the android navigation bar's content color based on the theme.
 npx expo install expo-navigation-bar
 ```
 
-**Copy/paste the following code to `~/lib/android-navigation-bar.tsx`**:
+**Copy/paste the following code to `@/lib/android-navigation-bar.tsx`**:
 
 
 <Code code={
     `
 import * as NavigationBar from 'expo-navigation-bar';
 import { Platform } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
+import { NAV_THEME } from '@/lib/constants';
 
 export async function setAndroidNavigationBar(theme: 'light' | 'dark') {
   if (Platform.OS !== 'android') return;
@@ -43,7 +43,7 @@ export async function setAndroidNavigationBar(theme: 'light' | 'dark') {
   );
 }
     `
-} lang="tsx" title="~/lib/android-navigation-bar.tsx" />
+} lang="tsx" title="@/lib/android-navigation-bar.tsx" />
 
 **Whenever you set the color scheme, call the function to update the navigation bar**
 

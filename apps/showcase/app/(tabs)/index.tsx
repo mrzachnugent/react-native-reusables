@@ -10,16 +10,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '~/components/ui/alert-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
+} from '@/components/ui/alert-dialog';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '~/components/ui/context-menu';
+} from '@/components/ui/context-menu';
 import {
   Dialog,
   DialogClose,
@@ -29,7 +29,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/ui/dialog';
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,15 +38,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
-import { Text } from '~/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
-import { Muted } from '~/components/ui/typography';
-import { CalendarDays } from '~/lib/icons/CalendarDays';
-import { ChevronDown } from '~/lib/icons/ChevronDown';
-import { Info } from '~/lib/icons/Info';
-import { cn } from '~/lib/utils';
+} from '@/components/ui/dropdown-menu';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Text } from '@/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Muted } from '@/components/ui/typography';
+import { CalendarDays } from '@/lib/icons/CalendarDays';
+import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { Info } from '@/lib/icons/Info';
+import { cn } from '@/lib/utils';
 
 export default function ExampleScreen() {
   return (

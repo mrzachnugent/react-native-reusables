@@ -1,7 +1,7 @@
-import { Button } from '~/components/ui/button';
-import { Text } from '~/components/ui/text';
-import { Loader2 } from '~/lib/icons/Loader2';
-import { View } from '@/components/react-native';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Loader2 } from '@/lib/icons/Loader2';
+import { View } from '@docs/components/react-native';
 
 export function ButtonLoadingPreview() {
   return (

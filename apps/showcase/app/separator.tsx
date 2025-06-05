@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { Separator } from '~/components/ui/separator';
-import { H4, P, Small } from '~/components/ui/typography';
+import { Separator } from '@/components/ui/separator';
+import { H4, P, Small } from '@/components/ui/typography';
 
 export default function SeparatorScreen() {
   return (

@@ -1,3 +1,5 @@
+import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { cn } from '@/lib/utils';
 import * as NavigationMenuPrimitive from '@rn-primitives/navigation-menu';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
@@ -11,9 +13,6 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { TextClassContext } from './text';
-import { ChevronDown } from '../../lib/icons/ChevronDown';
-import { cn } from '../../lib/utils';
 
 function NavigationMenu({
   className,

@@ -6,8 +6,8 @@ description: A collection of buttons with true or false states, which can be act
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/toggle-group?raw';
 
@@ -36,9 +36,9 @@ A collection of buttons with true or false states, which can be activated or dea
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/toggle-group.tsx`:**
+    **Copy/paste the following code to `@/components/ui/toggle-group.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/toggle-group.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/toggle-group.tsx' />
   </TabItem>
 </Tabs>
 
@@ -48,10 +48,10 @@ A collection of buttons with true or false states, which can be activated or dea
 ```tsx
 import * as React from 'react';
 import { View } from 'react-native';
-import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '~/components/ui/toggle-group';
-import { Bold } from '~/lib/icons/Bold';
-import { Italic } from '~/lib/icons/Italic';
-import { Underline } from '~/lib/icons/Underline';
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { Bold } from '@/lib/icons/Bold';
+import { Italic } from '@/lib/icons/Italic';
+import { Underline } from '@/lib/icons/Underline';
 
 function Example() {
   const [value, setValue] = React.useState<string[]>([]);

@@ -3,8 +3,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '~/components/ui/accordion';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/accordion';
+import { Text } from '@/components/ui/text';
 
 export function AccordionPreview() {
   return (

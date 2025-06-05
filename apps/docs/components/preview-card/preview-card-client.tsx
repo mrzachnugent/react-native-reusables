@@ -1,17 +1,17 @@
 'use client';
 
-import { CopyButton } from '@/components/copy-button';
+import { CopyButton } from '@docs/components/copy-button';
 import { type SelectProps } from '@radix-ui/react-select';
 import * as React from 'react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@docs/components/ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@docs/components/ui/select';
 import { setCookie } from 'cookies-next';
 
 const PLATFORMS = [

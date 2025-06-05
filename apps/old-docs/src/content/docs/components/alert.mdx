@@ -6,8 +6,8 @@ description: A notification to capture user attention.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/alert?raw';
 
@@ -29,17 +29,17 @@ A notification to capture user attention.
   </TabItem>
   <TabItem label='Manual'>
 
-    **Copy/paste the following code to `~/components/ui/alert.tsx`:**
+    **Copy/paste the following code to `@/components/ui/alert.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/alert.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/alert.tsx' />
   </TabItem>
 </Tabs>
 ### Usage
 
 ```tsx
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { AlertTriangle } from '~/lib/icons/AlertTriangle';
-import { Terminal } from '~/lib/icons/Terminal';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertTriangle } from '@/lib/icons/AlertTriangle';
+import { Terminal } from '@/lib/icons/Terminal';
 
 function AlertExample() {
   return (

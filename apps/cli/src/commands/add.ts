@@ -1,8 +1,8 @@
-import { Config, getConfig } from '@/src/utils/get-config';
-import { getPackageManager } from '@/src/utils/get-package-manager';
-import { handleError } from '@/src/utils/handle-error';
-import { logger } from '@/src/utils/logger';
-import { promptForConfig } from '@/src/utils/prompt-for-config';
+import { Config, getConfig } from '@cli/src/utils/get-config';
+import { getPackageManager } from '@cli/src/utils/get-package-manager';
+import { handleError } from '@cli/src/utils/handle-error';
+import { logger } from '@cli/src/utils/logger';
+import { promptForConfig } from '@cli/src/utils/prompt-for-config';
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';

@@ -6,8 +6,8 @@ description: Presents content within a chosen aspect ratio.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/aspect-ratio?raw';
 
@@ -36,16 +36,16 @@ Presents content within a chosen aspect ratio.
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/aspect-ratio.tsx`:**
+    **Copy/paste the following code to `@/components/ui/aspect-ratio.tsx`:**
 
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/aspect-ratio.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/aspect-ratio.tsx" />
   </TabItem>
 </Tabs>
 ### Usage
 
 ```tsx
-import { AspectRatio } from '~/components/ui/aspect-ratio';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 function Example() {
   return (

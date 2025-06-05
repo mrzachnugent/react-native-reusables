@@ -21,13 +21,13 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": [
+      "@docs/*": [
         "./*"
       ],
-      "~/components/ui/*": [
+      "@/components/ui/*": [
         "./components/reusables"
       ],
-      "~/lib/icons/*": [
+      "@/lib/icons/*": [
         "./components/reusables"
       ]
     },

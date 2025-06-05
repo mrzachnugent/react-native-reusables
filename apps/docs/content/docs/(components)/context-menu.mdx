@@ -3,14 +3,14 @@ title: Context Menu
 description: Displays a menu to the user — such as a set of actions or functions — triggered by a button.
 ---
 
-import contextMenuPreview from "!!raw-loader!@/previews/context-menu/context-menu-web";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PortalInfoAlert } from '@/components/portal-info-alert';
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { ContextMenuPreview } from "@/previews/context-menu/context-menu-web";
+import contextMenuPreview from "!!raw-loader!@docs/previews/context-menu/context-menu-web";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PortalInfoAlert } from '@docs/components/portal-info-alert';
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { ContextMenuPreview } from "@docs/previews/context-menu/context-menu-web";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -75,7 +75,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/text.tsx\""
+            "meta": "title=\"@/components/ui/text.tsx\""
           }
         }
         ```
@@ -85,7 +85,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/context-menu.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/context-menu.tsx\""
+            "meta": "title=\"@/components/ui/context-menu.tsx\""
           }
         }
         ```
@@ -106,8 +106,8 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '~/components/ui/context-menu';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/context-menu';
+import { Text } from '@/components/ui/text';
 
 ```
 

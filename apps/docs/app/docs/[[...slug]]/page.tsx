@@ -1,8 +1,8 @@
-import { source } from '@/lib/source';
+import { source } from '@docs/lib/source';
 import { DocsPage, DocsBody, DocsDescription, DocsTitle } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { cn } from '@/lib/utils';
+import { cn } from '@docs/lib/utils';
 import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {

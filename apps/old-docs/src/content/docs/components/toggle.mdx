@@ -6,8 +6,8 @@ description: A button with a true or false state, which can be activated or deac
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/toggle?raw';
 
@@ -36,9 +36,9 @@ A button with a true or false state, which can be activated or deactivated by to
 
     <br />
 
-    **Copy/paste the following code to `~/components/ui/toggle.tsx`:**
+    **Copy/paste the following code to `@/components/ui/toggle.tsx`:**
 
-    <Code code={importedCode} lang='tsx' title='~/components/ui/toggle.tsx' />
+    <Code code={importedCode} lang='tsx' title='@/components/ui/toggle.tsx' />
   </TabItem>
 </Tabs>
 
@@ -48,8 +48,8 @@ A button with a true or false state, which can be activated or deactivated by to
 ```tsx
 import * as React from 'react';
 import { View } from 'react-native';
-import { Toggle, ToggleIcon } from '~/components/ui/toggle';
-import { Bold } from '~/lib/icons/Bold';
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Bold } from '@/lib/icons/Bold';
 
 function Example() {
   const [pressed, setPressed] = React.useState(false);

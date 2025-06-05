@@ -6,8 +6,8 @@ description: Shows a badge or a badge-like component.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/badge?raw';
 
@@ -38,16 +38,16 @@ Shows a badge or a badge-like component.
     </Aside>
 
 
-    **Copy/paste the following code to `~/components/ui/badge.tsx`**
+    **Copy/paste the following code to `@/components/ui/badge.tsx`**
 
-    <Code code={importedCode} lang="tsx" title="~/components/ui/badge.tsx" />
+    <Code code={importedCode} lang="tsx" title="@/components/ui/badge.tsx" />
   </TabItem>
 </Tabs>
 ## Usage
 
 ```tsx
-import { Badge } from '~/components/ui/badge';
-import { Text } from '~/components/ui/text';
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
 
 function Example() {
   return (

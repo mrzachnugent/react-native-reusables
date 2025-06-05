@@ -12,8 +12,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '~/components/ui/menubar';
-import { Text } from '~/components/ui/text';
+} from '@/components/ui/menubar';
+import { Text } from '@/components/ui/text';
 
 // TODO(zach): fix primitive + double enter animation
 

@@ -4,7 +4,9 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@old-docs/*": [
+        "./src/*"
+      ]
     },
     "jsxImportSource": "react"
   }

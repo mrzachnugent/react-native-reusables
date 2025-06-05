@@ -2,6 +2,27 @@
 // The code is licensed under the MIT License.
 // https://github.com/shadcn-ui/ui
 
+import {
+  BottomSheet,
+  BottomSheetCloseTrigger,
+  BottomSheetContent,
+  BottomSheetOpenTrigger,
+  BottomSheetView,
+} from '@/components/deprecated-ui/bottom-sheet';
+import { Calendar } from '@/components/deprecated-ui/calendar';
+import { Combobox, ComboboxOption } from '@/components/deprecated-ui/combobox';
+import { Button, buttonTextVariants } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { RadioGroup } from '@/components/ui/radio-group';
+import { Select, type Option } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
+import { Calendar as CalendarIcon } from '@/lib/icons/Calendar';
+import { X } from '@/lib/icons/X';
+import { cn } from '@/lib/utils';
 import * as React from 'react';
 import {
   Controller,
@@ -14,27 +35,6 @@ import {
 } from 'react-hook-form';
 import { View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import {
-  BottomSheet,
-  BottomSheetCloseTrigger,
-  BottomSheetContent,
-  BottomSheetOpenTrigger,
-  BottomSheetView,
-} from '../../components/deprecated-ui/bottom-sheet';
-import { Calendar } from '../../components/deprecated-ui/calendar';
-import { Combobox, ComboboxOption } from '../../components/deprecated-ui/combobox';
-import { Button, buttonTextVariants } from '../../components/ui/button';
-import { Checkbox } from '../../components/ui/checkbox';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { RadioGroup } from '../../components/ui/radio-group';
-import { Select, type Option } from '../../components/ui/select';
-import { Switch } from '../../components/ui/switch';
-import { Textarea } from '../../components/ui/textarea';
-import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
-import { X } from '../../lib/icons/X';
-import { cn } from '../../lib/utils';
-import { Text } from './text';
 
 const Form = FormProvider;
 

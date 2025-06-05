@@ -3,19 +3,19 @@ title: Badge
 description: Displays a badge or a component that looks like a badge.
 ---
 
-import badgePreview from "!!raw-loader!@/previews/badge/badge-default";
-import badgeDestructivePreview from "!!raw-loader!@/previews/badge/badge-destructive";
-import badgeOutlinePreview from "!!raw-loader!@/previews/badge/badge-outline";
-import badgeSecondaryPreview from "!!raw-loader!@/previews/badge/badge-secondary";
-import { CommandTabs } from "@/components/command-tabs";
-import { CopyButton } from "@/components/copy-button";
-import { ExternalLinks } from "@/components/external-links";
-import { PreviewCard } from "@/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@/components/section-tabs";
-import { BadgePreview } from "@/previews/badge/badge-default";
-import { BadgeDestructivePreview } from "@/previews/badge/badge-destructive";
-import { BadgeOutlinePreview } from "@/previews/badge/badge-outline";
-import { BadgeSecondaryPreview } from "@/previews/badge/badge-secondary";
+import badgePreview from "!!raw-loader!@docs/previews/badge/badge-default";
+import badgeDestructivePreview from "!!raw-loader!@docs/previews/badge/badge-destructive";
+import badgeOutlinePreview from "!!raw-loader!@docs/previews/badge/badge-outline";
+import badgeSecondaryPreview from "!!raw-loader!@docs/previews/badge/badge-secondary";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { BadgePreview } from "@docs/previews/badge/badge-default";
+import { BadgeDestructivePreview } from "@docs/previews/badge/badge-destructive";
+import { BadgeOutlinePreview } from "@docs/previews/badge/badge-outline";
+import { BadgeSecondaryPreview } from "@docs/previews/badge/badge-secondary";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <div className="h-5"/>
@@ -72,7 +72,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/text.tsx\""
+            "meta": "title=\"@/components/ui/text.tsx\""
           }
         }
         ```
@@ -82,7 +82,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
           "file": "./node_modules/@rnr/reusables/src/components/ui/badge.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"~/components/ui/badge.tsx\""
+            "meta": "title=\"@/components/ui/badge.tsx\""
           }
         }
         ```
@@ -96,8 +96,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 ### Usage
 
 ```tsx
-import { Badge } from '~/components/ui/badge';
-import { Text } from '~/components/ui/text';
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
 
 ```
 
@@ -112,7 +112,7 @@ import { Text } from '~/components/ui/text';
 You can use the `badgeVariants` and `badgeTextVariants` helpers to create a link that looks like a badge.
 
 ```tsx
-import { badgeVariants, badgeTextVariants } from "~/components/ui/badge"
+import { badgeVariants, badgeTextVariants } from "@/components/ui/badge"
 ```
 
 ```tsx

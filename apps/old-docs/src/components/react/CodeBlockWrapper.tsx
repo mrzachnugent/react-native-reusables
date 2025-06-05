@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@old-docs/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { cn } from '@/lib/utils';
+} from '@old-docs/components/ui/collapsible';
+import { cn } from '@old-docs/lib/utils';
 import * as React from 'react';
 
 export function CodeBlockWrapper({ children }: { children: React.ReactNode }) {
@@ -13,10 +13,7 @@ export function CodeBlockWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Collapsible open={isOpened} onOpenChange={setIsOpened} className='py-6'>
       <div className={cn('relative overflow-hidden', isOpened && 'pb-12')}>
-        <CollapsibleContent
-          forceMount
-          className={cn('overflow-hidden', !isOpened && 'max-h-56')}
-        >
+        <CollapsibleContent forceMount className={cn('overflow-hidden', !isOpened && 'max-h-56')}>
           <div
             className={cn(
               '[&_pre]:my-0 [&_pre]:max-h-[650px] [&_pre]:pb-[100px]',

@@ -1,4 +1,4 @@
-import { Input } from '@/components/reusables';
+import { Input } from '@/components/ui/input';
 
 export function InputPreview() {
   return (

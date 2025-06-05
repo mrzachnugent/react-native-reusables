@@ -1,6 +1,6 @@
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,19 +13,19 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
-import { Text } from '~/components/ui/text';
-import { Cloud } from '~/lib/icons/Cloud';
-import { Github } from '~/lib/icons/Github';
-import { LifeBuoy } from '~/lib/icons/LifeBuoy';
-import { LogOut } from '~/lib/icons/LogOut';
-import { Mail } from '~/lib/icons/Mail';
-import { MessageSquare } from '~/lib/icons/MessageSquare';
-import { Plus } from '~/lib/icons/Plus';
-import { PlusCircle } from '~/lib/icons/PlusCircle';
-import { User } from '~/lib/icons/User';
-import { UserPlus } from '~/lib/icons/UserPlus';
-import { Users } from '~/lib/icons/Users';
+} from '@/components/ui/dropdown-menu';
+import { Text } from '@/components/ui/text';
+import { Cloud } from '@/lib/icons/Cloud';
+import { Github } from '@/lib/icons/Github';
+import { LifeBuoy } from '@/lib/icons/LifeBuoy';
+import { LogOut } from '@/lib/icons/LogOut';
+import { Mail } from '@/lib/icons/Mail';
+import { MessageSquare } from '@/lib/icons/MessageSquare';
+import { Plus } from '@/lib/icons/Plus';
+import { PlusCircle } from '@/lib/icons/PlusCircle';
+import { User } from '@/lib/icons/User';
+import { UserPlus } from '@/lib/icons/UserPlus';
+import { Users } from '@/lib/icons/Users';
 
 export default function DropdownMenuPreview() {
   const insets = useSafeAreaInsets();

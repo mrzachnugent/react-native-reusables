@@ -6,8 +6,8 @@ description: Accessible styled texts with an inheritance system.
 {/* prettier-ignore-start */}
 {/* prettier-ignore-end */}
 
-import Code from '@/components/Code.astro';
-import { LinkButton } from '@/components/react/LinkButton';
+import Code from '@docs/components/Code.astro';
+import { LinkButton } from '@docs/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedTextCode from '@rnr/reusables/components/ui/text?raw';
 
@@ -39,9 +39,9 @@ Styled text component and inheritance system.
         Before copy/pasting, add the <a href="https://rn-primitives.vercel.app/slot" className='text-white font-bold'>slot primitive</a> and <a href="https://rn-primitives.vercel.app/types" className='text-white font-bold'>types primitive</a> to your project.
     </Aside>
 
-    **Copy/paste the following code to `~/components/ui/text.tsx`:**
+    **Copy/paste the following code to `@/components/ui/text.tsx`:**
 
-    <Code code={importedTextCode} lang="tsx" title="~/components/ui/text.tsx" />
+    <Code code={importedTextCode} lang="tsx" title="@/components/ui/text.tsx" />
   </TabItem>
 </Tabs>
 
@@ -81,7 +81,7 @@ The algorithm used to determine which styles to apply is based on the following 
 <Tabs>
   <TabItem label="Screen.tsx">
 ```tsx
-  import { Text } from '~/components/ui/text';
+  import { Text } from '@/components/ui/text';
   import { Parent } from './Parent';
   import { OtherParent } from './OtherParent';
 
@@ -107,7 +107,7 @@ The algorithm used to determine which styles to apply is based on the following 
   </TabItem>
   <TabItem label="Parent.tsx">
   ```tsx
-  import { TextClassContext } from '~/components/ui/text';
+  import { TextClassContext } from '@/components/ui/text';
 
   export function Parent({ children }) {
     return (
@@ -122,7 +122,7 @@ The algorithm used to determine which styles to apply is based on the following 
   </TabItem>
   <TabItem label="OtherParent.tsx">
   ```tsx
-  import { TextClassContext } from '~/components/ui/text';
+  import { TextClassContext } from '@/components/ui/text';
 
   export function OtherParent({ children }) {
     return (

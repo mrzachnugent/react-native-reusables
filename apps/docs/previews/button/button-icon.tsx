@@ -1,5 +1,5 @@
-import { Button } from '~/components/ui/button';
-import { ChevronRight } from '~/lib/icons/ChevronRight';
+import { Button } from '@/components/ui/button';
+import { ChevronRight } from '@/lib/icons/ChevronRight';
 
 export function ButtonIconPreview() {
   return (

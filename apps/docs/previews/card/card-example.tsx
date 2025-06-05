@@ -1,5 +1,5 @@
-import { View } from '@/components/react-native';
-import { Button } from '~/components/ui/button';
+import { View } from '@docs/components/react-native';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -7,11 +7,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { Switch } from '~/components/ui/switch';
-import { Text } from '~/components/ui/text';
-import { Check } from '~/lib/icons/Check';
-import { Sparkles } from '~/lib/icons/Sparkles';
+} from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import { Text } from '@/components/ui/text';
+import { Check } from '@/lib/icons/Check';
+import { Sparkles } from '@/lib/icons/Sparkles';
 
 const NOTIFICATIONS = [
   {
@@ -45,7 +45,6 @@ export function CardExample() {
             </Text>
           </View>
           {/* TODO */}
-          {/* @ts-expect-error requires onCheckedChange prop */}
           <Switch disabled checked={false} />
         </View>
         <View>
@@ -66,7 +65,8 @@ export function CardExample() {
       </CardContent>
       <CardFooter>
         <Button className='w-full'>
-          <Check /> <Text>Mark all as read</Text>
+          <Check />
+          <Text>Mark all as read</Text>
         </Button>
       </CardFooter>
     </Card>
