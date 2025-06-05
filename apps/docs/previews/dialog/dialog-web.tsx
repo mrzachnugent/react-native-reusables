@@ -1,5 +1,5 @@
 import { View } from '@docs/components/react-native';
-import { Button } from '@/components/ui/button';
+import { Button } from '@rnr/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Text } from '@/components/ui/text';
+} from '@rnr/components/ui/dialog';
+import { Label } from '@rnr/components/ui/label';
+import { Input } from '@rnr/components/ui/input';
+import { Text } from '@rnr/components/ui/text';
 
 export function DialogPreview() {
   return (

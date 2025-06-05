@@ -1,9 +1,9 @@
 import { View } from '@docs/components/react-native';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Text } from '@/components/ui/text';
-import { CalendarDays } from '@/lib/icons/CalendarDays';
+import { Avatar, AvatarFallback, AvatarImage } from '@rnr/components/ui/avatar';
+import { Button } from '@rnr/components/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@rnr/components/ui/hover-card';
+import { Text } from '@rnr/components/ui/text';
+import { CalendarDays } from '@rnr/lib/icons/CalendarDays';
 
 export function HoverCardPreview() {
   return (

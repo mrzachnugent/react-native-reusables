@@ -1,8 +1,12 @@
 import { Platform, Text, View } from 'react-native';
 import Animated, { FadeInDown, LinearTransition } from 'react-native-reanimated';
-import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronsUpDown } from '@/lib/icons/ChevronsUpDown';
+import { Button } from '@rnr/components/ui/button';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@rnr/components/ui/collapsible';
+import { ChevronsUpDown } from '@rnr/lib/icons/ChevronsUpDown';
 
 export function CollapsiblePreview() {
   return (

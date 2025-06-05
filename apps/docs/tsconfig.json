@@ -24,11 +24,14 @@
       "@docs/*": [
         "./*"
       ],
-      "@/components/ui/*": [
+      "@rnr/components/ui/*": [
         "./components/reusables"
       ],
-      "@/lib/icons/*": [
+      "@rnr/lib/icons/*": [
         "./components/reusables"
+      ],
+      "@/*": [
+        "../../packages/reusables/src/*"
       ]
     },
     "plugins": [

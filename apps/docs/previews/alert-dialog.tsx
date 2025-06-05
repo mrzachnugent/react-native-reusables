@@ -8,9 +8,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
+} from '@rnr/components/ui/alert-dialog';
+import { Button } from '@rnr/components/ui/button';
+import { Text } from '@rnr/components/ui/text';
 
 export function AlertDialogPreview() {
   return (

@@ -61,5 +61,6 @@ function fixImports(value: string) {
     .replace('./text', '@/components/ui/text')
     .replaceAll('../../components', '@/components')
     .replaceAll('../../lib', '@/lib')
-    .replaceAll('@docs/components/react-native', 'react-native');
+    .replaceAll('@docs/components/react-native', 'react-native')
+    .replaceAll('@rnr/', '@/');
 }

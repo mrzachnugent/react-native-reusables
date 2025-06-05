@@ -18,7 +18,9 @@ export function CommandTabs({ args }: { args: string[] }) {
           <Tab key={manager} value={manager} className='dark:text-foreground *:dark'>
             <CodeBlock>
               <Pre>
-                <code>{[...COMMAND[manager], '@react-native-reusables', ...args].join(' ')}</code>
+                <code>
+                  {[...COMMAND[manager], '@react-native-reusables/cli@latest', ...args].join(' ')}
+                </code>
               </Pre>
             </CodeBlock>
           </Tab>

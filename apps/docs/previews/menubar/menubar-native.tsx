@@ -17,8 +17,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '@/components/ui/menubar';
-import { Text } from '@/components/ui/text';
+} from '@rnr/components/ui/menubar';
+import { Text } from '@rnr/components/ui/text';
 
 // TODO(zach): review this
 

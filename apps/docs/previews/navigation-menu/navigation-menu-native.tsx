@@ -11,9 +11,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { Text } from '@/components/ui/text';
-import { Sparkles } from '@/lib/icons/Sparkles';
+} from '@rnr/components/ui/navigation-menu';
+import { Text } from '@rnr/components/ui/text';
+import { Sparkles } from '@rnr/lib/icons/Sparkles';
 
 export function NavigationMenuPreview() {
   const insets = useSafeAreaInsets();
