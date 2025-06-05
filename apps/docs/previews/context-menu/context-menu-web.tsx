@@ -12,8 +12,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { Text } from '@/components/ui/text';
+} from '@rnr/components/ui/context-menu';
+import { Text } from '@rnr/components/ui/text';
 
 // TODO(zach): update primitives for options value and onChange
 

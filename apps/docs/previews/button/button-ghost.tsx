@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
+import { Button } from '@rnr/components/ui/button';
+import { Text } from '@rnr/components/ui/text';
 
 export function ButtonGhostPreview() {
   return (

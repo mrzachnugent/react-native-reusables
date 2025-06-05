@@ -1,5 +1,5 @@
 import { View } from '@docs/components/react-native';
-import { Button } from '@/components/ui/button';
+import { Button } from '@rnr/components/ui/button';
 import {
   Card,
   CardContent,
@@ -7,11 +7,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Switch } from '@/components/ui/switch';
-import { Text } from '@/components/ui/text';
-import { Check } from '@/lib/icons/Check';
-import { Sparkles } from '@/lib/icons/Sparkles';
+} from '@rnr/components/ui/card';
+import { Switch } from '@rnr/components/ui/switch';
+import { Text } from '@rnr/components/ui/text';
+import { Check } from '@rnr/lib/icons/Check';
+import { Sparkles } from '@rnr/lib/icons/Sparkles';
 
 const NOTIFICATIONS = [
   {

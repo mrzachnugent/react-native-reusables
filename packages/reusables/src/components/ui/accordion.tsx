@@ -77,7 +77,7 @@ function AccordionTrigger({
   );
 
   return (
-    <TextClassContext.Provider value='native:text-lg font-medium web:group-hover:underline'>
+    <TextClassContext.Provider value='native:text-lg text-sm font-medium web:group-hover:underline'>
       <AccordionPrimitive.Header className='flex'>
         <AccordionPrimitive.Trigger {...props} asChild>
           <Trigger
@@ -88,7 +88,7 @@ function AccordionTrigger({
           >
             {children}
             <Animated.View style={chevronStyle}>
-              <ChevronDown size={18} className='text-foreground shrink-0' />
+              <ChevronDown size={16} className='text-muted-foreground shrink-0' />
             </Animated.View>
           </Trigger>
         </AccordionPrimitive.Trigger>

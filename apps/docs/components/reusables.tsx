@@ -1,6 +1,6 @@
 'use client';
 
-import { Lib, Ui } from '@rnr/reusables';
+import { Lib, Ui } from '@/index';
 
 export const {
   Accordion,

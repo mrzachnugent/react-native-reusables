@@ -1,6 +1,6 @@
 import { View } from '@docs/components/react-native';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+import { Checkbox } from '@rnr/components/ui/checkbox';
+import { Label } from '@rnr/components/ui/label';
 
 export function CheckboxPreview() {
   return (

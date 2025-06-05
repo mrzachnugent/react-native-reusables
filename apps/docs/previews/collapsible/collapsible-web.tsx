@@ -1,8 +1,12 @@
 import { View } from '@docs/components/react-native';
-import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Text } from '@/components/ui/text';
-import { ChevronsUpDown } from '@/lib/icons/ChevronsUpDown';
+import { Button } from '@rnr/components/ui/button';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@rnr/components/ui/collapsible';
+import { Text } from '@rnr/components/ui/text';
+import { ChevronsUpDown } from '@rnr/lib/icons/ChevronsUpDown';
 
 export function CollapsiblePreview() {
   return (

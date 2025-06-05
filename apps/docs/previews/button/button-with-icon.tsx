@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-import { Mail } from '@/lib/icons/Mail';
+import { Button } from '@rnr/components/ui/button';
+import { Text } from '@rnr/components/ui/text';
+import { Mail } from '@rnr/lib/icons/Mail';
 
 export function ButtonWithIconPreview() {
   return (

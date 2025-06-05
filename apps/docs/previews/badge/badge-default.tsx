@@ -1,5 +1,5 @@
-import { Badge } from '@/components/ui/badge';
-import { Text } from '@/components/ui/text';
+import { Badge } from '@rnr/components/ui/badge';
+import { Text } from '@rnr/components/ui/text';
 
 export function BadgePreview() {
   return (
