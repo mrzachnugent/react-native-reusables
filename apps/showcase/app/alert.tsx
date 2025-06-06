@@ -1,7 +1,6 @@
 import { View } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { AlertTriangle } from '@/lib/icons/AlertTriangle';
-import { Terminal } from '@/lib/icons/Terminal';
+import { AlertTriangle, Terminal } from 'lucide-react-native';
 
 export default function AlertScreen() {
   return (

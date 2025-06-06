@@ -41,10 +41,12 @@ export default function SelectScreen() {
           <SelectTrigger
             ref={triggerRef}
             className='w-[250px]'
-            onTouchStart={() => {
-              // Temporary fix for https://github.com/mrzachnugent/react-native-reusables/issues/343#issuecomment-2779827475
-              triggerRef.current?.open();
-            }}
+            onTouchStart={Platform.select({
+              web: () => {
+                // Temporary fix for https://github.com/mrzachnugent/react-native-reusables/issues/343#issuecomment-2779827475
+                triggerRef.current?.open();
+              },
+            })}
           >
             <SelectValue
               className='text-foreground text-sm native:text-lg'
@@ -79,10 +81,12 @@ export default function SelectScreen() {
           <SelectTrigger
             ref={triggerScollableRef}
             className='w-[250px]'
-            onTouchStart={() => {
-              // Temporary fix for https://github.com/mrzachnugent/react-native-reusables/issues/343#issuecomment-2779827475
-              triggerScollableRef.current?.open();
-            }}
+            onTouchStart={Platform.select({
+              web: () => {
+                // Temporary fix for https://github.com/mrzachnugent/react-native-reusables/issues/343#issuecomment-2779827475
+                triggerScollableRef.current?.open();
+              },
+            })}
           >
             <SelectValue
               className='text-foreground text-sm native:text-lg'

@@ -1,3 +1,4 @@
+import { Icon } from '@/components/ui/icon';
 import { Text, TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -24,7 +25,7 @@ function Alert({
   className,
   variant,
   children,
-  icon: Icon,
+  icon,
   iconSize = 16,
   iconClassName,
   ...props
@@ -40,12 +41,9 @@ function Alert({
       <View role='alert' className={alertVariants({ variant, className })} {...props}>
         <View className='absolute left-3.5 top-4 -translate-y-0.5'>
           <Icon
+            as={icon}
             size={iconSize}
-            className={cn(
-              iconClassName,
-              'text-foreground',
-              variant === 'destructive' && 'text-destructive'
-            )}
+            className={cn(variant === 'destructive' && 'text-destructive', iconClassName)}
           />
         </View>
         {children}
