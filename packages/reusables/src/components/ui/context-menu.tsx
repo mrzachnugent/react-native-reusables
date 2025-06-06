@@ -1,10 +1,8 @@
+import { Icon } from '@/components/ui/icon';
 import { TextClassContext } from '@/components/ui/text';
-import { Check } from '@/lib/icons/Check';
-import { ChevronDown } from '@/lib/icons/ChevronDown';
-import { ChevronRight } from '@/lib/icons/ChevronRight';
-import { ChevronUp } from '@/lib/icons/ChevronUp';
 import { cn } from '@/lib/utils';
 import * as ContextMenuPrimitive from '@rn-primitives/context-menu';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react-native';
 import * as React from 'react';
 import {
   Platform,
@@ -33,7 +31,7 @@ function ContextMenuSubTrigger({
   inset?: boolean;
 }) {
   const { open } = ContextMenuPrimitive.useSubContext();
-  const Icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
+  const icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
     <TextClassContext.Provider
       value={cn(
@@ -50,8 +48,8 @@ function ContextMenuSubTrigger({
         )}
         {...props}
       >
-        {children}
-        <Icon size={18} className='ml-auto text-foreground' />
+        <>{children}</>
+        <Icon as={icon} size={18} className='ml-auto text-foreground' />
       </ContextMenuPrimitive.SubTrigger>
     </TextClassContext.Provider>
   );
@@ -164,10 +162,10 @@ function ContextMenuCheckboxItem({
     >
       <View className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
         <ContextMenuPrimitive.ItemIndicator>
-          <Check size={14} strokeWidth={3} className='text-foreground' />
+          <Icon as={Check} size={14} strokeWidth={3} className='text-foreground' />
         </ContextMenuPrimitive.ItemIndicator>
       </View>
-      {children}
+      <>{children}</>
     </ContextMenuPrimitive.CheckboxItem>
   );
 }
@@ -194,7 +192,7 @@ function ContextMenuRadioItem({
           <View className='bg-foreground h-2 w-2 rounded-full' />
         </ContextMenuPrimitive.ItemIndicator>
       </View>
-      {children}
+      <>{children}</>
     </ContextMenuPrimitive.RadioItem>
   );
 }

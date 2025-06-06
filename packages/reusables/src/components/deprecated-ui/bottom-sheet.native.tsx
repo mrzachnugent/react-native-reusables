@@ -18,7 +18,7 @@ import * as React from 'react';
 import { GestureResponderEvent, Keyboard, Pressable, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '../../components/deprecated-ui/button';
-import { X } from '../../lib/icons/X';
+import { X } from 'lucide-react-native';
 import { useColorScheme } from '../../lib/useColorScheme';
 import { cn } from '../../lib/utils';
 

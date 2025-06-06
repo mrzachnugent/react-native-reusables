@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated';
-import { Check } from '../../lib/icons/Check';
+import { Check } from 'lucide-react-native';
 import { cn } from '../../lib/utils';
 
 interface CheckboxProps {

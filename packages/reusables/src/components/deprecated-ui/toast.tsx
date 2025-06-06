@@ -2,9 +2,7 @@ import { Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast, { ToastConfig } from 'react-native-toast-message';
 import { Alert, AlertDescription, AlertTitle } from '../../components/deprecated-ui/alert';
-import { AlertTriangle } from '../../lib/icons/AlertTriangle';
-import { CheckSquare } from '../../lib/icons/CheckSquare';
-import { Info } from '../../lib/icons/Info';
+import { AlertTriangle, CheckSquare, Info } from 'lucide-react-native';
 
 /**
  * Temporary fix for warning when accessing useLayoutEffect on the server. See issue

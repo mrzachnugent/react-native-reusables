@@ -1,10 +1,8 @@
+import { Icon } from '@/components/ui/icon';
 import { TextClassContext } from '@/components/ui/text';
-import { Check } from '@/lib/icons/Check';
-import { ChevronDown } from '@/lib/icons/ChevronDown';
-import { ChevronRight } from '@/lib/icons/ChevronRight';
-import { ChevronUp } from '@/lib/icons/ChevronUp';
 import { cn } from '@/lib/utils';
 import * as MenubarPrimitive from '@rn-primitives/menubar';
+import { Check, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, Text, type TextProps, View } from 'react-native';
 
@@ -68,7 +66,7 @@ function MenubarSubTrigger({
   children?: React.ReactNode;
 }) {
   const { open } = MenubarPrimitive.useSubContext();
-  const Icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
+  const icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
     <TextClassContext.Provider
       value={cn('select-none text-sm text-foreground', open && 'native:text-accent-foreground')}
@@ -82,8 +80,8 @@ function MenubarSubTrigger({
         )}
         {...props}
       >
-        {children}
-        <Icon size={18} className='ml-auto text-foreground' />
+        <>{children}</>
+        <Icon as={icon} size={18} className='ml-auto text-foreground' />
       </MenubarPrimitive.SubTrigger>
     </TextClassContext.Provider>
   );
@@ -182,10 +180,10 @@ function MenubarCheckboxItem({
     >
       <View className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
         <MenubarPrimitive.ItemIndicator>
-          <Check size={14} strokeWidth={3} className='text-foreground' />
+          <Icon as={Check} size={14} strokeWidth={3} className='text-foreground' />
         </MenubarPrimitive.ItemIndicator>
       </View>
-      {children}
+      <>{children}</>
     </MenubarPrimitive.CheckboxItem>
   );
 }
@@ -212,7 +210,7 @@ function MenubarRadioItem({
           <View className='bg-foreground h-2 w-2 rounded-full' />
         </MenubarPrimitive.ItemIndicator>
       </View>
-      {children}
+      <>{children}</>
     </MenubarPrimitive.RadioItem>
   );
 }

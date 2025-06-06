@@ -1,4 +1,5 @@
-import { Check } from '@/lib/icons/Check';
+import { Icon } from '@/components/ui/icon';
+import { Check } from 'lucide-react-native';
 import { cn } from '@/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import * as React from 'react';
@@ -20,7 +21,8 @@ function Checkbox({
       {...props}
     >
       <CheckboxPrimitive.Indicator className={cn('items-center justify-center h-full w-full')}>
-        <Check
+        <Icon
+          as={Check}
           size={12}
           strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5}
           className='text-primary-foreground'

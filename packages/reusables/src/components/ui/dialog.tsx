@@ -1,6 +1,7 @@
-import { X } from '@/lib/icons/X';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 import * as DialogPrimitive from '@rn-primitives/dialog';
+import { X } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, StyleSheet, View, type ViewProps } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -47,7 +48,7 @@ function DialogOverlayNative({
       {...props}
     >
       <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(150)}>
-        {children}
+        <>{children}</>
       </Animated.View>
     </DialogPrimitive.Overlay>
   );
@@ -88,7 +89,8 @@ function DialogContent({
               'absolute right-4 top-4 p-0.5 web:group rounded-sm opacity-70 web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none'
             }
           >
-            <X
+            <Icon
+              as={X}
               size={Platform.OS === 'web' ? 16 : 18}
               className={cn('text-muted-foreground', open && 'text-accent-foreground')}
             />
