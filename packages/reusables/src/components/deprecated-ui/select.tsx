@@ -7,8 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '../../components/deprecated-ui/popover';
-import { Check } from '../../lib/icons/Check';
-import { ChevronDown } from '../../lib/icons/ChevronDown';
+import { Check, ChevronDown } from 'lucide-react-native';
 import { cn } from '../../lib/utils';
 import { Button, buttonTextVariants } from './button';
 

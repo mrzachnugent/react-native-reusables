@@ -1,8 +1,7 @@
-import { Check } from '@/lib/icons/Check';
-import { ChevronDown } from '@/lib/icons/ChevronDown';
-import { ChevronUp } from '@/lib/icons/ChevronUp';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 import * as SelectPrimitive from '@rn-primitives/select';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -34,8 +33,8 @@ function SelectTrigger({
       )}
       {...props}
     >
-      {children}
-      <ChevronDown size={16} aria-hidden={true} className='text-foreground opacity-50' />
+      <>{children}</>
+      <Icon as={ChevronDown} size={16} aria-hidden={true} className='text-foreground opacity-50' />
     </SelectPrimitive.Trigger>
   );
 }
@@ -52,7 +51,7 @@ function SelectScrollUpButton({ className, ...props }: SelectPrimitive.ScrollUpB
       className={cn('flex web:cursor-default items-center justify-center py-1', className)}
       {...props}
     >
-      <ChevronUp size={14} className='text-foreground' />
+      <Icon as={ChevronUp} size={14} className='text-foreground' />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -69,7 +68,7 @@ function SelectScrollDownButton({ className, ...props }: SelectPrimitive.ScrollD
       className={cn('flex web:cursor-default items-center justify-center py-1', className)}
       {...props}
     >
-      <ChevronDown size={14} className='text-foreground' />
+      <Icon as={ChevronDown} size={14} className='text-foreground' />
     </SelectPrimitive.ScrollDownButton>
   );
 }
@@ -157,7 +156,7 @@ function SelectItem({
     >
       <View className='absolute left-2 native:left-3.5 flex h-3.5 native:pt-px w-3.5 items-center justify-center'>
         <SelectPrimitive.ItemIndicator>
-          <Check size={16} strokeWidth={3} className='text-popover-foreground' />
+          <Icon as={Check} size={16} strokeWidth={3} className='text-popover-foreground' />
         </SelectPrimitive.ItemIndicator>
       </View>
       <SelectPrimitive.ItemText className='text-sm native:text-lg text-popover-foreground native:text-base web:group-focus:text-accent-foreground' />

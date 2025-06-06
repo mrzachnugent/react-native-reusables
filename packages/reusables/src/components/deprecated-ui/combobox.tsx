@@ -11,9 +11,7 @@ import {
   useBottomSheet,
 } from '../../components/deprecated-ui/bottom-sheet';
 import { Button, buttonTextVariants, buttonVariants } from '../../components/deprecated-ui/button';
-import { Check } from '../../lib/icons/Check';
-import { ChevronsUpDown } from '../../lib/icons/ChevronsUpDown';
-import { Search } from '../../lib/icons/Search';
+import { Check, ChevronsUpDown, Search } from 'lucide-react-native';
 import { cn } from '../../lib/utils';
 
 // TODO: refactor and move to UI

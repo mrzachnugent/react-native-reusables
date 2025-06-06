@@ -13,6 +13,7 @@ import { Calendar } from '@/components/deprecated-ui/calendar';
 import { Combobox, ComboboxOption } from '@/components/deprecated-ui/combobox';
 import { Button, buttonTextVariants } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Icon } from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup } from '@/components/ui/radio-group';
@@ -20,9 +21,8 @@ import { Select, type Option } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Text } from '@/components/ui/text';
 import { Textarea } from '@/components/ui/textarea';
-import { Calendar as CalendarIcon } from '@/lib/icons/Calendar';
-import { X } from '@/lib/icons/X';
 import { cn } from '@/lib/utils';
+import { Calendar as CalendarIcon, X } from 'lucide-react-native';
 import * as React from 'react';
 import {
   Controller,
@@ -363,7 +363,8 @@ const FormDatePicker = React.forwardRef<
           >
             {({ pressed }) => (
               <>
-                <CalendarIcon
+                <Icon
+                  as={CalendarIcon}
                   className={buttonTextVariants({
                     variant: 'outline',
                     className: cn(!value && 'opacity-80', pressed && 'opacity-60'),
@@ -386,7 +387,7 @@ const FormDatePicker = React.forwardRef<
                       onChange?.('');
                     }}
                   >
-                    <X size={18} className='text-muted-foreground text-xs' />
+                    <Icon as={X} size={18} className='text-muted-foreground text-xs' />
                   </Button>
                 )}
               </>

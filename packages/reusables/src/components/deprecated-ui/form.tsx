@@ -37,8 +37,7 @@ import {
 } from '../../components/deprecated-ui/select';
 import { Switch } from '../../components/deprecated-ui/switch';
 import { Textarea } from '../../components/deprecated-ui/textarea';
-import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
-import { X } from '../../lib/icons/X';
+import { Calendar as CalendarIcon, X } from 'lucide-react-native';
 import { cn } from '../../lib/utils';
 import { Checkbox } from './checkbox';
 

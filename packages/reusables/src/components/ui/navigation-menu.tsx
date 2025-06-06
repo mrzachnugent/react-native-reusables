@@ -1,7 +1,8 @@
-import { ChevronDown } from '@/lib/icons/ChevronDown';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 import * as NavigationMenuPrimitive from '@rn-primitives/navigation-menu';
 import { cva } from 'class-variance-authority';
+import { ChevronDown } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, {
@@ -89,9 +90,10 @@ function NavigationMenuTrigger({
       )}
       {...props}
     >
-      {children}
+      <>{children}</>
       <Animated.View style={chevronStyle}>
-        <ChevronDown
+        <Icon
+          as={ChevronDown}
           size={12}
           className={cn('relative text-foreground h-3 w-3 web:transition web:duration-200')}
           aria-hidden={true}
