@@ -1,6 +1,4 @@
-import Animated, { FadeIn } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '@rnr/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,21 +11,26 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@rnr/components/ui/dropdown-menu';
-import { Text } from '@rnr/components/ui/text';
-import { Cloud } from '@rnr/lib/icons/Cloud';
-import { Github } from '@rnr/lib/icons/Github';
-import { LifeBuoy } from '@rnr/lib/icons/LifeBuoy';
-import { LogOut } from '@rnr/lib/icons/LogOut';
-import { Mail } from '@rnr/lib/icons/Mail';
-import { MessageSquare } from '@rnr/lib/icons/MessageSquare';
-import { Plus } from '@rnr/lib/icons/Plus';
-import { PlusCircle } from '@rnr/lib/icons/PlusCircle';
-import { User } from '@rnr/lib/icons/User';
-import { UserPlus } from '@rnr/lib/icons/UserPlus';
-import { Users } from '@rnr/lib/icons/Users';
+} from '@/components/ui/dropdown-menu';
+import { Icon } from '@/components/ui/icon';
+import { Text } from '@/components/ui/text';
+import {
+  Cloud,
+  Github,
+  LifeBuoy,
+  LogOut,
+  Mail,
+  MessageSquare,
+  Plus,
+  PlusCircle,
+  User,
+  UserPlus,
+  Users,
+} from 'lucide-react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function DropdownMenuPreview() {
+export function DropdownMenuPreview() {
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -48,58 +51,58 @@ export default function DropdownMenuPreview() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <User className='text-foreground' size={14} />
+            <Icon as={User} className='text-foreground' size={14} />
             <Text>Profile</Text>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Users className='text-foreground' size={14} />
+            <Icon as={Users} className='text-foreground' size={14} />
             <Text>Team</Text>
           </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
-              <UserPlus className='text-foreground' size={14} />
+              <Icon as={UserPlus} className='text-foreground' size={14} />
               <Text>Invite users</Text>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <Animated.View entering={FadeIn.duration(200)}>
                 <DropdownMenuItem>
-                  <Mail className='text-foreground' size={14} />
+                  <Icon as={Mail} className='text-foreground' size={14} />
                   <Text>Email</Text>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <MessageSquare className='text-foreground' size={14} />
+                  <Icon as={MessageSquare} className='text-foreground' size={14} />
                   <Text>Message</Text>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <PlusCircle className='text-foreground' size={14} />
+                  <Icon as={PlusCircle} className='text-foreground' size={14} />
                   <Text>More...</Text>
                 </DropdownMenuItem>
               </Animated.View>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
           <DropdownMenuItem>
-            <Plus className='text-foreground' size={14} />
+            <Icon as={Plus} className='text-foreground' size={14} />
             <Text>New Team</Text>
             <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Github className='text-foreground' size={14} />
+          <Icon as={Github} className='text-foreground' size={14} />
           <Text>GitHub</Text>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <LifeBuoy className='text-foreground' size={14} />
+          <Icon as={LifeBuoy} className='text-foreground' size={14} />
           <Text>Support</Text>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>
-          <Cloud className='text-foreground' size={14} />
+          <Icon as={Cloud} className='text-foreground' size={14} />
           <Text>API</Text>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className='text-foreground' size={14} />
+          <Icon as={LogOut} className='text-foreground' size={14} />
           <Text>Log out</Text>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

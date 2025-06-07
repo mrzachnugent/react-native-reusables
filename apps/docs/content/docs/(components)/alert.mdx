@@ -3,14 +3,13 @@ title: Alert
 description: Displays a callout for user attention.
 ---
 
-import alertPreview from "!!raw-loader!@docs/previews/alert/alert-default";
-import alertDestructivePreview from "!!raw-loader!@docs/previews/alert/alert-destructive";
+import alertPreview from "!!raw-loader!@/examples/alert/alert-default";
+import alertDestructivePreview from "!!raw-loader!@/examples/alert/alert-destructive";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AlertPreview } from "@docs/previews/alert/alert-default";
-import { AlertDestructive } from "@docs/previews/alert/alert-destructive";
+import { AlertPreview, AlertDestructive } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <div className="h-5"/>
@@ -27,7 +26,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     ```json doc-gen:file
     {
-      "file": "./previews/alert/alert-default.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/alert/alert-default.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -105,7 +104,7 @@ import { Terminal } from '@/lib/icons/Terminal';
 
     ```json doc-gen:file
     {
-      "file": "./previews/alert/alert-default.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/alert/alert-default.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -130,7 +129,7 @@ import { Terminal } from '@/lib/icons/Terminal';
 
     ```json doc-gen:file
     {
-      "file": "./previews/alert/alert-destructive.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/alert/alert-destructive.tsx",
       "codeblock": {
         "lang": "tsx"
       }

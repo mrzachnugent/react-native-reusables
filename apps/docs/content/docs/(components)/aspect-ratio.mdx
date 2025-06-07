@@ -3,13 +3,13 @@ title: Aspect Ratio
 description: Displays content within a desired ratio.
 ---
 
-import aspectRatioPreview from "!!raw-loader!@docs/previews/aspect-ratio";
+import aspectRatioPreview from "!!raw-loader!@/examples/aspect-ratio";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AspectRatioPreview } from "@docs/previews/aspect-ratio";
+import { AspectRatioPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -33,7 +33,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     ```json doc-gen:file
     {
-      "file": "./previews/aspect-ratio.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/aspect-ratio.tsx",
       "codeblock": {
         "lang": "tsx"
       }

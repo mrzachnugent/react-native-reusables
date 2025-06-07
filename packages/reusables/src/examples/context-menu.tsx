@@ -1,7 +1,3 @@
-import * as React from 'react';
-import { Platform } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -16,8 +12,12 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '@rnr/components/ui/context-menu';
-import { Text } from '@rnr/components/ui/text';
+} from '@/components/ui/context-menu';
+import { Text } from '@/components/ui/text';
+import * as React from 'react';
+import { Platform } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function ContextMenuPreview() {
   const insets = useSafeAreaInsets();
@@ -32,7 +32,7 @@ export function ContextMenuPreview() {
   const [radioValue, setRadioValue] = React.useState('pedro');
 
   return (
-    <ContextMenu>
+    <ContextMenu className='w-full'>
       <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] mx-auto web:cursor-default items-center justify-center rounded-md border border-border border-dashed'>
         <Text className='text-foreground text-sm native:text-lg'>
           {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}

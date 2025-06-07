@@ -5,19 +5,26 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { CalendarDays } from 'lucide-react-native';
 import { View } from 'react-native';
-
-// TODO(zach): use only 1 component for hover card
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function HoverCardPreview() {
+  const insets = useSafeAreaInsets();
+  const contentInsets = {
+    top: insets.top,
+    bottom: insets.bottom,
+    left: 12,
+    right: 12,
+  };
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
         <Button variant='link' size='lg'>
+          <Icon as={CalendarDays} />
           <Text>@nextjs</Text>
         </Button>
       </HoverCardTrigger>
-      <HoverCardContent className='w-80 native:w-96'>
-        <View style={{ width: 320 }} className='flex flex-row justify-between gap-4'>
+      <HoverCardContent insets={contentInsets} className='w-80 native:w-96'>
+        <View className='flex flex-row justify-between gap-4'>
           <Avatar alt='Vercel avatar'>
             <AvatarImage source={{ uri: 'https://github.com/vercel.png' }} />
             <AvatarFallback>
@@ -30,7 +37,7 @@ export function HoverCardPreview() {
               The React Framework – created and maintained by @vercel.
             </Text>
             <View className='flex flex-row items-center pt-2 gap-2'>
-              <Icon as={CalendarDays} size={14} className='text-foreground opacity-70' />
+              <CalendarDays size={14} className='text-foreground opacity-70' />
               <Text className='text-xs native:text-sm text-muted-foreground'>
                 Joined December 2021
               </Text>

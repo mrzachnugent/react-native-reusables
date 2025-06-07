@@ -3,14 +3,14 @@ title: Hover Card
 description: For sighted users to preview content available behind a link.
 ---
 
-import hoverCardPreview from "!!raw-loader!@docs/previews/hover-card/hover-card-web";
+import hoverCardPreview from "!!raw-loader!@/examples/hover-card";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { HoverCardPreview } from "@docs/previews/hover-card/hover-card-web";
+import { HoverCardPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -34,7 +34,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     ```json doc-gen:file
     {
-      "file": "./previews/hover-card/hover-card-native.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/hover-card.tsx",
       "codeblock": {
         "lang": "tsx"
       }

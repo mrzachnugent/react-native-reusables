@@ -17,6 +17,10 @@ const config = {
     'react-native-calendars',
     'react-native-swipe-gestures',
     'react-native-toast-message',
+
+    'expo-router',
+    'react-navigation',
+    'expo-modules-core',
   ],
   images: {
     remotePatterns: [

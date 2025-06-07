@@ -14,13 +14,10 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { Text } from '@/components/ui/text';
-import { useNavigation } from 'expo-router';
 import * as React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-// TODO(zach): use only 1 component for menubar
 
 export function MenubarPreview() {
   const insets = useSafeAreaInsets();
@@ -36,14 +33,24 @@ export function MenubarPreview() {
   const [isChecked, setIsChecked] = React.useState(false);
   const [isChecked2, setIsChecked2] = React.useState(false);
   const [radio, setRadio] = React.useState('michael');
-  const navigation = useNavigation();
-  React.useEffect(() => {
-    const sub = navigation.addListener('blur', () => {
-      onValueChange(undefined);
-    });
 
-    return sub;
-  }, []);
+  /**
+   * NOTE:
+   * On mobile, we need to close the menu before navigating to a new screen
+   * since the portal overlays all screens.
+   * 
+   * For example:
+   * ```tsx
+      const navigation = useNavigation();
+      React.useEffect(() => {
+        const sub = navigation.addListener('blur', () => {
+          onValueChange(undefined);
+        });
+
+        return sub;
+      }, []);
+   * ```
+   */
 
   function closeSubs() {
     setIsSubOpen(false);

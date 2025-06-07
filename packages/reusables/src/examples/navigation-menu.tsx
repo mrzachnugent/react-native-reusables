@@ -10,13 +10,10 @@ import {
 } from '@/components/ui/navigation-menu';
 import { Text } from '@/components/ui/text';
 import type { TextRef } from '@rn-primitives/types';
-import { useNavigation } from 'expo-router';
 import { Sparkles } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-// TODO(zach): use only 1 component for navigation menu
 
 export function NavigationMenuPreview() {
   const insets = useSafeAreaInsets();
@@ -27,19 +24,26 @@ export function NavigationMenuPreview() {
     right: 12,
   };
   const [value, setValue] = React.useState<string>();
-  const navigation = useNavigation();
 
   function closeAll() {
     setValue('');
   }
 
-  React.useEffect(() => {
-    const sub = navigation.addListener('blur', () => {
-      closeAll();
-    });
+  /**
+   * NOTE:
+   * On mobile, we need to close the menu before navigating to a new screen
+   * since the portal overlays all screens.
+   * 
+   * For example:
+   * ```tsx
+      const navigation = useNavigation();
+      React.useEffect(() => {
+        const sub = navigation.addListener('blur', closeAll);
 
-    return sub;
-  }, []);
+        return sub;
+      }, []);
+   * ```
+   */
 
   return (
     <NavigationMenu value={value} onValueChange={setValue}>
