@@ -3,19 +3,16 @@ title: Badge
 description: Displays a badge or a component that looks like a badge.
 ---
 
-import badgePreview from "!!raw-loader!@docs/previews/badge/badge-default";
-import badgeDestructivePreview from "!!raw-loader!@docs/previews/badge/badge-destructive";
-import badgeOutlinePreview from "!!raw-loader!@docs/previews/badge/badge-outline";
-import badgeSecondaryPreview from "!!raw-loader!@docs/previews/badge/badge-secondary";
+import badgePreview from "!!raw-loader!@/examples/badge/badge-default";
+import badgeDestructivePreview from "!!raw-loader!@/examples/badge/badge-destructive";
+import badgeOutlinePreview from "!!raw-loader!@/examples/badge/badge-outline";
+import badgeSecondaryPreview from "!!raw-loader!@/examples/badge/badge-secondary";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { BadgePreview } from "@docs/previews/badge/badge-default";
-import { BadgeDestructivePreview } from "@docs/previews/badge/badge-destructive";
-import { BadgeOutlinePreview } from "@docs/previews/badge/badge-outline";
-import { BadgeSecondaryPreview } from "@docs/previews/badge/badge-secondary";
+import { BadgePreview, BadgeDestructivePreview, BadgeOutlinePreview, BadgeSecondaryPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <div className="h-5"/>
@@ -32,7 +29,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     ```json doc-gen:file
     {
-      "file": "./previews/badge/badge-default.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/badge/badge-default.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -137,7 +134,7 @@ import { badgeVariants, badgeTextVariants } from "@/components/ui/badge"
 
     ```json doc-gen:file
     {
-      "file": "./previews/badge/badge-default.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/badge/badge-default.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -162,7 +159,7 @@ import { badgeVariants, badgeTextVariants } from "@/components/ui/badge"
 
     ```json doc-gen:file
     {
-      "file": "./previews/badge/badge-secondary.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/badge/badge-secondary.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -188,7 +185,7 @@ import { badgeVariants, badgeTextVariants } from "@/components/ui/badge"
 
     ```json doc-gen:file
     {
-      "file": "./previews/badge/badge-outline.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/badge/badge-outline.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -214,7 +211,7 @@ import { badgeVariants, badgeTextVariants } from "@/components/ui/badge"
 
     ```json doc-gen:file
     {
-      "file": "./previews/badge/badge-destructive.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/badge/badge-destructive.tsx",
       "codeblock": {
         "lang": "tsx"
       }

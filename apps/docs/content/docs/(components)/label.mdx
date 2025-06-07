@@ -3,13 +3,13 @@ title: Label
 description: Renders an accessible label associated with controls.
 ---
 
-import labelPreview from "!!raw-loader!@docs/previews/label/label-default";
+import labelPreview from "!!raw-loader!@/examples/label";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { LabelPreview } from "@docs/previews/label/label-default";
+import { LabelPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <div className="h-5"/>
@@ -29,7 +29,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     ```json doc-gen:file
     {
-      "file": "./previews/label/label-default.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/label.tsx",
       "codeblock": {
         "lang": "tsx"
       }

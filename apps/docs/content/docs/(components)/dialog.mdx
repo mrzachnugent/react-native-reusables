@@ -3,14 +3,14 @@ title: Dialog
 description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
 ---
 
-import dialogPreview from "!!raw-loader!@docs/previews/dialog/dialog-native";
+import dialogPreview from "!!raw-loader!@/examples/dialog";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { DialogPreview } from "@docs/previews/dialog/dialog-web";
+import { DialogPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
@@ -34,7 +34,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     ```json doc-gen:file
     {
-      "file": "./previews/dialog/dialog-native.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/dialog.tsx",
       "codeblock": {
         "lang": "tsx"
       }
