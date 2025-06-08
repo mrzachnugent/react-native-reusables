@@ -38,15 +38,16 @@
       {
         "name": "next"
       }
-    ],
+    ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "global.d.ts",
     "nativewind-env.d.ts",
-    "global.d.ts"
+    "next-env.d.ts",
+    "dist/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
