@@ -1,5 +1,6 @@
-import { Alert, AlertTitle, AlertDescription } from '@docs/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@docs/components/ui/alert';
 import { InfoIcon } from 'lucide-react';
+import Link from 'next/link';
 
 export function PortalInfoAlert() {
   return (
@@ -8,9 +9,9 @@ export function PortalInfoAlert() {
       <AlertTitle className='pb-0.5'>Note</AlertTitle>
       <AlertDescription>
         A{' '}
-        <a href='/docs/portal' className='hover:underline'>
+        <Link href='/docs/portal' className='hover:underline'>
           <code className='text-[0.813rem] bg-muted py-0.5 px-1 rounded-sm'>PortalHost</code>
-        </a>{' '}
+        </Link>{' '}
         is required at the root of your project for this to work on native platforms.
       </AlertDescription>
     </Alert>
