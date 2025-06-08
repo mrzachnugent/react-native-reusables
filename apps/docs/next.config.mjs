@@ -37,6 +37,7 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
   },
+  distDir: 'dist',
   // TODO:
   eslint: {
     ignoreDuringBuilds: true,
