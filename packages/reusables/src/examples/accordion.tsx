@@ -28,7 +28,7 @@ export function AccordionPreview() {
         <AccordionTrigger>
           <Text>Shipping Details</Text>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className='flex flex-col gap-4 text-balance'>
           <Text>
             We offer worldwide shipping through trusted courier partners. Standard delivery takes
             3-5 business days, while express shipping ensures delivery within 1-2 business days.
@@ -43,7 +43,7 @@ export function AccordionPreview() {
         <AccordionTrigger>
           <Text>Return Policy</Text>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className='flex flex-col gap-4 text-balance'>
           <Text>
             We stand behind our products with a comprehensive 30-day return policy. If you&apos;re
             not completely satisfied, simply return the item in its original condition.
