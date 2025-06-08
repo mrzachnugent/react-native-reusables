@@ -23,4 +23,4 @@ config.resolver = {
   sourceExts: [...resolver.sourceExts, 'mjs', 'cjs'],
 };
 
-module.exports = withNativeWind(config, { input: './global.css' });
+module.exports = withNativeWind(config, { input: './global.css', inlineRem: 16 });
