@@ -8,32 +8,50 @@ import { Text } from '@/components/ui/text';
 
 export function AccordionPreview() {
   return (
-    <Accordion type='single' collapsible className='w-full max-w-sm native:max-w-md'>
+    <Accordion type='single' collapsible className='w-full max-w-sm' defaultValue='item-1'>
       <AccordionItem value='item-1'>
         <AccordionTrigger>
-          <Text>Is it accessible?</Text>
+          <Text>Product Information</Text>
         </AccordionTrigger>
-        <AccordionContent>
-          <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+        <AccordionContent className='flex flex-col gap-4 text-balance'>
+          <Text>
+            Our flagship product combines cutting-edge technology with sleek design. Built with
+            premium materials, it offers unparalleled performance and reliability.
+          </Text>
+          <Text>
+            Key features include advanced processing capabilities, and an intuitive user interface
+            designed for both beginners and experts.
+          </Text>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value='item-2'>
         <AccordionTrigger>
-          <Text>What are universal components?</Text>
+          <Text>Shipping Details</Text>
         </AccordionTrigger>
         <AccordionContent>
           <Text>
-            In the world of React Native, universal components are components that work on both web
-            and native platforms.
+            We offer worldwide shipping through trusted courier partners. Standard delivery takes
+            3-5 business days, while express shipping ensures delivery within 1-2 business days.
+          </Text>
+          <Text>
+            All orders are carefully packaged and fully insured. Track your shipment in real-time
+            through our dedicated tracking portal.
           </Text>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value='item-3'>
         <AccordionTrigger>
-          <Text>Is this component universal?</Text>
+          <Text>Return Policy</Text>
         </AccordionTrigger>
         <AccordionContent>
-          <Text>Yes. Try it out on the web, iOS, and/or Android.</Text>
+          <Text>
+            We stand behind our products with a comprehensive 30-day return policy. If you&apos;re
+            not completely satisfied, simply return the item in its original condition.
+          </Text>
+          <Text>
+            Our hassle-free return process includes free return shipping and full refunds processed
+            within 48 hours of receiving the returned item.
+          </Text>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

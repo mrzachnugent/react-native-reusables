@@ -51,7 +51,7 @@ export function PreviewCardClient({
   }
 
   return (
-    <div className='group/copy relative flex flex-col min-h-96 border rounded-md bg-card p-4 not-prose'>
+    <div className='group/copy relative flex flex-col min-h-[450px] border rounded-md bg-card p-4 not-prose'>
       <div className='flex items-center justify-between'>
         <PlatformSwitcher
           onValueChange={onValueChange}

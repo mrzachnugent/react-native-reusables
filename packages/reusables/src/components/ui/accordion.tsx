@@ -83,7 +83,7 @@ function AccordionTrigger({
         <AccordionPrimitive.Trigger {...props} asChild>
           <Trigger
             className={cn(
-              'flex flex-row web:flex-1 items-center justify-between py-4 web:transition-all group web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground',
+              'flex flex-row web:flex-1 items-center justify-between py-4 web:transition-all group web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground web:cursor-default',
               className
             )}
           >
@@ -107,10 +107,10 @@ function AccordionContent({
 }) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
   return (
-    <TextClassContext.Provider value='native:text-lg'>
+    <TextClassContext.Provider value='native:text-lg text-sm'>
       <AccordionPrimitive.Content
         className={cn(
-          'overflow-hidden text-sm web:transition-all',
+          'overflow-hidden web:transition-all',
           isExpanded ? 'web:animate-accordion-down' : 'web:animate-accordion-up'
         )}
         {...props}
