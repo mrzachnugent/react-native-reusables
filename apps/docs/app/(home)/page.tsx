@@ -3,21 +3,20 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <main className='max-w-fd-container w-full mx-auto p-4'>
-      <div className='flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12'>
-        <div className='flex flex-col gap-1'>
-          <h1 className='text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:leading-[1.1]'>
-            A port of{' '}
-            <a href='https://ui.shadcn.com' target='_blank'>
-              shadcn/ui
-            </a>
-          </h1>
-          <p className='max-w-2xl text-lg font-light text-foreground'>
-            Bringing shadcn/ui to React Native. Beautifully crafted components with NativeWind, open
-            source, and <i>almost</i> as easy to use.
-          </p>
-        </div>
-        <div className='flex w-full items-center justify-start gap-2 pt-2'>
+    <main className='max-w-fd-container w-full mx-auto flex flex-col items-center gap-4'>
+      <div className='container flex flex-col items-center gap-2 py-8 text-center md:py-16 lg:py-20 xl:gap-4'>
+        <h1 className='text-primary leading-tighter max-w-3xl text-4xl font-semibold tracking-tight text-balance lg:leading-[1.1] lg:font-semibold xl:text-5xl xl:tracking-tighter'>
+          Build your Universal Component Library
+        </h1>
+        <p className='text-foreground max-w-3xl text-base text-balance sm:text-lg'>
+          Bringing{' '}
+          <a href='https://ui.shadcn.com' target='_blank'>
+            shadcn/ui
+          </a>{' '}
+          to React Native. Beautifully crafted components with NativeWind, open source, and{' '}
+          <i>almost</i> as easy to use.
+        </p>
+        <div className='flex w-full items-center justify-center gap-2 pt-2 **:data-[slot=button]:shadow-none'>
           <Button asChild size='sm'>
             <Link href='/docs'>Get Started</Link>
           </Button>

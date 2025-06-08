@@ -13,11 +13,8 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <div className='group flex items-center gap-1.5'>
-        <RnrIcon
-          strokeWidth={32}
-          className='transition-transform duration-500 group-hover:rotate-180 group-hover:scale-90'
-        />
-        <p className='opacity-80 dark:opacity-90 transition-opacity group-hover:opacity-100'>RNR</p>
+        <RnrIcon className='transition-transform opacity-80 duration-500 group-hover:rotate-180 group-hover:scale-95 flex-shrink-0' />
+        <p className='font-medium'>Reusables</p>
       </div>
     ),
   },
