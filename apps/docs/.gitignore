@@ -12,6 +12,7 @@
 /out/
 /build
 *.tsbuildinfo
+/dist
 
 # misc
 .DS_Store
