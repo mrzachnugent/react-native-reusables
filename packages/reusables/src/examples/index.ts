@@ -1,6 +1,5 @@
 export * from './accordion';
-export * from './alert/alert-default';
-export * from './alert/alert-destructive';
+export * from './alert';
 export * from './alert-dialog';
 export * from './aspect-ratio';
 export * from './avatar';

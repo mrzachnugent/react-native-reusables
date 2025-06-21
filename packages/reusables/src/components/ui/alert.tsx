@@ -7,7 +7,7 @@ import * as React from 'react';
 import { View, type ViewProps } from 'react-native';
 
 const alertVariants = cva(
-  'relative bg-background w-full rounded-lg border border-border px-4 py-3',
+  'relative bg-background w-full rounded-lg border border-border px-4 pt-3.5 pb-2',
   {
     variants: {
       variant: {
@@ -37,9 +37,15 @@ function Alert({
     iconClassName?: string;
   }) {
   return (
-    <TextClassContext.Provider value={cn('text-sm text-foreground', className)}>
+    <TextClassContext.Provider
+      value={cn(
+        'text-sm text-foreground',
+        variant === 'destructive' && 'text-destructive',
+        className
+      )}
+    >
       <View role='alert' className={alertVariants({ variant, className })} {...props}>
-        <View className='absolute left-3.5 top-4 -translate-y-0.5'>
+        <View className='absolute left-3.5 top-3'>
           <Icon
             as={icon}
             size={iconSize}
@@ -55,18 +61,23 @@ function Alert({
 function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) {
   return (
     <Text
-      className={cn(
-        'pl-7 mb-1 font-medium text-base leading-none tracking-tight text-foreground',
-        className
-      )}
+      className={cn('pl-6 ml-0.5 mb-1 min-h-4 font-medium leading-none tracking-tight', className)}
       {...props}
     />
   );
 }
 
 function AlertDescription({ className, ...props }: React.ComponentProps<typeof Text>) {
+  const textClass = React.useContext(TextClassContext);
   return (
-    <Text className={cn('pl-7 text-sm leading-relaxed text-foreground', className)} {...props} />
+    <Text
+      className={cn(
+        'pl-6 ml-0.5 pb-1.5 text-sm leading-relaxed text-muted-foreground',
+        textClass?.includes('text-destructive') && 'text-destructive/90',
+        className
+      )}
+      {...props}
+    />
   );
 }
 
