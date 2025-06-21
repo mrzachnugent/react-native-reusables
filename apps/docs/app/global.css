@@ -68,3 +68,7 @@
     @apply font-sans antialiased;
   }
 }
+
+html {
+	scroll-behavior: smooth;
+}
