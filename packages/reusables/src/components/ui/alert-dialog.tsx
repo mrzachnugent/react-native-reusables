@@ -1,10 +1,11 @@
 import { buttonTextVariants, buttonVariants } from '@/components/ui/button';
+import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import * as React from 'react';
 import { Platform, View, type ViewProps } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -12,26 +13,7 @@ const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 
 const AlertDialogPortal = AlertDialogPrimitive.Portal;
 
-function AlertDialogOverlayWeb({
-  className,
-  ...props
-}: AlertDialogPrimitive.OverlayProps & {
-  ref?: React.RefObject<AlertDialogPrimitive.OverlayRef>;
-}) {
-  const { open } = AlertDialogPrimitive.useRootContext();
-  return (
-    <AlertDialogPrimitive.Overlay
-      className={cn(
-        'z-50 bg-black/80 flex justify-center items-center p-2 fixed top-0 right-0 bottom-0 left-0',
-        open ? 'web:animate-in web:fade-in-0' : 'web:animate-out web:fade-out-0',
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-function AlertDialogOverlayNative({
+function AlertDialogOverlay({
   className,
   children,
   ...props
@@ -41,23 +23,20 @@ function AlertDialogOverlayNative({
   return (
     <AlertDialogPrimitive.Overlay
       className={cn(
-        'z-50 absolute top-0 right-0 bottom-0 left-0 bg-black/80 flex justify-center items-center p-2',
+        'absolute top-0 left-0 right-0 bottom-0 z-50 bg-black/50 flex justify-center items-center p-2',
+        Platform.select({
+          web: 'fixed data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+        }),
         className
       )}
       {...props}
-      asChild
     >
-      <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(150)}>
+      <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut.duration(150)}>
         {children}
-      </Animated.View>
+      </NativeOnlyAnimatedView>
     </AlertDialogPrimitive.Overlay>
   );
 }
-
-const AlertDialogOverlay = Platform.select({
-  web: AlertDialogOverlayWeb,
-  default: AlertDialogOverlayNative,
-});
 
 function AlertDialogContent({
   className,
@@ -74,10 +53,10 @@ function AlertDialogContent({
       <AlertDialogOverlay>
         <AlertDialogPrimitive.Content
           className={cn(
-            'z-50 max-w-lg gap-4 border border-border bg-background p-6 shadow-lg shadow-foreground/10 web:duration-200 rounded-lg',
-            open
-              ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
-              : 'web:animate-out web:fade-out-0 web:zoom-out-95',
+            'bg-background z-50 flex flex-col w-full max-w-[calc(100%-2rem)] gap-4 rounded-lg border border-border p-6 shadow-lg sm:max-w-lg',
+            Platform.select({
+              web: 'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 duration-200',
+            }),
             className
           )}
           {...props}
@@ -88,13 +67,17 @@ function AlertDialogContent({
 }
 
 function AlertDialogHeader({ className, ...props }: ViewProps) {
-  return <View className={cn('flex flex-col gap-2', className)} {...props} />;
+  return (
+    <TextClassContext.Provider value='text-center sm:text-left'>
+      <View className={cn('flex flex-col gap-2', className)} {...props} />
+    </TextClassContext.Provider>
+  );
 }
 
 function AlertDialogFooter({ className, ...props }: ViewProps) {
   return (
     <View
-      className={cn('flex flex-col-reverse sm:flex-row sm:justify-end gap-2', className)}
+      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
       {...props}
     />
   );
@@ -108,7 +91,7 @@ function AlertDialogTitle({
 }) {
   return (
     <AlertDialogPrimitive.Title
-      className={cn('text-lg native:text-xl text-foreground font-semibold', className)}
+      className={cn('text-lg text-foreground font-semibold', className)}
       {...props}
     />
   );
@@ -122,7 +105,7 @@ function AlertDialogDescription({
 }) {
   return (
     <AlertDialogPrimitive.Description
-      className={cn('text-sm native:text-base text-muted-foreground', className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   );
