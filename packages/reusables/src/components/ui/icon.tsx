@@ -10,7 +10,15 @@ function IconImpl({ as: IconComponent, ...props }: IconProps) {
   return <IconComponent {...props} />;
 }
 
-cssInterop(IconImpl, { className: 'style' });
+cssInterop(IconImpl, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: {
+      height: 'size',
+      width: 'size',
+    },
+  },
+});
 
 /**
  * A wrapper component for Lucide icons with NativeWind `className` support via `cssInterop`.
