@@ -28,6 +28,9 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
     <PreviewCard copyContent={alertDialogPreview} webPreview={<AlertDialogPreview />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
@@ -58,7 +61,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <Steps>
       <Step>
  
-        #### Install the following dependency:
+        **Install the following dependency:**
 
         ```
         npx expo install @rn-primitives/alert-dialog
@@ -67,7 +70,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       </Step>
       <Step>
  
-        #### Copy and paste the following code into your project.
+        **Copy and paste the following code into your project.**
 
         ```json doc-gen:file
         {
@@ -102,7 +105,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       </Step>
       <Step>
 
-        #### Update the import paths to match your project setup.
+        **Update the import paths to match your project setup.**
 
       </Step>
     </Steps>

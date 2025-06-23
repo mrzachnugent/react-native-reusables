@@ -8,7 +8,7 @@ import { Text } from '@/components/ui/text';
 
 export function AccordionPreview() {
   return (
-    <Accordion type='single' collapsible className='w-full max-w-sm' defaultValue='item-1'>
+    <Accordion type='single' collapsible className='w-full max-w-lg' defaultValue='item-1'>
       <AccordionItem value='item-1'>
         <AccordionTrigger>
           <Text>Product Information</Text>
