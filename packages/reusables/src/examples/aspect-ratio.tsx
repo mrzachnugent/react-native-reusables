@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 
 export function AspectRatioPreview() {
   return (
-    <AspectRatio ratio={16 / 9} className='relative h-full w-full overflow-hidden rounded-md'>
+    <AspectRatio ratio={16 / 9} className='relative aspect-video w-full overflow-hidden rounded-md'>
       <Image
         source={{
           uri: 'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
