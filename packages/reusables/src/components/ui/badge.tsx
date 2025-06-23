@@ -2,17 +2,31 @@ import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as Slot from '@rn-primitives/slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { View, ViewProps } from 'react-native';
+import { Platform, View, ViewProps } from 'react-native';
 
 const badgeVariants = cva(
-  'web:inline-flex items-center rounded-full border border-border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2',
+  cn(
+    'group flex-row items-center justify-center rounded-md border border-border px-2 py-0.5 w-fit shrink-0 gap-1 overflow-hidden',
+    Platform.select({
+      web: 'whitespace-nowrap [&>svg]:size-3 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow]',
+    })
+  ),
   {
     variants: {
       variant: {
-        default: 'border-transparent bg-primary web:hover:opacity-80 active:opacity-80',
-        secondary: 'border-transparent bg-secondary web:hover:opacity-80 active:opacity-80',
-        destructive: 'border-transparent bg-destructive web:hover:opacity-80 active:opacity-80',
-        outline: 'text-foreground',
+        default: cn(
+          'border-transparent bg-primary',
+          Platform.select({ web: '[a&]:hover:bg-primary/90' })
+        ),
+        secondary: cn(
+          'border-transparent bg-secondary',
+          Platform.select({ web: '[a&]:hover:bg-secondary/90' })
+        ),
+        destructive: cn(
+          'border-transparent bg-destructive',
+          Platform.select({ web: '[a&]:hover:bg-destructive/90' })
+        ),
+        outline: Platform.select({ web: '[a&]:hover:bg-accent [a&]:hover:text-accent-foreground' }),
       },
     },
     defaultVariants: {
@@ -21,12 +35,12 @@ const badgeVariants = cva(
   }
 );
 
-const badgeTextVariants = cva('text-xs font-semibold ', {
+const badgeTextVariants = cva('text-xs font-medium', {
   variants: {
     variant: {
       default: 'text-primary-foreground',
       secondary: 'text-secondary-foreground',
-      destructive: 'text-destructive-foreground',
+      destructive: 'text-white',
       outline: 'text-foreground',
     },
   },
