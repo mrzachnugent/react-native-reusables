@@ -25,14 +25,14 @@ function AlertDialogOverlay({
       className={cn(
         'absolute top-0 left-0 right-0 bottom-0 z-50 bg-black/50 flex justify-center items-center p-2',
         Platform.select({
-          web: 'fixed data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+          web: 'fixed animate-in fade-in-0',
         }),
         className
       )}
       {...props}
     >
       <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut.duration(150)}>
-        {children}
+        <>{children}</>
       </NativeOnlyAnimatedView>
     </AlertDialogPrimitive.Overlay>
   );
@@ -46,8 +46,6 @@ function AlertDialogContent({
   ref?: React.RefObject<AlertDialogPrimitive.ContentRef>;
   portalHost?: string;
 }) {
-  const { open } = AlertDialogPrimitive.useRootContext();
-
   return (
     <AlertDialogPortal hostName={portalHost}>
       <AlertDialogOverlay>
@@ -55,7 +53,7 @@ function AlertDialogContent({
           className={cn(
             'bg-background z-50 flex flex-col w-full max-w-[calc(100%-2rem)] gap-4 rounded-lg border border-border p-6 shadow-lg sm:max-w-lg',
             Platform.select({
-              web: 'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 duration-200',
+              web: 'animate-in fade-in-0 zoom-in-95 duration-200',
             }),
             className
           )}
