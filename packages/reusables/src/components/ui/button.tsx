@@ -70,7 +70,7 @@ const buttonTextVariants = cva(
         ghost: 'group-active:text-accent-foreground',
         link: cn(
           'text-primary group-active:underline',
-          Platform.select({ web: 'underline-offset-4 hover:underline' })
+          Platform.select({ web: 'group-hover:underline underline-offset-4 hover:underline' })
         ),
       },
       size: {
