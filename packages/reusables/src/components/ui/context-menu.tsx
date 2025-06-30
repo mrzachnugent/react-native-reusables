@@ -35,10 +35,15 @@ function ContextMenuSubTrigger({
   const { open } = ContextMenuPrimitive.useSubContext();
   const icon = Platform.OS === 'web' ? ChevronRight : open ? ChevronUp : ChevronDown;
   return (
-    <TextClassContext.Provider value={cn('text-sm select-none', open && 'text-accent-foreground')}>
+    <TextClassContext.Provider
+      value={cn(
+        'text-sm select-none group-active:text-accent-foreground',
+        open && 'text-accent-foreground'
+      )}
+    >
       <ContextMenuPrimitive.SubTrigger
         className={cn(
-          'flex flex-row items-center rounded-sm px-2 py-1.5',
+          'group flex flex-row items-center rounded-sm px-2 py-1.5 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none [&_svg]:pointer-events-none',
           }),
@@ -133,19 +138,20 @@ function ContextMenuItem({
   return (
     <TextClassContext.Provider
       value={cn(
-        'select-none text-sm text-popover-foreground',
-        variant === 'destructive' && 'text-destructive'
+        'select-none text-sm text-popover-foreground group-active:text-popover-foreground',
+        variant === 'destructive' && 'text-destructive group-active:text-destructive'
       )}
     >
       <ContextMenuPrimitive.Item
         className={cn(
-          'relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5',
+          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent',
           Platform.select({
             web: cn(
               'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
               variant === 'destructive' && 'focus:bg-destructive/10 dark:focus:bg-destructive/20'
             ),
           }),
+          variant === 'destructive' && 'active:bg-destructive/10 dark:active:bg-destructive/20',
           props.disabled && 'opacity-50',
           inset && 'pl-8',
           className
@@ -165,12 +171,12 @@ function ContextMenuCheckboxItem({
   children?: React.ReactNode;
 }) {
   return (
-    <TextClassContext.Provider value='text-sm text-popover-foreground select-none'>
+    <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <ContextMenuPrimitive.CheckboxItem
         className={cn(
-          'relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
-            web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none  data-[disabled]:pointer-events-none',
+            web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
           }),
           props.disabled && 'opacity-50',
           className
@@ -203,10 +209,10 @@ function ContextMenuRadioItem({
   children?: React.ReactNode;
 }) {
   return (
-    <TextClassContext.Provider value='text-sm text-popover-foreground select-none'>
+    <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <ContextMenuPrimitive.RadioItem
         className={cn(
-          'relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none  data-[disabled]:pointer-events-none',
           }),
