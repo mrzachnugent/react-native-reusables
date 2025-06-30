@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import * as LabelPrimitive from '@rn-primitives/label';
 import * as React from 'react';
+import { Platform } from 'react-native';
 
 function Label({
   className,
@@ -14,17 +15,19 @@ function Label({
 }) {
   return (
     <LabelPrimitive.Root
-      className='web:cursor-default'
+      className={cn(
+        'flex flex-row items-center gap-2 select-none',
+        Platform.select({
+          web: 'leading-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
+        })
+      )}
       onPress={onPress}
       onLongPress={onLongPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     >
       <LabelPrimitive.Text
-        className={cn(
-          'text-sm text-foreground native:text-base font-medium leading-none web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70',
-          className
-        )}
+        className={cn('text-foreground text-sm leading-none font-medium', className)}
         {...props}
       />
     </LabelPrimitive.Root>

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import { TextInput, type TextInputProps } from 'react-native';
+import { Platform, TextInput, type TextInputProps } from 'react-native';
 
 function Input({
   className,
@@ -12,11 +12,21 @@ function Input({
   return (
     <TextInput
       className={cn(
-        'web:flex h-10 native:h-12 web:w-full rounded-md border border-input bg-background px-3 web:py-2 text-base lg:text-sm native:text-lg native:leading-[1.25] text-foreground placeholder:text-muted-foreground web:ring-offset-background file:border-0 file:bg-transparent file:font-medium web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
-        props.editable === false && 'opacity-50 web:cursor-not-allowed',
+        'dark:bg-input/30 border-input flex flex-row items-center h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-foreground shadow-xs',
+        props.editable === false &&
+          cn(
+            'opacity-50',
+            Platform.select({ web: 'disabled:pointer-events-none disabled:cursor-not-allowed' })
+          ),
+        Platform.select({
+          web: cn(
+            'md:text-sm placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground transition-[color,box-shadow] outline-none',
+            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+            'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive'
+          ),
+        }),
         className
       )}
-      placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
       {...props}
     />
   );
