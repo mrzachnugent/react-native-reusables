@@ -7,20 +7,30 @@ import { Platform } from 'react-native';
 
 function Checkbox({
   className,
+  checkedClassName,
+  indicatorClassName,
   ...props
 }: CheckboxPrimitive.RootProps & {
+  checkedClassName?: string;
+  indicatorClassName?: string;
   ref?: React.RefObject<CheckboxPrimitive.RootRef>;
 }) {
   return (
     <CheckboxPrimitive.Root
       className={cn(
-        'web:peer h-4 w-4 native:h-[20] native:w-[20] shrink-0 rounded-sm native:rounded border border-primary web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-        props.checked && 'bg-primary',
+        'border-input dark:bg-input/30 size-4 shrink-0 rounded-[4px] border shadow-xs',
+        Platform.select({
+          web: 'peer focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed',
+        }),
+        props.checked && cn('border-primary', checkedClassName),
+        props.disabled && 'opacity-50',
         className
       )}
       {...props}
     >
-      <CheckboxPrimitive.Indicator className={cn('items-center justify-center h-full w-full')}>
+      <CheckboxPrimitive.Indicator
+        className={cn('items-center justify-center h-full w-full bg-primary', indicatorClassName)}
+      >
         <Icon
           as={Check}
           size={12}
