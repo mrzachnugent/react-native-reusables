@@ -16,7 +16,6 @@ import {
 import { Text } from '@/components/ui/text';
 import * as React from 'react';
 import { Platform } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function ContextMenuPreview() {
@@ -28,18 +27,17 @@ export function ContextMenuPreview() {
     right: 12,
   };
   const [checkboxValue, setCheckboxValue] = React.useState(false);
-  const [subCheckboxValue, setSubCheckboxValue] = React.useState(false);
+  const [checkboxValue2, setCheckboxValue2] = React.useState(false);
   const [radioValue, setRadioValue] = React.useState('pedro');
 
   return (
-    <ContextMenu className='w-full'>
-      <ContextMenuTrigger className='flex h-[150px] w-full max-w-[300px] mx-auto web:cursor-default items-center justify-center rounded-md border border-border border-dashed'>
-        <Text className='text-foreground text-sm native:text-lg'>
-          {Platform.OS === 'web' ? 'Right click here' : 'Long press here'}
+    <ContextMenu className='w-[300px] h-[150px]'>
+      <ContextMenuTrigger className='flex w-full h-full items-center justify-center rounded-md border border-border border-dashed web:outline-none web:cursor-default'>
+        <Text className='text-sm'>
+          {Platform.select({ web: 'Right click here', default: 'Long press here' })}
         </Text>
       </ContextMenuTrigger>
-
-      <ContextMenuContent align='start' insets={contentInsets} className='w-64 native:w-72'>
+      <ContextMenuContent className='w-52' insets={contentInsets}>
         <ContextMenuItem inset>
           <Text>Back</Text>
           <ContextMenuShortcut>⌘[</ContextMenuShortcut>
@@ -52,54 +50,55 @@ export function ContextMenuPreview() {
           <Text>Reload</Text>
           <ContextMenuShortcut>⌘R</ContextMenuShortcut>
         </ContextMenuItem>
-
         <ContextMenuSub>
           <ContextMenuSubTrigger inset>
             <Text>More Tools</Text>
           </ContextMenuSubTrigger>
-          <ContextMenuSubContent className='web:w-48 native:mt-1'>
-            <Animated.View entering={FadeIn.duration(200)}>
-              <ContextMenuItem>
-                <Text>Save Page As...</Text>
-                <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
-              </ContextMenuItem>
-              <ContextMenuItem>
-                <Text>Create Shortcut...</Text>
-              </ContextMenuItem>
-
-              <ContextMenuSeparator />
-              <ContextMenuItem>
-                <Text>Developer Tools</Text>
-              </ContextMenuItem>
-            </Animated.View>
+          <ContextMenuSubContent className='web:w-44'>
+            <ContextMenuItem>
+              <Text>Save Page...</Text>
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <Text>Create Shortcut...</Text>
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <Text>Name Window...</Text>
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>
+              <Text>Developer Tools</Text>
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem variant='destructive'>
+              <Text>Delete</Text>
+            </ContextMenuItem>
           </ContextMenuSubContent>
         </ContextMenuSub>
-
         <ContextMenuSeparator />
         <ContextMenuCheckboxItem
+          closeOnPress={false}
           checked={checkboxValue}
           onCheckedChange={setCheckboxValue}
-          closeOnPress={false}
         >
-          <Text>Show Bookmarks Bar</Text>
-          <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
+          <Text>Show Bookmarks</Text>
         </ContextMenuCheckboxItem>
         <ContextMenuCheckboxItem
-          checked={subCheckboxValue}
-          onCheckedChange={setSubCheckboxValue}
           closeOnPress={false}
+          checked={checkboxValue2}
+          onCheckedChange={setCheckboxValue2}
         >
           <Text>Show Full URLs</Text>
         </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
         <ContextMenuRadioGroup value={radioValue} onValueChange={setRadioValue}>
-          <ContextMenuLabel inset>People</ContextMenuLabel>
-          <ContextMenuSeparator />
-          <ContextMenuRadioItem value='pedro' closeOnPress={false}>
-            <Text>Elmer Fudd</Text>
+          <ContextMenuLabel inset>
+            <Text>People</Text>
+          </ContextMenuLabel>
+          <ContextMenuRadioItem closeOnPress={false} value='pedro'>
+            <Text>Pedro Duarte</Text>
           </ContextMenuRadioItem>
-          <ContextMenuRadioItem value='colm' closeOnPress={false}>
-            <Text>Foghorn Leghorn</Text>
+          <ContextMenuRadioItem closeOnPress={false} value='colm'>
+            <Text>Colm Tuite</Text>
           </ContextMenuRadioItem>
         </ContextMenuRadioGroup>
       </ContextMenuContent>
