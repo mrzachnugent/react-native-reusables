@@ -1,4 +1,5 @@
 import { Icon } from '@/components/ui/icon';
+import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as ContextMenuPrimitive from '@rn-primitives/context-menu';
@@ -13,6 +14,7 @@ import {
   View,
   type ViewStyle,
 } from 'react-native';
+import { FadeIn } from 'react-native-reanimated';
 
 const ContextMenu = ContextMenuPrimitive.Root;
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
@@ -66,16 +68,18 @@ function ContextMenuSubContent({
   ref?: React.RefObject<ContextMenuPrimitive.SubContentRef>;
 }) {
   return (
-    <ContextMenuPrimitive.SubContent
-      className={cn(
-        'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg',
-        Platform.select({
-          web: 'animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 fade-in-0 data-[state=closed]:zoom-out-95 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-context-menu-content-transform-origin)',
-        }),
-        className
-      )}
-      {...props}
-    />
+    <NativeOnlyAnimatedView entering={FadeIn}>
+      <ContextMenuPrimitive.SubContent
+        className={cn(
+          'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg',
+          Platform.select({
+            web: 'animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 fade-in-0 data-[state=closed]:zoom-out-95 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-context-menu-content-transform-origin)',
+          }),
+          className
+        )}
+        {...props}
+      />
+    </NativeOnlyAnimatedView>
   );
 }
 
@@ -102,22 +106,24 @@ function ContextMenuContent({
         })}
         className={overlayClassName}
       >
-        <TextClassContext.Provider value='text-popover-foreground'>
-          <ContextMenuPrimitive.Content
-            className={cn(
-              'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg',
-              Platform.select({
-                web: cn(
-                  'animate-in fade-in-0 zoom-in-95 z-50 max-h-(--radix-context-menu-content-available-height) min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) cursor-default',
-                  props.side === 'bottom' && 'slide-in-from-top-2',
-                  props.side === 'top' && 'slide-in-from-bottom-2'
-                ),
-              }),
-              className
-            )}
-            {...props}
-          />
-        </TextClassContext.Provider>
+        <NativeOnlyAnimatedView entering={FadeIn}>
+          <TextClassContext.Provider value='text-popover-foreground'>
+            <ContextMenuPrimitive.Content
+              className={cn(
+                'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg',
+                Platform.select({
+                  web: cn(
+                    'animate-in fade-in-0 zoom-in-95 z-50 max-h-(--radix-context-menu-content-available-height) min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) cursor-default [&>*]:cursor-auto',
+                    props.side === 'bottom' && 'slide-in-from-top-2',
+                    props.side === 'top' && 'slide-in-from-bottom-2'
+                  ),
+                }),
+                className
+              )}
+              {...props}
+            />
+          </TextClassContext.Provider>
+        </NativeOnlyAnimatedView>
       </ContextMenuPrimitive.Overlay>
     </ContextMenuPrimitive.Portal>
   );

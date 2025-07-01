@@ -3,7 +3,8 @@ import { cn } from '@/lib/utils';
 import * as HoverCardPrimitive from '@rn-primitives/hover-card';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { NativeOnlyAnimatedView } from './native-only-animated-view';
 
 const HoverCard = HoverCardPrimitive.Root;
 
@@ -17,28 +18,29 @@ function HoverCardContent({
 }: HoverCardPrimitive.ContentProps & {
   ref?: React.RefObject<HoverCardPrimitive.ContentRef>;
 }) {
-  const { open } = HoverCardPrimitive.useRootContext();
   return (
     <HoverCardPrimitive.Portal>
-      <HoverCardPrimitive.Overlay
-        style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}
-      >
-        <Animated.View entering={FadeIn}>
+      <HoverCardPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
+        <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut}>
           <TextClassContext.Provider value='text-popover-foreground'>
             <HoverCardPrimitive.Content
               align={align}
               sideOffset={sideOffset}
               className={cn(
-                'z-50 w-64 rounded-md border border-border bg-popover p-4 shadow-md shadow-foreground/5 web:outline-none web:cursor-auto data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-                open
-                  ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
-                  : 'web:animate-out web:fade-out-0 web:zoom-out-95',
+                'bg-popover z-50 w-64 rounded-md border border-border p-4 shadow-md outline-hidden',
+                Platform.select({
+                  web: cn(
+                    'animate-in fade-in-0 zoom-in-95 origin-(--radix-hover-card-content-transform-origin) cursor-default [&>*]:cursor-auto',
+                    props.side === 'bottom' && 'slide-in-from-top-2',
+                    props.side === 'top' && 'slide-in-from-bottom-2'
+                  ),
+                }),
                 className
               )}
               {...props}
             />
           </TextClassContext.Provider>
-        </Animated.View>
+        </NativeOnlyAnimatedView>
       </HoverCardPrimitive.Overlay>
     </HoverCardPrimitive.Portal>
   );
