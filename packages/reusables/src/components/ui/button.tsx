@@ -16,21 +16,25 @@ const buttonVariants = cva(
       variant: {
         default: cn(
           'bg-primary shadow-sm active:bg-primary/90',
-          Platform.select({ web: 'hover:bg-primary/90' })
+          Platform.select({ web: 'hover:bg-primary/90', native: 'shadow-black/5' })
         ),
         destructive: cn(
           'bg-destructive shadow-sm active:bg-destructive/90 dark:bg-destructive/60',
           Platform.select({
             web: 'hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
+            native: 'shadow-black/5',
           })
         ),
         outline: cn(
           'border border-border bg-background shadow-sm active:bg-accent dark:bg-input/30 dark:border-input dark:active:bg-input/50',
-          Platform.select({ web: 'hover:bg-accent dark:hover:bg-input/50' })
+          Platform.select({
+            web: 'hover:bg-accent dark:hover:bg-input/50',
+            native: 'shadow-black/5',
+          })
         ),
         secondary: cn(
           'bg-secondary shadow-sm active:bg-secondary/80',
-          Platform.select({ web: 'hover:bg-secondary/80' })
+          Platform.select({ web: 'hover:bg-secondary/80', native: 'shadow-black/5' })
         ),
         ghost: cn(
           'active:bg-accent dark:active:bg-accent/50',
