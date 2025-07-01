@@ -110,10 +110,10 @@ function ContextMenuContent({
           <TextClassContext.Provider value='text-popover-foreground'>
             <ContextMenuPrimitive.Content
               className={cn(
-                'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg',
+                'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg min-w-[8rem]',
                 Platform.select({
                   web: cn(
-                    'animate-in fade-in-0 zoom-in-95 z-50 max-h-(--radix-context-menu-content-available-height) min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) cursor-default [&>*]:cursor-auto',
+                    'animate-in fade-in-0 zoom-in-95 z-50 max-h-(--radix-context-menu-content-available-height) origin-(--radix-context-menu-content-transform-origin) cursor-default',
                     props.side === 'bottom' && 'slide-in-from-top-2',
                     props.side === 'top' && 'slide-in-from-bottom-2'
                   ),
