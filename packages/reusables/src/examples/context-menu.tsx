@@ -91,9 +91,7 @@ export function ContextMenuPreview() {
         </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
         <ContextMenuRadioGroup value={radioValue} onValueChange={setRadioValue}>
-          <ContextMenuLabel inset>
-            <Text>People</Text>
-          </ContextMenuLabel>
+          <ContextMenuLabel inset>People</ContextMenuLabel>
           <ContextMenuRadioItem closeOnPress={false} value='pedro'>
             <Text>Pedro Duarte</Text>
           </ContextMenuRadioItem>
