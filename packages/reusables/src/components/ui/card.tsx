@@ -1,7 +1,7 @@
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import { Text, type TextProps, View, type ViewProps } from 'react-native';
+import { Platform, Text, type TextProps, View, type ViewProps } from 'react-native';
 
 function Card({
   className,
@@ -13,6 +13,9 @@ function Card({
     <View
       className={cn(
         'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm',
+        Platform.select({
+          native: 'shadow-black/5',
+        }),
         className
       )}
       {...props}

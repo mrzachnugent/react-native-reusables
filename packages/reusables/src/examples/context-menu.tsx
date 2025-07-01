@@ -34,7 +34,7 @@ export function ContextMenuPreview() {
     <ContextMenu className='w-[300px] h-[150px]'>
       <ContextMenuTrigger className='flex w-full h-full items-center justify-center rounded-md border border-border border-dashed web:outline-none web:cursor-default'>
         <Text className='text-sm'>
-          {Platform.select({ web: 'Right click here', default: 'Long press here' })}
+          {Platform.select({ web: 'Right click here', native: 'Long press here' })}
         </Text>
       </ContextMenuTrigger>
       <ContextMenuContent className='w-52' insets={contentInsets}>
