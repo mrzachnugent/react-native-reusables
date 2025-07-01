@@ -12,22 +12,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import {
-  Cloud,
-  Github,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  User,
-  UserPlus,
-  Users,
-} from 'lucide-react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function DropdownMenuPreview() {
@@ -46,63 +31,66 @@ export function DropdownMenuPreview() {
           <Text>Open</Text>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent insets={contentInsets} className='w-64 native:w-72'>
+      <DropdownMenuContent insets={contentInsets} className='w-56' align='start'>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Icon as={User} className='text-foreground' size={14} />
             <Text>Profile</Text>
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Icon as={Users} className='text-foreground' size={14} />
+            <Text>Billing</Text>
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Text>Settings</Text>
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Text>Keyboard shortcuts</Text>
+            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
             <Text>Team</Text>
           </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
-              <Icon as={UserPlus} className='text-foreground' size={14} />
               <Text>Invite users</Text>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
-              <Animated.View entering={FadeIn.duration(200)}>
-                <DropdownMenuItem>
-                  <Icon as={Mail} className='text-foreground' size={14} />
-                  <Text>Email</Text>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Icon as={MessageSquare} className='text-foreground' size={14} />
-                  <Text>Message</Text>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Icon as={PlusCircle} className='text-foreground' size={14} />
-                  <Text>More...</Text>
-                </DropdownMenuItem>
-              </Animated.View>
+              <DropdownMenuItem>
+                <Text>Email</Text>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Text>Message</Text>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Text>More...</Text>
+              </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
           <DropdownMenuItem>
-            <Icon as={Plus} className='text-foreground' size={14} />
             <Text>New Team</Text>
             <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Icon as={Github} className='text-foreground' size={14} />
           <Text>GitHub</Text>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Icon as={LifeBuoy} className='text-foreground' size={14} />
           <Text>Support</Text>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>
-          <Icon as={Cloud} className='text-foreground' size={14} />
           <Text>API</Text>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Icon as={LogOut} className='text-foreground' size={14} />
           <Text>Log out</Text>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
