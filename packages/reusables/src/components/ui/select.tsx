@@ -1,10 +1,13 @@
 import { Icon } from '@/components/ui/icon';
+import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
 import { cn } from '@/lib/utils';
 import * as SelectPrimitive from '@rn-primitives/select';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react-native';
+import { Check, ChevronDown, ChevronDownIcon, ChevronUpIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { ScrollView } from 'react-native-gesture-handler';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { TextClassContext } from './text';
 
 type Option = SelectPrimitive.Option;
 
@@ -12,64 +15,57 @@ const Select = SelectPrimitive.Root;
 
 const SelectGroup = SelectPrimitive.Group;
 
-const SelectValue = SelectPrimitive.Value;
+function SelectValue({
+  ref,
+  className,
+  ...props
+}: SelectPrimitive.ValueProps & {
+  ref?: React.RefObject<SelectPrimitive.ValueRef>;
+  className?: string;
+}) {
+  const { value } = SelectPrimitive.useRootContext();
+  return (
+    <SelectPrimitive.Value
+      ref={ref}
+      className={cn(
+        'line-clamp-1 flex flex-row items-center gap-2',
+        !value && 'text-muted-foreground',
+        className
+      )}
+      {...props}
+    />
+  );
+}
 
 function SelectTrigger({
   ref,
   className,
   children,
+  size = 'default',
   ...props
 }: SelectPrimitive.TriggerProps & {
   ref?: React.RefObject<SelectPrimitive.TriggerRef>;
   children?: React.ReactNode;
+  size?: 'default' | 'sm';
 }) {
   return (
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-        'flex flex-row h-10 native:h-12 items-center text-sm justify-between rounded-md border border-input bg-background px-3 py-2 web:ring-offset-background text-muted-foreground web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 [&>span]:line-clamp-1',
-        props.disabled && 'web:cursor-not-allowed opacity-50',
+        'border-input dark:bg-input/30 dark:active:bg-input/50 flex flex-row items-center justify-between gap-2 rounded-md border bg-background px-3 py-2 shadow-sm h-9',
+        Platform.select({
+          web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:hover:bg-input/50 w-fit whitespace-nowrap transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 text-sm',
+          native: 'shadow-black/5',
+        }),
+        props.disabled && 'opacity-50',
+        size === 'sm' && 'h-8 py-1.5',
         className
       )}
       {...props}
     >
       <>{children}</>
-      <Icon as={ChevronDown} size={16} aria-hidden={true} className='text-foreground opacity-50' />
+      <Icon as={ChevronDown} aria-hidden={true} className='size-4 text-muted-foreground' />
     </SelectPrimitive.Trigger>
-  );
-}
-
-/**
- * Platform: WEB ONLY
- */
-function SelectScrollUpButton({ className, ...props }: SelectPrimitive.ScrollUpButtonProps) {
-  if (Platform.OS !== 'web') {
-    return null;
-  }
-  return (
-    <SelectPrimitive.ScrollUpButton
-      className={cn('flex web:cursor-default items-center justify-center py-1', className)}
-      {...props}
-    >
-      <Icon as={ChevronUp} size={14} className='text-foreground' />
-    </SelectPrimitive.ScrollUpButton>
-  );
-}
-
-/**
- * Platform: WEB ONLY
- */
-function SelectScrollDownButton({ className, ...props }: SelectPrimitive.ScrollDownButtonProps) {
-  if (Platform.OS !== 'web') {
-    return null;
-  }
-  return (
-    <SelectPrimitive.ScrollDownButton
-      className={cn('flex web:cursor-default items-center justify-center py-1', className)}
-      {...props}
-    >
-      <Icon as={ChevronDown} size={14} className='text-foreground' />
-    </SelectPrimitive.ScrollDownButton>
   );
 }
 
@@ -84,38 +80,53 @@ function SelectContent({
   className?: string;
   portalHost?: string;
 }) {
-  const { open } = SelectPrimitive.useRootContext();
-
   return (
     <SelectPrimitive.Portal hostName={portalHost}>
-      <SelectPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
-        <Animated.View className='z-50' entering={FadeIn} exiting={FadeOut}>
-          <SelectPrimitive.Content
-            className={cn(
-              'relative z-50 max-h-96 min-w-[8rem] rounded-md border border-border bg-popover shadow-md shadow-foreground/10 py-2 px-1 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-              position === 'popper' &&
-                'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
-              open
-                ? 'web:zoom-in-95 web:animate-in web:fade-in-0'
-                : 'web:zoom-out-95 web:animate-out web:fade-out-0',
-              className
-            )}
-            position={position}
-            {...props}
-          >
-            <SelectScrollUpButton />
-            <SelectPrimitive.Viewport
+      <SelectPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
+        <TextClassContext.Provider value='text-popover-foreground'>
+          <NativeOnlyAnimatedView className='z-50' entering={FadeIn} exiting={FadeOut}>
+            <SelectPrimitive.Content
               className={cn(
-                'p-1',
+                'bg-popover relative z-50 min-w-[8rem] rounded-md border border-border shadow-md',
+                Platform.select({
+                  web: cn(
+                    'animate-in fade-in-0 zoom-in-95 max-h-52 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto',
+                    props.side === 'bottom' && 'slide-in-from-top-2',
+                    props.side === 'top' && 'slide-in-from-bottom-2'
+                  ),
+                  native: 'p-1 shadow-black/5',
+                }),
                 position === 'popper' &&
-                  'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
+                  Platform.select({
+                    web: cn(
+                      props.side === 'bottom' && 'translate-y-1',
+                      props.side === 'top' && '-translate-y-1'
+                    ),
+                  }),
+                className
               )}
+              position={position}
+              {...props}
             >
-              {children}
-            </SelectPrimitive.Viewport>
-            <SelectScrollDownButton />
-          </SelectPrimitive.Content>
-        </Animated.View>
+              <SelectScrollUpButton />
+              <SelectPrimitive.Viewport
+                className={cn(
+                  'p-1',
+                  position === 'popper' &&
+                    cn(
+                      'w-full',
+                      Platform.select({
+                        web: 'h-[var(--radix-select-trigger-height)]  min-w-[var(--radix-select-trigger-width)]',
+                      })
+                    )
+                )}
+              >
+                {children}
+              </SelectPrimitive.Viewport>
+              <SelectScrollDownButton />
+            </SelectPrimitive.Content>
+          </NativeOnlyAnimatedView>
+        </TextClassContext.Provider>
       </SelectPrimitive.Overlay>
     </SelectPrimitive.Portal>
   );
@@ -129,10 +140,7 @@ function SelectLabel({
 }) {
   return (
     <SelectPrimitive.Label
-      className={cn(
-        'py-1.5 native:pb-2 pl-8 native:pl-10 pr-2 text-popover-foreground text-sm native:text-base font-semibold',
-        className
-      )}
+      className={cn('text-muted-foreground px-2 py-1.5 text-xs', className)}
       {...props}
     />
   );
@@ -148,18 +156,21 @@ function SelectItem({
   return (
     <SelectPrimitive.Item
       className={cn(
-        'relative web:group flex flex-row w-full web:cursor-default web:select-none items-center rounded-sm py-1.5 native:py-2 pl-8 native:pl-10 pr-2 web:hover:bg-accent/50 active:bg-accent web:outline-none web:focus:bg-accent',
-        props.disabled && 'web:pointer-events-none opacity-50',
+        'group active:bg-accent relative flex flex-row w-full items-center gap-2 rounded-sm py-1.5 pr-8 pl-2',
+        Platform.select({
+          web: 'focus:bg-accent focus:text-accent-foreground outline-none cursor-default data-[disabled]:pointer-events-none [&_svg]:pointer-events-none  *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2',
+        }),
+        props.disabled && 'opacity-50',
         className
       )}
       {...props}
     >
-      <View className='absolute left-2 native:left-3.5 flex h-3.5 native:pt-px w-3.5 items-center justify-center'>
+      <View className='absolute right-2 flex size-3.5 items-center justify-center'>
         <SelectPrimitive.ItemIndicator>
-          <Icon as={Check} size={16} strokeWidth={3} className='text-popover-foreground' />
+          <Icon as={Check} className='text-muted-foreground shrink-0 size-4' />
         </SelectPrimitive.ItemIndicator>
       </View>
-      <SelectPrimitive.ItemText className='text-sm native:text-lg text-popover-foreground native:text-base web:group-focus:text-accent-foreground' />
+      <SelectPrimitive.ItemText className='group-active:text-accent-foreground text-sm select-none' />
     </SelectPrimitive.Item>
   );
 }
@@ -171,11 +182,72 @@ function SelectSeparator({
   ref?: React.RefObject<SelectPrimitive.SeparatorRef>;
 }) {
   return (
-    <SelectPrimitive.Separator className={cn('-mx-1 my-1 h-px bg-muted', className)} {...props} />
+    <SelectPrimitive.Separator
+      className={cn(
+        'bg-border -mx-1 my-1 h-px',
+        Platform.select({ web: 'pointer-events-none' }),
+        className
+      )}
+      {...props}
+    />
   );
 }
 
+/**
+ * @platform Web only
+ * Returns null on native platforms
+ */
+function SelectScrollUpButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+  if (Platform.OS !== 'web') {
+    return null;
+  }
+  return (
+    <SelectPrimitive.ScrollUpButton
+      className={cn('flex cursor-default items-center justify-center py-1', className)}
+      {...props}
+    >
+      <Icon as={ChevronUpIcon} className='size-4' />
+    </SelectPrimitive.ScrollUpButton>
+  );
+}
+
+/**
+ * @platform Web only
+ * Returns null on native platforms
+ */
+function SelectScrollDownButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+  if (Platform.OS !== 'web') {
+    return null;
+  }
+  return (
+    <SelectPrimitive.ScrollDownButton
+      className={cn('flex cursor-default items-center justify-center py-1', className)}
+      {...props}
+    >
+      <Icon as={ChevronDownIcon} className='size-4' />
+    </SelectPrimitive.ScrollDownButton>
+  );
+}
+
+/**
+ * @platform Native only
+ * Returns the children on the web
+ */
+function NativeSelectScrollView({ className, ...props }: React.ComponentProps<typeof ScrollView>) {
+  if (Platform.OS === 'web') {
+    return <>{props.children}</>;
+  }
+  return <ScrollView className={cn('max-h-52', className)} {...props} />;
+}
+
 export {
+  NativeSelectScrollView,
   Select,
   SelectContent,
   SelectGroup,
