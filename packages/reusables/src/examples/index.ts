@@ -24,3 +24,4 @@ export * from './input';
 export * from './label';
 export * from './menubar';
 export * from './navigation-menu';
+export * from './popover';

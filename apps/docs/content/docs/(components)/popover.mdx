@@ -1,23 +1,23 @@
 ---
-title: Navigation Menu
-description: A collection of links for navigating screens.
+title: Popover
+description: Displays rich content in a portal, triggered by a button.
 ---
 
 
-import navigationMenuPreview from "!!raw-loader!@/examples/navigation-menu";
+import popoverPreview from "!!raw-loader!@/examples/popover";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { NavigationMenuPreview } from "@docs/components/reusables";
+import { PopoverPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
   links={[
-    { title: 'Docs', url: 'https://rnprimitives.com/navigation-menu/' },
-    { title: 'API Reference', url: 'https://rnprimitives.com/navigation-menu/#props' },
+    { title: 'Docs', url: 'https://rnprimitives.com/popover/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/popover/#props' },
   ]}
 />
 
@@ -29,19 +29,9 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={navigationMenuPreview} webPreview={<NavigationMenuPreview />}/>
+    <PreviewCard copyContent={popoverPreview} webPreview={<PopoverPreview />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
-    ```json doc-gen:file
-    {
-        "file": "./node_modules/@rnr/reusables/src/components/ui/text.tsx",
-        "codeblock": {
-        "lang": "tsx",
-        "meta": "title=\"@/components/ui/text.tsx\""
-        }
-    }
-    ```
 
     ```json doc-gen:file
     {
@@ -63,7 +53,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="cli">
-     <CommandTabs args={["add", "navigation-menu"]}/>
+     <CommandTabs args={["add", "popover"]}/>
   </SectionTabsContent>
   <SectionTabsContent value="manual">
     <Steps> 
@@ -72,7 +62,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         **Install the following dependency:**
 
         ```
-        npx expo install @rn-primitives/navigation-menu
+        npx expo install @rn-primitives/popover
         ```
 
       </Step>
@@ -84,10 +74,10 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/reusables/src/components/ui/navigation-menu.tsx",
+          "file": "./node_modules/@rnr/reusables/src/components/ui/popover.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"@/components/ui/navigation-menu.tsx\""
+            "meta": "title=\"@/components/ui/popover.tsx\""
           }
         }
         ```
@@ -104,35 +94,22 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ```tsx
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@docs/components/ui/navigation-menu"
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { Text } from '@/components/ui/text';
 
 ```
 
 ```tsx
-<NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem>
-      <NavigationMenuTrigger>
-        <Text>Item One</Text>
-      </NavigationMenuTrigger>
-      <NavigationMenuContent>
-        <NavigationMenuLink>
-          <Text>Link</Text>
-        </NavigationMenuLink>
-      </NavigationMenuContent>
-    </NavigationMenuItem>
-  </NavigationMenuList>
-</NavigationMenu>
+<Popover>
+  <PopoverTrigger>
+    <Text>Open</Text>
+  </PopoverTrigger>
+  <PopoverContent>
+    <Text>Place content for the popover here.</Text>
+  </PopoverContent>
+</Popover>
 ```
 
-
-{/* TODO(zach): add warning about managing overlay on native */}
