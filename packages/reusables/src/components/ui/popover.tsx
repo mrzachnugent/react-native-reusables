@@ -1,8 +1,9 @@
+import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
+import { TextClassContext } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
 import * as PopoverPrimitive from '@rn-primitives/popover';
 import { Platform, StyleSheet } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { cn } from '@/lib/utils';
-import { TextClassContext } from '@/components/ui/text';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const Popover = PopoverPrimitive.Root;
 
@@ -20,20 +21,28 @@ function PopoverContent({
 }) {
   return (
     <PopoverPrimitive.Portal hostName={portalHost}>
-      <PopoverPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
-        <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut}>
+      <PopoverPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
+        <NativeOnlyAnimatedView entering={FadeIn.duration(200)} exiting={FadeOut}>
           <TextClassContext.Provider value='text-popover-foreground'>
             <PopoverPrimitive.Content
               align={align}
               sideOffset={sideOffset}
               className={cn(
-                'z-50 w-72 rounded-md web:cursor-auto border border-border bg-popover p-4 shadow-md shadow-foreground/5 web:outline-none web:data-[side=bottom]:slide-in-from-top-2 web:data-[side=left]:slide-in-from-right-2 web:data-[side=right]:slide-in-from-left-2 web:data-[side=top]:slide-in-from-bottom-2 web:animate-in web:zoom-in-95 web:fade-in-0',
+                'bg-popover z-50 w-72 rounded-md border border-border p-4 shadow-md outline-hidden',
+                Platform.select({
+                  web: cn(
+                    'animate-in fade-in-0 zoom-in-95 origin-(--radix-popover-content-transform-origin) ',
+                    props.side === 'bottom' && 'slide-in-from-top-2',
+                    props.side === 'top' && 'slide-in-from-bottom-2'
+                  ),
+                  native: 'shadow-black/5',
+                }),
                 className
               )}
               {...props}
             />
           </TextClassContext.Provider>
-        </Animated.View>
+        </NativeOnlyAnimatedView>
       </PopoverPrimitive.Overlay>
     </PopoverPrimitive.Portal>
   );
