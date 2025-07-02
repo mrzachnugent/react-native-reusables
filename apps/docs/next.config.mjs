@@ -17,6 +17,7 @@ const config = {
     'react-native-calendars',
     'react-native-swipe-gestures',
     'react-native-toast-message',
+    'react-native-gesture-handler',
 
     'expo-router',
     'react-navigation',
