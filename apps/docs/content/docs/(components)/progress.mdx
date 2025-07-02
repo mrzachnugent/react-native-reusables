@@ -1,23 +1,23 @@
 ---
-title: Popover
-description: Displays rich content in a portal, triggered by a button.
+title: Progress
+description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 ---
 
 
-import popoverPreview from "!!raw-loader!@/examples/popover";
+import progressPreview from "!!raw-loader!@/examples/progress";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { PopoverPreview } from "@docs/components/reusables";
+import { ProgressPreview } from "@docs/components/reusables";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <ExternalLinks
   links={[
-    { title: 'Docs', url: 'https://rnprimitives.com/popover/' },
-    { title: 'API Reference', url: 'https://rnprimitives.com/popover/#props' },
+    { title: 'Docs', url: 'https://rnprimitives.com/progress/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/progress/#props' },
   ]}
 />
 
@@ -29,13 +29,13 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={popoverPreview} webPreview={<PopoverPreview />}/>
+    <PreviewCard copyContent={progressPreview} webPreview={<ProgressPreview />}/>
   </SectionTabsContent>
   <SectionTabsContent value="code">
 
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/reusables/src/examples/popover.tsx",
+      "file": "./node_modules/@rnr/reusables/src/examples/progress.tsx",
       "codeblock": {
         "lang": "tsx"
       }
@@ -53,7 +53,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="cli">
-     <CommandTabs args={["add", "popover"]}/>
+     <CommandTabs args={["add", "progress"]}/>
   </SectionTabsContent>
   <SectionTabsContent value="manual">
     <Steps> 
@@ -62,7 +62,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         **Install the following dependency:**
 
         ```
-        npx expo install @rn-primitives/popover
+        npx expo install @rn-primitives/progress
         ```
 
       </Step>
@@ -74,10 +74,10 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/reusables/src/components/ui/popover.tsx",
+          "file": "./node_modules/@rnr/reusables/src/components/ui/progress.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"@/components/ui/popover.tsx\""
+            "meta": "title=\"@/components/ui/progress.tsx\""
           }
         }
         ```
@@ -90,26 +90,11 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ### Usage
 
-<PortalInfoAlert />
-
 ```tsx
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Text } from '@/components/ui/text';
-
+import { Progress } from "@/components/ui/progress"
 ```
 
 ```tsx
-<Popover>
-  <PopoverTrigger>
-    <Text>Open</Text>
-  </PopoverTrigger>
-  <PopoverContent>
-    <Text>Place content for the popover here.</Text>
-  </PopoverContent>
-</Popover>
+<Progress value={33} />
 ```
 
