@@ -26,3 +26,4 @@ export * from './menubar';
 export * from './navigation-menu';
 export * from './popover';
 export * from './progress';
+export * from './radio-group';

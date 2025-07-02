@@ -1,0 +1,113 @@
+---
+title: Radio Group
+description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+---
+
+import radioGroupPreview from "!!raw-loader!@/examples/radio-group";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { RadioGroupPreview } from "@docs/components/reusables";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<ExternalLinks
+  links={[
+    { title: 'Docs', url: 'https://rnprimitives.com/radio-group/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/radio-group/#props' },
+  ]}
+/>
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={radioGroupPreview} webPreview={<RadioGroupPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/reusables/src/examples/radio-group.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "radio-group"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        **Install the following dependency:**
+
+        ```
+        npx expo install @rn-primitives/radio-group
+        ```
+
+      </Step>
+      <Step>
+ 
+        **Copy and paste the following code into your project.**
+
+
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/radio-group.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/radio-group.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+    </Steps>
+
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import { View } from "react-native"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
+```
+
+```tsx
+<RadioGroup defaultValue="comfortable">
+  <View className="flex flex-row items-center gap-3">
+    <RadioGroupItem value="default" id="r1" />
+    <Label htmlFor="r1">Default</Label>
+  </View>
+  <View className="flex flex-row items-center gap-3">
+    <RadioGroupItem value="comfortable" id="r2" />
+    <Label htmlFor="r2">Comfortable</Label>
+  </View>
+  <View className="flex flex-row items-center gap-3">
+    <RadioGroupItem value="compact" id="r3" />
+    <Label htmlFor="r3">Compact</Label>
+  </View>
+</RadioGroup>
+```
+
