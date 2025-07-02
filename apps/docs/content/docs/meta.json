@@ -7,12 +7,10 @@
     "---Getting started---",
     "!index",
     "!installation",
-    "!icons",
-    "!portal",
-    "[DoorOpen][Introduction](/docs)",
+    "!cli",
+    "[BookOpen][Introduction](/docs)",
     "[FolderDown][Installation](/docs/installation)",
-    "[Library][Icons](/docs/icons)",
-    "[Replace][Portal](/docs/portal)",
+    "[SquareTerminal][CLI](/docs/cli)",
     "---Customization---",
     "!components-json",
     "!theming",
@@ -22,7 +20,6 @@
     "!/(components)",
     ".../(components)",
     "------",
-    "recipes",
     "..."
   ]
 }
