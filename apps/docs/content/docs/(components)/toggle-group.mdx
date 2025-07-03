@@ -1,0 +1,113 @@
+---
+title: Toggle Group
+description: A set of two-state buttons that can be toggled on or off.
+---
+
+import toggleGroupPreview from "!!raw-loader!@/examples/toggle-group";
+import { CommandTabs } from "@docs/components/command-tabs";
+import { CopyButton } from "@docs/components/copy-button";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PreviewCard } from "@docs/components/preview-card";
+import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { ToggleGroupPreview } from "@docs/components/reusables";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<ExternalLinks
+  links={[  
+    { title: 'Docs', url: 'https://rnprimitives.com/toggle-group/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/toggle-group/#props' },
+  ]}
+/>
+
+<div className="h-5"/>
+
+<SectionTabs defaultValue="preview">
+  <SectionTabsList>
+    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
+    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="preview">
+    <PreviewCard copyContent={toggleGroupPreview} webPreview={<ToggleGroupPreview />}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="code">
+
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/reusables/src/examples/toggle-group.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </SectionTabsContent>
+</SectionTabs>
+
+
+## Installation
+
+<SectionTabs defaultValue="cli">
+  <SectionTabsList>
+    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
+    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
+  </SectionTabsList>
+  <SectionTabsContent value="cli">
+     <CommandTabs args={["add", "toggle-group"]}/>
+  </SectionTabsContent>
+  <SectionTabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        **Install the following dependency:**
+
+        ```
+        npx expo install @rn-primitives/toggle-group
+        ```
+
+      </Step>
+      <Step>
+ 
+        **Copy and paste the following code into your project.**
+
+
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/reusables/src/components/ui/toggle-group.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/toggle-group.tsx\""
+          }
+        }
+        ```
+ 
+      </Step>
+    </Steps>
+
+  </SectionTabsContent>
+</SectionTabs>
+
+### Usage
+
+```tsx
+import { Bold, Italic, Underline } from 'lucide-react-native';
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
+import * as React from 'react';
+```
+
+```tsx
+  const [value, setValue] = React.useState<string[]>([]);
+  return (
+    <ToggleGroup value={value} onValueChange={setValue} variant='outline' type='multiple'>
+      <ToggleGroupItem isFirst value='bold' aria-label='Toggle bold'>
+        <ToggleGroupIcon as={Bold} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value='italic' aria-label='Toggle italic'>
+        <ToggleGroupIcon as={Italic} />
+      </ToggleGroupItem>
+      <ToggleGroupItem isLast value='strikethrough' aria-label='Toggle strikethrough'>
+        <ToggleGroupIcon as={Underline} />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  );
+```
+
