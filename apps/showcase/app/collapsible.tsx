@@ -1,4 +1,4 @@
-import { CollapsiblePreview } from '@/examples/collapsible';
+import { CollapsiblePreview } from '@/new-york/examples/collapsible';
 import * as React from 'react';
 import { View } from 'react-native';
 

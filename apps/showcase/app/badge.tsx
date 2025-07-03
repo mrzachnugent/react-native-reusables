@@ -1,4 +1,4 @@
-import { BadgePreview } from '@/examples/badge';
+import { BadgePreview } from '@/new-york/examples/badge';
 import { View } from 'react-native';
 
 export default function BadgeScreen() {

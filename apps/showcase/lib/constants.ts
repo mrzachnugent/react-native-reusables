@@ -1,7 +1,3 @@
-import { Lib } from '@rnr/reusables';
-
-export const { NAV_THEME } = Lib;
-
 export const COMPONENTS = [
   'accordion',
   'alert',
@@ -9,26 +5,17 @@ export const COMPONENTS = [
   'aspect-ratio',
   'avatar',
   'badge',
-  'bottom-sheet',
   'button',
-  'calendar',
   'card',
   'checkbox',
-  'combobox',
   'collapsible',
-  'command',
   'context-menu',
-  'data-table',
-  'date-picker',
   'dialog',
   'dropdown-menu',
-  'form',
   'hover-card',
   'input',
   'label',
-  'material-top-tabs',
   'menubar',
-  'navigation-menu',
   'popover',
   'progress',
   'radio-group',
@@ -37,15 +24,11 @@ export const COMPONENTS = [
   'skeleton',
   'slider',
   'switch',
-  'table',
   'tabs',
   'textarea',
-  'toast',
   'toggle',
   'toggle-group',
-  'toolbar',
   'tooltip',
-  'typography',
 ];
 
 export const PRIMITIVES = [
@@ -61,7 +44,6 @@ export const PRIMITIVES = [
   'hover-card',
   'label',
   'menubar',
-  'navigation-menu',
   'popover',
   'portal',
   'progress',

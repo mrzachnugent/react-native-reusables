@@ -1,4 +1,4 @@
-import { MenubarPreview } from '@/examples/menubar';
+import { MenubarPreview } from '@/new-york/examples/menubar';
 import * as React from 'react';
 import { View } from 'react-native';
 

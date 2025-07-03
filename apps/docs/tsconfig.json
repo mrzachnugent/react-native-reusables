@@ -24,12 +24,6 @@
       "@docs/*": [
         "./*"
       ],
-      "@rnr/components/ui/*": [
-        "./components/reusables"
-      ],
-      "@rnr/lib/icons/*": [
-        "./components/reusables"
-      ],
       "@/*": [
         "../../packages/reusables/src/*"
       ]

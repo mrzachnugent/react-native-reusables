@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Icon } from '@/components/ui/icon';
-import { Input } from '@/components/ui/input';
-import { Text } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { Button } from '@/new-york/components/ui/button';
+import { Icon } from '@/new-york/components/ui/icon';
+import { Input } from '@/new-york/components/ui/input';
+import { Text } from '@/new-york/components/ui/text';
+import { cn } from '@/new-york/lib/utils';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { COMPONENTS } from '@showcase/lib/constants';

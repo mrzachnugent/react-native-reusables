@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
 import { Pressable, View } from 'react-native';
-import { CircleUserRound } from '@/lib/icons/CircleUserRound';
-import { cn } from '@/lib/utils';
+import { CircleUserRound } from 'lucide-react-native';
+import { Icon } from '@/new-york/components/ui/icon';
+import { cn } from '@/new-york/lib/utils';
 
 export function ModalToggle() {
   return (
@@ -18,7 +19,7 @@ export function ModalToggle() {
             pressed && 'opacity-70'
           )}
         >
-          <CircleUserRound className='text-foreground' size={24} strokeWidth={1.25} />
+          <Icon as={CircleUserRound} className='text-foreground' size={24} strokeWidth={1.25} />
         </View>
       )}
     </Pressable>

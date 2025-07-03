@@ -1,4 +1,4 @@
-import { SwitchPreview } from '@/examples/switch';
+import { SwitchPreview } from '@/new-york/examples/switch';
 import * as React from 'react';
 import { View } from 'react-native';
 

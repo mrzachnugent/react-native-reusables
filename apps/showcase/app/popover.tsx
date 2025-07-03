@@ -1,4 +1,4 @@
-import { PopoverPreview } from '@/examples/popover';
+import { PopoverPreview } from '@/new-york/examples/popover';
 import * as React from 'react';
 import { View } from 'react-native';
 

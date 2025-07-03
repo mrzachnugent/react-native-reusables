@@ -1,4 +1,4 @@
-import { AlertDialogPreview } from '@/examples';
+import { AlertDialogPreview } from '@/new-york/examples';
 import { View } from 'react-native';
 
 export default function AlertDialogScreen() {

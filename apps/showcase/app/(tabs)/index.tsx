@@ -10,16 +10,22 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+} from '@/new-york/components/ui/alert-dialog';
+import { Avatar, AvatarFallback, AvatarImage } from '@/new-york/components/ui/avatar';
+import { Button } from '@/new-york/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/new-york/components/ui/card';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
+} from '@/new-york/components/ui/context-menu';
 import {
   Dialog,
   DialogClose,
@@ -29,7 +35,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@/new-york/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,15 +44,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Text } from '@/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Muted } from '@/components/ui/typography';
-import { CalendarDays } from '@/lib/icons/CalendarDays';
-import { ChevronDown } from '@/lib/icons/ChevronDown';
-import { Info } from '@/lib/icons/Info';
-import { cn } from '@/lib/utils';
+} from '@/new-york/components/ui/dropdown-menu';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/new-york/components/ui/hover-card';
+import { Text } from '@/new-york/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/new-york/components/ui/tooltip';
+import { CalendarDays, ChevronDown, Info } from 'lucide-react-native';
+import { Icon } from '@/new-york/components/ui/icon';
+import { cn } from '@/new-york/lib/utils';
 
 export default function ExampleScreen() {
   return (
@@ -57,7 +61,7 @@ export default function ExampleScreen() {
             <CardTitle className='pt-1'>Team Members</CardTitle>
             <Tooltip delayDuration={300}>
               <TooltipTrigger className='web:focus:outline-none'>
-                <Info size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
+                <Icon as={Info} size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
               </TooltipTrigger>
               <TooltipContent side='bottom' insets={contentInsets} className='gap-1 py-3 px-5'>
                 <Text className='native:text-lg font-bold'>Things to try:</Text>
@@ -123,7 +127,7 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
           className='flex-row gap-2 native:pr-3'
         >
           <Text>{value}</Text>
-          <ChevronDown size={18} className='text-foreground' />
+          <Icon as={ChevronDown} size={18} className='text-foreground' />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' insets={contentInsets} className='w-64 native:w-72'>
@@ -140,7 +144,7 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
             )}
           >
             <Text>Viewer</Text>
-            <Muted>Can view and comment.</Muted>
+            <Text variant='muted'>Can view and comment.</Text>
           </DropdownMenuItem>
           <DropdownMenuItem
             onPress={() => {
@@ -152,7 +156,7 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
             )}
           >
             <Text>Billing</Text>
-            <Muted>Can view, comment, and manage billing.</Muted>
+            <Text variant='muted'>Can view, comment, and manage billing.</Text>
           </DropdownMenuItem>
           <DropdownMenuItem
             onPress={() => {
@@ -161,7 +165,7 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
             className={cn('flex-col items-start gap-1', value === 'Owner' ? 'bg-secondary/70' : '')}
           >
             <Text>Owner</Text>
-            <Muted>Admin-level access to all resources</Muted>
+            <Text variant='muted'>Admin-level access to all resources</Text>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
@@ -191,7 +195,7 @@ function TeamMemberHoverCard({ name }: { name: string }) {
               Wishes they were part of the triangle company.
             </Text>
             <View className='flex flex-row items-center pt-2 gap-2'>
-              <CalendarDays size={14} className='text-foreground opacity-70' />
+              <Icon as={CalendarDays} size={14} className='text-foreground opacity-70' />
               <Text className='text-xs native:text-sm text-muted-foreground'>
                 Fingers crossed since December 2021
               </Text>
