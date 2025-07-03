@@ -7,6 +7,7 @@
     "clean": "rm -rf .next .source node_modules",
     "dev": "next dev",
     "start": "next start",
+    "registry:build:new-york": "shadcn build ./new-york-registry.json --output ./public/r/new-york",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "react-native-svg": "15.11.2",
     "react-native-web": "~0.20.0",
     "remark-variables": "^1.4.9",
+    "shadcn": "2.8.0-canary.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },
