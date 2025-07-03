@@ -35,3 +35,4 @@ export * from './tabs';
 export * from './textarea';
 export * from './toggle';
 export * from './toggle-group';
+export * from './tooltip';

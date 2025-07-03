@@ -1,17 +1,22 @@
+import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as TooltipPrimitive from '@rn-primitives/tooltip';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { FadeInDown, FadeInUp, FadeOut } from 'react-native-reanimated';
 
-const Tooltip = TooltipPrimitive.Root;
+function Tooltip(props: TooltipPrimitive.RootProps) {
+  return <TooltipPrimitive.Root delayDuration={0} {...props} />;
+}
+
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 function TooltipContent({
   className,
   sideOffset = 4,
   portalHost,
+  side = 'top',
   ...props
 }: TooltipPrimitive.ContentProps & {
   ref?: React.RefObject<TooltipPrimitive.ContentRef>;
@@ -19,22 +24,36 @@ function TooltipContent({
 }) {
   return (
     <TooltipPrimitive.Portal hostName={portalHost}>
-      <TooltipPrimitive.Overlay style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}>
-        <Animated.View
-          entering={Platform.select({ web: undefined, default: FadeIn })}
-          exiting={Platform.select({ web: undefined, default: FadeOut })}
+      <TooltipPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
+        <NativeOnlyAnimatedView
+          entering={
+            side === 'top'
+              ? FadeInDown.withInitialValues({ transform: [{ translateY: 3 }] }).duration(150)
+              : FadeInUp.withInitialValues({ transform: [{ translateY: -5 }] })
+          }
+          exiting={FadeOut}
         >
-          <TextClassContext.Provider value='text-sm native:text-base text-popover-foreground'>
+          <TextClassContext.Provider value='text-xs text-primary-foreground'>
             <TooltipPrimitive.Content
               sideOffset={sideOffset}
               className={cn(
-                'z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 shadow-md shadow-foreground/5 web:animate-in web:fade-in-0 web:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+                'bg-primary z-50 rounded-md px-3 py-1.5',
+                Platform.select({
+                  web: cn(
+                    'animate-in fade-in-0 zoom-in-95 w-fit origin-(--radix-tooltip-content-transform-origin) text-balance',
+                    side === 'bottom' && 'slide-in-from-top-2',
+                    side === 'left' && 'slide-in-from-right-2',
+                    side === 'right' && 'slide-in-from-left-2',
+                    side === 'top' && 'slide-in-from-bottom-2'
+                  ),
+                }),
                 className
               )}
+              side={side}
               {...props}
             />
           </TextClassContext.Provider>
-        </Animated.View>
+        </NativeOnlyAnimatedView>
       </TooltipPrimitive.Overlay>
     </TooltipPrimitive.Portal>
   );
