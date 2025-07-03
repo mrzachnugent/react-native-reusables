@@ -7,7 +7,7 @@
         "./*"
       ],
       "@/*": [
-        "../../packages/reusables/src/*"
+        "../../packages/registry/src/*"
       ]
     },
     "jsx": "react-native",

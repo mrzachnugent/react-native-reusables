@@ -1,4 +1,4 @@
-import { LabelPreview } from '@/examples/label';
+import { LabelPreview } from '@/new-york/examples/label';
 import * as React from 'react';
 import { View } from 'react-native';
 

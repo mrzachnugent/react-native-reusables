@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FullWindowOverlay } from 'react-native-screens';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/new-york/components/ui/button';
+import { Input } from '@/new-york/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -13,9 +13,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Text } from '@/components/ui/text';
-import { H1, Muted } from '@/components/ui/typography';
+} from '@/new-york/components/ui/select';
+import { Text } from '@/new-york/components/ui/text';
 
 const IOS_PORTAL_HOST_NAME = 'modal-example';
 
@@ -33,10 +32,12 @@ export default function ModalScreen() {
       <View className='flex-1 justify-center items-center'>
         <View className='p-4 native:pb-24 max-w-md gap-6 w-full'>
           <View className='gap-1'>
-            <H1 className='text-foreground text-center'>Create an account</H1>
-            <Muted className='text-base text-center'>
+            <Text variant='h1' className='text-foreground text-center'>
+              Create an account
+            </Text>
+            <Text variant='muted' className='text-base text-center'>
               Enter you email below to create your account
-            </Muted>
+            </Text>
           </View>
           <Input placeholder='name@example.com' />
           <Select>
@@ -65,18 +66,23 @@ export default function ModalScreen() {
           </Select>
           <View className='flex-row items-center gap-3'>
             <View className='flex-1 h-px bg-muted' />
-            <Muted>OR CONTINUE WITH</Muted>
+            <Text variant='muted'>OR CONTINUE WITH</Text>
             <View className='flex-1 h-px bg-muted' />
           </View>
           <Button>
             <Text>Github</Text>
           </Button>
           <View>
-            <Muted className='text-center'>
+            <Text variant='muted' className='text-center'>
               By creating an account, you agree to our{' '}
-              <Muted className='underline'>Terms of Service</Muted> and{' '}
-              <Muted className='underline'>Privacy Policy</Muted>
-            </Muted>
+              <Text variant='muted' className='underline'>
+                Terms of Service
+              </Text>{' '}
+              and{' '}
+              <Text variant='muted' className='underline'>
+                Privacy Policy
+              </Text>
+            </Text>
           </View>
         </View>
       </View>

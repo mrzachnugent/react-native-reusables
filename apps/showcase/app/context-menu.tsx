@@ -1,4 +1,4 @@
-import { ContextMenuPreview } from '@/examples/context-menu';
+import { ContextMenuPreview } from '@/new-york/examples/context-menu';
 import * as React from 'react';
 import { View } from 'react-native';
 

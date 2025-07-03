@@ -26,7 +26,7 @@
     "@rn-primitives/slider": "~1.2.0",
     "@rn-primitives/toast": "~1.2.0",
     "@rn-primitives/toolbar": "~1.2.0",
-    "@rnr/reusables": "workspace:*",
+    "@rnr/registry": "workspace:*",
     "@shopify/flash-list": "1.7.6",
     "@tanstack/react-table": "^8.11.7",
     "class-variance-authority": "^0.7.0",

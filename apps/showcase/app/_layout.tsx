@@ -1,19 +1,15 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
-import { DeprecatedUi } from '@rnr/reusables';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Appearance, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeToggle } from '@showcase/components/ThemeToggle';
-import { Text } from '@/components/ui/text';
-import { setAndroidNavigationBar } from '@showcase/lib/android-navigation-bar';
-import { NAV_THEME } from '@/lib/constants';
-import { useColorScheme } from '@/lib/useColorScheme';
-
-const { ToastProvider } = DeprecatedUi;
+import { Text } from '@/new-york/components/ui/text';
+import { NAV_THEME } from '@/new-york/lib/constants';
+import { useColorScheme } from 'nativewind';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -34,20 +30,14 @@ export const unstable_settings = {
   initialRouteName: '(tabs)',
 };
 
-const usePlatformSpecificSetup = Platform.select({
-  web: useSetWebBackgroundClassName,
-  android: useSetAndroidNavigationBar,
-  default: noop,
-});
-
 export default function RootLayout() {
-  const { isDarkColorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
-  usePlatformSpecificSetup();
+  useSetWebBackgroundClassName();
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+    <ThemeProvider value={colorScheme === 'dark' ? DARK_THEME : LIGHT_THEME}>
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <BottomSheetModalProvider>
           <Stack
@@ -78,7 +68,6 @@ export default function RootLayout() {
         </BottomSheetModalProvider>
         <PortalHost />
       </GestureHandlerRootView>
-      <ToastProvider />
     </ThemeProvider>
   );
 }
@@ -100,15 +89,10 @@ const useIsomorphicLayoutEffect =
 
 function useSetWebBackgroundClassName() {
   useIsomorphicLayoutEffect(() => {
+    if (Platform.OS !== 'web') {
+      return;
+    }
     // Adds the background color to the html element to prevent white background on overscroll.
     document.documentElement.classList.add('bg-background');
   }, []);
 }
-
-function useSetAndroidNavigationBar() {
-  React.useLayoutEffect(() => {
-    setAndroidNavigationBar(Appearance.getColorScheme() ?? 'light');
-  }, []);
-}
-
-function noop() {}
