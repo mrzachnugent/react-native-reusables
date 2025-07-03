@@ -31,3 +31,4 @@ export * from './select';
 export * from './separator';
 export * from './skeleton';
 export * from './switch';
+export * from './tabs';
