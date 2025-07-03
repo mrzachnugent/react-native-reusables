@@ -8,6 +8,7 @@
     "dev": "next dev",
     "start": "next start",
     "registry:build:new-york": "shadcn build ./new-york-registry.json --output ./public/r/new-york",
+    "registry:build:new-york:local": "shadcn build ./new-york-registry.local.json --output ./public/local/r/new-york",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
