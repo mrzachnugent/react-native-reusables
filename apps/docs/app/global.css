@@ -60,13 +60,16 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
+  }
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+  html {
+    @apply scroll-smooth;
   }
   body {
-    @apply font-sans antialiased;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
   }
-}
-
-html {
-	scroll-behavior: smooth;
 }
