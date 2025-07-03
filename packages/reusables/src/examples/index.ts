@@ -32,6 +32,7 @@ export * from './separator';
 export * from './skeleton';
 export * from './switch';
 export * from './tabs';
+export * from './text';
 export * from './textarea';
 export * from './toggle';
 export * from './toggle-group';
