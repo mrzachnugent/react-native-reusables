@@ -11,7 +11,7 @@
     "!cli",
     "[BookOpen][Introduction](/docs)",
     "[FolderDown][Installation](/docs/installation)",
-    "[SlidersVertical][Customization](/docs/customization)",
+    "[FileSliders][Customization](/docs/customization)",
     "[SquareTerminal][CLI](/docs/cli)",
     "---Components---",
     "!/(components)",
