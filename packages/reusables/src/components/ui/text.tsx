@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils';
 import * as Slot from '@rn-primitives/slot';
-import { cva, VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
-import { Platform, Text as RNText } from 'react-native';
+import { Platform, Text as RNText, type Role } from 'react-native';
 
 const textVariants = cva(
   cn(
@@ -57,7 +57,44 @@ function Text({
   }) {
   const textClass = React.useContext(TextClassContext);
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn(textVariants({ variant }), textClass, className)} {...props} />;
+  return (
+    <Component
+      {...getSemanticProps(variant)}
+      className={cn(textVariants({ variant }), textClass, className)}
+      {...props}
+    />
+  );
 }
 
 export { Text, TextClassContext };
+
+function getSemanticProps(variant: VariantProps<typeof textVariants>['variant']) {
+  switch (variant) {
+    case 'h1':
+      return {
+        role: 'heading',
+        'aria-level': '1',
+      } as const;
+    case 'h2':
+      return {
+        role: 'heading',
+        'aria-level': '2',
+      } as const;
+    case 'h3':
+      return {
+        role: 'heading',
+        'aria-level': '3',
+      } as const;
+    case 'h4':
+      return {
+        role: 'heading',
+        'aria-level': '4',
+      } as const;
+    case 'blockquote':
+      return Platform.select({ web: { role: 'blockquote' as Role } });
+    case 'code':
+      return Platform.select({ web: { role: 'code' as Role } });
+    default:
+      return {};
+  }
+}
