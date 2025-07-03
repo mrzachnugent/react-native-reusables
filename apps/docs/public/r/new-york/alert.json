@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:ui",
+  "title": "Alert",
+  "author": "@mrzachnugent",
+  "description": "Displays a callout for user attention.",
+  "registryDependencies": [
+    "https://reactnativereusable.com/r/new-york/text.json",
+    "https://reactnativereusable.com/r/new-york/icon.json"
+  ],
+  "files": [
+    {
+      "path": "./node_modules/@rnr/registry/src/new-york/components/ui/alert.tsx",
+      "content": "'use client';\n\nimport { Icon } from '@/registry/new-york/components/ui/icon';\nimport { Text, TextClassContext } from '@/registry/new-york/components/ui/text';\nimport { cn } from '@/registry/new-york/lib/utils';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport type { LucideIcon } from 'lucide-react-native';\nimport * as React from 'react';\nimport { View, type ViewProps } from 'react-native';\n\nconst alertVariants = cva(\n  'relative bg-background w-full rounded-lg border border-border px-4 pt-3.5 pb-2',\n  {\n    variants: {\n      variant: {\n        default: '',\n        destructive: 'border-destructive',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n);\n\nfunction Alert({\n  className,\n  variant,\n  children,\n  icon,\n  iconSize = 16,\n  iconClassName,\n  ...props\n}: ViewProps &\n  VariantProps<typeof alertVariants> & {\n    ref?: React.RefObject<View>;\n    icon: LucideIcon;\n    iconSize?: number;\n    iconClassName?: string;\n  }) {\n  return (\n    <TextClassContext.Provider\n      value={cn(\n        'text-sm text-foreground',\n        variant === 'destructive' && 'text-destructive',\n        className\n      )}\n    >\n      <View role='alert' className={alertVariants({ variant, className })} {...props}>\n        <View className='absolute left-3.5 top-3'>\n          <Icon\n            as={icon}\n            size={iconSize}\n            className={cn(variant === 'destructive' && 'text-destructive', iconClassName)}\n          />\n        </View>\n        {children}\n      </View>\n    </TextClassContext.Provider>\n  );\n}\n\nfunction AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) {\n  return (\n    <Text\n      className={cn('pl-6 ml-0.5 mb-1 min-h-4 font-medium leading-none tracking-tight', className)}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDescription({ className, ...props }: React.ComponentProps<typeof Text>) {\n  const textClass = React.useContext(TextClassContext);\n  return (\n    <Text\n      className={cn(\n        'pl-6 ml-0.5 pb-1.5 text-sm leading-relaxed text-muted-foreground',\n        textClass?.includes('text-destructive') && 'text-destructive/90',\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Alert, AlertDescription, AlertTitle };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

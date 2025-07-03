@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "Label",
+  "author": "@mrzachnugent",
+  "description": "Renders an accessible label associated with controls.",
+  "dependencies": [
+    "@rn-primitives/label"
+  ],
+  "files": [
+    {
+      "path": "./node_modules/@rnr/registry/src/new-york/components/ui/label.tsx",
+      "content": "'use client';\n\nimport { cn } from '@/registry/new-york/lib/utils';\nimport * as LabelPrimitive from '@rn-primitives/label';\nimport * as React from 'react';\nimport { Platform } from 'react-native';\n\nfunction Label({\n  className,\n  onPress,\n  onLongPress,\n  onPressIn,\n  onPressOut,\n  disabled,\n  ...props\n}: LabelPrimitive.TextProps & {\n  ref?: React.RefObject<LabelPrimitive.TextRef>;\n}) {\n  return (\n    <LabelPrimitive.Root\n      className={cn(\n        'flex flex-row items-center gap-2 select-none',\n        Platform.select({\n          web: 'leading-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',\n        }),\n        disabled && 'opacity-50'\n      )}\n      onPress={onPress}\n      onLongPress={onLongPress}\n      onPressIn={onPressIn}\n      onPressOut={onPressOut}\n      disabled={disabled}\n    >\n      <LabelPrimitive.Text\n        className={cn('text-foreground text-sm leading-none font-medium', className)}\n        {...props}\n      />\n    </LabelPrimitive.Root>\n  );\n}\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ]
+}
