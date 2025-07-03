@@ -1,4 +1,4 @@
-import { TooltipPreview } from '@/new-york/examples/tooltip';
+import { TooltipPreview } from '@/registry/new-york/examples/tooltip';
 import * as React from 'react';
 import { View } from 'react-native';
 

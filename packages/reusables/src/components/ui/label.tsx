@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@deprecated/lib/utils';
 import * as LabelPrimitive from '@rn-primitives/label';
 import * as React from 'react';
 import { Platform } from 'react-native';

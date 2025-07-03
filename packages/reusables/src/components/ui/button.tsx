@@ -1,5 +1,5 @@
-import { TextClassContext } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { TextClassContext } from '@deprecated/components/ui/text';
+import { cn } from '@deprecated/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { Platform, Pressable } from 'react-native';

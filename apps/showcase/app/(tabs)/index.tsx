@@ -10,22 +10,22 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/new-york/components/ui/alert-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/new-york/components/ui/avatar';
-import { Button } from '@/new-york/components/ui/button';
+} from '@/registry/new-york/components/ui/alert-dialog';
+import { Avatar, AvatarFallback, AvatarImage } from '@/registry/new-york/components/ui/avatar';
+import { Button } from '@/registry/new-york/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/new-york/components/ui/card';
+} from '@/registry/new-york/components/ui/card';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@/new-york/components/ui/context-menu';
+} from '@/registry/new-york/components/ui/context-menu';
 import {
   Dialog,
   DialogClose,
@@ -35,7 +35,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/new-york/components/ui/dialog';
+} from '@/registry/new-york/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,13 +44,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/new-york/components/ui/dropdown-menu';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/new-york/components/ui/hover-card';
-import { Text } from '@/new-york/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/new-york/components/ui/tooltip';
+} from '@/registry/new-york/components/ui/dropdown-menu';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/registry/new-york/components/ui/hover-card';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/new-york/components/ui/tooltip';
 import { CalendarDays, ChevronDown, Info } from 'lucide-react-native';
-import { Icon } from '@/new-york/components/ui/icon';
-import { cn } from '@/new-york/lib/utils';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { cn } from '@/registry/new-york/lib/utils';
 
 export default function ExampleScreen() {
   return (

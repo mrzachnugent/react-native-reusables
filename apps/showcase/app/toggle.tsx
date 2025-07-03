@@ -1,4 +1,4 @@
-import { TogglePreview } from '@/new-york/examples';
+import { TogglePreview } from '@/registry/new-york/examples';
 import { View } from 'react-native';
 
 export default function ToggleScreen() {

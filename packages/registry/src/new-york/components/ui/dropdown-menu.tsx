@@ -1,7 +1,9 @@
-import { Icon } from '@/new-york/components/ui/icon';
-import { NativeOnlyAnimatedView } from '@/new-york/components/ui/native-only-animated-view';
-import { TextClassContext } from '@/new-york/components/ui/text';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { NativeOnlyAnimatedView } from '@/registry/new-york/components/ui/native-only-animated-view';
+import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as DropdownMenuPrimitive from '@rn-primitives/dropdown-menu';
 import { Check, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react-native';
 import * as React from 'react';

@@ -1,4 +1,4 @@
-import { ToggleGroupPreview } from '@/new-york/examples/toggle-group';
+import { ToggleGroupPreview } from '@/registry/new-york/examples/toggle-group';
 import { View } from 'react-native';
 
 export default function ToggleGroupScreen() {

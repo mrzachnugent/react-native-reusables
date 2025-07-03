@@ -12,8 +12,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { Text } from '@/components/ui/text';
+} from '@deprecated/components/ui/context-menu';
+import { Text } from '@deprecated/components/ui/text';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

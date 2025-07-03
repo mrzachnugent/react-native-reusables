@@ -1,4 +1,4 @@
-import { Text, TextClassContext } from '@/components/ui/text';
+import { Text, TextClassContext } from '@deprecated/components/ui/text';
 import { View } from 'react-native';
 
 export function TextCascadePreview() {

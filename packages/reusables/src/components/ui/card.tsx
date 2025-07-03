@@ -1,5 +1,5 @@
-import { TextClassContext } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { TextClassContext } from '@deprecated/components/ui/text';
+import { cn } from '@deprecated/lib/utils';
 import * as React from 'react';
 import { Platform, Text, type TextProps, View, type ViewProps } from 'react-native';
 

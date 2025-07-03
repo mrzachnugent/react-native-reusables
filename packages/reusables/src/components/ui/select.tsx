@@ -1,6 +1,6 @@
-import { Icon } from '@/components/ui/icon';
-import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
-import { cn } from '@/lib/utils';
+import { Icon } from '@deprecated/components/ui/icon';
+import { NativeOnlyAnimatedView } from '@deprecated/components/ui/native-only-animated-view';
+import { cn } from '@deprecated/lib/utils';
 import * as SelectPrimitive from '@rn-primitives/select';
 import { Check, ChevronDown, ChevronDownIcon, ChevronUpIcon } from 'lucide-react-native';
 import * as React from 'react';

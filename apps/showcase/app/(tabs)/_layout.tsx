@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 import { ModalToggle } from '@showcase/components/ModalToggle';
 import { ThemeToggle } from '@showcase/components/ThemeToggle';
 import { LayoutPanelLeft, MenuSquare } from 'lucide-react-native';
-import { Icon } from '@/new-york/components/ui/icon';
+import { Icon } from '@/registry/new-york/components/ui/icon';
 
 export default function TabsLayout() {
   return (

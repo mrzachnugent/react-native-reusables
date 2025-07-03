@@ -1,4 +1,4 @@
-import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Toggle, ToggleIcon } from '@deprecated/components/ui/toggle';
 import { Bold } from 'lucide-react-native';
 import * as React from 'react';
 import * as Haptics from 'expo-haptics';

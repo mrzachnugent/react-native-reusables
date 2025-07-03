@@ -1,5 +1,5 @@
-import { Icon } from '@/components/ui/icon';
-import { cn } from '@/lib/utils';
+import { Icon } from '@deprecated/components/ui/icon';
+import { cn } from '@deprecated/lib/utils';
 import * as NavigationMenuPrimitive from '@rn-primitives/navigation-menu';
 import { cva } from 'class-variance-authority';
 import { ChevronDown } from 'lucide-react-native';

@@ -1,5 +1,5 @@
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@deprecated/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@deprecated/components/ui/radio-group';
 import * as React from 'react';
 import { View } from 'react-native';
 

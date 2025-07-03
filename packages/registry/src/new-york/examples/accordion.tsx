@@ -3,8 +3,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/new-york/components/ui/accordion';
-import { Text } from '@/new-york/components/ui/text';
+} from '@/registry/new-york/components/ui/accordion';
+import { Text } from '@/registry/new-york/components/ui/text';
 
 export function AccordionPreview() {
   return (

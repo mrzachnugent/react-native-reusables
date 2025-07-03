@@ -1,6 +1,6 @@
-import { Button } from '@/new-york/components/ui/button';
-import { Text } from '@/new-york/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/new-york/components/ui/tooltip';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/new-york/components/ui/tooltip';
 
 export function TooltipPreview() {
   return (

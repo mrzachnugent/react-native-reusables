@@ -1,6 +1,10 @@
-import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Icon } from '@/components/ui/icon';
+import { Button } from '@deprecated/components/ui/button';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@deprecated/components/ui/collapsible';
+import { Icon } from '@deprecated/components/ui/icon';
 import { ChevronsUpDown } from 'lucide-react-native';
 import { Text, View } from 'react-native';
 

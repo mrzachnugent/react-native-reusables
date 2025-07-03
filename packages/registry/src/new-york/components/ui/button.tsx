@@ -1,5 +1,7 @@
-import { TextClassContext } from '@/new-york/components/ui/text';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { Platform, Pressable } from 'react-native';

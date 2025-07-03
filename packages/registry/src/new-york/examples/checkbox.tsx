@@ -1,9 +1,9 @@
-import { Checkbox } from '@/new-york/components/ui/checkbox';
-import { Label } from '@/new-york/components/ui/label';
+import { Checkbox } from '@/registry/new-york/components/ui/checkbox';
+import { Label } from '@/registry/new-york/components/ui/label';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { Text } from '@/new-york/components/ui/text';
-import { cn } from '@/new-york/lib/utils';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 
 export function CheckboxPreview() {
   const [state, setState] = React.useState({

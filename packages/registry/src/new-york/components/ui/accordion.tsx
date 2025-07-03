@@ -1,6 +1,8 @@
-import { Icon } from '@/new-york/components/ui/icon';
-import { TextClassContext } from '@/new-york/components/ui/text';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as AccordionPrimitive from '@rn-primitives/accordion';
 import { ChevronDown } from 'lucide-react-native';
 import * as React from 'react';

@@ -1,5 +1,5 @@
-import { Separator } from '@/components/ui/separator';
-import { Text } from '@/components/ui/text';
+import { Separator } from '@deprecated/components/ui/separator';
+import { Text } from '@deprecated/components/ui/text';
 import { View } from 'react-native';
 
 export function SeparatorPreview() {

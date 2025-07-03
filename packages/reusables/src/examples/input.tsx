@@ -1,4 +1,4 @@
-import { Input } from '@/components/ui/input';
+import { Input } from '@deprecated/components/ui/input';
 
 export function InputPreview() {
   return (

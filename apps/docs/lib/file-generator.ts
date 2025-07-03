@@ -56,11 +56,5 @@ export function fileGenerator(): DocGenerator {
 }
 
 function fixImports(value: string) {
-  return value
-    .replace('./typography', '@/components/ui/typography')
-    .replace('./text', '@/components/ui/text')
-    .replaceAll('../../components', '@/components')
-    .replaceAll('../../lib', '@/lib')
-    .replaceAll('@docs/components/react-native', 'react-native')
-    .replaceAll('@rnr/', '@/');
+  return value.replaceAll('@/registry/new-york/', '@/').replaceAll('@/registry/default/', '@/');
 }

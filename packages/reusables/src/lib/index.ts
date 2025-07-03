@@ -1,5 +1,5 @@
-export * from '@/lib/constants';
-export * from '@/lib/utils';
-export * from '@/lib/keyboard';
-export * from '@/lib/useColorScheme';
-export * as Icons from '@/lib/icons';
+export * from '@deprecated/lib/constants';
+export * from '@deprecated/lib/utils';
+export * from '@deprecated/lib/keyboard';
+export * from '@deprecated/lib/useColorScheme';
+export * as Icons from '@deprecated/lib/icons';

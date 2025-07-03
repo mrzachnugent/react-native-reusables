@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FullWindowOverlay } from 'react-native-screens';
-import { Button } from '@/new-york/components/ui/button';
-import { Input } from '@/new-york/components/ui/input';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Input } from '@/registry/new-york/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -13,8 +13,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/new-york/components/ui/select';
-import { Text } from '@/new-york/components/ui/text';
+} from '@/registry/new-york/components/ui/select';
+import { Text } from '@/registry/new-york/components/ui/text';
 
 const IOS_PORTAL_HOST_NAME = 'modal-example';
 

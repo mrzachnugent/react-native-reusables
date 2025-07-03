@@ -59,7 +59,12 @@ export function PreviewCardClient({
           setPlatform={setPlatform}
           value={platform}
         />
-        <CopyButton className='group-hover/copy:opacity-100' content={copyContent} />
+        <CopyButton
+          className='group-hover/copy:opacity-100'
+          content={copyContent
+            .replaceAll('@/registry/new-york/', '@/')
+            .replaceAll('@/registry/default/', '@/')}
+        />
       </div>
       <div className='flex flex-col items-center justify-center p-6 flex-1'>
         {platform === 'android'

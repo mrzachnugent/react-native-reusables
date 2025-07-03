@@ -1,10 +1,10 @@
-import { Button } from '@/new-york/components/ui/button';
+import { Button } from '@/registry/new-york/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/new-york/components/ui/collapsible';
-import { Icon } from '@/new-york/components/ui/icon';
+} from '@/registry/new-york/components/ui/collapsible';
+import { Icon } from '@/registry/new-york/components/ui/icon';
 import { ChevronsUpDown } from 'lucide-react-native';
 import { Text, View } from 'react-native';
 

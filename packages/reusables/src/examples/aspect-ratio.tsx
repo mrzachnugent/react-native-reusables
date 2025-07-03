@@ -1,4 +1,4 @@
-import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { AspectRatio } from '@deprecated/components/ui/aspect-ratio';
 import { Image } from 'react-native';
 
 export function AspectRatioPreview() {

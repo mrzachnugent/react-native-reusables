@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { AspectRatioPreview } from '@/new-york/examples/aspect-ratio';
+import { AspectRatioPreview } from '@/registry/new-york/examples/aspect-ratio';
 
 export default function AspectRatioScreen() {
   return (

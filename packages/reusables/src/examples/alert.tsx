@@ -1,5 +1,5 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Text } from '@/components/ui/text';
+import { Alert, AlertDescription, AlertTitle } from '@deprecated/components/ui/alert';
+import { Text } from '@deprecated/components/ui/text';
 import { AlertCircleIcon, CheckCircle2Icon, Terminal } from 'lucide-react-native';
 import { View } from 'react-native';
 

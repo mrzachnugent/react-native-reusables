@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@deprecated/lib/utils';
 import * as Slot from '@rn-primitives/slot';
 import * as React from 'react';
 import { Platform, Text as RNText } from 'react-native';

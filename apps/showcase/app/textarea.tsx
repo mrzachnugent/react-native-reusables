@@ -1,4 +1,4 @@
-import { TextareaPreview } from '@/new-york/examples/textarea';
+import { TextareaPreview } from '@/registry/new-york/examples/textarea';
 import { View } from 'react-native';
 
 export default function InputScreen() {

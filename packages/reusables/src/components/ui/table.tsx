@@ -1,5 +1,5 @@
-import { TextClassContext } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { TextClassContext } from '@deprecated/components/ui/text';
+import { cn } from '@deprecated/lib/utils';
 import * as TablePrimitive from '@rn-primitives/table';
 import * as React from 'react';
 

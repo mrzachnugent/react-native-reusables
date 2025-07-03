@@ -1,7 +1,9 @@
-import { buttonTextVariants, buttonVariants } from '@/new-york/components/ui/button';
-import { NativeOnlyAnimatedView } from '@/new-york/components/ui/native-only-animated-view';
-import { TextClassContext } from '@/new-york/components/ui/text';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { buttonTextVariants, buttonVariants } from '@/registry/new-york/components/ui/button';
+import { NativeOnlyAnimatedView } from '@/registry/new-york/components/ui/native-only-animated-view';
+import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import * as React from 'react';
 import { Platform, View, type ViewProps } from 'react-native';

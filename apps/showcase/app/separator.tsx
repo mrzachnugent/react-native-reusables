@@ -1,4 +1,4 @@
-import { SeparatorPreview } from '@/new-york/examples/separator';
+import { SeparatorPreview } from '@/registry/new-york/examples/separator';
 import { View } from 'react-native';
 
 export default function SeparatorScreen() {

@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@deprecated/components/ui/button';
+import { Text } from '@deprecated/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@deprecated/components/ui/tooltip';
 
 export function TooltipPreview() {
   return (

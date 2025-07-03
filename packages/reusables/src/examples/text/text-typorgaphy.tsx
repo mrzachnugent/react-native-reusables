@@ -1,5 +1,5 @@
 import { ScrollView, View } from 'react-native';
-import { Text } from '@/components/ui/text';
+import { Text } from '@deprecated/components/ui/text';
 
 export function TextTypographyPreview() {
   return (

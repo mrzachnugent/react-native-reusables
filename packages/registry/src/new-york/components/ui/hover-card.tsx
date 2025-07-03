@@ -1,6 +1,8 @@
-import { NativeOnlyAnimatedView } from '@/new-york/components/ui/native-only-animated-view';
-import { TextClassContext } from '@/new-york/components/ui/text';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { NativeOnlyAnimatedView } from '@/registry/new-york/components/ui/native-only-animated-view';
+import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as HoverCardPrimitive from '@rn-primitives/hover-card';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';

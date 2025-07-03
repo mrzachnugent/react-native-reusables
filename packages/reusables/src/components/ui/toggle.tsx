@@ -1,6 +1,6 @@
-import { Icon } from '@/components/ui/icon';
-import { TextClassContext } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { Icon } from '@deprecated/components/ui/icon';
+import { TextClassContext } from '@deprecated/components/ui/text';
+import { cn } from '@deprecated/lib/utils';
 import * as TogglePrimitive from '@rn-primitives/toggle';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';

@@ -1,5 +1,5 @@
-import { Icon } from '@/components/ui/icon';
-import { cn } from '@/lib/utils';
+import { Icon } from '@deprecated/components/ui/icon';
+import { cn } from '@deprecated/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { Check } from 'lucide-react-native';
 import * as React from 'react';

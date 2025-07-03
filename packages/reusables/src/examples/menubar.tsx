@@ -12,8 +12,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '@/components/ui/menubar';
-import { Text } from '@/components/ui/text';
+} from '@deprecated/components/ui/menubar';
+import { Text } from '@deprecated/components/ui/text';
 import * as React from 'react';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
