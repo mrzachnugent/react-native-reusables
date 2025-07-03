@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@deprecated/components/ui/skeleton';
 import { View } from 'react-native';
 
 export function SkeletonPreview() {

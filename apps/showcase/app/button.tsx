@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { Button } from '@/new-york/components/ui/button';
-import { Text } from '@/new-york/components/ui/text';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Text } from '@/registry/new-york/components/ui/text';
 
 export default function ButtonScreen() {
   return (

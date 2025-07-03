@@ -1,7 +1,7 @@
 import { Pressable, View } from 'react-native';
 import { MoonStar, Sun } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
-import { Icon } from '@/new-york/components/ui/icon';
+import { Icon } from '@/registry/new-york/components/ui/icon';
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme();

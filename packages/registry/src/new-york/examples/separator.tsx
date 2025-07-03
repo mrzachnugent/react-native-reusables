@@ -1,5 +1,5 @@
-import { Separator } from '@/new-york/components/ui/separator';
-import { Text } from '@/new-york/components/ui/text';
+import { Separator } from '@/registry/new-york/components/ui/separator';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { View } from 'react-native';
 
 export function SeparatorPreview() {

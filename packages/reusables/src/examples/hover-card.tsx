@@ -1,7 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Text } from '@/components/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@deprecated/components/ui/avatar';
+import { Button } from '@deprecated/components/ui/button';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@deprecated/components/ui/hover-card';
+import { Text } from '@deprecated/components/ui/text';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

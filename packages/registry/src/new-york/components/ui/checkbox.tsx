@@ -1,5 +1,7 @@
-import { Icon } from '@/new-york/components/ui/icon';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { Check } from 'lucide-react-native';
 import * as React from 'react';

@@ -1,4 +1,6 @@
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { cn } from '@/registry/new-york/lib/utils';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { Platform } from 'react-native';
 

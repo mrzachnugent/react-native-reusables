@@ -1,6 +1,8 @@
-import { Button } from '@/new-york/components/ui/button';
-import { Icon } from '@/new-york/components/ui/icon';
-import { Text } from '@/new-york/components/ui/text';
+'use client';
+
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { Loader2 } from 'lucide-react-native';
 import { View } from 'react-native';
 

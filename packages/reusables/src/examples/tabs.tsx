@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@deprecated/components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Text } from '@/components/ui/text';
+} from '@deprecated/components/ui/card';
+import { Input } from '@deprecated/components/ui/input';
+import { Label } from '@deprecated/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@deprecated/components/ui/tabs';
+import { Text } from '@deprecated/components/ui/text';
 import * as React from 'react';
 import { View } from 'react-native';
 

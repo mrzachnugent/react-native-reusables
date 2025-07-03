@@ -1,5 +1,7 @@
-import { Button } from '@/new-york/components/ui/button';
-import { Icon } from '@/new-york/components/ui/icon';
+'use client';
+
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Icon } from '@/registry/new-york/components/ui/icon';
 import { ChevronRight } from 'lucide-react-native';
 
 export function ButtonIconPreview() {

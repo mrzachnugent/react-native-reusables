@@ -1,8 +1,8 @@
-import { Button } from '@/new-york/components/ui/button';
-import { Input } from '@/new-york/components/ui/input';
-import { Label } from '@/new-york/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/new-york/components/ui/popover';
-import { Text } from '@/new-york/components/ui/text';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Input } from '@/registry/new-york/components/ui/input';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/new-york/components/ui/popover';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { View } from 'react-native';
 
 export function PopoverPreview() {

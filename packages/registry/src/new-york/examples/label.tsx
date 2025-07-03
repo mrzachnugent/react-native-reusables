@@ -1,5 +1,5 @@
-import { Checkbox } from '@/new-york/components/ui/checkbox';
-import { Label } from '@/new-york/components/ui/label';
+import { Checkbox } from '@/registry/new-york/components/ui/checkbox';
+import { Label } from '@/registry/new-york/components/ui/label';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 

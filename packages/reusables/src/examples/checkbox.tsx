@@ -1,9 +1,9 @@
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+import { Checkbox } from '@deprecated/components/ui/checkbox';
+import { Label } from '@deprecated/components/ui/label';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { Text } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { Text } from '@deprecated/components/ui/text';
+import { cn } from '@deprecated/lib/utils';
 
 export function CheckboxPreview() {
   const [state, setState] = React.useState({

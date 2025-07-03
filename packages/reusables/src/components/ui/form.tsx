@@ -8,20 +8,20 @@ import {
   BottomSheetContent,
   BottomSheetOpenTrigger,
   BottomSheetView,
-} from '@/components/deprecated-ui/bottom-sheet';
-import { Calendar } from '@/components/deprecated-ui/calendar';
-import { Combobox, ComboboxOption } from '@/components/deprecated-ui/combobox';
-import { Button, buttonTextVariants } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Icon } from '@/components/ui/icon';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { RadioGroup } from '@/components/ui/radio-group';
-import { Select, type Option } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Text } from '@/components/ui/text';
-import { Textarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
+} from '@deprecated/components/deprecated-ui/bottom-sheet';
+import { Calendar } from '@deprecated/components/deprecated-ui/calendar';
+import { Combobox, ComboboxOption } from '@deprecated/components/deprecated-ui/combobox';
+import { Button, buttonTextVariants } from '@deprecated/components/ui/button';
+import { Checkbox } from '@deprecated/components/ui/checkbox';
+import { Icon } from '@deprecated/components/ui/icon';
+import { Input } from '@deprecated/components/ui/input';
+import { Label } from '@deprecated/components/ui/label';
+import { RadioGroup } from '@deprecated/components/ui/radio-group';
+import { Select, type Option } from '@deprecated/components/ui/select';
+import { Switch } from '@deprecated/components/ui/switch';
+import { Text } from '@deprecated/components/ui/text';
+import { Textarea } from '@deprecated/components/ui/textarea';
+import { cn } from '@deprecated/lib/utils';
 import { Calendar as CalendarIcon, X } from 'lucide-react-native';
 import * as React from 'react';
 import {

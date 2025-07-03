@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Label } from '@/new-york/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/new-york/components/ui/radio-group';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/registry/new-york/components/ui/radio-group';
 
 export default function RadioGroupScreen() {
   const [value, setValue] = React.useState('Comfortable');

@@ -1,4 +1,4 @@
-import { TabsPreview } from '@/new-york/examples';
+import { TabsPreview } from '@/registry/new-york/examples';
 import { View } from 'react-native';
 
 export default function TabsScreen() {

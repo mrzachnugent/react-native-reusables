@@ -1,5 +1,9 @@
 import { Bold, Italic, Underline } from 'lucide-react-native';
-import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
+import {
+  ToggleGroup,
+  ToggleGroupIcon,
+  ToggleGroupItem,
+} from '@deprecated/components/ui/toggle-group';
 import * as React from 'react';
 import * as Haptics from 'expo-haptics';
 

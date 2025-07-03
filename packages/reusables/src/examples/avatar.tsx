@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Text } from '@/components/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@deprecated/components/ui/avatar';
+import { Text } from '@deprecated/components/ui/text';
 import { View } from 'react-native';
 
 export function AvatarPreview() {

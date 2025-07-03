@@ -1,7 +1,9 @@
-import { Icon } from '@/new-york/components/ui/icon';
-import { TextClassContext } from '@/new-york/components/ui/text';
-import { toggleVariants } from '@/new-york/components/ui/toggle';
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { toggleVariants } from '@/registry/new-york/components/ui/toggle';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as ToggleGroupPrimitive from '@rn-primitives/toggle-group';
 import type { VariantProps } from 'class-variance-authority';
 import * as React from 'react';

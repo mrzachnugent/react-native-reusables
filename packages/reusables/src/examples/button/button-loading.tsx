@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
+import { Button } from '@deprecated/components/ui/button';
+import { Icon } from '@deprecated/components/ui/icon';
+import { Text } from '@deprecated/components/ui/text';
 import { Loader2 } from 'lucide-react-native';
 import { View } from 'react-native';
 

@@ -24,8 +24,8 @@
       "@docs/*": [
         "./*"
       ],
-      "@/*": [
-        "../../packages/reusables/src/*"
+      "@/registry/*": [
+        "../../packages/registry/src/*"
       ]
     },
     "plugins": [

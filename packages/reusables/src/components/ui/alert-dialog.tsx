@@ -1,7 +1,7 @@
-import { buttonTextVariants, buttonVariants } from '@/components/ui/button';
-import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
-import { TextClassContext } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
+import { buttonTextVariants, buttonVariants } from '@deprecated/components/ui/button';
+import { NativeOnlyAnimatedView } from '@deprecated/components/ui/native-only-animated-view';
+import { TextClassContext } from '@deprecated/components/ui/text';
+import { cn } from '@deprecated/lib/utils';
 import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import * as React from 'react';
 import { Platform, View, type ViewProps } from 'react-native';

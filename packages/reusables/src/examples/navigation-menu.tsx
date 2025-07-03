@@ -1,4 +1,4 @@
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@deprecated/components/ui/icon';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,8 +7,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { Text } from '@/components/ui/text';
+} from '@deprecated/components/ui/navigation-menu';
+import { Text } from '@deprecated/components/ui/text';
 import type { TextRef } from '@rn-primitives/types';
 import { Sparkles } from 'lucide-react-native';
 import * as React from 'react';

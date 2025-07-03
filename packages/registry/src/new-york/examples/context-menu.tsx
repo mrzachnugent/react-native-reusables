@@ -12,8 +12,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '@/new-york/components/ui/context-menu';
-import { Text } from '@/new-york/components/ui/text';
+} from '@/registry/new-york/components/ui/context-menu';
+import { Text } from '@/registry/new-york/components/ui/text';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

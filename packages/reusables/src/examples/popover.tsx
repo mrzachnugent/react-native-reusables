@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Text } from '@/components/ui/text';
+import { Button } from '@deprecated/components/ui/button';
+import { Input } from '@deprecated/components/ui/input';
+import { Label } from '@deprecated/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@deprecated/components/ui/popover';
+import { Text } from '@deprecated/components/ui/text';
 import { View } from 'react-native';
 
 export function PopoverPreview() {

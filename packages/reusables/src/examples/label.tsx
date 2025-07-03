@@ -1,5 +1,5 @@
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+import { Checkbox } from '@deprecated/components/ui/checkbox';
+import { Label } from '@deprecated/components/ui/label';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 

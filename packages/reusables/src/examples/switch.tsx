@@ -1,5 +1,5 @@
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
+import { Label } from '@deprecated/components/ui/label';
+import { Switch } from '@deprecated/components/ui/switch';
 import * as React from 'react';
 import { View } from 'react-native';
 

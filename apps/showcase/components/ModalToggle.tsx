@@ -1,8 +1,8 @@
 import { router } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { CircleUserRound } from 'lucide-react-native';
-import { Icon } from '@/new-york/components/ui/icon';
-import { cn } from '@/new-york/lib/utils';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { cn } from '@/registry/new-york/lib/utils';
 
 export function ModalToggle() {
   return (

@@ -7,8 +7,8 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeToggle } from '@showcase/components/ThemeToggle';
-import { Text } from '@/new-york/components/ui/text';
-import { NAV_THEME } from '@/new-york/lib/constants';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { useColorScheme } from 'nativewind';
 
 const LIGHT_THEME: Theme = {

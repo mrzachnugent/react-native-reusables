@@ -1,4 +1,6 @@
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { cn } from '@/registry/new-york/lib/utils';
 import * as ProgressPrimitive from '@rn-primitives/progress';
 import * as React from 'react';
 import { Platform, View } from 'react-native';

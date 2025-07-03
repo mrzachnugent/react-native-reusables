@@ -5,8 +5,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { cn } from '@/lib/utils';
+} from '@deprecated/components/ui/table';
+import { cn } from '@deprecated/lib/utils';
 import { FlashList, type FlashListProps } from '@shopify/flash-list';
 import {
   ColumnDef,

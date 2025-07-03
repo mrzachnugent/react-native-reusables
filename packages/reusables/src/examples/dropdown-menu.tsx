@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@deprecated/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Text } from '@/components/ui/text';
+} from '@deprecated/components/ui/dropdown-menu';
+import { Text } from '@deprecated/components/ui/text';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function DropdownMenuPreview() {

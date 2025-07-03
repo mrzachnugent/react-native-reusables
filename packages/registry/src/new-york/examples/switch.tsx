@@ -1,5 +1,5 @@
-import { Label } from '@/new-york/components/ui/label';
-import { Switch } from '@/new-york/components/ui/switch';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { Switch } from '@/registry/new-york/components/ui/switch';
 import * as React from 'react';
 import { View } from 'react-native';
 

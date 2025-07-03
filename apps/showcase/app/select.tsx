@@ -1,5 +1,5 @@
-import { Text } from '@/new-york/components/ui/text';
-import { ScrollableSelectPreview, SelectPreview } from '@/new-york/examples/select';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { ScrollableSelectPreview, SelectPreview } from '@/registry/new-york/examples/select';
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

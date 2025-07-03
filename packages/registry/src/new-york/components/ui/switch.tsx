@@ -1,4 +1,6 @@
-import { cn } from '@/new-york/lib/utils';
+'use client';
+
+import { cn } from '@/registry/new-york/lib/utils';
 import * as SwitchPrimitives from '@rn-primitives/switch';
 import * as React from 'react';
 import { Platform } from 'react-native';
