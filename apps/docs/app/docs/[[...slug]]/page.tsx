@@ -1,9 +1,13 @@
+import { Button } from '@docs/components/ui/button';
 import { source } from '@docs/lib/source';
-import { DocsPage, DocsBody, DocsDescription, DocsTitle } from 'fumadocs-ui/page';
-import { notFound } from 'next/navigation';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { cn } from '@docs/lib/utils';
-import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
+import { findNeighbour } from 'fumadocs-core/server';
+import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
@@ -13,9 +17,12 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
   const MDX = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage toc={page.data.toc} full={page.data.full} breadcrumb={{ includePage: false }}>
       <DocsBody>
-        <DocsTitle className='mb-0'>{page.data.title}</DocsTitle>
+        <div className='flex items-center justify-between gap-2'>
+          <DocsTitle className='mb-0'>{page.data.title}</DocsTitle>
+          <NeighbourButtons url={page.url} />
+        </div>
         <DocsDescription className='mt-2.5 mb-4 text-base'>{page.data.description}</DocsDescription>
         <MDX
           components={{
@@ -40,6 +47,28 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
         />
       </DocsBody>
     </DocsPage>
+  );
+}
+
+function NeighbourButtons({ url }: { url: string }) {
+  const neighbours = findNeighbour(source.pageTree, url);
+  return (
+    <div className='flex items-center gap-2'>
+      {neighbours.previous && (
+        <Button variant='outline' size='icon' className='size-8 border-border/70' asChild>
+          <Link href={neighbours.previous.url}>
+            <ArrowLeftIcon />
+          </Link>
+        </Button>
+      )}
+      {neighbours.next && (
+        <Button variant='outline' size='icon' className='size-8 border-border/70' asChild>
+          <Link href={neighbours.next.url}>
+            <ArrowRightIcon />
+          </Link>
+        </Button>
+      )}
+    </div>
   );
 }
 
