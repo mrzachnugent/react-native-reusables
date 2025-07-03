@@ -170,7 +170,7 @@ function SelectItem({
           <Icon as={Check} className='text-muted-foreground shrink-0 size-4' />
         </SelectPrimitive.ItemIndicator>
       </View>
-      <SelectPrimitive.ItemText className='group-active:text-accent-foreground text-sm select-none' />
+      <SelectPrimitive.ItemText className='text-foreground group-active:text-accent-foreground text-sm select-none' />
     </SelectPrimitive.Item>
   );
 }
