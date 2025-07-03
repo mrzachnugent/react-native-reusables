@@ -12,9 +12,9 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
-      <div className='group flex items-center gap-1.5'>
+      <div className='group flex items-center gap-2'>
         <RnrIcon className='transition-transform opacity-80 duration-500 group-hover:rotate-180 group-hover:scale-95 flex-shrink-0' />
-        <p className='font-medium'>Reusables</p>
+        <p className='font-medium text-[1.175rem]'>Reusables</p>
       </div>
     ),
   },

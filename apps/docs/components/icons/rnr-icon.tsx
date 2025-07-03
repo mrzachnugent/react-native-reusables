@@ -4,13 +4,16 @@ export function RnrIcon({
   className,
   reactPathClassName,
   ...props
-}: React.ComponentProps<'svg'> & { reactPathClassName?: string }) {
+}: {
+  className?: string;
+  reactPathClassName?: string;
+}) {
   return (
     <svg
       viewBox='0 0 22 20'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
-      className={cn('h-6', className)}
+      className={cn('h-[1.625rem]', className)}
       shapeRendering='crispEdges'
       {...props}
     >
