@@ -2,8 +2,16 @@ import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as TabsPrimitive from '@rn-primitives/tabs';
 import * as React from 'react';
+import { Platform } from 'react-native';
 
-const Tabs = TabsPrimitive.Root;
+function Tabs({
+  className,
+  ...props
+}: TabsPrimitive.RootProps & {
+  ref?: React.RefObject<TabsPrimitive.RootRef>;
+}) {
+  return <TabsPrimitive.Root className={cn('flex flex-col gap-2', className)} {...props} />;
+}
 
 function TabsList({
   className,
@@ -14,7 +22,8 @@ function TabsList({
   return (
     <TabsPrimitive.List
       className={cn(
-        'web:inline-flex h-10 native:h-12 items-center justify-center rounded-md bg-muted p-1 native:px-1.5',
+        'bg-muted text-muted-foreground flex flex-row h-9 w-fit items-center justify-center rounded-lg p-[3px]',
+        Platform.select({ web: 'inline-flex' }),
         className
       )}
       {...props}
@@ -32,15 +41,19 @@ function TabsTrigger({
   return (
     <TextClassContext.Provider
       value={cn(
-        'text-sm native:text-base font-medium text-muted-foreground web:transition-all',
-        value === props.value && 'text-foreground'
+        'text-foreground dark:text-muted-foreground text-sm font-medium',
+        value === props.value && 'dark:text-foreground'
       )}
     >
       <TabsPrimitive.Trigger
         className={cn(
-          'inline-flex items-center justify-center shadow-none web:whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
-          props.disabled && 'web:pointer-events-none opacity-50',
-          props.value === value && 'bg-background shadow-lg shadow-foreground/10',
+          'flex flex-row h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 shadow-none',
+          Platform.select({
+            web: 'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring inline-flex whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 cursor-default',
+          }),
+          props.disabled && 'opacity-50',
+          props.value === value && 'bg-background dark:border-foreground/10 dark:bg-input/30',
+          Platform.select({ native: 'shadow-black/10' }),
           className
         )}
         {...props}
@@ -57,10 +70,7 @@ function TabsContent({
 }) {
   return (
     <TabsPrimitive.Content
-      className={cn(
-        'web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
-        className
-      )}
+      className={cn(Platform.select({ web: 'flex-1 outline-none' }), className)}
       {...props}
     />
   );
