@@ -2,22 +2,33 @@ import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as TogglePrimitive from '@rn-primitives/toggle';
 import { cva, type VariantProps } from 'class-variance-authority';
-import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
+import { Platform } from 'react-native';
+import { Icon } from './icon';
 
 const toggleVariants = cva(
-  'web:group web:inline-flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:hover:bg-muted active:bg-muted web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
+  cn(
+    'group flex flex-row items-center justify-center gap-2 rounded-md active:bg-muted',
+    Platform.select({
+      web: 'inline-flex hover:bg-muted hover:text-muted-foreground disabled:pointer-events-none [&_svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none transition-[color,box-shadow] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive whitespace-nowrap cursor-default',
+    })
+  ),
   {
     variants: {
       variant: {
         default: 'bg-transparent',
-        outline:
-          'border border-input bg-transparent web:hover:bg-accent active:bg-accent active:bg-accent',
+        outline: cn(
+          'border border-input bg-transparent shadow-sm active:bg-accent',
+          Platform.select({
+            web: 'hover:bg-accent hover:text-accent-foreground',
+            native: 'shadow-black/5',
+          })
+        ),
       },
       size: {
-        default: 'h-10 px-3 native:h-12 native:px-[12]',
-        sm: 'h-9 px-2.5 native:h-10 native:px-[9]',
-        lg: 'h-11 px-5 native:h-14 native:px-6',
+        default: 'h-9 px-2 min-w-9',
+        sm: 'h-8 px-1.5 min-w-8',
+        lg: 'h-10 px-2.5 min-w-10',
       },
     },
     defaultVariants: {
@@ -26,24 +37,6 @@ const toggleVariants = cva(
     },
   }
 );
-
-const toggleTextVariants = cva('text-sm native:text-base text-foreground font-medium', {
-  variants: {
-    variant: {
-      default: '',
-      outline: 'web:group-hover:text-accent-foreground web:group-active:text-accent-foreground',
-    },
-    size: {
-      default: '',
-      sm: '',
-      lg: '',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default',
-  },
-});
 
 function Toggle({
   className,
@@ -58,15 +51,17 @@ function Toggle({
   return (
     <TextClassContext.Provider
       value={cn(
-        toggleTextVariants({ variant, size }),
-        props.pressed ? 'text-accent-foreground' : 'web:group-hover:text-muted-foreground',
+        'text-sm text-foreground font-medium',
+        props.pressed
+          ? 'text-accent-foreground'
+          : Platform.select({ web: 'group-hover:text-muted-foreground' }),
         className
       )}
     >
       <TogglePrimitive.Root
         className={cn(
           toggleVariants({ variant, size }),
-          props.disabled && 'web:pointer-events-none opacity-50',
+          props.disabled && 'opacity-50',
           props.pressed && 'bg-accent',
           className
         )}
@@ -76,15 +71,9 @@ function Toggle({
   );
 }
 
-function ToggleIcon({
-  className,
-  icon: Icon,
-  ...props
-}: React.ComponentPropsWithoutRef<LucideIcon> & {
-  icon: LucideIcon;
-}) {
+function ToggleIcon({ className, ...props }: React.ComponentProps<typeof Icon>) {
   const textClass = React.useContext(TextClassContext);
-  return <Icon className={cn(textClass, className)} {...props} />;
+  return <Icon className={cn('size-4 shrink-0', textClass, className)} {...props} />;
 }
 
-export { Toggle, ToggleIcon, toggleTextVariants, toggleVariants };
+export { Toggle, ToggleIcon, toggleVariants };

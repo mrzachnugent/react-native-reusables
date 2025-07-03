@@ -18,7 +18,7 @@ const config = {
     'react-native-swipe-gestures',
     'react-native-toast-message',
     'react-native-gesture-handler',
-
+    'expo-haptics',
     'expo-router',
     'react-navigation',
     'expo-modules-core',
