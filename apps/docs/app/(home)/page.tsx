@@ -13,7 +13,7 @@ export default function HomePage() {
           <a href='https://ui.shadcn.com' target='_blank'>
             shadcn/ui
           </a>{' '}
-          to React Native. Beautifully crafted components with NativeWind, open source, and{' '}
+          to React Native. Beautifully crafted components with Nativewind, open source, and{' '}
           <i>almost</i> as easy to use.
         </p>
         <div className='flex w-full items-center justify-center gap-2 pt-2 **:data-[slot=button]:shadow-none'>

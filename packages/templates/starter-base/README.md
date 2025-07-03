@@ -4,7 +4,7 @@ A starting point to help you set up your project quickly and use the common comp
 
 ## Features
 
-- NativeWind v4
+- Nativewind v4
 - Dark and light mode
   - Android Navigation Bar matches mode
   - Persistent mode
