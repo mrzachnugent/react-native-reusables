@@ -16,8 +16,7 @@ import { setCookie } from 'cookies-next';
 
 const PLATFORMS = [
   { name: 'web', label: 'Web' },
-  { name: 'ios', label: 'iOS' },
-  { name: 'android', label: 'Android' },
+  { name: 'native', label: 'Native' },
 ] as const;
 
 export type Platform = (typeof PLATFORMS)[number]['name'];
@@ -25,16 +24,14 @@ export type Platform = (typeof PLATFORMS)[number]['name'];
 export type PreviewCardClientProps = {
   copyContent: string;
   webPreview: React.ReactNode;
-  iosPreview?: React.ReactNode;
-  androidPreview?: React.ReactNode;
+  nativePreview?: React.ReactNode;
   platformCookie?: Platform;
 };
 
 export function PreviewCardClient({
   copyContent,
   webPreview,
-  iosPreview,
-  androidPreview,
+  nativePreview,
   platformCookie,
 }: PreviewCardClientProps) {
   const [platform, setPlatform] = React.useState<Platform>(platformCookie ?? 'web');
@@ -67,10 +64,8 @@ export function PreviewCardClient({
         />
       </div>
       <div className='flex flex-col items-center justify-center p-6 flex-1'>
-        {platform === 'android'
-          ? androidPreview ?? <ComingSoon selectWebPreview={selectWebPreview} />
-          : platform === 'ios'
-          ? iosPreview ?? <ComingSoon selectWebPreview={selectWebPreview} />
+        {platform === 'native'
+          ? nativePreview ?? <ComingSoon selectWebPreview={selectWebPreview} />
           : webPreview}
       </div>
     </div>
