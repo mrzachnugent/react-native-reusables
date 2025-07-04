@@ -1,8 +1,8 @@
 'use client';
 
-import { Icon } from '@/registry/new-york/components/ui/icon';
-import { TextClassContext } from '@/registry/new-york/components/ui/text';
-import { cn } from '@/registry/new-york/lib/utils';
+import { Icon } from '@/registry/default/components/ui/icon';
+import { TextClassContext } from '@/registry/default/components/ui/text';
+import { cn } from '@/registry/default/lib/utils';
 import * as AccordionPrimitive from '@rn-primitives/accordion';
 import { ChevronDown } from 'lucide-react-native';
 import * as React from 'react';
@@ -44,11 +44,7 @@ function AccordionItem({
 }) {
   return (
     <AccordionPrimitive.Item
-      className={cn(
-        'border-b border-border',
-        Platform.select({ web: 'last:border-b-0' }),
-        className
-      )}
+      className={cn('border-b border-border', className)}
       value={value}
       asChild
       {...props}
@@ -88,7 +84,10 @@ function AccordionTrigger({
 
   return (
     <TextClassContext.Provider
-      value={cn('text-left text-sm font-medium', Platform.select({ web: 'group-hover:underline' }))}
+      value={cn(
+        'text-left text-base font-medium',
+        Platform.select({ web: 'group-hover:underline' })
+      )}
     >
       <AccordionPrimitive.Header>
         <AccordionPrimitive.Trigger {...props} asChild>
@@ -107,7 +106,7 @@ function AccordionTrigger({
                 as={ChevronDown}
                 size={16}
                 className={cn(
-                  'text-muted-foreground shrink-0',
+                  'text-foreground shrink-0',
                   Platform.select({
                     web: 'pointer-events-none translate-y-0.5 transition-transform duration-200',
                   })
