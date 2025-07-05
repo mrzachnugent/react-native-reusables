@@ -20,7 +20,7 @@
 - [x] Popover
 - [x] Progress
 - [x] Radio Group
-- [ ] Select
+- [x] Select
 - [ ] Separator
 - [ ] Skeleton
 - [ ] Switch
