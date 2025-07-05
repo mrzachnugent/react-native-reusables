@@ -19,7 +19,7 @@
 - [x] Menubar
 - [x] Popover
 - [x] Progress
-- [ ] Radio Group
+- [x] Radio Group
 - [ ] Select
 - [ ] Separator
 - [ ] Skeleton
