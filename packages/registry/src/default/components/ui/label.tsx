@@ -32,7 +32,7 @@ function Label({
       disabled={disabled}
     >
       <LabelPrimitive.Text
-        className={cn('text-foreground text-sm leading-none font-medium', className)}
+        className={cn('text-foreground text-sm font-medium leading-none', className)}
         {...props}
       />
     </LabelPrimitive.Root>
