@@ -24,8 +24,8 @@ function TabsList({
   return (
     <TabsPrimitive.List
       className={cn(
-        'bg-muted text-muted-foreground flex flex-row h-9 w-fit items-center justify-center rounded-lg p-[3px]',
-        Platform.select({ web: 'inline-flex' }),
+        'bg-muted flex flex-row h-9 items-center justify-center rounded-lg p-[3px]',
+        Platform.select({ web: 'inline-flex w-fit' }),
         className
       )}
       {...props}
