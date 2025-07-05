@@ -15,7 +15,7 @@
 - [x] Dropdown Menu
 - [x] Hover Card
 - [x] Input
-- [ ] Label
+- [x] Label
 - [ ] Menubar
 - [ ] Popover
 - [ ] Progress
