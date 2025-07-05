@@ -13,8 +13,8 @@
 - [x] Context Menu
 - [x] Dialog
 - [x] Dropdown Menu
-- [ ] Hover Card
-- [ ] Input
+- [x] Hover Card
+- [x] Input
 - [ ] Label
 - [ ] Menubar
 - [ ] Popover
