@@ -5,4 +5,28 @@
 - [x] Alert Dialog
 - [x] Aspect Ratio
 - [x] Avatar
+- [x] Badge
 - [x] Button
+- [ ] Card
+- [ ] Checkbox
+- [ ] Collapsible
+- [ ] Context Menu
+- [ ] Dialog
+- [ ] Dropdown Menu
+- [ ] Hover Card
+- [ ] Input
+- [ ] Label
+- [ ] Menubar
+- [ ] Popover
+- [ ] Progress
+- [ ] Radio Group
+- [ ] Select
+- [ ] Separator
+- [ ] Skeleton
+- [ ] Switch
+- [ ] Tabs
+- [ ] Text
+- [ ] Textarea
+- [ ] Toggle Group
+- [ ] Toggle
+- [ ] Tooltip
