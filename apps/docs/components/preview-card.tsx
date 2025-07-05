@@ -147,7 +147,7 @@ function ComingSoon({ selectWebPreview }: { selectWebPreview: () => void }) {
         <span className='text-[0.5rem] pt-1'>TM</span>
       </div>
       <p className='text-sm text-fd-muted-foreground pb-4'>
-        We&apos;re working on this preview. In the meantime, check out the web preview.
+        We&apos;re working on it. In the meantime, you can check out the web preview.
       </p>
 
       <Button
