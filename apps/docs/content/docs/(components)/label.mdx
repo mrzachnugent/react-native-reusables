@@ -3,14 +3,17 @@ title: Label
 description: Renders an accessible label associated with controls.
 ---
 
-import labelPreview from "!!raw-loader!@/registry/new-york/examples/label";
+import labelPreview from "!!raw-loader!@/registry/default/examples/label";
+import labelNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/label";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { LabelPreview } from "@docs/components/new-york-previews";
+import { LabelPreview } from "@docs/components/default-previews";
+import { LabelPreview as LabelNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <div className="h-5"/>
 
@@ -23,10 +26,21 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <PreviewCard
       copyContent={labelPreview}
       webPreview={<LabelPreview />}
+      webNewYorkPreview={<LabelNewYorkPreview />}
     />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/label.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/label.tsx",
@@ -35,6 +49,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

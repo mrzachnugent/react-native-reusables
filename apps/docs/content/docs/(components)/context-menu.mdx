@@ -3,15 +3,18 @@ title: Context Menu
 description: Displays a menu to the user — such as a set of actions or functions — triggered by a button.
 ---
 
-import contextMenuPreview from "!!raw-loader!@/registry/new-york/examples/context-menu";
+import contextMenuPreview from "!!raw-loader!@/registry/default/examples/context-menu";
+import contextMenuNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/context-menu";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { ContextMenuPreview } from "@docs/components/new-york-previews";
+import { ContextMenuPreview } from "@docs/components/default-previews";
+import { ContextMenuPreview as ContextMenuNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -28,10 +31,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={contextMenuPreview} webPreview={<ContextMenuPreview />}/>
+    <PreviewCard 
+      copyContent={contextMenuPreview} 
+      webPreview={<ContextMenuPreview />}
+      webNewYorkPreview={<ContextMenuNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/context-menu.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/context-menu.tsx",
@@ -40,6 +57,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

@@ -3,15 +3,18 @@ title: Menubar
 description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
 ---
 
-import menubarPreview from "!!raw-loader!@/registry/new-york/examples/menubar";
+import menubarPreview from "!!raw-loader!@/registry/default/examples/menubar";
+import menubarNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/menubar";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { MenubarPreview } from "@docs/components/new-york-previews";
+import { MenubarPreview } from "@docs/components/default-previews";
+import { MenubarPreview as MenubarNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -28,10 +31,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={menubarPreview} webPreview={<MenubarPreview />}/>
+    <PreviewCard 
+      copyContent={menubarPreview} 
+      webPreview={<MenubarPreview />}
+      webNewYorkPreview={<MenubarNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/menubar.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/menubar.tsx",
@@ -40,6 +57,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
