@@ -51,7 +51,7 @@ function ContextMenuSubTrigger({
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none [&_svg]:pointer-events-none',
           }),
-          open && 'bg-accent',
+          open && cn('bg-accent', Platform.select({ native: 'mb-1' })),
           inset && 'pl-8'
         )}
         {...props}
