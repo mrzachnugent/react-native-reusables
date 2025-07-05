@@ -27,6 +27,6 @@
 - [x] Tabs
 - [x] Text
 - [x] Textarea
-- [ ] Toggle Group
-- [ ] Toggle
-- [ ] Tooltip
+- [x] Toggle Group
+- [x] Toggle
+- [x] Tooltip

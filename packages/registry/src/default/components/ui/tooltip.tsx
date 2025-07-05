@@ -8,9 +8,7 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { FadeInDown, FadeInUp, FadeOut } from 'react-native-reanimated';
 
-function Tooltip(props: TooltipPrimitive.RootProps) {
-  return <TooltipPrimitive.Root delayDuration={0} {...props} />;
-}
+const Tooltip = TooltipPrimitive.Root;
 
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
@@ -35,11 +33,11 @@ function TooltipContent({
           }
           exiting={FadeOut}
         >
-          <TextClassContext.Provider value='text-xs text-primary-foreground'>
+          <TextClassContext.Provider value='text-sm text-popover-foreground'>
             <TooltipPrimitive.Content
               sideOffset={sideOffset}
               className={cn(
-                'bg-primary z-50 rounded-md px-3 py-1.5',
+                'bg-popover border border-border z-50 rounded-md px-3 py-1.5',
                 Platform.select({
                   web: cn(
                     'animate-in fade-in-0 zoom-in-95 w-fit origin-(--radix-tooltip-content-transform-origin) text-balance',
