@@ -1,3 +1,4 @@
+import { CookiesProvider } from '@docs/components/cookies-provider';
 import { SafeAreaProvider } from '@docs/components/safe-area-provider';
 import { cn } from '@docs/lib/utils';
 import { RootProvider } from 'fumadocs-ui/provider';
@@ -20,9 +21,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className={cn(fontSans.variable, fontMono.variable)} suppressHydrationWarning>
       <body className='flex flex-col min-h-screen'>
-        <SafeAreaProvider>
-          <RootProvider>{children}</RootProvider>
-        </SafeAreaProvider>
+        <CookiesProvider>
+          <SafeAreaProvider>
+            <RootProvider>{children}</RootProvider>
+          </SafeAreaProvider>
+        </CookiesProvider>
       </body>
     </html>
   );
