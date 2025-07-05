@@ -8,7 +8,7 @@
 - [x] Badge
 - [x] Button
 - [x] Card
-- [ ] Checkbox
+- [x] Checkbox
 - [ ] Collapsible
 - [ ] Context Menu
 - [ ] Dialog
