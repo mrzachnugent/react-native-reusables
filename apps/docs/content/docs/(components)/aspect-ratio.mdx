@@ -3,14 +3,17 @@ title: Aspect Ratio
 description: Displays content within a desired ratio.
 ---
 
-import aspectRatioPreview from "!!raw-loader!@/registry/new-york/examples/aspect-ratio";
+import aspectRatioPreview from "!!raw-loader!@/registry/default/examples/aspect-ratio";
+import aspectRatioNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/aspect-ratio";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AspectRatioPreview } from "@docs/components/new-york-previews";
+import { AspectRatioPreview } from "@docs/components/default-previews";
+import { AspectRatioPreview as AspectRatioNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -30,10 +33,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div> 
-    <PreviewCard copyContent={aspectRatioPreview} webPreview={<AspectRatioPreview />}/>
+    <PreviewCard 
+      copyContent={aspectRatioPreview} 
+      webPreview={<AspectRatioPreview />}
+      webNewYorkPreview={<AspectRatioNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/aspect-ratio.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/aspect-ratio.tsx",
@@ -42,6 +59,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
