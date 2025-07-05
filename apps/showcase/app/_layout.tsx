@@ -54,12 +54,12 @@ export default function RootLayout() {
               },
               headerLeft: () => (
                 <Pressable
-                  hitSlop={30}
+                  hitSlop={12}
                   onPress={() => router.back()}
                   className='flex-row items-center active:opacity-70'
                 >
-                  <Icon as={ChevronLeft} className='text-foreground size-5 -ml-2' />
-                  <Text className='text-foreground text-sm'>Back</Text>
+                  <Icon as={ChevronLeft} className='text-muted-foreground size-6 -ml-1' />
+                  <Text className='text-muted-foreground text-sm -ml-1'>Back</Text>
                 </Pressable>
               ),
             }}
