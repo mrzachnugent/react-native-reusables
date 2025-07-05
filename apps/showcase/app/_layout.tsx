@@ -1,15 +1,17 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeToggle } from '@showcase/components/ThemeToggle';
 import { Text } from '@/registry/new-york/components/ui/text';
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { useColorScheme } from 'nativewind';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { ChevronLeft } from 'lucide-react-native';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -27,7 +29,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: 'index',
 };
 
 export default function RootLayout() {
@@ -41,19 +43,37 @@ export default function RootLayout() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <BottomSheetModalProvider>
           <Stack
-            initialRouteName='(tabs)'
             screenOptions={{
               headerBackTitle: 'Back',
               headerTitle(props) {
                 return <Text className='text-xl font-semibold'>{toOptions(props.children)}</Text>;
               },
               headerRight: () => <ThemeToggle />,
+              headerBackTitleStyle: {
+                fontSize: 14,
+              },
+              headerLeft: () => (
+                <Pressable
+                  hitSlop={30}
+                  onPress={() => router.back()}
+                  className='flex-row items-center active:opacity-70'
+                >
+                  <Icon as={ChevronLeft} className='text-foreground size-5 -ml-2' />
+                  <Text className='text-foreground text-sm'>Back</Text>
+                </Pressable>
+              ),
             }}
           >
             <Stack.Screen
-              name='(tabs)'
+              name='index'
               options={{
-                headerShown: false,
+                headerLargeTitle: true,
+                headerTitle: 'Showcase',
+                headerLargeTitleShadowVisible: false,
+                headerLargeStyle: {
+                  backgroundColor: colorScheme === 'dark' ? 'black' : 'white',
+                },
+                headerLeft: null,
               }}
             />
 
