@@ -54,10 +54,7 @@ function Menubar({
       ) : null}
       <MenubarPrimitive.Root
         className={cn(
-          'bg-background flex-row flex h-9 items-center gap-1 rounded-md border border-border p-1 shadow-sm',
-          Platform.select({
-            native: 'shadow-black/5',
-          }),
+          'bg-background flex-row flex h-10 items-center gap-1 rounded-md border border-border p-1',
           className
         )}
         value={value ?? valueProp}
@@ -86,7 +83,7 @@ function MenubarTrigger({
     >
       <MenubarPrimitive.Trigger
         className={cn(
-          'group flex items-center rounded-md px-2 py-1',
+          'group flex items-center rounded-md px-3 py-1.5',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground outline-none cursor-default',
           }),
@@ -148,7 +145,7 @@ function MenubarSubContent({
     <NativeOnlyAnimatedView entering={FadeIn}>
       <MenubarPrimitive.SubContent
         className={cn(
-          'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg',
+          'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-md',
           Platform.select({
             web: 'animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 fade-in-0 data-[state=closed]:zoom-out-95 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-context-menu-content-transform-origin)',
           }),
@@ -185,7 +182,7 @@ function MenubarContent({
         <TextClassContext.Provider value='text-popover-foreground'>
           <MenubarPrimitive.Content
             className={cn(
-              'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-lg min-w-[12rem]',
+              'bg-popover overflow-hidden rounded-md border border-border p-1 shadow-md min-w-[12rem]',
               Platform.select({
                 web: cn(
                   'animate-in fade-in-0 zoom-in-95 z-50 max-h-(--radix-context-menu-content-available-height) origin-(--radix-context-menu-content-transform-origin) cursor-default',
@@ -325,7 +322,11 @@ function MenubarLabel({
 }) {
   return (
     <MenubarPrimitive.Label
-      className={cn('text-foreground px-2 py-1.5 text-sm font-medium', inset && 'pl-8', className)}
+      className={cn(
+        'text-foreground px-2 py-1.5 text-sm font-semibold',
+        inset && 'pl-8',
+        className
+      )}
       {...props}
     />
   );

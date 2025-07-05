@@ -16,7 +16,7 @@
 - [x] Hover Card
 - [x] Input
 - [x] Label
-- [ ] Menubar
+- [x] Menubar
 - [ ] Popover
 - [ ] Progress
 - [ ] Radio Group
