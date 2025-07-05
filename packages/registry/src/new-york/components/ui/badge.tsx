@@ -8,9 +8,9 @@ import { Platform, View, ViewProps } from 'react-native';
 
 const badgeVariants = cva(
   cn(
-    'group flex-row items-center justify-center rounded-md border border-border px-2 py-0.5 w-fit shrink-0 gap-1 overflow-hidden',
+    'group flex-row items-center justify-center rounded-md border border-border px-2 py-0.5 shrink-0 gap-1 overflow-hidden',
     Platform.select({
-      web: 'whitespace-nowrap [&>svg]:size-3 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow]',
+      web: 'whitespace-nowrap w-fit [&>svg]:size-3 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow]',
     })
   ),
   {
