@@ -3,14 +3,17 @@ title: Textarea
 description: Displays a form textarea or a component that looks like a textarea.
 ---
 
-import textareaPreview from "!!raw-loader!@/registry/new-york/examples/textarea";
+import textareaPreview from "!!raw-loader!@/registry/default/examples/textarea";
+import textareaNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/textarea";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { TextareaPreview } from "@docs/components/new-york-previews";
+import { TextareaPreview } from "@docs/components/default-previews";
+import { TextareaPreview as TextareaNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -27,10 +30,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={textareaPreview} webPreview={<TextareaPreview />}/>
+    <PreviewCard 
+      copyContent={textareaPreview} 
+      webPreview={<TextareaPreview />}
+      webNewYorkPreview={<TextareaNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/textarea.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/textarea.tsx",
@@ -39,6 +56,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

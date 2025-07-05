@@ -3,17 +3,20 @@ title: Select
 description: Displays a list of options for the user to pick from—triggered by a button.
 ---
 
-
-import selectPreview from "!!raw-loader!@/registry/new-york/examples/select/select";
-import scrollableSelectPreview from "!!raw-loader!@/registry/new-york/examples/select/scrollable-select";
+import selectPreview from "!!raw-loader!@/registry/default/examples/select/select";
+import selectNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/select/select";
+import scrollableSelectPreview from "!!raw-loader!@/registry/default/examples/select/scrollable-select";
+import scrollableSelectNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/select/scrollable-select";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { SelectPreview, ScrollableSelectPreview } from "@docs/components/new-york-previews";
+import { SelectPreview, ScrollableSelectPreview } from "@docs/components/default-previews";
+import { SelectPreview as SelectNewYorkPreview, ScrollableSelectPreview as ScrollableSelectNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -30,10 +33,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={selectPreview} webPreview={<SelectPreview />}/>
+    <PreviewCard 
+      copyContent={selectPreview} 
+      webPreview={<SelectPreview />}
+      webNewYorkPreview={<SelectNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/select/select.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/select/select.tsx",
@@ -42,6 +59,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -154,10 +172,24 @@ import {
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={scrollableSelectPreview} webPreview={<ScrollableSelectPreview />}/>
+    <PreviewCard 
+      copyContent={scrollableSelectPreview} 
+      webPreview={<ScrollableSelectPreview />}
+      webNewYorkPreview={<ScrollableSelectNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/select/scrollable-select.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/select/scrollable-select.tsx",
@@ -166,5 +198,6 @@ import {
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
