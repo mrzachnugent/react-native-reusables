@@ -1,9 +1,9 @@
 'use client';
 
-import { TextClassContext } from '@/registry/new-york/components/ui/text';
+import { Text, TextClassContext } from '@/registry/new-york/components/ui/text';
 import { cn } from '@/registry/new-york/lib/utils';
 import * as React from 'react';
-import { Platform, Text, type TextProps, View, type ViewProps } from 'react-native';
+import { Platform, View, type ViewProps } from 'react-native';
 
 function Card({
   className,
@@ -12,16 +12,18 @@ function Card({
   ref?: React.RefObject<View>;
 }) {
   return (
-    <View
-      className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm',
-        Platform.select({
-          native: 'shadow-black/5',
-        }),
-        className
-      )}
-      {...props}
-    />
+    <TextClassContext.Provider value='text-card-foreground'>
+      <View
+        className={cn(
+          'bg-card flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm',
+          Platform.select({
+            native: 'shadow-black/5',
+          }),
+          className
+        )}
+        {...props}
+      />
+    </TextClassContext.Provider>
   );
 }
 
@@ -37,14 +39,14 @@ function CardHeader({
 function CardTitle({
   className,
   ...props
-}: TextProps & {
+}: React.ComponentProps<typeof Text> & {
   ref?: React.RefObject<Text>;
 }) {
   return (
     <Text
       role='heading'
       aria-level={3}
-      className={cn('text-card-foreground leading-none font-semibold', className)}
+      className={cn('leading-none font-semibold', className)}
       {...props}
     />
   );
@@ -53,7 +55,7 @@ function CardTitle({
 function CardDescription({
   className,
   ...props
-}: TextProps & {
+}: React.ComponentProps<typeof Text> & {
   ref?: React.RefObject<Text>;
 }) {
   return <Text className={cn('text-muted-foreground text-sm', className)} {...props} />;
@@ -65,11 +67,7 @@ function CardContent({
 }: ViewProps & {
   ref?: React.RefObject<View>;
 }) {
-  return (
-    <TextClassContext.Provider value='text-card-foreground'>
-      <View className={cn('px-6', className)} {...props} />
-    </TextClassContext.Provider>
-  );
+  return <View className={cn('px-6', className)} {...props} />;
 }
 
 function CardFooter({

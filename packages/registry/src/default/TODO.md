@@ -7,7 +7,7 @@
 - [x] Avatar
 - [x] Badge
 - [x] Button
-- [ ] Card
+- [x] Card
 - [ ] Checkbox
 - [ ] Collapsible
 - [ ] Context Menu
