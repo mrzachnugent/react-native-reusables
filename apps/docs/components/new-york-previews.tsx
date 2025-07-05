@@ -1,3 +1,3 @@
 'use client';
 
-export * from '@/registry/default/examples'; // TODO: change to new-york
+export * from '@/registry/new-york/examples';
