@@ -307,6 +307,9 @@ importers:
 
   apps/showcase:
     dependencies:
+      '@expo-google-fonts/geist':
+        specifier: ^0.4.0
+        version: 0.4.0
       '@gorhom/bottom-sheet':
         specifier: ^5.1.4
         version: 5.1.6(@types/react@19.0.14)(react-native-gesture-handler@2.24.0(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.28.0)(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -2086,6 +2089,9 @@ packages:
   '@eslint/js@8.57.1':
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@expo-google-fonts/geist@0.4.0':
+    resolution: {integrity: sha512-tMxHklsJHTuOgXYkBTrzeVinHmECTZ2g7I0UZLrk82jHx3GnPuj5D/iR5RUaYWrS3DmOPAkDg9FtgkRU8j+Ygg==}
 
   '@expo/cli@0.24.18':
     resolution: {integrity: sha512-4cUVWa7bHS0oLn9hBCH5QKI47o+qm0JTUl8xINC0In0JIG9mlLugDSNY+t81powr28Htq9n5gOGkKPTGc1vKiw==}
@@ -10931,6 +10937,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.1': {}
+
+  '@expo-google-fonts/geist@0.4.0': {}
 
   '@expo/cli@0.24.18(graphql@16.11.0)':
     dependencies:
