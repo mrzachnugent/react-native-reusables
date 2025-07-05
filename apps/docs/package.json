@@ -7,8 +7,10 @@
     "clean": "rm -rf .next .source node_modules",
     "dev": "next dev",
     "start": "next start",
-    "registry:build:new-york": "shadcn build ./new-york-registry.json --output ./public/r/new-york",
-    "registry:build:new-york:local": "shadcn build ./new-york-registry.local.json --output ./public/local/r/new-york",
+    "registry:build:default": "shadcn build ./registry/default.json --output ./public/r/default",
+    "registry:build:default:local": "shadcn build ./registry/default.local.json --output ./public/local/r/default",
+    "registry:build:new-york": "shadcn build ./registry/new-york.json --output ./public/r/new-york",
+    "registry:build:new-york:local": "shadcn build ./registry/new-york.local.json --output ./public/local/r/new-york",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
