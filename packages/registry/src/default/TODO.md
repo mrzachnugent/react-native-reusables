@@ -25,8 +25,8 @@
 - [x] Skeleton
 - [x] Switch
 - [x] Tabs
-- [ ] Text
-- [ ] Textarea
+- [x] Text
+- [x] Textarea
 - [ ] Toggle Group
 - [ ] Toggle
 - [ ] Tooltip
