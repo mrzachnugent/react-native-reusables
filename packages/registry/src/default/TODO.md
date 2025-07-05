@@ -21,8 +21,8 @@
 - [x] Progress
 - [x] Radio Group
 - [x] Select
-- [ ] Separator
-- [ ] Skeleton
+- [x] Separator
+- [x] Skeleton
 - [ ] Switch
 - [ ] Tabs
 - [ ] Text
