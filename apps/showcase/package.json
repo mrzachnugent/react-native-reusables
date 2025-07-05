@@ -14,6 +14,7 @@
     "postinstall": "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
   },
   "dependencies": {
+    "@expo-google-fonts/geist": "^0.4.0",
     "@gorhom/bottom-sheet": "^5.1.4",
     "@hookform/resolvers": "^3.3.4",
     "@react-native-community/slider": "4.5.6",

@@ -1,4 +1,5 @@
 const { hairlineWidth } = require('nativewind/theme');
+const geistFontPlugin = require('./plugins/geistFontPlugin.js');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,6 +12,9 @@ module.exports = {
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Geist'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -73,5 +77,5 @@ module.exports = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [geistFontPlugin, require('tailwindcss-animate')],
 };
