@@ -3,13 +3,16 @@ title: Alert
 description: Displays a callout for user attention.
 ---
 
-import alertPreview from "!!raw-loader!@/registry/new-york/examples/alert";
+import alertPreview from "!!raw-loader!@/registry/default/examples/alert";
+import alertNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/alert";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AlertPreview } from "@docs/components/new-york-previews";
+import { AlertPreview } from "@docs/components/default-previews";
+import { AlertPreview as AlertNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <div className="h-5"/>
 
@@ -22,10 +25,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div>
-    <PreviewCard copyContent={alertPreview} webPreview={<AlertPreview />}/>
+    <PreviewCard 
+      copyContent={alertPreview} 
+      webPreview={<AlertPreview />}
+      webNewYorkPreview={<AlertNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/alert.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/alert.tsx",
@@ -34,6 +51,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

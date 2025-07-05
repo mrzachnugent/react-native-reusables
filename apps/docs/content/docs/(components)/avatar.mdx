@@ -3,14 +3,17 @@ title: Avatar
 description: An image element with a fallback for representing the user.
 ---
 
-import avatarPreview from "!!raw-loader!@/registry/new-york/examples/avatar";
+import avatarPreview from "!!raw-loader!@/registry/default/examples/avatar";
+import avatarNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/avatar";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AvatarPreview } from "@docs/components/new-york-previews";
+import { AvatarPreview } from "@docs/components/default-previews";
+import { AvatarPreview as AvatarNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -30,10 +33,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div> 
-    <PreviewCard copyContent={avatarPreview} webPreview={<AvatarPreview />}/>
+    <PreviewCard 
+      copyContent={avatarPreview} 
+      webPreview={<AvatarPreview />}
+      webNewYorkPreview={<AvatarNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/avatar.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/avatar.tsx",
@@ -42,6 +59,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

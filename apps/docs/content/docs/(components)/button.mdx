@@ -3,22 +3,33 @@ title: Button
 description: Displays a button or a component that looks like a button.
 ---
 
-import buttonPreview from "!!raw-loader!@/registry/new-york/examples/button/button-primary";
-import buttonDestructivePreview from "!!raw-loader!@/registry/new-york/examples/button/button-destructive";
-import buttonOutlinePreview from "!!raw-loader!@/registry/new-york/examples/button/button-outline";
-import buttonSecondaryPreview from "!!raw-loader!@/registry/new-york/examples/button/button-secondary";
-import buttonGhostPreview from "!!raw-loader!@/registry/new-york/examples/button/button-ghost";
-import buttonLinkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-link";
-import buttonIconPreview from "!!raw-loader!@/registry/new-york/examples/button/button-icon";
-import buttonWithIconPreview from "!!raw-loader!@/registry/new-york/examples/button/button-with-icon";
-import buttonLoadingPreview from "!!raw-loader!@/registry/new-york/examples/button/button-loading";
+import buttonPreview from "!!raw-loader!@/registry/default/examples/button/button-primary";
+import buttonNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-primary";
+import buttonDestructivePreview from "!!raw-loader!@/registry/default/examples/button/button-destructive";
+import buttonDestructiveNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-destructive";
+import buttonOutlinePreview from "!!raw-loader!@/registry/default/examples/button/button-outline";
+import buttonOutlineNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-outline";
+import buttonSecondaryPreview from "!!raw-loader!@/registry/default/examples/button/button-secondary";
+import buttonSecondaryNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-secondary";
+import buttonGhostPreview from "!!raw-loader!@/registry/default/examples/button/button-ghost";
+import buttonGhostNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-ghost";
+import buttonLinkPreview from "!!raw-loader!@/registry/default/examples/button/button-link";
+import buttonLinkNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-link";
+import buttonIconPreview from "!!raw-loader!@/registry/default/examples/button/button-icon";
+import buttonIconNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-icon";
+import buttonWithIconPreview from "!!raw-loader!@/registry/default/examples/button/button-with-icon";
+import buttonWithIconNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-with-icon";
+import buttonLoadingPreview from "!!raw-loader!@/registry/default/examples/button/button-loading";
+import buttonLoadingNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-loading";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { ButtonPreview, ButtonDestructivePreview, ButtonOutlinePreview, ButtonSecondaryPreview, ButtonGhostPreview, ButtonLinkPreview, ButtonIconPreview, ButtonWithIconPreview, ButtonLoadingPreview } from "@docs/components/new-york-previews";
+import { ButtonPreview, ButtonDestructivePreview, ButtonOutlinePreview, ButtonSecondaryPreview, ButtonGhostPreview, ButtonLinkPreview, ButtonIconPreview, ButtonWithIconPreview, ButtonLoadingPreview } from "@docs/components/default-previews";
+import { ButtonPreview as ButtonNewYorkPreview, ButtonDestructivePreview as ButtonDestructiveNewYorkPreview, ButtonOutlinePreview as ButtonOutlineNewYorkPreview, ButtonSecondaryPreview as ButtonSecondaryNewYorkPreview, ButtonGhostPreview as ButtonGhostNewYorkPreview, ButtonLinkPreview as ButtonLinkNewYorkPreview, ButtonIconPreview as ButtonIconNewYorkPreview, ButtonWithIconPreview as ButtonWithIconNewYorkPreview, ButtonLoadingPreview as ButtonLoadingNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <div className="h-5"/>
 
@@ -28,10 +39,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />}/>
+    <PreviewCard 
+      copyContent={buttonPreview} 
+      webPreview={<ButtonPreview />}
+      webNewYorkPreview={<ButtonNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-primary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-primary.tsx",
@@ -40,6 +65,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -143,10 +169,20 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />}/>
+    <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />} webNewYorkPreview={<ButtonNewYorkPreview />} />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+  <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-primary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-primary.tsx",
@@ -155,6 +191,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -168,10 +205,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonSecondaryPreview} webPreview={<ButtonSecondaryPreview />}/>
+    <PreviewCard 
+      copyContent={buttonSecondaryPreview} 
+      webPreview={<ButtonSecondaryPreview />}
+      webNewYorkPreview={<ButtonSecondaryNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-secondary.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-secondary.tsx",
@@ -180,7 +231,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -194,10 +245,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonDestructivePreview} webPreview={<ButtonDestructivePreview />}/>
+    <PreviewCard 
+      copyContent={buttonDestructivePreview} 
+      webPreview={<ButtonDestructivePreview />}
+      webNewYorkPreview={<ButtonDestructiveNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-destructive.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-destructive.tsx",
@@ -206,7 +271,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -220,10 +285,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonOutlinePreview} webPreview={<ButtonOutlinePreview />}/>
+    <PreviewCard 
+      copyContent={buttonOutlinePreview} 
+      webPreview={<ButtonOutlinePreview />}
+      webNewYorkPreview={<ButtonOutlineNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-outline.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-outline.tsx",
@@ -232,7 +311,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -246,10 +325,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonGhostPreview} webPreview={<ButtonGhostPreview />}/>
+    <PreviewCard 
+      copyContent={buttonGhostPreview} 
+      webPreview={<ButtonGhostPreview />}
+      webNewYorkPreview={<ButtonGhostNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-ghost.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-ghost.tsx",
@@ -258,7 +351,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -272,10 +365,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonLinkPreview} webPreview={<ButtonLinkPreview />}/>
+    <PreviewCard 
+      copyContent={buttonLinkPreview} 
+      webPreview={<ButtonLinkPreview />}
+      webNewYorkPreview={<ButtonLinkNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-link.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-link.tsx",
@@ -284,7 +391,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -298,10 +405,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonIconPreview} webPreview={<ButtonIconPreview />}/>
+    <PreviewCard 
+      copyContent={buttonIconPreview} 
+      webPreview={<ButtonIconPreview />}
+      webNewYorkPreview={<ButtonIconNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-icon.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-icon.tsx",
@@ -310,7 +431,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -324,10 +445,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonWithIconPreview} webPreview={<ButtonWithIconPreview />}/>
+    <PreviewCard 
+      copyContent={buttonWithIconPreview} 
+      webPreview={<ButtonWithIconPreview />}
+      webNewYorkPreview={<ButtonWithIconNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-with-icon.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-with-icon.tsx",
@@ -336,7 +471,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -350,10 +485,24 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={buttonLoadingPreview} webPreview={<ButtonLoadingPreview />}/>
+    <PreviewCard 
+      copyContent={buttonLoadingPreview} 
+      webPreview={<ButtonLoadingPreview />}
+      webNewYorkPreview={<ButtonLoadingNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-loading.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-loading.tsx",
@@ -362,6 +511,6 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
       }
     }
     ```
-
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
