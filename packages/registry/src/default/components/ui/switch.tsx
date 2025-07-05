@@ -14,7 +14,7 @@ function Switch({
   return (
     <SwitchPrimitives.Root
       className={cn(
-        'flex flex-row h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-sm',
+        'flex flex-row h-6 w-11 shrink-0 items-center rounded-full border-2 border-transparent shadow-sm',
         Platform.select({
           web: 'peer focus-visible:border-ring focus-visible:ring-ring/50 inline-flex transition-all outline-none focus-visible:ring-[3px]  disabled:cursor-not-allowed',
           native: 'shadow-black/5',
@@ -27,12 +27,12 @@ function Switch({
     >
       <SwitchPrimitives.Thumb
         className={cn(
-          'bg-background size-4 rounded-full transition-transform',
+          'bg-background h-5 w-5 rounded-full transition-transform',
           Platform.select({
             web: 'pointer-events-none block ring-0 ',
           }),
           props.checked
-            ? 'dark:bg-primary-foreground translate-x-3.5'
+            ? 'dark:bg-primary-foreground translate-x-5'
             : 'dark:bg-foreground translate-x-0'
         )}
       />
