@@ -95,7 +95,7 @@ function PlatformSwitcher(props: SelectProps) {
           <SelectValue placeholder='Select platform' />
         )}
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent onCloseAutoFocus={preventDefault}>
         {PLATFORMS.map((platform) => (
           <SelectItem key={platform.name} value={platform.name} className='text-xs'>
             {platform.label}
@@ -128,7 +128,7 @@ function StyleSwitcher(props: SelectProps) {
           <SelectValue placeholder='Select style' />
         )}
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent onCloseAutoFocus={preventDefault}>
         {STYLES.map((style) => (
           <SelectItem key={style.name} value={style.name} className='text-xs'>
             {style.label}
@@ -160,4 +160,8 @@ function ComingSoon({ selectWebPreview }: { selectWebPreview: () => void }) {
       </Button>
     </div>
   );
+}
+
+function preventDefault(e: Event) {
+  e.preventDefault();
 }
