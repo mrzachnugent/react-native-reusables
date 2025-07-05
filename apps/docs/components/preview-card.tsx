@@ -31,6 +31,8 @@ type PreviewCardProps = {
   webNewYorkPreview?: React.ReactNode;
 };
 
+const DEFAULT_STYLE_RADIUS = { '--radius': '0.5rem' } as React.CSSProperties;
+
 export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps) {
   const getCookie = useReactiveGetCookie();
   const setCookie = useReactiveSetCookie();
@@ -54,7 +56,10 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
         <StyleSwitcher onValueChange={onStyleChange} defaultValue='default' value={style} />
         <PlatformSwitcher onValueChange={onPlatformChange} defaultValue='web' value={platform} />
       </div>
-      <div className='flex flex-col items-center justify-center p-6 flex-1'>
+      <div
+        style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
+        className='flex flex-col items-center justify-center p-6 flex-1'
+      >
         {platform === 'native' ? (
           <ComingSoon selectWebPreview={selectWebPreview} />
         ) : style === 'new-york' ? (
