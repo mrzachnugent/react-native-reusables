@@ -3,14 +3,17 @@ title: Accordion
 description: A vertically stacked set of interactive headings that each reveal a section of content.
 ---
 
-import accordionPreview from "!!raw-loader!@/registry/new-york/examples/accordion";
+import accordionPreview from "!!raw-loader!@/registry/default/examples/accordion";
+import accordionNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/accordion";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AccordionPreview } from "@docs/components/new-york-previews";
-import { Step, Steps } from 'fumadocs-ui/components/steps'; 
+import { AccordionPreview } from "@docs/components/default-previews";
+import { AccordionPreview as AccordionNewYorkPreview } from "@docs/components/new-york-previews";
+import { Step, Steps } from 'fumadocs-ui/components/steps';      
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -30,18 +33,29 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div>
-    <PreviewCard copyContent={accordionPreview} webPreview={<AccordionPreview />}/>
+    <PreviewCard copyContent={accordionPreview} webPreview={<AccordionPreview />} webNewYorkPreview={<AccordionNewYorkPreview />} />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/accordion.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    } 
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/accordion.tsx",
       "codeblock": {
         "lang": "tsx"
       }
-    }
+    } 
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

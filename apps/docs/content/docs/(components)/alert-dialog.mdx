@@ -3,15 +3,18 @@ title: Alert Dialog
 description: A modal dialog that interrupts the user with important content and expects a response.
 ---
 
-import alertDialogPreview from "!!raw-loader!@/registry/new-york/examples/alert-dialog";
+import alertDialogPreview from "!!raw-loader!@/registry/default/examples/alert-dialog";
+import alertDialogNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/alert-dialog";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { AlertDialogPreview } from "@docs/components/new-york-previews";
+import { AlertDialogPreview } from "@docs/components/default-previews";
+import { AlertDialogPreview as AlertDialogNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -31,18 +34,33 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div>
-    <PreviewCard copyContent={alertDialogPreview} webPreview={<AlertDialogPreview />}/>
+    <PreviewCard 
+      copyContent={alertDialogPreview} 
+      webPreview={<AlertDialogPreview />}
+      webNewYorkPreview={<AlertDialogNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/alert-dialog.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    } 
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/alert-dialog.tsx",
       "codeblock": {
         "lang": "tsx"
       }
-    }
+    } 
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
