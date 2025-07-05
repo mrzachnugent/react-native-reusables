@@ -75,7 +75,8 @@ export function CheckboxPreview() {
         htmlFor='toggle-2'
         className={cn(
           'flex flex-row web:hover:bg-accent/50 rounded-lg border border-border p-3',
-          state.toggle2Checked && 'border-blue-600 bg-blue-50 dark:border-blue-900 dark:bg-blue-950'
+          state.toggle2Checked &&
+            'border-blue-600 bg-blue-50 dark:border-blue-900 dark:bg-blue-950 web:hover:bg-blue-50'
         )}
       >
         <View className='flex flex-row items-start gap-3'>
