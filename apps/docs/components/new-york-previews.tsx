@@ -1,3 +1,3 @@
 'use client';
 
-export * from '@/registry/new-york/examples';
+export * from '@/registry/default/examples';
