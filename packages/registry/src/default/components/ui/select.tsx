@@ -30,7 +30,7 @@ function SelectValue({
     <SelectPrimitive.Value
       ref={ref}
       className={cn(
-        'line-clamp-1 flex flex-row items-center gap-2',
+        'line-clamp-1 flex flex-row items-center gap-2 text-foreground',
         !value && 'text-muted-foreground',
         className
       )}
@@ -54,7 +54,7 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-        'border-input dark:bg-input/30 dark:active:bg-input/50 flex flex-row items-center justify-between gap-2 rounded-md border bg-background px-3 py-2 shadow-sm h-9',
+        'border-input dark:bg-input/30 dark:active:bg-input/50 flex flex-row items-center justify-between gap-2 rounded-md border bg-background px-3 py-2 shadow-sm h-10',
         Platform.select({
           web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:hover:bg-input/50 w-fit whitespace-nowrap transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 text-sm',
           native: 'shadow-black/5',
