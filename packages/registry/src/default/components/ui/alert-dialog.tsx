@@ -25,7 +25,7 @@ function AlertDialogOverlay({
   return (
     <AlertDialogPrimitive.Overlay
       className={cn(
-        'absolute top-0 left-0 right-0 bottom-0 z-50 bg-black/50 flex justify-center items-center p-2',
+        'absolute top-0 left-0 right-0 bottom-0 z-50 bg-black/80 flex justify-center items-center p-2',
         Platform.select({
           web: 'fixed animate-in fade-in-0',
         }),
@@ -53,7 +53,7 @@ function AlertDialogContent({
       <AlertDialogOverlay>
         <AlertDialogPrimitive.Content
           className={cn(
-            'bg-background z-50 flex flex-col w-full max-w-[calc(100%-2rem)] gap-4 rounded-lg border border-border p-6 shadow-lg sm:max-w-lg',
+            'bg-background z-50 flex flex-col max-w-lg gap-4 rounded-lg border border-border p-6 shadow-lg',
             Platform.select({
               web: 'animate-in fade-in-0 zoom-in-95 duration-200',
             }),
@@ -77,7 +77,7 @@ function AlertDialogHeader({ className, ...props }: ViewProps) {
 function AlertDialogFooter({ className, ...props }: ViewProps) {
   return (
     <View
-      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
+      className={cn('flex flex-col-reverse sm:gap-2 sm:flex-row sm:justify-end', className)}
       {...props}
     />
   );
@@ -133,7 +133,7 @@ function AlertDialogCancel({
   return (
     <TextClassContext.Provider value={buttonTextVariants({ className, variant: 'outline' })}>
       <AlertDialogPrimitive.Cancel
-        className={cn(buttonVariants({ variant: 'outline', className }))}
+        className={cn(buttonVariants({ variant: 'outline' }), 'mt-2 sm:mt-0', className)}
         {...props}
       />
     </TextClassContext.Provider>
