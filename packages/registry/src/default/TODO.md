@@ -17,8 +17,8 @@
 - [x] Input
 - [x] Label
 - [x] Menubar
-- [ ] Popover
-- [ ] Progress
+- [x] Popover
+- [x] Progress
 - [ ] Radio Group
 - [ ] Select
 - [ ] Separator
