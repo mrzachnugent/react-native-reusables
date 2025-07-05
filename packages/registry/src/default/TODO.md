@@ -23,8 +23,8 @@
 - [x] Select
 - [x] Separator
 - [x] Skeleton
-- [ ] Switch
-- [ ] Tabs
+- [x] Switch
+- [x] Tabs
 - [ ] Text
 - [ ] Textarea
 - [ ] Toggle Group
