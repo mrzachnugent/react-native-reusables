@@ -3,14 +3,17 @@ title: Toggle Group
 description: A set of two-state buttons that can be toggled on or off.
 ---
 
-import toggleGroupPreview from "!!raw-loader!@/registry/new-york/examples/toggle-group";
+import toggleGroupPreview from "!!raw-loader!@/registry/default/examples/toggle-group";
+import toggleGroupNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/toggle-group";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { ToggleGroupPreview } from "@docs/components/new-york-previews";
+import { ToggleGroupPreview } from "@docs/components/default-previews";
+import { ToggleGroupPreview as ToggleGroupNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[  
@@ -27,10 +30,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={toggleGroupPreview} webPreview={<ToggleGroupPreview />}/>
+    <PreviewCard 
+      copyContent={toggleGroupPreview} 
+      webPreview={<ToggleGroupPreview />}
+      webNewYorkPreview={<ToggleGroupNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/toggle-group.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/toggle-group.tsx",
@@ -39,6 +56,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 

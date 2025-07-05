@@ -3,16 +3,21 @@ title: Text
 description: A component for displaying text.
 ---
 
-import textPreview from "!!raw-loader!@/registry/new-york/examples/text/text";
-import textTypographyPreview from "!!raw-loader!@/registry/new-york/examples/text/text-typorgaphy";
-import textCascadePreview from "!!raw-loader!@/registry/new-york/examples/text/text-cascade";
+import textPreview from "!!raw-loader!@/registry/default/examples/text/text";
+import textNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/text/text";
+import textTypographyPreview from "!!raw-loader!@/registry/default/examples/text/text-typorgaphy";
+import textTypographyNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/text/text-typorgaphy";
+import textCascadePreview from "!!raw-loader!@/registry/default/examples/text/text-cascade";
+import textCascadeNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/text/text-cascade";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { TextPreview, TextTypographyPreview, TextCascadePreview } from "@docs/components/new-york-previews";
+import { TextPreview, TextTypographyPreview, TextCascadePreview } from "@docs/components/default-previews";
+import { TextPreview as TextNewYorkPreview, TextTypographyPreview as TextTypographyNewYorkPreview, TextCascadePreview as TextCascadeNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 
 <SectionTabs defaultValue="preview">
@@ -21,10 +26,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={textPreview} webPreview={<TextPreview />}/>
+    <PreviewCard 
+      copyContent={textPreview} 
+      webPreview={<TextPreview />}
+      webNewYorkPreview={<TextNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/text/text.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/text/text.tsx",
@@ -33,6 +52,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -94,10 +114,24 @@ To fix this, we use something called `TextClassContext` to pass styles down. The
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={textCascadePreview} webPreview={<TextCascadePreview />}/>
+    <PreviewCard 
+      copyContent={textCascadePreview} 
+      webPreview={<TextCascadePreview />}
+      webNewYorkPreview={<TextCascadeNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/text/text-cascade.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/text/text-cascade.tsx",
@@ -106,6 +140,7 @@ To fix this, we use something called `TextClassContext` to pass styles down. The
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
@@ -131,10 +166,24 @@ import { Text } from "@/components/ui/text"
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={textTypographyPreview} webPreview={<TextTypographyPreview />}/>
+    <PreviewCard 
+      copyContent={textTypographyPreview} 
+      webPreview={<TextTypographyPreview />}
+      webNewYorkPreview={<TextTypographyNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/text/text-typorgaphy.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/text/text-typorgaphy.tsx",
@@ -143,5 +192,6 @@ import { Text } from "@/components/ui/text"
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>

@@ -3,14 +3,17 @@ title: Toggle
 description: A two-state button that can be either on or off.
 ---
 
-import togglePreview from "!!raw-loader!@/registry/new-york/examples/toggle";
+import togglePreview from "!!raw-loader!@/registry/default/examples/toggle";
+import toggleNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/toggle";
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
-import { TogglePreview } from "@docs/components/new-york-previews";
+import { TogglePreview } from "@docs/components/default-previews";
+import { TogglePreview as ToggleNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -27,10 +30,24 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
   </SectionTabsList>
   <SectionTabsContent value="preview">
-    <PreviewCard copyContent={togglePreview} webPreview={<TogglePreview />}/>
+    <PreviewCard 
+      copyContent={togglePreview} 
+      webPreview={<TogglePreview />}
+      webNewYorkPreview={<ToggleNewYorkPreview />}
+    />
   </SectionTabsContent>
   <SectionTabsContent value="code">
-
+    <ShowIfStyle style="default">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/default/examples/toggle.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+    </ShowIfStyle>
+    <ShowIfStyle style="new-york">
     ```json doc-gen:file
     {
       "file": "./node_modules/@rnr/registry/src/new-york/examples/toggle.tsx",
@@ -39,6 +56,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       }
     }
     ```
+    </ShowIfStyle>
   </SectionTabsContent>
 </SectionTabs>
 
