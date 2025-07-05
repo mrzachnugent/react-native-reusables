@@ -45,10 +45,10 @@ const buttonVariants = cva(
         link: '',
       },
       size: {
-        default: cn('h-9 px-4 py-2', Platform.select({ web: 'has-[>svg]:px-3' })),
-        sm: cn('h-8 rounded-md gap-1.5 px-3', Platform.select({ web: 'has-[>svg]:px-2.5' })),
-        lg: cn('h-10 rounded-md px-6', Platform.select({ web: 'has-[>svg]:px-4' })),
-        icon: 'size-9',
+        default: cn('h-10 px-4 py-2', Platform.select({ web: 'has-[>svg]:px-3' })),
+        sm: cn('h-9 rounded-md px-3', Platform.select({ web: 'has-[>svg]:px-2.5' })),
+        lg: cn('h-11 rounded-md px-6', Platform.select({ web: 'has-[>svg]:px-4' })),
+        icon: 'h-10 w-10',
       },
     },
     defaultVariants: {
