@@ -9,10 +9,10 @@
 - [x] Button
 - [x] Card
 - [x] Checkbox
-- [ ] Collapsible
-- [ ] Context Menu
+- [x] Collapsible
+- [x] Context Menu
 - [ ] Dialog
-- [ ] Dropdown Menu
+- [x] Dropdown Menu
 - [ ] Hover Card
 - [ ] Input
 - [ ] Label
