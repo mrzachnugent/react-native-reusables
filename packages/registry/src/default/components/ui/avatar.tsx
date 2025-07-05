@@ -12,7 +12,7 @@ function Avatar({
 }) {
   return (
     <AvatarPrimitive.Root
-      className={cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', className)}
+      className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
       {...props}
     />
   );
@@ -24,7 +24,9 @@ function AvatarImage({
 }: AvatarPrimitive.ImageProps & {
   ref?: React.RefObject<AvatarPrimitive.ImageRef>;
 }) {
-  return <AvatarPrimitive.Image className={cn('aspect-square size-full', className)} {...props} />;
+  return (
+    <AvatarPrimitive.Image className={cn('aspect-square h-full w-full', className)} {...props} />
+  );
 }
 
 function AvatarFallback({
@@ -36,7 +38,7 @@ function AvatarFallback({
   return (
     <AvatarPrimitive.Fallback
       className={cn(
-        'bg-muted flex flex-row size-full items-center justify-center rounded-full',
+        'flex h-full w-full items-center justify-center rounded-full bg-muted',
         className
       )}
       {...props}
