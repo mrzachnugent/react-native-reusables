@@ -1,6 +1,5 @@
 'use client';
 
-import { CopyButton } from '@docs/components/copy-button';
 import { type SelectProps } from '@radix-ui/react-select';
 import * as React from 'react';
 
@@ -19,54 +18,71 @@ const PLATFORMS = [
   { name: 'native', label: 'Native' },
 ] as const;
 
+const STYLES = [
+  { name: 'default', label: 'Default' },
+  { name: 'new-york', label: 'New York' },
+] as const;
+
 export type Platform = (typeof PLATFORMS)[number]['name'];
+export type Style = (typeof STYLES)[number]['name'];
 
 export type PreviewCardClientProps = {
-  copyContent: string;
   webPreview: React.ReactNode;
-  nativePreview?: React.ReactNode;
+  webNewYorkPreview?: React.ReactNode;
   platformCookie?: Platform;
+  styleCookie?: Style;
 };
 
 export function PreviewCardClient({
-  copyContent,
   webPreview,
-  nativePreview,
+  webNewYorkPreview,
   platformCookie,
+  styleCookie,
 }: PreviewCardClientProps) {
   const [platform, setPlatform] = React.useState<Platform>(platformCookie ?? 'web');
+  const [style, setStyle] = React.useState<Style>(styleCookie ?? 'default');
 
-  function onValueChange(value: Platform) {
+  function onPlatformChange(value: Platform) {
     setPlatform(value);
     setCookie('platform', value);
     const event = new CustomEvent('cookieChange', { detail: { name: 'platform', value } });
     window.dispatchEvent(event);
   }
+  function onStyleChange(value: Style) {
+    setStyle(value);
+    setCookie('style', value);
+    const event = new CustomEvent('cookieChange', { detail: { name: 'style', value } });
+    window.dispatchEvent(event);
+  }
 
   function selectWebPreview() {
-    onValueChange('web');
+    onPlatformChange('web');
   }
 
   return (
     <div className='group/copy relative flex flex-col min-h-[450px] border rounded-md bg-card p-4 not-prose'>
       <div className='flex items-center justify-between'>
+        <StyleSwitcher
+          onValueChange={onStyleChange}
+          defaultValue={styleCookie}
+          setStyle={setStyle}
+          value={style}
+        />
         <PlatformSwitcher
-          onValueChange={onValueChange}
+          onValueChange={onPlatformChange}
           defaultValue={platformCookie}
           setPlatform={setPlatform}
           value={platform}
         />
-        <CopyButton
-          className='group-hover/copy:opacity-100'
-          content={copyContent
-            .replaceAll('@/registry/new-york/', '@/')
-            .replaceAll('@/registry/default/', '@/')}
-        />
       </div>
       <div className='flex flex-col items-center justify-center p-6 flex-1'>
-        {platform === 'native'
-          ? nativePreview ?? <ComingSoon selectWebPreview={selectWebPreview} />
-          : webPreview}
+        {platform === 'native' ? (
+          <ComingSoon selectWebPreview={selectWebPreview} />
+        ) : style === 'new-york' ? (
+          webNewYorkPreview
+        ) : (
+          webPreview
+        )}
       </div>
     </div>
   );
@@ -109,6 +125,46 @@ function PlatformSwitcher({
         {PLATFORMS.map((platform) => (
           <SelectItem key={platform.name} value={platform.name} className='text-xs'>
             {platform.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
+function StyleSwitcher({ setStyle, ...props }: SelectProps & { setStyle: (value: Style) => void }) {
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+    function handleCookieChange(ev: Event) {
+      const detail = (ev as Event & { detail: { name: string; value: Style } }).detail;
+      if (detail.name === 'style') {
+        setStyle(detail.value);
+      }
+    }
+
+    window.addEventListener('cookieChange', handleCookieChange);
+    return () => {
+      window.removeEventListener('cookieChange', handleCookieChange);
+    };
+  }, []);
+
+  return (
+    <Select {...props}>
+      <SelectTrigger className='h-7 w-fit gap-1 text-xs pl-2.5 pr-1.5 [&_svg]:h-4 [&_svg]:w-4'>
+        <span className='text-muted-foreground flex-1 pr-1'>Style:</span>
+        {!isClient ? (
+          <span className='opacity-50'>
+            {STYLES.find((style) => style.name === props.value)?.label}
+          </span>
+        ) : (
+          <SelectValue placeholder='Select style' />
+        )}
+      </SelectTrigger>
+      <SelectContent>
+        {STYLES.map((style) => (
+          <SelectItem key={style.name} value={style.name} className='text-xs'>
+            {style.label}
           </SelectItem>
         ))}
       </SelectContent>

@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
 import {
-  type PreviewCardClientProps,
   type Platform,
   PreviewCardClient,
+  type PreviewCardClientProps,
+  type Style,
 } from './preview-card-client';
 
 type PreviewCardProps = Omit<PreviewCardClientProps, 'platformCookie'>;
@@ -10,5 +11,6 @@ type PreviewCardProps = Omit<PreviewCardClientProps, 'platformCookie'>;
 export async function PreviewCard(props: PreviewCardProps) {
   const cookieStore = await cookies();
   const platformCookie = cookieStore.get('platform')?.value as Platform;
-  return <PreviewCardClient platformCookie={platformCookie} {...props} />;
+  const styleCookie = cookieStore.get('style')?.value as Style;
+  return <PreviewCardClient platformCookie={platformCookie} styleCookie={styleCookie} {...props} />;
 }
