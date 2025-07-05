@@ -11,7 +11,7 @@
 - [x] Checkbox
 - [x] Collapsible
 - [x] Context Menu
-- [ ] Dialog
+- [x] Dialog
 - [x] Dropdown Menu
 - [ ] Hover Card
 - [ ] Input

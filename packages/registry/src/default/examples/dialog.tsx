@@ -29,7 +29,7 @@ export function DialogPreview() {
             Make changes to your profile here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <View className='grid gap-4'>
+        <View className='grid gap-4 pt-2 pb-4'>
           <View className='grid gap-3'>
             <Label htmlFor='name-1'>Name</Label>
             <Input id='name-1' defaultValue='Pedro Duarte' />
