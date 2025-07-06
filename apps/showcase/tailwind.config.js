@@ -78,5 +78,8 @@ module.exports = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [platformSelect({ native: geistFontPlugin }), require('tailwindcss-animate')],
+  plugins: [
+    platformSelect({ native: geistFontPlugin, default: [] }),
+    require('tailwindcss-animate'),
+  ],
 };

@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mrzachnugent/react-native-reusables.git",
-    "directory": "packages/old-cli"
+    "directory": "apps/old-cli"
   },
   "files": [
     "dist",
@@ -79,8 +79,8 @@
     "@types/lodash.template": "^4.5.1",
     "@types/prompts": "^2.4.2",
     "rimraf": "^4.1.3",
-    "tsup": "^6.6.3",
-    "tsx": "^4.7.1",
+    "tsup": "^8.2.4",
+    "tsx": "^4.19.1",
     "type-fest": "^3.8.0",
     "typescript": "^5.8.3"
   }
