@@ -14,6 +14,7 @@ import {
   ContextMenuTrigger,
 } from '@/registry/default/components/ui/context-menu';
 import { Text } from '@/registry/default/components/ui/text';
+import * as Haptics from 'expo-haptics';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -30,9 +31,16 @@ export function ContextMenuPreview() {
   const [checkboxValue2, setCheckboxValue2] = React.useState(false);
   const [radioValue, setRadioValue] = React.useState('pedro');
 
+  function onLongPress() {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  }
+
   return (
     <ContextMenu className='w-[300px] h-[150px]'>
-      <ContextMenuTrigger className='flex w-full h-full items-center justify-center rounded-md border border-border border-dashed web:outline-none web:cursor-default'>
+      <ContextMenuTrigger
+        onLongPress={onLongPress}
+        className='flex w-full h-full items-center justify-center rounded-md border border-border border-dashed web:outline-none web:cursor-default'
+      >
         <Text className='text-sm'>
           {Platform.select({ web: 'Right click here', native: 'Long press here' })}
         </Text>
