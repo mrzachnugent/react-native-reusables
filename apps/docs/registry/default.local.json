@@ -284,21 +284,6 @@
       "dependencies": ["@rn-primitives/menubar"]
     },
     {
-      "name": "popover",
-      "type": "registry:ui",
-      "title": "Popover",
-      "description": "Displays rich content in a portal, triggered by a button.",
-      "author": "@mrzachnugent",
-      "files": [
-        {
-          "path": "./node_modules/@rnr/registry/src/default/components/ui/popover.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": ["http://localhost:3000/r/default/text.json"],
-      "dependencies": ["@rn-primitives/popover"]
-    },
-    {
       "name": "native-only-animated-view",
       "type": "registry:ui",
       "title": "Native Only Animated View",
