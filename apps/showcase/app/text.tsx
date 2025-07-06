@@ -12,5 +12,5 @@ const textPreviews = [
 ];
 
 export default function TextScreen() {
-  return <PreviewCarousel previews={textPreviews} />;
+  return <PreviewCarousel previews={textPreviews} removeBottomSafeArea />;
 }
