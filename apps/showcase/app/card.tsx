@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { CardPreview } from '@/registry/new-york/examples/card';
+import { CardPreview } from '@showcase/components/styles/examples';
 
 export default function CardScreen() {
   return (

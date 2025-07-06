@@ -1,4 +1,4 @@
-import { InputPreview } from '@/registry/new-york/examples';
+import { InputPreview } from '@showcase/components/styles/examples';
 import * as React from 'react';
 import { View } from 'react-native';
 

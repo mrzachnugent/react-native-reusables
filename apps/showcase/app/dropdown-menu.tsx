@@ -1,4 +1,4 @@
-import { DropdownMenuPreview } from '@/registry/new-york/examples/dropdown-menu';
+import { DropdownMenuPreview } from '@showcase/components/styles/examples';
 import * as React from 'react';
 import { View } from 'react-native';
 

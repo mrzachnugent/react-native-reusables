@@ -1,15 +1,17 @@
-import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Icon } from '@showcase/components/styles/ui';
 import { cn } from '@/registry/new-york/lib/utils';
 import { router } from 'expo-router';
 import { SettingsIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 export function SettingsNavLink() {
   const [isAnimating, setIsAnimating] = React.useState(false);
 
   function goToSettings() {
     setIsAnimating(true);
+    hapticCogTurning();
     router.push('/settings');
     setTimeout(() => {
       setIsAnimating(false);
@@ -25,4 +27,14 @@ export function SettingsNavLink() {
       </View>
     </Pressable>
   );
+}
+
+async function hapticCogTurning() {
+  await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
+  setTimeout(async () => {
+    await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
+    setTimeout(async () => {
+      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
+    }, 125);
+  }, 75);
 }

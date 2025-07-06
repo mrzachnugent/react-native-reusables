@@ -1,0 +1,88 @@
+import { Button, Icon } from '@showcase/components/styles/ui';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react-native';
+import * as React from 'react';
+import { useState } from 'react';
+import {
+  Dimensions,
+  FlatList,
+  ListRenderItemInfo,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  View,
+} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+
+type PreviewCarouselProps = {
+  previews: { name: string; component: (props: unknown) => React.JSX.Element }[];
+};
+
+function PreviewCarousel({ previews }: PreviewCarouselProps) {
+  const [index, setIndex] = useState(0);
+  const ref = React.useRef<FlatList>(null);
+
+  function onScroll(ev: NativeSyntheticEvent<NativeScrollEvent>) {
+    const index = Math.round(ev.nativeEvent.contentOffset.x / windowWidth);
+    setIndex(index);
+  }
+
+  function onPreviewPress() {
+    ref.current?.scrollToIndex({ index: Math.max(0, index - 1) });
+  }
+
+  function onNextPress() {
+    ref.current?.scrollToIndex({ index: Math.min(previews.length - 1, index + 1) });
+  }
+
+  return (
+    <>
+      <FlatList
+        ref={ref}
+        data={previews}
+        renderItem={renderItem}
+        onScroll={onScroll}
+        keyExtractor={keyExtractor}
+        horizontal
+        snapToInterval={windowWidth}
+        decelerationRate='fast'
+        showsHorizontalScrollIndicator={false}
+      />
+      <View className='absolute bottom-0 left-0 right-0 h-12 mb-safe flex-row justify-center items-center px-4'>
+        <View className='justify-center items-center flex-row gap-2 relative'>
+          <View className='rounded-md bg-background'>
+            <Button variant='outline' size='icon' disabled={index === 0} onPress={onPreviewPress}>
+              <Icon as={ChevronLeftIcon} className='size-4' />
+            </Button>
+          </View>
+          <View className='rounded-md bg-background'>
+            <Button
+              variant='outline'
+              size='icon'
+              disabled={index === previews.length - 1}
+              onPress={onNextPress}
+            >
+              <Icon as={ChevronRightIcon} className='size-4' />
+            </Button>
+          </View>
+        </View>
+      </View>
+    </>
+  );
+}
+
+export { PreviewCarousel };
+
+function renderItem({
+  item,
+}: ListRenderItemInfo<{ name: string; component: (props: unknown) => React.JSX.Element }>) {
+  const Component = item.component;
+  return (
+    <View className='w-screen flex-1 justify-center items-center'>
+      <Component />
+    </View>
+  );
+}
+
+function keyExtractor(item: { name: string }) {
+  return item.name;
+}

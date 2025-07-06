@@ -1,5 +1,5 @@
 import { ScrollView } from 'react-native';
-import { DialogPreview } from '@/registry/new-york/examples/dialog';
+import { DialogPreview } from '@showcase/components/styles/examples';
 
 export default function DialogScreen() {
   return (
