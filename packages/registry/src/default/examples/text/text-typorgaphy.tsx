@@ -3,8 +3,8 @@ import { Text } from '@/registry/default/components/ui/text';
 
 export function TextTypographyPreview() {
   return (
-    <ScrollView contentContainerClassName='p-6'>
-      <View className='max-w-lg'>
+    <ScrollView contentContainerClassName='p-6 native:pb-safe'>
+      <View className='max-w-lg native:pb-12'>
         <Text variant='h1'>The Rainbow Forest Adventure</Text>
         <View className='p-1.5' />
         <Text variant='p'>

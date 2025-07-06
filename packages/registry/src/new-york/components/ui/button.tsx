@@ -39,10 +39,10 @@ const buttonVariants = cva(
           Platform.select({ web: 'hover:bg-secondary/80', native: 'shadow-black/5' })
         ),
         ghost: cn(
-          'active:bg-accent dark:active:bg-accent/50',
+          'active:bg-accent shadow-none dark:active:bg-accent/50',
           Platform.select({ web: 'hover:bg-accent dark:hover:bg-accent/50' })
         ),
-        link: '',
+        link: 'shadow-none',
       },
       size: {
         default: cn('h-9 px-4 py-2', Platform.select({ web: 'has-[>svg]:px-3' })),

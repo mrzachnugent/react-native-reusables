@@ -1,4 +1,4 @@
-import { BadgePreview } from '@/registry/new-york/examples/badge';
+import { BadgePreview } from '@showcase/components/styles/examples';
 import { View } from 'react-native';
 
 export default function BadgeScreen() {

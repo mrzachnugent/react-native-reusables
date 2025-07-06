@@ -1,4 +1,4 @@
-import { AccordionPreview } from '@/registry/new-york/examples/accordion';
+import { AccordionPreview } from '@showcase/components/styles/examples';
 import { View } from 'react-native';
 
 export default function AccordionScreen() {

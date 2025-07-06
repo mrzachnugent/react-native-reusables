@@ -1,4 +1,4 @@
-import { SkeletonPreview } from '@/registry/new-york/examples/skeleton';
+import { SkeletonPreview } from '@showcase/components/styles/examples';
 import { View } from 'react-native';
 
 export default function SkeletonScreen() {

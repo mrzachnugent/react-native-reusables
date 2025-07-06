@@ -4,18 +4,19 @@ import { PortalHost } from '@rn-primitives/portal';
 import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform, Pressable } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
-import { Text } from '@/registry/new-york/components/ui/text';
+import { Text } from '@showcase/components/styles/ui';
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { useColorScheme } from 'nativewind';
-import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Icon } from '@showcase/components/styles/ui';
 import { ChevronLeft } from 'lucide-react-native';
 import { SettingsNavLink } from '@showcase/components/SettingsNavLink';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
-import { ReanimatedScreenProvider } from 'react-native-screens/reanimated';
 import { ThemeToggle } from '@showcase/components/ThemeToggle';
+import { StyleProvider, useStyle } from '@showcase/components/styles/style-provider';
+import { vars } from 'nativewind';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -67,46 +68,61 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DARK_THEME : LIGHT_THEME}>
-      <ReanimatedScreenProvider>
+      <StyleProvider>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <GestureHandlerRootView style={{ flex: 1 }}>
           <BottomSheetModalProvider>
-            <Stack
-              screenOptions={{
-                headerStyle: {},
-                headerBackTitle: 'Back',
-                headerTitle(props) {
-                  return <Text className='text-xl font-medium'>{toOptions(props.children)}</Text>;
-                },
-                headerRight: () => <SettingsNavLink />,
-              }}
-            >
-              <Stack.Screen
-                name='index'
-                options={{
-                  headerLargeTitle: true,
-                  headerTitle: 'Showcase',
-                  headerLargeTitleShadowVisible: false,
-                  headerLargeStyle: {
-                    backgroundColor: colorScheme === 'dark' ? 'hsl(0 0% 3.9%)' : 'hsl(0 0% 100%)',
+            <StyleBorderRadiusProvider>
+              <Stack
+                screenOptions={{
+                  headerStyle: {},
+                  headerBackTitle: 'Back',
+                  headerTitle(props) {
+                    return <Text className='text-xl font-medium'>{toOptions(props.children)}</Text>;
                   },
+                  headerRight: () => <SettingsNavLink />,
                 }}
-              />
+              >
+                <Stack.Screen
+                  name='index'
+                  options={{
+                    headerLargeTitle: true,
+                    headerTitle: 'Showcase',
+                    headerLargeTitleShadowVisible: false,
+                    headerLargeStyle: {
+                      backgroundColor: colorScheme === 'dark' ? 'hsl(0 0% 3.9%)' : 'hsl(0 0% 100%)',
+                    },
+                  }}
+                />
 
-              <Stack.Screen
-                name='settings'
-                options={{
-                  presentation: 'modal',
-                  title: 'Settings',
-                  headerRight: () => <ThemeToggle />,
-                }}
-              />
-            </Stack>
+                <Stack.Screen
+                  name='settings'
+                  options={{
+                    presentation: 'modal',
+                    title: 'Settings',
+                    headerRight: () => <ThemeToggle />,
+                  }}
+                />
+              </Stack>
+            </StyleBorderRadiusProvider>
           </BottomSheetModalProvider>
           <PortalHost />
         </GestureHandlerRootView>
-      </ReanimatedScreenProvider>
+      </StyleProvider>
     </ThemeProvider>
+  );
+}
+
+const defaultRadius = vars({
+  '--radius': 8,
+});
+
+function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {
+  const { style } = useStyle();
+  return (
+    <View style={style === 'default' ? defaultRadius : undefined} className='flex-1'>
+      {children}
+    </View>
   );
 }
 

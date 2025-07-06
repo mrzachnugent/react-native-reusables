@@ -27,7 +27,7 @@ const textVariants = cva(
         ),
         h3: cn('text-2xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20' })),
         h4: cn('text-xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20' })),
-        p: 'leading-7 mt-6',
+        p: 'leading-7 mt-3 sm:mt-6',
         blockquote: 'mt-4 sm:mt-6 border-l-2 pl-3 sm:pl-6 italic',
         code: cn(
           'bg-muted relative rounded px-[0.3rem] py-[0.2rem] text-sm font-semibold',

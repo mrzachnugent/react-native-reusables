@@ -1,4 +1,4 @@
-import { HoverCardPreview } from '@/registry/new-york/examples/hover-card';
+import { HoverCardPreview } from '@showcase/components/styles/examples';
 import * as React from 'react';
 import { View } from 'react-native';
 

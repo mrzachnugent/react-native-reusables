@@ -1,4 +1,4 @@
-import { ProgressPreview } from '@/registry/new-york/examples/progress';
+import { ProgressPreview } from '@showcase/components/styles/examples';
 import * as React from 'react';
 import { View } from 'react-native';
 

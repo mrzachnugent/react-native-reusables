@@ -1,18 +1,16 @@
-import { Button } from '@/registry/new-york/components/ui/button';
-import { Icon } from '@/registry/new-york/components/ui/icon';
-import { Input } from '@/registry/new-york/components/ui/input';
-import { Text } from '@/registry/new-york/components/ui/text';
+import { Button } from '@showcase/components/styles/ui';
+import { Icon } from '@showcase/components/styles/ui';
+import { Input } from '@showcase/components/styles/ui';
+import { Text } from '@showcase/components/styles/ui';
 import { cn } from '@/registry/new-york/lib/utils';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { COMPONENTS } from '@showcase/lib/constants';
-import { Link, useNavigation } from 'expo-router';
+import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
 import * as React from 'react';
 import { View } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { useReanimatedHeaderHeight } from 'react-native-screens/reanimated';
 
 cssInterop(FlashList, { className: 'style', contentContainerClassName: 'contentContainerStyle' });
 
@@ -20,7 +18,6 @@ export default function ComponentsScreen() {
   const [search, setSearch] = React.useState('');
   const ref = React.useRef(null);
   useScrollToTop(ref);
-  const headerHeight = useReanimatedHeaderHeight();
 
   const data = !search
     ? COMPONENTS
@@ -34,7 +31,7 @@ export default function ComponentsScreen() {
       contentContainerClassName='px-4'
       estimatedItemSize={49}
       keyboardShouldPersistTaps='handled'
-      keyboardDismissMode='interactive'
+      keyboardDismissMode='on-drag'
       showsVerticalScrollIndicator={false}
       stickyHeaderIndices={[0]}
       ListHeaderComponent={
@@ -44,6 +41,7 @@ export default function ComponentsScreen() {
             clearButtonMode='always'
             value={search}
             onChangeText={setSearch}
+            autoCorrect={false}
           />
         </View>
       }

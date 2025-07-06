@@ -1,12 +1,14 @@
-import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Icon } from '@showcase/components/styles/ui';
 import { MoonStarIcon, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { Pressable, View } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme();
 
   function toggleColorScheme() {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
     const newTheme = colorScheme === 'dark' ? 'light' : 'dark';
     setColorScheme(newTheme);
   }
