@@ -40,7 +40,22 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/geist/900Black/Geist_900Black.ttf",
+            "node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf",
+            "node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf",
+            "node_modules/@expo-google-fonts/geist/600SemiBold/Geist_600SemiBold.ttf",
+            "node_modules/@expo-google-fonts/geist/500Medium/Geist_500Medium.ttf",
+            "node_modules/@expo-google-fonts/geist/400Regular/Geist_400Regular.ttf",
+            "node_modules/@expo-google-fonts/geist/300Light/Geist_300Light.ttf",
+            "node_modules/@expo-google-fonts/geist/200ExtraLight/Geist_200ExtraLight.ttf",
+            "node_modules/@expo-google-fonts/geist/100Thin/Geist_100Thin.ttf"
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

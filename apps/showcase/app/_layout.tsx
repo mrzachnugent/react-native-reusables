@@ -1,22 +1,19 @@
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { PortalHost } from '@rn-primitives/portal';
-import { router, Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import * as SplashScreen from 'expo-splash-screen';
-import { Text } from '@showcase/components/styles/ui';
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
-import { useColorScheme } from 'nativewind';
-import { Icon } from '@showcase/components/styles/ui';
-import { ChevronLeft } from 'lucide-react-native';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
+import { PortalHost } from '@rn-primitives/portal';
 import { SettingsNavLink } from '@showcase/components/SettingsNavLink';
-import { useGeistFont } from '@showcase/hooks/use-geist-font';
 import { ThemeToggle } from '@showcase/components/ThemeToggle';
 import { StyleProvider, useStyle } from '@showcase/components/styles/style-provider';
-import { vars } from 'nativewind';
+import { Text } from '@showcase/components/styles/ui';
+import { useGeistFont } from '@showcase/hooks/use-geist-font';
+import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
+import { useColorScheme, vars } from 'nativewind';
+import * as React from 'react';
+import { Platform, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -114,7 +111,7 @@ export default function RootLayout() {
 }
 
 const defaultRadius = vars({
-  '--radius': 8,
+  '--radius': '8px',
 });
 
 function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {

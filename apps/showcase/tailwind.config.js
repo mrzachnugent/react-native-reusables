@@ -1,5 +1,6 @@
 const { hairlineWidth } = require('nativewind/theme');
 const geistFontPlugin = require('./plugins/geistFontPlugin.js');
+const { platformSelect } = require('nativewind/theme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -77,5 +78,5 @@ module.exports = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [geistFontPlugin, require('tailwindcss-animate')],
+  plugins: [platformSelect({ native: geistFontPlugin }), require('tailwindcss-animate')],
 };
