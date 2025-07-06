@@ -3,8 +3,8 @@ import {
   DEFAULT_LIB,
   rawConfigSchema,
   resolveConfigPaths,
-} from '@cli/src/utils/get-config';
-import { logger } from '@cli/src/utils/logger';
+} from '@old-cli/src/utils/get-config';
+import { logger } from '@old-cli/src/utils/logger';
 import chalk from 'chalk';
 import { promises as fs } from 'fs';
 import ora from 'ora';

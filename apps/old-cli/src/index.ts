@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { add } from '@cli/src/commands/add';
-import { init } from '@cli/src/commands/init';
+import { add } from '@old-cli/src/commands/add';
+import { init } from '@old-cli/src/commands/init';
 
 import { Command } from 'commander';
 

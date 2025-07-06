@@ -1,4 +1,4 @@
-import { resolveImport } from '@cli/src/utils/resolve-import';
+import { resolveImport } from '@old-cli/src/utils/resolve-import';
 import { cosmiconfig } from 'cosmiconfig';
 import { loadConfig } from 'tsconfig-paths';
 import { z } from 'zod';

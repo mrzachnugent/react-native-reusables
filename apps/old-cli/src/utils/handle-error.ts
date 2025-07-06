@@ -1,4 +1,4 @@
-import { logger } from '@cli/src/utils/logger';
+import { logger } from '@old-cli/src/utils/logger';
 
 export function handleError(error: unknown) {
   if (typeof error === 'string') {

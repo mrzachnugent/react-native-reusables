@@ -1,6 +1,6 @@
-import { copyFolder } from '@cli/src/utils/copy-folder';
-import { handleError } from '@cli/src/utils/handle-error';
-import { logger } from '@cli/src/utils/logger';
+import { copyFolder } from '@old-cli/src/utils/copy-folder';
+import { handleError } from '@old-cli/src/utils/handle-error';
+import { logger } from '@old-cli/src/utils/logger';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
 import { Command } from 'commander';
