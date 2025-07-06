@@ -1,10 +1,9 @@
 {
-  "name": "@template/cli",
+  "name": "@react-native-reusables/cli",
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@9.10.0",
   "license": "MIT",
-  "description": "A basic Effect CLI application",
+  "description": "A CLI for React Native Reusables",
   "repository": {
     "type": "git",
     "url": "https://github.com/mrzachnugent/react-native-reusables.git",
