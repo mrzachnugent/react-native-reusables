@@ -1,6 +1,6 @@
 const plugin = require('tailwindcss/plugin');
 
-module.exports = plugin(function ({ addUtilities, matchUtilities, theme }) {
+module.exports = plugin(function ({ addUtilities }) {
   addUtilities({
     '.font-sans': {
       fontFamily: 'Geist',
