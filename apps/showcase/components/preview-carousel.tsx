@@ -1,3 +1,4 @@
+import { cn } from '@/registry/new-york/lib/utils';
 import { Button, Icon } from '@showcase/components/styles/ui';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react-native';
 import * as React from 'react';
@@ -15,9 +16,10 @@ const windowWidth = Dimensions.get('window').width;
 
 type PreviewCarouselProps = {
   previews: { name: string; component: (props: unknown) => React.JSX.Element }[];
+  removeBottomSafeArea?: boolean;
 };
 
-function PreviewCarousel({ previews }: PreviewCarouselProps) {
+function PreviewCarousel({ previews, removeBottomSafeArea = false }: PreviewCarouselProps) {
   const [index, setIndex] = useState(0);
   const ref = React.useRef<FlatList>(null);
 
@@ -46,6 +48,7 @@ function PreviewCarousel({ previews }: PreviewCarouselProps) {
         snapToInterval={windowWidth}
         decelerationRate='fast'
         showsHorizontalScrollIndicator={false}
+        contentContainerClassName={cn(!removeBottomSafeArea && 'pb-12 mb-safe')}
       />
       <View className='absolute bottom-0 left-0 right-0 h-12 mb-safe flex-row justify-center items-center px-4'>
         <View className='justify-center items-center flex-row gap-2 relative'>
