@@ -13,7 +13,10 @@
     "emitDecoratorMetadata": false,
     "experimentalDecorators": true,
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022", "DOM"],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "isolatedModules": true,
     "sourceMap": true,
     "declarationMap": true,
@@ -36,10 +39,15 @@
     "module": "NodeNext",
     "incremental": true,
     "removeComments": false,
-    "plugins": [{ "name": "@effect/language-service" }],
+    "plugins": [
+      {
+        "name": "@effect/language-service"
+      }
+    ],
     "paths": {
-      "@template/cli": ["./src/index.js"],
-      "@template/cli/*": ["./src/*.js"]
+      "@cli/*": [
+        "./src/*"
+      ]
     }
   }
 }
