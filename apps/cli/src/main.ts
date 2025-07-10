@@ -12,7 +12,7 @@ const cli = Command.make("react-native-reusables/cli")
         yield* Console.log("🎯 Welcome to React Native Reusables CLI!")
         yield* Console.log("")
 
-        yield* doctorHandler()
+        yield* doctorHandler({ addMissing: false, cwd: ".", interactive: false })
       })
     )
   )

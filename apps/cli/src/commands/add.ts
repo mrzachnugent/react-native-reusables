@@ -5,17 +5,17 @@ const args = Args.all({
   components: Args.text({ name: "components" }).pipe(Args.repeated)
 })
 
-const options = Options.boolean("test", { aliases: ["t"] })
+const test = Options.boolean("test", { aliases: ["t"] })
 
-const AddCommand = Command.make("add", { args, options })
+const AddCommand = Command.make("add", { args, test })
   .pipe(Command.withDescription("Add React Native components to your project"))
   .pipe(Command.withHandler(addHandler))
 
-function addHandler({ args, options }: { args: { components: Array<string> }; options: boolean }) {
+function addHandler({ args, test }: { args: { components: Array<string> }; test: boolean }) {
   return Effect.gen(function* () {
     yield* Console.log("➕ Adding components...")
     yield* Console.log("Components to add:", args.components)
-    yield* Console.log("Test option:", options)
+    yield* Console.log("Test option:", test)
     yield* Console.log("✅ Components added successfully!")
   })
 }

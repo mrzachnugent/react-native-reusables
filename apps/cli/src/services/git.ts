@@ -11,12 +11,10 @@ const COMMANDS = {
 } as const
 
 export class Git extends Effect.Service<Git>()("Git", {
-  effect: Effect.sync(() => {
-    return {
-      checkIfDirty: Effect.gen(function* () {
-        const result = yield* COMMANDS.status.pipe(Command.string)
-        return result.trim().length > 0
-      })
-    }
-  })
+  succeed: {
+    checkIfDirty: Effect.gen(function* () {
+      const result = yield* COMMANDS.status.pipe(Command.string)
+      return result.trim().length > 0
+    })
+  }
 }) {}

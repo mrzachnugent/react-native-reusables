@@ -5,9 +5,9 @@
 
 Checks that everything is set up correctly:
 
-- components.json
 - nativewind
 - rnr deps (tailwindcss-animate class-variance-authority clsx tailwind-merge)
+- components.json
 - typescript alias
 - cn
 - css variables
