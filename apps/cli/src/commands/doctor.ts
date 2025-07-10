@@ -1,30 +1,48 @@
-import { Command, Options } from "@effect/cli"
+import { Command, Options, Prompt } from "@effect/cli"
 import { Effect } from "effect"
 import { Git } from "../services/git.js"
 import { Path, FileSystem } from "@effect/platform"
 
-// Default command checks:
-// - nativewind - https://www.nativewind.dev/docs/getting-started/installation#1-install-nativewind
-// - rnr deps -  npx expo install tailwindcss-animate class-variance-authority clsx tailwind-merge
-// - constants - @/lib/constants.ts
-// - typescript alias - tsconfig.json
-// - cn - @/lib/utils.ts
+// Suggestion types :
+// - Install missing package
+// - Add missing file (maybe prompt for file path if exists)
+// - Incorrect file content
 
-// - components.json - @/components.json
-// - css variables (if enabled) - @/styles/globals.css | @/globals.css
-// - tailwind config (with css variables if enabled) - @/tailwind.config.js
-// - import css in root layout - @/app/\_layout.tsx - @/app/\_layout.tsx
-// - Check for theme and Portal in /\_layout.tsx - @/app/\_layout.tsx
+// Dependencies
+// Check if they are all in the package.json
+// If some are not, prompt user to install them
 
-// If step can be fixed automatically:
-// - prompt user to fix
-//   - check that git is clean: if not, suggest to commit changes then prompt if they want to continue
-//   - run the fix command
+// Dev Dependencies
+// Check if they are all in the package.json
+// If some are not, prompt user to install orElse
 
-// If step cannot be fixed automatically or the user does not want to fix it:
-// - at the end, show a list of issues that require manual intervention or the issues not selected above with links to docs
+// Config files
+// Check if they are all there and if they are all correct
+// If missing, prompt user to add them
+// If incorrect, show link to docs
 
-// --fix command runs the default command and then fixes the issues that can be fixed automatically
+// Deprecated files
+// Check if any are present
+// If so, suggest to remove them
+
+// USER EXPERIENCE:
+
+// Running the doctor command
+// 1. It checks for everything set up correctly first
+// 2. If there's a problem, it prompts the user to fix it
+// 2.1 If its a missing dependency or file, and they accept, it will install or add the file otherwise it will keep the suggestion for the end
+// 2.2 If its a incorrect file content, it will keep the suggestion for the end
+// 2.3 If its a deprecated file, it will keep the suggestion for the end
+// 3. Show suggestions with links to more info if there are any
+// 4. If there are no suggestions, it will show a message saying that the project seems to be setup correctly
+
+// --quiet
+// Running the doctor command without prompts/just suggestions
+
+// --essentials
+// Running the doctor command for shadcn cli essentials and showing a warning message count with the suggestion to run the doctor command (before adding a component, for the CLI mostly)
+
+// Concurrently do as much as possible
 
 const NATIVEWIND = {
   dependencies: ["nativewind", "react-native-reanimated", "react-native-safe-area-context"],
@@ -49,7 +67,6 @@ const RNR = {
 const COMPONENT_JSON = "/components.json"
 
 const FILES_TO_CHECK_FROM_COMPONENT_JSON = {
-  cssFileIncludes: ["@tailwind base;", "@tailwind components;", "@tailwind utilities;"],
   check: ["global.css", "/lib/theme.ts", "tailwind.config.js"]
 }
 
@@ -67,6 +84,7 @@ function doctorHandler(options: { addMissing: boolean; cwd: string; interactive:
     const git = yield* Git
     const path = yield* Path.Path
     const fs = yield* FileSystem.FileSystem
+
     yield* Effect.logDebug("cwd", options.cwd)
     const packageJsonPath = path.join(options.cwd, "package.json")
 
@@ -329,15 +347,6 @@ function doctorHandler(options: { addMissing: boolean; cwd: string; interactive:
       yield* Effect.logDebug("✅ globals.css found")
     }
 
-    const globalCssContent = yield* fs.readFileString(path.join(options.cwd, "global.css"))
-    if (FILES_TO_CHECK_FROM_COMPONENT_JSON.cssFileIncludes.some((include) => !globalCssContent.includes(include))) {
-      yield* Effect.logWarning(
-        "⚠️ global.css does not contain @tailwind base; @tailwind components; @tailwind utilities;"
-      )
-    } else {
-      yield* Effect.logDebug("✅ global.css contains @tailwind base; @tailwind components; @tailwind utilities;")
-    }
-
     // Check contents of files from component json
     yield* Effect.logDebug(`🟠 TODO: check contents of ${FILES_TO_CHECK_FROM_COMPONENT_JSON.check.join(", ")}`)
 
@@ -359,6 +368,25 @@ function doctorHandler(options: { addMissing: boolean; cwd: string; interactive:
       yield* Effect.log("🔧 Adding missing stuff...")
       yield* checkGit()
     }
+
+    const prompt = yield* Prompt.confirm({
+      message: "Does this work?",
+      label: { confirm: "y", deny: "n" },
+      initial: true,
+      placeholder: { defaultConfirm: "y/n" }
+    })
+
+    yield* Effect.log(`Answered: ${prompt}`)
+
+    const prompt2 = yield* Prompt.select({
+      choices: [
+        { title: "y", value: "y" },
+        { title: "n", value: "n" }
+      ],
+      message: "Does this work?"
+    })
+
+    yield* Effect.log(`Answered 2: ${prompt2}`)
   })
 }
 
