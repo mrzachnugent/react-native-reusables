@@ -5,7 +5,7 @@ import * as NodeRuntime from "@effect/platform-node/NodeRuntime"
 import { Layer } from "effect"
 import * as Effect from "effect/Effect"
 import { run } from "./main.js"
-import { Git } from "./services/Git.js"
+import { Git } from "./services/git.js"
 
 const MainLayer = Layer.mergeAll(NodeContext.layer, Git.Default)
 
