@@ -1,0 +1,9 @@
+{
+  "aliases": {
+    "components": "@showcase/ui/components",
+    "utils": "@showcase/ui/lib/utils",
+    "hooks": "@showcase/ui/hooks",
+    "lib": "@showcase/ui/lib",
+    "ui": "@showcase/ui/components"
+  }
+}

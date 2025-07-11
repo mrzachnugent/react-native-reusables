@@ -50,6 +50,7 @@
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "tsup": "^8.2.4",
     "tsx": "^4.19.1",
     "typescript": "^5.8.3",

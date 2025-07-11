@@ -11,5 +11,6 @@ const MainLayer = Layer.mergeAll(NodeContext.layer, Git.Default)
 
 Effect.suspend(() => run(process.argv)).pipe(
   Effect.provide(MainLayer),
+  Effect.catchAll((error) => Effect.logError(error)),
   NodeRuntime.runMain({ disableErrorReporting: true })
 )
