@@ -1,3 +1,5 @@
+import './global.css';
+
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';

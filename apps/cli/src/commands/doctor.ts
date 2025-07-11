@@ -1,29 +1,66 @@
 import { Command, Options, Prompt } from "@effect/cli"
-import { Effect } from "effect"
-import { Git } from "../services/git.js"
+import { Data, Effect, Schema } from "effect"
+// import { Git } from "../services/git.js"
 import { Path, FileSystem } from "@effect/platform"
+import { loadConfig as loadTypscriptConfig, createMatchPath, type ConfigLoaderSuccessResult } from "tsconfig-paths"
+import { packageJsonSchema } from "@cli/schemas/package-schema.js"
+import { componentJsonSchema } from "@cli/schemas/component-json-schema.js"
 
-// Suggestion types :
-// - Install missing package
-// - Add missing file (maybe prompt for file path if exists)
-// - Incorrect file content
+const loadTsConfig = (cwd: string) =>
+  Effect.try({
+    try: () => {
+      const configResult = loadTypscriptConfig(cwd)
+      if (configResult.resultType === "failed") {
+        throw new Error("Error loading tsconfig.json", { cause: configResult.message })
+      }
+      return configResult
+    },
+    catch: (error) => new Error("Error loading tsconfig.json", { cause: String(error) })
+  })
 
-// Dependencies
-// Check if they are all in the package.json
-// If some are not, prompt user to install them
+const supportedExtensions = [".ts", ".tsx", ".jsx", ".js", ".css"]
 
-// Dev Dependencies
-// Check if they are all in the package.json
-// If some are not, prompt user to install orElse
+function returnTrue() {
+  return true
+}
 
-// Config files
-// Check if they are all there and if they are all correct
-// If missing, prompt user to add them
-// If incorrect, show link to docs
+const resolvePathFromAlias = (
+  aliasPath: string,
+  config: Pick<ConfigLoaderSuccessResult, "absoluteBaseUrl" | "paths">
+) =>
+  Effect.try({
+    try: () => {
+      const matchPath = createMatchPath(config.absoluteBaseUrl, config.paths)(
+        aliasPath,
+        undefined,
+        returnTrue,
+        supportedExtensions
+      )
+      if (!matchPath) {
+        throw new Error("Path not found", { cause: aliasPath })
+      }
+      return matchPath
+    },
+    catch: (error) => new Error(`Error resolving alias "${aliasPath}": ${String(error)}`)
+  })
 
-// Deprecated files
-// Check if any are present
-// If so, suggest to remove them
+class ParseJsonError extends Data.TaggedError("ParseJsonError")<{
+  cause?: unknown
+  message?: string
+}> {}
+
+const parseJson = (content: string) =>
+  Effect.try({
+    try: () => JSON.parse(content) as unknown,
+    catch: (error) => new ParseJsonError({ message: "Error parsing JSON", cause: error })
+  })
+
+function retryWith<A, R, E, B>(
+  fn: (input: A) => Effect.Effect<R, E, B>,
+  inputs: readonly [A, ...Array<A>]
+): Effect.Effect<R, E, B> {
+  return inputs.slice(1).reduce((acc, input) => acc.pipe(Effect.orElse(() => fn(input))), fn(inputs[0]))
+}
 
 // USER EXPERIENCE:
 
@@ -43,7 +80,14 @@ import { Path, FileSystem } from "@effect/platform"
 // Running the doctor command for shadcn cli essentials and showing a warning message count with the suggestion to run the doctor command (before adding a component, for the CLI mostly)
 
 // Concurrently do as much as possible
+// Find all files
+// For all that exist, check if they are correct
 
+// Pre-flight
+// components.json
+// package.json
+
+// TODO: make better objects for nativewind, rnr, etc
 const NATIVEWIND = {
   dependencies: ["nativewind", "react-native-reanimated", "react-native-safe-area-context"],
   devDependencies: [
@@ -53,22 +97,25 @@ const NATIVEWIND = {
   babelConfigIncludes: ["nativewind/babel", "jsxImportSource"],
   metroConfigIncludes: ["withNativeWind"],
   envTypesIncludes: ["nativewind/types"],
-  _layoutIncludes: ["global.css"]
+  _layoutIncludes: ["global.css"],
+  cssIncludes: ["@tailwind base", "@tailwind components", "@tailwind utilities"]
 }
 
 const RNR = {
   dependencies: ["tailwindcss-animate", "class-variance-authority", "clsx", "tailwind-merge"],
-  typescriptConfigIncludes: ["paths"],
   utilsFileIncludes: ["function cn("],
   _layoutIncludes: ["<PortalHost"],
-  deprecated: ["/lib/icons", "/lib/constants", "lib/useColorScheme.tsx"]
+  deprecatedLibs: ["icons", "constants.ts", "useColorScheme.tsx"]
 }
 
-const COMPONENT_JSON = "/components.json"
+// TODO: check /lib/theme.ts, if not add all css variable colors + nav theme
 
-const FILES_TO_CHECK_FROM_COMPONENT_JSON = {
-  check: ["global.css", "/lib/theme.ts", "tailwind.config.js"]
-}
+const configFilesToCheck = [
+  ["babel.config.js", "babel.config.ts"],
+  ["metro.config.js"],
+  ["nativewind-env.d.ts"],
+  ["app/_layout.tsx", "src/app/_layout.tsx"]
+]
 
 const cwd = Options.directory("cwd", { exists: "yes" }).pipe(Options.withDefault("."), Options.withAlias("c"))
 
@@ -81,307 +128,253 @@ const DoctorCommand = Command.make("doctor", { addMissing, cwd, interactive })
 
 function doctorHandler(options: { addMissing: boolean; cwd: string; interactive: boolean }) {
   return Effect.gen(function* () {
-    const git = yield* Git
+    // const git = yield* Git
     const path = yield* Path.Path
     const fs = yield* FileSystem.FileSystem
 
-    yield* Effect.logDebug("cwd", options.cwd)
-    const packageJsonPath = path.join(options.cwd, "package.json")
+    const [componentJson, packageJson, tsConfig] = yield* Effect.all(
+      [
+        fs.readFileString(path.join(options.cwd, "components.json")).pipe(
+          Effect.flatMap(parseJson),
+          Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
+          Effect.catchTags({
+            ParseJsonError: (error) => {
+              return Effect.fail(error)
+            },
+            ParseError: () =>
+              Effect.gen(function* () {
+                const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
+                yield* Effect.log("An invalid components.json file was found.")
+                const shouldCreateComponentJson = yield* Prompt.confirm({
+                  message: `${
+                    componentJsonExists ? "Do you want to fix it?" : "Do you want to create a components.json file?"
+                  } It is required for the CLI to work.`,
+                  label: { confirm: "y", deny: "n" },
+                  initial: true,
+                  placeholder: { defaultConfirm: "y/n" }
+                })
 
-    yield* Effect.logInfo("🏥 Running doctor command...")
+                if (!shouldCreateComponentJson) {
+                  return yield* Effect.fail("components.json not found")
+                }
 
-    // Expo check
-    const hasPackageJson = yield* fs.exists(packageJsonPath)
-    if (!hasPackageJson) {
-      yield* Effect.logError("⚠️  Package.json not found")
-      return yield* Effect.fail("Package.json not found")
-    }
+                yield* Effect.log("Creating components.json file...")
+                return yield* Schema.encode(componentJsonSchema)({
+                  $schema: "https://raw.githubusercontent.com/shadcn/ui/main/components.json",
+                  style: "default",
+                  aliases: {
+                    components: "@showcase/components",
+                    utils: "@showcase/utils",
+                    lib: "@showcase/lib"
+                  },
+                  rsc: false,
+                  tsx: true,
+                  tailwind: {
+                    css: "globals.css",
+                    baseColor: "slate",
+                    cssVariables: true,
+                    config: "tailwind.config.js"
+                  }
+                })
+              })
+          })
+        ),
+        fs.readFileString(path.join(options.cwd, "package.json")).pipe(
+          Effect.flatMap(parseJson),
+          Effect.flatMap(Schema.decodeUnknown(packageJsonSchema)),
+          Effect.catchAll((error) => Effect.fail(new Error("Package.json not found", { cause: error })))
+        ),
+        loadTsConfig(options.cwd)
+      ],
+      { concurrency: "unbounded" }
+    )
 
-    yield* Effect.logDebug("✅ Package.json found")
-    const packageJson = yield* fs.readFileString(packageJsonPath)
-
-    const UNSAFE_PACKAGE_JSON = JSON.parse(packageJson)
-
-    const expoVersion = UNSAFE_PACKAGE_JSON.dependencies?.expo
-
-    if (!expoVersion) {
-      yield* Effect.logError("⚠️  Expo not found in package.json")
-      return yield* Effect.fail("Expo not found in package.json")
-    }
-
-    yield* Effect.logDebug("✅ Expo found in package.json")
-
-    // Deps check
+    const missingDeps = []
+    const missingDevDeps = []
 
     for (const dep of NATIVEWIND.dependencies) {
-      const versionInstalled = UNSAFE_PACKAGE_JSON.dependencies?.[dep]
+      const versionInstalled = packageJson.dependencies?.[dep]
       yield* Effect.logDebug(`${dep}@${versionInstalled}`)
-      if (!UNSAFE_PACKAGE_JSON.dependencies?.[dep]) {
-        yield* Effect.logWarning(`⚠️  ${dep} not found in package.json`)
-        return yield* Effect.fail(`${dep} not found in package.json`)
+      if (!packageJson.dependencies?.[dep]) {
+        missingDeps.push(dep)
       }
     }
 
     for (const dep of NATIVEWIND.devDependencies) {
-      const versionInstalled = UNSAFE_PACKAGE_JSON.devDependencies?.[dep]
+      const versionInstalled = packageJson.devDependencies?.[dep]
       yield* Effect.logDebug(`${dep}@${versionInstalled}`)
-      if (!UNSAFE_PACKAGE_JSON.devDependencies?.[dep]) {
-        yield* Effect.logWarning(`⚠️  ${dep} not found in package.json`)
-        return yield* Effect.fail(`${dep} not found in package.json`)
+      if (!packageJson.devDependencies?.[dep]) {
+        missingDevDeps.push(dep)
       }
     }
 
     for (const dep of RNR.dependencies) {
-      const versionInstalled = UNSAFE_PACKAGE_JSON.dependencies?.[dep]
+      const versionInstalled = packageJson.dependencies?.[dep]
       yield* Effect.logDebug(`${dep}@${versionInstalled}`)
-      if (!UNSAFE_PACKAGE_JSON.dependencies?.[dep]) {
-        yield* Effect.logWarning(`⚠️  ${dep} not found in package.json`)
-        return yield* Effect.fail(`${dep} not found in package.json`)
+      if (!packageJson.dependencies?.[dep]) {
+        missingDeps.push(dep)
       }
     }
 
-    // Typescript check
-    const hasTsConfig = yield* fs.exists(path.join(options.cwd, "tsconfig.json"))
-    if (!hasTsConfig) {
-      yield* Effect.logWarning("⚠️  Tsconfig not found")
-      return yield* Effect.fail("Tsconfig not found")
-    }
+    const tailwindConfigPaths = [componentJson.tailwind.config, "tailwind.config.js", "tailwind.config.ts"].filter(
+      (path) => path != null
+    )
+    configFilesToCheck.push(tailwindConfigPaths)
 
-    yield* Effect.logDebug("✅ Tsconfig found")
+    const cssPath = yield* resolvePathFromAlias(componentJson.tailwind.css, tsConfig)
+    const cssPaths = [cssPath, "global.css", "src/global.css"]
+    configFilesToCheck.push(cssPaths)
 
-    const tsConfigContent = yield* fs.readFileString(path.join(options.cwd, "tsconfig.json"))
-
-    const hasTsConfigIncludes = RNR.typescriptConfigIncludes.every((include) => tsConfigContent.includes(include))
-
-    if (!hasTsConfigIncludes) {
-      yield* Effect.logWarning("⚠️  Tsconfig does not include paths")
-      return yield* Effect.fail("Tsconfig does not include paths")
-    }
-
-    yield* Effect.logDebug("✅ Tsconfig includes paths")
-
-    // Utils file check
-    const hasUtilsFile = yield* fs.exists(path.join(options.cwd, "lib/utils.ts"))
-
-    if (!hasUtilsFile) {
-      yield* Effect.logWarning("⚠️  Utils file not found")
-      return yield* Effect.fail("Utils file not found")
-    }
-
-    yield* Effect.logDebug("✅ Utils file found")
-
-    const utilsFileContent = yield* fs.readFileString(path.join(options.cwd, "lib/utils.ts"))
-
-    const hasUtilsFileIncludes = RNR.utilsFileIncludes.every((include) => utilsFileContent.includes(include))
-
-    if (!hasUtilsFileIncludes) {
-      yield* Effect.logWarning("⚠️  Utils file does not include function cn")
-      return yield* Effect.fail("Utils file does not include function cn")
-    }
-
-    yield* Effect.logDebug("✅ Utils file includes function cn")
-
-    // Tailwind config check - first
-    const hasTailwindConfig = yield* fs.exists(path.join(options.cwd, "tailwind.config.js"))
-    if (!hasTailwindConfig) {
-      yield* Effect.logWarning("⚠️  Tailwind config not found")
-      return yield* Effect.fail("Tailwind config not found")
-    }
-
-    yield* Effect.logDebug("✅ Tailwind config found")
-
-    const tailwindConfig = yield* fs.readFileString(path.join(options.cwd, "tailwind.config.js"))
-
-    const hasTailwindConfigIncludes = NATIVEWIND.tailwindConfigIncludes.every((include) =>
-      tailwindConfig.includes(include)
+    const [babelConfig, metroConfig, nativewindEnv, rootLayout, tailwindConfig, css] = yield* Effect.forEach(
+      configFilesToCheck,
+      (paths) =>
+        retryWith(fs.readFileString, paths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]).pipe(
+          Effect.catchAll(() => Effect.succeed(null))
+        ),
+      { concurrency: "unbounded" }
     )
 
-    if (!hasTailwindConfigIncludes) {
-      yield* Effect.logWarning("⚠️  Tailwind config does not include nativewind/preset")
-      return yield* Effect.fail("Tailwind config does not include nativewind/preset")
-    }
+    const missingFiles = []
+    const incorrectFiles = new Set<string>([])
 
-    yield* Effect.logDebug("✅ Tailwind config includes nativewind/preset")
-
-    // Babel config check
-
-    const hasBabelConfig = yield* fs.exists(path.join(options.cwd, "babel.config.js"))
-    if (!hasBabelConfig) {
-      yield* Effect.logWarning("⚠️  Babel config not found")
-      return yield* Effect.fail("Babel config not found")
-    }
-
-    yield* Effect.logDebug("✅ Babel config found")
-
-    const babelConfig = yield* fs.readFileString(path.join(options.cwd, "babel.config.js"))
-
-    const hasBabelConfigIncludes = NATIVEWIND.babelConfigIncludes.every((include) => babelConfig.includes(include))
-
-    if (!hasBabelConfigIncludes) {
-      yield* Effect.logWarning("⚠️  Babel config does not include nativewind/babel")
-      return yield* Effect.fail("Babel config does not include nativewind/babel")
-    }
-
-    yield* Effect.logDebug("✅ Babel config includes nativewind/babel")
-
-    // Metro config check
-
-    const hasMetroConfig = yield* fs.exists(path.join(options.cwd, "metro.config.js"))
-    if (!hasMetroConfig) {
-      yield* Effect.logWarning("⚠️  Metro config not found")
-      return yield* Effect.fail("Metro config not found")
-    }
-
-    yield* Effect.logDebug("✅ Metro config found")
-
-    const metroConfig = yield* fs.readFileString(path.join(options.cwd, "metro.config.js"))
-
-    yield* Effect.logDebug("✅ Metro config found")
-
-    const hasMetroConfigIncludes = NATIVEWIND.metroConfigIncludes.every((include) => metroConfig.includes(include))
-
-    yield* Effect.logDebug("✅ Metro config includes withNativeWind")
-
-    // Nativewind env types check
-    const hasEnvTypes = yield* fs.exists(path.join(options.cwd, "nativewind-env.d.ts"))
-
-    if (!hasEnvTypes) {
-      yield* Effect.logWarning("⚠️  Env types not found")
-      return yield* Effect.fail("Env types not found")
-    }
-
-    yield* Effect.logDebug("✅ Nativewind Env types found")
-
-    if (!hasMetroConfigIncludes) {
-      yield* Effect.logWarning("⚠️  Metro config does not include withNativeWind")
-      return yield* Effect.fail("Metro config does not include withNativeWind")
-    }
-
-    // Root layout check
-    const rootLayout = yield* fs.exists(path.join(options.cwd, "app/_layout.tsx"))
-
-    if (!rootLayout) {
-      const srcRootLayout = yield* fs.exists(path.join(options.cwd, "src/app/_layout.tsx"))
-      if (!srcRootLayout) {
-        yield* Effect.logWarning("⚠️  Root layout not found")
-        return yield* Effect.fail("Root layout not found")
-      }
-
-      yield* Effect.logDebug("✅ Root layout found in src/_layout.tsx")
-      const srcRootLayoutContent = yield* fs.readFileString(path.join(options.cwd, "src/app/_layout.tsx"))
-      if (!srcRootLayoutContent.includes(".css")) {
-        yield* Effect.logWarning("⚠️  CSS import not found in src/app/_layout.tsx")
-        return yield* Effect.fail("CSS import not found in src/app/_layout.tsx")
-      }
-
-      if (!srcRootLayoutContent.includes("<PortalHost")) {
-        yield* Effect.logWarning("⚠️  PortalHost not found in src/app/_layout.tsx")
-        return yield* Effect.fail("PortalHost not found in src/app/_layout.tsx")
-      }
-    }
-
-    const rootLayoutContent = yield* fs.readFileString(path.join(options.cwd, "app/_layout.tsx"))
-    if (!rootLayoutContent.includes(".css")) {
-      const hasIndexFile = yield* fs.exists(path.join(options.cwd, "index.js"))
-      if (!hasIndexFile) {
-        yield* Effect.logWarning("⚠️  CSS import not found in app/_layout.tsx")
-        return yield* Effect.fail("CSS import not found in app/_layout.tsx")
-      }
-
-      const indexFile = yield* fs.readFileString(path.join(options.cwd, "index.js"))
-      if (!indexFile.includes(".css")) {
-        yield* Effect.logWarning("⚠️  CSS import not found in index.js")
-        return yield* Effect.fail("CSS import not found in index.js")
-      }
-    }
-
-    if (!rootLayoutContent.includes("<PortalHost")) {
-      yield* Effect.logWarning("⚠️  PortalHost not found in app/_layout.tsx")
-      return yield* Effect.fail("PortalHost not found in app/_layout.tsx")
-    }
-
-    yield* Effect.logDebug("✅ CSS import found")
-    yield* Effect.logDebug("✅ PortalHost found ")
-
-    // Deprecated files check
-    const hasDeprecatedConstants = yield* fs.exists(path.join(options.cwd, "lib/constants.ts"))
-
-    if (hasDeprecatedConstants) {
-      yield* Effect.logWarning("⚠️  Deprecated constants found")
-    } else {
-      yield* Effect.logDebug("✅ No deprecated constants found")
-    }
-
-    const hasDeprecatedIcons = yield* fs.exists(path.join(options.cwd, "lib/icons.ts"))
-
-    if (hasDeprecatedIcons) {
-      yield* Effect.logWarning("⚠️  Deprecated icons found")
-    } else {
-      yield* Effect.logDebug("✅ No deprecated icons found")
-    }
-
-    const hasDeprecatedUseColorScheme = yield* fs.exists(path.join(options.cwd, "lib/useColorScheme.tsx"))
-    if (hasDeprecatedUseColorScheme) {
-      yield* Effect.logWarning("⚠️  Deprecated useColorScheme found")
-    } else {
-      yield* Effect.logDebug("✅ No deprecated useColorScheme found")
-    }
-
-    // Component json check
-    const hasComponentJson = yield* fs.exists(path.join(options.cwd, COMPONENT_JSON))
-
-    if (hasComponentJson) {
-      yield* Effect.logWarning("⚠️ No Component json found")
-    } else {
-      yield* Effect.logDebug("✅ component json found")
-    }
-
-    yield* Effect.logDebug("🟠 TODO: parse component json and check if matches shadcn/ui")
-
-    // Globals css check
-    const hasGlobalsCss = yield* fs.exists(path.join(options.cwd, "globals.css"))
-
-    if (hasGlobalsCss) {
-      yield* Effect.logWarning("⚠️ No globals.css found")
-    } else {
-      yield* Effect.logDebug("✅ globals.css found")
-    }
-
-    // Check contents of files from component json
-    yield* Effect.logDebug(`🟠 TODO: check contents of ${FILES_TO_CHECK_FROM_COMPONENT_JSON.check.join(", ")}`)
-
-    function* checkGit() {
-      const isDirty = yield* git.checkIfDirty
-      if (isDirty) {
-        yield* Effect.log("⚠️  Git repository is dirty")
+    if (tailwindConfig) {
+      yield* Effect.log("tailwindConfig found")
+      if (NATIVEWIND.tailwindConfigIncludes.some((str) => !tailwindConfig.includes(str))) {
+        yield* Effect.log("tailwindConfig is missing some includes")
+        incorrectFiles.add("tailwindConfig-nativewind")
       } else {
-        yield* Effect.log("✅ Git repository is clean")
+        yield* Effect.log("tailwindConfig is correct")
       }
+      // TODO: better check
+      ;["primary", "secondary", "destructive"].forEach((color) => {
+        if (!tailwindConfig.includes(`--${color}`)) {
+          incorrectFiles.add("tailwindConfig-rnr-colors")
+        }
+        // TODO: more checks
+      })
+    } else {
+      missingFiles.push("tailwind.config.js")
     }
 
-    if (options.interactive) {
-      yield* Effect.log("🟠 TODO: prompt user to fix issues as they are found")
-      yield* checkGit()
+    if (babelConfig) {
+      yield* Effect.log("babelConfig found")
+      if (NATIVEWIND.babelConfigIncludes.some((str) => !babelConfig.includes(str))) {
+        yield* Effect.log("babelConfig is missing some includes")
+        incorrectFiles.add("babelConfig-nativewind")
+      } else {
+        yield* Effect.log("babelConfig is correct")
+      }
+    } else {
+      missingFiles.push("babel.config.js")
     }
 
-    if (options.addMissing) {
-      yield* Effect.log("🔧 Adding missing stuff...")
-      yield* checkGit()
+    if (metroConfig) {
+      yield* Effect.log("metroConfig found")
+      if (NATIVEWIND.metroConfigIncludes.some((str) => !metroConfig.includes(str))) {
+        yield* Effect.log("metroConfig is missing some includes")
+        incorrectFiles.add("metroConfig-nativewind")
+      } else {
+        yield* Effect.log("metroConfig is correct")
+      }
+    } else {
+      missingFiles.push("metro.config.js")
+    }
+
+    if (nativewindEnv) {
+      yield* Effect.log("nativewindEnv found")
+      if (NATIVEWIND.envTypesIncludes.some((str) => !nativewindEnv.includes(str))) {
+        yield* Effect.log("nativewindEnv is missing some includes")
+        incorrectFiles.add("nativewindEnv-nativewind")
+      } else {
+        yield* Effect.log("nativewindEnv is correct")
+      }
+    } else {
+      missingFiles.push("nativewind-env.d.ts")
+    }
+
+    if (rootLayout) {
+      yield* Effect.log("rootLayout found")
+      if (NATIVEWIND._layoutIncludes.some((str) => !rootLayout.includes(str))) {
+        yield* Effect.log("rootLayout is missing some includes")
+        incorrectFiles.add("rootLayout-nativewind")
+      } else {
+        yield* Effect.log("rootLayout is correct")
+      }
+
+      if (RNR._layoutIncludes.some((str) => !rootLayout.includes(str))) {
+        yield* Effect.log("rootLayout is missing some includes")
+        incorrectFiles.add("rootLayout-rnr")
+      } else {
+        yield* Effect.log("rootLayout is correct")
+      }
+    } else {
+      missingFiles.push("app/_layout.tsx")
+    }
+
+    if (css) {
+      yield* Effect.log("css found")
+      if (NATIVEWIND.cssIncludes.some((str) => !css.includes(str))) {
+        yield* Effect.log("css is missing some includes")
+        incorrectFiles.add("css-nativewind")
+      } else {
+        yield* Effect.log("css is correct")
+      }
+      // TODO: check variables
+    } else {
+      missingFiles.push("globals.css")
+    }
+
+    yield* Effect.logDebug({ missingFiles, missingDeps, missingDevDeps, incorrectFiles: [...incorrectFiles] })
+
+    console.log("tsConfig.paths", Object.keys(tsConfig.paths)[0])
+
+    const [icons, constants, useColorScheme] = yield* Effect.forEach(
+      RNR.deprecatedLibs,
+      (path) =>
+        resolvePathFromAlias(
+          componentJson.aliases.lib
+            ? `${componentJson.aliases.lib}/${path}`
+            : `${Object.keys(tsConfig.paths)[0].replace("*", "")}lib/${path}`,
+          tsConfig
+        ).pipe(
+          Effect.flatMap((path) => {
+            console.log({ path })
+            return fs.exists(path)
+          }),
+          Effect.catchAll(() => Effect.succeed(null))
+        ),
+      { concurrency: "unbounded" }
+    )
+
+    if (icons) {
+      yield* Effect.log("icons found and is deprecated")
+    } else {
+      yield* Effect.logDebug("icons not found - GOOD")
+    }
+
+    if (constants) {
+      yield* Effect.log("constants found and is deprecated")
+    } else {
+      yield* Effect.logDebug("constants not found - GOOD")
+    }
+
+    if (useColorScheme) {
+      yield* Effect.log("useColorScheme found and is deprecated")
+    } else {
+      yield* Effect.logDebug("useColorScheme not found - GOOD")
     }
 
     const prompt = yield* Prompt.confirm({
       message: "Does this work?",
-      label: { confirm: "y", deny: "n" },
-      initial: true,
-      placeholder: { defaultConfirm: "y/n" }
+      initial: true
     })
 
     yield* Effect.log(`Answered: ${prompt}`)
 
     const prompt2 = yield* Prompt.select({
       choices: [
-        { title: "y", value: "y" },
-        { title: "n", value: "n" }
+        { title: "Red pill", value: "red" },
+        { title: "Blue pill", value: "blue", disabled: true, description: "You have already chosen." }
       ],
       message: "Does this work?"
     })
