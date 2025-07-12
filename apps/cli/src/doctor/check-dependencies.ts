@@ -1,4 +1,4 @@
-import { REQUIREMENTS } from "@cli/commands/doctor/requirements.js"
+import { REQUIREMENTS } from "@cli/doctor/requirements.js"
 import type { packageJsonSchema } from "@cli/schemas/package-schema.js"
 import { Effect } from "effect"
 

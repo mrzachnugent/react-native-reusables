@@ -1,5 +1,5 @@
-import { type FileCheck, type FileWithContent, type MissingInclude } from "@cli/commands/doctor/requirements.js"
-import { retryWith } from "@cli/commands/doctor/utils.js"
+import { type FileCheck, type FileWithContent, type MissingInclude } from "@cli/doctor/requirements.js"
+import { retryWith } from "@cli/doctor/utils.js"
 import { FileSystem, Path } from "@effect/platform"
 import { Effect } from "effect"
 

@@ -1,5 +1,5 @@
-import { REQUIREMENTS } from "@cli/commands/doctor/requirements.js"
-import { resolvePathFromAlias } from "@cli/commands/doctor/utils.js"
+import { REQUIREMENTS } from "@cli/doctor/requirements.js"
+import { resolvePathFromAlias } from "@cli/doctor/utils.js"
 import { FileSystem } from "@effect/platform"
 import { Effect } from "effect"
 import { type ConfigLoaderSuccessResult } from "tsconfig-paths"
