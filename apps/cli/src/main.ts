@@ -1,5 +1,5 @@
 import { AddCommand } from "@cli/commands/add.js"
-import { DoctorCommand, doctorHandler } from "@cli/commands/doctor.js"
+import { DoctorCommand } from "@cli/commands/doctor.js"
 import { InitCommand } from "@cli/commands/init.js"
 import { Command } from "@effect/cli"
 import { Console, Effect } from "effect"
@@ -11,8 +11,6 @@ const cli = Command.make("react-native-reusables/cli")
       Effect.gen(function* () {
         yield* Console.log("🎯 Welcome to React Native Reusables CLI!")
         yield* Console.log("")
-
-        yield* doctorHandler({ cwd: ".", fix: false, essentials: false, quiet: false })
       })
     )
   )
