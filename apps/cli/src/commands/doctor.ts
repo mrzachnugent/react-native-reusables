@@ -87,28 +87,6 @@ function retryWith<A, R, E, B>(
 // components.json
 // package.json
 
-// TODO: make better objects for nativewind, rnr, etc
-const NATIVEWIND = {
-  dependencies: ["nativewind", "react-native-reanimated", "react-native-safe-area-context"], //
-  devDependencies: [
-    "tailwindcss" // check dependencies if not found in devDependencies
-  ],
-  tailwindConfigIncludes: ["nativewind/preset"],
-  babelConfigIncludes: ["nativewind/babel", "jsxImportSource"],
-  metroConfigIncludes: ["withNativeWind"],
-  envTypesIncludes: ["nativewind/types"],
-  _layoutIncludes: ["global.css"],
-  cssIncludes: ["@tailwind base", "@tailwind components", "@tailwind utilities"]
-}
-
-const RNR = {
-  dependencies: ["tailwindcss-animate", "class-variance-authority", "clsx", "tailwind-merge"], //
-  utilsFileIncludes: ["function cn("],
-  _layoutIncludes: ["<PortalHost"],
-  deprecatedLibs: ["icons", "constants.ts", "useColorScheme.tsx"],
-  themeIncludes: ["primary", "secondary", "destructive"]
-}
-
 const DEPENDENCIES = [
   "nativewind",
   "react-native-reanimated",
@@ -164,28 +142,15 @@ const FILE_CHECKS = [
         docs: "https://google.com"
       }
     ]
-  },
-  {
-    name: "CSS",
-    fileNames: ["globals.css", "src/global.css"],
-    includes: [
-      {
-        content: ["@tailwind base", "@tailwind components", "@tailwind utilities"],
-        message: "The tailwind layer directives are missing",
-        docs: "https://google.com"
-      },
-      {
-        content: ["primary", "secondary", "destructive"], // TODO: do better
-        message: "At least one of the color css variables is missing",
-        docs: "https://google.com"
-      }
-    ]
   }
 ]
+
+const DEPRECATED_FROM_LIB = ["icons", "constants.ts", "useColorScheme.tsx"]
 
 const CUSTOM_FILE_CHECKS = {
   tailwindConfig: {
     name: "Tailwind Config",
+    defaultFileNames: ["tailwind.config.js", "tailwind.config.ts"],
     includes: [
       {
         content: ["nativewind/preset"],
@@ -201,6 +166,7 @@ const CUSTOM_FILE_CHECKS = {
   },
   theme: {
     name: "Theme",
+    defaultFileNames: ["lib/theme.ts"],
     includes: [
       {
         content: ["primary", "secondary", "destructive"],
@@ -226,6 +192,7 @@ const CUSTOM_FILE_CHECKS = {
   },
   utils: {
     name: "Utils",
+    defaultFileNames: ["lib/utils.ts"],
     includes: [
       {
         content: ["function cn("],
@@ -233,22 +200,58 @@ const CUSTOM_FILE_CHECKS = {
         docs: "https://google.com"
       }
     ]
+  },
+  css: {
+    name: "CSS",
+    defaultFileNames: ["globals.css", "src/global.css"],
+    includes: [
+      {
+        content: ["@tailwind base", "@tailwind components", "@tailwind utilities"],
+        message: "The tailwind layer directives are missing",
+        docs: "https://google.com"
+      },
+      {
+        content: ["primary", "secondary", "destructive"], // TODO: do better
+        message: "At least one of the color css variables is missing",
+        docs: "https://google.com"
+      }
+    ]
   }
 }
+
+const NATIVEWIND_ENV_FILE = "nativewind-env.d.ts"
 
 const RULES = {
   dependencies: DEPENDENCIES,
   devDependencies: DEV_DEPENDENCIES,
   files: FILE_CHECKS,
-  custom: CUSTOM_FILE_CHECKS
+  custom: CUSTOM_FILE_CHECKS,
+  deprecated: {
+    lib: DEPRECATED_FROM_LIB
+  }
 } as const
 
-const configFilesToCheck = [
-  ["babel.config.js", "babel.config.ts"],
-  ["metro.config.js"],
-  ["nativewind-env.d.ts"],
-  ["app/_layout.tsx", "src/app/_layout.tsx"]
-]
+const checkDependencies = (packageJson: typeof packageJsonSchema.Type) =>
+  Effect.gen(function* () {
+    const uninstalledDependencies = []
+    const uninstalledDevDependencies = []
+
+    for (const dependency of RULES.dependencies) {
+      if (!packageJson.dependencies?.[dependency]) {
+        uninstalledDependencies.push(dependency)
+        continue
+      }
+      yield* Effect.logDebug(`✅ ${dependency}@${packageJson.dependencies?.[dependency]} is installed`)
+    }
+    for (const devDependency of RULES.devDependencies) {
+      if (!packageJson.devDependencies?.[devDependency] && !packageJson.dependencies?.[devDependency]) {
+        uninstalledDevDependencies.push(devDependency)
+        continue
+      }
+      yield* Effect.logDebug(`✅ ${devDependency}@${packageJson.devDependencies?.[devDependency]} is installed`)
+    }
+    return { uninstalledDependencies, uninstalledDevDependencies }
+  })
 
 const cwd = Options.directory("cwd", { exists: "yes" }).pipe(Options.withDefault("."), Options.withAlias("c"))
 
@@ -322,199 +325,179 @@ function doctorHandler(options: { cwd: string; quiet: boolean; essentials: boole
       { concurrency: "unbounded" }
     )
 
-    const missingDeps = []
-    const missingDevDeps = []
+    const { uninstalledDependencies, uninstalledDevDependencies } = yield* checkDependencies(packageJson)
 
-    for (const dep of NATIVEWIND.dependencies) {
-      const versionInstalled = packageJson.dependencies?.[dep]
-      yield* Effect.logDebug(`${dep}@${versionInstalled}`)
-      if (!packageJson.dependencies?.[dep]) {
-        missingDeps.push(dep)
+    const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
+
+    const missingFiles: Array<(typeof RULES.files)[number] | (typeof RULES.custom)[keyof typeof RULES.custom]> = []
+
+    const filesWithContent = yield* Effect.forEach(
+      RULES.files,
+      (file) =>
+        retryWith(
+          (cwd: string) =>
+            Effect.gen(function* () {
+              const fileContents = yield* fs.readFileString(cwd)
+              yield* Effect.logDebug(`✅ ${file.name} found`)
+              return { ...file, content: fileContents }
+            }),
+          file.fileNames.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
+        ).pipe(
+          Effect.catchAll(() => {
+            missingFiles.push(file)
+            return Effect.succeed(null)
+          })
+        ),
+      { concurrency: "unbounded" }
+    ).pipe(Effect.map((files) => files.filter((file) => file !== null)))
+
+    const missingIncludes: Array<(typeof RULES.files)[number]["includes"][number] & { fileName: string }> = []
+
+    yield* Effect.forEach(filesWithContent, (file) =>
+      Effect.gen(function* () {
+        const { content, includes, name } = file
+        for (const include of includes) {
+          if (include.content.every((str) => content.includes(str))) {
+            yield* Effect.logDebug(`✅ ${name} has ${include.content.join(", ")}`)
+            continue
+          }
+          missingIncludes.push({ ...include, fileName: name })
+        }
+      })
+    )
+
+    const { css, nativewindEnv, tailwindConfig, theme, utils } = RULES.custom
+
+    const cssPaths = [componentJson.tailwind.css, "global.css", "src/global.css"].filter((path) => path != null)
+
+    const cssContent = yield* retryWith(
+      (cwd: string) =>
+        Effect.gen(function* () {
+          const content = yield* fs.readFileString(cwd)
+          yield* Effect.logDebug(`✅ ${css.name} found`)
+          return content
+        }),
+      cssPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
+    ).pipe(Effect.catchAll(() => Effect.fail(() => new Error("CSS not found")))) // TODO: tagged error
+
+    for (const include of css.includes) {
+      if (include.content.every((str) => cssContent.includes(str))) {
+        yield* Effect.logDebug(`✅ ${css.name} has ${include.content.join(", ")}`)
+        continue
       }
+      missingIncludes.push({ ...include, fileName: css.name })
     }
 
-    for (const dep of NATIVEWIND.devDependencies) {
-      const versionInstalled = packageJson.devDependencies?.[dep]
-      yield* Effect.logDebug(`${dep}@${versionInstalled}`)
-      if (!packageJson.devDependencies?.[dep]) {
-        missingDevDeps.push(dep)
-      }
-    }
+    if (componentJson.tsx !== false) {
+      const nativewindEnvContent = yield* fs.readFileString(path.join(options.cwd, NATIVEWIND_ENV_FILE)).pipe(
+        Effect.catchAll(() => {
+          missingFiles.push(nativewindEnv)
+          return Effect.succeed(null)
+        })
+      )
 
-    for (const dep of RNR.dependencies) {
-      const versionInstalled = packageJson.dependencies?.[dep]
-      yield* Effect.logDebug(`${dep}@${versionInstalled}`)
-      if (!packageJson.dependencies?.[dep]) {
-        missingDeps.push(dep)
+      for (const include of nativewindEnv.includes) {
+        if (!nativewindEnvContent) {
+          continue
+        }
+        if (include.content.every((str) => nativewindEnvContent.includes(str))) {
+          yield* Effect.logDebug(`✅ ${nativewindEnv.name} has ${include.content.join(", ")}`)
+          continue
+        }
+        missingIncludes.push({ ...include, fileName: nativewindEnv.name })
       }
     }
 
     const tailwindConfigPaths = [componentJson.tailwind.config, "tailwind.config.js", "tailwind.config.ts"].filter(
       (path) => path != null
     )
-    configFilesToCheck.push(tailwindConfigPaths)
+    const tailwindConfigContent = yield* retryWith(
+      (cwd: string) =>
+        Effect.gen(function* () {
+          const content = yield* fs.readFileString(cwd)
+          yield* Effect.logDebug(`✅ ${tailwindConfig.name} found`)
+          return content
+        }),
+      tailwindConfigPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
+    ).pipe(Effect.catchAll(() => Effect.fail(() => new Error("Tailwind config not found")))) // TODO: tagged error
 
-    const cssPaths = [componentJson.tailwind.css, "global.css", "src/global.css"]
-    configFilesToCheck.push(cssPaths)
-
-    const firstTsPathKey = Object.keys(tsConfig.paths)[0].replace("*", "")
-
-    const aliasForLib = componentJson.aliases.lib ? `${componentJson.aliases.lib}` : `${firstTsPathKey}lib`
-
-    const themePath =
-      firstTsPathKey.length > 0
-        ? yield* resolvePathFromAlias(`${aliasForLib}/theme.ts`, tsConfig)
-        : path.join(options.cwd, "lib/theme.ts")
-    configFilesToCheck.push([themePath])
-
-    const [babelConfig, metroConfig, nativewindEnv, rootLayout, tailwindConfig, css, theme] = yield* Effect.forEach(
-      configFilesToCheck,
-      (paths) =>
-        retryWith(fs.readFileString, paths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]).pipe(
-          Effect.catchAll(() => Effect.succeed(null))
-        ),
-      { concurrency: "unbounded" }
-    )
-
-    const missingFiles = []
-    const incorrectFiles = new Set<string>([])
-
-    if (tailwindConfig) {
-      yield* Effect.log("tailwindConfig found")
-      if (NATIVEWIND.tailwindConfigIncludes.some((str) => !tailwindConfig.includes(str))) {
-        yield* Effect.log("tailwindConfig is missing some includes")
-        incorrectFiles.add("tailwindConfig-nativewind")
-      } else {
-        yield* Effect.log("tailwindConfig is correct")
+    for (const include of tailwindConfig.includes) {
+      if (include.content.every((str) => tailwindConfigContent.includes(str))) {
+        yield* Effect.logDebug(`✅ ${tailwindConfig.name} has ${include.content.join(", ")}`)
+        continue
       }
-      // TODO: better check
-      ;["primary", "secondary", "destructive"].forEach((color) => {
-        if (!tailwindConfig.includes(`--${color}`)) {
-          incorrectFiles.add("tailwindConfig-rnr-colors")
-        }
-        // TODO: more checks
+      missingIncludes.push({ ...include, fileName: tailwindConfig.name })
+    }
+
+    const themeAliasPath = yield* resolvePathFromAlias(`${aliasForLib}/theme.ts`, tsConfig)
+
+    const themeContent = yield* Effect.gen(function* () {
+      const content = yield* fs.readFileString(themeAliasPath)
+      yield* Effect.logDebug(`✅ ${theme.name} found`)
+      return content
+    }).pipe(
+      Effect.catchAll(() => {
+        missingFiles.push(theme)
+        return Effect.succeed(null)
       })
-    } else {
-      missingFiles.push("tailwind.config.js")
-    }
-
-    if (babelConfig) {
-      yield* Effect.log("babelConfig found")
-      if (NATIVEWIND.babelConfigIncludes.some((str) => !babelConfig.includes(str))) {
-        yield* Effect.log("babelConfig is missing some includes")
-        incorrectFiles.add("babelConfig-nativewind")
-      } else {
-        yield* Effect.log("babelConfig is correct")
-      }
-    } else {
-      missingFiles.push("babel.config.js")
-    }
-
-    if (metroConfig) {
-      yield* Effect.log("metroConfig found")
-      if (NATIVEWIND.metroConfigIncludes.some((str) => !metroConfig.includes(str))) {
-        yield* Effect.log("metroConfig is missing some includes")
-        incorrectFiles.add("metroConfig-nativewind")
-      } else {
-        yield* Effect.log("metroConfig is correct")
-      }
-    } else {
-      missingFiles.push("metro.config.js")
-    }
-
-    if (nativewindEnv) {
-      yield* Effect.log("nativewindEnv found")
-      if (NATIVEWIND.envTypesIncludes.some((str) => !nativewindEnv.includes(str))) {
-        yield* Effect.log("nativewindEnv is missing some includes")
-        incorrectFiles.add("nativewindEnv-nativewind")
-      } else {
-        yield* Effect.log("nativewindEnv is correct")
-      }
-    } else {
-      missingFiles.push("nativewind-env.d.ts")
-    }
-
-    if (rootLayout) {
-      yield* Effect.log("rootLayout found")
-      if (NATIVEWIND._layoutIncludes.some((str) => !rootLayout.includes(str))) {
-        yield* Effect.log("rootLayout is missing some includes")
-        incorrectFiles.add("rootLayout-nativewind")
-      } else {
-        yield* Effect.log("rootLayout is correct")
-      }
-
-      if (RNR._layoutIncludes.some((str) => !rootLayout.includes(str))) {
-        yield* Effect.log("rootLayout is missing some includes")
-        incorrectFiles.add("rootLayout-rnr")
-      } else {
-        yield* Effect.log("rootLayout is correct")
-      }
-    } else {
-      missingFiles.push("app/_layout.tsx")
-    }
-
-    if (css) {
-      yield* Effect.log("css found")
-      if (NATIVEWIND.cssIncludes.some((str) => !css.includes(str))) {
-        yield* Effect.log("css is missing some includes")
-        incorrectFiles.add("css-nativewind")
-      } else {
-        yield* Effect.log("css is correct")
-      }
-      // TODO: check variables
-    } else {
-      missingFiles.push("globals.css")
-    }
-
-    if (theme) {
-      yield* Effect.log("theme found")
-      if (RNR.themeIncludes.some((str) => !theme.includes(str))) {
-        yield* Effect.log("theme is missing some includes")
-        incorrectFiles.add("theme-rnr")
-      } else {
-        yield* Effect.log("theme is correct")
-      }
-    } else {
-      missingFiles.push("lib/theme.ts")
-    }
-
-    yield* Effect.logDebug({ missingFiles, missingDeps, missingDevDeps, incorrectFiles: [...incorrectFiles] })
-
-    const [icons, constants, useColorScheme] = yield* Effect.forEach(
-      RNR.deprecatedLibs,
-      (path) =>
-        resolvePathFromAlias(
-          componentJson.aliases.lib
-            ? `${componentJson.aliases.lib}/${path}`
-            : `${Object.keys(tsConfig.paths)[0].replace("*", "")}lib/${path}`,
-          tsConfig
-        ).pipe(
-          Effect.flatMap((path) => {
-            console.log({ path })
-            return fs.exists(path)
-          }),
-          Effect.catchAll(() => Effect.succeed(null))
-        ),
-      { concurrency: "unbounded" }
     )
 
-    if (icons) {
-      yield* Effect.log("icons found and is deprecated")
-    } else {
-      yield* Effect.logDebug("icons not found - GOOD")
+    for (const include of theme.includes) {
+      if (!themeContent) {
+        continue
+      }
+      if (include.content.every((str) => themeContent.includes(str))) {
+        yield* Effect.logDebug(`✅ ${theme.name} has ${include.content.join(", ")}`)
+        continue
+      }
+      missingIncludes.push({ ...include, fileName: theme.name })
     }
 
-    if (constants) {
-      yield* Effect.log("constants found and is deprecated")
-    } else {
-      yield* Effect.logDebug("constants not found - GOOD")
+    const utilsPath = yield* resolvePathFromAlias(`${aliasForLib}/utils.ts`, tsConfig)
+
+    const utilsContent = yield* Effect.gen(function* () {
+      const content = yield* fs.readFileString(utilsPath)
+      yield* Effect.logDebug(`✅ ${utils.name} found`)
+      return content
+    }).pipe(
+      Effect.catchAll(() => {
+        missingFiles.push(utils)
+        return Effect.succeed(null)
+      })
+    )
+
+    for (const include of utils.includes) {
+      if (utilsContent && include.content.every((str) => utilsContent.includes(str))) {
+        yield* Effect.logDebug(`✅ ${utils.name} has ${include.content.join(", ")}`)
+        continue
+      }
+      missingIncludes.push({ ...include, fileName: utils.name })
     }
 
-    if (useColorScheme) {
-      yield* Effect.log("useColorScheme found and is deprecated")
-    } else {
-      yield* Effect.logDebug("useColorScheme not found - GOOD")
-    }
+    const existingDeprecatedFromLibs = yield* Effect.forEach(
+      RULES.deprecated.lib,
+      (path) =>
+        resolvePathFromAlias(`${aliasForLib}/${path}`, tsConfig).pipe(
+          Effect.flatMap((fullPath) =>
+            Effect.gen(function* () {
+              const exists = yield* fs.exists(fullPath)
+              if (!exists) {
+                yield* Effect.logDebug(`✅ deprecated lib/${path} not found`)
+              }
+              return { file: `${aliasForLib}/${path}`, exists }
+            })
+          )
+        ),
+      { concurrency: "unbounded" }
+    ).pipe(Effect.map((results) => results.filter((result) => result.exists)))
+
+    yield* Effect.logError({
+      missingFiles,
+      uninstalledDependencies,
+      uninstalledDevDependencies,
+      missingIncludes,
+      existingDeprecatedFromLibs
+    })
 
     const prompt = yield* Prompt.confirm({
       message: "Does this work?",
