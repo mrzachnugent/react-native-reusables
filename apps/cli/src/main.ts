@@ -1,5 +1,5 @@
 import { AddCommand } from "@cli/commands/add.js"
-import { DoctorCommand, doctorHandler } from "@cli/commands/doctor/index.js"
+import { DoctorCommand, doctorHandler } from "@cli/commands/doctor.js"
 import { InitCommand } from "@cli/commands/init.js"
 import { Command } from "@effect/cli"
 import { Console, Effect } from "effect"

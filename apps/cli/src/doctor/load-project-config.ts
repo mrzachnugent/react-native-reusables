@@ -1,4 +1,4 @@
-import { FileNotFoundError, loadTsConfig, parseJson } from "@cli/commands/doctor/utils.js"
+import { FileNotFoundError, loadTsConfig, parseJson } from "@cli/doctor/utils.js"
 import { componentJsonSchema } from "@cli/schemas/component-json-schema.js"
 import { packageJsonSchema } from "@cli/schemas/package-schema.js"
 import { Prompt } from "@effect/cli"
