@@ -89,7 +89,7 @@ function retryWith<A, R, E, B>(
 
 // TODO: make better objects for nativewind, rnr, etc
 const NATIVEWIND = {
-  dependencies: ["nativewind", "react-native-reanimated", "react-native-safe-area-context"],
+  dependencies: ["nativewind", "react-native-reanimated", "react-native-safe-area-context"], //
   devDependencies: [
     "tailwindcss" // check dependencies if not found in devDependencies
   ],
@@ -102,13 +102,146 @@ const NATIVEWIND = {
 }
 
 const RNR = {
-  dependencies: ["tailwindcss-animate", "class-variance-authority", "clsx", "tailwind-merge"],
+  dependencies: ["tailwindcss-animate", "class-variance-authority", "clsx", "tailwind-merge"], //
   utilsFileIncludes: ["function cn("],
   _layoutIncludes: ["<PortalHost"],
-  deprecatedLibs: ["icons", "constants.ts", "useColorScheme.tsx"]
+  deprecatedLibs: ["icons", "constants.ts", "useColorScheme.tsx"],
+  themeIncludes: ["primary", "secondary", "destructive"]
 }
 
-// TODO: check /lib/theme.ts, if not add all css variable colors + nav theme
+const DEPENDENCIES = [
+  "nativewind",
+  "react-native-reanimated",
+  "react-native-safe-area-context",
+  "tailwindcss-animate",
+  "class-variance-authority",
+  "clsx",
+  "tailwind-merge"
+]
+
+const DEV_DEPENDENCIES = ["tailwindcss"]
+
+const FILE_CHECKS = [
+  {
+    name: "Babel Config",
+    fileNames: ["babel.config.js", "babel.config.ts"],
+    includes: [
+      {
+        content: ["nativewind/babel", "jsxImportSource"],
+        message: "jsxImportSource or nativewind/babel is missing",
+        docs: "https://google.com"
+      }
+    ]
+  },
+  {
+    name: "Metro Config",
+    fileNames: ["metro.config.js", "metro.config.ts"],
+    includes: [
+      {
+        content: ["withNativeWind("],
+        message: "The withNativeWind function is missing",
+        docs: "https://google.com"
+      },
+      {
+        content: ["inlineRem", "16"],
+        message: "The inlineRem is missing",
+        docs: "https://google.com"
+      }
+    ]
+  },
+  {
+    name: "Root Layout",
+    fileNames: ["app/_layout.tsx", "src/app/_layout.tsx"],
+    includes: [
+      {
+        content: [".css"],
+        message: "The css file import is missing",
+        docs: "https://google.com"
+      },
+      {
+        content: ["<PortalHost"],
+        message: "The PortalHost component is missing",
+        docs: "https://google.com"
+      }
+    ]
+  },
+  {
+    name: "CSS",
+    fileNames: ["globals.css", "src/global.css"],
+    includes: [
+      {
+        content: ["@tailwind base", "@tailwind components", "@tailwind utilities"],
+        message: "The tailwind layer directives are missing",
+        docs: "https://google.com"
+      },
+      {
+        content: ["primary", "secondary", "destructive"], // TODO: do better
+        message: "At least one of the color css variables is missing",
+        docs: "https://google.com"
+      }
+    ]
+  }
+]
+
+const CUSTOM_FILE_CHECKS = {
+  tailwindConfig: {
+    name: "Tailwind Config",
+    includes: [
+      {
+        content: ["nativewind/preset"],
+        message: "The nativewind preset is missing",
+        docs: "https://google.com"
+      },
+      {
+        content: ["primary", "secondary", "destructive"], // TODO: do better
+        message: "At least one of the color css variables is missing",
+        docs: "https://google.com"
+      }
+    ]
+  },
+  theme: {
+    name: "Theme",
+    includes: [
+      {
+        content: ["primary", "secondary", "destructive"],
+        message: "At least one of the color variables is missing",
+        docs: "https://google.com"
+      },
+      {
+        content: ["NAV_THEME"],
+        message: "The NAV_THEME is missing",
+        docs: "https://google.com"
+      }
+    ]
+  },
+  nativewindEnv: {
+    name: "Nativewind Env",
+    includes: [
+      {
+        content: ["nativewind/types"],
+        message: "The nativewind types are missing",
+        docs: "https://google.com"
+      }
+    ]
+  },
+  utils: {
+    name: "Utils",
+    includes: [
+      {
+        content: ["function cn("],
+        message: "The cn function is missing",
+        docs: "https://google.com"
+      }
+    ]
+  }
+}
+
+const RULES = {
+  dependencies: DEPENDENCIES,
+  devDependencies: DEV_DEPENDENCIES,
+  files: FILE_CHECKS,
+  custom: CUSTOM_FILE_CHECKS
+} as const
 
 const configFilesToCheck = [
   ["babel.config.js", "babel.config.ts"],
@@ -119,14 +252,14 @@ const configFilesToCheck = [
 
 const cwd = Options.directory("cwd", { exists: "yes" }).pipe(Options.withDefault("."), Options.withAlias("c"))
 
-const interactive = Options.boolean("interactive", { aliases: ["i"] })
-const addMissing = Options.boolean("add-missing", { aliases: ["a"] })
+const quiet = Options.boolean("quiet", { aliases: ["q"] })
+const essentials = Options.boolean("essentials", { aliases: ["e"] })
 
-const DoctorCommand = Command.make("doctor", { addMissing, cwd, interactive })
+const DoctorCommand = Command.make("doctor", { cwd, quiet, essentials })
   .pipe(Command.withDescription("Check your project setup and diagnose issues"))
   .pipe(Command.withHandler(doctorHandler))
 
-function doctorHandler(options: { addMissing: boolean; cwd: string; interactive: boolean }) {
+function doctorHandler(options: { cwd: string; quiet: boolean; essentials: boolean }) {
   return Effect.gen(function* () {
     // const git = yield* Git
     const path = yield* Path.Path
@@ -221,11 +354,20 @@ function doctorHandler(options: { addMissing: boolean; cwd: string; interactive:
     )
     configFilesToCheck.push(tailwindConfigPaths)
 
-    const cssPath = yield* resolvePathFromAlias(componentJson.tailwind.css, tsConfig)
-    const cssPaths = [cssPath, "global.css", "src/global.css"]
+    const cssPaths = [componentJson.tailwind.css, "global.css", "src/global.css"]
     configFilesToCheck.push(cssPaths)
 
-    const [babelConfig, metroConfig, nativewindEnv, rootLayout, tailwindConfig, css] = yield* Effect.forEach(
+    const firstTsPathKey = Object.keys(tsConfig.paths)[0].replace("*", "")
+
+    const aliasForLib = componentJson.aliases.lib ? `${componentJson.aliases.lib}` : `${firstTsPathKey}lib`
+
+    const themePath =
+      firstTsPathKey.length > 0
+        ? yield* resolvePathFromAlias(`${aliasForLib}/theme.ts`, tsConfig)
+        : path.join(options.cwd, "lib/theme.ts")
+    configFilesToCheck.push([themePath])
+
+    const [babelConfig, metroConfig, nativewindEnv, rootLayout, tailwindConfig, css, theme] = yield* Effect.forEach(
       configFilesToCheck,
       (paths) =>
         retryWith(fs.readFileString, paths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]).pipe(
@@ -324,9 +466,19 @@ function doctorHandler(options: { addMissing: boolean; cwd: string; interactive:
       missingFiles.push("globals.css")
     }
 
-    yield* Effect.logDebug({ missingFiles, missingDeps, missingDevDeps, incorrectFiles: [...incorrectFiles] })
+    if (theme) {
+      yield* Effect.log("theme found")
+      if (RNR.themeIncludes.some((str) => !theme.includes(str))) {
+        yield* Effect.log("theme is missing some includes")
+        incorrectFiles.add("theme-rnr")
+      } else {
+        yield* Effect.log("theme is correct")
+      }
+    } else {
+      missingFiles.push("lib/theme.ts")
+    }
 
-    console.log("tsConfig.paths", Object.keys(tsConfig.paths)[0])
+    yield* Effect.logDebug({ missingFiles, missingDeps, missingDevDeps, incorrectFiles: [...incorrectFiles] })
 
     const [icons, constants, useColorScheme] = yield* Effect.forEach(
       RNR.deprecatedLibs,
