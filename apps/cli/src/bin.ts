@@ -2,15 +2,11 @@
 
 import * as NodeContext from "@effect/platform-node/NodeContext"
 import * as NodeRuntime from "@effect/platform-node/NodeRuntime"
-import { Layer } from "effect"
 import * as Effect from "effect/Effect"
 import { run } from "./main.js"
-import { Git } from "./git.js"
-
-const MainLayer = Layer.mergeAll(NodeContext.layer, Git.Default)
 
 Effect.suspend(() => run(process.argv)).pipe(
-  Effect.provide(MainLayer),
+  Effect.provide(NodeContext.layer),
   Effect.catchAll((error) => Effect.logError(error)),
   NodeRuntime.runMain({ disableErrorReporting: true })
 )

@@ -32,6 +32,7 @@ interface MissingInclude {
 }
 
 const DEPENDENCIES = [
+  "expo",
   "nativewind",
   "react-native-reanimated",
   "react-native-safe-area-context",
@@ -39,9 +40,9 @@ const DEPENDENCIES = [
   "class-variance-authority",
   "clsx",
   "tailwind-merge"
-] as const
+]
 
-const DEV_DEPENDENCIES = ["tailwindcss"] as const
+const DEV_DEPENDENCIES = ["tailwindcss"]
 
 const FILE_CHECKS: Array<FileCheck> = [
   {
@@ -171,7 +172,7 @@ const CUSTOM_FILE_CHECKS = {
   }
 }
 
-const REQUIREMENTS = {
+const PROJECT_MANIFEST = {
   dependencies: DEPENDENCIES,
   devDependencies: DEV_DEPENDENCIES,
   fileChecks: FILE_CHECKS,
@@ -179,5 +180,7 @@ const REQUIREMENTS = {
   customFileChecks: CUSTOM_FILE_CHECKS
 }
 
-export { REQUIREMENTS }
+const NATIVEWIND_ENV_FILE = "nativewind-env.d.ts"
+
+export { PROJECT_MANIFEST, NATIVEWIND_ENV_FILE }
 export type { FileCheck, CustomFileCheck, FileWithContent, MissingInclude }
