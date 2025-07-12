@@ -38,7 +38,7 @@ const doctorHandler = (options: DoctorOptions) =>
       existingDeprecatedFromLibs
     }
 
-    yield* Effect.logDebug("Doctor Results:", result)
+    yield* Effect.logDebug("Doctor Results:", JSON.stringify(result, null, 2))
 
     const sallgoodman =
       result.missingFiles.length +
