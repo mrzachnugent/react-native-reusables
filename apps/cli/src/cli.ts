@@ -1,0 +1,43 @@
+import * as Add from "@cli/commands/add.js"
+import * as Doctor from "@cli/commands/doctor.js"
+import * as Init from "@cli/commands/init.js"
+import { cwd, essentials, fix, quiet } from "@cli/cli-options.js"
+import { Args, Command } from "@effect/cli"
+import { Console, Effect, pipe } from "effect"
+
+const addArgs = Args.all({
+  components: Args.text({ name: "components" }).pipe(Args.repeated)
+})
+
+const AddCommand = Command.make("add", { args: addArgs })
+  .pipe(Command.withDescription("Add React Native components to your project"))
+  .pipe(Command.withHandler(Add.make))
+
+const DoctorCommand = Command.make("doctor", { cwd, quiet, essentials, fix })
+  .pipe(Command.withDescription("Check your project setup and diagnose issues"))
+  .pipe(Command.withHandler(Doctor.make))
+
+const InitCommand = Command.make("init")
+  .pipe(Command.withDescription("Initialize a new React Native project with reusables"))
+  .pipe(Command.withHandler(Init.make))
+
+const Cli = Command.make("react-native-reusables/cli")
+  .pipe(Command.withDescription("React Native Reusables CLI - A powerful toolkit for React Native development"))
+  .pipe(
+    Command.withHandler(() =>
+      Effect.gen(function* () {
+        yield* Console.log("🎯 Welcome to React Native Reusables CLI!")
+        yield* Console.log("")
+      })
+    )
+  )
+  .pipe(Command.withSubcommands([AddCommand, DoctorCommand, InitCommand]))
+
+export const run = () =>
+  pipe(
+    process.argv,
+    Command.run(Cli, {
+      name: "@react-native-reusables/cli",
+      version: "1.0.0"
+    })
+  )
