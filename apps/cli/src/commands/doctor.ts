@@ -6,7 +6,7 @@ import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect, Layer, Schema } from "effect"
 
 const packageJsonSchema = Schema.Struct({
-  dependencies: Schema.Record({ key: Schema.String, value: Schema.String }),
+  dependencies: Schema.optional(Schema.Record({ key: Schema.String, value: Schema.String })),
   devDependencies: Schema.optional(Schema.Record({ key: Schema.String, value: Schema.String }))
 })
 
@@ -34,7 +34,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
       Effect.gen(function* () {
         const packageJsonExists = yield* fs.exists(path.join(options.cwd, "package.json"))
         if (!packageJsonExists) {
-          return yield* Effect.fail(new PackageJsonError({ message: "package.json not found" }))
+          return yield* Effect.fail(new PackageJsonError({ message: "A package.json was not found and is required." }))
         }
 
         return yield* fs.readFileString(path.join(options.cwd, "package.json")).pipe(
@@ -86,7 +86,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
           })
 
           if (uninstalledDependencies.includes("expo")) {
-            return yield* Effect.fail(new Error("Expo is not installed"))
+            return yield* Effect.fail(new Error("Expo is not installed and is required for the CLI to work."))
           }
 
           const { customFileResults, deprecatedFileResults, fileResults } = yield* requiredFileChecker.run({
@@ -107,15 +107,17 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
 
           yield* Effect.logDebug("Doctor Results:", JSON.stringify(result, null, 2))
 
-          const sallgoodman =
-            result.missingFiles.length +
-              result.missingIncludes.length +
-              result.deprecatedFileResults.length +
-              uninstalledDependencies.length +
-              uninstalledDevDependencies.length ===
-            0
+          const counts = {
+            missingFiles: result.missingFiles.length,
+            missingIncludes: result.missingIncludes.length,
+            deprecatedFileResults: result.deprecatedFileResults.length,
+            uninstalledDependencies: result.uninstalledDependencies.length,
+            uninstalledDevDependencies: result.uninstalledDevDependencies.length
+          }
 
-          if (sallgoodman) {
+          const totalCount = Object.values(counts).reduce((acc, count) => acc + count, 0)
+
+          if (totalCount === 0) {
             yield* Effect.log("Everything looks good!")
             return yield* Effect.succeed(true)
           }
@@ -135,29 +137,29 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             }
           }
 
-          const numOfMissingFiles = result.missingFiles.length
-          const numOfMissingIncludes = result.missingIncludes.length
-          const numOfExistingDeprecatedFromLibs = result.deprecatedFileResults.length
-          const numOfUninstalledDependencies = result.uninstalledDependencies.length
-          const numOfUninstalledDevDependencies = result.uninstalledDevDependencies.length
-
           if (options.quiet) {
             const thing = [
-              numOfMissingFiles > 0 ? `Missing ${numOfMissingFiles} file${numOfMissingFiles > 1 ? "s" : ""}` : "",
-              numOfMissingIncludes > 0
-                ? `Missing ${numOfMissingIncludes} include${numOfMissingIncludes > 1 ? "s" : ""}`
+              counts.missingFiles > 0
+                ? `Missing ${counts.missingFiles} file${counts.missingFiles > 1 ? "s" : ""} (${result.missingFiles
+                    .map((f) => f.name)
+                    .join(", ")})`
                 : "",
-              numOfExistingDeprecatedFromLibs > 0
-                ? `Existing ${numOfExistingDeprecatedFromLibs} deprecated file${
-                    numOfExistingDeprecatedFromLibs > 1 ? "s" : ""
+              counts.missingIncludes > 0
+                ? `Missing ${counts.missingIncludes} include${counts.missingIncludes > 1 ? "s" : ""}`
+                : "",
+              counts.deprecatedFileResults > 0
+                ? `Existing ${counts.deprecatedFileResults} deprecated file${
+                    counts.deprecatedFileResults > 1 ? "s" : ""
                   }`
                 : "",
-              numOfUninstalledDependencies > 0
-                ? `Uninstalled ${numOfUninstalledDependencies} dependency${numOfUninstalledDependencies > 1 ? "s" : ""}`
+              counts.uninstalledDependencies > 0
+                ? `Uninstalled ${counts.uninstalledDependencies} dependency${
+                    counts.uninstalledDependencies > 1 ? "s" : ""
+                  }`
                 : "",
-              numOfUninstalledDevDependencies > 0
-                ? `Uninstalled ${numOfUninstalledDevDependencies} dev dependency${
-                    numOfUninstalledDevDependencies > 1 ? "s" : ""
+              counts.uninstalledDevDependencies > 0
+                ? `Uninstalled ${counts.uninstalledDevDependencies} dev dependency${
+                    counts.uninstalledDevDependencies > 1 ? "s" : ""
                   }`
                 : ""
             ].filter(Boolean)
@@ -165,7 +167,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             return yield* Effect.succeed(true)
           }
           //TODO: detailed output
-          if (numOfMissingFiles - createdFiles > 0) {
+          if (counts.missingFiles - createdFiles > 0) {
             yield* Effect.forEach(result.missingFiles, (file) =>
               Effect.gen(function* () {
                 yield* Effect.logWarning(`⚠️ ${file.name} file is missing. You should create it.`)
@@ -173,7 +175,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
               })
             )
           }
-          if (numOfMissingIncludes > 0) {
+          if (counts.missingIncludes > 0) {
             yield* Effect.forEach(result.missingIncludes, (include) =>
               Effect.gen(function* () {
                 yield* Effect.logWarning(`⚠️ ${include.fileName} include is missing. You should create it.`)
@@ -181,21 +183,21 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
               })
             )
           }
-          if (numOfExistingDeprecatedFromLibs > 0) {
+          if (counts.deprecatedFileResults > 0) {
             yield* Effect.forEach(result.deprecatedFileResults, (file) =>
               Effect.gen(function* () {
                 yield* Effect.logWarning(`⚠️ ${file.file} is deprecated. You should remove it.`)
               })
             )
           }
-          if (numOfUninstalledDependencies > 0) {
+          if (counts.uninstalledDependencies > 0) {
             yield* Effect.forEach(result.uninstalledDependencies, (dependency) =>
               Effect.gen(function* () {
                 yield* Effect.logWarning(`⚠️ ${dependency} dependency is uninstalled. You should install it.`)
               })
             )
           }
-          if (numOfUninstalledDevDependencies > 0) {
+          if (counts.uninstalledDevDependencies > 0) {
             yield* Effect.forEach(result.uninstalledDevDependencies, (dependency) =>
               Effect.gen(function* () {
                 yield* Effect.logWarning(`⚠️ ${dependency} dev dependency is uninstalled. You should install it.`)

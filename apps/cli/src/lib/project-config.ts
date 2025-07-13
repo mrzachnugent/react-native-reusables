@@ -1,7 +1,7 @@
 import { CliOptions } from "@cli/cli-options.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
-import { Data, Effect, Schema } from "effect"
+import { Effect, Schema } from "effect"
 import { loadConfig as loadTypscriptConfig } from "tsconfig-paths"
 
 export const componentJsonSchema = Schema.Struct({
@@ -25,11 +25,6 @@ export const componentJsonSchema = Schema.Struct({
   }),
   iconLibrary: Schema.optional(Schema.String)
 })
-
-class TsConfigError extends Data.TaggedError("TsConfigError")<{
-  cause?: string
-  message?: string
-}> {}
 
 class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
   effect: Effect.gen(function* () {
@@ -101,7 +96,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
             }
             return configResult
           },
-          catch: (error) => new TsConfigError({ message: "Error loading {ts,js}config.json", cause: String(error) })
+          catch: (error) => new Error("Error loading {ts,js}config.json", { cause: String(error) })
         })
     }
   })

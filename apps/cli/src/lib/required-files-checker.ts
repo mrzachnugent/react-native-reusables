@@ -11,14 +11,13 @@ class RequiredFileError extends Data.TaggedError("RequiredFileError")<{
   message?: string
 }> {}
 
-export class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("RequiredFilesChecker", {
+class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("RequiredFilesChecker", {
   dependencies: [ProjectConfig.Default],
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
     const options = yield* CliOptions
     const projectConfig = yield* ProjectConfig
-    const componentJson = yield* projectConfig.getComponentJson()
     const tsConfig = yield* projectConfig.getTsConfig()
 
     const checkFiles = (fileChecks: Array<FileCheck>) =>
@@ -64,6 +63,7 @@ export class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()
 
     const checkDeprecatedFiles = (deprecatedFromLib: Array<string>) =>
       Effect.gen(function* () {
+        const componentJson = yield* projectConfig.getComponentJson()
         const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
 
         const existingDeprecatedFromLibs = yield* Effect.forEach(
@@ -88,6 +88,7 @@ export class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()
 
     const checkCustomFiles = (customFileChecks: Record<string, CustomFileCheck>) =>
       Effect.gen(function* () {
+        const componentJson = yield* projectConfig.getComponentJson()
         const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
         const missingFiles: Array<CustomFileCheck> = []
         const missingIncludes: Array<MissingInclude> = []
@@ -212,12 +213,11 @@ export class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()
         deprecatedFromLib: Array<string>
       }) =>
         Effect.gen(function* () {
-          const [fileResults, customFileResults, deprecatedFileResults] = yield* Effect.all(
-            [checkFiles(fileChecks), checkCustomFiles(customFileChecks), checkDeprecatedFiles(deprecatedFromLib)],
-            {
-              concurrency: "unbounded"
-            }
-          )
+          const [fileResults, customFileResults, deprecatedFileResults] = yield* Effect.all([
+            checkFiles(fileChecks),
+            checkCustomFiles(customFileChecks),
+            checkDeprecatedFiles(deprecatedFromLib)
+          ])
 
           return { fileResults, customFileResults, deprecatedFileResults }
         })
@@ -225,4 +225,4 @@ export class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()
   })
 }) {}
 
-// export { RequiredFilesChecker }
+export { RequiredFilesChecker }
