@@ -1,3 +1,4 @@
+import { CliOptions } from "@cli/cli-options.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect, Schema } from "effect"
@@ -34,15 +35,14 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
+    const options = yield* CliOptions
 
-    const cwd = "../showcase" // TODO
-
-    const handleInvalidComponentJson = (cwd: string, fix: boolean) =>
+    const handleInvalidComponentJson = () =>
       Effect.gen(function* () {
-        const componentJsonExists = yield* fs.exists(path.join(cwd, "components.json"))
+        const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
         yield* Effect.log("An invalid components.json file was found.")
 
-        const shouldCreateComponentJson = fix
+        const shouldCreateComponentJson = options.fix
           ? true
           : yield* Prompt.confirm({
               message: `${
@@ -54,7 +54,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
             })
 
         if (!shouldCreateComponentJson) {
-          return yield* Effect.fail(new Error("File not found", { cause: "components.json" }))
+          return yield* Effect.fail(new Error("A components.json file is required for the CLI to work."))
         }
 
         yield* Effect.log("Creating components.json file...")
@@ -78,42 +78,24 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
       })
 
     return {
-      checkComponentJson: () =>
-        Effect.gen(function* () {
-          const componentJsonExists = yield* fs.exists(path.join(cwd, "components.json"))
-          if (!componentJsonExists) {
-            return !!(yield* handleInvalidComponentJson(cwd, false))
-          }
-          return yield* fs.readFileString(path.join(cwd, "components.json")).pipe(
-            Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
-            Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
-            Effect.map(() => true),
-            Effect.catchTags({
-              ParseError: () =>
-                Effect.gen(function* () {
-                  return !!(yield* handleInvalidComponentJson(cwd, false))
-                })
-            })
-          )
-        }),
       getComponentJson: () =>
         Effect.gen(function* () {
-          const componentJsonExists = yield* fs.exists(path.join(cwd, "components.json"))
+          const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
           if (!componentJsonExists) {
-            return yield* handleInvalidComponentJson(cwd, false)
+            return yield* handleInvalidComponentJson()
           }
-          return yield* fs.readFileString(path.join(cwd, "components.json")).pipe(
+          return yield* fs.readFileString(path.join(options.cwd, "components.json")).pipe(
             Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
             Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
             Effect.catchTags({
-              ParseError: () => handleInvalidComponentJson(cwd, true)
+              ParseError: handleInvalidComponentJson
             })
           )
         }),
       getTsConfig: () =>
         Effect.try({
           try: () => {
-            const configResult = loadTypscriptConfig(cwd)
+            const configResult = loadTypscriptConfig(options.cwd)
             if (configResult.resultType === "failed") {
               throw new Error("Error loading tsconfig.json", { cause: configResult.message })
             }

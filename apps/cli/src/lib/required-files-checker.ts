@@ -1,28 +1,27 @@
+import { CliOptions } from "@cli/cli-options.js"
+import { ProjectConfig } from "@cli/lib/project-config.js"
+import { NATIVEWIND_ENV_FILE } from "@cli/project-manifest.js"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect } from "effect"
-import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "./project-manifest.js"
-import { retryWith, resolvePathFromAlias } from "./utils.js"
-import { ProjectConfig } from "./project-config.js"
-import { NATIVEWIND_ENV_FILE, PROJECT_MANIFEST } from "./project-manifest.js"
-
-const { customFileChecks, deprecatedFromLib, fileChecks } = PROJECT_MANIFEST
+import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "../project-manifest.js"
+import { resolvePathFromAlias, retryWith } from "../utils.js"
 
 class RequiredFileError extends Data.TaggedError("RequiredFileError")<{
   file: string
   message?: string
 }> {}
 
-class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("RequiredFilesChecker", {
+export class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("RequiredFilesChecker", {
   dependencies: [ProjectConfig.Default],
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
-    const cwd = "../showcase" // TODO
+    const options = yield* CliOptions
     const projectConfig = yield* ProjectConfig
     const componentJson = yield* projectConfig.getComponentJson()
     const tsConfig = yield* projectConfig.getTsConfig()
 
-    const checkFiles = () =>
+    const checkFiles = (fileChecks: Array<FileCheck>) =>
       Effect.gen(function* () {
         const missingFiles: Array<FileCheck> = []
         const missingIncludes: Array<MissingInclude> = []
@@ -37,7 +36,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                   yield* Effect.logDebug(`✅ ${file.name} found`)
                   return { ...file, content: fileContents } as FileWithContent
                 }),
-              file.fileNames.map((p) => path.join(cwd, p)) as [string, ...Array<string>]
+              file.fileNames.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
             ).pipe(
               Effect.catchAll(() => {
                 missingFiles.push(file)
@@ -63,7 +62,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         return { missingFiles, missingIncludes }
       })
 
-    const checkDeprecatedFiles = () =>
+    const checkDeprecatedFiles = (deprecatedFromLib: Array<string>) =>
       Effect.gen(function* () {
         const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
 
@@ -87,7 +86,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         return existingDeprecatedFromLibs
       })
 
-    const checkCustomFiles = () =>
+    const checkCustomFiles = (customFileChecks: Record<string, CustomFileCheck>) =>
       Effect.gen(function* () {
         const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
         const missingFiles: Array<CustomFileCheck> = []
@@ -102,7 +101,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
               yield* Effect.logDebug(`✅ ${customFileChecks.css.name} found`)
               return content
             }),
-          cssPaths.map((p) => path.join(cwd, p)) as [string, ...Array<string>]
+          cssPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
         ).pipe(
           Effect.catchAll(() => Effect.fail(new RequiredFileError({ file: "CSS", message: "CSS file not found" })))
         )
@@ -117,7 +116,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
 
         // Check NativeWind env file
         if (componentJson.tsx !== false) {
-          const nativewindEnvContent = yield* fs.readFileString(path.join(cwd, NATIVEWIND_ENV_FILE)).pipe(
+          const nativewindEnvContent = yield* fs.readFileString(path.join(options.cwd, NATIVEWIND_ENV_FILE)).pipe(
             Effect.catchAll(() => {
               missingFiles.push(customFileChecks.nativewindEnv)
               return Effect.succeed(null)
@@ -146,7 +145,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
               yield* Effect.logDebug(`✅ ${customFileChecks.tailwindConfig.name} found`)
               return content
             }),
-          tailwindConfigPaths.map((p) => path.join(cwd, p)) as [string, ...Array<string>]
+          tailwindConfigPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
         ).pipe(
           Effect.catchAll(() =>
             Effect.fail(new RequiredFileError({ file: "Tailwind config", message: "Tailwind config not found" }))
@@ -203,10 +202,18 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
       })
 
     return {
-      run: () =>
+      run: ({
+        customFileChecks,
+        deprecatedFromLib,
+        fileChecks
+      }: {
+        fileChecks: Array<FileCheck>
+        customFileChecks: Record<string, CustomFileCheck>
+        deprecatedFromLib: Array<string>
+      }) =>
         Effect.gen(function* () {
           const [fileResults, customFileResults, deprecatedFileResults] = yield* Effect.all(
-            [checkFiles(), checkCustomFiles(), checkDeprecatedFiles()],
+            [checkFiles(fileChecks), checkCustomFiles(customFileChecks), checkDeprecatedFiles(deprecatedFromLib)],
             {
               concurrency: "unbounded"
             }
@@ -218,4 +225,4 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
   })
 }) {}
 
-export { RequiredFilesChecker }
+// export { RequiredFilesChecker }

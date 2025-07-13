@@ -93,7 +93,7 @@ const FILE_CHECKS: Array<FileCheck> = [
   }
 ]
 
-const DEPRECATED_FROM_LIB = ["icons", "constants.ts", "useColorScheme.tsx"] as const
+const DEPRECATED_FROM_LIB = ["icons", "constants.ts", "useColorScheme.tsx"]
 
 const CUSTOM_FILE_CHECKS = {
   tailwindConfig: {

@@ -1,19 +1,7 @@
 import { Effect } from "effect"
-import { createMatchPath, loadConfig as loadTypscriptConfig, type ConfigLoaderSuccessResult } from "tsconfig-paths"
+import { createMatchPath, type ConfigLoaderSuccessResult } from "tsconfig-paths"
 
 const supportedExtensions = [".ts", ".tsx", ".jsx", ".js", ".css"]
-
-const loadTsConfig = (cwd: string) =>
-  Effect.try({
-    try: () => {
-      const configResult = loadTypscriptConfig(cwd)
-      if (configResult.resultType === "failed") {
-        throw new Error("Error loading tsconfig.json", { cause: configResult.message })
-      }
-      return configResult
-    },
-    catch: (error) => new Error("Error loading tsconfig.json", { cause: String(error) })
-  })
 
 const resolvePathFromAlias = (
   aliasPath: string,
@@ -41,4 +29,4 @@ const retryWith = <A, R, E, B>(
 ): Effect.Effect<R, E, B> =>
   inputs.slice(1).reduce((acc, input) => acc.pipe(Effect.orElse(() => fn(input))), fn(inputs[0]))
 
-export { loadTsConfig, resolvePathFromAlias, retryWith }
+export { resolvePathFromAlias, retryWith }
