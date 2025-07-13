@@ -1,4 +1,3 @@
-import { Json } from "@cli/json.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect, Schema } from "effect"
@@ -32,11 +31,9 @@ class TsConfigError extends Data.TaggedError("TsConfigError")<{
 }> {}
 
 class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
-  dependencies: [Json.Default],
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
-    const json = yield* Json
 
     const cwd = "../showcase" // TODO
 
@@ -88,13 +85,13 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
             return !!(yield* handleInvalidComponentJson(cwd, false))
           }
           return yield* fs.readFileString(path.join(cwd, "components.json")).pipe(
-            Effect.flatMap(json.parse),
+            Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
             Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
             Effect.map(() => true),
             Effect.catchTags({
               ParseError: () =>
                 Effect.gen(function* () {
-                  return !!(yield* handleInvalidComponentJson(cwd, true))
+                  return !!(yield* handleInvalidComponentJson(cwd, false))
                 })
             })
           )
@@ -106,7 +103,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
             return yield* handleInvalidComponentJson(cwd, false)
           }
           return yield* fs.readFileString(path.join(cwd, "components.json")).pipe(
-            Effect.flatMap(json.parse),
+            Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
             Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
             Effect.catchTags({
               ParseError: () => handleInvalidComponentJson(cwd, true)

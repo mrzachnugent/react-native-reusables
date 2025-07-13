@@ -1,5 +1,4 @@
 import { Data, Effect, Schema } from "effect"
-import { Json } from "./json.js"
 import { Path, FileSystem } from "@effect/platform"
 
 const packageJsonSchema = Schema.Struct({
@@ -13,11 +12,9 @@ class PackageJsonError extends Data.TaggedError("PackageJsonError")<{
 }> {}
 
 class PackageJson extends Effect.Service<PackageJson>()("PackageJson", {
-  dependencies: [Json.Default],
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
-    const json = yield* Json
 
     const cwd = "../showcase" // TODO
 
@@ -29,7 +26,7 @@ class PackageJson extends Effect.Service<PackageJson>()("PackageJson", {
         }
 
         return yield* fs.readFileString(path.join(cwd, "package.json")).pipe(
-          Effect.flatMap(json.parse),
+          Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
           Effect.flatMap(Schema.decodeUnknown(packageJsonSchema)),
           Effect.catchTags({
             ParseError: () => Effect.fail(new PackageJsonError({ message: "Failed to parse package.json" }))
