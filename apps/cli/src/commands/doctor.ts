@@ -1,6 +1,6 @@
 import { CliOptions } from "@cli/cli-options.js"
-import { PROJECT_MANIFEST } from "@cli/project-manifest.js"
 import { RequiredFilesChecker } from "@cli/lib/required-files-checker.js"
+import { type CustomFileCheck, type FileCheck, type MissingInclude, PROJECT_MANIFEST } from "@cli/project-manifest.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect, Layer, Schema } from "effect"
@@ -95,8 +95,6 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             fileChecks: PROJECT_MANIFEST.fileChecks
           })
 
-          // Parse the results
-
           const result = {
             missingFiles: [...fileResults.missingFiles, ...customFileResults.missingFiles],
             uninstalledDependencies,
@@ -105,24 +103,13 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             deprecatedFileResults
           }
 
-          yield* Effect.logDebug("Doctor Results:", JSON.stringify(result, null, 2))
+          const total = Object.values(result).reduce((sum, cat) => sum + cat.length, 0)
 
-          const counts = {
-            missingFiles: result.missingFiles.length,
-            missingIncludes: result.missingIncludes.length,
-            deprecatedFileResults: result.deprecatedFileResults.length,
-            uninstalledDependencies: result.uninstalledDependencies.length,
-            uninstalledDevDependencies: result.uninstalledDevDependencies.length
-          }
-
-          const totalCount = Object.values(counts).reduce((acc, count) => acc + count, 0)
-
-          if (totalCount === 0) {
+          if (total === 0) {
             yield* Effect.log("Everything looks good!")
             return yield* Effect.succeed(true)
           }
 
-          let createdFiles = 0
           for (const missingFile of result.missingFiles) {
             const prompt = options.fix
               ? true
@@ -132,77 +119,64 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
                 })
 
             if (prompt) {
-              createdFiles++
+              result.missingFiles = result.missingFiles.filter((f) => f.name !== missingFile.name)
               yield* Effect.logDebug(`Creating ${missingFile.name} file`)
             }
           }
 
+          const dependenciesToInstall: Array<string> = []
+          for (const dep of result.uninstalledDependencies) {
+            const prompt = options.fix
+              ? true
+              : yield* Prompt.confirm({
+                  message: `The ${dep} dependency is missing. Do you want to install it?`,
+                  initial: true
+                })
+            if (prompt) {
+              yield* Effect.logDebug(`Adding ${dep} to dependencies to install`)
+              dependenciesToInstall.push(dep)
+              result.uninstalledDependencies = result.uninstalledDependencies.filter((d) => d !== dep)
+            }
+          }
+
+          const devDependenciesToInstall: Array<string> = []
+          for (const dep of result.uninstalledDevDependencies) {
+            const prompt = options.fix
+              ? true
+              : yield* Prompt.confirm({
+                  message: `The ${dep} dependency is missing. Do you want to install it?`,
+                  initial: true
+                })
+            if (prompt) {
+              yield* Effect.logDebug(`Adding ${dep} to devDependencies to install`)
+              devDependenciesToInstall.push(dep)
+              result.uninstalledDevDependencies = result.uninstalledDevDependencies.filter((d) => d !== dep)
+            }
+          }
+
+          if (dependenciesToInstall.length > 0) {
+            yield* Effect.logDebug(`Installing ${dependenciesToInstall.join(", ")}`)
+          }
+
+          if (devDependenciesToInstall.length > 0) {
+            yield* Effect.logDebug(`Installing ${devDependenciesToInstall.join(", ")}`)
+          }
+
+          const analysis = analyzeResult(result)
           if (options.quiet) {
-            const thing = [
-              counts.missingFiles > 0
-                ? `Missing ${counts.missingFiles} file${counts.missingFiles > 1 ? "s" : ""} (${result.missingFiles
-                    .map((f) => f.name)
-                    .join(", ")})`
-                : "",
-              counts.missingIncludes > 0
-                ? `Missing ${counts.missingIncludes} include${counts.missingIncludes > 1 ? "s" : ""}`
-                : "",
-              counts.deprecatedFileResults > 0
-                ? `Existing ${counts.deprecatedFileResults} deprecated file${
-                    counts.deprecatedFileResults > 1 ? "s" : ""
-                  }`
-                : "",
-              counts.uninstalledDependencies > 0
-                ? `Uninstalled ${counts.uninstalledDependencies} dependency${
-                    counts.uninstalledDependencies > 1 ? "s" : ""
-                  }`
-                : "",
-              counts.uninstalledDevDependencies > 0
-                ? `Uninstalled ${counts.uninstalledDevDependencies} dev dependency${
-                    counts.uninstalledDevDependencies > 1 ? "s" : ""
-                  }`
-                : ""
-            ].filter(Boolean)
-            yield* Effect.logWarning(`${thing.join(", ")}`)
-            return yield* Effect.succeed(true)
-          }
-          //TODO: detailed output
-          if (counts.missingFiles - createdFiles > 0) {
-            yield* Effect.forEach(result.missingFiles, (file) =>
-              Effect.gen(function* () {
-                yield* Effect.logWarning(`⚠️ ${file.name} file is missing. You should create it.`)
-                yield* Effect.log(`For more information, see ${file.docs}`)
-              })
+            console.log(
+              `⚠️  ${total} Potential issue${
+                total > 1 ? "s" : ""
+              } found. For more info, run \`npx @react-native-reusables/cli doctor\``
             )
-          }
-          if (counts.missingIncludes > 0) {
-            yield* Effect.forEach(result.missingIncludes, (include) =>
-              Effect.gen(function* () {
-                yield* Effect.logWarning(`⚠️ ${include.fileName} include is missing. You should create it.`)
-                yield* Effect.log(`For more information, see ${include.docs}`)
-              })
-            )
-          }
-          if (counts.deprecatedFileResults > 0) {
-            yield* Effect.forEach(result.deprecatedFileResults, (file) =>
-              Effect.gen(function* () {
-                yield* Effect.logWarning(`⚠️ ${file.file} is deprecated. You should remove it.`)
-              })
-            )
-          }
-          if (counts.uninstalledDependencies > 0) {
-            yield* Effect.forEach(result.uninstalledDependencies, (dependency) =>
-              Effect.gen(function* () {
-                yield* Effect.logWarning(`⚠️ ${dependency} dependency is uninstalled. You should install it.`)
-              })
-            )
-          }
-          if (counts.uninstalledDevDependencies > 0) {
-            yield* Effect.forEach(result.uninstalledDevDependencies, (dependency) =>
-              Effect.gen(function* () {
-                yield* Effect.logWarning(`⚠️ ${dependency} dev dependency is uninstalled. You should install it.`)
-              })
-            )
+          } else {
+            console.log("\n🔎 Diagnosis")
+            for (const item of analysis) {
+              console.group(`\n${item.title}`)
+              item.logs.forEach((line) => console.log(line))
+              console.groupEnd()
+            }
+            console.log(`\n`)
           }
         })
     }
@@ -218,3 +192,65 @@ function make(options: DoctorOptions) {
 }
 
 export { Doctor, make }
+
+interface Result {
+  missingFiles: Array<FileCheck | CustomFileCheck>
+  missingIncludes: Array<MissingInclude>
+  uninstalledDependencies: Array<string>
+  uninstalledDevDependencies: Array<string>
+  deprecatedFileResults: Array<{
+    file: string
+    exists: boolean
+  }>
+}
+
+function analyzeResult(result: Result) {
+  const categories: Array<{ title: string; logs: Array<string>; count: number }> = []
+
+  if (result.missingFiles.length > 0) {
+    categories.push({
+      title: `❌ Missing Files (${result.missingFiles.length})`,
+      count: result.missingFiles.length,
+      logs: result.missingFiles.flatMap((f) => [`• ${f.name} → ${f.name}`, `  📘 Docs: ${f.docs}`])
+    })
+  }
+
+  if (result.missingIncludes.length > 0) {
+    categories.push({
+      title: `❌ Potentially Misconfigured Files (${result.missingIncludes.length})`,
+      count: result.missingIncludes.length,
+      logs: result.missingIncludes.flatMap((inc) => [
+        `• ${inc.fileName}`,
+        `  ↪ ${inc.message}`,
+        `  ✏️ Needed: ${inc.content.join(", ")}`,
+        `  📘 Docs: ${inc.docs}`
+      ])
+    })
+  }
+
+  if (result.uninstalledDependencies.length > 0) {
+    categories.push({
+      title: `❌ Missing Dependencies (${result.uninstalledDependencies.length})`,
+      count: result.uninstalledDependencies.length,
+      logs: result.uninstalledDependencies.map((dep) => `• ${dep}`)
+    })
+  }
+
+  if (result.uninstalledDevDependencies.length > 0) {
+    categories.push({
+      title: `❌ Missing Dev Dependencies (${result.uninstalledDevDependencies.length})`,
+      count: result.uninstalledDevDependencies.length,
+      logs: result.uninstalledDevDependencies.map((dep) => `• ${dep}`)
+    })
+  }
+
+  if (result.deprecatedFileResults.length > 0) {
+    categories.push({
+      title: `⚠️  Deprecated Files (${result.deprecatedFileResults.length})`,
+      count: result.deprecatedFileResults.length,
+      logs: result.deprecatedFileResults.map((f) => `• ${f.file} → ${f.exists ? "Exists" : "Missing"}`)
+    })
+  }
+
+  return categories
+}
