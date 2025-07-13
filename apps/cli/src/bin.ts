@@ -7,7 +7,6 @@ import * as Cli from "./cli.js"
 
 Effect.suspend(Cli.run).pipe(
   Effect.provide(NodeContext.layer),
-
   Effect.catchAll((error) => {
     if (error instanceof Error) {
       Effect.logDebug(error)
