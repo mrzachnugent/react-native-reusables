@@ -1,4 +1,4 @@
-import { CliOptions } from "@cli/cli-options.js"
+import { CliOptions } from "@cli/contexts/cli-options.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Effect, Schema } from "effect"

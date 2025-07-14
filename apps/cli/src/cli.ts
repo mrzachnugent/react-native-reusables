@@ -1,7 +1,7 @@
 import * as Add from "@cli/services/commands/add.js"
 import * as Doctor from "@cli/services/commands/doctor.js"
 import * as Init from "@cli/services/commands/init.js"
-import { cwd, essentials, fix, quiet } from "@cli/cli-options.js"
+import { cwd, essentials, fix, quiet } from "@cli/contexts/cli-options.js"
 import { Args, Command } from "@effect/cli"
 import { Console, Effect, pipe } from "effect"
 
