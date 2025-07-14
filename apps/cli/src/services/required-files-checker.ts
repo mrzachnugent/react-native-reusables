@@ -60,27 +60,31 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         return { missingFiles, missingIncludes }
       })
 
-    const checkDeprecatedFiles = (deprecatedFromLib: Array<string>) =>
+    const checkDeprecatedFiles = (deprecatedFromLib: Array<Omit<FileCheck, "docs">>) =>
       Effect.gen(function* () {
         const componentJson = yield* projectConfig.getComponentJson()
         const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
 
         const existingDeprecatedFromLibs = yield* Effect.forEach(
           deprecatedFromLib,
-          (filePath) =>
-            projectConfig.resolvePathFromAlias(`${aliasForLib}/${filePath}`).pipe(
+          (file) =>
+            projectConfig.resolvePathFromAlias(`${aliasForLib}/${file.fileNames[0]}`).pipe(
               Effect.flatMap((fullPath) =>
                 Effect.gen(function* () {
                   const exists = yield* fs.exists(fullPath)
                   if (!exists) {
-                    yield* Effect.logDebug(`${logSymbols.success} deprecated lib/${filePath} not found`)
+                    yield* Effect.logDebug(`${logSymbols.error} deprecated lib/${file.fileNames[0]} not found`)
                   }
-                  return { file: `${aliasForLib}/${filePath}`, exists }
+                  return { ...file, exists }
                 })
               )
             ),
           { concurrency: "unbounded" }
-        ).pipe(Effect.map((results) => results.filter((result) => result.exists)))
+        ).pipe(
+          Effect.map((results) =>
+            results.filter((result) => result.exists).map(({ exists: _exists, ...result }) => result)
+          )
+        )
 
         return existingDeprecatedFromLibs
       })
@@ -219,7 +223,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
       }: {
         fileChecks: Array<FileCheck>
         customFileChecks: Record<string, CustomFileCheck>
-        deprecatedFromLib: Array<string>
+        deprecatedFromLib: Array<Omit<FileCheck, "docs">>
       }) =>
         Effect.gen(function* () {
           const [fileResults, customFileResults, deprecatedFileResults] = yield* Effect.all([
