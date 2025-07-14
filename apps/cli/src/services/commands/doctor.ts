@@ -183,7 +183,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
               } found. For more info, run \`npx @react-native-reusables/cli doctor\``
             )
           } else {
-            console.log("\n🔎 Diagnosis")
+            yield* Effect.log("\n\n🔎 Diagnosis")
             for (const item of analysis) {
               console.group(`\n${item.title}`)
               item.logs.forEach((line) => console.log(line))

@@ -73,7 +73,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                 Effect.gen(function* () {
                   const exists = yield* fs.exists(fullPath)
                   if (!exists) {
-                    yield* Effect.logDebug(`${logSymbols.error} deprecated lib/${file.fileNames[0]} not found`)
+                    yield* Effect.logDebug(`${logSymbols.success} deprecated lib/${file.fileNames[0]} not found`)
                   }
                   return { ...file, exists }
                 })
