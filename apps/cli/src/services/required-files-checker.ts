@@ -248,7 +248,6 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           }
         } else {
           yield* Effect.logDebug(`${logSymbols.error} ${customFileChecks.utils.name} not found`)
-          missingFiles.push(customFileChecks.utils)
         }
 
         return { missingFiles, missingIncludes }

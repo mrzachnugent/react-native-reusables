@@ -1,8 +1,8 @@
 import * as Add from "@cli/services/commands/add.js"
 import * as Doctor from "@cli/services/commands/doctor.js"
 import * as Init from "@cli/services/commands/init.js"
-import { cwd, essentials, fix, quiet } from "@cli/contexts/cli-options.js"
-import { Args, Command } from "@effect/cli"
+import { cwd, summary, yes } from "@cli/contexts/cli-options.js"
+import { Args, Command, Options } from "@effect/cli"
 import { Console, Effect, pipe } from "effect"
 
 const addArgs = Args.all({
@@ -13,11 +13,11 @@ const AddCommand = Command.make("add", { args: addArgs })
   .pipe(Command.withDescription("Add React Native components to your project"))
   .pipe(Command.withHandler(Add.make))
 
-const DoctorCommand = Command.make("doctor", { cwd, quiet, essentials, fix })
+const DoctorCommand = Command.make("doctor", { cwd, summary, yes })
   .pipe(Command.withDescription("Check your project setup and diagnose issues"))
   .pipe(Command.withHandler(Doctor.make))
 
-const InitCommand = Command.make("init")
+const InitCommand = Command.make("init", { yes: yes.pipe(Options.withDefault(true)) })
   .pipe(Command.withDescription("Initialize a new React Native project with reusables"))
   .pipe(Command.withHandler(Init.make))
 
