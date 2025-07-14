@@ -1,4 +1,5 @@
 import { Effect } from "effect"
+import { execa } from "execa"
 import { createMatchPath, type ConfigLoaderSuccessResult } from "tsconfig-paths"
 
 const supportedExtensions = [".ts", ".tsx", ".jsx", ".js", ".css"]
@@ -29,4 +30,10 @@ const retryWith = <A, R, E, B>(
 ): Effect.Effect<R, E, B> =>
   inputs.slice(1).reduce((acc, input) => acc.pipe(Effect.orElse(() => fn(input))), fn(inputs[0]))
 
-export { resolvePathFromAlias, retryWith }
+const runCommand = (file: string, args: Array<string>, options: Parameters<typeof execa>[1]) =>
+  Effect.tryPromise({
+    try: () => execa(file, args, options),
+    catch: (error) => new Error(`Failed to run command: ${file} ${args.join(" ")}`, { cause: String(error) })
+  })
+
+export { resolvePathFromAlias, retryWith, runCommand }

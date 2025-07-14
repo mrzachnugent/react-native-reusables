@@ -18,7 +18,7 @@
     "build:ts": "tsup",
     "clean": "rimraf dist/*",
     "check": "tsc -b tsconfig.json",
-    "dev": "tsx src/bin.ts",
+    "dev": "NODE_ENV=development tsx src/bin.ts",
     "lint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\"",
     "lint-fix": "pnpm lint --fix",
     "test": "vitest run",
@@ -60,5 +60,9 @@
     "patchedDependencies": {
       "@changesets/get-github-info@0.6.0": "patches/@changesets__get-github-info@0.6.0.patch"
     }
+  },
+  "dependencies": {
+    "execa": "^7.2.0",
+    "log-symbols": "^7.0.1"
   }
 }

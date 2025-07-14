@@ -3,6 +3,7 @@ import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Effect, Schema } from "effect"
 import { loadConfig as loadTypscriptConfig } from "tsconfig-paths"
+import { Git } from "./git.js"
 
 export const componentJsonSchema = Schema.Struct({
   $schema: Schema.optional(Schema.String),
@@ -27,49 +28,92 @@ export const componentJsonSchema = Schema.Struct({
 })
 
 class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
+  dependencies: [Git.Default],
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
     const options = yield* CliOptions
+    const git = yield* Git
 
-    const handleInvalidComponentJson = () =>
+    const handleInvalidComponentJson = (exists: boolean) =>
       Effect.gen(function* () {
-        const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
-        yield* Effect.log("An invalid components.json file was found.")
-
-        const shouldCreateComponentJson = options.fix
-          ? true
-          : yield* Prompt.confirm({
-              message: `${
-                componentJsonExists ? "Do you want to fix it?" : "Do you want to create a components.json file?"
-              } It is required for the CLI to work.`,
-              label: { confirm: "y", deny: "n" },
-              initial: true,
-              placeholder: { defaultConfirm: "y/n" }
-            })
-
-        if (!shouldCreateComponentJson) {
-          return yield* Effect.fail(new Error("A components.json file is required for the CLI to work."))
+        yield* Effect.logWarning(exists ? "Invalid components.json file found" : "components.json file not found")
+        const agreeToWrite = yield* Prompt.confirm({
+          message: `Do you want to ${
+            exists ? "update the" : "write the new"
+          } components.json file (required to continue)?`,
+          label: { confirm: "y", deny: "n" },
+          initial: true,
+          placeholder: { defaultConfirm: "y/n" }
+        })
+        if (!agreeToWrite) {
+          return yield* Effect.fail(new Error("Unable to continue without a valid components.json file."))
         }
 
-        yield* Effect.log("Creating components.json file...")
-        return yield* Schema.encode(componentJsonSchema)({
+        const baseColor = yield* Prompt.select({
+          message: "Which color would you like to use as the base color?",
+          choices: [
+            { title: "slate", value: "slate" },
+            { title: "neutral", value: "neutral" },
+            { title: "stone", value: "stone" },
+            { title: "zinc", value: "zinc" },
+            { title: "gray", value: "gray" }
+          ] as const
+        })
+
+        const hasRootGlobalCss = yield* fs.exists(path.join(options.cwd, "globals.css"))
+
+        const css = hasRootGlobalCss
+          ? "globals.css"
+          : yield* Prompt.text({
+              message: "What is the name of the CSS file and path to it? (e.g. ./globals.css)",
+              default: "./globals.css"
+            })
+
+        const hasTailwindConfig = yield* fs.exists(path.join(options.cwd, "tailwind.config.js"))
+        const tailwindConfig = hasTailwindConfig
+          ? "tailwind.config.js"
+          : yield* Prompt.text({
+              message: "What is the name of the Tailwind config file and path to it? (e.g. ./tailwind.config.js)",
+              default: "./tailwind.config.js"
+            })
+
+        const [componentsAlias, utilsAlias, libAlias] = yield* Prompt.all([
+          Prompt.text({
+            message: "What is the alias for the components directory? (e.g. @/components)",
+            default: "@/components"
+          }),
+          Prompt.text({
+            message: "What is the alias for the utils directory? (e.g. @/utils)",
+            default: "@/utils"
+          }),
+          Prompt.text({
+            message: "What is the alias for the lib directory? (e.g. @/lib)",
+            default: "@/lib"
+          })
+        ])
+
+        const newComponentJson = yield* Schema.encode(componentJsonSchema)({
           $schema: "https://raw.githubusercontent.com/shadcn/ui/main/components.json",
           style: "default",
           aliases: {
-            components: "@showcase/components",
-            utils: "@showcase/utils",
-            lib: "@showcase/lib"
+            components: componentsAlias,
+            utils: utilsAlias,
+            lib: libAlias
           },
           rsc: false,
           tsx: true,
           tailwind: {
-            css: "globals.css",
-            baseColor: "slate",
+            css,
+            baseColor,
             cssVariables: true,
-            config: "tailwind.config.js"
+            config: tailwindConfig
           }
         })
+
+        yield* git.promptIfDirty()
+        yield* fs.writeFileString(path.join(options.cwd, "components.json"), JSON.stringify(newComponentJson, null, 2))
+        return newComponentJson
       })
 
     return {
@@ -77,13 +121,13 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
         Effect.gen(function* () {
           const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
           if (!componentJsonExists) {
-            return yield* handleInvalidComponentJson()
+            return yield* handleInvalidComponentJson(false)
           }
           return yield* fs.readFileString(path.join(options.cwd, "components.json")).pipe(
             Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
             Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
             Effect.catchTags({
-              ParseError: handleInvalidComponentJson
+              ParseError: () => handleInvalidComponentJson(true)
             })
           )
         }),

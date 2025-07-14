@@ -5,6 +5,7 @@ import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect } from "effect"
 import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "../project-manifest.js"
 import { resolvePathFromAlias, retryWith } from "../utils.js"
+import logSymbols from "log-symbols"
 
 class RequiredFileError extends Data.TaggedError("RequiredFileError")<{
   file: string
@@ -32,7 +33,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
               (filePath: string) =>
                 Effect.gen(function* () {
                   const fileContents = yield* fs.readFileString(filePath)
-                  yield* Effect.logDebug(`✅ ${file.name} found`)
+                  yield* Effect.logDebug(`${logSymbols.success} ${file.name} found`)
                   return { ...file, content: fileContents } as FileWithContent
                 }),
               file.fileNames.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
@@ -50,7 +51,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
             const { content, includes, name } = file
             for (const include of includes) {
               if (include.content.every((str) => content.includes(str))) {
-                yield* Effect.logDebug(`✅ ${name} has ${include.content.join(", ")}`)
+                yield* Effect.logDebug(`${logSymbols.success} ${name} has ${include.content.join(", ")}`)
                 continue
               }
               missingIncludes.push({ ...include, fileName: name })
@@ -74,7 +75,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                 Effect.gen(function* () {
                   const exists = yield* fs.exists(fullPath)
                   if (!exists) {
-                    yield* Effect.logDebug(`✅ deprecated lib/${filePath} not found`)
+                    yield* Effect.logDebug(`${logSymbols.success} deprecated lib/${filePath} not found`)
                   }
                   return { file: `${aliasForLib}/${filePath}`, exists }
                 })
@@ -99,7 +100,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           (filePath: string) =>
             Effect.gen(function* () {
               const content = yield* fs.readFileString(filePath)
-              yield* Effect.logDebug(`✅ ${customFileChecks.css.name} found`)
+              yield* Effect.logDebug(`${logSymbols.success} ${customFileChecks.css.name} found`)
               return content
             }),
           cssPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
@@ -109,7 +110,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
 
         for (const include of customFileChecks.css.includes) {
           if (include.content.every((str) => cssContent.includes(str))) {
-            yield* Effect.logDebug(`✅ ${customFileChecks.css.name} has ${include.content.join(", ")}`)
+            yield* Effect.logDebug(
+              `${logSymbols.success} ${customFileChecks.css.name} has ${include.content.join(", ")}`
+            )
             continue
           }
           missingIncludes.push({ ...include, fileName: customFileChecks.css.name })
@@ -127,7 +130,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           if (nativewindEnvContent) {
             for (const include of customFileChecks.nativewindEnv.includes) {
               if (include.content.every((str) => nativewindEnvContent.includes(str))) {
-                yield* Effect.logDebug(`✅ ${customFileChecks.nativewindEnv.name} has ${include.content.join(", ")}`)
+                yield* Effect.logDebug(
+                  `${logSymbols.success} ${customFileChecks.nativewindEnv.name} has ${include.content.join(", ")}`
+                )
                 continue
               }
               missingIncludes.push({ ...include, fileName: customFileChecks.nativewindEnv.name })
@@ -143,7 +148,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           (filePath: string) =>
             Effect.gen(function* () {
               const content = yield* fs.readFileString(filePath)
-              yield* Effect.logDebug(`✅ ${customFileChecks.tailwindConfig.name} found`)
+              yield* Effect.logDebug(`${logSymbols.success} ${customFileChecks.tailwindConfig.name} found`)
               return content
             }),
           tailwindConfigPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
@@ -155,7 +160,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
 
         for (const include of customFileChecks.tailwindConfig.includes) {
           if (include.content.every((str) => tailwindConfigContent.includes(str))) {
-            yield* Effect.logDebug(`✅ ${customFileChecks.tailwindConfig.name} has ${include.content.join(", ")}`)
+            yield* Effect.logDebug(
+              `${logSymbols.success} ${customFileChecks.tailwindConfig.name} has ${include.content.join(", ")}`
+            )
             continue
           }
           missingIncludes.push({ ...include, fileName: customFileChecks.tailwindConfig.name })
@@ -173,7 +180,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         if (themeContent) {
           for (const include of customFileChecks.theme.includes) {
             if (include.content.every((str) => themeContent.includes(str))) {
-              yield* Effect.logDebug(`✅ ${customFileChecks.theme.name} has ${include.content.join(", ")}`)
+              yield* Effect.logDebug(
+                `${logSymbols.success} ${customFileChecks.theme.name} has ${include.content.join(", ")}`
+              )
               continue
             }
             missingIncludes.push({ ...include, fileName: customFileChecks.theme.name })
@@ -192,7 +201,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         if (utilsContent) {
           for (const include of customFileChecks.utils.includes) {
             if (include.content.every((str) => utilsContent.includes(str))) {
-              yield* Effect.logDebug(`✅ ${customFileChecks.utils.name} has ${include.content.join(", ")}`)
+              yield* Effect.logDebug(
+                `${logSymbols.success} ${customFileChecks.utils.name} has ${include.content.join(", ")}`
+              )
               continue
             }
             missingIncludes.push({ ...include, fileName: customFileChecks.utils.name })

@@ -2,7 +2,7 @@ import { cn } from '@/registry/new-york/lib/utils';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { Button, Icon, Input, Text } from '@showcase/components/styles/ui';
-import { COMPONENTS } from '@showcase/lib/constants';
+import { COMPONENTS } from '@showcase/lib/component-icon-map';
 import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
