@@ -1,4 +1,4 @@
-import { CliOptions } from "@cli/cli-options.js"
+import { CliOptions } from "@cli/contexts/cli-options.js"
 import { type CustomFileCheck, type FileCheck, type MissingInclude, PROJECT_MANIFEST } from "@cli/project-manifest.js"
 import { ProjectConfig } from "@cli/services/project-config.js"
 import { RequiredFilesChecker } from "@cli/services/required-files-checker.js"

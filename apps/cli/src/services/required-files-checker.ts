@@ -1,4 +1,4 @@
-import { CliOptions } from "@cli/cli-options.js"
+import { CliOptions } from "@cli/contexts/cli-options.js"
 import { NATIVEWIND_ENV_FILE } from "@cli/project-manifest.js"
 import { ProjectConfig } from "@cli/services/project-config.js"
 import { retryWith } from "@cli/utils/retry-with.js"
