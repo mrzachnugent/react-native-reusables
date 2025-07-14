@@ -64,10 +64,10 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
 
     const handleInvalidComponentJson = (exists: boolean) =>
       Effect.gen(function* () {
-        yield* Effect.logWarning(exists ? "Invalid components.json file found" : "components.json file not found")
+        yield* Effect.logWarning(exists ? "Invalid components.json" : "Missing components.json")
         const agreeToWrite = yield* Prompt.confirm({
-          message: `Do you want to ${
-            exists ? "update the" : "write the new"
+          message: `Would you like to ${
+            exists ? "update the" : "write a"
           } components.json file (required to continue)?`,
           label: { confirm: "y", deny: "n" },
           initial: true,
@@ -77,24 +77,30 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
           return yield* Effect.fail(new Error("Unable to continue without a valid components.json file."))
         }
 
-        const baseColor = yield* Prompt.select({
-          message: "Which color would you like to use as the base color?",
-          choices: [
-            { title: "slate", value: "slate" },
-            { title: "neutral", value: "neutral" },
-            { title: "stone", value: "stone" },
-            { title: "zinc", value: "zinc" },
-            { title: "gray", value: "gray" }
-          ] as const
-        })
+        const baseColor = exists
+          ? "neutral"
+          : yield* Prompt.select({
+              message: "Which color would you like to use as the base color?",
+              choices: [
+                { title: "neutral", value: "neutral" },
+                { title: "stone", value: "stone" },
+                { title: "zinc", value: "zinc" },
+                { title: "gray", value: "gray" },
+                { title: "slate", value: "slate" }
+              ] as const
+            })
 
-        const hasRootGlobalCss = yield* fs.exists(path.join(options.cwd, "globals.css"))
+        const hasRootGlobalCss = yield* fs.exists(path.join(options.cwd, "global.css"))
+
+        const hasSrcGlobalCss = hasRootGlobalCss ? false : yield* fs.exists(path.join(options.cwd, "src/global.css"))
 
         const css = hasRootGlobalCss
-          ? "globals.css"
+          ? "global.css"
+          : hasSrcGlobalCss
+          ? "src/global.css"
           : yield* Prompt.text({
-              message: "What is the name of the CSS file and path to it? (e.g. ./globals.css)",
-              default: "./globals.css"
+              message: "What is the name of the CSS file and path to it? (e.g. ./global.css)",
+              default: "./global.css"
             })
 
         const hasTailwindConfig = yield* fs.exists(path.join(options.cwd, "tailwind.config.js"))
@@ -105,28 +111,19 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
               default: "./tailwind.config.js"
             })
 
-        const [componentsAlias, utilsAlias, libAlias] = yield* Prompt.all([
-          Prompt.text({
-            message: "What is the alias for the components directory? (e.g. @/components)",
-            default: "@/components"
-          }),
-          Prompt.text({
-            message: "What is the alias for the utils directory? (e.g. @/utils)",
-            default: "@/utils"
-          }),
-          Prompt.text({
-            message: "What is the alias for the lib directory? (e.g. @/lib)",
-            default: "@/lib"
-          })
-        ])
+        const tsConfig = yield* getTsConfig()
+
+        const aliasSymbol = `${(Object.keys(tsConfig.paths ?? {})[0] ?? "@/*").split("/*")[0]}`
 
         const newComponentJson = yield* Schema.encode(componentJsonSchema)({
-          $schema: "https://raw.githubusercontent.com/shadcn/ui/main/components.json",
+          $schema: "https://ui.shadcn.com/schema.json",
           style: "default",
           aliases: {
-            components: componentsAlias,
-            utils: utilsAlias,
-            lib: libAlias
+            components: `${aliasSymbol}/components`,
+            utils: `${aliasSymbol}/utils`,
+            ui: `${aliasSymbol}/components/ui`,
+            lib: `${aliasSymbol}/lib`,
+            hooks: `${aliasSymbol}/hooks`
           },
           rsc: false,
           tsx: true,
