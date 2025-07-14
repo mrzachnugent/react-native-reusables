@@ -99,7 +99,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
           : hasSrcGlobalCss
           ? "src/global.css"
           : yield* Prompt.text({
-              message: "What is the name of the CSS file and path to it? (e.g. ./global.css)",
+              message: "What is the name of the CSS file and path to it? (e.g. global.css or src/global.css)",
               default: "./global.css"
             })
 
@@ -107,7 +107,8 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
         const tailwindConfig = hasTailwindConfig
           ? "tailwind.config.js"
           : yield* Prompt.text({
-              message: "What is the name of the Tailwind config file and path to it? (e.g. ./tailwind.config.js)",
+              message:
+                "What is the name of the Tailwind config file and path to it? (e.g. tailwind.config.js or src/tailwind.config.js)",
               default: "./tailwind.config.js"
             })
 
