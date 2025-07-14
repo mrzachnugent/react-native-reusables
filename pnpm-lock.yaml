@@ -22,13 +22,6 @@ importers:
         version: 5.8.3
 
   apps/cli:
-    dependencies:
-      execa:
-        specifier: ^7.2.0
-        version: 7.2.0
-      log-symbols:
-        specifier: ^7.0.1
-        version: 7.0.1
     devDependencies:
       '@changesets/changelog-github':
         specifier: ^0.5.0
@@ -96,6 +89,15 @@ importers:
       eslint-plugin-sort-destructure-keys:
         specifier: ^2.0.0
         version: 2.0.0(eslint@9.30.1(jiti@1.21.7))
+      execa:
+        specifier: ^7.2.0
+        version: 7.2.0
+      log-symbols:
+        specifier: ^7.0.1
+        version: 7.0.1
+      ora:
+        specifier: ^6.1.2
+        version: 6.3.1
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
@@ -483,9 +485,6 @@ importers:
       lucide-react-native:
         specifier: ^0.511.0
         version: 0.511.0(react-native-svg@15.11.2(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
-      nativewind:
-        specifier: ^4.1.23
-        version: 4.1.23(react-native-reanimated@3.17.5(@babel/core@7.28.0)(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-svg@15.11.2(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)(tailwindcss@3.4.17)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -541,9 +540,6 @@ importers:
       '@types/react':
         specifier: ~19.0.14
         version: 19.0.14
-      tailwindcss:
-        specifier: ^3.4.14
-        version: 3.4.17
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
