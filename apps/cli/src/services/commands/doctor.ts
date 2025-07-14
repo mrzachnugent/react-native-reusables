@@ -2,6 +2,7 @@ import { CliOptions } from "@cli/contexts/cli-options.js"
 import { type CustomFileCheck, type FileCheck, type MissingInclude, PROJECT_MANIFEST } from "@cli/project-manifest.js"
 import { ProjectConfig } from "@cli/services/project-config.js"
 import { RequiredFilesChecker } from "@cli/services/required-files-checker.js"
+import { Spinner } from "@cli/services/spinner.js"
 import { runCommand } from "@cli/utils/run-command.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
@@ -26,12 +27,13 @@ type DoctorOptions = {
 }
 
 class Doctor extends Effect.Service<Doctor>()("Doctor", {
-  dependencies: [RequiredFilesChecker.Default],
+  dependencies: [RequiredFilesChecker.Default, Spinner.Default],
   effect: Effect.gen(function* () {
     const options = yield* CliOptions
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
     const requiredFileChecker = yield* RequiredFilesChecker
+    const spinner = yield* Spinner
 
     const checkRequiredDependencies = ({
       dependencies,
@@ -119,7 +121,10 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
               if (prompt) {
                 total--
                 result.missingFiles = result.missingFiles.filter((f) => f.name !== missingFile.name)
+                spinner.start(`Creating ${missingFile.name} file`)
                 yield* Effect.logDebug(`Creating ${missingFile.name} file`)
+                yield* Effect.sleep(1000) // TODO: get and write the file
+                spinner.stop()
               }
             }
 
@@ -142,7 +147,9 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             if (dependenciesToInstall.length > 0) {
               yield* Effect.logDebug(`Installing ${dependenciesToInstall.join(", ")}`)
               if (process.env.NODE_ENV !== "development") {
+                spinner.start("Installing dependencies")
                 yield* runCommand("npx", ["expo", "install", ...dependenciesToInstall], { cwd: options.cwd })
+                spinner.stop()
               }
             }
 
@@ -165,7 +172,9 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             if (devDependenciesToInstall.length > 0) {
               yield* Effect.logDebug(`Installing ${devDependenciesToInstall.join(", ")}`)
               if (process.env.NODE_ENV !== "development") {
+                spinner.start("Installing dev dependencies")
                 yield* runCommand("npx", ["expo", "install", ...devDependenciesToInstall], { cwd: options.cwd })
+                spinner.stop()
               }
             }
 

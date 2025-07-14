@@ -1,11 +1,11 @@
 import { CliOptions } from "@cli/contexts/cli-options.js"
+import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "@cli/project-manifest.js"
 import { NATIVEWIND_ENV_FILE } from "@cli/project-manifest.js"
 import { ProjectConfig } from "@cli/services/project-config.js"
 import { retryWith } from "@cli/utils/retry-with.js"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect } from "effect"
 import logSymbols from "log-symbols"
-import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "../project-manifest.js"
 
 class RequiredFileError extends Data.TaggedError("RequiredFileError")<{
   file: string
