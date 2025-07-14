@@ -1,6 +1,6 @@
 import { CliOptions } from "@cli/contexts/cli-options.js"
 import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "@cli/project-manifest.js"
-import { NATIVEWIND_ENV_FILE } from "@cli/project-manifest.js"
+import { PROJECT_MANIFEST } from "@cli/project-manifest.js"
 import { ProjectConfig } from "@cli/services/project-config.js"
 import { retryWith } from "@cli/utils/retry-with.js"
 import { FileSystem, Path } from "@effect/platform"
@@ -136,12 +136,14 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
 
         // Check NativeWind env file
         if (componentJson.tsx !== false) {
-          const nativewindEnvContent = yield* fs.readFileString(path.join(options.cwd, NATIVEWIND_ENV_FILE)).pipe(
-            Effect.catchAll(() => {
-              missingFiles.push(customFileChecks.nativewindEnv)
-              return Effect.succeed(null)
-            })
-          )
+          const nativewindEnvContent = yield* fs
+            .readFileString(path.join(options.cwd, PROJECT_MANIFEST.nativewindEnvFile))
+            .pipe(
+              Effect.catchAll(() => {
+                missingFiles.push(customFileChecks.nativewindEnv)
+                return Effect.succeed(null)
+              })
+            )
 
           if (nativewindEnvContent) {
             for (const include of customFileChecks.nativewindEnv.includes) {

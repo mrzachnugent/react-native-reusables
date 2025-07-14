@@ -59,6 +59,8 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
         )
 
         componentJsonConfig = config
+
+        yield* Effect.logDebug(`componentJsonConfig: ${JSON.stringify(componentJsonConfig, null, 2)}`)
         return config
       })
 
@@ -132,7 +134,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
 
         const detectedAliases = {
           components: `${aliasSymbol}/components`,
-          utils: `${aliasSymbol}/utils`,
+          utils: `${aliasSymbol}/lib/utils`,
           ui: `${aliasSymbol}/components/ui`,
           lib: `${aliasSymbol}/lib`,
           hooks: `${aliasSymbol}/hooks`
@@ -196,6 +198,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
 
         yield* git.promptIfDirty()
         yield* fs.writeFileString(path.join(options.cwd, "components.json"), JSON.stringify(newComponentJson, null, 2))
+        yield* Effect.logDebug(`newComponentJson: ${JSON.stringify(newComponentJson, null, 2)}`)
         return newComponentJson
       })
 
