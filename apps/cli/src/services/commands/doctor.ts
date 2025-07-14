@@ -90,6 +90,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
     return {
       run: (options: DoctorOptions) =>
         Effect.gen(function* () {
+          yield* Effect.logDebug(`Doctor options: ${JSON.stringify(options, null, 2)}`)
           const { uninstalledDependencies, uninstalledDevDependencies } = yield* checkRequiredDependencies({
             dependencies: PROJECT_MANIFEST.dependencies,
             devDependencies: PROJECT_MANIFEST.devDependencies
@@ -178,12 +179,12 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             console.log(
               `\x1b[2m${logSymbols.warning} ${total} Potential issue${
                 total > 1 ? "s" : ""
-              } found. For more info, run \x1b[3mnpx @react-native-reusables/cli doctor${
+              } found. For more info, run: 'npx @react-native-reusables/cli doctor${
                 options.cwd !== "." ? ` -c ${options.cwd}` : ""
-              }\x1b[0m\n`
+              }'\x1b[0m\n`
             )
           } else {
-            yield* Effect.log("\n\n🔎 Diagnosis")
+            yield* Effect.log("\n\n🩺 Diagnosis")
             for (const item of analysis) {
               console.group(`\n${item.title}`)
               item.logs.forEach((line) => console.log(line))

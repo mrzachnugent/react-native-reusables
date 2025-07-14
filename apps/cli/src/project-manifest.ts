@@ -197,15 +197,50 @@ const CUSTOM_FILE_CHECKS = {
   }
 }
 
+const NATIVEWIND_ENV_FILE = "nativewind-env.d.ts"
+
+const COMPONENTS = [
+  "accordion",
+  "alert-dialog",
+  "alert",
+  "aspect-ratio",
+  "avatar",
+  "badge",
+  "button",
+  "card",
+  "checkbox",
+  "collapsible",
+  "context-menu",
+  "dialog",
+  "dropdown-menu",
+  "hover-card",
+  "input",
+  "label",
+  "menubar",
+  "popover",
+  "progress",
+  "radio-group",
+  "select",
+  "separator",
+  "skeleton",
+  "switch",
+  "tabs",
+  "text",
+  "textarea",
+  "toggle-group",
+  "toggle",
+  "tooltip"
+]
+
 const PROJECT_MANIFEST = {
   dependencies: DEPENDENCIES,
   devDependencies: DEV_DEPENDENCIES,
   fileChecks: FILE_CHECKS,
   deprecatedFromLib: DEPRECATED_FROM_LIB,
-  customFileChecks: CUSTOM_FILE_CHECKS
+  customFileChecks: CUSTOM_FILE_CHECKS,
+  nativewindEnvFile: NATIVEWIND_ENV_FILE,
+  components: COMPONENTS
 }
 
-const NATIVEWIND_ENV_FILE = "nativewind-env.d.ts"
-
-export { PROJECT_MANIFEST, NATIVEWIND_ENV_FILE }
+export { PROJECT_MANIFEST }
 export type { FileCheck, CustomFileCheck, FileWithContent, MissingInclude }

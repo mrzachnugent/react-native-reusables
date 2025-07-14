@@ -1,7 +1,7 @@
+import { all, cwd, overwrite, path, summary, yes } from "@cli/contexts/cli-options.js"
 import * as Add from "@cli/services/commands/add.js"
 import * as Doctor from "@cli/services/commands/doctor.js"
 import * as Init from "@cli/services/commands/init.js"
-import { cwd, summary, yes } from "@cli/contexts/cli-options.js"
 import { Args, Command, Options } from "@effect/cli"
 import { Console, Effect, pipe } from "effect"
 
@@ -9,7 +9,7 @@ const addArgs = Args.all({
   components: Args.text({ name: "components" }).pipe(Args.repeated)
 })
 
-const AddCommand = Command.make("add", { args: addArgs })
+const AddCommand = Command.make("add", { args: addArgs, cwd, yes, overwrite, all, path })
   .pipe(Command.withDescription("Add React Native components to your project"))
   .pipe(Command.withHandler(Add.make))
 
