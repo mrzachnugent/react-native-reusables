@@ -211,10 +211,7 @@ interface Result {
   missingIncludes: Array<MissingInclude>
   uninstalledDependencies: Array<string>
   uninstalledDevDependencies: Array<string>
-  deprecatedFileResults: Array<{
-    file: string
-    exists: boolean
-  }>
+  deprecatedFileResults: Array<Omit<FileCheck, "docs">>
 }
 
 function analyzeResult(result: Result) {
@@ -224,7 +221,7 @@ function analyzeResult(result: Result) {
     categories.push({
       title: `${logSymbols.error} Missing Files (${result.missingFiles.length})`,
       count: result.missingFiles.length,
-      logs: result.missingFiles.flatMap((f) => [`• ${f.name} → ${f.name}`, `  📘 Docs: ${f.docs}`])
+      logs: result.missingFiles.flatMap((f) => [`• ${f.name}`, `  📘 Docs: ${f.docs}`])
     })
   }
 
@@ -235,7 +232,6 @@ function analyzeResult(result: Result) {
       logs: result.missingIncludes.flatMap((inc) => [
         `• ${inc.fileName}`,
         `  ↪ ${inc.message}`,
-        `  ✏️ Needed: ${inc.content.join(", ")}`,
         `  📘 Docs: ${inc.docs}`
       ])
     })
@@ -245,7 +241,7 @@ function analyzeResult(result: Result) {
     categories.push({
       title: `${logSymbols.error} Missing Dependencies (${result.uninstalledDependencies.length})`,
       count: result.uninstalledDependencies.length,
-      logs: result.uninstalledDependencies.map((dep) => `• ${dep}`)
+      logs: ["• Install with:", `  ↪ npx expo install ${result.uninstalledDependencies.join(" ")}`]
     })
   }
 
@@ -253,15 +249,18 @@ function analyzeResult(result: Result) {
     categories.push({
       title: `${logSymbols.error} Missing Dev Dependencies (${result.uninstalledDevDependencies.length})`,
       count: result.uninstalledDevDependencies.length,
-      logs: result.uninstalledDevDependencies.map((dep) => `• ${dep}`)
+      logs: ["• Install with:", `  ↪ npx expo install -- -D ${result.uninstalledDevDependencies.join(" ")}`]
     })
   }
 
   if (result.deprecatedFileResults.length > 0) {
     categories.push({
-      title: `${logSymbols.warning} Deprecated Files (${result.deprecatedFileResults.length})`,
+      title: `${logSymbols.warning} Deprecated (${result.deprecatedFileResults.length})`,
       count: result.deprecatedFileResults.length,
-      logs: result.deprecatedFileResults.map((f) => `• ${f.file} → ${f.exists ? "Exists" : "Missing"}`)
+      logs: result.deprecatedFileResults.flatMap((deprecatedFile) => [
+        `• ${deprecatedFile.name}`,
+        ...deprecatedFile.includes.map((item) => `  ↪ ${item.message}\n  📘 Docs: ${item.docs}`)
+      ])
     })
   }
 
