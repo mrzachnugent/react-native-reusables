@@ -2,10 +2,10 @@ import { CliOptions } from "@cli/cli-options.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Effect, Schema } from "effect"
-import { loadConfig as loadTypscriptConfig } from "tsconfig-paths"
 import { Git } from "./git.js"
+import { type ConfigLoaderSuccessResult, createMatchPath, loadConfig as loadTypescriptConfig } from "tsconfig-paths"
 
-export const componentJsonSchema = Schema.Struct({
+const componentJsonSchema = Schema.Struct({
   $schema: Schema.optional(Schema.String),
   style: Schema.String,
   rsc: Schema.Boolean,
@@ -27,6 +27,8 @@ export const componentJsonSchema = Schema.Struct({
   iconLibrary: Schema.optional(Schema.String)
 })
 
+const supportedExtensions = [".ts", ".tsx", ".jsx", ".js", ".css"]
+
 class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
   dependencies: [Git.Default],
   effect: Effect.gen(function* () {
@@ -34,6 +36,31 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
     const path = yield* Path.Path
     const options = yield* CliOptions
     const git = yield* Git
+
+    let componentJsonConfig: typeof componentJsonSchema.Type | null = null
+    let tsConfig: ConfigLoaderSuccessResult | null = null
+
+    const getComponentJson = () =>
+      Effect.gen(function* () {
+        if (componentJsonConfig) {
+          return componentJsonConfig
+        }
+
+        const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
+        if (!componentJsonExists) {
+          return yield* handleInvalidComponentJson(false)
+        }
+        const config = yield* fs.readFileString(path.join(options.cwd, "components.json")).pipe(
+          Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
+          Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
+          Effect.catchTags({
+            ParseError: () => handleInvalidComponentJson(true)
+          })
+        )
+
+        componentJsonConfig = config
+        return config
+      })
 
     const handleInvalidComponentJson = (exists: boolean) =>
       Effect.gen(function* () {
@@ -116,32 +143,46 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
         return newComponentJson
       })
 
-    return {
-      getComponentJson: () =>
-        Effect.gen(function* () {
-          const componentJsonExists = yield* fs.exists(path.join(options.cwd, "components.json"))
-          if (!componentJsonExists) {
-            return yield* handleInvalidComponentJson(false)
+    const getTsConfig = () =>
+      Effect.try({
+        try: () => {
+          if (tsConfig) {
+            return tsConfig
           }
-          return yield* fs.readFileString(path.join(options.cwd, "components.json")).pipe(
-            Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
-            Effect.flatMap(Schema.decodeUnknown(componentJsonSchema)),
-            Effect.catchTags({
-              ParseError: () => handleInvalidComponentJson(true)
-            })
-          )
-        }),
-      getTsConfig: () =>
-        Effect.try({
+          const configResult = loadTypescriptConfig(options.cwd)
+          if (configResult.resultType === "failed") {
+            throw new Error("Error loading tsconfig.json", { cause: configResult.message })
+          }
+          tsConfig = configResult
+          return configResult
+        },
+        catch: (error) => new Error("Error loading {ts,js}config.json", { cause: String(error) })
+      })
+
+    const resolvePathFromAlias = (aliasPath: string) =>
+      Effect.gen(function* () {
+        const config = yield* getTsConfig()
+        return yield* Effect.try({
           try: () => {
-            const configResult = loadTypscriptConfig(options.cwd)
-            if (configResult.resultType === "failed") {
-              throw new Error("Error loading tsconfig.json", { cause: configResult.message })
+            const matchPath = createMatchPath(config.absoluteBaseUrl, config.paths)(
+              aliasPath,
+              undefined,
+              () => true,
+              supportedExtensions
+            )
+            if (!matchPath) {
+              throw new Error("Path not found", { cause: aliasPath })
             }
-            return configResult
+            return matchPath
           },
-          catch: (error) => new Error("Error loading {ts,js}config.json", { cause: String(error) })
+          catch: (error) => new Error("Path not found", { cause: String(error) })
         })
+      })
+
+    return {
+      getComponentJson,
+      getTsConfig,
+      resolvePathFromAlias
     }
   })
 }) {}

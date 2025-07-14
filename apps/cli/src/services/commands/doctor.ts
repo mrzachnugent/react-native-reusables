@@ -1,7 +1,8 @@
 import { CliOptions } from "@cli/cli-options.js"
-import { RequiredFilesChecker } from "@cli/lib/required-files-checker.js"
 import { type CustomFileCheck, type FileCheck, type MissingInclude, PROJECT_MANIFEST } from "@cli/project-manifest.js"
-import { runCommand } from "@cli/utils.js"
+import { ProjectConfig } from "@cli/services/project-config.js"
+import { RequiredFilesChecker } from "@cli/services/required-files-checker.js"
+import { runCommand } from "@cli/utils/run-command.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect, Layer, Schema } from "effect"
@@ -200,7 +201,7 @@ function make(options: DoctorOptions) {
   return Effect.gen(function* () {
     const doctor = yield* Doctor
     return yield* doctor.run(options)
-  }).pipe(Effect.provide(Doctor.Default), Effect.provide(optionsLayer))
+  }).pipe(Effect.provide(Doctor.Default), Effect.provide(ProjectConfig.Default), Effect.provide(optionsLayer))
 }
 
 export { Doctor, make }
