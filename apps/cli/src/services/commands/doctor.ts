@@ -21,9 +21,8 @@ class PackageJsonError extends Data.TaggedError("PackageJsonError")<{
 
 type DoctorOptions = {
   cwd: string
-  quiet: boolean
-  essentials: boolean
-  fix: boolean
+  summary: boolean
+  yes: boolean
 }
 
 class Doctor extends Effect.Service<Doctor>()("Doctor", {
@@ -60,17 +59,23 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
         const uninstalledDevDependencies: Array<string> = []
 
         for (const dependency of dependencies) {
-          if (!packageJson.dependencies?.[dependency]) {
+          if (
+            !packageJson.dependencies?.[dependency.split("@")[0]] &&
+            !packageJson.devDependencies?.[dependency.split("@")[0]]
+          ) {
             uninstalledDependencies.push(dependency)
             continue
           }
           yield* Effect.logDebug(
-            `${logSymbols.success} ${dependency}@${packageJson.dependencies[dependency]} is installed`
+            `${logSymbols.success} ${dependency}@${packageJson.dependencies?.[dependency.split("@")[0]]} is installed`
           )
         }
 
         for (const devDependency of devDependencies) {
-          if (!packageJson.devDependencies?.[devDependency] && !packageJson.dependencies?.[devDependency]) {
+          if (
+            !packageJson.devDependencies?.[devDependency.split("@")[0]] &&
+            !packageJson.dependencies?.[devDependency.split("@")[0]]
+          ) {
             uninstalledDevDependencies.push(devDependency)
             continue
           }
@@ -90,10 +95,6 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             devDependencies: PROJECT_MANIFEST.devDependencies
           })
 
-          if (uninstalledDependencies.includes("expo")) {
-            return yield* Effect.fail(new Error("Expo is not installed. This CLI cannot run without it."))
-          }
-
           const { customFileResults, deprecatedFileResults, fileResults } = yield* requiredFileChecker.run({
             customFileChecks: PROJECT_MANIFEST.customFileChecks,
             deprecatedFromLib: PROJECT_MANIFEST.deprecatedFromLib,
@@ -109,34 +110,19 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
           }
 
           let total = Object.values(result).reduce((sum, cat) => sum + cat.length, 0)
-          if (!options.quiet) {
-            for (const missingFile of result.missingFiles) {
-              const prompt = options.fix
-                ? true
-                : yield* Prompt.confirm({
-                    message: `${logSymbols.warning} The ${missingFile.name} file is missing. Do you want to create it?`,
-                    initial: true
-                  })
-
-              if (prompt) {
-                total--
-                result.missingFiles = result.missingFiles.filter((f) => f.name !== missingFile.name)
-                spinner.start(`Creating ${missingFile.name} file`)
-                yield* Effect.logDebug(`Creating ${missingFile.name} file`)
-                yield* Effect.sleep(1000) // TODO: get and write the file
-                spinner.stop()
-              }
-            }
-
+          if (!options.summary) {
             const dependenciesToInstall: Array<string> = []
             for (const dep of result.uninstalledDependencies) {
-              const prompt = options.fix
+              const confirmsInstall = options.yes
                 ? true
                 : yield* Prompt.confirm({
                     message: `The ${dep} dependency is missing. Do you want to install it?`,
                     initial: true
                   })
-              if (prompt) {
+              if (confirmsInstall) {
+                if (uninstalledDependencies.includes("expo")) {
+                  continue
+                }
                 total--
                 yield* Effect.logDebug(`Adding ${dep} to dependencies to install`)
                 dependenciesToInstall.push(dep)
@@ -155,13 +141,16 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
 
             const devDependenciesToInstall: Array<string> = []
             for (const dep of result.uninstalledDevDependencies) {
-              const prompt = options.fix
+              const confirmsInstall = options.yes
                 ? true
                 : yield* Prompt.confirm({
                     message: `The ${dep} dependency is missing. Do you want to install it?`,
                     initial: true
                   })
-              if (prompt) {
+              if (confirmsInstall) {
+                if (uninstalledDependencies.includes("expo")) {
+                  continue
+                }
                 total--
                 yield* Effect.logDebug(`Adding ${dep} to devDependencies to install`)
                 devDependenciesToInstall.push(dep)
@@ -185,11 +174,13 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
           }
 
           const analysis = analyzeResult(result)
-          if (options.quiet) {
+          if (options.summary) {
             console.log(
               `\x1b[2m${logSymbols.warning} ${total} Potential issue${
                 total > 1 ? "s" : ""
-              } found. For more info, run \x1b[3mnpx @react-native-reusables/cli doctor\x1b[0m\n`
+              } found. For more info, run \x1b[3mnpx @react-native-reusables/cli doctor${
+                options.cwd !== "." ? ` -c ${options.cwd}` : ""
+              }\x1b[0m\n`
             )
           } else {
             yield* Effect.log("\n\n🔎 Diagnosis")

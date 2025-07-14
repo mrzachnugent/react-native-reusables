@@ -64,20 +64,32 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
 
     const handleInvalidComponentJson = (exists: boolean) =>
       Effect.gen(function* () {
-        yield* Effect.logWarning(exists ? "Invalid components.json" : "Missing components.json")
-        const agreeToWrite = yield* Prompt.confirm({
-          message: `Would you like to ${
-            exists ? "update the" : "write a"
-          } components.json file (required to continue)?`,
-          label: { confirm: "y", deny: "n" },
-          initial: true,
-          placeholder: { defaultConfirm: "y/n" }
-        })
+        yield* Effect.logWarning(
+          `${exists ? "Invalid components.json" : "Missing components.json"}${" (required to continue)"}`
+        )
+        const agreeToWrite = options.yes
+          ? true
+          : yield* Prompt.confirm({
+              message: `Would you like to ${exists ? "update the" : "write a"} components.json file?`,
+              label: { confirm: "y", deny: "n" },
+              initial: true,
+              placeholder: { defaultConfirm: "y/n" }
+            })
         if (!agreeToWrite) {
           return yield* Effect.fail(new Error("Unable to continue without a valid components.json file."))
         }
 
-        const baseColor = exists
+        const style = options.yes
+          ? "default"
+          : yield* Prompt.select({
+              message: "Which style would you like to use?",
+              choices: [
+                { title: "default", value: "default" },
+                { title: "new-york", value: "new-york" }
+              ] as const
+            })
+
+        const baseColor = options.yes
           ? "neutral"
           : yield* Prompt.select({
               message: "Which color would you like to use as the base color?",
@@ -94,38 +106,84 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
 
         const hasSrcGlobalCss = hasRootGlobalCss ? false : yield* fs.exists(path.join(options.cwd, "src/global.css"))
 
-        const css = hasRootGlobalCss
-          ? "global.css"
-          : hasSrcGlobalCss
-          ? "src/global.css"
-          : yield* Prompt.text({
-              message: "What is the name of the CSS file and path to it? (e.g. global.css or src/global.css)",
-              default: "./global.css"
-            })
+        const detectedCss = hasRootGlobalCss ? "global.css" : hasSrcGlobalCss ? "src/global.css" : ""
+
+        const css =
+          options.yes && detectedCss
+            ? detectedCss
+            : yield* Prompt.text({
+                message: "What is the name of the CSS file and path to it? (e.g. global.css or src/global.css)",
+                default: detectedCss
+              })
 
         const hasTailwindConfig = yield* fs.exists(path.join(options.cwd, "tailwind.config.js"))
-        const tailwindConfig = hasTailwindConfig
-          ? "tailwind.config.js"
-          : yield* Prompt.text({
-              message:
-                "What is the name of the Tailwind config file and path to it? (e.g. tailwind.config.js or src/tailwind.config.js)",
-              default: "./tailwind.config.js"
-            })
+        const tailwindConfig =
+          options.yes && hasTailwindConfig
+            ? "tailwind.config.js"
+            : yield* Prompt.text({
+                message:
+                  "What is the name of the Tailwind config file and path to it? (e.g. tailwind.config.js or src/tailwind.config.js)",
+                default: "tailwind.config.js"
+              })
 
         const tsConfig = yield* getTsConfig()
 
         const aliasSymbol = `${(Object.keys(tsConfig.paths ?? {})[0] ?? "@/*").split("/*")[0]}`
 
+        const detectedAliases = {
+          components: `${aliasSymbol}/components`,
+          utils: `${aliasSymbol}/utils`,
+          ui: `${aliasSymbol}/components/ui`,
+          lib: `${aliasSymbol}/lib`,
+          hooks: `${aliasSymbol}/hooks`
+        }
+
+        let aliases = detectedAliases
+
+        if (!options.yes) {
+          const useDetectedAliases = yield* Prompt.confirm({
+            message: `Use detected alias (${aliasSymbol}/*) in your setup?`,
+            initial: true
+          })
+
+          if (!useDetectedAliases) {
+            const [componentsAlias, utilsAlias, uiAlias, libAlias, hooksAlias] = yield* Prompt.all([
+              Prompt.text({
+                message: "What is the name of the components alias?",
+                default: detectedAliases.components
+              }),
+              Prompt.text({
+                message: "What is the name of the utils alias?",
+                default: detectedAliases.utils
+              }),
+              Prompt.text({
+                message: "What is the name of the ui alias?",
+                default: detectedAliases.ui
+              }),
+              Prompt.text({
+                message: "What is the name of the lib alias?",
+                default: detectedAliases.lib
+              }),
+              Prompt.text({
+                message: "What is the name of the hooks alias?",
+                default: detectedAliases.hooks
+              })
+            ])
+
+            aliases = {
+              components: componentsAlias,
+              utils: utilsAlias,
+              ui: uiAlias,
+              lib: libAlias,
+              hooks: hooksAlias
+            }
+          }
+        }
+
         const newComponentJson = yield* Schema.encode(componentJsonSchema)({
           $schema: "https://ui.shadcn.com/schema.json",
-          style: "default",
-          aliases: {
-            components: `${aliasSymbol}/components`,
-            utils: `${aliasSymbol}/utils`,
-            ui: `${aliasSymbol}/components/ui`,
-            lib: `${aliasSymbol}/lib`,
-            hooks: `${aliasSymbol}/hooks`
-          },
+          style,
+          aliases,
           rsc: false,
           tsx: true,
           tailwind: {
