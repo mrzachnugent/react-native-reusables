@@ -1,11 +1,11 @@
 import { CliOptions } from "@cli/cli-options.js"
-import { ProjectConfig } from "@cli/lib/project-config.js"
 import { NATIVEWIND_ENV_FILE } from "@cli/project-manifest.js"
+import { ProjectConfig } from "@cli/services/project-config.js"
+import { retryWith } from "@cli/utils/retry-with.js"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect } from "effect"
-import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "../project-manifest.js"
-import { resolvePathFromAlias, retryWith } from "../utils.js"
 import logSymbols from "log-symbols"
+import type { CustomFileCheck, FileCheck, FileWithContent, MissingInclude } from "../project-manifest.js"
 
 class RequiredFileError extends Data.TaggedError("RequiredFileError")<{
   file: string
@@ -13,13 +13,11 @@ class RequiredFileError extends Data.TaggedError("RequiredFileError")<{
 }> {}
 
 class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("RequiredFilesChecker", {
-  dependencies: [ProjectConfig.Default],
   effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem
     const path = yield* Path.Path
     const options = yield* CliOptions
     const projectConfig = yield* ProjectConfig
-    const tsConfig = yield* projectConfig.getTsConfig()
 
     const checkFiles = (fileChecks: Array<FileCheck>) =>
       Effect.gen(function* () {
@@ -70,7 +68,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         const existingDeprecatedFromLibs = yield* Effect.forEach(
           deprecatedFromLib,
           (filePath) =>
-            resolvePathFromAlias(`${aliasForLib}/${filePath}`, tsConfig).pipe(
+            projectConfig.resolvePathFromAlias(`${aliasForLib}/${filePath}`).pipe(
               Effect.flatMap((fullPath) =>
                 Effect.gen(function* () {
                   const exists = yield* fs.exists(fullPath)
@@ -169,7 +167,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         }
 
         // Check theme file
-        const themeAliasPath = yield* resolvePathFromAlias(`${aliasForLib}/theme.ts`, tsConfig)
+        const themeAliasPath = yield* projectConfig.resolvePathFromAlias(`${aliasForLib}/theme.ts`)
         const themeContent = yield* fs.readFileString(themeAliasPath).pipe(
           Effect.catchAll(() => {
             missingFiles.push(customFileChecks.theme)
@@ -190,7 +188,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         }
 
         // Check utils file
-        const utilsPath = yield* resolvePathFromAlias(`${aliasForLib}/utils.ts`, tsConfig)
+        const utilsPath = yield* projectConfig.resolvePathFromAlias(`${aliasForLib}/utils.ts`)
         const utilsContent = yield* fs.readFileString(utilsPath).pipe(
           Effect.catchAll(() => {
             missingFiles.push(customFileChecks.utils)
