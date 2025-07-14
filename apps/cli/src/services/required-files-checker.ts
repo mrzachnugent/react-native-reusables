@@ -38,7 +38,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
             ).pipe(
               Effect.catchAll(() => {
                 missingFiles.push(file)
-                return Effect.succeed(null)
+                return Effect.logDebug(`${logSymbols.error} ${file.name} not found`).pipe(() => Effect.succeed(null))
               })
             ),
           { concurrency: "unbounded" }
@@ -52,6 +52,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                 yield* Effect.logDebug(`${logSymbols.success} ${name} has ${include.content.join(", ")}`)
                 continue
               }
+              yield* Effect.logDebug(`${logSymbols.error} ${name} missing ${include.content.join(", ")}`)
               missingIncludes.push({ ...include, fileName: name })
             }
           })
@@ -73,7 +74,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                 Effect.gen(function* () {
                   const exists = yield* fs.exists(fullPath)
                   if (!exists) {
-                    yield* Effect.logDebug(`${logSymbols.success} deprecated lib/${file.fileNames[0]} not found`)
+                    yield* Effect.logDebug(`${logSymbols.success} Deprecated lib/${file.fileNames[0]} not found`)
+                  } else {
+                    yield* Effect.logDebug(`${logSymbols.error} Deprecated lib/${file.fileNames[0]} found`)
                   }
                   return { ...file, exists }
                 })
@@ -107,7 +110,15 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
             }),
           cssPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
         ).pipe(
-          Effect.catchAll(() => Effect.fail(new RequiredFileError({ file: "CSS", message: "CSS file not found" })))
+          Effect.catchAll(() =>
+            Effect.fail(
+              new RequiredFileError({
+                file: "CSS",
+                message:
+                  "CSS file not found. Please follow the instructions at https://www.nativewind.dev/docs/getting-started/installation#installation-with-expo"
+              })
+            )
+          )
         )
 
         for (const include of customFileChecks.css.includes) {
@@ -117,6 +128,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
             )
             continue
           }
+          yield* Effect.logDebug(
+            `${logSymbols.error} ${customFileChecks.css.name} missing ${include.content.join(", ")}`
+          )
           missingIncludes.push({ ...include, fileName: customFileChecks.css.name })
         }
 
@@ -137,8 +151,13 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                 )
                 continue
               }
+              yield* Effect.logDebug(
+                `${logSymbols.error} ${customFileChecks.nativewindEnv.name} missing ${include.content.join(", ")}`
+              )
               missingIncludes.push({ ...include, fileName: customFileChecks.nativewindEnv.name })
             }
+          } else {
+            yield* Effect.logDebug(`${logSymbols.error} ${customFileChecks.nativewindEnv.name} not found`)
           }
         }
 
@@ -156,7 +175,13 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           tailwindConfigPaths.map((p) => path.join(options.cwd, p)) as [string, ...Array<string>]
         ).pipe(
           Effect.catchAll(() =>
-            Effect.fail(new RequiredFileError({ file: "Tailwind config", message: "Tailwind config not found" }))
+            Effect.fail(
+              new RequiredFileError({
+                file: "Tailwind config",
+                message:
+                  "Tailwind config not found, Please follow the instructions at https://www.nativewind.dev/docs/getting-started/installation#installation-with-expo"
+              })
+            )
           )
         )
 
@@ -167,6 +192,9 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
             )
             continue
           }
+          yield* Effect.logDebug(
+            `${logSymbols.error} ${customFileChecks.tailwindConfig.name} missing ${include.content.join(", ")}`
+          )
           missingIncludes.push({ ...include, fileName: customFileChecks.tailwindConfig.name })
         }
 
@@ -187,8 +215,13 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
               )
               continue
             }
+            yield* Effect.logDebug(
+              `${logSymbols.error} ${customFileChecks.theme.name} missing ${include.content.join(", ")}`
+            )
             missingIncludes.push({ ...include, fileName: customFileChecks.theme.name })
           }
+        } else {
+          yield* Effect.logDebug(`${logSymbols.error} ${customFileChecks.theme.name} not found`)
         }
 
         // Check utils file
@@ -208,8 +241,14 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
               )
               continue
             }
+            yield* Effect.logDebug(
+              `${logSymbols.error} ${customFileChecks.utils.name} missing ${include.content.join(", ")}`
+            )
             missingIncludes.push({ ...include, fileName: customFileChecks.utils.name })
           }
+        } else {
+          yield* Effect.logDebug(`${logSymbols.error} ${customFileChecks.utils.name} not found`)
+          missingFiles.push(customFileChecks.utils)
         }
 
         return { missingFiles, missingIncludes }
