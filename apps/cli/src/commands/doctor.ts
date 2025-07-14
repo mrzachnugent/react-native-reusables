@@ -1,9 +1,11 @@
 import { CliOptions } from "@cli/cli-options.js"
 import { RequiredFilesChecker } from "@cli/lib/required-files-checker.js"
 import { type CustomFileCheck, type FileCheck, type MissingInclude, PROJECT_MANIFEST } from "@cli/project-manifest.js"
+import { runCommand } from "@cli/utils.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Data, Effect, Layer, Schema } from "effect"
+import logSymbols from "log-symbols"
 
 const packageJsonSchema = Schema.Struct({
   dependencies: Schema.optional(Schema.Record({ key: Schema.String, value: Schema.String })),
@@ -30,22 +32,6 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
     const path = yield* Path.Path
     const requiredFileChecker = yield* RequiredFilesChecker
 
-    const getPackageJson = () =>
-      Effect.gen(function* () {
-        const packageJsonExists = yield* fs.exists(path.join(options.cwd, "package.json"))
-        if (!packageJsonExists) {
-          return yield* Effect.fail(new PackageJsonError({ message: "A package.json was not found and is required." }))
-        }
-
-        return yield* fs.readFileString(path.join(options.cwd, "package.json")).pipe(
-          Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
-          Effect.flatMap(Schema.decodeUnknown(packageJsonSchema)),
-          Effect.catchTags({
-            ParseError: () => Effect.fail(new PackageJsonError({ message: "Failed to parse package.json" }))
-          })
-        )
-      })
-
     const checkRequiredDependencies = ({
       dependencies,
       devDependencies
@@ -54,7 +40,19 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
       devDependencies: Array<string>
     }) =>
       Effect.gen(function* () {
-        const packageJson = yield* getPackageJson()
+        const packageJsonExists = yield* fs.exists(path.join(options.cwd, "package.json"))
+        if (!packageJsonExists) {
+          return yield* Effect.fail(new PackageJsonError({ message: "A package.json was not found and is required." }))
+        }
+
+        const packageJson = yield* fs.readFileString(path.join(options.cwd, "package.json")).pipe(
+          Effect.flatMap(Schema.decodeUnknown(Schema.parseJson())),
+          Effect.flatMap(Schema.decodeUnknown(packageJsonSchema)),
+          Effect.catchTags({
+            ParseError: () => Effect.fail(new PackageJsonError({ message: "Failed to parse package.json" }))
+          })
+        )
+
         const uninstalledDependencies: Array<string> = []
         const uninstalledDevDependencies: Array<string> = []
 
@@ -63,7 +61,9 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             uninstalledDependencies.push(dependency)
             continue
           }
-          yield* Effect.logDebug(`✅ ${dependency}@${packageJson.dependencies[dependency]} is installed`)
+          yield* Effect.logDebug(
+            `${logSymbols.success} ${dependency}@${packageJson.dependencies[dependency]} is installed`
+          )
         }
 
         for (const devDependency of devDependencies) {
@@ -71,7 +71,9 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             uninstalledDevDependencies.push(devDependency)
             continue
           }
-          yield* Effect.logDebug(`✅ ${devDependency}@${packageJson.devDependencies?.[devDependency]} is installed`)
+          yield* Effect.logDebug(
+            `${logSymbols.success} ${devDependency}@${packageJson.devDependencies?.[devDependency]} is installed`
+          )
         }
 
         return { uninstalledDependencies, uninstalledDevDependencies }
@@ -86,7 +88,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
           })
 
           if (uninstalledDependencies.includes("expo")) {
-            return yield* Effect.fail(new Error("Expo is not installed and is required for the CLI to work."))
+            return yield* Effect.fail(new Error("Expo is not installed. This CLI cannot run without it."))
           }
 
           const { customFileResults, deprecatedFileResults, fileResults } = yield* requiredFileChecker.run({
@@ -103,69 +105,79 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
             deprecatedFileResults
           }
 
-          const total = Object.values(result).reduce((sum, cat) => sum + cat.length, 0)
+          let total = Object.values(result).reduce((sum, cat) => sum + cat.length, 0)
+          if (!options.quiet) {
+            for (const missingFile of result.missingFiles) {
+              const prompt = options.fix
+                ? true
+                : yield* Prompt.confirm({
+                    message: `${logSymbols.warning} The ${missingFile.name} file is missing. Do you want to create it?`,
+                    initial: true
+                  })
 
-          if (total === 0) {
-            yield* Effect.log("Everything looks good!")
-            return yield* Effect.succeed(true)
-          }
-
-          for (const missingFile of result.missingFiles) {
-            const prompt = options.fix
-              ? true
-              : yield* Prompt.confirm({
-                  message: `The ${missingFile.name} file is missing. Do you want to create it?`,
-                  initial: true
-                })
-
-            if (prompt) {
-              result.missingFiles = result.missingFiles.filter((f) => f.name !== missingFile.name)
-              yield* Effect.logDebug(`Creating ${missingFile.name} file`)
+              if (prompt) {
+                total--
+                result.missingFiles = result.missingFiles.filter((f) => f.name !== missingFile.name)
+                yield* Effect.logDebug(`Creating ${missingFile.name} file`)
+              }
             }
-          }
 
-          const dependenciesToInstall: Array<string> = []
-          for (const dep of result.uninstalledDependencies) {
-            const prompt = options.fix
-              ? true
-              : yield* Prompt.confirm({
-                  message: `The ${dep} dependency is missing. Do you want to install it?`,
-                  initial: true
-                })
-            if (prompt) {
-              yield* Effect.logDebug(`Adding ${dep} to dependencies to install`)
-              dependenciesToInstall.push(dep)
-              result.uninstalledDependencies = result.uninstalledDependencies.filter((d) => d !== dep)
+            const dependenciesToInstall: Array<string> = []
+            for (const dep of result.uninstalledDependencies) {
+              const prompt = options.fix
+                ? true
+                : yield* Prompt.confirm({
+                    message: `The ${dep} dependency is missing. Do you want to install it?`,
+                    initial: true
+                  })
+              if (prompt) {
+                total--
+                yield* Effect.logDebug(`Adding ${dep} to dependencies to install`)
+                dependenciesToInstall.push(dep)
+                result.uninstalledDependencies = result.uninstalledDependencies.filter((d) => d !== dep)
+              }
             }
-          }
 
-          const devDependenciesToInstall: Array<string> = []
-          for (const dep of result.uninstalledDevDependencies) {
-            const prompt = options.fix
-              ? true
-              : yield* Prompt.confirm({
-                  message: `The ${dep} dependency is missing. Do you want to install it?`,
-                  initial: true
-                })
-            if (prompt) {
-              yield* Effect.logDebug(`Adding ${dep} to devDependencies to install`)
-              devDependenciesToInstall.push(dep)
-              result.uninstalledDevDependencies = result.uninstalledDevDependencies.filter((d) => d !== dep)
+            if (dependenciesToInstall.length > 0) {
+              yield* Effect.logDebug(`Installing ${dependenciesToInstall.join(", ")}`)
+              if (process.env.NODE_ENV !== "development") {
+                yield* runCommand("npx", ["expo", "install", ...dependenciesToInstall], { cwd: options.cwd })
+              }
             }
-          }
 
-          if (dependenciesToInstall.length > 0) {
-            yield* Effect.logDebug(`Installing ${dependenciesToInstall.join(", ")}`)
-          }
+            const devDependenciesToInstall: Array<string> = []
+            for (const dep of result.uninstalledDevDependencies) {
+              const prompt = options.fix
+                ? true
+                : yield* Prompt.confirm({
+                    message: `The ${dep} dependency is missing. Do you want to install it?`,
+                    initial: true
+                  })
+              if (prompt) {
+                total--
+                yield* Effect.logDebug(`Adding ${dep} to devDependencies to install`)
+                devDependenciesToInstall.push(dep)
+                result.uninstalledDevDependencies = result.uninstalledDevDependencies.filter((d) => d !== dep)
+              }
+            }
 
-          if (devDependenciesToInstall.length > 0) {
-            yield* Effect.logDebug(`Installing ${devDependenciesToInstall.join(", ")}`)
+            if (devDependenciesToInstall.length > 0) {
+              yield* Effect.logDebug(`Installing ${devDependenciesToInstall.join(", ")}`)
+              if (process.env.NODE_ENV !== "development") {
+                yield* runCommand("npx", ["expo", "install", ...devDependenciesToInstall], { cwd: options.cwd })
+              }
+            }
+
+            if (total === 0) {
+              yield* Effect.log(`${logSymbols.success} No issues detected.`)
+              return yield* Effect.succeed(true)
+            }
           }
 
           const analysis = analyzeResult(result)
           if (options.quiet) {
             console.log(
-              `⚠️  ${total} Potential issue${
+              `${logSymbols.warning} ${total} Potential issue${
                 total > 1 ? "s" : ""
               } found. For more info, run \`npx @react-native-reusables/cli doctor\``
             )
@@ -209,7 +221,7 @@ function analyzeResult(result: Result) {
 
   if (result.missingFiles.length > 0) {
     categories.push({
-      title: `❌ Missing Files (${result.missingFiles.length})`,
+      title: `${logSymbols.error} Missing Files (${result.missingFiles.length})`,
       count: result.missingFiles.length,
       logs: result.missingFiles.flatMap((f) => [`• ${f.name} → ${f.name}`, `  📘 Docs: ${f.docs}`])
     })
@@ -217,7 +229,7 @@ function analyzeResult(result: Result) {
 
   if (result.missingIncludes.length > 0) {
     categories.push({
-      title: `❌ Potentially Misconfigured Files (${result.missingIncludes.length})`,
+      title: `${logSymbols.error} Potentially Misconfigured Files (${result.missingIncludes.length})`,
       count: result.missingIncludes.length,
       logs: result.missingIncludes.flatMap((inc) => [
         `• ${inc.fileName}`,
@@ -230,7 +242,7 @@ function analyzeResult(result: Result) {
 
   if (result.uninstalledDependencies.length > 0) {
     categories.push({
-      title: `❌ Missing Dependencies (${result.uninstalledDependencies.length})`,
+      title: `${logSymbols.error} Missing Dependencies (${result.uninstalledDependencies.length})`,
       count: result.uninstalledDependencies.length,
       logs: result.uninstalledDependencies.map((dep) => `• ${dep}`)
     })
@@ -238,7 +250,7 @@ function analyzeResult(result: Result) {
 
   if (result.uninstalledDevDependencies.length > 0) {
     categories.push({
-      title: `❌ Missing Dev Dependencies (${result.uninstalledDevDependencies.length})`,
+      title: `${logSymbols.error} Missing Dev Dependencies (${result.uninstalledDevDependencies.length})`,
       count: result.uninstalledDevDependencies.length,
       logs: result.uninstalledDevDependencies.map((dep) => `• ${dep}`)
     })
@@ -246,7 +258,7 @@ function analyzeResult(result: Result) {
 
   if (result.deprecatedFileResults.length > 0) {
     categories.push({
-      title: `⚠️  Deprecated Files (${result.deprecatedFileResults.length})`,
+      title: `${logSymbols.warning} Deprecated Files (${result.deprecatedFileResults.length})`,
       count: result.deprecatedFileResults.length,
       logs: result.deprecatedFileResults.map((f) => `• ${f.file} → ${f.exists ? "Exists" : "Missing"}`)
     })

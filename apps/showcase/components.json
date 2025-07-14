@@ -1,9 +1,17 @@
 {
+  "$schema": "https://raw.githubusercontent.com/shadcn/ui/main/components.json",
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "./globals.css",
+    "baseColor": "slate",
+    "cssVariables": true
+  },
   "aliases": {
-    "components": "@showcase/ui/components",
-    "utils": "@showcase/ui/lib/utils",
-    "hooks": "@showcase/ui/hooks",
-    "lib": "@showcase/ui/lib",
-    "ui": "@showcase/ui/components"
+    "components": "@showcase/components",
+    "utils": "@showcase/utils",
+    "lib": "@showcase/lib"
   }
 }
