@@ -4,6 +4,7 @@ import { Template } from "@cli/services/template.js"
 import { Prompt } from "@effect/cli"
 import { FileSystem, Path } from "@effect/platform"
 import { Effect, Layer } from "effect"
+import logSymbols from "log-symbols"
 import { ProjectConfig } from "../project-config.js"
 
 type InitOptions = {
@@ -28,20 +29,22 @@ class Init extends Effect.Service<Init>()("Init", {
           yield* Effect.logDebug(`Does package.json exist: ${packageJsonExists ? "yes" : "no"}`)
 
           if (packageJsonExists) {
+            yield* Effect.logWarning(`${logSymbols.warning} A project already exists in this directory.`)
             const choice = yield* Prompt.select({
-              message: "A project already exists in this directory. What would you like to do?",
+              message: "How would you like to proceed?",
               choices: [
-                { title: "Start fresh by initializing a new project", value: "init-new" },
-                { title: "Run the doctor command to inspect and fix setup issues", value: "doctor" },
+                { title: "Initialize a new project here anyway", value: "init-new" },
+                { title: "Inspect project configuration", value: "doctor" },
                 { title: "Cancel and exit", value: "cancel" }
               ]
             })
             yield* Effect.logDebug(`Init choice: ${choice}`)
             if (choice === "cancel") {
-              return Effect.succeed(true)
+              return yield* Effect.succeed(true)
             }
             if (choice === "doctor") {
-              return yield* doctor.run({ ...options, summary: true, yes: false })
+              console.log("")
+              return yield* doctor.run({ ...options, summary: false, yes: false })
             }
           }
 
