@@ -1,4 +1,4 @@
-import './global.css';
+import '../global.css';
 
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
