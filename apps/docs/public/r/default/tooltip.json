@@ -6,7 +6,10 @@
   "author": "@mrzachnugent",
   "description": "A popup that displays information related to an element when the element receives keyboard focus, the mouse hovers over it, or when it is pressed.",
   "dependencies": ["@rn-primitives/tooltip"],
-  "registryDependencies": ["https://reactnativereusable.com/r/default/text.json"],
+  "registryDependencies": [
+    "https://reactnativereusable.com/r/default/text.json",
+    "https://reactnativereusable.com/r/default/native-only-animated-view.json"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/default/components/ui/tooltip.tsx",
