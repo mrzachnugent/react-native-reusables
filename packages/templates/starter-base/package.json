@@ -1,5 +1,5 @@
 {
-  "name": "@rnr/starter-base",
+  "name": "starter-base",
   "main": "index.js",
   "version": "1.0.0",
   "scripts": {
