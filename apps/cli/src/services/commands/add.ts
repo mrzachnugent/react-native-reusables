@@ -33,7 +33,7 @@ class Add extends Effect.Service<Add>()("Add", {
 
           const components = options.all ? PROJECT_MANIFEST.components : options.args?.components ?? []
 
-          if (!options.yes && components.length === 0) {
+          if (components.length === 0) {
             const selectedComponents = yield* Prompt.multiSelect({
               message: "Select components to add",
               choices: PROJECT_MANIFEST.components.map((component) => ({
@@ -62,6 +62,8 @@ class Add extends Effect.Service<Add>()("Add", {
           const shadcnOptions = toShadcnOptions(options)
 
           const commandArgs = ["shadcn@latest", "add", ...shadcnOptions, ...componentUrls]
+
+          yield* Effect.logDebug(`Running command: npx ${commandArgs.join(" ")}`)
 
           yield* runCommand("npx", commandArgs, {
             cwd: options.cwd,
@@ -93,12 +95,12 @@ export { make }
 function toShadcnOptions(options: AddOptions) {
   const shadcnOptions = []
 
-  if (options.yes) {
-    shadcnOptions.push("-y")
+  if (options.overwrite) {
+    shadcnOptions.push("--overwrite")
   }
 
-  if (options.overwrite) {
-    shadcnOptions.push("-o")
+  if (options.yes) {
+    shadcnOptions.push("--yes")
   }
 
   if (options.path) {

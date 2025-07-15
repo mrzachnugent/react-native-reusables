@@ -2,8 +2,8 @@ import { all, cwd, overwrite, path, summary, yes } from "@cli/contexts/cli-optio
 import * as Add from "@cli/services/commands/add.js"
 import * as Doctor from "@cli/services/commands/doctor.js"
 import * as Init from "@cli/services/commands/init.js"
-import { Args, Command } from "@effect/cli"
-import { Console, Effect, pipe } from "effect"
+import { Args, Command, Prompt } from "@effect/cli"
+import { Effect, pipe } from "effect"
 
 const addArgs = Args.all({
   components: Args.text({ name: "components" }).pipe(Args.repeated)
@@ -21,13 +21,35 @@ const InitCommand = Command.make("init", { cwd })
   .pipe(Command.withDescription("Initialize a new React Native project with reusables"))
   .pipe(Command.withHandler(Init.make))
 
-const Cli = Command.make("react-native-reusables/cli")
+const Cli = Command.make("react-native-reusables/cli", { cwd })
   .pipe(Command.withDescription("React Native Reusables CLI - A powerful toolkit for React Native development"))
   .pipe(
-    Command.withHandler(() =>
+    Command.withHandler((options) =>
       Effect.gen(function* () {
-        yield* Console.log("🎯 Welcome to React Native Reusables CLI!")
-        yield* Console.log("")
+        yield* Effect.log("React Native Reusables CLI - A powerful toolkit for React Native development")
+        const choice = yield* Prompt.select({
+          message: "What would you like to do?",
+          choices: [
+            { title: "Add a component", value: "add" },
+            { title: "Inspect project configuration", value: "doctor" },
+            { title: "Initialize a new project", value: "init" }
+          ]
+        })
+
+        if (choice === "add") {
+          yield* Add.make({
+            cwd: options.cwd,
+            yes: true,
+            overwrite: false,
+            all: false,
+            path: "",
+            args: { components: [] }
+          })
+        } else if (choice === "doctor") {
+          yield* Doctor.make({ cwd: options.cwd, summary: false, yes: false })
+        } else if (choice === "init") {
+          yield* Init.make({ cwd: options.cwd })
+        }
       })
     )
   )

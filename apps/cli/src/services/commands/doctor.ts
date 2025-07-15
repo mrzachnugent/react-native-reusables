@@ -167,11 +167,11 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
                 spinner.stop()
               }
             }
+          }
 
-            if (total === 0) {
-              yield* Effect.log(`${logSymbols.success} No issues detected.`)
-              return yield* Effect.succeed(true)
-            }
+          if (total === 0) {
+            console.log(`\x1b[2m${logSymbols.success} All checks passed.\x1b[0m\n`)
+            return yield* Effect.succeed(true)
           }
 
           const analysis = analyzeResult(result)

@@ -20,33 +20,59 @@ class Template extends Effect.Service<Template>()("src/services/template", {
             Effect.gen(function* () {
               yield* Effect.logDebug(`Template.clone args: ${JSON.stringify({ cwd, name, repo }, null, 2)}`)
 
+              const newRepoPath = path.join(cwd, name)
+
+              const newRepoPathExists = yield* fs.exists(newRepoPath)
+
+              yield* Effect.logDebug(`Does ${newRepoPath} exist? ${newRepoPathExists ? "yes" : "no"}`)
+
+              if (newRepoPathExists) {
+                yield* Effect.logWarning(`${logSymbols.warning} A project already exists in this directory.`)
+                const choice = yield* Prompt.select({
+                  message: "How would you like to proceed?",
+                  choices: [
+                    { title: "Cancel and exit", value: "cancel" },
+                    { title: "Overwrite the existing project", value: "overwrite" }
+                  ]
+                })
+
+                if (choice === "cancel") {
+                  yield* Effect.logDebug(`User chose to cancel`)
+                  return yield* Effect.succeed(true)
+                }
+
+                const confirmOverwrite = yield* Prompt.confirm({
+                  message: "Are you sure you want to overwrite the existing project?",
+                  initial: true
+                })
+
+                if (!confirmOverwrite) {
+                  yield* Effect.logDebug(`User chose to not overwrite the existing project`)
+                  return yield* Effect.succeed(true)
+                }
+              }
+
               yield* Effect.logDebug(`Created temp directory: ${tempDirPath}`)
 
-              spinner.start(`Cloning template from ${repo.url}...`)
+              const templateName = repo.subPath
+                ? path.basename(repo.subPath)
+                : path.basename(repo.url).replace(".git", "")
 
-              yield* runCommand("git", ["clone", "--depth=1", "--branch", "main", repo.url, name], {
-                cwd: tempDirPath,
-                stdio: "inherit"
+              spinner.start(`Initializing the ${templateName} template...`)
+              //TODO: replace '@zach/docs-rewrite' with 'main'
+              yield* runCommand("git", ["clone", "--depth=1", "--branch", "@zach/docs-rewrite", repo.url, name], {
+                cwd: tempDirPath
               })
 
               const cloneToTempPath = path.join(tempDirPath, name)
 
               yield* Effect.logDebug(`Cloned temp template to ${cloneToTempPath}`)
 
-              const newRepoPath = path.join(cwd, name)
-
               yield* fs.copy(repo.subPath ? path.join(cloneToTempPath, repo.subPath) : cloneToTempPath, newRepoPath, {
                 overwrite: true
               })
 
               yield* Effect.logDebug(`Copied template to ${newRepoPath}`)
-
-              const templateName = repo.subPath
-                ? path.basename(repo.subPath)
-                : path.basename(repo.url).replace(".git", "")
-
-              spinner.stop()
-              spinner.start(`Replacing template name ${templateName} with ${name}...`)
 
               const allPaths = yield* fs.readDirectory(newRepoPath, { recursive: true })
 
@@ -92,15 +118,13 @@ class Template extends Effect.Service<Template>()("src/services/template", {
                 const hasNpmrc = yield* fs.exists(npmrcPath)
 
                 if (packageManager === "pnpm" && !hasNpmrc) {
-                  spinner.start(`Writing .npmrc file...`)
+                  yield* Effect.logDebug(`Writing .npmrc file...`)
                   yield* fs.writeFileString(npmrcPath, "node-linker=hoisted\nenable-pre-post-scripts=true")
-                  spinner.stop()
                 }
 
                 if (packageManager !== "pnpm" && packageManager !== "none" && hasNpmrc) {
-                  spinner.start(`Removing .npmrc file...`)
+                  yield* Effect.logDebug(`Removing .npmrc file...`)
                   yield* fs.remove(npmrcPath)
-                  spinner.stop()
                 }
 
                 yield* runCommand(packageManager, ["install"], {
@@ -168,11 +192,11 @@ class Template extends Effect.Service<Template>()("src/services/template", {
               }
 
               if (packageManager === "none") {
-                yield* Effect.log(`\x1b[37m${logSymbols.info}To get started:\x1b[0m`)
+                yield* Effect.log(`\x1b[22m\x1b[38;5;250m${logSymbols.info} To get started:\x1b[0m`)
                 yield* Effect.log(
-                  "\x1b[37m↪ Install the dependencies manually using your package manager of choice.\x1b[0m"
+                  "\x1b[22m\x1b[38;5;250m↪ Install the dependencies manually using your package manager of choice.\x1b[0m"
                 )
-                yield* Effect.log("\x1b[37m↪ Run the dev script.\x1b[0m")
+                yield* Effect.log("\x1b[22m\x1b[38;5;250m↪ Run the dev script.\x1b[0m")
               }
               console.log("\n")
               yield* Effect.log(`\x1b[37m${logSymbols.info} Additional resources\x1b[0m`)
