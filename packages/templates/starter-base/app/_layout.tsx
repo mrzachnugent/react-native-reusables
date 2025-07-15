@@ -1,15 +1,14 @@
 import '@/global.css';
 
+import { ThemeToggle } from '@/components/theme-toggle';
+import { NAV_THEME } from '@/lib/theme';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
+import { PortalHost } from '@rn-primitives/portal';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useColorScheme } from 'nativewind';
 import * as React from 'react';
-import { Appearance, Platform, View } from 'react-native';
-import { NAV_THEME } from '@/lib/constants';
-import { useColorScheme } from '@/lib/useColorScheme';
-import { PortalHost } from '@rn-primitives/portal';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { setAndroidNavigationBar } from '@/lib/android-navigation-bar';
+import { Platform } from 'react-native';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -25,19 +24,13 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
-const usePlatformSpecificSetup = Platform.select({
-  web: useSetWebBackgroundClassName,
-  android: useSetAndroidNavigationBar,
-  default: noop,
-});
-
 export default function RootLayout() {
-  usePlatformSpecificSetup();
-  const { isDarkColorScheme } = useColorScheme();
+  useSetWebBackgroundClassName();
+  const { colorScheme } = useColorScheme();
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+    <ThemeProvider value={colorScheme === 'dark' ? DARK_THEME : LIGHT_THEME}>
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <Stack>
         <Stack.Screen
           name='index'
@@ -57,15 +50,10 @@ const useIsomorphicLayoutEffect =
 
 function useSetWebBackgroundClassName() {
   useIsomorphicLayoutEffect(() => {
+    if (Platform.OS !== 'web') {
+      return;
+    }
     // Adds the background color to the html element to prevent white background on overscroll.
     document.documentElement.classList.add('bg-background');
   }, []);
 }
-
-function useSetAndroidNavigationBar() {
-  React.useLayoutEffect(() => {
-    setAndroidNavigationBar(Appearance.getColorScheme() ?? 'light');
-  }, []);
-}
-
-function noop() {}

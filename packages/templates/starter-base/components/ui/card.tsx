@@ -1,7 +1,9 @@
-import * as React from 'react';
-import { Text, TextProps, View, ViewProps } from 'react-native';
-import { TextClassContext } from '@/components/ui/text';
+'use client';
+
+import { Text, TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
+import * as React from 'react';
+import { Platform, View, type ViewProps } from 'react-native';
 
 function Card({
   className,
@@ -10,13 +12,18 @@ function Card({
   ref?: React.RefObject<View>;
 }) {
   return (
-    <View
-      className={cn(
-        'rounded-lg border border-border bg-card shadow-sm shadow-foreground/10',
-        className
-      )}
-      {...props}
-    />
+    <TextClassContext.Provider value='text-card-foreground'>
+      <View
+        className={cn(
+          'rounded-lg border border-border bg-card shadow-sm',
+          Platform.select({
+            native: 'shadow-black/5',
+          }),
+          className
+        )}
+        {...props}
+      />
+    </TextClassContext.Provider>
   );
 }
 
@@ -26,23 +33,20 @@ function CardHeader({
 }: ViewProps & {
   ref?: React.RefObject<View>;
 }) {
-  return <View className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />;
+  return <View className={cn('flex flex-col gap-1.5 p-6', className)} {...props} />;
 }
 
 function CardTitle({
   className,
   ...props
-}: TextProps & {
+}: React.ComponentProps<typeof Text> & {
   ref?: React.RefObject<Text>;
 }) {
   return (
     <Text
       role='heading'
       aria-level={3}
-      className={cn(
-        'text-2xl text-card-foreground font-semibold leading-none tracking-tight',
-        className
-      )}
+      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
       {...props}
     />
   );
@@ -51,10 +55,10 @@ function CardTitle({
 function CardDescription({
   className,
   ...props
-}: TextProps & {
+}: React.ComponentProps<typeof Text> & {
   ref?: React.RefObject<Text>;
 }) {
-  return <Text className={cn('text-sm text-muted-foreground', className)} {...props} />;
+  return <Text className={cn('text-muted-foreground text-sm', className)} {...props} />;
 }
 
 function CardContent({
@@ -63,11 +67,7 @@ function CardContent({
 }: ViewProps & {
   ref?: React.RefObject<View>;
 }) {
-  return (
-    <TextClassContext.Provider value='text-card-foreground'>
-      <View className={cn('p-6 pt-0', className)} {...props} />
-    </TextClassContext.Provider>
-  );
+  return <View className={cn('p-6 pt-0', className)} {...props} />;
 }
 
 function CardFooter({
