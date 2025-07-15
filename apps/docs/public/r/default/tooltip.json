@@ -9,7 +9,8 @@
     "@rn-primitives/tooltip"
   ],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json"
+    "https://reactnativereusable.com/r/default/text.json",
+    "https://reactnativereusable.com/r/default/native-only-animated-view.json"
   ],
   "files": [
     {
