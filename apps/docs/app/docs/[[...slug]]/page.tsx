@@ -9,6 +9,10 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+function getRandomBoolean() {
+  return Math.random() < 0.5;
+}
+
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
   const page = source.getPage(params.slug);
@@ -17,7 +21,15 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
   const MDX = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full} breadcrumb={{ includePage: false }}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      breadcrumb={{ includePage: false }}
+      tableOfContent={{
+        footer:
+          page.data.title !== 'Hire us' && getRandomBoolean() ? <TableOfContentFooter /> : null,
+      }}
+    >
       <DocsBody>
         <div className='flex items-center justify-between gap-2'>
           <DocsTitle className='mb-0'>{page.data.title}</DocsTitle>
@@ -68,6 +80,29 @@ function NeighbourButtons({ url }: { url: string }) {
           </Link>
         </Button>
       )}
+    </div>
+  );
+}
+
+function TableOfContentFooter() {
+  return (
+    <div className='group bg-card dark:bg-fd-muted border border-border/40 dark:border-border/0 text-fd-foreground/80 relative flex flex-col gap-2 rounded-lg p-6 text-sm mt-12 animate-in fade-in-0 duration-300'>
+      <div className='text-base leading-tight font-semibold text-balance group-hover:underline'>
+        Want to work with us?
+      </div>
+      <div className='text-muted-foreground'>Tell your team about us.</div>
+      <div className='text-muted-foreground'>
+        We join companies like yours to ship exceptional UI/UX.
+      </div>
+      <button
+        data-slot='button'
+        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 mt-2 w-fit"
+      >
+        Get in touch
+      </button>
+      <Link href='/docs/hire-us' className='absolute inset-0'>
+        <span className='sr-only'>Get in touch</span>
+      </Link>
     </div>
   );
 }
