@@ -11,15 +11,25 @@ export default function Layout({ children }: { children: ReactNode }) {
       nav={{
         title: (
           <div className='flex items-center justify-center size-8 rounded-md hover:bg-fd-accent transition-colors duration-200 -ml-0.5'>
-            <RnrIcon className='w-6' />
+            <RnrIcon className='w-6' pathClassName='stroke-[1px]' />
           </div>
         ),
         children: (
-          <div className='flex items-center gap-4'>
-            <Button variant='ghost' size='sm' asChild>
+          <div className='flex items-center gap-4 -ml-0.5'>
+            <Button
+              variant='ghost'
+              size='sm'
+              asChild
+              className='hover:bg-fd-accent dark:hover:bg-fd-accent'
+            >
               <Link href='/docs'>Docs</Link>
             </Button>
-            <Button variant='ghost' size='sm' asChild>
+            <Button
+              variant='ghost'
+              size='sm'
+              asChild
+              className='hover:bg-fd-accent dark:hover:bg-fd-accent'
+            >
               <Link href='/docs/components/accordion'>Components</Link>
             </Button>
           </div>
