@@ -15,9 +15,9 @@ export function ExternalLinks(props: ExternalLinksProps) {
           key={link.title}
           href={link.url}
           target='_blank'
-          className='inline-flex bg-muted border rounded-md no-underline px-2 py-0.5'
+          className='inline-flex bg-muted hover:bg-muted/50 border rounded-md no-underline px-2 py-0.5'
         >
-          <div className='flex items-center gap-1 text-xs font-medium'>
+          <div className='flex items-center gap-1 text-xs text-foreground/80 font-medium'>
             {link.title} <ExternalLinkIcon strokeWidth={2.5} className='w-3 h-3' />
           </div>
         </a>
