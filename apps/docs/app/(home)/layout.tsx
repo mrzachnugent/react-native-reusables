@@ -1,10 +1,31 @@
 import type { ReactNode } from 'react';
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
-import { baseOptions } from '@docs/app/layout.config';
+import { RnrIcon } from '@docs/components/icons/rnr-icon';
+import Link from 'next/link';
+import { Button } from '@docs/components/ui/button';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <HomeLayout githubUrl='https://github.com/mrzachnugent/react-native-reusables' {...baseOptions}>
+    <HomeLayout
+      githubUrl='https://github.com/mrzachnugent/react-native-reusables'
+      nav={{
+        title: (
+          <div className='flex items-center justify-center size-8 rounded-md hover:bg-fd-accent transition-colors duration-200 -ml-0.5'>
+            <RnrIcon className='w-6' />
+          </div>
+        ),
+        children: (
+          <div className='flex items-center gap-4'>
+            <Button variant='ghost' size='sm' asChild>
+              <Link href='/docs'>Docs</Link>
+            </Button>
+            <Button variant='ghost' size='sm' asChild>
+              <Link href='/docs/components/accordion'>Components</Link>
+            </Button>
+          </div>
+        ),
+      }}
+    >
       {children}
     </HomeLayout>
   );
