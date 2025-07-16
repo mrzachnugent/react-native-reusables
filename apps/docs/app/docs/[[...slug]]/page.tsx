@@ -86,7 +86,7 @@ function NeighbourButtons({ url }: { url: string }) {
 
 function TableOfContentFooter() {
   return (
-    <div className='group bg-card dark:bg-fd-muted border border-border/40 dark:border-border/0 text-fd-foreground/80 relative flex flex-col gap-2 rounded-lg p-6 text-sm mt-12 animate-in fade-in-0 duration-300'>
+    <div className='group bg-card dark:bg-fd-muted border border-border/50 dark:border-border/0 text-fd-foreground/80 relative flex flex-col gap-2 rounded-lg p-6 text-sm mt-12 animate-in fade-in-0 duration-300'>
       <div className='text-base leading-tight font-semibold text-balance group-hover:underline'>
         Want to work with us?
       </div>
