@@ -18,8 +18,8 @@
     "[GitMerge][Changelog](/docs/changelog)",
     "[Handshake][Hire us](/docs/hire-us)",
     "---Components---",
-    "!/(components)",
-    ".../(components)",
+    "!/components",
+    ".../components",
     "------",
     "..."
   ]
