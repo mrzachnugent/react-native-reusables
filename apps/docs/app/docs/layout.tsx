@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       tree={source.pageTree}
       nav={{
         title: (
-          <div className='-ml-1 gap-1.5 flex items-center text-foreground/80 opacity-90 hover:opacity-100 transition-opacity duration-200'>
+          <div className='-ml-px gap-1.5 flex items-center text-foreground/80 opacity-90 hover:opacity-100 transition-opacity duration-200'>
             <div className='flex items-center justify-center'>
               <RnrIcon />
             </div>
