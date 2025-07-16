@@ -90,9 +90,9 @@ function TableOfContentFooter() {
       <div className='text-base leading-tight font-semibold text-balance group-hover:underline'>
         Want to work with us?
       </div>
-      <div className='text-muted-foreground'>Tell your team about us.</div>
+      <div className='text-muted-foreground'>Mention us to your team.</div>
       <div className='text-muted-foreground'>
-        We join companies like yours to ship exceptional UI/UX.
+        We help companies like yours ship world-class UI/UX.
       </div>
       <button
         data-slot='button'
