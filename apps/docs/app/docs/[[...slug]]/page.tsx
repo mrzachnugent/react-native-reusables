@@ -35,13 +35,16 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
     >
       <DocsBody>
         <div className='flex items-center justify-between gap-2'>
-          <DocsTitle className='mb-0'>{page.data.title}</DocsTitle>
+          <DocsTitle className='mb-0 font-semibold'>{page.data.title}</DocsTitle>
           <NeighbourButtons url={page.url} />
         </div>
         <DocsDescription className='mt-2.5 mb-4 text-base'>{page.data.description}</DocsDescription>
         <MDX
           components={{
             ...defaultMdxComponents,
+            h2: ({ className, ...props }) => (
+              <defaultMdxComponents.h2 className={cn(className, 'font-normal')} {...props} />
+            ),
             //  HTML `ref` attribute conflicts with `forwardRef`
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             pre: ({ ref: _ref, className, ...props }) => (
@@ -56,7 +59,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
               </CodeBlock>
             ),
             h3: ({ className, ...props }) => (
-              <h3 className={cn(className, 'mt-10 mb-6')} {...props} />
+              <h3 className={cn(className, 'mt-10 mb-6 font-normal')} {...props} />
             ),
           }}
         />
