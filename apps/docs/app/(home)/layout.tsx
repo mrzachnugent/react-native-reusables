@@ -3,6 +3,12 @@ import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { RnrIcon } from '@docs/components/icons/rnr-icon';
 import Link from 'next/link';
 import { Button } from '@docs/components/ui/button';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'React Native Reusables',
+  description: 'Bringing the shadcn/ui design system to React Native',
+};
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

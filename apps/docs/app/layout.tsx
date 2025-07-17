@@ -30,6 +30,9 @@ const SEARCH_OPTIONS = {
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html lang='en' className={cn(fontSans.variable, fontMono.variable)} suppressHydrationWarning>
+      <head>
+        <link rel='icon' href='/favicon.svg' />
+      </head>
       <body className='flex flex-col min-h-screen'>
         <CookiesProvider>
           <SafeAreaProvider>

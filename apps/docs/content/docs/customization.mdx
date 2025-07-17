@@ -18,6 +18,16 @@ The `components.json` file serves as a configuration manifest for your project. 
 
 This file is particularly useful when using the CLI to initialize or add components, ensuring consistency and automation in your setup.
 
+To implement your chosen theming style, adjust the `style` setting in your `components.json` file:
+
+```json
+{
+  // ...
+  "style": "new-york"
+  // ...
+}
+```
+
 Learn more about `components.json` in the [shadcn/ui components.json documentation](https://ui.shadcn.com/docs/components-json).
 
 
@@ -29,14 +39,8 @@ Theming in React Native Reusables allows you to define and apply consistent styl
 - **Utility Classes**: Utilizes Tailwind CSS utility classes directly in your components for styling. This method offers granular control over individual component styles.
 
 
-To implement your chosen theming style, adjust the `style` setting in your `components.json` file:
-
-```json
-{
-  // ...
-  "style": "new-york"
-  // ...
-}
+```tsx
+<div className="bg-background text-foreground md:bg-muted" />
 ```
 
 Learn more about theming in the [shadcn/ui theming documentation](https://ui.shadcn.com/docs/theming).
