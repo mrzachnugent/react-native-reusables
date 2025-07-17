@@ -3,3 +3,110 @@ title: Changelog
 description: Latest updates and announcements.
 ---
 
+import { CommandTabs } from '@docs/components/command-tabs';
+
+## August 2025 - Total Rewrite
+
+New CLI. New docs. New registry. New showcase app.
+
+### First React Native compatible shadcn registry
+
+You can now use `npx shadcn@latest` with our registries built just for React Native.
+
+To make the experience even smoother, we built a thin wrapper around the CLI.
+
+- No need to copy long registry URLs
+
+- You can use `--all` to install everything at once
+
+- If you skip the component name, you'll get a multi-select prompt
+
+<CommandTabs args={["add"]} />
+
+Same power, tailored for React Native.
+
+### New CLI - rewritten with Effect + shadcn
+
+The CLI has been rebuilt from the ground up with `@effect/cli` and the `shadcn` engine under the hood for the add command.
+
+Features:
+
+- `doctor` command to diagnose and fix certain config/setup issues
+
+- Registry-aware component scaffolding
+
+- Stronger foundation for future updates
+
+<CommandTabs args={["doctor"]} />
+
+### Improved component architecture
+
+Every component has been refined and standardized for both `default` and `new-york` styles.
+
+- Improved platform-specific logic
+
+- Easier to override and customize
+
+
+### Blocks
+
+- TODO
+
+### Showcase App
+
+We launched a new Expo app so you can explore components from your device.
+
+- TODO: add link to app
+
+### Redesigned Docs
+
+The docs have been rebuilt from scratch as you can see.
+
+- TODO: Add before and after images
+
+### New GitHub Home
+
+We moved the repo from my personal account to a dedicated org:
+
+- [@founded-labs](https://github.com/founded-labs)
+
+This gives the project a long-term home with more room to grow.
+
+### New Icon component
+
+A single icon component to replace all icons from the deprecated `/lib/icons` directory.
+
+```tsx
+import { Icon } from '@/components/ui/icon';
+import { HeartIcon } from 'lucide-react-native';
+
+<Icon as={HeartIcon} className="size-4 text-red-500" />
+
+```
+
+### Deprecated
+
+- `lib/constants.ts`: now using the `theme.ts` file.
+
+- `lib/useColorScheme.ts`: now using the hook directly from `nativewind`
+
+- `lib/icons`: deprecated in favor of the new `Icon` component.
+
+### Upgrade Notes
+1. Run the doctor command and follow the instructions:
+
+<CommandTabs args={["doctor"]} />
+
+2. Run the add command with the override flag:
+
+<Callout type="warn">
+  Make sure you commit your changes before running the add command and use the diff view to see what's changed and to keep
+  your own custom changes.
+</Callout>
+
+<CommandTabs args={["add", "--override", "[...components]"]} />
+
+#### Thanks
+
+Thank you to everyone who has been using React Native Reusables, sharing feedback, and contributing.
+Your support means a lot and is truly appreciated.
