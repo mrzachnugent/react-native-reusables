@@ -1,5 +1,86 @@
 ---
 title: CLI
-description: Use the CLI to add components to your project
+description: Use the CLI to add components and more
 ---
 
+import { CommandTabs } from '@docs/components/command-tabs';
+
+## init
+
+Use `init` to scaffold a new React Native project using our starter template.
+
+<CommandTabs args={["init"]} />
+
+### Options
+
+```bash
+Usage: react-native-reusables init [options]
+
+Initialize a new React Native project with reusables
+
+Options:
+  -c, --cwd <cwd>    the working directory. defaults to the current directory.
+  -h, --help         display help for command
+```
+
+## add
+
+
+Use `add` to add React Native components to your project.
+
+<CommandTabs args={["add", "[components]"]} />
+
+
+### Options
+
+```bash
+Usage: react-native-reusables add [options] [...components]
+
+Add React Native components to your project
+
+Arguments:
+  components         name of components to add
+
+Options:
+  -c, --cwd <cwd>        the working directory. defaults to the current directory.
+  -y, --yes              skip confirmation prompt
+  -o, --overwrite        force overwrite of existing files
+  -a, --all              add all components
+  --path <path>          path to the component
+  -h, --help             display help for command
+```
+
+<Callout type="info">
+  Uses the [shadcn cli](https://ui.shadcn.com/docs/cli#add) under the hood.
+</Callout>
+
+
+## doctor
+
+Use `doctor` to check if everything is set up correctly.
+
+<CommandTabs args={["doctor"]} />
+
+### Options
+
+```bash
+Usage: react-native-reusables doctor [options]
+
+Check your project setup and diagnose issues
+
+Options:
+  -c, --cwd <cwd>        the working directory. defaults to the current directory.
+  --summary              show summary only
+  -y, --yes              skip confirmation prompt
+  -h, --help             display help for command
+```
+
+<div className="h-2" />
+
+<Callout type="info" title="Debugging">
+
+    If you're having issues, you can run any command with the initial `--log-level all` flag to get more information and create a [bug report](https://github.com/mrzachnugent/react-native-reusables/issues).
+
+    <CommandTabs args={["--log-level all", "[command]", "[options]", "[...args]"]} />
+    
+</Callout>
