@@ -1,13 +1,45 @@
 ---
 title: Customization
-description: TODO
+description: How to customize your project
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
 
-## What is Next?
+React Native Reusables encourages full customization by giving you control over how components look and behave. Two important parts of this flexibility are the `components.json` files and the theming system.
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+## What is `components.json`?
+
+The `components.json` file serves as a configuration manifest for your project. It provides essential metadata and setup details, allowing tools to understand your project's structure and generate components accordingly. Key aspects include:
+
+- **Style Configuration**: Defines the base style for components (e.g., `"style": "new-york"`).
+- **Tailwind Integration**: Specifies paths to your Tailwind configuration and CSS files.
+- **Color Palette**: Sets the base color for components (e.g., `"baseColor": "gray"`).
+- **Theming Method**: Chooses between CSS variables or utility classes for theming (`"cssVariables": true`).
+- **Aliases**: Maps custom paths for components and utilities, aiding in the organization and import process.
+
+This file is particularly useful when using the CLI to initialize or add components, ensuring consistency and automation in your setup.
+
+Learn more about `components.json` in the [shadcn/ui components.json documentation](https://ui.shadcn.com/docs/components-json).
+
+
+## Theming
+
+Theming in React Native Reusables allows you to define and apply consistent styles across your components. You can choose between two methods:
+
+- **CSS Variables**: Enables global theming by defining variables like `--background` and `--foreground` in your css file. This approach allows for easy theme switching and customization.
+- **Utility Classes**: Utilizes Tailwind CSS utility classes directly in your components for styling. This method offers granular control over individual component styles.
+
+
+To implement your chosen theming style, adjust the `style` setting in your `components.json` file:
+
+```json
+{
+  // ...
+  "style": "new-york"
+  // ...
+}
+```
+
+Learn more about theming in the [shadcn/ui theming documentation](https://ui.shadcn.com/docs/theming).
+
+
+React Native Reusables adapts these concepts for React Native, providing you with the same open, composable, and customizable foundation tailored for native apps.
