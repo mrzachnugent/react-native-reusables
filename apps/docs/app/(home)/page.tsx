@@ -12,7 +12,7 @@ export default function HomePage() {
             variant='outline'
             className='bg-card dark:bg-secondary border-border/70 shadow-sm font-normal gap-1 pr-2'
           >
-            Download the app <ArrowRightIcon className='size-3' />
+            Download the showcase app <ArrowRightIcon className='size-3' />
           </Badge>
         </div>
         <h1 className='text-primary/90 leading-tighter max-w-3xl xl:max-w-7xl text-4xl font-semibold tracking-tight text-balance lg:leading-[1.1] xl:font-medium xl:text-5xl xl:tracking-tighter'>

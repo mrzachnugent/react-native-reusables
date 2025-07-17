@@ -1,64 +1,39 @@
 ---
 title: Introduction
-description: TODO
 ---
 
 import { Button } from '@/registry/new-york/components/ui/button';
 import { Text } from '@/registry/new-york/components/ui/text';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/registry/new-york/components/ui/accordion';
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+<div className='h-4' />
 
-Differences:
-- Portal
-- No cascading styles
-- Use of reanimated
-- rn-primitives
-- Icons
-- Managing UI State (programmatic open/close...)
+<blockquote cite="https://ui.shadcn.com/docs" className='text-fd-foreground/70 font-normal'>
+This is not a component library. It is how you build your component library.
+</blockquote>
 
-<Button>
-  <Text>Get Started</Text>
-</Button>
 
-     <Accordion
-        type='multiple'
-        collapsible
-        defaultValue={['item-1']}
-        className='w-full max-w-sm native:max-w-md'
-      >
-        <AccordionItem value='item-1'>
-          <AccordionTrigger>
-            <Text>Is it accessible?</Text>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger>
-            <Text>What are universal components?</Text>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Text>
-              In the world of React Native, universal components are components that work on both
-              web and native platforms.
-            </Text>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value='item-3'>
-          <AccordionTrigger>
-            <Text>Is this component universal?</Text>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Text>Yes. Try it out on the web, iOS, and/or Android.</Text>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+<span className='[&_h2]:font-normal '>
+  ## Bringing the shadcn/ui design system to React Native
+</span>  
 
-## What is Next?
+- Follows the same styling, structure, and naming conventions wherever possible.
+- Built with familiar tools and libraries.
+- Let's you use the design system you love, with the tools you already know, to build beautiful universal apps.
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+
+<span className='[&_h2]:font-normal'>
+  ## Key differences from shadcn/ui
+</span>
+
+- **Nativewind**: React Native Reusables integrates with NativeWind for utility-first styling on native, providing a Tailwind-like experience adapted for React Native.
+- **rn-primitives**: A universal port of Radix UI primitives for React Native with an almost identical API, enabling consistent composition on native platforms.
+- **Portals**: React Native doesn’t support DOM portals. Components like modals, dropdowns, and toasts require a `PortalHost` near the root of your app.
+- **No cascading styles**: You can’t style child elements (like `Text`) from a parent’s class. Each element must be styled directly.
+- **Animations**: Uses `react-native-reanimated` for smooth, native performance.
+- **Icons**: Use a wrapper component like `<Icon as={LeftArrowIcon} />` to avoid wrapping every imported icon individually with `cssInterop`.
+- **Programmatic control**: Some components, such as `DropdownMenu`, can’t be controlled with `open` or `onOpenChange` props. Instead, you use a `ref` to manage open and close behavior after layout calculation.
+
+<div className='h-2' />
+
+React Native Reusables stays true to the spirit of <a href='https://ui.shadcn.com' target='_blank' rel='noreferrer' className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>shadcn/ui</a> while adapting it to the unique constraints of mobile/universal development.
