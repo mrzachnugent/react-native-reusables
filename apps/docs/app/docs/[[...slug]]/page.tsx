@@ -9,10 +9,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-function getRandomBoolean() {
-  return Math.random() < 0.5;
-}
-
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
   const page = source.getPage(params.slug);
@@ -26,8 +22,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
       full={page.data.full}
       breadcrumb={{ includePage: false }}
       tableOfContent={{
-        footer:
-          page.data.title !== 'Hire us' && getRandomBoolean() ? <TableOfContentFooter /> : null,
+        footer: shouldShowTableOfContentFooter(page.data.title) ? <TableOfContentFooter /> : null,
       }}
       footer={{
         component: <Footer url={page.url} />,
@@ -70,55 +65,61 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 
 function NeighbourButtons({ url }: { url: string }) {
   const neighbours = findNeighbour(source.pageTree, url);
+
+  const isManualInstallation = url === '/docs/installation/manual';
+
   return (
     <div className='flex items-center gap-2'>
-      {neighbours.previous && (
+      {neighbours.previous || isManualInstallation ? (
         <Button variant='outline' size='icon' className='size-8 border-border/70' asChild>
-          <Link href={neighbours.previous.url}>
+          <Link href={neighbours.previous?.url || '/docs'}>
             <ArrowLeftIcon />
           </Link>
         </Button>
-      )}
-      {neighbours.next && (
+      ) : null}
+      {neighbours.next || isManualInstallation ? (
         <Button variant='outline' size='icon' className='size-8 border-border/70' asChild>
-          <Link href={neighbours.next.url}>
+          <Link href={neighbours.next?.url || '/docs/customization'}>
             <ArrowRightIcon />
           </Link>
         </Button>
-      )}
+      ) : null}
     </div>
   );
 }
 
 function Footer({ url }: { url: string }) {
   const neighbours = findNeighbour(source.pageTree, url);
+
+  const isManualInstallation = url === '/docs/installation/manual';
+
   return (
     <footer>
       <div className='flex justify-between h-16 w-full items-center gap-2'>
-        {neighbours.previous ? (
+        {neighbours.previous || isManualInstallation ? (
           <Button
             variant='ghost'
             size='sm'
             asChild
             className='bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80'
           >
-            <Link href={neighbours.previous.url}>
+            <Link href={neighbours.previous?.url || '/docs'}>
               <ArrowLeftIcon />
-              {neighbours.previous.name}
+              {neighbours.previous?.name || 'Introduction'}
             </Link>
           </Button>
         ) : (
           <div />
         )}
-        {neighbours.next ? (
+        {neighbours.next || isManualInstallation ? (
           <Button
             variant='ghost'
             size='sm'
             asChild
             className='bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80'
           >
-            <Link href={neighbours.next.url}>
-              {neighbours.next.name}
+            <Link href={neighbours.next?.url || '/docs/customization'}>
+              {neighbours.next?.name || 'Customization'}
               <ArrowRightIcon />
             </Link>
           </Button>
@@ -190,6 +191,12 @@ function TableOfContentFooter() {
       </Link>
     </div>
   );
+}
+
+const PAGE_TITLES_TO_NOT_SHOW_FOOTER = ['Installation', 'Hire us'];
+
+function shouldShowTableOfContentFooter(title: string) {
+  return !PAGE_TITLES_TO_NOT_SHOW_FOOTER.includes(title) && Math.random() < 0.5;
 }
 
 export async function generateStaticParams() {

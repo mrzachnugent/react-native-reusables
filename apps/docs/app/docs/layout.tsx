@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { source } from '@docs/lib/source';
 import { RnrIcon } from '@docs/components/icons/rnr-icon';
 
+const SIDEBAR_PROPS = { className: '[&>div]:pt-3' };
+
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <DocsLayout
@@ -17,7 +19,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         ),
       }}
-      sidebar={{ className: '[&>div]:pt-3' }}
+      sidebar={SIDEBAR_PROPS}
       githubUrl='https://github.com/mrzachnugent/react-native-reusables'
     >
       {children}
