@@ -29,6 +29,9 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
         footer:
           page.data.title !== 'Hire us' && getRandomBoolean() ? <TableOfContentFooter /> : null,
       }}
+      footer={{
+        component: <Footer url={page.url} />,
+      }}
     >
       <DocsBody>
         <div className='flex items-center justify-between gap-2'>
@@ -81,6 +84,85 @@ function NeighbourButtons({ url }: { url: string }) {
         </Button>
       )}
     </div>
+  );
+}
+
+function Footer({ url }: { url: string }) {
+  const neighbours = findNeighbour(source.pageTree, url);
+  return (
+    <footer>
+      <div className='flex justify-between h-16 w-full items-center gap-2'>
+        {neighbours.previous ? (
+          <Button
+            variant='ghost'
+            size='sm'
+            asChild
+            className='bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80'
+          >
+            <Link href={neighbours.previous.url}>
+              <ArrowLeftIcon />
+              {neighbours.previous.name}
+            </Link>
+          </Button>
+        ) : (
+          <div />
+        )}
+        {neighbours.next ? (
+          <Button
+            variant='ghost'
+            size='sm'
+            asChild
+            className='bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80'
+          >
+            <Link href={neighbours.next.url}>
+              {neighbours.next.name}
+              <ArrowRightIcon />
+            </Link>
+          </Button>
+        ) : null}
+      </div>
+      <div className='flex h-20 items-center justify-between'>
+        <div className='text-fd-muted-foreground w-full text-center text-xs leading-loose lg:text-sm px-4 text-balance'>
+          Built by{' '}
+          <a
+            href='https://x.com/mrzachnugent'
+            target='_blank'
+            rel='noreferrer'
+            className='underline underline-offset-4'
+          >
+            mrzachnugent
+          </a>{' '}
+          at{' '}
+          <a
+            href='https://foundedlabs.com'
+            target='_blank'
+            rel='noreferrer'
+            className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'
+          >
+            Founded Labs
+          </a>
+          , bringing{' '}
+          <a
+            href='https://ui.shadcn.com'
+            target='_blank'
+            rel='noreferrer'
+            className='underline underline-offset-4'
+          >
+            shadcn/ui
+          </a>{' '}
+          to React Native. Source on{' '}
+          <a
+            href='https://github.com/mrzachnugent/react-native-reusables'
+            target='_blank'
+            rel='noreferrer'
+            className='underline underline-offset-4'
+          >
+            GitHub
+          </a>
+          .
+        </div>
+      </div>
+    </footer>
   );
 }
 
