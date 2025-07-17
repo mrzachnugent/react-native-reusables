@@ -30,20 +30,59 @@ To implement your chosen theming style, adjust the `style` setting in your `comp
 
 Learn more about `components.json` in the [shadcn/ui components.json documentation](https://ui.shadcn.com/docs/components-json).
 
-
 ## Theming
 
-Theming in React Native Reusables allows you to define and apply consistent styles across your components. You can choose between two methods:
+Theming in React Native Reusables allows you to define and apply consistent styles across your components. You can choose between CSS variables (recommended) or utility classes:
 
 - **CSS Variables**: Enables global theming by defining variables like `--background` and `--foreground` in your css file. This approach allows for easy theme switching and customization.
-- **Utility Classes**: Utilizes Tailwind CSS utility classes directly in your components for styling. This method offers granular control over individual component styles.
-
 
 ```tsx
-<div className="bg-background text-foreground md:bg-muted" />
+  <div className="bg-background text-foreground" />
+```
+
+<Callout title="Update theme.ts when changing CSS variables" type="warn">
+  If you update or rename any CSS variables (like `--background`, `--primary`, etc.), don't forget to update `theme.ts` as well.
+</Callout>
+
+<div className="h-2" />
+
+- **Utility Classes**: Utilizes Tailwind CSS utility classes directly in your components for styling. This method offers granular control over individual component styles.
+
+```tsx
+  <div className="bg-zinc-950 dark:bg-white text-zinc-50 dark:text-zinc-950" />
 ```
 
 Learn more about theming in the [shadcn/ui theming documentation](https://ui.shadcn.com/docs/theming).
 
+## Tailwind Configuration
+
+NativeWind currently uses Tailwind CSS v3, which means a `tailwind.config.ts` file is still required. This is where you:
+
+- Extend the default theme (e.g. colors, spacing, border radius)
+
+- Register custom class shortcuts or plugins
+
+- Enable dark mode or other variants
+
+- Without this config, utility classes like `bg-background` won't resolve correctly.
+
+## `theme.ts`
+
+The `theme.ts` file brings your theme into TypeScript.
+
+<Callout title="Same variables as your CSS" >
+  The values in `theme.ts` mirror the CSS variables defined in your global styles.
+</Callout>
+
+- Access to the same CSS variable values defined in your styles, directly in code
+
+- Typed theme values for use in JavaScript/TypeScript logic
+
+- Navigation theming via the `NAV_THEME` export, which plugs into react-navigation
+
+This lets you keep both your styles and logic in sync with your app's theme.
+
+
+<div className="h-2" />
 
 React Native Reusables adapts these concepts for React Native, providing you with the same open, composable, and customizable foundation tailored for native apps.
