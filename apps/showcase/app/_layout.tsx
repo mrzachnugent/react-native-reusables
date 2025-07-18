@@ -3,8 +3,8 @@ import '../global.css';
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
-import { SettingsNavLink } from '@showcase/components/SettingsNavLink';
-import { ThemeToggle } from '@showcase/components/ThemeToggle';
+import { HeaderRightView } from '@showcase/components/header-right-view';
+import { ThemeToggle } from '@showcase/components/theme-toggle';
 import { StyleProvider, useStyle } from '@showcase/components/styles/style-provider';
 import { Text } from '@showcase/components/styles/ui';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
@@ -22,8 +22,8 @@ const LIGHT_THEME: Theme = {
   colors: NAV_THEME.light,
   fonts: {
     bold: { fontFamily: 'Geist-Medium', fontWeight: '500' },
-    medium: { fontFamily: 'Geist', fontWeight: '400' },
-    regular: { fontFamily: 'Geist-Light', fontWeight: '300' },
+    medium: { fontFamily: 'Geist-Medium', fontWeight: '500' },
+    regular: { fontFamily: 'Geist', fontWeight: '400' },
     heavy: { fontFamily: 'Geist-SemiBold', fontWeight: '600' },
   },
 };
@@ -32,8 +32,8 @@ const DARK_THEME: Theme = {
   colors: NAV_THEME.dark,
   fonts: {
     bold: { fontFamily: 'Geist-Medium', fontWeight: '500' },
-    medium: { fontFamily: 'Geist', fontWeight: '400' },
-    regular: { fontFamily: 'Geist-Light', fontWeight: '300' },
+    medium: { fontFamily: 'Geist-Medium', fontWeight: '500' },
+    regular: { fontFamily: 'Geist', fontWeight: '400' },
     heavy: { fontFamily: 'Geist-SemiBold', fontWeight: '600' },
   },
 };
@@ -74,7 +74,6 @@ export default function RootLayout() {
             <StyleBorderRadiusProvider>
               <Stack
                 screenOptions={{
-                  headerStyle: {},
                   headerBackTitle: 'Back',
                   headerTitle(props) {
                     return (
@@ -83,7 +82,7 @@ export default function RootLayout() {
                       </Text>
                     );
                   },
-                  headerRight: () => <SettingsNavLink />,
+                  headerRight: () => <HeaderRightView />,
                 }}
               >
                 <Stack.Screen
@@ -99,10 +98,10 @@ export default function RootLayout() {
                 />
 
                 <Stack.Screen
-                  name='settings'
+                  name='theming'
                   options={{
                     presentation: 'modal',
-                    title: 'Settings',
+                    title: 'Theming',
                     headerRight: () => <ThemeToggle />,
                   }}
                 />
