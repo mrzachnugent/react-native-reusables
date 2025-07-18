@@ -8,6 +8,7 @@ export default function InputScreen() {
       <KeyboardAwareScrollView
         contentContainerClassName='flex-1 justify-center items-center p-6'
         keyboardDismissMode='interactive'
+        keyboardShouldPersistTaps='handled'
       >
         <InputPreview />
       </KeyboardAwareScrollView>

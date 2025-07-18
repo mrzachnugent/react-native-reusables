@@ -31,9 +31,6 @@ export default function ComponentsScreen() {
         keyboardShouldPersistTaps='handled'
         keyboardDismissMode='on-drag'
         showsVerticalScrollIndicator={false}
-        stickyHeaderIndices={Platform.select({
-          native: [0],
-        })}
         ListHeaderComponent={Platform.select({
           native: (
             <View className='pb-4'>
