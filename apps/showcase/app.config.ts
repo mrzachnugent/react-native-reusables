@@ -16,8 +16,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     policy: 'appVersion',
   },
   updates: {
-    fallbackToCacheTimeout: 0,
-    url: '',
+    url: 'https://u.expo.dev/ceb86f7d-1fed-4feb-98cb-2f2ba6223741',
   },
   splash: {
     image: './assets/images/splash.png',
@@ -75,6 +74,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         ],
       },
     ],
+    [
+      'react-native-edge-to-edge',
+      {
+        android: {
+          parentTheme: 'Material3',
+          enforceNavigationBarContrast: false,
+        },
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,
@@ -84,7 +92,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       origin: false,
     },
     eas: {
-      projectId: '',
+      projectId: 'ceb86f7d-1fed-4feb-98cb-2f2ba6223741',
     },
   },
 });
