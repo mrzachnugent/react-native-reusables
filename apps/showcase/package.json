@@ -19,7 +19,7 @@
     "testflight": "eas build -p ios --submit",
     "build:dev": "eas build --profile development",
     "build:preview": "eas build --profile preview",
-    "build:prod": "eas build --profile production",
+    "build:prod": "eas build --profile production --auto-submit",
     "update:ios": "eas update --platform ios",
     "build:web": "npx expo export -p web",
     "serve:web": "npx serve dist --single",
