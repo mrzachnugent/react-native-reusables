@@ -26,8 +26,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.reactnativereusables.showcase',
+    bundleIdentifier: 'com.reactnativereusables.app',
     associatedDomains: ['applinks:reactnativereusables.com'],
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
     edgeToEdgeEnabled: true,
@@ -35,7 +38,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './assets/images/adaptive-icon.png',
       backgroundColor: '#0A0A0A',
     },
-    package: 'com.reactnativereusables.showcase',
+    package: 'com.reactnativereusables.app',
     intentFilters: [
       {
         action: 'VIEW',
