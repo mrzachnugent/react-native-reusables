@@ -56,7 +56,7 @@ export default function ComponentsScreen() {
               )}
             >
               <View className='flex-row items-center gap-4'>
-                <Icon as={item.icon} className='text-muted-foreground size-4' />
+                <Icon as={item.icon} className='text-foreground/80 size-4' />
                 <Text className='text-base font-normal'>{toOptions(item.name)}</Text>
               </View>
               <Icon as={ChevronRight} className='text-muted-foreground size-4 stroke-[1.5px]' />
