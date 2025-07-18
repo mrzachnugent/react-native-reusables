@@ -29,11 +29,6 @@
         "expo-modules-*",
         "typescript"
       ]
-    },
-    "overrides": {
-      "mimic-fn": "4.0.0",
-      "onetime": "6.0.0",
-      "restore-cursor": "4.0.0"
     }
   },
   "prettier": {
