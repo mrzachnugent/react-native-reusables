@@ -36,7 +36,7 @@
     "react-native-svg": "15.11.2",
     "react-native-web": "~0.20.0",
     "remark-variables": "^1.4.9",
-    "shadcn": "2.8.0-canary.1",
+    "shadcn": "2.9.2",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },
