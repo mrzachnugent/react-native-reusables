@@ -56,7 +56,6 @@ export const COMPONENTS = [
   { name: 'select', icon: ListCheckIcon },
   { name: 'separator', icon: MinusIcon },
   { name: 'skeleton', icon: BoneIcon },
-  { name: 'slider', icon: Settings2Icon },
   { name: 'switch', icon: ToggleRightIcon },
   { name: 'tabs', icon: TableOfContentsIcon },
   { name: 'text', icon: LetterTextIcon },
