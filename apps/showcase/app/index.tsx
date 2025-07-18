@@ -44,7 +44,7 @@ export default function ComponentsScreen() {
           ),
         })}
         renderItem={({ item, index }) => (
-          <Link href={`/${item.name}`} asChild>
+          <Link href={`/components/${item.name}`} asChild>
             <Button
               variant='outline'
               size='lg'
