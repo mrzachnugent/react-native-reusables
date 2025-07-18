@@ -30,8 +30,7 @@ const textVariants = cva(
         p: 'leading-7 mt-3 sm:mt-6',
         blockquote: 'mt-4 sm:mt-6 border-l-2 pl-3 sm:pl-6 italic',
         code: cn(
-          'bg-muted relative rounded px-[0.3rem] py-[0.2rem] text-sm font-semibold',
-          Platform.select({ android: 'font-sans', default: 'font-mono' })
+          'font-mono bg-muted relative rounded px-[0.3rem] py-[0.2rem] text-sm font-semibold'
         ),
         lead: 'text-muted-foreground text-xl',
         large: 'text-lg font-semibold',
