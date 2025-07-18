@@ -77,7 +77,11 @@ export default function RootLayout() {
                   headerStyle: {},
                   headerBackTitle: 'Back',
                   headerTitle(props) {
-                    return <Text className='text-xl font-medium'>{toOptions(props.children)}</Text>;
+                    return (
+                      <Text className='text-xl ios:font-medium android:mt-1.5'>
+                        {toOptions(props.children)}
+                      </Text>
+                    );
                   },
                   headerRight: () => <SettingsNavLink />,
                 }}

@@ -7,6 +7,7 @@ export default function CardScreen() {
       <KeyboardAwareScrollView
         contentContainerClassName='flex-1 justify-center items-center p-6'
         keyboardDismissMode='interactive'
+        keyboardShouldPersistTaps='handled'
       >
         <CardPreview />
       </KeyboardAwareScrollView>
