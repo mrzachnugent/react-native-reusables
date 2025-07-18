@@ -1,14 +1,27 @@
+import { storage } from '@showcase/lib/storage';
 import * as React from 'react';
 
 type Style = 'default' | 'new-york';
 
 const StyleContext = React.createContext<{
   style: Style;
-  setStyle: React.Dispatch<React.SetStateAction<Style>>;
+  setStyle: (style: Style) => void;
 } | null>(null);
 
 function StyleProvider({ children }: { children: React.ReactNode }) {
-  const [style, setStyle] = React.useState<Style>('default');
+  const [style, setStyleState] = React.useState<Style>(() => {
+    const style = storage.getString('theme.style');
+    return style === 'new-york' ? 'new-york' : 'default';
+  });
+
+  function setStyle(style: Style) {
+    try {
+      storage.set('theme.style', style);
+      setStyleState(style);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return <StyleContext.Provider value={{ style, setStyle }}>{children}</StyleContext.Provider>;
 }

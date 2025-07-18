@@ -38,6 +38,11 @@ const DARK_THEME: Theme = {
   },
 };
 
+const THEMES = {
+  light: LIGHT_THEME,
+  dark: DARK_THEME,
+};
+
 SplashScreen.preventAutoHideAsync();
 
 export {
@@ -66,10 +71,12 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DARK_THEME : LIGHT_THEME}>
+    <ThemeProvider value={THEMES[colorScheme]}>
       <StyleProvider>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView
+          style={{ flex: 1, backgroundColor: THEMES[colorScheme].colors.background }}
+        >
           <KeyboardProvider>
             <StyleBorderRadiusProvider>
               <Stack
@@ -122,7 +129,7 @@ const defaultRadius = vars({
 function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {
   const { style } = useStyle();
   return (
-    <View style={style === 'default' ? defaultRadius : undefined} className='flex-1'>
+    <View style={style === 'default' ? { flex: 1, ...defaultRadius } : { flex: 1 }}>
       {children}
     </View>
   );
