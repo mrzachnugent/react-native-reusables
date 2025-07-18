@@ -79,7 +79,7 @@ export default function RootLayout() {
                   headerTitle(props) {
                     return (
                       <Text className='text-xl ios:font-medium android:mt-1.5'>
-                        {toOptions(props.children)}
+                        {toOptions(props.children.split('/').pop())}
                       </Text>
                     );
                   },
