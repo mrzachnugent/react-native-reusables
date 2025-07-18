@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "React Native Reusables Showcase",
+    "name": "Showcase",
     "slug": "react-native-reusables-showcase",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "example",
+    "scheme": "showcase",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "runtimeVersion": {
@@ -18,25 +18,47 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#18181B"
+      "backgroundColor": "#0A0A0A"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.reactnativereusables.showcase"
+      "bundleIdentifier": "com.reactnativereusables.showcase",
+      "associatedDomains": [
+        "applinks:reactnativereusables.com"
+      ]
     },
     "android": {
+      "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#18181B"
-      }
+        "backgroundColor": "#0A0A0A"
+      },
+      "package": "com.reactnativereusables.showcase",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "reactnativereusables.com",
+              "pathPrefix": "/showcase/links"
+            },
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "web": {
       "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.svg"
     },
     "plugins": [
       "expo-router",
@@ -44,15 +66,15 @@
         "expo-font",
         {
           "fonts": [
-            "node_modules/@expo-google-fonts/geist/900Black/Geist_900Black.ttf",
-            "node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf",
-            "node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf",
-            "node_modules/@expo-google-fonts/geist/600SemiBold/Geist_600SemiBold.ttf",
-            "node_modules/@expo-google-fonts/geist/500Medium/Geist_500Medium.ttf",
-            "node_modules/@expo-google-fonts/geist/400Regular/Geist_400Regular.ttf",
-            "node_modules/@expo-google-fonts/geist/300Light/Geist_300Light.ttf",
-            "node_modules/@expo-google-fonts/geist/200ExtraLight/Geist_200ExtraLight.ttf",
-            "node_modules/@expo-google-fonts/geist/100Thin/Geist_100Thin.ttf"
+            "../../node_modules/@expo-google-fonts/geist/900Black/Geist_900Black.ttf",
+            "../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf",
+            "../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf",
+            "../../node_modules/@expo-google-fonts/geist/600SemiBold/Geist_600SemiBold.ttf",
+            "../../node_modules/@expo-google-fonts/geist/500Medium/Geist_500Medium.ttf",
+            "../../node_modules/@expo-google-fonts/geist/400Regular/Geist_400Regular.ttf",
+            "../../node_modules/@expo-google-fonts/geist/300Light/Geist_300Light.ttf",
+            "../../node_modules/@expo-google-fonts/geist/200ExtraLight/Geist_200ExtraLight.ttf",
+            "../../node_modules/@expo-google-fonts/geist/100Thin/Geist_100Thin.ttf"
           ]
         }
       ]
@@ -67,7 +89,6 @@
       "eas": {
         "projectId": ""
       }
-    },
-    "owner": "*"
+    }
   }
 }
