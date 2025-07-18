@@ -1,11 +1,16 @@
 import { InputPreview } from '@showcase/components/styles/examples';
 import * as React from 'react';
-import { View } from 'react-native';
+import { KeyboardAwareScrollView, KeyboardGestureArea } from 'react-native-keyboard-controller';
 
 export default function InputScreen() {
   return (
-    <View className='flex-1 justify-center items-center p-6'>
-      <InputPreview />
-    </View>
+    <KeyboardGestureArea interpolator='ios' style={{ flex: 1 }}>
+      <KeyboardAwareScrollView
+        contentContainerClassName='flex-1 justify-center items-center p-6'
+        keyboardDismissMode='interactive'
+      >
+        <InputPreview />
+      </KeyboardAwareScrollView>
+    </KeyboardGestureArea>
   );
 }
