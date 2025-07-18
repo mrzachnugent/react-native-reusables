@@ -36,6 +36,7 @@ function HoverCardContent({
                     props.side === 'bottom' && 'slide-in-from-top-2',
                     props.side === 'top' && 'slide-in-from-bottom-2'
                   ),
+                  native: 'shadow-black/10',
                 }),
                 className
               )}

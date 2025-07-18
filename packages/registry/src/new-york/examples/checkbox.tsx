@@ -1,9 +1,10 @@
 import { Checkbox } from '@/registry/new-york/components/ui/checkbox';
 import { Label } from '@/registry/new-york/components/ui/label';
-import * as React from 'react';
-import { Platform, View } from 'react-native';
 import { Text } from '@/registry/new-york/components/ui/text';
 import { cn } from '@/registry/new-york/lib/utils';
+import * as Haptics from 'expo-haptics';
+import * as React from 'react';
+import { Platform, View } from 'react-native';
 
 export function CheckboxPreview() {
   const [state, setState] = React.useState({
@@ -15,6 +16,7 @@ export function CheckboxPreview() {
 
   function toggleCheckedState(key: keyof typeof state) {
     return () => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       setState((prev) => ({
         ...prev,
         [key]: !prev[key],

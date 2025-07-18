@@ -21,21 +21,21 @@ export function HoverCardPreview() {
     <HoverCard>
       <HoverCardTrigger asChild>
         <Button variant='link'>
-          <Text>@nextjs</Text>
+          <Text>@expo</Text>
         </Button>
       </HoverCardTrigger>
       <HoverCardContent insets={contentInsets} className='w-80'>
         <View className='flex flex-row justify-between gap-4'>
           <Avatar alt='Vercel avatar'>
-            <AvatarImage source={{ uri: 'https://github.com/vercel.png' }} />
+            <AvatarImage source={{ uri: 'https://github.com/expo.png' }} />
             <AvatarFallback>
-              <Text>VC</Text>
+              <Text>E</Text>
             </AvatarFallback>
           </Avatar>
           <View className='gap-1 flex-1'>
-            <Text className='text-sm font-semibold'>@nextjs</Text>
+            <Text className='text-sm font-semibold'>@expo</Text>
             <Text className='text-sm'>
-              The React Framework – created and maintained by @vercel.
+              Framework and tools for creating native apps with React.
             </Text>
             <Text className='text-muted-foreground text-xs'>Joined December 2021</Text>
           </View>
