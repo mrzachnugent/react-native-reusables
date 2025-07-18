@@ -27,8 +27,8 @@ export function CardPreview() {
       <CardContent>
         <View className='w-full justify-center gap-4'>
           <View className='gap-2'>
-            <Label htmlFor='name'>Name</Label>
-            <Input id='name' placeholder='Name of your project' />
+            <Label htmlFor='email'>Email</Label>
+            <Input id='email' placeholder='m@example.com' />
           </View>
           <View className='gap-2'>
             <View className='flex flex-row items-center justify-between'>
