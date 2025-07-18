@@ -11,11 +11,11 @@
     "build": "npx expo export -p web",
     "serve": "npx serve dist --single",
     "clean": "rm -rf .expo node_modules",
-    "postinstall": "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
+    "postinstall": "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@expo-google-fonts/geist": "^0.4.0",
-    "@gorhom/bottom-sheet": "^5.1.4",
     "@hookform/resolvers": "^3.3.4",
     "@react-native-community/slider": "4.5.6",
     "@react-navigation/material-top-tabs": "^7.0.0",
@@ -32,7 +32,7 @@
     "@tanstack/react-table": "^8.11.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "expo": "^53.0.17",
+    "expo": "^53.0.19",
     "expo-font": "~13.3.2",
     "expo-haptics": "~14.1.4",
     "expo-linking": "~7.1.7",
@@ -49,6 +49,7 @@
     "react-native": "0.79.5",
     "react-native-calendars": "^1.1302.0",
     "react-native-gesture-handler": "~2.24.0",
+    "react-native-keyboard-controller": "^1.17.5",
     "react-native-reanimated": "~3.17.5",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "^4.11.1",

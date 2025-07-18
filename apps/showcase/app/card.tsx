@@ -1,10 +1,15 @@
-import { View } from 'react-native';
 import { CardPreview } from '@showcase/components/styles/examples';
+import { KeyboardAwareScrollView, KeyboardGestureArea } from 'react-native-keyboard-controller';
 
 export default function CardScreen() {
   return (
-    <View className='flex-1 justify-center items-center gap-5 p-6'>
-      <CardPreview />
-    </View>
+    <KeyboardGestureArea interpolator='ios' style={{ flex: 1 }}>
+      <KeyboardAwareScrollView
+        contentContainerClassName='flex-1 justify-center items-center p-6'
+        keyboardDismissMode='interactive'
+      >
+        <CardPreview />
+      </KeyboardAwareScrollView>
+    </KeyboardGestureArea>
   );
 }

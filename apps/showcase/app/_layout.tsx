@@ -1,7 +1,6 @@
 import '../global.css';
 
 import { NAV_THEME } from '@/registry/new-york/lib/constants';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { SettingsNavLink } from '@showcase/components/SettingsNavLink';
@@ -16,6 +15,7 @@ import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -70,7 +70,7 @@ export default function RootLayout() {
       <StyleProvider>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <BottomSheetModalProvider>
+          <KeyboardProvider>
             <StyleBorderRadiusProvider>
               <Stack
                 screenOptions={{
@@ -104,8 +104,8 @@ export default function RootLayout() {
                 />
               </Stack>
             </StyleBorderRadiusProvider>
-          </BottomSheetModalProvider>
-          <PortalHost />
+            <PortalHost />
+          </KeyboardProvider>
         </GestureHandlerRootView>
       </StyleProvider>
     </ThemeProvider>
