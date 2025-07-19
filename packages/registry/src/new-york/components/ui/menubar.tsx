@@ -54,7 +54,7 @@ function Menubar({
       ) : null}
       <MenubarPrimitive.Root
         className={cn(
-          'bg-background flex-row flex h-9 items-center gap-1 rounded-md border border-border p-1 shadow-sm',
+          'bg-background flex-row flex h-10 sm:h-9 items-center gap-1 rounded-md border border-border p-1 shadow-sm',
           Platform.select({
             native: 'shadow-black/5',
           }),
@@ -86,7 +86,7 @@ function MenubarTrigger({
     >
       <MenubarPrimitive.Trigger
         className={cn(
-          'group flex items-center rounded-md px-2 py-1',
+          'group flex items-center rounded-md px-2 py-1.5 sm:py-1',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground outline-none cursor-default',
           }),
@@ -122,7 +122,7 @@ function MenubarSubTrigger({
     >
       <MenubarPrimitive.SubTrigger
         className={cn(
-          'group flex flex-row items-center rounded-sm px-2 py-1.5 active:bg-accent',
+          'group flex flex-row items-center rounded-sm px-2 py-2 sm:py-1.5 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none [&_svg]:pointer-events-none',
           }),
@@ -226,7 +226,7 @@ function MenubarItem({
     >
       <MenubarPrimitive.Item
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-2 sm:py-1.5 active:bg-accent',
           Platform.select({
             web: cn(
               'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
@@ -256,7 +256,7 @@ function MenubarCheckboxItem({
     <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <MenubarPrimitive.CheckboxItem
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-2 sm:py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
           }),
@@ -294,7 +294,7 @@ function MenubarRadioItem({
     <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <MenubarPrimitive.RadioItem
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-2 sm:py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none  data-[disabled]:pointer-events-none',
           }),
@@ -325,7 +325,11 @@ function MenubarLabel({
 }) {
   return (
     <MenubarPrimitive.Label
-      className={cn('text-foreground px-2 py-1.5 text-sm font-medium', inset && 'pl-8', className)}
+      className={cn(
+        'text-foreground px-2 py-2 sm:py-1.5 text-sm font-medium',
+        inset && 'pl-8',
+        className
+      )}
       {...props}
     />
   );

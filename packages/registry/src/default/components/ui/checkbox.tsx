@@ -7,7 +7,7 @@ import { Check } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-const DEFAULT_HIT_SLOP = 12;
+const DEFAULT_HIT_SLOP = 24;
 
 function Checkbox({
   className,

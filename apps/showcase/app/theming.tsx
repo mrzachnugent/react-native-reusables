@@ -43,12 +43,6 @@ function RadioCheckbox({
     };
   });
 
-  const checkboxContainerStyle = useAnimatedStyle(() => {
-    return {
-      marginTop: withTiming(derivedStyle.value === 'default' ? 3 : 2),
-    };
-  });
-
   function onPress(style: 'new-york' | 'default') {
     return () => {
       hapticStyleChange();
@@ -68,16 +62,15 @@ function RadioCheckbox({
       )}
     >
       <View className='flex flex-row items-start gap-3'>
-        <Animated.View style={checkboxContainerStyle}>
-          <Checkbox
-            id={style}
-            checked={style === selectedStyle}
-            onCheckedChange={onPress(style)}
-            checkedClassName='border-blue-600 bg-blue-600 dark:border-blue-700'
-            indicatorClassName='bg-blue-600 dark:bg-blue-700'
-            iconClassName='text-white'
-          />
-        </Animated.View>
+        <Checkbox
+          id={style}
+          checked={style === selectedStyle}
+          onCheckedChange={onPress(style)}
+          className='mt-0.5'
+          checkedClassName='border-blue-600 bg-blue-600 dark:border-blue-700'
+          indicatorClassName='bg-blue-600 dark:bg-blue-700'
+          iconClassName='text-white'
+        />
         <View className='flex-1'>
           <Animated.Text style={fontSizeStyle} className='font-medium text-foreground'>
             {title}

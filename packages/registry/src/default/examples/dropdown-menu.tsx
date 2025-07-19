@@ -20,8 +20,8 @@ export function DropdownMenuPreview() {
   const contentInsets = {
     top: insets.top,
     bottom: insets.bottom,
-    left: 12,
-    right: 12,
+    left: 4,
+    right: 4,
   };
 
   return (
@@ -31,7 +31,7 @@ export function DropdownMenuPreview() {
           <Text>Open</Text>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent insets={contentInsets} className='w-56' align='start'>
+      <DropdownMenuContent insets={contentInsets} sideOffset={2} className='w-56' align='start'>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
