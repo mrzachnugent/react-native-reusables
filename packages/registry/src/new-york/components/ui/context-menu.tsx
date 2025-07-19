@@ -47,7 +47,7 @@ function ContextMenuSubTrigger({
     >
       <ContextMenuPrimitive.SubTrigger
         className={cn(
-          'group flex flex-row items-center rounded-sm px-2 py-1.5 active:bg-accent',
+          'group flex flex-row items-center rounded-sm px-2 py-2 sm:py-1.5 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none [&_svg]:pointer-events-none',
           }),
@@ -103,7 +103,10 @@ function ContextMenuContent({
         style={Platform.select({
           web: overlayStyle ?? undefined,
           native: overlayStyle
-            ? StyleSheet.flatten([StyleSheet.absoluteFill, overlayStyle])
+            ? StyleSheet.flatten([
+                StyleSheet.absoluteFill,
+                overlayStyle as typeof StyleSheet.absoluteFill,
+              ])
             : StyleSheet.absoluteFill,
         })}
         className={overlayClassName}
@@ -151,7 +154,7 @@ function ContextMenuItem({
     >
       <ContextMenuPrimitive.Item
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-2 sm:py-1.5 active:bg-accent',
           Platform.select({
             web: cn(
               'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
@@ -181,7 +184,7 @@ function ContextMenuCheckboxItem({
     <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <ContextMenuPrimitive.CheckboxItem
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-2 sm:py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
           }),
@@ -219,7 +222,7 @@ function ContextMenuRadioItem({
     <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <ContextMenuPrimitive.RadioItem
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-2 sm:py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none  data-[disabled]:pointer-events-none',
           }),
@@ -250,7 +253,11 @@ function ContextMenuLabel({
 }) {
   return (
     <ContextMenuPrimitive.Label
-      className={cn('text-foreground px-2 py-1.5 text-sm font-medium', inset && 'pl-8', className)}
+      className={cn(
+        'text-foreground px-2 py-2 sm:py-1.5 text-sm font-medium',
+        inset && 'pl-8',
+        className
+      )}
       {...props}
     />
   );

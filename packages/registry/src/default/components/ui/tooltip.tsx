@@ -37,7 +37,7 @@ function TooltipContent({
             <TooltipPrimitive.Content
               sideOffset={sideOffset}
               className={cn(
-                'bg-popover border border-border z-50 rounded-md px-3 py-1.5',
+                'bg-popover border border-border z-50 rounded-md px-3 py-2 sm:py-1.5',
                 Platform.select({
                   web: cn(
                     'animate-in fade-in-0 zoom-in-95 w-fit origin-(--radix-tooltip-content-transform-origin) text-balance',

@@ -24,25 +24,25 @@ export function PopoverPreview() {
               <Label className='w-24 web:block' htmlFor='width'>
                 Width
               </Label>
-              <Input id='width' defaultValue='100%' className='flex-1 h-8' />
+              <Input id='width' defaultValue='100%' className='flex-1 sm:h-8' />
             </View>
             <View className='flex-row items-center gap-4'>
               <Label className='w-24 web:block' htmlFor='maxWidth'>
                 Max. width
               </Label>
-              <Input id='maxWidth' defaultValue='300px' className='flex-1 h-8' />
+              <Input id='maxWidth' defaultValue='300px' className='flex-1 sm:h-8' />
             </View>
             <View className='flex-row items-center gap-4'>
               <Label className='w-24 web:block' htmlFor='height'>
                 Height
               </Label>
-              <Input id='height' defaultValue='25px' className='flex-1 h-8' />
+              <Input id='height' defaultValue='25px' className='flex-1 sm:h-8' />
             </View>
             <View className='flex-row items-center gap-4'>
               <Label className='w-24 web:block' htmlFor='maxHeight'>
                 Max. height
               </Label>
-              <Input id='maxHeight' defaultValue='none' className='flex-1 h-8' />
+              <Input id='maxHeight' defaultValue='none' className='flex-1 sm:h-8' />
             </View>
           </View>
         </View>

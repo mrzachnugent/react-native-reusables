@@ -53,7 +53,7 @@ function DropdownMenuSubTrigger({
     >
       <DropdownMenuPrimitive.SubTrigger
         className={cn(
-          'group flex flex-row items-center rounded-sm px-2 py-1.5 active:bg-accent',
+          'group flex flex-row items-center rounded-sm px-2 py-2 sm:py-1.5 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none [&_svg]:pointer-events-none',
           }),
@@ -157,7 +157,7 @@ function DropdownMenuItem({
     >
       <DropdownMenuPrimitive.Item
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm px-2 py-2 sm:py-1.5 active:bg-accent',
           Platform.select({
             web: cn(
               'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
@@ -187,7 +187,7 @@ function DropdownMenuCheckboxItem({
     <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <DropdownMenuPrimitive.CheckboxItem
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-2 sm:py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none data-[disabled]:pointer-events-none',
           }),
@@ -225,7 +225,7 @@ function DropdownMenuRadioItem({
     <TextClassContext.Provider value='text-sm text-popover-foreground select-none group-active:text-accent-foreground'>
       <DropdownMenuPrimitive.RadioItem
         className={cn(
-          'group relative flex flex-row items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 active:bg-accent',
+          'group relative flex flex-row items-center gap-2 rounded-sm py-2 sm:py-1.5 pr-2 pl-8 active:bg-accent',
           Platform.select({
             web: 'focus:bg-accent focus:text-accent-foreground cursor-default outline-none  data-[disabled]:pointer-events-none',
           }),
@@ -256,7 +256,11 @@ function DropdownMenuLabel({
 }) {
   return (
     <DropdownMenuPrimitive.Label
-      className={cn('text-foreground px-2 py-1.5 text-sm font-medium', inset && 'pl-8', className)}
+      className={cn(
+        'text-foreground px-2 py-2 sm:py-1.5 text-sm font-medium',
+        inset && 'pl-8',
+        className
+      )}
       {...props}
     />
   );
