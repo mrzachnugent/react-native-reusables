@@ -20,7 +20,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
     <DocsPage
       toc={page.data.toc}
       full={page.data.full}
-      breadcrumb={{ includePage: false }}
+      breadcrumb={{ enabled: false }}
       tableOfContent={{
         footer: shouldShowTableOfContentFooter(page.data.title) ? <TableOfContentFooter /> : null,
       }}

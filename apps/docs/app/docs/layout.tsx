@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { source } from '@docs/lib/source';
 import { RnrIcon } from '@docs/components/icons/rnr-icon';
 
-const SIDEBAR_PROPS = { className: '[&>div]:pt-3' };
+const SIDEBAR_PROPS = { className: '[&>div]:pt-3', defaultOpenLevel: 1 };
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
