@@ -16,7 +16,7 @@ export default function SettingsScreen() {
       <RadioCheckbox
         style='new-york'
         title='New York'
-        description='Compact and modern with smaller components, subtle shadows, and rounder corners.'
+        description='Compact and modern with smaller components, and subtle shadows.'
       />
       <Text className='text-center text-xs px-4 opacity-80'>
         Your app's style can be set in the <Text variant='code'>components.json</Text>.
@@ -74,7 +74,8 @@ function RadioCheckbox({
             checked={style === selectedStyle}
             onCheckedChange={onPress(style)}
             checkedClassName='border-blue-600 bg-blue-600 dark:border-blue-700'
-            indicatorClassName='bg-blue-600 text-white dark:bg-blue-700 dark:text-white'
+            indicatorClassName='bg-blue-600 dark:bg-blue-700'
+            iconClassName='text-white'
           />
         </Animated.View>
         <View className='flex-1'>

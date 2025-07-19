@@ -87,7 +87,8 @@ export function CheckboxPreview() {
             checked={state.toggle2Checked}
             onCheckedChange={toggleCheckedState('toggle2Checked')}
             checkedClassName='border-blue-600 bg-blue-600 dark:border-blue-700'
-            indicatorClassName='bg-blue-600 text-white dark:bg-blue-700 dark:text-white'
+            indicatorClassName='bg-blue-600 dark:bg-blue-700'
+            iconClassName='text-white'
           />
           <View className='flex-1'>
             <Text className='text-sm leading-none font-medium'>Enable notifications</Text>
