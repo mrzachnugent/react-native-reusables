@@ -61,14 +61,14 @@ const FILE_CHECKS: Array<FileCheck> = [
       {
         content: ["inlineRem", "16"],
         message: "The inlineRem is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#update-the-default-inlined-rem-value"
       }
     ]
   },
   {
     name: "Root Layout",
     fileNames: ["app/_layout.tsx", "src/app/_layout.tsx"],
-    docs: "https://google.com", // TODO: add reactnativereusables link
+    docs: "hhttps://www.reactnativereusables.com/docs/installation/manual#add-the-portal-to-your-root-layout", //
     includes: [
       {
         content: [".css"],
@@ -78,7 +78,7 @@ const FILE_CHECKS: Array<FileCheck> = [
       {
         content: ["<PortalHost"],
         message: "The PortalHost component is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#add-the-portal-to-your-root-layout"
       }
     ]
   }
@@ -92,7 +92,7 @@ const DEPRECATED_FROM_LIB = [
       {
         content: ["iconWithClassName"],
         message: "lib/icons and its contents are deprecated. Use the new icon wrapper from components/ui/icon.",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/changelog#deprecated"
       }
     ]
   },
@@ -103,7 +103,7 @@ const DEPRECATED_FROM_LIB = [
       {
         content: ["NAV_THEME"],
         message: "Usage of lib/constants for NAV_THEME is deprecated. Use lib/theme instead.",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/changelog#deprecated"
       }
     ]
   },
@@ -124,7 +124,7 @@ const CUSTOM_FILE_CHECKS = {
   tailwindConfig: {
     name: "Tailwind Config",
     defaultFileNames: ["tailwind.config.js", "tailwind.config.ts"],
-    docs: "https://google.com", // TODO: add reactnativereusables link
+    docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles",
     includes: [
       {
         content: ["nativewind/preset"],
@@ -134,24 +134,24 @@ const CUSTOM_FILE_CHECKS = {
       {
         content: ["primary", "secondary", "destructive"],
         message: "At least one of the color css variables is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       }
     ]
   },
   theme: {
     name: "Theme",
     defaultFileNames: ["lib/theme.ts"],
-    docs: "https://google.com", // TODO: add reactnativereusables link
+    docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles",
     includes: [
       {
         content: ["primary", "secondary", "destructive"],
         message: "At least one of the color variables is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       },
       {
         content: ["NAV_THEME"],
         message: "The NAV_THEME is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       }
     ]
   },
@@ -169,29 +169,29 @@ const CUSTOM_FILE_CHECKS = {
   utils: {
     name: "Utils",
     defaultFileNames: ["lib/utils.ts"],
-    docs: "https://google.com", // TODO: add reactnativereusables link
+    docs: "https://www.reactnativereusables.com/docs/installation/manual#add-a-cn-helper",
     includes: [
       {
         content: ["function cn("],
         message: "The cn function is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#add-a-cn-helper"
       }
     ]
   },
   css: {
     name: "CSS",
     defaultFileNames: ["globals.css", "src/global.css"],
-    docs: "https://google.com", // TODO: add reactnativereusables link
+    docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles",
     includes: [
       {
         content: ["@tailwind base", "@tailwind components", "@tailwind utilities"],
         message: "The tailwind layer directives are missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       },
       {
         content: ["primary", "secondary", "destructive"],
         message: "At least one of the color css variables is missing",
-        docs: "https://google.com" // TODO: add reactnativereusables link
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       }
     ]
   }
