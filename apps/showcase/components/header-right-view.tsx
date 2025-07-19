@@ -53,7 +53,7 @@ export function HeaderRightView() {
   }
 
   return (
-    <Pressable hitSlop={24} onPress={goToTheming} className='active:opacity-70'>
+    <Pressable hitSlop={8} onPress={goToTheming} className='active:opacity-70'>
       <View className='justify-center items-start py-2.5 pl-8 pr-1 web:pr-5'>
         <Animated.View style={animatedStyle}>
           <Icon as={SettingsIcon} className='text-foreground/90 size-6 ' />

@@ -13,10 +13,12 @@ function Checkbox({
   className,
   checkedClassName,
   indicatorClassName,
+  iconClassName,
   ...props
 }: CheckboxPrimitive.RootProps & {
   checkedClassName?: string;
   indicatorClassName?: string;
+  iconClassName?: string;
   ref?: React.RefObject<CheckboxPrimitive.RootRef>;
 }) {
   return (
@@ -40,7 +42,7 @@ function Checkbox({
           as={Check}
           size={12}
           strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5}
-          className='text-primary-foreground'
+          className={cn('text-primary-foreground', iconClassName)}
         />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

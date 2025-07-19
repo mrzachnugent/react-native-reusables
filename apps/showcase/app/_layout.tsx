@@ -126,10 +126,20 @@ const defaultRadius = vars({
   '--radius': '8px',
 });
 
+const newYorkRadius = vars({
+  '--radius': '10px',
+});
+
 function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {
   const { style } = useStyle();
   return (
-    <View style={style === 'default' ? { flex: 1, ...defaultRadius } : { flex: 1 }}>
+    <View
+      style={
+        style === 'default'
+          ? { flex: 1, ...defaultRadius }
+          : { flex: 1, ...(style === 'new-york' ? newYorkRadius : {}) }
+      }
+    >
       {children}
     </View>
   );
