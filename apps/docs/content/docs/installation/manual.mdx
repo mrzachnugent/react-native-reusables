@@ -21,14 +21,47 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
   <Steps>
     <Step>
       ### Set up NativeWind 
-      Follow the official installation guide to add [NativeWind](https://www.nativewind.dev/docs/getting-started/installation) to your project.
+      Follow the official installation guide to add [Nativewind](https://www.nativewind.dev/docs/getting-started/installation) to your project.
+    </Step>
+    <Step>
+      ### Update the default inlined `rem` value
+      Change the default `rem` value by setting `inlineRem` in your `metro.config.js`
+      ```diff title="metro.config.js"
+      const { getDefaultConfig } = require('expo/metro-config');
+      const { withNativeWind } = require('nativewind/metro');
+
+      const config = getDefaultConfig(__dirname);
+
+      - module.exports = withNativeWind(config, { input: './global.css' });
+      + module.exports = withNativeWind(config, { input: './global.css', inlineRem: 16 });
+      ```
     </Step>
     <Step>
       ### Add dependencies
       Add the following dependencies to your project:
 
       ```
-      npx expo install tailwindcss-animate class-variance-authority clsx tailwind-merge
+      npx expo install tailwindcss-animate class-variance-authority clsx tailwind-merge @rn-primitives/portal
+      ```
+    </Step>
+    <Step>
+      ### Add the Portal to your root layout
+      Render the `Portal` from `@rn-primitives/portal` in your root layout. Place it as the last child of your providers. This is where your components that use the `PortalHost` will be rendered (e.g. `DropdownMenu`, `Tooltip`, `Popover`, etc.).
+
+      ```diff title="app/_layout.tsx"
+       <ThemeProvider value={colorScheme === 'dark' ? DARK_THEME : LIGHT_THEME}>
+         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+         <Stack>
+           <Stack.Screen
+             name='index'
+             options={{
+               title: 'Starter Base',
+               headerRight: () => <ThemeToggle />,
+             }}
+           />
+         </Stack>
+      +  <PortalHost />
+       </ThemeProvider>
       ```
     </Step>
     <Step>
