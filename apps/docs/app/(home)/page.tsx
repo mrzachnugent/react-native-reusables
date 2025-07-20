@@ -23,7 +23,11 @@ export default function HomePage() {
         </h1>
         <p className='text-foreground/80 max-w-3xl text-base text-balance sm:text-lg'>
           Bringing{' '}
-          <a href='https://ui.shadcn.com' target='_blank'>
+          <a
+            href='https://ui.shadcn.com'
+            target='_blank'
+            className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'
+          >
             shadcn/ui
           </a>{' '}
           to React Native. Beautifully crafted components with Nativewind, open source, and{' '}

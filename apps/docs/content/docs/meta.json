@@ -18,6 +18,13 @@
     "[GitMerge][Changelog](/docs/changelog)",
     "[Handshake][Hire us](/docs/hire-us)",
     "------",
+    "!/blocks",
+    "---Blocks---",
+    ".../blocks",
+    "------",
+    "---Components---",
+    "!/components",
+    ".../components",
     "..."
   ]
 }
