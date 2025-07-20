@@ -12,11 +12,16 @@ export function SwitchPreview() {
     setChecked((prev) => !prev);
   }
 
+  function onCheckedChange(checked: boolean) {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setChecked(checked);
+  }
+
   return (
     <View className='flex-row items-center gap-2'>
       <Switch
         checked={checked}
-        onCheckedChange={setChecked}
+        onCheckedChange={onCheckedChange}
         id='airplane-mode'
         nativeID='airplane-mode'
       />
