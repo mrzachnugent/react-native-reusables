@@ -45,8 +45,10 @@ function RadioCheckbox({
 
   function onPress(style: 'new-york' | 'default') {
     return () => {
-      hapticStyleChange();
-      setStyle(style);
+      if (selectedStyle !== style) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        setStyle(style);
+      }
     };
   }
 
@@ -80,9 +82,4 @@ function RadioCheckbox({
       </View>
     </Label>
   );
-}
-
-async function hapticStyleChange() {
-  await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
-  await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 }
