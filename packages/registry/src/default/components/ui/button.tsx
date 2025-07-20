@@ -93,8 +93,6 @@ const buttonTextVariants = cva(
   }
 );
 
-const DEFAULT_HIT_SLOP = 12;
-
 type ButtonProps = React.ComponentProps<typeof Pressable> & VariantProps<typeof buttonVariants>;
 
 function Button({ className, variant, size, ...props }: ButtonProps) {
@@ -103,7 +101,6 @@ function Button({ className, variant, size, ...props }: ButtonProps) {
       <Pressable
         className={cn(props.disabled && 'opacity-50', buttonVariants({ variant, size }), className)}
         role='button'
-        hitSlop={DEFAULT_HIT_SLOP}
         {...props}
       />
     </TextClassContext.Provider>
