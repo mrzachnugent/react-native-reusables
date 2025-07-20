@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.reactnativereusables.app",
+      "sha256_cert_fingerprints": [
+        "F7:0C:7B:38:A3:7F:9E:F0:85:5F:44:DF:54:F1:85:17:22:86:2D:F5:F5:ED:BF:34:C1:BD:03:6E:5C:51:CA:BB"
+      ]
+    }
+  }
+]
