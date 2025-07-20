@@ -1,5 +1,6 @@
 import { Label } from '@/registry/new-york/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/registry/new-york/components/ui/radio-group';
+import * as Haptics from 'expo-haptics';
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -8,11 +9,18 @@ export function RadioGroupPreview() {
 
   function onLabelPress(label: string) {
     return () => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       setValue(label);
     };
   }
+
+  function onValueChange(value: string) {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setValue(value);
+  }
+
   return (
-    <RadioGroup value={value} onValueChange={setValue}>
+    <RadioGroup value={value} onValueChange={onValueChange}>
       <View className='flex flex-row items-center gap-3'>
         <RadioGroupItem value='default' id='r1' />
         <Label htmlFor='r1' onPress={onLabelPress('default')}>
