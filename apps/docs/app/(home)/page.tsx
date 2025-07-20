@@ -5,7 +5,10 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <main className='max-w-fd-container w-full mx-auto flex flex-col items-center gap-4'>
+    <main
+      id='nd-page'
+      className='max-w-fd-container w-full mx-auto flex flex-col items-center gap-4'
+    >
       <div className='container flex flex-col items-center gap-2 py-8 text-center md:py-16 lg:py-20 xl:gap-4'>
         <div className='h-6'>
           <Badge
