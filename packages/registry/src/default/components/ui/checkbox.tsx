@@ -24,9 +24,10 @@ function Checkbox({
   return (
     <CheckboxPrimitive.Root
       className={cn(
-        'border-primary h-4 w-4 shrink-0 rounded-sm border overflow-hidden',
+        'border-primary h-4 w-4 shrink-0 rounded border',
         Platform.select({
           web: 'peer focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed cursor-default',
+          native: 'overflow-hidden',
         }),
         props.checked && checkedClassName,
         props.disabled && 'opacity-50',
