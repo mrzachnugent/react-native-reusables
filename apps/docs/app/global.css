@@ -72,4 +72,7 @@
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }
+  #nd-page {
+    @apply scroll-mt-20;
+  }
 }
