@@ -33,8 +33,10 @@ function AlertDialogOverlay({
       )}
       {...props}
     >
-      <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut.duration(150)}>
-        <>{children}</>
+      <NativeOnlyAnimatedView entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+        <NativeOnlyAnimatedView entering={FadeIn.delay(50)} exiting={FadeOut.duration(150)}>
+          <>{children}</>
+        </NativeOnlyAnimatedView>
       </NativeOnlyAnimatedView>
     </AlertDialogPrimitive.Overlay>
   );
