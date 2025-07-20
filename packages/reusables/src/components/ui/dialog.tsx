@@ -19,7 +19,7 @@ function DialogOverlay({
   className,
   children,
   ...props
-}: DialogPrimitive.OverlayProps & {
+}: Omit<DialogPrimitive.OverlayProps, 'asChild'> & {
   ref?: React.RefObject<DialogPrimitive.OverlayRef>;
   children?: React.ReactNode;
 }) {
@@ -33,9 +33,12 @@ function DialogOverlay({
         className
       )}
       {...props}
+      asChild
     >
       <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut.duration(150)}>
-        <>{children}</>
+        <NativeOnlyAnimatedView entering={FadeIn.delay(150)} exiting={FadeOut.duration(150)}>
+          <>{children}</>
+        </NativeOnlyAnimatedView>
       </NativeOnlyAnimatedView>
     </DialogPrimitive.Overlay>
   );
