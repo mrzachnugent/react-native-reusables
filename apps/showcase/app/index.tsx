@@ -13,20 +13,36 @@ cssInterop(FlashList, { className: 'style', contentContainerClassName: 'contentC
 
 export default function ComponentsScreen() {
   const [search, setSearch] = React.useState('');
-  const ref = React.useRef(null);
-  useScrollToTop(ref);
+  const [isAtTop, setIsAtTop] = React.useState(true);
+  const isAtTopRef = React.useRef(true);
+  const flashListRef = React.useRef(null);
+  useScrollToTop(flashListRef);
 
   const data = !search
     ? COMPONENTS
     : COMPONENTS.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <View className='max-w-lg mx-auto w-full flex-1 web:p-4'>
+    <View
+      className={cn(
+        'max-w-lg mx-auto w-full flex-1 web:p-4',
+        Platform.select({ android: cn('border-t border-border/0', !isAtTop && 'border-border') })
+      )}
+    >
       <FlashList
-        ref={ref}
+        ref={flashListRef}
         data={data}
+        onScroll={Platform.select({
+          android: ({ nativeEvent }) => {
+            const isScrollAtTop = nativeEvent.contentOffset.y <= 0;
+            if (isScrollAtTop !== isAtTopRef.current) {
+              isAtTopRef.current = isScrollAtTop;
+              setIsAtTop(isScrollAtTop);
+            }
+          },
+        })}
         contentInsetAdjustmentBehavior='automatic'
-        contentContainerClassName='px-4'
+        contentContainerClassName='px-4 pb-safe'
         estimatedItemSize={49}
         keyboardShouldPersistTaps='handled'
         keyboardDismissMode='on-drag'
@@ -55,15 +71,13 @@ export default function ComponentsScreen() {
                 index === data.length - 1 && 'border-b rounded-b-lg'
               )}
             >
-              <View className='flex-row items-center gap-4'>
-                <Icon as={item.icon} className='text-foreground/80 size-4' />
-                <Text className='text-base font-normal'>{toOptions(item.name)}</Text>
-              </View>
+              <Text className='text-base font-normal'>{toOptions(item.name)}</Text>
+
               <Icon as={ChevronRight} className='text-muted-foreground size-4 stroke-[1.5px]' />
             </Button>
           </Link>
         )}
-        ListFooterComponent={<View className='py-4' />}
+        ListFooterComponent={<View className='android:h-2' />}
       />
     </View>
   );
