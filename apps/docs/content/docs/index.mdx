@@ -21,12 +21,13 @@ This is not a component library. It is how you build your component library.
 
 - <a href='https://www.nativewind.dev' target='_blank' rel='noreferrer' className='font-medium underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>Nativewind</a>: React Native Reusables integrates with NativeWind for utility-first styling on native, providing a Tailwind-like experience adapted for React Native.
 - <a href='https://rnprimitives.com' target='_blank' rel='noreferrer' className='font-medium underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>RN Primitives</a>: A universal port of Radix UI primitives for React Native with an almost identical API, enabling consistent composition on native platforms.
-- **Portals**: React Native doesn’t support DOM portals. Components like modals, dropdowns, and toasts require a `PortalHost` near the root of your app.
-- **No cascading styles**: You can’t style child elements (like `Text`) from a parent’s class. Each element must be styled directly.
+- **Portals**: React Native doesn't support DOM portals. Components like modals, dropdowns, and toasts require a `PortalHost` near the root of your app.
+- **No cascading styles**: You can't style child elements (like `Text`) from a parent's class. Each element must be styled directly.
 - <a href='https://docs.swmansion.com/react-native-reanimated' target='_blank' rel='noreferrer' className='font-medium underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>Reanimated</a>: Uses `react-native-reanimated` for smooth, native performance.
-- <a href='https://lucide.dev/guide/packages/lucide-react-native' target='_blank' rel='noreferrer' className='font-medium underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>Icons</a>: Use a wrapper component like `<Icon as={LeftArrowIcon} />` to avoid wrapping every imported icon individually with `cssInterop`.
-- **Programmatic control**: Some components, such as `DropdownMenu`, can’t be controlled with `open` or `onOpenChange` props. Instead, you use a `ref` to manage open and close behavior after layout calculation.
+- <span className='font-medium'>Icons:</span> Uses a wrapper component in combination with a <a href='https://lucide.dev/guide/packages/lucide-react-native' target='_blank' rel='noreferrer' className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>Lucide icon</a> to avoid wrapping every imported icon individually (e.g. `<Icon as={LeftArrowIcon} />`).
+- **Programmatic control**: Some components, such as `DropdownMenu`, can't be controlled with `open` or `onOpenChange` props. Instead, you use a `ref` to manage open and close behavior after layout calculation.
 
 <div className='h-2' />
 
-React Native Reusables stays true to the spirit of <a href='https://ui.shadcn.com' target='_blank' rel='noreferrer' className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>shadcn/ui</a> while adapting it to the unique constraints of mobile/universal development.
+React Native Reusables aims to stay true to the spirit of <a href='https://ui.shadcn.com' target='_blank' rel='noreferrer' className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'>shadcn/ui</a> while adapting it to the unique constraints of mobile/universal development.
+

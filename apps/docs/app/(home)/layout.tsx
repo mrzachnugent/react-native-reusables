@@ -23,27 +23,48 @@ export default function Layout({ children }: { children: ReactNode }) {
               <RnrIcon className='w-6' pathClassName='stroke-[1px]' />
             </div>
           ),
-          children: (
-            <div className='flex items-center gap-4 -ml-0.5'>
+        }}
+        links={[
+          {
+            type: 'custom',
+            children: (
               <Button
                 variant='ghost'
                 size='sm'
                 asChild
-                className='hover:bg-fd-accent dark:hover:bg-fd-accent'
+                className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
               >
                 <Link href='/docs'>Docs</Link>
               </Button>
+            ),
+          },
+          {
+            type: 'custom',
+            children: (
               <Button
                 variant='ghost'
                 size='sm'
                 asChild
-                className='hover:bg-fd-accent dark:hover:bg-fd-accent'
+                className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
               >
                 <Link href='/docs/components/accordion'>Components</Link>
               </Button>
-            </div>
-          ),
-        }}
+            ),
+          },
+          {
+            type: 'custom',
+            children: (
+              <Button
+                variant='ghost'
+                size='sm'
+                asChild
+                className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
+              >
+                <Link href='/docs/blocks/authentication'>Blocks</Link>
+              </Button>
+            ),
+          },
+        ]}
       >
         {children}
       </HomeLayout>
