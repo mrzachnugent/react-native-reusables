@@ -54,7 +54,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
               </CodeBlock>
             ),
             h3: ({ className, ...props }) => (
-              <h3 className={cn(className, 'mt-10 mb-6 font-normal')} {...props} />
+              <h3 className={cn(className, 'mt-10 mb-6 font-normal scroll-mt-20')} {...props} />
             ),
           }}
         />

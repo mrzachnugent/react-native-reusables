@@ -9,7 +9,10 @@ export function PortalInfoAlert() {
       <AlertTitle className='pb-0.5'>Note</AlertTitle>
       <AlertDescription>
         A{' '}
-        <Link href='/docs/portal' className='hover:underline'>
+        <Link
+          href='/docs/installation/manual#add-the-portal-host-to-your-root-layout'
+          className='hover:underline'
+        >
           <code className='text-[0.813rem] bg-muted py-0.5 px-1 rounded-sm'>PortalHost</code>
         </Link>{' '}
         is required at the root of your project for this to work on native platforms.
