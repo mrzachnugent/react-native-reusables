@@ -4,16 +4,16 @@ import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
-import { ThemeToggle } from '@showcase/components/theme-toggle';
 import { StyleProvider, useStyle } from '@showcase/components/styles/style-provider';
 import { Text } from '@showcase/components/styles/ui';
+import { ThemeToggle } from '@showcase/components/theme-toggle';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
@@ -56,9 +56,8 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const { colorScheme } = useColorScheme();
-  useSetWebBackgroundClassName();
   const [loaded, error] = useGeistFont();
+  const { colorScheme } = useColorScheme();
 
   React.useEffect(() => {
     if (loaded || error) {
@@ -155,17 +154,4 @@ function toOptions(name: string) {
     })
     .join(' ');
   return title;
-}
-
-const useIsomorphicLayoutEffect =
-  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
-
-function useSetWebBackgroundClassName() {
-  useIsomorphicLayoutEffect(() => {
-    if (Platform.OS !== 'web') {
-      return;
-    }
-    // Adds the background color to the html element to prevent white background on overscroll.
-    document.documentElement.classList.add('bg-background');
-  }, []);
 }
