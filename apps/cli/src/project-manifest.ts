@@ -92,7 +92,7 @@ const DEPRECATED_FROM_LIB = [
       {
         content: ["iconWithClassName"],
         message: "lib/icons and its contents are deprecated. Use the new icon wrapper from components/ui/icon.",
-        docs: "https://www.reactnativereusables.com/docs/changelog#deprecated"
+        docs: "https://www.reactnativereusables.com/docs/changelog#august-2025-deprecated"
       }
     ]
   },
@@ -103,7 +103,7 @@ const DEPRECATED_FROM_LIB = [
       {
         content: ["NAV_THEME"],
         message: "Usage of lib/constants for NAV_THEME is deprecated. Use lib/theme instead.",
-        docs: "https://www.reactnativereusables.com/docs/changelog#deprecated"
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       }
     ]
   },
