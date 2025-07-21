@@ -45,8 +45,8 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
       ```
     </Step>
     <Step>
-      ### Add the Portal to your root layout
-      Render the `Portal` from `@rn-primitives/portal` in your root layout. Place it as the last child of your providers. This is where your components that use the `PortalHost` will be rendered (e.g. `DropdownMenu`, `Tooltip`, `Popover`, etc.).
+      ### Add the Portal Host to your root layout
+      Render the `PortalHost` from [`@rn-primitives/portal`](https://rnprimitives.com/portal) in your root layout. Place it as the last child of your providers. This is where your components that use the `Portal` will be rendered (e.g. `DropdownMenu`, `Tooltip`, `Popover`, etc.).
 
       ```diff title="app/_layout.tsx"
        <ThemeProvider value={colorScheme === 'dark' ? DARK_THEME : LIGHT_THEME}>

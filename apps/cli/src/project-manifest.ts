@@ -68,7 +68,7 @@ const FILE_CHECKS: Array<FileCheck> = [
   {
     name: "Root Layout",
     fileNames: ["app/_layout.tsx", "src/app/_layout.tsx"],
-    docs: "hhttps://www.reactnativereusables.com/docs/installation/manual#add-the-portal-to-your-root-layout", //
+    docs: "hhttps://www.reactnativereusables.com/docs/installation/manual#add-the-portal-host-to-your-root-layout", //
     includes: [
       {
         content: [".css"],
@@ -78,7 +78,7 @@ const FILE_CHECKS: Array<FileCheck> = [
       {
         content: ["<PortalHost"],
         message: "The PortalHost component is missing",
-        docs: "https://www.reactnativereusables.com/docs/installation/manual#add-the-portal-to-your-root-layout"
+        docs: "https://www.reactnativereusables.com/docs/installation/manual#add-the-portal-host-to-your-root-layout"
       }
     ]
   }
