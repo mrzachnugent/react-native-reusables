@@ -6,9 +6,9 @@ export function AspectRatioPreview() {
     <AspectRatio ratio={16 / 9} className='relative aspect-video w-full overflow-hidden rounded-md'>
       <Image
         source={{
-          uri: 'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
+          uri: 'https://images.unsplash.com/photo-1672758247442-82df22f5899e',
         }}
-        alt='Photo by Drew Beamer'
+        alt='Photo by Drew Beamer (https://unsplash.com/@dbeamer_jpg)'
         className='absolute top-0 right-0 left-0 bottom-0 object-cover'
       />
     </AspectRatio>
