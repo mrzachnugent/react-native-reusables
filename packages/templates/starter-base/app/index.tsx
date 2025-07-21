@@ -1,97 +1,76 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import Animated, { FadeInUp, FadeOutDown, LayoutAnimationConfig } from 'react-native-reanimated';
-import { InfoIcon } from 'lucide-react-native';
-import { Icon } from '@/components/ui/icon';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Link, Stack } from 'expo-router';
+import { MoonStarIcon, StarIcon, SunIcon } from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
+import * as React from 'react';
+import { Image, Platform, View } from 'react-native';
 
-const GITHUB_AVATAR_URI =
-  'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
+const LOGO = {
+  light: require('@/assets/images/react-native-reusables-light.png'),
+  dark: require('@/assets/images/react-native-reusables-dark.png'),
+};
+
+const SCREEN_OPTIONS = {
+  title: 'React Native Reusables',
+  headerRight: () => <ThemeToggle />,
+};
 
 export default function Screen() {
-  const [progress, setProgress] = React.useState(78);
+  const { colorScheme } = useColorScheme();
 
-  function updateProgressValue() {
-    setProgress(Math.floor(Math.random() * 100));
-  }
   return (
-    <View className='flex-1 justify-center items-center gap-5 p-6 bg-secondary/30'>
-      <Card className='w-full max-w-sm p-6 rounded-2xl'>
-        <CardHeader className='items-center'>
-          <Avatar alt="Rick Sanchez's Avatar" className='w-24 h-24'>
-            <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
-            <AvatarFallback>
-              <Text>RS</Text>
-            </AvatarFallback>
-          </Avatar>
-          <View className='p-3' />
-          <CardTitle className='pb-2 text-center'>Rick Sanchez</CardTitle>
-          <View className='flex-row'>
-            <CardDescription className='text-base font-semibold'>Scientist</CardDescription>
-            <Tooltip delayDuration={150}>
-              <TooltipTrigger className='px-2 pb-0.5 active:opacity-50'>
-                <Icon
-                  as={InfoIcon}
-                  size={14}
-                  strokeWidth={2.5}
-                  className='w-4 h-4 text-foreground/70'
-                />
-              </TooltipTrigger>
-              <TooltipContent className='py-2 px-4 shadow-md shadow-black/10'>
-                <Text>Freelance</Text>
-              </TooltipContent>
-            </Tooltip>
-          </View>
-        </CardHeader>
-        <CardContent>
-          <View className='flex-row justify-around gap-3'>
-            <View className='items-center'>
-              <Text className='text-sm text-muted-foreground'>Dimension</Text>
-              <Text className='text-xl font-semibold'>C-137</Text>
-            </View>
-            <View className='items-center'>
-              <Text className='text-sm text-muted-foreground'>Age</Text>
-              <Text className='text-xl font-semibold'>70</Text>
-            </View>
-            <View className='items-center'>
-              <Text className='text-sm text-muted-foreground'>Species</Text>
-              <Text className='text-xl font-semibold'>Human</Text>
-            </View>
-          </View>
-        </CardContent>
-        <CardFooter className='flex-col gap-3 pb-0'>
-          <View className='flex-row items-center overflow-hidden'>
-            <Text className='text-sm text-muted-foreground'>Productivity:</Text>
-            <LayoutAnimationConfig skipEntering>
-              <Animated.View
-                key={progress}
-                entering={FadeInUp}
-                exiting={FadeOutDown}
-                className='w-11 items-center'
-              >
-                <Text className='text-sm font-bold text-sky-500'>{progress}%</Text>
-              </Animated.View>
-            </LayoutAnimationConfig>
-          </View>
-          <Progress value={progress} className='h-1.5' indicatorClassName='bg-sky-500' />
-          <View />
-          <Button variant='outline' onPress={updateProgressValue}>
-            <Text>Update</Text>
-          </Button>
-        </CardFooter>
-      </Card>
-    </View>
+    <>
+      <Stack.Screen options={SCREEN_OPTIONS} />
+      <View className='flex-1 justify-center items-center gap-8 p-4 mb-safe'>
+        <Image source={LOGO[colorScheme ?? 'light']} height={85} width={96} />
+        <View className='gap-2 p-4'>
+          <Text className=' font-mono text-sm'>
+            1. Edit <Text variant='code'>app/index.tsx</Text> to get started.
+          </Text>
+          <Text className=' font-mono text-sm'>
+            2.{' '}
+            {Platform.select({
+              web: 'Save and reload to see your changes.',
+              default: 'Save to see your changes instantly.',
+            })}
+          </Text>
+        </View>
+        <View className='flex-row gap-2'>
+          <Link href='https://reactnativereusables.com' asChild>
+            <Button>
+              <Text>Browse the Docs</Text>
+            </Button>
+          </Link>
+          <Link href='https://github.com/mrzachnugent/react-native-reusables' asChild>
+            <Button variant='ghost'>
+              <Text>Star the Repo</Text>
+              <Icon as={StarIcon} />
+            </Button>
+          </Link>
+        </View>
+      </View>
+    </>
+  );
+}
+
+const THEME_ICONS = {
+  light: SunIcon,
+  dark: MoonStarIcon,
+};
+
+function ThemeToggle() {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
+  return (
+    <Button
+      onPress={toggleColorScheme}
+      size='icon'
+      variant='ghost'
+      className='rounded-full web:mr-4'
+    >
+      <Icon as={THEME_ICONS[colorScheme ?? 'light']} className='size-5' />
+    </Button>
   );
 }
