@@ -9,7 +9,7 @@ import { CommandTabs } from '@docs/components/command-tabs';
 
 New CLI. New docs. New registry. New showcase app.
 
-### First React Native compatible shadcn registry
+### First React Native compatible shadcn registry [#august-2025-first-react-native-compatible-shadcn-registry]
 
 You can now use `npx shadcn@latest` with our registries built just for React Native.
 
@@ -25,7 +25,7 @@ To make the experience even smoother, we built a thin wrapper around the CLI.
 
 Same power, tailored for React Native.
 
-### New CLI - rewritten with Effect + shadcn
+### New CLI - rewritten with Effect + shadcn [#august-2025-new-cli-rewritten-with-effect-shadcn]
 
 The CLI has been rebuilt from the ground up with [`effect`](https://effect.website) and the [`shadcn`](https://ui.shadcn.com/docs/cli) engine under the hood for the add command.
 
@@ -39,7 +39,7 @@ Features:
 
 <CommandTabs args={["doctor"]} />
 
-### Improved component architecture
+### Improved component architecture [#august-2025-improved-component-architecture]
 
 Every component has been refined and standardized for both `default` and `new-york` styles.
 
@@ -48,23 +48,23 @@ Every component has been refined and standardized for both `default` and `new-yo
 - Easier to override and customize
 
 
-### Blocks
+### Blocks [#august-2025-blocks]
 
 - TODO
 
-### Showcase App
+### Showcase App [#august-2025-showcase-app]
 
 We launched a new Expo app so you can explore components from your device.
 
 - TODO: add link to app
 
-### Redesigned Docs
+### Redesigned Docs [#august-2025-redesigned-docs]
 
 The docs have been rebuilt from scratch as you can see.
 
 - TODO: Add before and after images
 
-### New GitHub Home
+### New GitHub Home [#august-2025-new-github-home]
 
 We moved the repo from my personal account to a dedicated org:
 
@@ -72,11 +72,17 @@ We moved the repo from my personal account to a dedicated org:
 
 This gives the project a long-term home with more room to grow.
 
-### New Icon component
+### New Icon component [#august-2025-new-icon-component]
 
 A single icon component to replace all icons from the deprecated `/lib/icons` directory.
 
+**Install the new icon component with the CLI**
+
+<CommandTabs args={["add", "icon"]} />
+
+
 ```tsx
+// Example usage
 import { Icon } from '@/components/ui/icon';
 import { HeartIcon } from 'lucide-react-native';
 
@@ -84,7 +90,7 @@ import { HeartIcon } from 'lucide-react-native';
 
 ```
 
-### Deprecated
+### Deprecated [#august-2025-deprecated]
 
 - `lib/constants.ts`: now using the `theme.ts` file.
 
@@ -92,7 +98,7 @@ import { HeartIcon } from 'lucide-react-native';
 
 - `lib/icons`: deprecated in favor of the new `Icon` component.
 
-### Upgrade Notes
+### Upgrade Notes [#august-2025-upgrade-notes]
 1. Run the doctor command and follow the instructions:
 
 <CommandTabs args={["doctor"]} />
@@ -106,7 +112,7 @@ import { HeartIcon } from 'lucide-react-native';
 
 <CommandTabs args={["add", "--override", "[...components]"]} />
 
-#### Thanks
+#### Thanks [#august-2025-thanks]
 
 Thank you to everyone who has been using React Native Reusables, sharing feedback, and contributing.
 Your support means a lot and is truly appreciated.
