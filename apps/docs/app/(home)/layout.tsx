@@ -8,7 +8,8 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'React Native Reusables',
-  description: 'Bringing the shadcn/ui design system to React Native',
+  description:
+    'Bringing shadcn/ui to React Native. Beautifully crafted components with Nativewind, open source, and almost as easy to use.',
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
