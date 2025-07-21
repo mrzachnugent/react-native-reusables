@@ -75,6 +75,7 @@ function DialogContent({
                 web: 'ring-offset-background focus:ring-ring data-[state=open]:bg-accent transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none',
               })
             )}
+            hitSlop={12}
           >
             <Icon
               as={X}
