@@ -1,5 +1,7 @@
 # React Native Reusables
 
+// TODO: Improve this README
+
 ![banner](https://github.com/mrzachnugent/react-native-reusables/assets/63797719/0eef0a6d-d8eb-4b52-a97d-fa3b1e534215)
 
 ## Universal [shadcn/ui](https://ui.shadcn.com) for React Native featuring a focused collection of components
