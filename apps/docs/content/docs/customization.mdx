@@ -38,9 +38,11 @@ If you update a CSS variable, update `theme.ts` as well.
 
 
 
-<div className='text-sm text-muted-foreground *:text-muted-foreground *:font-normal py-px'>
+<div className='text-sm *:text-muted-foreground *:font-normal py-2 *:leading-7'>
 
-<span className='font-medium'>Tip</span>: Use this prompt to sync `theme.ts` after updating CSS variables in `global.css`:
+<div className='-mb-1.5 *:text-foreground'>
+  <span className='font-medium'>Tip</span>: Use this prompt to sync `theme.ts` after updating CSS variables in `global.css`:
+</div>
 
 > Read CSS variables under `:root` and `.dark:root` in `global.css`.
 > Update the `light` and `dark` entries in the `THEME` object in `theme.ts` to match these values in HSL format.
