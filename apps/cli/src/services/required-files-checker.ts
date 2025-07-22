@@ -75,17 +75,26 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                   const exists = yield* fs.exists(fullPath)
                   if (!exists) {
                     yield* Effect.logDebug(`${logSymbols.success} Deprecated lib/${file.fileNames[0]} not found`)
-                  } else {
-                    yield* Effect.logDebug(`${logSymbols.error} Deprecated lib/${file.fileNames[0]} found`)
+                    return { ...file, hasIncludes: false }
                   }
-                  return { ...file, exists }
+
+                  yield* Effect.logDebug(`${logSymbols.error} Deprecated lib/${file.fileNames[0]} found`)
+
+                  const fileContent = yield* fs.readFileString(fullPath)
+
+                  return {
+                    ...file,
+                    hasIncludes: file.includes.some((include) =>
+                      include.content.some((content) => fileContent.includes(content))
+                    )
+                  }
                 })
               )
             ),
           { concurrency: "unbounded" }
         ).pipe(
           Effect.map((results) =>
-            results.filter((result) => result.exists).map(({ exists: _exists, ...result }) => result)
+            results.filter((result) => result.hasIncludes).map(({ hasIncludes: _hasIncludes, ...result }) => result)
           )
         )
 
