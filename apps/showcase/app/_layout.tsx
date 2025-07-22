@@ -1,6 +1,5 @@
 import '../global.css';
 
-import { NAV_THEME } from '@/registry/new-york/lib/constants';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
@@ -8,6 +7,7 @@ import { StyleProvider, useStyle } from '@showcase/components/styles/style-provi
 import { Text } from '@showcase/components/styles/ui';
 import { ThemeToggle } from '@showcase/components/theme-toggle';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
+import { NAV_THEME } from '@showcase/lib/theme';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
