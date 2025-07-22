@@ -58,7 +58,7 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
       </div>
       <div
         style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
-        className='flex flex-col items-center justify-center p-6 flex-1'
+        className='flex flex-col items-center justify-center py-6  flex-1'
       >
         {platform === 'native' ? (
           <ComingSoon selectWebPreview={selectWebPreview} />
