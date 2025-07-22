@@ -48,7 +48,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 asChild
                 className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
               >
-                <Link href='/docs/components/accordion'>Components</Link>
+                <Link href='/docs/blocks/authentication'>Blocks</Link>
               </Button>
             ),
           },
@@ -61,7 +61,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 asChild
                 className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
               >
-                <Link href='/docs/blocks/authentication'>Blocks</Link>
+                <Link href='/docs/components/accordion'>Components</Link>
               </Button>
             ),
           },
