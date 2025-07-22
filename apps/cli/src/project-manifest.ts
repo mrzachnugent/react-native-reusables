@@ -120,6 +120,23 @@ const DEPRECATED_FROM_LIB = [
   }
 ]
 
+// Excludes foreground colors since it is formatted differently in all 3 styling files (tailwind config, global.css, theme.ts)
+const CSS_VARIABLE_NAMES = [
+  "background",
+  "foreground",
+  "card",
+  "popover",
+  "primary",
+  "secondary",
+  "muted",
+  "accent",
+  "destructive",
+  "border",
+  "input",
+  "ring",
+  "radius"
+]
+
 const CUSTOM_FILE_CHECKS = {
   tailwindConfig: {
     name: "Tailwind Config",
@@ -132,7 +149,7 @@ const CUSTOM_FILE_CHECKS = {
         docs: "https://www.nativewind.dev/docs/getting-started/installation#2-setup-tailwind-css"
       },
       {
-        content: ["primary", "secondary", "destructive"],
+        content: CSS_VARIABLE_NAMES,
         message: "At least one of the color css variables is missing",
         docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       }
@@ -144,7 +161,7 @@ const CUSTOM_FILE_CHECKS = {
     docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles",
     includes: [
       {
-        content: ["primary", "secondary", "destructive"],
+        content: CSS_VARIABLE_NAMES,
         message: "At least one of the color variables is missing",
         docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       },
@@ -189,7 +206,7 @@ const CUSTOM_FILE_CHECKS = {
         docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       },
       {
-        content: ["primary", "secondary", "destructive"],
+        content: CSS_VARIABLE_NAMES,
         message: "At least one of the color css variables is missing",
         docs: "https://www.reactnativereusables.com/docs/installation/manual#configure-your-styles"
       }
