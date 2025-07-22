@@ -99,11 +99,11 @@ import { HeartIcon } from 'lucide-react-native';
 - `lib/icons`: deprecated in favor of the new `Icon` component.
 
 ### Upgrade Notes [#august-2025-upgrade-notes]
-1. Run the doctor command and follow the instructions:
+1. Run the `doctor` command to diagnose. Then, follow the instructions to get your project up to date:
 
 <CommandTabs args={["doctor"]} />
 
-2. Run the add command with the override flag:
+2. Update your components by running the `add` command with `--override` and list the components from your project:
 
 <Callout type="warn">
   Make sure you commit your changes before running the add command and use the diff view to see what's changed and to keep
@@ -112,7 +112,13 @@ import { HeartIcon } from 'lucide-react-native';
 
 <CommandTabs args={["add", "--override", "[...components]"]} />
 
-#### Thanks [#august-2025-thanks]
+<span className='sr-only'>
+
+#### Thank you [#august-2025-thanks]
+
+</span>
+
+<br />
 
 Thank you to everyone who has been using React Native Reusables, sharing feedback, and contributing.
 Your support means a lot and is truly appreciated.
