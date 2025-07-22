@@ -11,6 +11,10 @@ export const source = loader({
     if (!icon) {
       return;
     }
+    if (icon === 'FoundedLabs') {
+      // TODO: add Founded Labs logo for work with us section
+      return createElement(icons['Handshake']);
+    }
 
     if (icon in icons) return createElement(icons[icon as keyof typeof icons]);
   },
