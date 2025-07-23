@@ -1,4 +1,5 @@
 import { CliOptions } from "@cli/contexts/cli-options.js"
+import { PROJECT_MANIFEST } from "@cli/project-manifest.js"
 import { Doctor } from "@cli/services/commands/doctor.js"
 import { Template } from "@cli/services/template.js"
 import { Prompt } from "@effect/cli"
@@ -53,13 +54,18 @@ class Init extends Effect.Service<Init>()("Init", {
             default: "my-app"
           })
 
+          const selectedTemplate = yield* Prompt.select({
+            message: "Select a template",
+            choices: PROJECT_MANIFEST.templates.map((template) => ({
+              title: template.name,
+              value: template
+            }))
+          })
+
           yield* template.clone({
             cwd: options.cwd,
             name: projectName,
-            repo: {
-              url: "https://github.com/mrzachnugent/react-native-reusables.git",
-              subPath: "packages/templates/starter-base"
-            }
+            repo: selectedTemplate
           })
         })
     }
