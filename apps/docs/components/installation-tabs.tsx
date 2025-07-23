@@ -18,11 +18,10 @@ function InstallationTabs({
   return (
     <LinkTabs
       ref={onRef(value)}
-      value={value === 'cli' ? '/docs/installation' : '/docs/installation/manual'}
-    >
+      value={value === 'cli' ? '/docs/installation' : '/docs/installation/manual'}>
       <LinkTabsList>
-        <LinkTabsTrigger href='/docs/installation'>CLI</LinkTabsTrigger>
-        <LinkTabsTrigger href='/docs/installation/manual'>Manual</LinkTabsTrigger>
+        <LinkTabsTrigger href="/docs/installation">CLI</LinkTabsTrigger>
+        <LinkTabsTrigger href="/docs/installation/manual">Manual</LinkTabsTrigger>
       </LinkTabsList>
       <LinkTabsContent value={value === 'cli' ? '/docs/installation' : '/docs/installation/manual'}>
         {children}

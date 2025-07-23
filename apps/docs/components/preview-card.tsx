@@ -51,15 +51,14 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
   }
 
   return (
-    <div className='group/copy relative flex flex-col min-h-[450px] border rounded-md bg-card p-4 not-prose'>
-      <div className='flex items-center justify-between'>
-        <StyleSwitcher onValueChange={onStyleChange} defaultValue='default' value={style} />
-        <PlatformSwitcher onValueChange={onPlatformChange} defaultValue='web' value={platform} />
+    <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
+      <div className="flex items-center justify-between">
+        <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} />
+        <PlatformSwitcher onValueChange={onPlatformChange} defaultValue="web" value={platform} />
       </div>
       <div
         style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
-        className='flex flex-col items-center justify-center py-6  flex-1'
-      >
+        className="flex flex-1 flex-col items-center justify-center py-6">
         {platform === 'native' ? (
           <ComingSoon selectWebPreview={selectWebPreview} />
         ) : style === 'new-york' ? (
@@ -81,10 +80,10 @@ function PlatformSwitcher(props: SelectProps) {
 
   return (
     <Select {...props}>
-      <SelectTrigger className='h-7 w-fit gap-1 text-xs pl-2.5 pr-1.5 [&_svg]:h-4 [&_svg]:w-4'>
-        <span className='text-muted-foreground flex-1 pr-1'>Platform:</span>
+      <SelectTrigger className="h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs [&_svg]:h-4 [&_svg]:w-4">
+        <span className="text-muted-foreground flex-1 pr-1">Platform:</span>
         {!isClient ? (
-          <span className='opacity-50'>
+          <span className="opacity-50">
             {
               PLATFORMS.find((platform) =>
                 platform.name === props.value ? props.value : props.defaultValue
@@ -92,12 +91,12 @@ function PlatformSwitcher(props: SelectProps) {
             }
           </span>
         ) : (
-          <SelectValue placeholder='Select platform' />
+          <SelectValue placeholder="Select platform" />
         )}
       </SelectTrigger>
       <SelectContent onCloseAutoFocus={preventDefault}>
         {PLATFORMS.map((platform) => (
-          <SelectItem key={platform.name} value={platform.name} className='text-xs'>
+          <SelectItem key={platform.name} value={platform.name} className="text-xs">
             {platform.label}
           </SelectItem>
         ))}
@@ -114,10 +113,10 @@ function StyleSwitcher(props: SelectProps) {
 
   return (
     <Select {...props}>
-      <SelectTrigger className='h-7 w-fit gap-1 text-xs pl-2.5 pr-1.5 [&_svg]:h-4 [&_svg]:w-4'>
-        <span className='text-muted-foreground flex-1 pr-1'>Style:</span>
+      <SelectTrigger className="h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs [&_svg]:h-4 [&_svg]:w-4">
+        <span className="text-muted-foreground flex-1 pr-1">Style:</span>
         {!isClient ? (
-          <span className='opacity-50'>
+          <span className="opacity-50">
             {
               STYLES.find((style) =>
                 style.name === props.value ? props.value : props.defaultValue
@@ -125,12 +124,12 @@ function StyleSwitcher(props: SelectProps) {
             }
           </span>
         ) : (
-          <SelectValue placeholder='Select style' />
+          <SelectValue placeholder="Select style" />
         )}
       </SelectTrigger>
       <SelectContent onCloseAutoFocus={preventDefault}>
         {STYLES.map((style) => (
-          <SelectItem key={style.name} value={style.name} className='text-xs'>
+          <SelectItem key={style.name} value={style.name} className="text-xs">
             {style.label}
           </SelectItem>
         ))}
@@ -141,21 +140,20 @@ function StyleSwitcher(props: SelectProps) {
 
 function ComingSoon({ selectWebPreview }: { selectWebPreview: () => void }) {
   return (
-    <div className='p-4 max-w-sm text-center space-y-1'>
-      <div className='flex justify-center'>
-        <p className='text-lg'>Coming soon</p>
-        <span className='text-[0.5rem] pt-1'>TM</span>
+    <div className="max-w-sm space-y-1 p-4 text-center">
+      <div className="flex justify-center">
+        <p className="text-lg">Coming soon</p>
+        <span className="pt-1 text-[0.5rem]">TM</span>
       </div>
-      <p className='text-sm text-fd-muted-foreground pb-4'>
+      <p className="text-fd-muted-foreground pb-4 text-sm">
         We&apos;re working on it. In the meantime, you can check out the web preview.
       </p>
 
       <Button
-        variant='secondary'
-        size='sm'
-        className='border border-border/50 text-xs'
-        onClick={selectWebPreview}
-      >
+        variant="secondary"
+        size="sm"
+        className="border-border/50 border text-xs"
+        onClick={selectWebPreview}>
         View Web Preview
       </Button>
     </div>

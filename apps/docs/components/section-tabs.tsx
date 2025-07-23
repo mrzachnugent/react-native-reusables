@@ -21,7 +21,7 @@ const SectionTabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      'inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b p-0',
+      'text-muted-foreground inline-flex h-9 w-full items-center justify-start rounded-none border-b p-0',
       className
     )}
     {...props}
@@ -36,7 +36,7 @@ const SectionTabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative h-9 rounded-none border-b-2 border-b-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none',
+      'ring-offset-background focus-visible:ring-ring text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold shadow-none transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-none',
       className
     )}
     {...props}
@@ -51,7 +51,7 @@ const SectionTabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      'mt-5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative [&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold',
+      'ring-offset-background focus-visible:ring-ring relative mt-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 [&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold',
       className
     )}
     {...props}

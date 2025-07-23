@@ -26,14 +26,13 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
       }}
       footer={{
         component: <Footer url={page.url} />,
-      }}
-    >
+      }}>
       <DocsBody>
-        <div className='flex items-center justify-between gap-2'>
-          <DocsTitle className='mb-0 font-semibold'>{page.data.title}</DocsTitle>
+        <div className="flex items-center justify-between gap-2">
+          <DocsTitle className="mb-0 font-semibold">{page.data.title}</DocsTitle>
           <NeighbourButtons url={page.url} />
         </div>
-        <DocsDescription className='mt-2.5 mb-4 text-base'>{page.data.description}</DocsDescription>
+        <DocsDescription className="mb-4 mt-2.5 text-base">{page.data.description}</DocsDescription>
         <MDX
           components={{
             ...defaultMdxComponents,
@@ -47,14 +46,13 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
                 {...props}
                 className={cn(
                   className,
-                  'relative bg-fd-foreground/95 dark:bg-fd-secondary/50 text-background dark:text-foreground *:dark'
-                )}
-              >
+                  'bg-fd-foreground/95 dark:bg-fd-secondary/50 text-background dark:text-foreground *:dark relative'
+                )}>
                 <Pre>{props.children}</Pre>
               </CodeBlock>
             ),
             h3: ({ className, ...props }) => (
-              <h3 className={cn(className, 'mt-10 mb-6 font-normal scroll-mt-20')} {...props} />
+              <h3 className={cn(className, 'mb-6 mt-10 scroll-mt-20 font-normal')} {...props} />
             ),
           }}
         />
@@ -69,16 +67,16 @@ function NeighbourButtons({ url }: { url: string }) {
   const isManualInstallation = url === '/docs/installation/manual';
 
   return (
-    <div className='flex items-center gap-2'>
+    <div className="flex items-center gap-2">
       {neighbours.previous || isManualInstallation ? (
-        <Button variant='outline' size='icon' className='size-8 border-border/70' asChild>
+        <Button variant="outline" size="icon" className="border-border/70 size-8" asChild>
           <Link href={neighbours.previous?.url || '/docs'}>
             <ArrowLeftIcon />
           </Link>
         </Button>
       ) : null}
       {neighbours.next || isManualInstallation ? (
-        <Button variant='outline' size='icon' className='size-8 border-border/70' asChild>
+        <Button variant="outline" size="icon" className="border-border/70 size-8" asChild>
           <Link href={neighbours.next?.url || '/docs/customization'}>
             <ArrowRightIcon />
           </Link>
@@ -95,14 +93,13 @@ function Footer({ url }: { url: string }) {
 
   return (
     <footer>
-      <div className='flex justify-between h-16 w-full items-center gap-2'>
+      <div className="flex h-16 w-full items-center justify-between gap-2">
         {neighbours.previous || isManualInstallation ? (
           <Button
-            variant='ghost'
-            size='sm'
+            variant="ghost"
+            size="sm"
             asChild
-            className='bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80'
-          >
+            className="bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80">
             <Link href={neighbours.previous?.url || '/docs'}>
               <ArrowLeftIcon />
               {neighbours.previous?.name || 'Introduction'}
@@ -113,11 +110,10 @@ function Footer({ url }: { url: string }) {
         )}
         {neighbours.next || isManualInstallation ? (
           <Button
-            variant='ghost'
-            size='sm'
+            variant="ghost"
+            size="sm"
             asChild
-            className='bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80'
-          >
+            className="bg-fd-accent hover:bg-fd-accent/80 dark:hover:bg-fd-accent/80">
             <Link href={neighbours.next?.url || '/docs/customization'}>
               {neighbours.next?.name || 'Customization'}
               <ArrowRightIcon />
@@ -125,42 +121,38 @@ function Footer({ url }: { url: string }) {
           </Button>
         ) : null}
       </div>
-      <div className='flex h-20 items-center justify-between'>
-        <div className='text-fd-muted-foreground w-full text-center text-xs leading-loose lg:text-sm px-4 text-balance'>
+      <div className="flex h-20 items-center justify-between">
+        <div className="text-fd-muted-foreground w-full text-balance px-4 text-center text-xs leading-loose lg:text-sm">
           Built by{' '}
           <a
-            href='https://x.com/mrzachnugent'
-            target='_blank'
-            rel='noreferrer'
-            className='underline underline-offset-4'
-          >
+            href="https://x.com/mrzachnugent"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4">
             mrzachnugent
           </a>{' '}
           at{' '}
           <a
-            href='https://foundedlabs.com'
-            target='_blank'
-            rel='noreferrer'
-            className='underline underline-offset-4 decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground'
-          >
+            href="https://foundedlabs.com"
+            target="_blank"
+            rel="noreferrer"
+            className="decoration-fd-muted-foreground/0 hover:decoration-fd-muted-foreground underline underline-offset-4">
             Founded Labs
           </a>
           , bringing{' '}
           <a
-            href='https://ui.shadcn.com'
-            target='_blank'
-            rel='noreferrer'
-            className='underline underline-offset-4'
-          >
+            href="https://ui.shadcn.com"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4">
             shadcn/ui
           </a>{' '}
           to React Native. Source on{' '}
           <a
-            href='https://github.com/mrzachnugent/react-native-reusables'
-            target='_blank'
-            rel='noreferrer'
-            className='underline underline-offset-4'
-          >
+            href="https://github.com/mrzachnugent/react-native-reusables"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4">
             GitHub
           </a>
           .
@@ -172,22 +164,21 @@ function Footer({ url }: { url: string }) {
 
 function TableOfContentFooter() {
   return (
-    <div className='group bg-card dark:bg-fd-muted border border-border/50 dark:border-border/0 text-fd-foreground/80 relative flex flex-col gap-2 rounded-lg p-6 text-sm mt-12 animate-in fade-in-0 duration-300'>
-      <div className='text-base leading-tight font-semibold text-balance group-hover:underline'>
+    <div className="bg-card dark:bg-fd-muted border-border/50 dark:border-border/0 text-fd-foreground/80 animate-in fade-in-0 group relative mt-12 flex flex-col gap-2 rounded-lg border p-6 text-sm duration-300">
+      <div className="text-balance text-base font-semibold leading-tight group-hover:underline">
         Want to work with us?
       </div>
-      <div className='text-muted-foreground'>Mention us to your team.</div>
-      <div className='text-muted-foreground'>
+      <div className="text-muted-foreground">Mention us to your team.</div>
+      <div className="text-muted-foreground">
         We help companies like yours ship world-class UI/UX.
       </div>
       <button
-        data-slot='button'
-        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 mt-2 w-fit"
-      >
+        data-slot="button"
+        className="[&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 has-[&gt;svg]:px-2.5 mt-2 inline-flex h-8 w-fit shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 text-sm font-medium outline-none transition-all focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50">
         Get in touch
       </button>
-      <Link href='/docs/hire-us' className='absolute inset-0'>
-        <span className='sr-only'>Get in touch</span>
+      <Link href="/docs/hire-us" className="absolute inset-0">
+        <span className="sr-only">Get in touch</span>
       </Link>
     </div>
   );
