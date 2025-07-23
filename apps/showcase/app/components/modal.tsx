@@ -29,57 +29,56 @@ export default function ModalScreen() {
 
   return (
     <>
-      <View className='flex-1 justify-center items-center'>
-        <View className='p-4 native:pb-24 max-w-md gap-6 w-full'>
-          <View className='gap-1'>
-            <Text variant='h1' className='text-foreground text-center'>
+      <View className="flex-1 items-center justify-center">
+        <View className="native:pb-24 w-full max-w-md gap-6 p-4">
+          <View className="gap-1">
+            <Text variant="h1" className="text-foreground text-center">
               Create an account
             </Text>
-            <Text variant='muted' className='text-base text-center'>
+            <Text variant="muted" className="text-center text-base">
               Enter you email below to create your account
             </Text>
           </View>
-          <Input placeholder='name@example.com' />
+          <Input placeholder="name@example.com" />
           <Select>
             <SelectTrigger>
-              <SelectValue placeholder='Select a role' />
+              <SelectValue placeholder="Select a role" />
             </SelectTrigger>
             <SelectContent
               insets={contentInsets}
-              className='w-full'
+              className="w-full"
               portalHost={Platform.select({ ios: IOS_PORTAL_HOST_NAME })}
-              sideOffset={Platform.select({ ios: 16 })}
-            >
+              sideOffset={Platform.select({ ios: 16 })}>
               <SelectGroup>
                 <SelectLabel>Roles</SelectLabel>
-                <SelectItem label='Staff' value='staff'>
+                <SelectItem label="Staff" value="staff">
                   Staff
                 </SelectItem>
-                <SelectItem label='Manager' value='manager'>
+                <SelectItem label="Manager" value="manager">
                   Manager
                 </SelectItem>
-                <SelectItem label='Admin' value='admin'>
+                <SelectItem label="Admin" value="admin">
                   Admin
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
-          <View className='flex-row items-center gap-3'>
-            <View className='flex-1 h-px bg-muted' />
-            <Text variant='muted'>OR CONTINUE WITH</Text>
-            <View className='flex-1 h-px bg-muted' />
+          <View className="flex-row items-center gap-3">
+            <View className="bg-muted h-px flex-1" />
+            <Text variant="muted">OR CONTINUE WITH</Text>
+            <View className="bg-muted h-px flex-1" />
           </View>
           <Button>
             <Text>Github</Text>
           </Button>
           <View>
-            <Text variant='muted' className='text-center'>
+            <Text variant="muted" className="text-center">
               By creating an account, you agree to our{' '}
-              <Text variant='muted' className='underline'>
+              <Text variant="muted" className="underline">
                 Terms of Service
               </Text>{' '}
               and{' '}
-              <Text variant='muted' className='underline'>
+              <Text variant="muted" className="underline">
                 Privacy Policy
               </Text>
             </Text>

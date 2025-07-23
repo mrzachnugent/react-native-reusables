@@ -25,10 +25,9 @@ export default function ComponentsScreen() {
   return (
     <View
       className={cn(
-        'max-w-lg mx-auto w-full flex-1 web:p-4',
-        Platform.select({ android: cn('border-t border-border/0', !isAtTop && 'border-border') })
-      )}
-    >
+        'web:p-4 mx-auto w-full max-w-lg flex-1',
+        Platform.select({ android: cn('border-border/0 border-t', !isAtTop && 'border-border') })
+      )}>
       <FlashList
         ref={flashListRef}
         data={data}
@@ -41,18 +40,18 @@ export default function ComponentsScreen() {
             }
           },
         })}
-        contentInsetAdjustmentBehavior='automatic'
-        contentContainerClassName='px-4 pb-safe'
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerClassName="px-4 pb-safe"
         estimatedItemSize={49}
-        keyboardShouldPersistTaps='handled'
-        keyboardDismissMode='on-drag'
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={Platform.select({
           native: (
-            <View className='pb-4'>
+            <View className="pb-4">
               <Input
-                placeholder='Components'
-                clearButtonMode='always'
+                placeholder="Components"
+                clearButtonMode="always"
                 onChangeText={setSearch}
                 autoCorrect={false}
               />
@@ -62,22 +61,21 @@ export default function ComponentsScreen() {
         renderItem={({ item, index }) => (
           <Link href={`/components/${item.name}`} asChild>
             <Button
-              variant='outline'
-              size='lg'
+              variant="outline"
+              size="lg"
               unstable_pressDelay={100}
               className={cn(
-                'pl-4 pr-3.5 dark:bg-background border-b-0 border-border rounded-none flex-row justify-between',
+                'dark:bg-background border-border flex-row justify-between rounded-none border-b-0 pl-4 pr-3.5',
                 index === 0 && 'rounded-t-lg',
-                index === data.length - 1 && 'border-b rounded-b-lg'
-              )}
-            >
-              <Text className='text-base font-normal'>{toOptions(item.name)}</Text>
+                index === data.length - 1 && 'rounded-b-lg border-b'
+              )}>
+              <Text className="text-base font-normal">{toOptions(item.name)}</Text>
 
-              <Icon as={ChevronRight} className='text-muted-foreground size-4 stroke-[1.5px]' />
+              <Icon as={ChevronRight} className="text-muted-foreground size-4 stroke-[1.5px]" />
             </Button>
           </Link>
         )}
-        ListFooterComponent={<View className='android:h-2' />}
+        ListFooterComponent={<View className="android:h-2" />}
       />
     </View>
   );

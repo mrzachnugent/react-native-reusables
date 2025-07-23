@@ -3,7 +3,7 @@ import { AvatarPreview } from '@showcase/components/styles/examples';
 
 export default function AvatarScreen() {
   return (
-    <View className='flex-1 justify-center items-center p-6 gap-12'>
+    <View className="flex-1 items-center justify-center gap-12 p-6">
       <AvatarPreview />
     </View>
   );
