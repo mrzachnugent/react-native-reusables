@@ -29,11 +29,11 @@ const SEARCH_OPTIONS = {
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
-    <html lang='en' className={cn(fontSans.variable, fontMono.variable)} suppressHydrationWarning>
+    <html lang="en" className={cn(fontSans.variable, fontMono.variable)} suppressHydrationWarning>
       <head>
-        <link rel='icon' href='/favicon.svg' />
+        <link rel="icon" href="/favicon.svg" />
       </head>
-      <body className='flex flex-col min-h-screen'>
+      <body className="flex min-h-screen flex-col">
         <CookiesProvider>
           <SafeAreaProvider>
             <RootProvider search={SEARCH_OPTIONS}>{children}</RootProvider>

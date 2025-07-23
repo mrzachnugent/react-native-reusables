@@ -12,10 +12,10 @@ const COMMAND: Record<(typeof MANAGERS)[number], string[]> = {
 
 export function CommandTabs({ args }: { args: string[] }) {
   return (
-    <div className='dark'>
-      <Tabs items={MANAGERS as unknown as string[]} groupId='manager' persist>
+    <div className="dark">
+      <Tabs items={MANAGERS as unknown as string[]} groupId="manager" persist>
         {MANAGERS.map((manager) => (
-          <Tab key={manager} value={manager} className='dark:text-foreground *:dark'>
+          <Tab key={manager} value={manager} className="dark:text-foreground *:dark">
             <CodeBlock>
               <Pre>
                 <code>

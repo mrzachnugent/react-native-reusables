@@ -23,20 +23,19 @@ export function CopyButton({
 
   return (
     <button
-      type='button'
+      type="button"
       className={cn(
         buttonVariants({
           variant: 'ghost',
           size: 'icon',
         }),
-        'transition-opacity group-hover:opacity-100 size-7',
+        'size-7 transition-opacity group-hover:opacity-100',
         !checked && 'opacity-0',
         className
       )}
-      aria-label='Copy Text'
+      aria-label="Copy Text"
       onClick={onClick}
-      {...props}
-    >
+      {...props}>
       <CheckIcon className={cn('!size-3.5 transition-transform', !checked && 'scale-0')} />
       <CopyIcon className={cn('absolute !size-3.5 transition-transform', checked && 'scale-0')} />
     </button>

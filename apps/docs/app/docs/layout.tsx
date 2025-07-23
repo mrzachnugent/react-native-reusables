@@ -14,17 +14,16 @@ export default function Layout({ children }: { children: ReactNode }) {
         tree={source.pageTree}
         nav={{
           title: (
-            <div className='-ml-px gap-1.5 flex items-center text-foreground/80 opacity-90 hover:opacity-100 transition-opacity duration-200'>
-              <div className='flex items-center justify-center'>
+            <div className="text-foreground/80 -ml-px flex items-center gap-1.5 opacity-90 transition-opacity duration-200 hover:opacity-100">
+              <div className="flex items-center justify-center">
                 <RnrIcon />
               </div>
-              <p className='text-base'>Reusables</p>
+              <p className="text-base">Reusables</p>
             </div>
           ),
         }}
         sidebar={SIDEBAR_PROPS}
-        githubUrl='https://github.com/mrzachnugent/react-native-reusables'
-      >
+        githubUrl="https://github.com/mrzachnugent/react-native-reusables">
         {children}
       </DocsLayout>
     </>

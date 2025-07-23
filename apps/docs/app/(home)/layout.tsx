@@ -17,11 +17,11 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <SkipNavigationButton />
       <HomeLayout
-        githubUrl='https://github.com/mrzachnugent/react-native-reusables'
+        githubUrl="https://github.com/mrzachnugent/react-native-reusables"
         nav={{
           title: (
-            <div className='flex items-center justify-center size-8 rounded-md hover:bg-fd-accent transition-colors duration-200 -ml-0.5'>
-              <RnrIcon className='w-6' pathClassName='stroke-[1px]' />
+            <div className="hover:bg-fd-accent -ml-0.5 flex size-8 items-center justify-center rounded-md transition-colors duration-200">
+              <RnrIcon className="w-6" pathClassName="stroke-[1px]" />
             </div>
           ),
         }}
@@ -30,12 +30,11 @@ export default function Layout({ children }: { children: ReactNode }) {
             type: 'custom',
             children: (
               <Button
-                variant='ghost'
-                size='sm'
+                variant="ghost"
+                size="sm"
                 asChild
-                className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
-              >
-                <Link href='/docs'>Docs</Link>
+                className="hover:bg-fd-accent dark:hover:bg-fd-accent -ml-1.5 justify-start sm:ml-0 sm:justify-center">
+                <Link href="/docs">Docs</Link>
               </Button>
             ),
           },
@@ -43,12 +42,11 @@ export default function Layout({ children }: { children: ReactNode }) {
             type: 'custom',
             children: (
               <Button
-                variant='ghost'
-                size='sm'
+                variant="ghost"
+                size="sm"
                 asChild
-                className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
-              >
-                <Link href='/docs/blocks/authentication'>Blocks</Link>
+                className="hover:bg-fd-accent dark:hover:bg-fd-accent -ml-1.5 justify-start sm:ml-0 sm:justify-center">
+                <Link href="/docs/blocks/authentication">Blocks</Link>
               </Button>
             ),
           },
@@ -56,17 +54,15 @@ export default function Layout({ children }: { children: ReactNode }) {
             type: 'custom',
             children: (
               <Button
-                variant='ghost'
-                size='sm'
+                variant="ghost"
+                size="sm"
                 asChild
-                className='hover:bg-fd-accent dark:hover:bg-fd-accent justify-start sm:justify-center -ml-1.5 sm:ml-0'
-              >
-                <Link href='/docs/components/accordion'>Components</Link>
+                className="hover:bg-fd-accent dark:hover:bg-fd-accent -ml-1.5 justify-start sm:ml-0 sm:justify-center">
+                <Link href="/docs/components/accordion">Components</Link>
               </Button>
             ),
           },
-        ]}
-      >
+        ]}>
         {children}
       </HomeLayout>
     </>
