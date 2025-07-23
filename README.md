@@ -126,10 +126,6 @@ Explore community-created components and templates that extend the core library 
   - iOS: `pnpm dev:showcase`
   - Android: `pnpm dev:showcase:android`
   - Web: `pnpm dev:showcase:web`
-- Starter-base
-  - iOS: `pnpm dev:starter-base`
-  - Android: `pnpm dev:starter-base:android`
-  - Web: `pnpm dev:starter-base:web`
 - Docs: `pnpm dev:docs`
 
 5. Add and commit your changes
