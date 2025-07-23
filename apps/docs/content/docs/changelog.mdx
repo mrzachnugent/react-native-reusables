@@ -91,6 +91,18 @@ import { HeartIcon } from 'lucide-react-native';
 
 ```
 
+### Text variants [#august-2025-text-variants]
+
+The `Text` component now includes built-in typography variants, so you no longer need to use the deprecated `Typography` components like `<Typography.H1>`.
+
+Use the variant prop like this:
+
+```tsx
+<Text variant="h1">Title</Text>
+```
+
+Available variants: `default`, `h1` , `h2`, `h3`, `h4`, `p`, `block-quote`, `code`, `lead`, `large`, `small`, and `muted`.
+
 ### Deprecated [#august-2025-deprecated]
 
 - `lib/constants.ts`: now using the `theme.ts` file.
@@ -98,6 +110,8 @@ import { HeartIcon } from 'lucide-react-native';
 - `lib/useColorScheme.ts`: now using the hook directly from `nativewind`
 
 - `lib/icons`: deprecated in favor of the new [`Icon`](#august-2025-new-icon-component) component.
+
+- `components/ui/typography.tsx`: deprecated in favor of the new [`variant`](#august-2025-text-variants) prop on the `Text` component.
 
 ### Upgrade Notes [#august-2025-upgrade-notes]
 1. Run the `doctor` command to diagnose. Then, follow the instructions to get your project up to date:
