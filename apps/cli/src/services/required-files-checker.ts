@@ -61,7 +61,10 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
         return { missingFiles, missingIncludes }
       })
 
-    const checkDeprecatedFiles = (deprecatedFromLib: Array<Omit<FileCheck, "docs">>) =>
+    const checkDeprecatedFiles = (
+      deprecatedFromLib: Array<Omit<FileCheck, "docs">>,
+      deprecatedFromUi: Array<Omit<FileCheck, "docs">>
+    ) =>
       Effect.gen(function* () {
         const componentJson = yield* projectConfig.getComponentJson()
         const aliasForLib = componentJson.aliases.lib ?? `${componentJson.aliases.utils}/lib`
@@ -74,11 +77,13 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
                 Effect.gen(function* () {
                   const exists = yield* fs.exists(fullPath)
                   if (!exists) {
-                    yield* Effect.logDebug(`${logSymbols.success} Deprecated lib/${file.fileNames[0]} not found`)
+                    yield* Effect.logDebug(
+                      `${logSymbols.success} Deprecated ${aliasForLib}/${file.fileNames[0]} not found`
+                    )
                     return { ...file, hasIncludes: false }
                   }
 
-                  yield* Effect.logDebug(`${logSymbols.error} Deprecated lib/${file.fileNames[0]} found`)
+                  yield* Effect.logDebug(`${logSymbols.error} Deprecated ${aliasForLib}/${file.fileNames[0]} found`)
 
                   const fileContent = yield* fs.readFileString(fullPath)
 
@@ -98,7 +103,43 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           )
         )
 
-        return existingDeprecatedFromLibs
+        const aliasForUi = componentJson.aliases.ui ?? `${componentJson.aliases.components}/ui`
+
+        const existingDeprecatedFromUi = yield* Effect.forEach(
+          deprecatedFromUi,
+          (file) =>
+            projectConfig.resolvePathFromAlias(`${aliasForUi}/${file.fileNames[0]}`).pipe(
+              Effect.flatMap((fullPath) =>
+                Effect.gen(function* () {
+                  const exists = yield* fs.exists(fullPath)
+                  if (!exists) {
+                    yield* Effect.logDebug(
+                      `${logSymbols.success} Deprecated ${aliasForUi}/${file.fileNames[0]} not found`
+                    )
+                    return { ...file, hasIncludes: false }
+                  }
+
+                  yield* Effect.logDebug(`${logSymbols.error} Deprecated ${aliasForUi}/${file.fileNames[0]} found`)
+
+                  const fileContent = yield* fs.readFileString(fullPath)
+
+                  return {
+                    ...file,
+                    hasIncludes: file.includes.some((include) =>
+                      include.content.some((content) => fileContent.includes(content))
+                    )
+                  }
+                })
+              )
+            ),
+          { concurrency: "unbounded" }
+        ).pipe(
+          Effect.map((results) =>
+            results.filter((result) => result.hasIncludes).map(({ hasIncludes: _hasIncludes, ...result }) => result)
+          )
+        )
+
+        return [...existingDeprecatedFromLibs, ...existingDeprecatedFromUi]
       })
 
     const checkCustomFiles = (customFileChecks: Record<string, CustomFileCheck>) =>
@@ -268,17 +309,19 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
       run: ({
         customFileChecks,
         deprecatedFromLib,
+        deprecatedFromUi,
         fileChecks
       }: {
         fileChecks: Array<FileCheck>
         customFileChecks: Record<string, CustomFileCheck>
         deprecatedFromLib: Array<Omit<FileCheck, "docs">>
+        deprecatedFromUi: Array<Omit<FileCheck, "docs">>
       }) =>
         Effect.gen(function* () {
           const [fileResults, customFileResults, deprecatedFileResults] = yield* Effect.all([
             checkFiles(fileChecks),
             checkCustomFiles(customFileChecks),
-            checkDeprecatedFiles(deprecatedFromLib)
+            checkDeprecatedFiles(deprecatedFromLib, deprecatedFromUi)
           ])
 
           return { fileResults, customFileResults, deprecatedFileResults }
