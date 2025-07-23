@@ -59,8 +59,7 @@ class Template extends Effect.Service<Template>()("src/services/template", {
                 : path.basename(repo.url).replace(".git", "")
 
               spinner.start(`Initializing the ${templateName} template...`)
-              //TODO: replace '@zach/docs-rewrite' with 'main'
-              yield* runCommand("git", ["clone", "--depth=1", "--branch", "@zach/docs-rewrite", repo.url, name], {
+              yield* runCommand("git", ["clone", "--depth=1", "--branch", "main", repo.url, name], {
                 cwd: tempDirPath
               })
 

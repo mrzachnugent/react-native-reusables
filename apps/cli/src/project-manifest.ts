@@ -276,6 +276,14 @@ const COMPONENTS = [
   "tooltip"
 ]
 
+const TEMPLATES = [
+  {
+    name: "Minimal",
+    url: "https://github.com/founded-labs/react-native-reusables-templates.git",
+    subPath: "minimal"
+  }
+]
+
 const PROJECT_MANIFEST = {
   dependencies: DEPENDENCIES,
   devDependencies: DEV_DEPENDENCIES,
@@ -284,7 +292,8 @@ const PROJECT_MANIFEST = {
   deprecatedFromUi: DEPRECATED_FROM_UI,
   customFileChecks: CUSTOM_FILE_CHECKS,
   nativewindEnvFile: NATIVEWIND_ENV_FILE,
-  components: COMPONENTS
+  components: COMPONENTS,
+  templates: TEMPLATES
 }
 
 export { PROJECT_MANIFEST }
