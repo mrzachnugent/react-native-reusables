@@ -1,6 +1,6 @@
 {
   "recommendations": [
-      "effectful-tech.effect-vscode",
-      "dbaeumer.vscode-eslint"
-    ]
+    "effectful-tech.effect-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
 }
