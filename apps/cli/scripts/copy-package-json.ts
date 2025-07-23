@@ -2,7 +2,7 @@ import { FileSystem, Path } from "@effect/platform"
 import { NodeContext } from "@effect/platform-node"
 import { Effect } from "effect"
 
-const program = Effect.gen(function*() {
+const program = Effect.gen(function* () {
   const fs = yield* FileSystem.FileSystem
   const path = yield* Path.Path
   yield* Effect.log("[Build] Copying package.json ...")

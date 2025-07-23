@@ -31,7 +31,7 @@ class Add extends Effect.Service<Add>()("Add", {
             Schema.decodeUnknown(Schema.Union(Schema.Literal("default"), Schema.Literal("new-york")))
           )
 
-          const components = options.all ? PROJECT_MANIFEST.components : options.args?.components ?? []
+          const components = options.all ? PROJECT_MANIFEST.components : (options.args?.components ?? [])
 
           if (components.length === 0) {
             const selectedComponents = yield* Prompt.multiSelect({
