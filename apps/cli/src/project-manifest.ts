@@ -120,6 +120,33 @@ const DEPRECATED_FROM_LIB = [
   }
 ]
 
+const DEPRECATED_FROM_UI = [
+  {
+    name: "Typography",
+    fileNames: ["typography.tsx"],
+    includes: [
+      {
+        content: [
+          "function H1({",
+          "function H2({",
+          "function H3({",
+          "function H4({",
+          "function P({",
+          "function BlockQuote({",
+          "function Code({",
+          "function Lead({",
+          "function Large({",
+          "function Small({",
+          "function Muted({"
+        ],
+        message:
+          "Typography is deprecated. Instead, use the Text component with its variant prop (e.g. <Text variant='h1'>Title</Text>)",
+        docs: "https://www.reactnativereusables.com/docs/components/text#typography"
+      }
+    ]
+  }
+]
+
 // Excludes foreground colors since it is formatted differently in all 3 styling files (tailwind config, global.css, theme.ts)
 const CSS_VARIABLE_NAMES = [
   "background",
@@ -254,6 +281,7 @@ const PROJECT_MANIFEST = {
   devDependencies: DEV_DEPENDENCIES,
   fileChecks: FILE_CHECKS,
   deprecatedFromLib: DEPRECATED_FROM_LIB,
+  deprecatedFromUi: DEPRECATED_FROM_UI,
   customFileChecks: CUSTOM_FILE_CHECKS,
   nativewindEnvFile: NATIVEWIND_ENV_FILE,
   components: COMPONENTS

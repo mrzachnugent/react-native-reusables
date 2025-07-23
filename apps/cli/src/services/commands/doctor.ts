@@ -99,6 +99,7 @@ class Doctor extends Effect.Service<Doctor>()("Doctor", {
           const { customFileResults, deprecatedFileResults, fileResults } = yield* requiredFileChecker.run({
             customFileChecks: PROJECT_MANIFEST.customFileChecks,
             deprecatedFromLib: PROJECT_MANIFEST.deprecatedFromLib,
+            deprecatedFromUi: PROJECT_MANIFEST.deprecatedFromUi,
             fileChecks: PROJECT_MANIFEST.fileChecks
           })
 
