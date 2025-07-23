@@ -74,8 +74,7 @@ export default function RootLayout() {
       <StyleProvider>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <GestureHandlerRootView
-          style={{ flex: 1, backgroundColor: THEMES[colorScheme].colors.background }}
-        >
+          style={{ flex: 1, backgroundColor: THEMES[colorScheme].colors.background }}>
           <KeyboardProvider>
             <StyleBorderRadiusProvider>
               <Stack
@@ -83,16 +82,15 @@ export default function RootLayout() {
                   headerBackTitle: 'Back',
                   headerTitle(props) {
                     return (
-                      <Text className='text-xl ios:font-medium android:mt-1.5'>
+                      <Text className="ios:font-medium android:mt-1.5 text-xl">
                         {toOptions(props.children.split('/').pop())}
                       </Text>
                     );
                   },
                   headerRight: () => <HeaderRightView />,
-                }}
-              >
+                }}>
                 <Stack.Screen
-                  name='index'
+                  name="index"
                   options={{
                     headerLargeTitle: true,
                     headerTitle: 'Showcase',
@@ -104,7 +102,7 @@ export default function RootLayout() {
                 />
 
                 <Stack.Screen
-                  name='theming'
+                  name="theming"
                   options={{
                     presentation: 'modal',
                     title: 'Theming',
@@ -137,8 +135,7 @@ function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) 
         style === 'default'
           ? { flex: 1, ...defaultRadius }
           : { flex: 1, ...(style === 'new-york' ? newYorkRadius : {}) }
-      }
-    >
+      }>
       {children}
     </View>
   );

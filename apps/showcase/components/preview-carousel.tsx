@@ -46,25 +46,24 @@ function PreviewCarousel({ previews, removeBottomSafeArea = false }: PreviewCaro
         keyExtractor={keyExtractor}
         horizontal
         snapToInterval={windowWidth}
-        decelerationRate='fast'
+        decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
         contentContainerClassName={cn(!removeBottomSafeArea && 'pb-12 mb-safe')}
       />
-      <View className='absolute bottom-0 left-0 right-0 h-12 mb-safe flex-row justify-center items-center px-4'>
-        <View className='justify-center items-center flex-row gap-2 relative'>
-          <View className='rounded-md bg-background'>
-            <Button variant='outline' size='icon' disabled={index === 0} onPress={onPreviewPress}>
-              <Icon as={ChevronLeftIcon} className='size-4' />
+      <View className="mb-safe absolute bottom-0 left-0 right-0 h-12 flex-row items-center justify-center px-4">
+        <View className="relative flex-row items-center justify-center gap-2">
+          <View className="bg-background rounded-md">
+            <Button variant="outline" size="icon" disabled={index === 0} onPress={onPreviewPress}>
+              <Icon as={ChevronLeftIcon} className="size-4" />
             </Button>
           </View>
-          <View className='rounded-md bg-background'>
+          <View className="bg-background rounded-md">
             <Button
-              variant='outline'
-              size='icon'
+              variant="outline"
+              size="icon"
               disabled={index === previews.length - 1}
-              onPress={onNextPress}
-            >
-              <Icon as={ChevronRightIcon} className='size-4' />
+              onPress={onNextPress}>
+              <Icon as={ChevronRightIcon} className="size-4" />
             </Button>
           </View>
         </View>
@@ -80,7 +79,7 @@ function renderItem({
 }: ListRenderItemInfo<{ name: string; component: (props: unknown) => React.JSX.Element }>) {
   const Component = item.component;
   return (
-    <View className='w-screen flex-1 justify-center items-center'>
+    <View className="w-screen flex-1 items-center justify-center">
       <Component />
     </View>
   );
