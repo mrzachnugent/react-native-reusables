@@ -12,7 +12,7 @@ export function TogglePreview() {
   }
 
   return (
-    <Toggle aria-label='Toggle italic' pressed={pressed} onPressedChange={onPressedChange}>
+    <Toggle aria-label="Toggle italic" pressed={pressed} onPressedChange={onPressedChange}>
       <ToggleIcon as={Bold} />
     </Toggle>
   );

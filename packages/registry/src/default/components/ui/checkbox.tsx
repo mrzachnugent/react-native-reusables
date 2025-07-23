@@ -26,7 +26,7 @@ function Checkbox({
       className={cn(
         'border-primary h-4 w-4 shrink-0 rounded border',
         Platform.select({
-          web: 'peer focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed cursor-default',
+          web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive peer cursor-default outline-none transition-shadow focus-visible:ring-[3px] disabled:cursor-not-allowed',
           native: 'overflow-hidden',
         }),
         props.checked && checkedClassName,
@@ -34,11 +34,9 @@ function Checkbox({
         className
       )}
       hitSlop={DEFAULT_HIT_SLOP}
-      {...props}
-    >
+      {...props}>
       <CheckboxPrimitive.Indicator
-        className={cn('items-center justify-center h-full w-full bg-primary', indicatorClassName)}
-      >
+        className={cn('bg-primary h-full w-full items-center justify-center', indicatorClassName)}>
         <Icon
           as={Check}
           size={12}

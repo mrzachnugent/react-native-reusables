@@ -9,8 +9,8 @@ import { View } from 'react-native';
 export function ButtonLoadingPreview() {
   return (
     <Button disabled>
-      <View className='animate-spin pointer-events-none'>
-        <Icon as={Loader2} className='text-primary-foreground' />
+      <View className="pointer-events-none animate-spin">
+        <Icon as={Loader2} className="text-primary-foreground" />
       </View>
       <Text>Please wait</Text>
     </Button>

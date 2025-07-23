@@ -30,8 +30,7 @@ function ToggleGroup({
           Platform.select({ web: 'shadow-xs', native: 'shadow-xs shadow-black/5' }),
         className
       )}
-      {...props}
-    >
+      {...props}>
       <ToggleGroupContext.Provider value={{ variant, size }}>
         {children}
       </ToggleGroupContext.Provider>
@@ -73,8 +72,7 @@ function ToggleGroupItem({
         ToggleGroupPrimitive.utils.getIsSelected(value, props.value)
           ? 'text-accent-foreground'
           : Platform.select({ web: 'group-hover:text-muted-foreground' })
-      )}
-    >
+      )}>
       <ToggleGroupPrimitive.Item
         className={cn(
           toggleVariants({
@@ -83,18 +81,17 @@ function ToggleGroupItem({
           }),
           props.disabled && 'opacity-50',
           ToggleGroupPrimitive.utils.getIsSelected(value, props.value) && 'bg-accent',
-          'min-w-0  shrink-0 rounded-none shadow-none',
+          'min-w-0 shrink-0 rounded-none shadow-none',
           isFirst && 'rounded-l-md',
           isLast && 'rounded-r-md',
           (context.variant === 'outline' || variant === 'outline') && 'border-l-0',
           (context.variant === 'outline' || variant === 'outline') && isFirst && 'border-l',
           Platform.select({
-            web: 'focus:z-10 focus-visible:z-10 flex-1',
+            web: 'flex-1 focus:z-10 focus-visible:z-10',
           }),
           className
         )}
-        {...props}
-      >
+        {...props}>
         {children}
       </ToggleGroupPrimitive.Item>
     </TextClassContext.Provider>

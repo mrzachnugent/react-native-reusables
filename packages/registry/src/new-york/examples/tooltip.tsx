@@ -7,7 +7,7 @@ export function TooltipPreview() {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant='outline'>
+        <Button variant="outline">
           <Text>{Platform.select({ web: 'Hover', default: 'Press' })}</Text>
         </Button>
       </TooltipTrigger>

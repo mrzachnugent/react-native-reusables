@@ -16,7 +16,7 @@ export function AlertDialogPreview() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant='outline'>
+        <Button variant="outline">
           <Text>Show Alert Dialog</Text>
         </Button>
       </AlertDialogTrigger>

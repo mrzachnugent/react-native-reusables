@@ -24,12 +24,12 @@ function HoverCardContent({
     <HoverCardPrimitive.Portal>
       <HoverCardPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
         <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut}>
-          <TextClassContext.Provider value='text-popover-foreground'>
+          <TextClassContext.Provider value="text-popover-foreground">
             <HoverCardPrimitive.Content
               align={align}
               sideOffset={sideOffset}
               className={cn(
-                'bg-popover z-50 w-64 rounded-md border border-border p-4 shadow-md outline-hidden',
+                'bg-popover border-border outline-hidden z-50 w-64 rounded-md border p-4 shadow-md',
                 Platform.select({
                   web: cn(
                     'animate-in fade-in-0 zoom-in-95 origin-(--radix-hover-card-content-transform-origin) cursor-default [&>*]:cursor-auto',

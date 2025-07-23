@@ -12,10 +12,10 @@ function Card({
   ref?: React.RefObject<View>;
 }) {
   return (
-    <TextClassContext.Provider value='text-card-foreground'>
+    <TextClassContext.Provider value="text-card-foreground">
       <View
         className={cn(
-          'rounded-lg border border-border bg-card shadow-sm',
+          'border-border bg-card rounded-lg border shadow-sm',
           Platform.select({
             native: 'shadow-black/5',
           }),
@@ -44,7 +44,7 @@ function CardTitle({
 }) {
   return (
     <Text
-      role='heading'
+      role="heading"
       aria-level={3}
       className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
       {...props}

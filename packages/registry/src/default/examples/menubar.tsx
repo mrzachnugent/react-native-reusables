@@ -55,7 +55,7 @@ export function MenubarPreview() {
 
   return (
     <Menubar value={value} onValueChange={onValueChange}>
-      <MenubarMenu value='file'>
+      <MenubarMenu value="file">
         <MenubarTrigger onPress={closeSubs}>
           <Text>File</Text>
         </MenubarTrigger>
@@ -97,11 +97,11 @@ export function MenubarPreview() {
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
-      <MenubarMenu value='edit'>
+      <MenubarMenu value="edit">
         <MenubarTrigger onPress={closeSubs}>
           <Text>Edit</Text>
         </MenubarTrigger>
-        <MenubarContent insets={contentInsets} className='native:w-48'>
+        <MenubarContent insets={contentInsets} className="native:w-48">
           <MenubarItem>
             <Text>Undo</Text>
             <MenubarShortcut>⌘Z</MenubarShortcut>
@@ -145,7 +145,7 @@ export function MenubarPreview() {
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
-      <MenubarMenu value='view'>
+      <MenubarMenu value="view">
         <MenubarTrigger onPress={closeSubs}>
           <Text>View</Text>
         </MenubarTrigger>
@@ -153,15 +153,13 @@ export function MenubarPreview() {
           <MenubarCheckboxItem
             checked={isChecked}
             onCheckedChange={setIsChecked}
-            closeOnPress={false}
-          >
+            closeOnPress={false}>
             <Text>Always Show Bookmarks Bar</Text>
           </MenubarCheckboxItem>
           <MenubarCheckboxItem
             checked={isChecked2}
             onCheckedChange={setIsChecked2}
-            closeOnPress={false}
-          >
+            closeOnPress={false}>
             <Text>Always Show Full URLs</Text>
           </MenubarCheckboxItem>
           <MenubarSeparator />
@@ -183,19 +181,19 @@ export function MenubarPreview() {
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
-      <MenubarMenu value='profile'>
+      <MenubarMenu value="profile">
         <MenubarTrigger onPress={closeSubs}>
           <Text>Profiles</Text>
         </MenubarTrigger>
         <MenubarContent insets={contentInsets}>
           <MenubarRadioGroup value={radio} onValueChange={setRadio}>
-            <MenubarRadioItem closeOnPress={false} value='andy'>
+            <MenubarRadioItem closeOnPress={false} value="andy">
               <Text>Andy</Text>
             </MenubarRadioItem>
-            <MenubarRadioItem closeOnPress={false} value='michael'>
+            <MenubarRadioItem closeOnPress={false} value="michael">
               <Text>Michael</Text>
             </MenubarRadioItem>
-            <MenubarRadioItem closeOnPress={false} value='creed'>
+            <MenubarRadioItem closeOnPress={false} value="creed">
               <Text>Creed</Text>
             </MenubarRadioItem>
           </MenubarRadioGroup>

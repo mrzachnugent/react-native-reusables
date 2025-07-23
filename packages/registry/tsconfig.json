@@ -12,7 +12,7 @@
       "@/registry/*": [
         "src/*"
       ]
-    },
+    }
   },
   "exclude": [
     "node_modules"

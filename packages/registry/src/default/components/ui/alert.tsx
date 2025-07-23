@@ -8,7 +8,7 @@ import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View, type ViewProps } from 'react-native';
 
-const alertVariants = cva('relative w-full rounded-lg border border-border p-4', {
+const alertVariants = cva('border-border relative w-full rounded-lg border p-4', {
   variants: {
     variant: {
       default: 'bg-background',
@@ -35,10 +35,9 @@ function Alert({
   }) {
   return (
     <TextClassContext.Provider
-      value={cn('text-foreground', variant === 'destructive' && 'text-destructive', className)}
-    >
-      <View role='alert' className={alertVariants({ variant, className })} {...props}>
-        <View className='absolute left-4 top-4'>
+      value={cn('text-foreground', variant === 'destructive' && 'text-destructive', className)}>
+      <View role="alert" className={alertVariants({ variant, className })} {...props}>
+        <View className="absolute left-4 top-4">
           <Icon
             as={icon}
             className={cn('size-4', variant === 'destructive' && 'text-destructive', iconClassName)}
@@ -53,7 +52,7 @@ function Alert({
 function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) {
   return (
     <Text
-      className={cn('pl-7 mb-1 font-medium leading-none tracking-tight', className)}
+      className={cn('mb-1 pl-7 font-medium leading-none tracking-tight', className)}
       {...props}
     />
   );
@@ -64,7 +63,7 @@ function AlertDescription({ className, ...props }: React.ComponentProps<typeof T
   return (
     <Text
       className={cn(
-        'pl-7 text-sm text-foreground leading-relaxed',
+        'text-foreground pl-7 text-sm leading-relaxed',
         textClass?.includes('text-destructive') && 'text-destructive',
         className
       )}

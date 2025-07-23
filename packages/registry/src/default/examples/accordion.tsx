@@ -8,12 +8,12 @@ import { Text } from '@/registry/default/components/ui/text';
 
 export function AccordionPreview() {
   return (
-    <Accordion type='single' collapsible className='w-full max-w-lg' defaultValue='item-1'>
-      <AccordionItem value='item-1'>
+    <Accordion type="single" collapsible className="w-full max-w-lg" defaultValue="item-1">
+      <AccordionItem value="item-1">
         <AccordionTrigger>
           <Text>Product Information</Text>
         </AccordionTrigger>
-        <AccordionContent className='flex flex-col gap-4 text-balance'>
+        <AccordionContent className="flex flex-col gap-4 text-balance">
           <Text>
             Our flagship product combines cutting-edge technology with sleek design. Built with
             premium materials, it offers unparalleled performance and reliability.
@@ -24,11 +24,11 @@ export function AccordionPreview() {
           </Text>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value='item-2'>
+      <AccordionItem value="item-2">
         <AccordionTrigger>
           <Text>Shipping Details</Text>
         </AccordionTrigger>
-        <AccordionContent className='flex flex-col gap-4 text-balance'>
+        <AccordionContent className="flex flex-col gap-4 text-balance">
           <Text>
             We offer worldwide shipping through trusted courier partners. Standard delivery takes
             3-5 business days, while express shipping ensures delivery within 1-2 business days.
@@ -39,11 +39,11 @@ export function AccordionPreview() {
           </Text>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value='item-3'>
+      <AccordionItem value="item-3">
         <AccordionTrigger>
           <Text>Return Policy</Text>
         </AccordionTrigger>
-        <AccordionContent className='flex flex-col gap-4 text-balance'>
+        <AccordionContent className="flex flex-col gap-4 text-balance">
           <Text>
             We stand behind our products with a comprehensive 30-day return policy. If you&apos;re
             not completely satisfied, simply return the item in its original condition.

@@ -19,9 +19,9 @@ function Label({
   return (
     <LabelPrimitive.Root
       className={cn(
-        'flex flex-row items-center gap-2 select-none',
+        'flex select-none flex-row items-center gap-2',
         Platform.select({
-          web: 'leading-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
+          web: 'leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50',
         }),
         disabled && 'opacity-50'
       )}
@@ -29,8 +29,7 @@ function Label({
       onLongPress={onLongPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
-      disabled={disabled}
-    >
+      disabled={disabled}>
       <LabelPrimitive.Text
         className={cn('text-foreground text-sm font-medium leading-none', className)}
         {...props}

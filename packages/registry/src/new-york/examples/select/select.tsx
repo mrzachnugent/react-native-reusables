@@ -29,10 +29,10 @@ export function SelectPreview() {
 
   return (
     <Select>
-      <SelectTrigger className='w-[180px]'>
-        <SelectValue placeholder='Select a fruit' />
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
-      <SelectContent insets={contentInsets} className='w-[180px]'>
+      <SelectContent insets={contentInsets} className="w-[180px]">
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
           {fruits.map((fruit) => (
