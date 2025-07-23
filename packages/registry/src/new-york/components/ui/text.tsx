@@ -8,7 +8,7 @@ import { Platform, Text as RNText, type Role } from 'react-native';
 
 const textVariants = cva(
   cn(
-    'text-base text-foreground',
+    'text-foreground text-base',
     Platform.select({
       web: 'select-text',
     })
@@ -22,19 +22,19 @@ const textVariants = cva(
           Platform.select({ web: 'scroll-m-20 text-balance' })
         ),
         h2: cn(
-          'border-b border-border pb-2 text-3xl font-semibold tracking-tight',
+          'border-border border-b pb-2 text-3xl font-semibold tracking-tight',
           Platform.select({ web: 'scroll-m-20 first:mt-0' })
         ),
         h3: cn('text-2xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20' })),
         h4: cn('text-xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20' })),
-        p: 'leading-7 mt-3 sm:mt-6',
-        blockquote: 'mt-4 sm:mt-6 border-l-2 pl-3 sm:pl-6 italic',
+        p: 'mt-3 leading-7 sm:mt-6',
+        blockquote: 'mt-4 border-l-2 pl-3 italic sm:mt-6 sm:pl-6',
         code: cn(
-          'font-mono bg-muted relative rounded px-[0.3rem] py-[0.2rem] text-sm font-semibold'
+          'bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold'
         ),
         lead: 'text-muted-foreground text-xl',
         large: 'text-lg font-semibold',
-        small: 'text-sm leading-none font-medium',
+        small: 'text-sm font-medium leading-none',
         muted: 'text-muted-foreground text-sm',
       },
     },

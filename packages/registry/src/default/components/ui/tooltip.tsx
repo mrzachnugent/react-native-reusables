@@ -31,16 +31,15 @@ function TooltipContent({
               ? FadeInDown.withInitialValues({ transform: [{ translateY: 3 }] }).duration(150)
               : FadeInUp.withInitialValues({ transform: [{ translateY: -5 }] })
           }
-          exiting={FadeOut}
-        >
-          <TextClassContext.Provider value='text-sm text-popover-foreground'>
+          exiting={FadeOut}>
+          <TextClassContext.Provider value="text-sm text-popover-foreground">
             <TooltipPrimitive.Content
               sideOffset={sideOffset}
               className={cn(
-                'bg-popover border border-border z-50 rounded-md px-3 py-2 sm:py-1.5',
+                'bg-popover border-border z-50 rounded-md border px-3 py-2 sm:py-1.5',
                 Platform.select({
                   web: cn(
-                    'animate-in fade-in-0 zoom-in-95 w-fit origin-(--radix-tooltip-content-transform-origin) text-balance',
+                    'animate-in fade-in-0 zoom-in-95 origin-(--radix-tooltip-content-transform-origin) w-fit text-balance',
                     side === 'bottom' && 'slide-in-from-top-2',
                     side === 'left' && 'slide-in-from-right-2',
                     side === 'right' && 'slide-in-from-left-2',

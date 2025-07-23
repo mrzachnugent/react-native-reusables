@@ -42,10 +42,10 @@ export function ScrollableSelectPreview() {
   };
   return (
     <Select>
-      <SelectTrigger className='w-[180px]'>
-        <SelectValue placeholder='Select a fruit' />
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
-      <SelectContent insets={contentInsets} className='w-[180px]'>
+      <SelectContent insets={contentInsets} className="w-[180px]">
         <NativeSelectScrollView>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>

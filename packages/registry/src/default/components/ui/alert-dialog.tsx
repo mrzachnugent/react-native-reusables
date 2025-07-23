@@ -25,18 +25,16 @@ function AlertDialogOverlay({
   return (
     <AlertDialogPrimitive.Overlay
       className={cn(
-        'absolute top-0 left-0 right-0 bottom-0 z-50 bg-black/80 flex justify-center items-center p-2',
+        'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/80 p-2',
         Platform.select({
-          web: 'fixed animate-in fade-in-0',
+          web: 'animate-in fade-in-0 fixed',
         }),
         className
       )}
-      {...props}
-    >
+      {...props}>
       <NativeOnlyAnimatedView
         entering={FadeIn.duration(200).delay(50)}
-        exiting={FadeOut.duration(150)}
-      >
+        exiting={FadeOut.duration(150)}>
         <>{children}</>
       </NativeOnlyAnimatedView>
     </AlertDialogPrimitive.Overlay>
@@ -56,7 +54,7 @@ function AlertDialogContent({
       <AlertDialogOverlay>
         <AlertDialogPrimitive.Content
           className={cn(
-            'bg-background z-50 flex flex-col max-w-lg gap-4 rounded-lg border border-border p-6 shadow-lg',
+            'bg-background border-border z-50 flex max-w-lg flex-col gap-4 rounded-lg border p-6 shadow-lg',
             Platform.select({
               web: 'animate-in fade-in-0 zoom-in-95 duration-200',
             }),
@@ -71,7 +69,7 @@ function AlertDialogContent({
 
 function AlertDialogHeader({ className, ...props }: ViewProps) {
   return (
-    <TextClassContext.Provider value='text-center sm:text-left'>
+    <TextClassContext.Provider value="text-center sm:text-left">
       <View className={cn('flex flex-col gap-2', className)} {...props} />
     </TextClassContext.Provider>
   );
@@ -80,7 +78,7 @@ function AlertDialogHeader({ className, ...props }: ViewProps) {
 function AlertDialogFooter({ className, ...props }: ViewProps) {
   return (
     <View
-      className={cn('flex flex-col-reverse sm:gap-2 sm:flex-row sm:justify-end', className)}
+      className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-2', className)}
       {...props}
     />
   );
@@ -94,7 +92,7 @@ function AlertDialogTitle({
 }) {
   return (
     <AlertDialogPrimitive.Title
-      className={cn('text-lg text-foreground font-semibold', className)}
+      className={cn('text-foreground text-lg font-semibold', className)}
       {...props}
     />
   );

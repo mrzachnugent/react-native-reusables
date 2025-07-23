@@ -6,7 +6,7 @@ import { ChevronRight } from 'lucide-react-native';
 
 export function ButtonIconPreview() {
   return (
-    <Button variant='outline' size='icon'>
+    <Button variant="outline" size="icon">
       <Icon as={ChevronRight} />
     </Button>
   );

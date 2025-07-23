@@ -17,17 +17,17 @@ import { View } from 'react-native';
 export function TabsPreview() {
   const [value, setValue] = React.useState('account');
   return (
-    <View className='flex w-full max-w-sm flex-col gap-6'>
+    <View className="flex w-full max-w-sm flex-col gap-6">
       <Tabs value={value} onValueChange={setValue}>
         <TabsList>
-          <TabsTrigger value='account'>
+          <TabsTrigger value="account">
             <Text>Account</Text>
           </TabsTrigger>
-          <TabsTrigger value='password'>
+          <TabsTrigger value="password">
             <Text>Password</Text>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value='account'>
+        <TabsContent value="account">
           <Card>
             <CardHeader>
               <CardTitle>Account</CardTitle>
@@ -35,14 +35,14 @@ export function TabsPreview() {
                 Make changes to your account here. Click save when you&apos;re done.
               </CardDescription>
             </CardHeader>
-            <CardContent className='gap-6'>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-name'>Name</Label>
-                <Input id='tabs-demo-name' defaultValue='Pedro Duarte' />
+            <CardContent className="gap-6">
+              <View className="gap-3">
+                <Label htmlFor="tabs-demo-name">Name</Label>
+                <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
               </View>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-username'>Username</Label>
-                <Input id='tabs-demo-username' defaultValue='@peduarte' />
+              <View className="gap-3">
+                <Label htmlFor="tabs-demo-username">Username</Label>
+                <Input id="tabs-demo-username" defaultValue="@peduarte" />
               </View>
             </CardContent>
             <CardFooter>
@@ -52,7 +52,7 @@ export function TabsPreview() {
             </CardFooter>
           </Card>
         </TabsContent>
-        <TabsContent value='password'>
+        <TabsContent value="password">
           <Card>
             <CardHeader>
               <CardTitle>Password</CardTitle>
@@ -60,14 +60,14 @@ export function TabsPreview() {
                 Change your password here. After saving, you&apos;ll be logged out.
               </CardDescription>
             </CardHeader>
-            <CardContent className='gap-6'>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-current'>Current password</Label>
-                <Input id='tabs-demo-current' secureTextEntry />
+            <CardContent className="gap-6">
+              <View className="gap-3">
+                <Label htmlFor="tabs-demo-current">Current password</Label>
+                <Input id="tabs-demo-current" secureTextEntry />
               </View>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-new'>New password</Label>
-                <Input id='tabs-demo-new' secureTextEntry />
+              <View className="gap-3">
+                <Label htmlFor="tabs-demo-new">New password</Label>
+                <Input id="tabs-demo-new" secureTextEntry />
               </View>
             </CardContent>
             <CardFooter>

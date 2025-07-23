@@ -18,14 +18,14 @@ export function SwitchPreview() {
   }
 
   return (
-    <View className='flex-row items-center gap-2'>
+    <View className="flex-row items-center gap-2">
       <Switch
         checked={checked}
         onCheckedChange={onCheckedChange}
-        id='airplane-mode'
-        nativeID='airplane-mode'
+        id="airplane-mode"
+        nativeID="airplane-mode"
       />
-      <Label nativeID='airplane-mode' htmlFor='airplane-mode' onPress={onPress}>
+      <Label nativeID="airplane-mode" htmlFor="airplane-mode" onPress={onPress}>
         Airplane Mode
       </Label>
     </View>

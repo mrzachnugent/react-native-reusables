@@ -3,7 +3,7 @@ import { Text } from '@/registry/default/components/ui/text';
 
 export function ButtonLinkPreview() {
   return (
-    <Button variant='link'>
+    <Button variant="link">
       <Text>Link</Text>
     </Button>
   );

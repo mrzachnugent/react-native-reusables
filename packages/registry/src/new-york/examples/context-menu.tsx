@@ -36,16 +36,15 @@ export function ContextMenuPreview() {
   }
 
   return (
-    <ContextMenu className='w-[300px] h-[150px]'>
+    <ContextMenu className="h-[150px] w-[300px]">
       <ContextMenuTrigger
         onLongPress={onLongPress}
-        className='flex w-full h-full items-center justify-center rounded-md border border-border border-dashed web:outline-none web:cursor-default'
-      >
-        <Text className='text-sm'>
+        className="border-border web:outline-none web:cursor-default flex h-full w-full items-center justify-center rounded-md border border-dashed">
+        <Text className="text-sm">
           {Platform.select({ web: 'Right click here', native: 'Long press here' })}
         </Text>
       </ContextMenuTrigger>
-      <ContextMenuContent className='w-52' insets={contentInsets}>
+      <ContextMenuContent className="w-52" insets={contentInsets}>
         <ContextMenuItem inset>
           <Text>Back</Text>
           <ContextMenuShortcut>⌘[</ContextMenuShortcut>
@@ -62,7 +61,7 @@ export function ContextMenuPreview() {
           <ContextMenuSubTrigger inset>
             <Text>More Tools</Text>
           </ContextMenuSubTrigger>
-          <ContextMenuSubContent className='web:w-44'>
+          <ContextMenuSubContent className="web:w-44">
             <ContextMenuItem>
               <Text>Save Page...</Text>
             </ContextMenuItem>
@@ -77,7 +76,7 @@ export function ContextMenuPreview() {
               <Text>Developer Tools</Text>
             </ContextMenuItem>
             <ContextMenuSeparator />
-            <ContextMenuItem variant='destructive'>
+            <ContextMenuItem variant="destructive">
               <Text>Delete</Text>
             </ContextMenuItem>
           </ContextMenuSubContent>
@@ -86,24 +85,22 @@ export function ContextMenuPreview() {
         <ContextMenuCheckboxItem
           closeOnPress={false}
           checked={checkboxValue}
-          onCheckedChange={setCheckboxValue}
-        >
+          onCheckedChange={setCheckboxValue}>
           <Text>Show Bookmarks</Text>
         </ContextMenuCheckboxItem>
         <ContextMenuCheckboxItem
           closeOnPress={false}
           checked={checkboxValue2}
-          onCheckedChange={setCheckboxValue2}
-        >
+          onCheckedChange={setCheckboxValue2}>
           <Text>Show Full URLs</Text>
         </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
         <ContextMenuRadioGroup value={radioValue} onValueChange={setRadioValue}>
           <ContextMenuLabel inset>People</ContextMenuLabel>
-          <ContextMenuRadioItem closeOnPress={false} value='pedro'>
+          <ContextMenuRadioItem closeOnPress={false} value="pedro">
             <Text>Pedro Duarte</Text>
           </ContextMenuRadioItem>
-          <ContextMenuRadioItem closeOnPress={false} value='colm'>
+          <ContextMenuRadioItem closeOnPress={false} value="colm">
             <Text>Colm Tuite</Text>
           </ContextMenuRadioItem>
         </ContextMenuRadioGroup>

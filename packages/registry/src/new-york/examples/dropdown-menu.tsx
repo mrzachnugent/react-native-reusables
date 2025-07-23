@@ -27,11 +27,11 @@ export function DropdownMenuPreview() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline'>
+        <Button variant="outline">
           <Text>Open</Text>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent insets={contentInsets} sideOffset={2} className='w-56' align='start'>
+      <DropdownMenuContent insets={contentInsets} sideOffset={2} className="w-56" align="start">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

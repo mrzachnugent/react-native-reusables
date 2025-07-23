@@ -3,7 +3,7 @@ import { Text } from '@/registry/new-york/components/ui/text';
 
 export function ButtonOutlinePreview() {
   return (
-    <Button variant='outline'>
+    <Button variant="outline">
       <Text>Outline</Text>
     </Button>
   );

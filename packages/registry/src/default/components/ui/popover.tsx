@@ -25,15 +25,15 @@ function PopoverContent({
     <PopoverPrimitive.Portal hostName={portalHost}>
       <PopoverPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
         <NativeOnlyAnimatedView entering={FadeIn.duration(200)} exiting={FadeOut}>
-          <TextClassContext.Provider value='text-popover-foreground'>
+          <TextClassContext.Provider value="text-popover-foreground">
             <PopoverPrimitive.Content
               align={align}
               sideOffset={sideOffset}
               className={cn(
-                'bg-popover z-50 w-72 rounded-md border border-border p-4 shadow-md outline-hidden',
+                'bg-popover border-border outline-hidden z-50 w-72 rounded-md border p-4 shadow-md',
                 Platform.select({
                   web: cn(
-                    'animate-in fade-in-0 zoom-in-95 origin-(--radix-popover-content-transform-origin) ',
+                    'animate-in fade-in-0 zoom-in-95 origin-(--radix-popover-content-transform-origin)',
                     props.side === 'bottom' && 'slide-in-from-top-2',
                     props.side === 'top' && 'slide-in-from-bottom-2'
                   ),

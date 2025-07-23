@@ -24,7 +24,7 @@ function TabsList({
   return (
     <TabsPrimitive.List
       className={cn(
-        'bg-muted flex flex-row h-10 items-center justify-center rounded-md p-1',
+        'bg-muted flex h-10 flex-row items-center justify-center rounded-md p-1',
         Platform.select({ web: 'inline-flex' }),
         className
       )}
@@ -45,13 +45,12 @@ function TabsTrigger({
       value={cn(
         'text-foreground dark:text-muted-foreground text-sm font-medium',
         value === props.value && 'dark:text-foreground'
-      )}
-    >
+      )}>
       <TabsPrimitive.Trigger
         className={cn(
-          'flex flex-row h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-sm border border-transparent px-3 py-1.5 shadow-none',
+          'flex h-[calc(100%-1px)] flex-1 flex-row items-center justify-center gap-1.5 rounded-sm border border-transparent px-3 py-1.5 shadow-none',
           Platform.select({
-            web: 'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring inline-flex whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 cursor-default',
+            web: 'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring inline-flex cursor-default whitespace-nowrap transition-[color,box-shadow] focus-visible:outline-1 focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0',
           }),
           props.disabled && 'opacity-50',
           props.value === value && 'bg-background',

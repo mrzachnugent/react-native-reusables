@@ -3,7 +3,7 @@ import { Text } from '@/registry/new-york/components/ui/text';
 
 export function ButtonDestructivePreview() {
   return (
-    <Button variant='destructive'>
+    <Button variant="destructive">
       <Text>Destructive</Text>
     </Button>
   );

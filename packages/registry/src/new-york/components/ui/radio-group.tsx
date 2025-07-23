@@ -22,17 +22,16 @@ function RadioGroupItem({
   return (
     <RadioGroupPrimitive.Item
       className={cn(
-        'border-input dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-sm justify-center items-center',
+        'border-input dark:bg-input/30 aspect-square size-4 shrink-0 items-center justify-center rounded-full border shadow-sm',
         Platform.select({
-          web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed',
+          web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive outline-none transition-all focus-visible:ring-[3px] disabled:cursor-not-allowed',
           native: 'shadow-black/5',
         }),
         props.disabled && 'opacity-50',
         className
       )}
-      {...props}
-    >
-      <RadioGroupPrimitive.Indicator className='size-2 bg-primary rounded-full' />
+      {...props}>
+      <RadioGroupPrimitive.Indicator className="bg-primary size-2 rounded-full" />
     </RadioGroupPrimitive.Item>
   );
 }
