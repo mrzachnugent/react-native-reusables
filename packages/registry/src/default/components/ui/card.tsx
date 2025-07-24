@@ -15,7 +15,7 @@ function Card({
     <TextClassContext.Provider value="text-card-foreground">
       <View
         className={cn(
-          'border-border bg-card rounded-lg border shadow-sm',
+          'border-border bg-card rounded-lg border shadow-sm shadow-black/5',
           Platform.select({
             native: 'shadow-black/5',
           }),

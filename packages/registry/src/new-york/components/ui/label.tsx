@@ -21,7 +21,7 @@ function Label({
       className={cn(
         'flex select-none flex-row items-center gap-2',
         Platform.select({
-          web: 'leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50',
+          web: 'cursor-default leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50',
         }),
         disabled && 'opacity-50'
       )}
