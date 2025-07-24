@@ -1,4 +1,4 @@
-# Contributing to [react-native-reusables](https://github.com/mrzachnugent/react-native-reusables)
+# Contributing to React Native Reusables
 
 Thank you for your interest in contributing to `react-native-reusables`! We welcome contributions from the community to improve and enhance this project. Before getting started, please take a moment to review the following guidelines.
 
