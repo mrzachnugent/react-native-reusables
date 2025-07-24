@@ -7,7 +7,7 @@ import Animated, { useAnimatedStyle, useDerivedValue, withTiming } from 'react-n
 
 export default function SettingsScreen() {
   return (
-    <View className="flex-1 gap-4 p-4">
+    <View className="flex-1 items-center gap-4 p-4">
       <RadioCheckbox
         style="default"
         title="Default"
@@ -57,12 +57,12 @@ function RadioCheckbox({
       onPress={Platform.select({ native: onPress(style) })}
       htmlFor={style}
       className={cn(
-        'web:hover:bg-accent/50 border-border flex flex-row rounded-lg border p-3 shadow-none',
+        'web:hover:bg-accent/50 border-border flex max-w-md flex-row rounded-lg border p-3 shadow-none',
         selectedStyle === 'new-york' && 'shadow-md shadow-black/5',
         style === selectedStyle &&
           'web:hover:bg-blue-50 border-blue-600 bg-blue-50 dark:border-blue-900 dark:bg-blue-950'
       )}>
-      <View className="flex flex-row items-start gap-3">
+      <View className="flex flex-1 flex-row items-start gap-3">
         <Checkbox
           id={style}
           checked={style === selectedStyle}
