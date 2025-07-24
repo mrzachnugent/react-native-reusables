@@ -33,7 +33,7 @@ export function CardPreview() {
           <View className="gap-2">
             <View className="flex flex-row items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              <Button variant="link" className="h-5 rounded-sm px-0 py-0">
+              <Button variant="link" className="h-4 rounded-sm px-0 py-0 sm:h-4">
                 <Text className="font-normal">Forgot your password?</Text>
               </Button>
             </View>
