@@ -3,7 +3,7 @@
 import { Text, TextClassContext } from '@/registry/new-york/components/ui/text';
 import { cn } from '@/registry/new-york/lib/utils';
 import * as React from 'react';
-import { Platform, View, type ViewProps } from 'react-native';
+import { View, type ViewProps } from 'react-native';
 
 function Card({
   className,
@@ -16,9 +16,6 @@ function Card({
       <View
         className={cn(
           'border-border bg-card rounded-lg border shadow-sm shadow-black/5',
-          Platform.select({
-            native: 'shadow-black/5',
-          }),
           className
         )}
         {...props}

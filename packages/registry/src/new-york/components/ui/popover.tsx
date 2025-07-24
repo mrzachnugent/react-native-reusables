@@ -30,14 +30,13 @@ function PopoverContent({
               align={align}
               sideOffset={sideOffset}
               className={cn(
-                'bg-popover border-border outline-hidden z-50 w-72 rounded-md border p-4 shadow-md',
+                'bg-popover border-border outline-hidden z-50 w-72 rounded-md border p-4 shadow-md shadow-black/5',
                 Platform.select({
                   web: cn(
                     'animate-in fade-in-0 zoom-in-95 origin-(--radix-popover-content-transform-origin)',
                     props.side === 'bottom' && 'slide-in-from-top-2',
                     props.side === 'top' && 'slide-in-from-bottom-2'
                   ),
-                  native: 'shadow-black/5',
                 }),
                 className
               )}
