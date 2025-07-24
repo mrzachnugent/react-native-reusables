@@ -54,10 +54,9 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-        'border-input dark:bg-input/30 dark:active:bg-input/50 bg-background flex h-11 flex-row items-center justify-between gap-2 rounded-md border px-3 py-2 shadow-sm sm:h-10',
+        'border-input dark:bg-input/30 dark:active:bg-input/50 bg-background flex h-11 flex-row items-center justify-between gap-2 rounded-md border px-3 py-2 shadow-sm shadow-black/5 sm:h-10',
         Platform.select({
           web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:hover:bg-input/50 w-fit whitespace-nowrap text-sm outline-none transition-[color,box-shadow] focus-visible:ring-[3px] disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0',
-          native: 'shadow-black/5',
         }),
         props.disabled && 'opacity-50',
         size === 'sm' && 'h-8 py-2 sm:py-1.5',
@@ -88,14 +87,14 @@ function SelectContent({
           <NativeOnlyAnimatedView className="z-50" entering={FadeIn} exiting={FadeOut}>
             <SelectPrimitive.Content
               className={cn(
-                'bg-popover border-border relative z-50 min-w-[8rem] rounded-md border shadow-md',
+                'bg-popover border-border relative z-50 min-w-[8rem] rounded-md border shadow-md shadow-black/5',
                 Platform.select({
                   web: cn(
                     'animate-in fade-in-0 zoom-in-95 origin-(--radix-select-content-transform-origin) max-h-52 overflow-y-auto overflow-x-hidden',
                     props.side === 'bottom' && 'slide-in-from-top-2',
                     props.side === 'top' && 'slide-in-from-bottom-2'
                   ),
-                  native: 'p-1 shadow-black/5',
+                  native: 'p-1',
                 }),
                 position === 'popper' &&
                   Platform.select({
