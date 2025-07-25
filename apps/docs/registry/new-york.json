@@ -308,7 +308,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/text.json"],
+      "registryDependencies": [
+        "https://reactnativereusable.com/r/new-york/text.json",
+        "https://reactnativereusable.com/r/new-york/native-only-animated-view.json"
+      ],
       "dependencies": ["@rn-primitives/popover"]
     },
     {

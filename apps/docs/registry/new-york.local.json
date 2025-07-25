@@ -308,7 +308,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["http://localhost:3000/r/new-york/text.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/new-york/text.json",
+        "http://localhost:3000/r/new-york/native-only-animated-view.json"
+      ],
       "dependencies": ["@rn-primitives/popover"]
     },
     {

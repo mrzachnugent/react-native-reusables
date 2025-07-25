@@ -308,7 +308,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["http://localhost:3000/r/default/text.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/default/text.json",
+        "http://localhost:3000/r/default/native-only-animated-view.json"
+      ],
       "dependencies": ["@rn-primitives/popover"]
     },
     {
