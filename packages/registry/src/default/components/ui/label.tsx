@@ -14,7 +14,7 @@ function Label({
   disabled,
   ...props
 }: LabelPrimitive.TextProps & {
-  ref?: React.RefObject<LabelPrimitive.TextRef>;
+  ref?: React.RefObject<null | LabelPrimitive.TextRef>;
 }) {
   return (
     <LabelPrimitive.Root

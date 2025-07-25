@@ -9,7 +9,7 @@ function Switch({
   className,
   ...props
 }: SwitchPrimitives.RootProps & {
-  ref?: React.RefObject<SwitchPrimitives.RootRef>;
+  ref?: React.RefObject<null | SwitchPrimitives.RootRef>;
 }) {
   return (
     <SwitchPrimitives.Root

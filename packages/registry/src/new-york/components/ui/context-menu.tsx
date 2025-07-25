@@ -31,7 +31,7 @@ function ContextMenuSubTrigger({
   iconClassName,
   ...props
 }: ContextMenuPrimitive.SubTriggerProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.SubTriggerRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.SubTriggerRef>;
   children?: React.ReactNode;
   iconClassName?: string;
   inset?: boolean;
@@ -65,7 +65,7 @@ function ContextMenuSubContent({
   className,
   ...props
 }: ContextMenuPrimitive.SubContentProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.SubContentRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.SubContentRef>;
 }) {
   return (
     <NativeOnlyAnimatedView entering={FadeIn}>
@@ -90,7 +90,7 @@ function ContextMenuContent({
   portalHost,
   ...props
 }: ContextMenuPrimitive.ContentProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.ContentRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.ContentRef>;
   overlayStyle?: StyleProp<ViewStyle>;
   overlayClassName?: string;
   portalHost?: string;
@@ -137,7 +137,7 @@ function ContextMenuItem({
   variant,
   ...props
 }: ContextMenuPrimitive.ItemProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.ItemRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.ItemRef>;
   className?: string;
   inset?: boolean;
   variant?: 'default' | 'destructive';
@@ -173,7 +173,7 @@ function ContextMenuCheckboxItem({
   children,
   ...props
 }: ContextMenuPrimitive.CheckboxItemProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.CheckboxItemRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.CheckboxItemRef>;
   children?: React.ReactNode;
 }) {
   return (
@@ -210,7 +210,7 @@ function ContextMenuRadioItem({
   children,
   ...props
 }: ContextMenuPrimitive.RadioItemProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.RadioItemRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.RadioItemRef>;
   children?: React.ReactNode;
 }) {
   return (
@@ -241,7 +241,7 @@ function ContextMenuLabel({
   inset,
   ...props
 }: ContextMenuPrimitive.LabelProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.LabelRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.LabelRef>;
   className?: string;
   inset?: boolean;
 }) {
@@ -261,7 +261,7 @@ function ContextMenuSeparator({
   className,
   ...props
 }: ContextMenuPrimitive.SeparatorProps & {
-  ref?: React.RefObject<ContextMenuPrimitive.SeparatorRef>;
+  ref?: React.RefObject<null | ContextMenuPrimitive.SeparatorRef>;
 }) {
   return (
     <ContextMenuPrimitive.Separator

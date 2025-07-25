@@ -22,7 +22,7 @@ function DialogOverlay({
   children,
   ...props
 }: Omit<DialogPrimitive.OverlayProps, 'asChild'> & {
-  ref?: React.RefObject<DialogPrimitive.OverlayRef>;
+  ref?: React.RefObject<null | DialogPrimitive.OverlayRef>;
   children?: React.ReactNode;
 }) {
   return (
@@ -50,7 +50,7 @@ function DialogContent({
   children,
   ...props
 }: DialogPrimitive.ContentProps & {
-  ref?: React.RefObject<DialogPrimitive.ContentRef>;
+  ref?: React.RefObject<null | DialogPrimitive.ContentRef>;
   portalHost?: string;
 }) {
   return (
@@ -105,7 +105,7 @@ function DialogTitle({
   className,
   ...props
 }: DialogPrimitive.TitleProps & {
-  ref?: React.RefObject<DialogPrimitive.TitleRef>;
+  ref?: React.RefObject<null | DialogPrimitive.TitleRef>;
 }) {
   return (
     <DialogPrimitive.Title
@@ -119,7 +119,7 @@ function DialogDescription({
   className,
   ...props
 }: DialogPrimitive.DescriptionProps & {
-  ref?: React.RefObject<DialogPrimitive.DescriptionRef>;
+  ref?: React.RefObject<null | DialogPrimitive.DescriptionRef>;
 }) {
   return (
     <DialogPrimitive.Description

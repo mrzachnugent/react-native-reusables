@@ -29,7 +29,7 @@ function Alert({
   ...props
 }: ViewProps &
   VariantProps<typeof alertVariants> & {
-    ref?: React.RefObject<View>;
+    ref?: React.RefObject<null | View>;
     icon: LucideIcon;
     iconClassName?: string;
   }) {
