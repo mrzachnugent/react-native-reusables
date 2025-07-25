@@ -4,14 +4,12 @@ import { cn } from '@/registry/new-york/lib/utils';
 import * as React from 'react';
 import { Platform, TextInput, type TextInputProps } from 'react-native';
 
-const DEFAULT_HIT_SLOP = 12;
-
 function Input({
   className,
   placeholderClassName,
   ...props
 }: TextInputProps & {
-  ref?: React.RefObject<TextInput>;
+  ref?: React.RefObject<null | TextInput>;
 }) {
   return (
     <TextInput
@@ -32,7 +30,6 @@ function Input({
         }),
         className
       )}
-      hitSlop={DEFAULT_HIT_SLOP}
       {...props}
     />
   );

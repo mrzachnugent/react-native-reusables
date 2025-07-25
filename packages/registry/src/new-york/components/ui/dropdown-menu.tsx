@@ -37,7 +37,7 @@ function DropdownMenuSubTrigger({
   iconClassName,
   ...props
 }: DropdownMenuPrimitive.SubTriggerProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.SubTriggerRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.SubTriggerRef>;
   children?: React.ReactNode;
   iconClassName?: string;
   inset?: boolean;
@@ -71,7 +71,7 @@ function DropdownMenuSubContent({
   className,
   ...props
 }: DropdownMenuPrimitive.SubContentProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.SubContentRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.SubContentRef>;
 }) {
   return (
     <NativeOnlyAnimatedView entering={FadeIn}>
@@ -96,7 +96,7 @@ function DropdownMenuContent({
   portalHost,
   ...props
 }: DropdownMenuPrimitive.ContentProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.ContentRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.ContentRef>;
   overlayStyle?: StyleProp<ViewStyle>;
   overlayClassName?: string;
   portalHost?: string;
@@ -140,7 +140,7 @@ function DropdownMenuItem({
   variant,
   ...props
 }: DropdownMenuPrimitive.ItemProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.ItemRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.ItemRef>;
   className?: string;
   inset?: boolean;
   variant?: 'default' | 'destructive';
@@ -176,7 +176,7 @@ function DropdownMenuCheckboxItem({
   children,
   ...props
 }: DropdownMenuPrimitive.CheckboxItemProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.CheckboxItemRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.CheckboxItemRef>;
   children?: React.ReactNode;
 }) {
   return (
@@ -213,7 +213,7 @@ function DropdownMenuRadioItem({
   children,
   ...props
 }: DropdownMenuPrimitive.RadioItemProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.RadioItemRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.RadioItemRef>;
   children?: React.ReactNode;
 }) {
   return (
@@ -244,7 +244,7 @@ function DropdownMenuLabel({
   inset,
   ...props
 }: DropdownMenuPrimitive.LabelProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.LabelRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.LabelRef>;
   className?: string;
   inset?: boolean;
 }) {
@@ -264,7 +264,7 @@ function DropdownMenuSeparator({
   className,
   ...props
 }: DropdownMenuPrimitive.SeparatorProps & {
-  ref?: React.RefObject<DropdownMenuPrimitive.SeparatorRef>;
+  ref?: React.RefObject<null | DropdownMenuPrimitive.SeparatorRef>;
 }) {
   return (
     <DropdownMenuPrimitive.Separator
