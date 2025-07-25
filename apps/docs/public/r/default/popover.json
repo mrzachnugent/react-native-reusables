@@ -6,7 +6,10 @@
   "author": "@mrzachnugent",
   "description": "Displays rich content in a portal, triggered by a button.",
   "dependencies": ["@rn-primitives/popover"],
-  "registryDependencies": ["https://reactnativereusable.com/r/default/text.json"],
+  "registryDependencies": [
+    "https://reactnativereusable.com/r/default/text.json",
+    "https://reactnativereusable.com/r/default/native-only-animated-view.json"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/default/components/ui/popover.tsx",
