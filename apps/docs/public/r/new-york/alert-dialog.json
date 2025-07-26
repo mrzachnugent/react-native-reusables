@@ -9,8 +9,8 @@
     "@rn-primitives/alert-dialog"
   ],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/button.json",
-    "https://reactnativereusable.com/r/new-york/text.json"
+    "https://reactnativereusables.com/r/new-york/button.json",
+    "https://reactnativereusables.com/r/new-york/text.json"
   ],
   "files": [
     {

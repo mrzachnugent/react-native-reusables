@@ -9,7 +9,7 @@
     "@rn-primitives/checkbox"
   ],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/icon.json"
+    "https://reactnativereusables.com/r/new-york/icon.json"
   ],
   "files": [
     {
