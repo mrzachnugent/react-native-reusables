@@ -9,7 +9,7 @@
     "@rn-primitives/slot"
   ],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json"
+    "https://reactnativereusables.com/r/default/text.json"
   ],
   "files": [
     {

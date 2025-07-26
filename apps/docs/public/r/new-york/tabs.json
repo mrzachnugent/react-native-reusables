@@ -9,7 +9,7 @@
     "@rn-primitives/tabs"
   ],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json"
+    "https://reactnativereusables.com/r/new-york/text.json"
   ],
   "files": [
     {

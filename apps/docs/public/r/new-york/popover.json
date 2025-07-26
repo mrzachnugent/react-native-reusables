@@ -9,8 +9,8 @@
     "@rn-primitives/popover"
   ],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json",
-    "https://reactnativereusable.com/r/new-york/native-only-animated-view.json"
+    "https://reactnativereusables.com/r/new-york/text.json",
+    "https://reactnativereusables.com/r/new-york/native-only-animated-view.json"
   ],
   "files": [
     {

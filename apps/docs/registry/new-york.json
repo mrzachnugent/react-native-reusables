@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "React Native Reusables",
-  "homepage": "https://reactnativereusable.com",
+  "homepage": "https://reactnativereusables.com/",
   "items": [
     {
       "name": "accordion",
@@ -16,8 +16,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/accordion"]
     },
@@ -34,8 +34,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ]
     },
     {
@@ -51,8 +51,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/button.json",
-        "https://reactnativereusable.com/r/new-york/text.json"
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
       ],
       "dependencies": ["@rn-primitives/alert-dialog"]
     },
@@ -96,7 +96,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/text.json"],
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
       "dependencies": ["@rn-primitives/slot"]
     },
     {
@@ -111,7 +111,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/text.json"]
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"]
     },
     {
       "name": "card",
@@ -125,7 +125,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/text.json"]
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"]
     },
     {
       "name": "checkbox",
@@ -139,7 +139,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/icon.json"],
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/icon.json"],
       "dependencies": ["@rn-primitives/checkbox"]
     },
     {
@@ -169,8 +169,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/context-menu"]
     },
@@ -187,8 +187,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/dialog"]
     },
@@ -205,8 +205,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/dropdown-menu"]
     },
@@ -222,7 +222,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/text.json"],
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
       "dependencies": ["@rn-primitives/hover-card"]
     },
     {
@@ -278,8 +278,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/menubar"]
     },
@@ -309,8 +309,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/native-only-animated-view.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json"
       ],
       "dependencies": ["@rn-primitives/popover"]
     },
@@ -355,8 +355,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/select"]
     },
@@ -413,7 +413,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusable.com/r/new-york/text.json"],
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
       "dependencies": ["@rn-primitives/tabs"]
     },
     {
@@ -456,8 +456,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/toggle"]
     },
@@ -474,8 +474,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/toggle-group"]
     },
@@ -492,8 +492,8 @@
         }
       ],
       "registryDependencies": [
-        "https://reactnativereusable.com/r/new-york/text.json",
-        "https://reactnativereusable.com/r/new-york/native-only-animated-view.json"
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json"
       ],
       "dependencies": ["@rn-primitives/tooltip"]
     }
