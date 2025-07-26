@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "details": [
+            {
+                "appID" : "HA68FZH26V.com.reactnativereusables.app",
+                "paths": ["/showcase/links/*"]
+
+            }
+        ]
+    }
+}
