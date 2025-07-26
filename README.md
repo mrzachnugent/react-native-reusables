@@ -139,3 +139,9 @@ Explore community-created components and templates that extend the core library 
 > These components are still available for use but are no longer recommended or actively supported by the developers. They can be used as inspiration or as a starting point for your own components.
 
 [View deprecated components](/packages/reusables/src/components/deprecated-ui/README.md)
+
+<br />
+<br />
+<a href="https://vercel.com/oss">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
+</a>
