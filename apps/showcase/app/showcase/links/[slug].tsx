@@ -10,7 +10,7 @@ export default function Screen() {
       const item = Array.isArray(slug) ? slug[0] : slug;
 
       if (getIsComponent(item)) {
-        router.replace(`/component/${item}`);
+        router.replace(`/components/${item}`);
         return;
       }
       // Fallback to home
