@@ -6,7 +6,7 @@ Bringing [shadcn/ui](https://ui.shadcn.com) to React Native. Beautifully crafted
 
 ## Documentation
 
-Visit https://www.reactnativereusables.com/docs to view the documentation.
+Visit https://reactnativereusables.com/docs to view the documentation.
 
 ## Contributing
 

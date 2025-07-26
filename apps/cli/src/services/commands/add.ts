@@ -55,7 +55,7 @@ class Add extends Effect.Service<Add>()("Add", {
           const baseUrl =
             process.env.NODE_ENV === "development"
               ? "http://localhost:3000/local/r"
-              : "https://www.reactnativereusables.com/r"
+              : "https://reactnativereusables.com/r"
 
           const componentUrls = components.map((component) => `${baseUrl}/${style}/${component}.json`)
 
