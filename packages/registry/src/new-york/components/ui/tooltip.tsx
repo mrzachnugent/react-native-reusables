@@ -21,7 +21,7 @@ function TooltipContent({
   side = 'top',
   ...props
 }: TooltipPrimitive.ContentProps & {
-  ref?: React.RefObject<null | TooltipPrimitive.ContentRef>;
+  ref?: React.RefObject<TooltipPrimitive.ContentRef | null>;
   portalHost?: string;
 }) {
   return (

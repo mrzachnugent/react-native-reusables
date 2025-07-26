@@ -18,7 +18,7 @@ function Progress({
   indicatorClassName,
   ...props
 }: ProgressPrimitive.RootProps & {
-  ref?: React.RefObject<null | ProgressPrimitive.RootRef>;
+  ref?: React.RefObject<ProgressPrimitive.RootRef | null>;
   indicatorClassName?: string;
 }) {
   return (

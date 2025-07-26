@@ -22,7 +22,7 @@ function SelectValue({
   className,
   ...props
 }: SelectPrimitive.ValueProps & {
-  ref?: React.RefObject<null | SelectPrimitive.ValueRef>;
+  ref?: React.RefObject<SelectPrimitive.ValueRef | null>;
   className?: string;
 }) {
   const { value } = SelectPrimitive.useRootContext();
@@ -46,7 +46,7 @@ function SelectTrigger({
   size = 'default',
   ...props
 }: SelectPrimitive.TriggerProps & {
-  ref?: React.RefObject<null | SelectPrimitive.TriggerRef>;
+  ref?: React.RefObject<SelectPrimitive.TriggerRef | null>;
   children?: React.ReactNode;
   size?: 'default' | 'sm';
 }) {
@@ -76,7 +76,7 @@ function SelectContent({
   portalHost,
   ...props
 }: SelectPrimitive.ContentProps & {
-  ref?: React.RefObject<null | SelectPrimitive.ContentRef>;
+  ref?: React.RefObject<SelectPrimitive.ContentRef | null>;
   className?: string;
   portalHost?: string;
 }) {
@@ -134,7 +134,7 @@ function SelectLabel({
   className,
   ...props
 }: SelectPrimitive.LabelProps & {
-  ref?: React.RefObject<null | SelectPrimitive.LabelRef>;
+  ref?: React.RefObject<SelectPrimitive.LabelRef | null>;
 }) {
   return (
     <SelectPrimitive.Label
@@ -149,7 +149,7 @@ function SelectItem({
   children,
   ...props
 }: SelectPrimitive.ItemProps & {
-  ref?: React.RefObject<null | SelectPrimitive.ItemRef>;
+  ref?: React.RefObject<SelectPrimitive.ItemRef | null>;
 }) {
   return (
     <SelectPrimitive.Item
@@ -176,7 +176,7 @@ function SelectSeparator({
   className,
   ...props
 }: SelectPrimitive.SeparatorProps & {
-  ref?: React.RefObject<null | SelectPrimitive.SeparatorRef>;
+  ref?: React.RefObject<SelectPrimitive.SeparatorRef | null>;
 }) {
   return (
     <SelectPrimitive.Separator

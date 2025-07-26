@@ -18,7 +18,7 @@ function PopoverContent({
   portalHost,
   ...props
 }: PopoverPrimitive.ContentProps & {
-  ref?: React.RefObject<null | PopoverPrimitive.ContentRef>;
+  ref?: React.RefObject<PopoverPrimitive.ContentRef | null>;
   portalHost?: string;
 }) {
   return (
