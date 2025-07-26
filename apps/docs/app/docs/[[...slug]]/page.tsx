@@ -187,7 +187,7 @@ function TableOfContentFooter() {
 const PAGE_TITLES_TO_NOT_SHOW_FOOTER = ['Installation', 'Hire us'];
 
 function shouldShowTableOfContentFooter(title: string) {
-  return !PAGE_TITLES_TO_NOT_SHOW_FOOTER.includes(title) && Math.random() < 0.5;
+  return !PAGE_TITLES_TO_NOT_SHOW_FOOTER.includes(title);
 }
 
 export async function generateStaticParams() {
