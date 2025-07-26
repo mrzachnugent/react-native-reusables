@@ -6,7 +6,7 @@
   "author": "@mrzachnugent",
   "description": "For sighted users to preview content available behind a link.",
   "dependencies": ["@rn-primitives/hover-card"],
-  "registryDependencies": ["https://reactnativereusable.com/r/default/text.json"],
+  "registryDependencies": ["https://reactnativereusables.com/r/default/text.json"],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/default/components/ui/hover-card.tsx",

@@ -7,8 +7,8 @@
   "description": "A two-state button that can be either on or off.",
   "dependencies": ["@rn-primitives/toggle"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json",
-    "https://reactnativereusable.com/r/default/icon.json"
+    "https://reactnativereusables.com/r/default/text.json",
+    "https://reactnativereusables.com/r/default/icon.json"
   ],
   "files": [
     {

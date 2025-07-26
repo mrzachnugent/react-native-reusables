@@ -6,8 +6,8 @@
   "author": "@mrzachnugent",
   "description": "Displays a callout for user attention.",
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json",
-    "https://reactnativereusable.com/r/new-york/icon.json"
+    "https://reactnativereusables.com/r/new-york/text.json",
+    "https://reactnativereusables.com/r/new-york/icon.json"
   ],
   "files": [
     {

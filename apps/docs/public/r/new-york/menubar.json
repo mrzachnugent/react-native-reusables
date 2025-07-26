@@ -7,8 +7,8 @@
   "description": "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.",
   "dependencies": ["@rn-primitives/menubar"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json",
-    "https://reactnativereusable.com/r/new-york/icon.json"
+    "https://reactnativereusables.com/r/new-york/text.json",
+    "https://reactnativereusables.com/r/new-york/icon.json"
   ],
   "files": [
     {

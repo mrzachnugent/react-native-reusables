@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "React Native Reusables",
-  "homepage": "https://reactnativereusable.com",
+  "homepage": "https://reactnativereusables.com/",
   "items": [
     {
       "name": "accordion",

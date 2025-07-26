@@ -7,8 +7,8 @@
   "description": "Displays rich content in a portal, triggered by a button.",
   "dependencies": ["@rn-primitives/popover"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json",
-    "https://reactnativereusable.com/r/default/native-only-animated-view.json"
+    "https://reactnativereusables.com/r/default/text.json",
+    "https://reactnativereusables.com/r/default/native-only-animated-view.json"
   ],
   "files": [
     {

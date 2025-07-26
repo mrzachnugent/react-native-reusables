@@ -6,7 +6,7 @@
   "author": "@mrzachnugent",
   "description": "A control that allows the user to toggle between checked and not checked.",
   "dependencies": ["@rn-primitives/checkbox"],
-  "registryDependencies": ["https://reactnativereusable.com/r/new-york/icon.json"],
+  "registryDependencies": ["https://reactnativereusables.com/r/new-york/icon.json"],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/checkbox.tsx",

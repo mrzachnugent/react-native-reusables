@@ -7,8 +7,8 @@
   "description": "A set of two-state buttons that can be toggled on or off.",
   "dependencies": ["@rn-primitives/toggle-group"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json",
-    "https://reactnativereusable.com/r/default/icon.json"
+    "https://reactnativereusables.com/r/default/text.json",
+    "https://reactnativereusables.com/r/default/icon.json"
   ],
   "files": [
     {

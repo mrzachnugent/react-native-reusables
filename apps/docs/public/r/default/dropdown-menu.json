@@ -7,8 +7,8 @@
   "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
   "dependencies": ["@rn-primitives/dropdown-menu"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json",
-    "https://reactnativereusable.com/r/default/icon.json"
+    "https://reactnativereusables.com/r/default/text.json",
+    "https://reactnativereusables.com/r/default/icon.json"
   ],
   "files": [
     {

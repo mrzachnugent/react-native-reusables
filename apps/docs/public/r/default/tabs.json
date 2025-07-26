@@ -6,7 +6,7 @@
   "author": "@mrzachnugent",
   "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
   "dependencies": ["@rn-primitives/tabs"],
-  "registryDependencies": ["https://reactnativereusable.com/r/default/text.json"],
+  "registryDependencies": ["https://reactnativereusables.com/r/default/text.json"],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/default/components/ui/tabs.tsx",

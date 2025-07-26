@@ -7,8 +7,8 @@
   "description": "Displays a list of options for the user to pick from—triggered by a button.",
   "dependencies": ["@rn-primitives/select"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json",
-    "https://reactnativereusable.com/r/default/icon.json"
+    "https://reactnativereusables.com/r/default/text.json",
+    "https://reactnativereusables.com/r/default/icon.json"
   ],
   "files": [
     {

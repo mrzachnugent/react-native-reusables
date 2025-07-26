@@ -7,8 +7,8 @@
   "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
   "dependencies": ["@rn-primitives/dialog"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json",
-    "https://reactnativereusable.com/r/new-york/icon.json"
+    "https://reactnativereusables.com/r/new-york/text.json",
+    "https://reactnativereusables.com/r/new-york/icon.json"
   ],
   "files": [
     {

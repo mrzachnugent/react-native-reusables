@@ -7,8 +7,8 @@
   "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
   "dependencies": ["@rn-primitives/accordion"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/default/text.json",
-    "https://reactnativereusable.com/r/default/icon.json"
+    "https://reactnativereusables.com/r/default/text.json",
+    "https://reactnativereusables.com/r/default/icon.json"
   ],
   "files": [
     {

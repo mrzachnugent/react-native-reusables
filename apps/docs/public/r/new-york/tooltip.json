@@ -7,8 +7,8 @@
   "description": "A popup that displays information related to an element when the element receives keyboard focus, the mouse hovers over it, or when it is pressed.",
   "dependencies": ["@rn-primitives/tooltip"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json",
-    "https://reactnativereusable.com/r/new-york/native-only-animated-view.json"
+    "https://reactnativereusables.com/r/new-york/text.json",
+    "https://reactnativereusables.com/r/new-york/native-only-animated-view.json"
   ],
   "files": [
     {

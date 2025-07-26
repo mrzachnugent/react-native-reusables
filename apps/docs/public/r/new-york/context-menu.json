@@ -7,8 +7,8 @@
   "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
   "dependencies": ["@rn-primitives/context-menu"],
   "registryDependencies": [
-    "https://reactnativereusable.com/r/new-york/text.json",
-    "https://reactnativereusable.com/r/new-york/icon.json"
+    "https://reactnativereusables.com/r/new-york/text.json",
+    "https://reactnativereusables.com/r/new-york/icon.json"
   ],
   "files": [
     {
