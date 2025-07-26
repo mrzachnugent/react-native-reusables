@@ -3,7 +3,7 @@
   "main": "index.js",
   "version": "0.0.1",
   "scripts": {
-    "start": "expo start --clear --dev-client",
+    "start": "ENV=development expo start --clear --dev-client",
     "device:ios": "ENV=development expo run:ios --device",
     "device:ios:prod": "expo run:ios --device",
     "ios": "ENV=development expo run:ios",
