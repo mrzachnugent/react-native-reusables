@@ -9,14 +9,14 @@ export default function SettingsScreen() {
   return (
     <View className="flex-1 items-center gap-4 p-4">
       <RadioCheckbox
-        style="default"
-        title="Default"
-        description="Spacious and minimal with larger components, and little to no shadows."
-      />
-      <RadioCheckbox
         style="new-york"
         title="New York"
         description="Compact and modern with smaller components, and subtle shadows."
+      />
+      <RadioCheckbox
+        style="default"
+        title="Default"
+        description="Spacious and minimal with larger components, and little to no shadows."
       />
       <Text className="px-4 text-center text-xs opacity-80">
         Your app's style can be set in the <Text variant="code">components.json</Text>.

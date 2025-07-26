@@ -11,7 +11,7 @@ const StyleContext = React.createContext<{
 function StyleProvider({ children }: { children: React.ReactNode }) {
   const [style, setStyleState] = React.useState<Style>(() => {
     const style = storage.getString('theme.style');
-    return style === 'new-york' ? 'new-york' : 'default';
+    return style === 'default' ? 'default' : 'new-york';
   });
 
   function setStyle(style: Style) {
@@ -40,7 +40,7 @@ function withStyleToggle<TProps>(
 ) {
   return function StyledComponent(props: TProps) {
     const { style } = useStyle();
-    const Component = style === 'new-york' ? NewYorkComponent : DefaultComponent;
+    const Component = style === 'default' ? DefaultComponent : NewYorkComponent;
     return <Component {...props} />;
   };
 }

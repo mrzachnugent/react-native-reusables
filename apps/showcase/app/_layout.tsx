@@ -120,22 +120,18 @@ export default function RootLayout() {
 }
 
 const defaultRadius = vars({
-  '--radius': '8px',
+  '--radius': '8px', // 0.5rem
 });
 
 const newYorkRadius = vars({
-  '--radius': '10px',
+  '--radius': '10px', // 0.625rem
 });
 
 function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {
   const { style } = useStyle();
   return (
     <View
-      style={
-        style === 'default'
-          ? { flex: 1, ...defaultRadius }
-          : { flex: 1, ...(style === 'new-york' ? newYorkRadius : {}) }
-      }>
+      style={style === 'default' ? { flex: 1, ...defaultRadius } : { flex: 1, ...newYorkRadius }}>
       {children}
     </View>
   );
