@@ -59,7 +59,7 @@ export default function ComponentsScreen() {
           ),
         })}
         renderItem={({ item, index }) => (
-          <Link href={`/components/${item.name}`} asChild>
+          <Link href={`/components/${item.slug}`} asChild>
             <Button
               variant="outline"
               size="lg"
@@ -69,7 +69,7 @@ export default function ComponentsScreen() {
                 index === 0 && 'rounded-t-lg',
                 index === data.length - 1 && 'rounded-b-lg border-b'
               )}>
-              <Text className="text-base font-normal">{toOptions(item.name)}</Text>
+              <Text className="text-base font-normal">{item.name}</Text>
 
               <Icon as={ChevronRight} className="text-muted-foreground size-4 stroke-[1.5px]" />
             </Button>
@@ -79,16 +79,4 @@ export default function ComponentsScreen() {
       />
     </View>
   );
-}
-
-function toOptions(name: string) {
-  const title = name
-    .split('-')
-    .map(function (str: string) {
-      return str.replace(/\b\w/g, function (char) {
-        return char.toUpperCase();
-      });
-    })
-    .join(' ');
-  return title;
 }
