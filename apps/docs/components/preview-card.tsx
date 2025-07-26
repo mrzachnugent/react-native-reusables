@@ -19,8 +19,8 @@ const PLATFORMS = [
 ] as const;
 
 const STYLES = [
-  { name: 'default', label: 'Default' },
   { name: 'new-york', label: 'New York' },
+  { name: 'default', label: 'Default' },
 ] as const;
 
 type Platform = (typeof PLATFORMS)[number]['name'];
@@ -37,7 +37,7 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
   const getCookie = useReactiveGetCookie();
   const setCookie = useReactiveSetCookie();
   const platform = getCookie('platform') ?? 'web';
-  const style = getCookie('style') ?? 'default';
+  const style = getCookie('style') ?? 'new-york';
 
   function onPlatformChange(value: Platform) {
     setCookie('platform', value);
@@ -61,10 +61,10 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
         className="flex flex-1 flex-col items-center justify-center py-6">
         {platform === 'native' ? (
           <ComingSoon selectWebPreview={selectWebPreview} />
-        ) : style === 'new-york' ? (
-          webNewYorkPreview
-        ) : (
+        ) : style === 'default' ? (
           webPreview
+        ) : (
+          webNewYorkPreview
         )}
       </div>
     </div>
