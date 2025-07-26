@@ -35,7 +35,7 @@ function Menubar({
   onValueChange: onValueChangeProp,
   ...props
 }: MenubarPrimitive.RootProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.RootRef>;
+  ref?: React.RefObject<MenubarPrimitive.RootRef | null>;
 }) {
   const [value, setValue] = React.useState<string | undefined>(undefined);
   return (
@@ -69,7 +69,7 @@ function MenubarTrigger({
   className,
   ...props
 }: MenubarPrimitive.TriggerProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.TriggerRef>;
+  ref?: React.RefObject<MenubarPrimitive.TriggerRef | null>;
 }) {
   const { value } = MenubarPrimitive.useRootContext();
   const { value: itemValue } = MenubarPrimitive.useMenuContext();
@@ -102,7 +102,7 @@ function MenubarSubTrigger({
   iconClassName,
   ...props
 }: MenubarPrimitive.SubTriggerProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.SubTriggerRef>;
+  ref?: React.RefObject<MenubarPrimitive.SubTriggerRef | null>;
   children?: React.ReactNode;
   iconClassName?: string;
   inset?: boolean;
@@ -136,7 +136,7 @@ function MenubarSubContent({
   className,
   ...props
 }: MenubarPrimitive.SubContentProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.SubContentRef>;
+  ref?: React.RefObject<MenubarPrimitive.SubContentRef | null>;
 }) {
   return (
     <NativeOnlyAnimatedView entering={FadeIn}>
@@ -164,7 +164,7 @@ function MenubarContent({
   sideOffset = 8,
   ...props
 }: MenubarPrimitive.ContentProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.ContentRef>;
+  ref?: React.RefObject<MenubarPrimitive.ContentRef | null>;
   overlayStyle?: StyleProp<ViewStyle>;
   overlayClassName?: string;
   portalHost?: string;
@@ -205,7 +205,7 @@ function MenubarItem({
   variant,
   ...props
 }: MenubarPrimitive.ItemProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.ItemRef>;
+  ref?: React.RefObject<MenubarPrimitive.ItemRef | null>;
   className?: string;
   inset?: boolean;
   variant?: 'default' | 'destructive';
@@ -241,7 +241,7 @@ function MenubarCheckboxItem({
   children,
   ...props
 }: MenubarPrimitive.CheckboxItemProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.CheckboxItemRef>;
+  ref?: React.RefObject<MenubarPrimitive.CheckboxItemRef | null>;
   children?: React.ReactNode;
 }) {
   return (
@@ -278,7 +278,7 @@ function MenubarRadioItem({
   children,
   ...props
 }: MenubarPrimitive.RadioItemProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.RadioItemRef>;
+  ref?: React.RefObject<MenubarPrimitive.RadioItemRef | null>;
   children?: React.ReactNode;
 }) {
   return (
@@ -309,7 +309,7 @@ function MenubarLabel({
   inset,
   ...props
 }: MenubarPrimitive.LabelProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.LabelRef>;
+  ref?: React.RefObject<MenubarPrimitive.LabelRef | null>;
   className?: string;
   inset?: boolean;
 }) {
@@ -329,7 +329,7 @@ function MenubarSeparator({
   className,
   ...props
 }: MenubarPrimitive.SeparatorProps & {
-  ref?: React.RefObject<null | MenubarPrimitive.SeparatorRef>;
+  ref?: React.RefObject<MenubarPrimitive.SeparatorRef | null>;
 }) {
   return (
     <MenubarPrimitive.Separator className={cn('bg-border -mx-1 my-1 h-px', className)} {...props} />

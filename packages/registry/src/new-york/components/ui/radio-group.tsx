@@ -8,7 +8,7 @@ function RadioGroup({
   className,
   ...props
 }: RadioGroupPrimitive.RootProps & {
-  ref?: React.RefObject<null | RadioGroupPrimitive.RootRef>;
+  ref?: React.RefObject<RadioGroupPrimitive.RootRef | null>;
 }) {
   return <RadioGroupPrimitive.Root className={cn('gap-3', className)} {...props} />;
 }
@@ -17,7 +17,7 @@ function RadioGroupItem({
   className,
   ...props
 }: RadioGroupPrimitive.ItemProps & {
-  ref?: React.RefObject<null | RadioGroupPrimitive.ItemRef>;
+  ref?: React.RefObject<RadioGroupPrimitive.ItemRef | null>;
 }) {
   return (
     <RadioGroupPrimitive.Item

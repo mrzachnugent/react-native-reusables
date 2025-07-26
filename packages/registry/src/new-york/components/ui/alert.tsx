@@ -15,7 +15,7 @@ function Alert({
   iconClassName,
   ...props
 }: ViewProps & {
-  ref?: React.RefObject<null | View>;
+  ref?: React.RefObject<View | null>;
   icon: LucideIcon;
   variant?: 'default' | 'destructive';
   iconClassName?: string;

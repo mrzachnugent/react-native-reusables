@@ -10,7 +10,7 @@ function Separator({
   decorative = true,
   ...props
 }: SeparatorPrimitive.RootProps & {
-  ref?: React.RefObject<null | SeparatorPrimitive.RootRef>;
+  ref?: React.RefObject<SeparatorPrimitive.RootRef | null>;
 }) {
   return (
     <SeparatorPrimitive.Root

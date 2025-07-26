@@ -11,7 +11,7 @@ function Textarea({
   placeholderClassName,
   ...props
 }: TextInputProps & {
-  ref?: React.RefObject<null | TextInput>;
+  ref?: React.RefObject<TextInput | null>;
 }) {
   return (
     <TextInput

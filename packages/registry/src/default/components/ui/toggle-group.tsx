@@ -19,7 +19,7 @@ function ToggleGroup({
   ...props
 }: ToggleGroupPrimitive.RootProps &
   VariantProps<typeof toggleVariants> & {
-    ref?: React.RefObject<null | ToggleGroupPrimitive.RootRef>;
+    ref?: React.RefObject<ToggleGroupPrimitive.RootRef | null>;
   }) {
   return (
     <ToggleGroupPrimitive.Root
@@ -57,7 +57,7 @@ function ToggleGroupItem({
   ...props
 }: ToggleGroupPrimitive.ItemProps &
   VariantProps<typeof toggleVariants> & {
-    ref?: React.RefObject<null | ToggleGroupPrimitive.ItemRef>;
+    ref?: React.RefObject<ToggleGroupPrimitive.ItemRef | null>;
     isFirst?: boolean;
     isLast?: boolean;
   }) {

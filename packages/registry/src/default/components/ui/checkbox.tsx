@@ -19,7 +19,7 @@ function Checkbox({
   checkedClassName?: string;
   indicatorClassName?: string;
   iconClassName?: string;
-  ref?: React.RefObject<null | CheckboxPrimitive.RootRef>;
+  ref?: React.RefObject<CheckboxPrimitive.RootRef | null>;
 }) {
   return (
     <CheckboxPrimitive.Root

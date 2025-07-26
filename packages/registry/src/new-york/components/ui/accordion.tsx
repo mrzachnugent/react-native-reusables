@@ -20,7 +20,7 @@ function Accordion({
   children,
   ...props
 }: Omit<AccordionPrimitive.RootProps, 'asChild'> & {
-  ref?: React.RefObject<null | AccordionPrimitive.RootRef>;
+  ref?: React.RefObject<AccordionPrimitive.RootRef | null>;
 }) {
   return (
     <LayoutAnimationConfig skipEntering>
@@ -39,7 +39,7 @@ function AccordionItem({
   value,
   ...props
 }: AccordionPrimitive.ItemProps & {
-  ref?: React.RefObject<null | AccordionPrimitive.ItemRef>;
+  ref?: React.RefObject<AccordionPrimitive.ItemRef | null>;
 }) {
   return (
     <AccordionPrimitive.Item
@@ -68,7 +68,7 @@ function AccordionTrigger({
   ...props
 }: AccordionPrimitive.TriggerProps & {
   children?: React.ReactNode;
-  ref?: React.RefObject<null | AccordionPrimitive.TriggerRef>;
+  ref?: React.RefObject<AccordionPrimitive.TriggerRef | null>;
 }) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
@@ -124,7 +124,7 @@ function AccordionContent({
   children,
   ...props
 }: AccordionPrimitive.ContentProps & {
-  ref?: React.RefObject<null | AccordionPrimitive.ContentRef>;
+  ref?: React.RefObject<AccordionPrimitive.ContentRef | null>;
 }) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
   return (

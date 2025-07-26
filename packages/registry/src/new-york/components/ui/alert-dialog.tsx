@@ -20,7 +20,7 @@ function AlertDialogOverlay({
   children,
   ...props
 }: AlertDialogPrimitive.OverlayProps & {
-  ref?: React.RefObject<null | AlertDialogPrimitive.OverlayRef>;
+  ref?: React.RefObject<AlertDialogPrimitive.OverlayRef | null>;
 }) {
   return (
     <AlertDialogPrimitive.Overlay
@@ -46,7 +46,7 @@ function AlertDialogContent({
   portalHost,
   ...props
 }: AlertDialogPrimitive.ContentProps & {
-  ref?: React.RefObject<null | AlertDialogPrimitive.ContentRef>;
+  ref?: React.RefObject<AlertDialogPrimitive.ContentRef | null>;
   portalHost?: string;
 }) {
   return (
@@ -88,7 +88,7 @@ function AlertDialogTitle({
   className,
   ...props
 }: AlertDialogPrimitive.TitleProps & {
-  ref?: React.RefObject<null | AlertDialogPrimitive.TitleRef>;
+  ref?: React.RefObject<AlertDialogPrimitive.TitleRef | null>;
 }) {
   return (
     <AlertDialogPrimitive.Title
@@ -102,7 +102,7 @@ function AlertDialogDescription({
   className,
   ...props
 }: AlertDialogPrimitive.DescriptionProps & {
-  ref?: React.RefObject<null | AlertDialogPrimitive.DescriptionRef>;
+  ref?: React.RefObject<AlertDialogPrimitive.DescriptionRef | null>;
 }) {
   return (
     <AlertDialogPrimitive.Description
@@ -116,7 +116,7 @@ function AlertDialogAction({
   className,
   ...props
 }: AlertDialogPrimitive.ActionProps & {
-  ref?: React.RefObject<null | AlertDialogPrimitive.ActionRef>;
+  ref?: React.RefObject<AlertDialogPrimitive.ActionRef | null>;
 }) {
   return (
     <TextClassContext.Provider value={buttonTextVariants({ className })}>
@@ -129,7 +129,7 @@ function AlertDialogCancel({
   className,
   ...props
 }: AlertDialogPrimitive.CancelProps & {
-  ref?: React.RefObject<null | AlertDialogPrimitive.CancelRef>;
+  ref?: React.RefObject<AlertDialogPrimitive.CancelRef | null>;
 }) {
   return (
     <TextClassContext.Provider value={buttonTextVariants({ className, variant: 'outline' })}>

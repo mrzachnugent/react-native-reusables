@@ -10,7 +10,7 @@ function Tabs({
   className,
   ...props
 }: TabsPrimitive.RootProps & {
-  ref?: React.RefObject<null | TabsPrimitive.RootRef>;
+  ref?: React.RefObject<TabsPrimitive.RootRef | null>;
 }) {
   return <TabsPrimitive.Root className={cn('flex flex-col gap-2', className)} {...props} />;
 }
@@ -19,7 +19,7 @@ function TabsList({
   className,
   ...props
 }: TabsPrimitive.ListProps & {
-  ref?: React.RefObject<null | TabsPrimitive.ListRef>;
+  ref?: React.RefObject<TabsPrimitive.ListRef | null>;
 }) {
   return (
     <TabsPrimitive.List
@@ -37,7 +37,7 @@ function TabsTrigger({
   className,
   ...props
 }: TabsPrimitive.TriggerProps & {
-  ref?: React.RefObject<null | TabsPrimitive.TriggerRef>;
+  ref?: React.RefObject<TabsPrimitive.TriggerRef | null>;
 }) {
   const { value } = TabsPrimitive.useRootContext();
   return (
@@ -67,7 +67,7 @@ function TabsContent({
   className,
   ...props
 }: TabsPrimitive.ContentProps & {
-  ref?: React.RefObject<null | TabsPrimitive.ContentRef>;
+  ref?: React.RefObject<TabsPrimitive.ContentRef | null>;
 }) {
   return (
     <TabsPrimitive.Content

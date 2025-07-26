@@ -8,7 +8,7 @@ function Avatar({
   className,
   ...props
 }: AvatarPrimitive.RootProps & {
-  ref?: React.RefObject<null | AvatarPrimitive.RootRef>;
+  ref?: React.RefObject<AvatarPrimitive.RootRef | null>;
 }) {
   return (
     <AvatarPrimitive.Root
@@ -22,7 +22,7 @@ function AvatarImage({
   className,
   ...props
 }: AvatarPrimitive.ImageProps & {
-  ref?: React.RefObject<null | AvatarPrimitive.ImageRef>;
+  ref?: React.RefObject<AvatarPrimitive.ImageRef | null>;
 }) {
   return <AvatarPrimitive.Image className={cn('aspect-square size-full', className)} {...props} />;
 }
@@ -31,7 +31,7 @@ function AvatarFallback({
   className,
   ...props
 }: AvatarPrimitive.FallbackProps & {
-  ref?: React.RefObject<null | AvatarPrimitive.FallbackRef>;
+  ref?: React.RefObject<AvatarPrimitive.FallbackRef | null>;
 }) {
   return (
     <AvatarPrimitive.Fallback
