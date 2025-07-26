@@ -15,64 +15,66 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 export function TabsPreview() {
-  const [value, setValue] = React.useState('account');
+  const [value, setValue] = React.useState('feedback');
   return (
     <View className="flex w-full max-w-sm flex-col gap-6">
       <Tabs value={value} onValueChange={setValue}>
         <TabsList>
-          <TabsTrigger value="account">
-            <Text>Account</Text>
+          <TabsTrigger value="feedback">
+            <Text>Feedback</Text>
           </TabsTrigger>
-          <TabsTrigger value="password">
-            <Text>Password</Text>
+          <TabsTrigger value="survey">
+            <Text>Survey</Text>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="account">
+
+        <TabsContent value="feedback">
           <Card>
             <CardHeader>
-              <CardTitle>Account</CardTitle>
+              <CardTitle>Feedback</CardTitle>
               <CardDescription>
-                Make changes to your account here. Click save when you&apos;re done.
+                Share your thoughts with us. Click submit when you’re ready.
               </CardDescription>
             </CardHeader>
             <CardContent className="gap-6">
               <View className="gap-3">
                 <Label htmlFor="tabs-demo-name">Name</Label>
-                <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+                <Input id="tabs-demo-name" defaultValue="Michael Scott" />
               </View>
               <View className="gap-3">
-                <Label htmlFor="tabs-demo-username">Username</Label>
-                <Input id="tabs-demo-username" defaultValue="@peduarte" />
+                <Label htmlFor="tabs-demo-message">Message</Label>
+                <Input id="tabs-demo-message" defaultValue="Where are the turtles?!" />
               </View>
             </CardContent>
             <CardFooter>
               <Button>
-                <Text>Save changes</Text>
+                <Text>Submit feedback</Text>
               </Button>
             </CardFooter>
           </Card>
         </TabsContent>
-        <TabsContent value="password">
+
+        <TabsContent value="survey">
           <Card>
             <CardHeader>
-              <CardTitle>Password</CardTitle>
+              <CardTitle>Quick Survey</CardTitle>
               <CardDescription>
-                Change your password here. After saving, you&apos;ll be logged out.
+                Answer a few quick questions to help improve the demo.
               </CardDescription>
             </CardHeader>
             <CardContent className="gap-6">
               <View className="gap-3">
-                <Label htmlFor="tabs-demo-current">Current password</Label>
-                <Input id="tabs-demo-current" secureTextEntry />
+                <Label htmlFor="tabs-demo-job-title">Job Title</Label>
+                <Input id="tabs-demo-job-title" defaultValue="Regional Manager" />
               </View>
               <View className="gap-3">
-                <Label htmlFor="tabs-demo-new">New password</Label>
-                <Input id="tabs-demo-new" secureTextEntry />
+                <Label htmlFor="tabs-demo-favorite">Favorite feature</Label>
+                <Input id="tabs-demo-favorite" defaultValue="CLI" />
               </View>
             </CardContent>
             <CardFooter>
               <Button>
-                <Text>Save password</Text>
+                <Text>Submit survey</Text>
               </Button>
             </CardFooter>
           </Card>

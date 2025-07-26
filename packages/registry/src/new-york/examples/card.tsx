@@ -17,12 +17,9 @@ export function CardPreview() {
     <Card className="w-full max-w-sm">
       <CardHeader className="flex-row">
         <View className="flex-1 gap-1.5">
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>Enter your email below to login to your account</CardDescription>
+          <CardTitle>Subscribe to our newsletter</CardTitle>
+          <CardDescription>Enter your details to receive updates and tips</CardDescription>
         </View>
-        <Button variant="link">
-          <Text>Sign up</Text>
-        </Button>
       </CardHeader>
       <CardContent>
         <View className="w-full justify-center gap-4">
@@ -31,22 +28,17 @@ export function CardPreview() {
             <Input id="email" placeholder="m@example.com" />
           </View>
           <View className="gap-2">
-            <View className="flex flex-row items-center justify-between">
-              <Label htmlFor="password">Password</Label>
-              <Button variant="link" className="h-4 rounded-sm px-0 py-0 sm:h-4">
-                <Text className="font-normal">Forgot your password?</Text>
-              </Button>
-            </View>
-            <Input id="password" secureTextEntry />
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" placeholder="John Doe" />
           </View>
         </View>
       </CardContent>
       <CardFooter className="flex-col gap-2">
         <Button className="w-full">
-          <Text>Login</Text>
+          <Text>Subscribe</Text>
         </Button>
         <Button variant="outline" className="w-full">
-          <Text>Login with Google</Text>
+          <Text>Later</Text>
         </Button>
       </CardFooter>
     </Card>
