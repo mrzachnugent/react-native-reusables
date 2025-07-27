@@ -37,7 +37,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
           components={{
             ...defaultMdxComponents,
             h2: ({ className, ...props }) => (
-              <defaultMdxComponents.h2 className={cn(className, 'font-normal')} {...props} />
+              <defaultMdxComponents.h2 className={cn(className, 'font-medium')} {...props} />
             ),
             //  HTML `ref` attribute conflicts with `forwardRef`
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,7 +52,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
               </CodeBlock>
             ),
             h3: ({ className, ...props }) => (
-              <h3 className={cn(className, 'mb-6 mt-10 scroll-mt-20 font-normal')} {...props} />
+              <h3 className={cn(className, 'mb-6 mt-10 scroll-mt-20 font-medium')} {...props} />
             ),
           }}
         />
