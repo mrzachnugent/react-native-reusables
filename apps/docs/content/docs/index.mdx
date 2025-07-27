@@ -9,7 +9,7 @@ import { AppStoreButton } from '@docs/components/app-store-button';
 import { PlayStoreButton } from '@docs/components/play-store-button';
 import { RnrIcon } from '@docs/components/icons/rnr-icon';
 
-<blockquote cite="https://ui.shadcn.com/docs" className='text-fd-muted-foreground font-normal -mt-3'>
+<blockquote cite="https://ui.shadcn.com/docs" className='text-fd-muted-foreground font-normal -mt-2'>
 This is not a component library. It is how you build your component library.
 </blockquote>
 
@@ -18,17 +18,22 @@ This is not a component library. It is how you build your component library.
 Built with familiar tools and libraries, it follows consistent styling, structure, and naming conventions, letting you use your favorite design system to create beautiful universal apps.
 
 
-<div className='bg-card rounded-xl p-12 lg:py-16 flex justify-between gap-8 flex-col-reverse items-center lg:items-start lg:flex-row border shadow-sm not-prose my-12'>
-  <div className='flex flex-col gap-7 items-center lg:items-start justify-center max-w-sm'>
-    <p className='text-4xl lg:text-5xl font-medium text-center lg:text-left lg:text-balance'>Explore the New Showcase</p>
-    <div className='flex gap-2'>
+<div className="bg-card flex flex-col-reverse items-center justify-between gap-8 rounded-xl border p-12 shadow-sm lg:flex-row lg:p-14 not-prose my-12">
+  <div className="flex max-w-[25.5rem] flex-col items-center justify-center gap-7 lg:items-start">
+    <div>
+      <h1 className="pb-1 text-center text-3xl font-medium lg:text-left lg:text-4xl">React Native Reusables</h1>
+      <p className="text-muted-foreground text-center text-base lg:text-left">
+       Preview components on your phone by scanning QR codes from the docs.
+      </p>
+    </div>
+    <div className="flex gap-2 lg:gap-3">
       <AppStoreButton />
       <PlayStoreButton />
     </div>
   </div>
-  <div className='flex items-center lg:flex-1 justify-center'>
-    <div className='flex justify-center items-center bg-black rounded-3xl md:rounded-[2.5rem] p-4 md:p-6 shadow-md border border-border/0 dark:border-border'>
-      <RnrIcon className='text-white size-16 md:size-28' pathClassName='stroke-1' />
+  <div className="flex items-center justify-center ">
+    <div className="border-border/0 dark:border-border flex items-center justify-center rounded-3xl border bg-black p-4 shadow-md md:rounded-[2.5rem] md:p-6">
+      <RnrIcon className="size-16 text-white md:size-32" pathClassName="stroke-1" />
     </div>
   </div>
 </div>
