@@ -281,6 +281,11 @@ const TEMPLATES = [
     name: "Minimal",
     url: "https://github.com/founded-labs/react-native-reusables-templates.git",
     subPath: "minimal"
+  },
+  {
+    name: "Clerk auth",
+    url: "https://github.com/founded-labs/react-native-reusables-templates.git",
+    subPath: "clerk-auth"
   }
 ]
 
