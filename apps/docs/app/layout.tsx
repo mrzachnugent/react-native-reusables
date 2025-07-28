@@ -34,7 +34,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <head>
         <link rel="icon" href="/favicon.svg" />
       </head>
-      <body className="flex min-h-screen flex-col">
+      <body className="flex min-h-svh flex-col">
         <CookiesProvider>
           <SafeAreaProvider>
             <RootProvider search={SEARCH_OPTIONS}>
