@@ -4,9 +4,9 @@ export default function Page() {
       <h1>Support</h1>
       <p>Effective Date: July 26, 2025</p>
       <p>
-        The React Native Reusables Showcase App (“the App”) is a demonstration application created
-        to showcase UI components and blocks provided by the React Native Reusables project. This
-        page provides users with the necessary information to ask questions and request support.
+        The React Native Reusables App (“the App”) is an interactive developer tool that enables
+        users to explore and implement UI components and blocks provided by the React Native
+        Reusables project.
       </p>
       <h2>1. How to Get Support</h2>
       <p>If you need help with the App or React Native Reusables, you can:</p>
