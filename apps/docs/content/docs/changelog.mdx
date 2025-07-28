@@ -18,7 +18,7 @@ React Native Reusables is now part of the [Vercel OSS Program](https://vercel.co
   <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
 </a>
 
-### First React Native compatible shadcn registry (probably) [#august-2025-first-react-native-compatible-shadcn-registry]
+### First React Native compatible shadcn registry _(probably)_ [#august-2025-first-react-native-compatible-shadcn-registry]
 
 You can now use `npx shadcn@latest` with our registries built just for React Native.
 
@@ -33,6 +33,20 @@ To make the experience even smoother, we built a thin wrapper around the CLI.
 <CommandTabs args={["add"]} />
 
 Same power, tailored for React Native.
+
+### Standardize rem to match web behavior [#august-2025-standardize-rem]
+
+In the `metro.config.js`, `inlineRem` is now set to `16` to match web behavior.
+
+```diff title="metro.config.js"
+const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname);
+
+- module.exports = withNativeWind(config, { input: './global.css' });
++ module.exports = withNativeWind(config, { input: './global.css', inlineRem: 16 });
+```
 
 ### New CLI - rewritten with Effect + shadcn [#august-2025-new-cli-rewritten-with-effect-shadcn]
 
