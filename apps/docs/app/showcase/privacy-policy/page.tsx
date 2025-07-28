@@ -5,10 +5,11 @@ export default function Page() {
       <p>Effective Date: July 19, 2025</p>
 
       <p>
-        The React Native Reusables Showcase App (“the App”) is a demonstration application created
-        to showcase UI components and blocks provided by the React Native Reusables project. Your
-        privacy is important to us. This Privacy Policy explains what information we collect, how we
-        use it, and your rights regarding that information.
+        The React Native Reusables App (“the App”) is an interactive developer tool that allows
+        users to explore, preview, and interact with a wide range of UI components and blocks
+        provided by the React Native Reusables project. It is designed for developers and designers
+        who want to evaluate, learn from, and integrate these components into their own
+        applications.
       </p>
 
       <h2>1. Information We Collect</h2>
