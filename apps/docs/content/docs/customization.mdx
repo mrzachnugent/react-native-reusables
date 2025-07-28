@@ -28,7 +28,7 @@ See the [full list of CSS variables](https://ui.shadcn.com/docs/theming#list-of-
 
 ## `tailwind.config.ts`
 
-Connects Tailwind utility classes (like `bg-card`, `text-muted`) to the CSS variables defined in `global.css`. It also sets the dark mode selector.
+Connects Tailwind utility classes (like `bg-card`, `text-muted`) to the CSS variables defined in `global.css`, while also configuring the dark mode selector, plugins, and animations.
 
 ## `theme.ts`
 
@@ -41,7 +41,7 @@ If you update a CSS variable, update `theme.ts` as well.
 <div className='text-sm *:text-muted-foreground *:font-normal py-2 *:leading-7'>
 
 <div className='-mb-1.5 *:text-foreground'>
-  <span className='font-medium'>Tip</span>: Use this prompt to sync `theme.ts` after updating CSS variables in `global.css`:
+  <span className='font-medium'>Tip</span>:  After updating CSS variables in `global.css`, use this prompt to sync `theme.ts`:
 </div>
 
 > Read CSS variables under `:root` and `.dark:root` in `global.css`.
