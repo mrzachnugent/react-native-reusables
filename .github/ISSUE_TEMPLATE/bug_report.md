@@ -43,5 +43,16 @@ If applicable, add screenshots to help explain your problem.
 - OS: [e.g. iOS]
 - Browser (if applies) [e.g. chrome, safari]
 
+**CLI output (paste the full command output)**
+
+If applicable, paste the full command output by running it with the `--log-level all` flag.
+
+```bash
+npx @react-native-reusables/cli@latest --log-level all [command] [args] [options]
+
+// example:
+// npx @react-native-reusables/cli@latest --log-level all init -t minimal
+```
+
 **Additional context**
 Add any other context about the problem here.
