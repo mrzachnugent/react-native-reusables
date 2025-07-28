@@ -1,3 +1,5 @@
+import { DarkTheme, DefaultTheme, type Theme } from '@react-navigation/native';
+
 export const THEME = {
   light: {
     background: 'hsl(0 0% 100%)',
@@ -53,21 +55,39 @@ export const THEME = {
   },
 };
 
-export const NAV_THEME = {
+export const NAV_THEME: Record<'light' | 'dark', Theme> = {
   light: {
-    background: THEME.light.background,
-    border: THEME.light.border,
-    card: THEME.light.card,
-    notification: THEME.light.destructive,
-    primary: THEME.light.primary,
-    text: THEME.light.foreground,
+    ...DefaultTheme,
+    colors: {
+      background: THEME.light.background,
+      border: THEME.light.border,
+      card: THEME.light.card,
+      notification: THEME.light.destructive,
+      primary: THEME.light.primary,
+      text: THEME.light.foreground,
+    },
+    fonts: {
+      bold: { fontFamily: 'Geist-Medium', fontWeight: '500' },
+      medium: { fontFamily: 'Geist-Medium', fontWeight: '500' },
+      regular: { fontFamily: 'Geist', fontWeight: '400' },
+      heavy: { fontFamily: 'Geist-SemiBold', fontWeight: '600' },
+    },
   },
   dark: {
-    background: THEME.dark.background,
-    border: THEME.dark.border,
-    card: THEME.dark.card,
-    notification: THEME.dark.destructive,
-    primary: THEME.dark.primary,
-    text: THEME.dark.foreground,
+    ...DarkTheme,
+    colors: {
+      background: THEME.dark.background,
+      border: THEME.dark.border,
+      card: THEME.dark.card,
+      notification: THEME.dark.destructive,
+      primary: THEME.dark.primary,
+      text: THEME.dark.foreground,
+    },
+    fonts: {
+      bold: { fontFamily: 'Geist-Medium', fontWeight: '500' },
+      medium: { fontFamily: 'Geist-Medium', fontWeight: '500' },
+      regular: { fontFamily: 'Geist', fontWeight: '400' },
+      heavy: { fontFamily: 'Geist-SemiBold', fontWeight: '600' },
+    },
   },
 };

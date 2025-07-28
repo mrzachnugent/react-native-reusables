@@ -1,6 +1,6 @@
 import '../global.css';
 
-import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
+import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
 import { StyleProvider, useStyle } from '@showcase/components/styles/style-provider';
@@ -16,32 +16,6 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
-
-const LIGHT_THEME: Theme = {
-  ...DefaultTheme,
-  colors: NAV_THEME.light,
-  fonts: {
-    bold: { fontFamily: 'Geist-Medium', fontWeight: '500' },
-    medium: { fontFamily: 'Geist-Medium', fontWeight: '500' },
-    regular: { fontFamily: 'Geist', fontWeight: '400' },
-    heavy: { fontFamily: 'Geist-SemiBold', fontWeight: '600' },
-  },
-};
-const DARK_THEME: Theme = {
-  ...DarkTheme,
-  colors: NAV_THEME.dark,
-  fonts: {
-    bold: { fontFamily: 'Geist-Medium', fontWeight: '500' },
-    medium: { fontFamily: 'Geist-Medium', fontWeight: '500' },
-    regular: { fontFamily: 'Geist', fontWeight: '400' },
-    heavy: { fontFamily: 'Geist-SemiBold', fontWeight: '600' },
-  },
-};
-
-const THEMES = {
-  light: LIGHT_THEME,
-  dark: DARK_THEME,
-};
 
 SplashScreen.preventAutoHideAsync();
 
@@ -70,11 +44,11 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={THEMES[colorScheme]}>
+    <ThemeProvider value={NAV_THEME[colorScheme]}>
       <StyleProvider>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <GestureHandlerRootView
-          style={{ flex: 1, backgroundColor: THEMES[colorScheme].colors.background }}>
+          style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
           <KeyboardProvider>
             <StyleBorderRadiusProvider>
               <Stack
