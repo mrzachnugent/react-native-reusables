@@ -82,13 +82,20 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
         }
 
         const style = options.yes
-          ? "default"
+          ? exists
+            ? "default"
+            : "new-york"
           : yield* Prompt.select({
               message: "Which style would you like to use?",
-              choices: [
-                { title: "default", value: "default" },
-                { title: "new-york", value: "new-york" }
-              ] as const
+              choices: exists
+                ? [
+                    { title: "default", value: "default" },
+                    { title: "new-york", value: "new-york" }
+                  ]
+                : ([
+                    { title: "new-york", value: "new-york" },
+                    { title: "default", value: "default" }
+                  ] as const)
             })
 
         const baseColor = options.yes
