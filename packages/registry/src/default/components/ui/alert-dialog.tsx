@@ -8,12 +8,15 @@ import * as AlertDialogPrimitive from '@rn-primitives/alert-dialog';
 import * as React from 'react';
 import { Platform, View, type ViewProps } from 'react-native';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { FullWindowOverlay as RNFullWindowOverlay } from 'react-native-screens';
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 
 const AlertDialogPortal = AlertDialogPrimitive.Portal;
+
+const FullWindowOverlay = Platform.OS === 'ios' ? RNFullWindowOverlay : React.Fragment;
 
 function AlertDialogOverlay({
   className,
@@ -23,21 +26,23 @@ function AlertDialogOverlay({
   ref?: React.RefObject<AlertDialogPrimitive.OverlayRef | null>;
 }) {
   return (
-    <AlertDialogPrimitive.Overlay
-      className={cn(
-        'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/80 p-2',
-        Platform.select({
-          web: 'animate-in fade-in-0 fixed',
-        }),
-        className
-      )}
-      {...props}>
-      <NativeOnlyAnimatedView
-        entering={FadeIn.duration(200).delay(50)}
-        exiting={FadeOut.duration(150)}>
-        <>{children}</>
-      </NativeOnlyAnimatedView>
-    </AlertDialogPrimitive.Overlay>
+    <FullWindowOverlay>
+      <AlertDialogPrimitive.Overlay
+        className={cn(
+          'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/80 p-2',
+          Platform.select({
+            web: 'animate-in fade-in-0 fixed',
+          }),
+          className
+        )}
+        {...props}>
+        <NativeOnlyAnimatedView
+          entering={FadeIn.duration(200).delay(50)}
+          exiting={FadeOut.duration(150)}>
+          <>{children}</>
+        </NativeOnlyAnimatedView>
+      </AlertDialogPrimitive.Overlay>
+    </FullWindowOverlay>
   );
 }
 
@@ -54,7 +59,7 @@ function AlertDialogContent({
       <AlertDialogOverlay>
         <AlertDialogPrimitive.Content
           className={cn(
-            'bg-background border-border z-50 flex max-w-lg flex-col gap-4 rounded-lg border p-6 shadow-lg',
+            'bg-background border-border z-50 flex max-w-lg flex-col gap-4 rounded-lg border p-6 shadow-lg shadow-black/5',
             Platform.select({
               web: 'animate-in fade-in-0 zoom-in-95 duration-200',
             }),

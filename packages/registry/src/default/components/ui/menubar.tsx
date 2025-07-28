@@ -18,6 +18,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { FadeIn } from 'react-native-reanimated';
+import { FullWindowOverlay as RNFullWindowOverlay } from 'react-native-screens';
 
 const MenubarMenu = MenubarPrimitive.Menu;
 
@@ -28,6 +29,8 @@ const MenubarPortal = MenubarPrimitive.Portal;
 const MenubarSub = MenubarPrimitive.Sub;
 
 const MenubarRadioGroup = MenubarPrimitive.RadioGroup;
+
+const FullWindowOverlay = Platform.OS === 'ios' ? RNFullWindowOverlay : React.Fragment;
 
 function Menubar({
   className,
@@ -142,7 +145,7 @@ function MenubarSubContent({
     <NativeOnlyAnimatedView entering={FadeIn}>
       <MenubarPrimitive.SubContent
         className={cn(
-          'bg-popover border-border overflow-hidden rounded-md border p-1 shadow-md',
+          'bg-popover border-border overflow-hidden rounded-md border p-1 shadow-md shadow-black/5',
           Platform.select({
             web: 'animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 fade-in-0 data-[state=closed]:zoom-out-95 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-context-menu-content-transform-origin) z-50 min-w-[8rem]',
           }),
@@ -171,30 +174,32 @@ function MenubarContent({
 }) {
   return (
     <MenubarPrimitive.Portal hostName={portalHost}>
-      <NativeOnlyAnimatedView
-        entering={FadeIn}
-        style={StyleSheet.absoluteFill}
-        pointerEvents="box-none">
-        <TextClassContext.Provider value="text-popover-foreground">
-          <MenubarPrimitive.Content
-            className={cn(
-              'bg-popover border-border min-w-[12rem] overflow-hidden rounded-md border p-1 shadow-md',
-              Platform.select({
-                web: cn(
-                  'animate-in fade-in-0 zoom-in-95 max-h-(--radix-context-menu-content-available-height) origin-(--radix-context-menu-content-transform-origin) z-50 cursor-default',
-                  props.side === 'bottom' && 'slide-in-from-top-2',
-                  props.side === 'top' && 'slide-in-from-bottom-2'
-                ),
-              }),
-              className
-            )}
-            align={align}
-            alignOffset={alignOffset}
-            sideOffset={sideOffset}
-            {...props}
-          />
-        </TextClassContext.Provider>
-      </NativeOnlyAnimatedView>
+      <FullWindowOverlay>
+        <NativeOnlyAnimatedView
+          entering={FadeIn}
+          style={StyleSheet.absoluteFill}
+          pointerEvents="box-none">
+          <TextClassContext.Provider value="text-popover-foreground">
+            <MenubarPrimitive.Content
+              className={cn(
+                'bg-popover border-border min-w-[12rem] overflow-hidden rounded-md border p-1 shadow-md shadow-black/5',
+                Platform.select({
+                  web: cn(
+                    'animate-in fade-in-0 zoom-in-95 max-h-(--radix-context-menu-content-available-height) origin-(--radix-context-menu-content-transform-origin) z-50 cursor-default',
+                    props.side === 'bottom' && 'slide-in-from-top-2',
+                    props.side === 'top' && 'slide-in-from-bottom-2'
+                  ),
+                }),
+                className
+              )}
+              align={align}
+              alignOffset={alignOffset}
+              sideOffset={sideOffset}
+              {...props}
+            />
+          </TextClassContext.Provider>
+        </NativeOnlyAnimatedView>
+      </FullWindowOverlay>
     </MenubarPrimitive.Portal>
   );
 }
