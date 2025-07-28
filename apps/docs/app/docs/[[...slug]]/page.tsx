@@ -149,7 +149,7 @@ function Footer({ url }: { url: string }) {
           </a>{' '}
           to React Native. Source on{' '}
           <a
-            href="https://github.com/mrzachnugent/react-native-reusables"
+            href="https://github.com/founded-labs/react-native-reusables"
             target="_blank"
             rel="noreferrer"
             className="underline underline-offset-4">

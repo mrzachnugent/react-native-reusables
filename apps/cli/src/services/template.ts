@@ -203,7 +203,7 @@ class Template extends Effect.Service<Template>()("src/services/template", {
                 `\x1b[22m\x1b[38;5;250m↪ Documentation: \x1b[37mhttps://reactnativereusables.com\x1b[0m`
               )
               yield* Effect.log(
-                `\x1b[22m\x1b[38;5;250m↪ Report issues: \x1b[37mhttps://github.com/mrzachnugent/react-native-reusables/issues\x1b[0m`
+                `\x1b[22m\x1b[38;5;250m↪ Report issues: \x1b[37mhttps://github.com/founded-labs/react-native-reusables/issues\x1b[0m`
               )
 
               return newRepoPath

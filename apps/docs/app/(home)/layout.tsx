@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <SkipNavigationButton />
       <HomeLayout
-        githubUrl="https://github.com/mrzachnugent/react-native-reusables"
+        githubUrl="https://github.com/founded-labs/react-native-reusables"
         nav={{
           title: (
             <div className="hover:bg-fd-accent -ml-0.5 flex size-8 items-center justify-center rounded-md transition-colors duration-200">

@@ -4,7 +4,7 @@
 
 # Important Note:
 
-Please create a [discussion](https://github.com/mrzachnugent/react-native-reusables/discussions/categories/ideas) for any new feature proposals **before** submitting a pull request. This helps ensure alignment with project goals and gather community feedback.
+Please create a [discussion](https://github.com/founded-labs/react-native-reusables/discussions/categories/ideas) for any new feature proposals **before** submitting a pull request. This helps ensure alignment with project goals and gather community feedback.
 
 -->
 
