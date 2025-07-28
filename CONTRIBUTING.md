@@ -8,8 +8,8 @@ Thank you for your interest in contributing to `react-native-reusables`! We welc
 >
 > **If you want to propose a new feature:**
 >
-> 1.  Make sure to read the [project scope](https://github.com/mrzachnugent/react-native-reusables/discussions/229) to confirm your proposal fits within the vision and purpose of `react-native-reusables`.
-> 2.  Please open a [new discussion](https://github.com/mrzachnugent/react-native-reusables/discussions) before taking any action. This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
+> 1.  Make sure to read the [project scope](https://github.com/founded-labs/react-native-reusables/discussions/229) to confirm your proposal fits within the vision and purpose of `react-native-reusables`.
+> 2.  Please open a [new discussion](https://github.com/founded-labs/react-native-reusables/discussions) before taking any action. This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
 
 <br />
 
@@ -48,15 +48,15 @@ Please follow the coding style and guidelines used in the project. If there are 
 
 ## Issue Tracker
 
-Check the [issue tracker](https://github.com/mrzachnugent/react-native-reusables/issues) for existing issues or open a new issue to discuss and coordinate your contribution with the maintainers.
+Check the [issue tracker](https://github.com/founded-labs/react-native-reusables/issues) for existing issues or open a new issue to discuss and coordinate your contribution with the maintainers.
 
 ## Code of Conduct
 
-Please review and adhere to our [Code of Conduct](https://github.com/mrzachnugent/react-native-reusables/blob/main/CODE_OF_CONDUCT.md). Be respectful and considerate towards others.
+Please review and adhere to our [Code of Conduct](https://github.com/founded-labs/react-native-reusables/blob/main/CODE_OF_CONDUCT.md). Be respectful and considerate towards others.
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/mrzachnugent/react-native-reusables/blob/main/LICENSE) file of this repository.
+By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/founded-labs/react-native-reusables/blob/main/LICENSE) file of this repository.
 
 ## Contact
 

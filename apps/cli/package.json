@@ -6,7 +6,7 @@
   "description": "A CLI for React Native Reusables",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrzachnugent/react-native-reusables.git",
+    "url": "https://github.com/founded-labs/react-native-reusables.git",
     "directory": "apps/cli"
   },
   "publishConfig": {
