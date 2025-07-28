@@ -5,22 +5,33 @@ description: Latest updates and announcements.
 
 import { Callout } from '@docs/components/callout';
 import { CommandTabs } from '@docs/components/command-tabs';
+import { VercelOssBadge } from '@docs/components/vercel-oss-badge';
+import { ClerkLogo } from '@docs/components/clerk-logo';
+import { DownloadAppBanner } from '@docs/components/download-app-banner';
 
 ## August 2025 - Total Rewrite
 
-New CLI. New docs. New registry. New showcase app.
+New CLI. New docs. New registry. New showcase app. New sponsors.
+
 
 ### Now part of the Vercel OSS Program [#august-2025-vercel-oss]
 
+<VercelOssBadge />
+
 React Native Reusables is now part of the [Vercel OSS Program](https://vercel.com/oss), which supports its continued growth and development.
 
-<a href="https://vercel.com/oss">
-  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
+### Sponsored Blocks by Clerk [#august-2025-clerk]
+
+<a href="https://go.clerk.com/gjgxNgT" target="_blank" className="block w-fit">
+  <ClerkLogo />
 </a>
+
+React Native Reusables now features a [template](https://github.com/founded-labs/react-native-reusables-templates/tree/main/clerk-auth) and sponsored [blocks](/docs/blocks/authentication) from [Clerk](https://go.clerk.com/gjgxNgT), helping you quickly integrate authentication into your apps with React Native Reusables.
+
 
 ### First React Native compatible shadcn registry _(probably)_ [#august-2025-first-react-native-compatible-shadcn-registry]
 
-You can now use `npx shadcn@latest` with our registries built just for React Native.
+You can now use `npx shadcn@latest` with our registries.
 
 To make the experience even smoother, we built a thin wrapper around the CLI.
 
@@ -32,11 +43,11 @@ To make the experience even smoother, we built a thin wrapper around the CLI.
 
 <CommandTabs args={["add"]} />
 
-Same power, tailored for React Native.
+Same power, tailored for React Native Reusables.
 
-### Standardize rem to match web behavior [#august-2025-standardize-rem]
+### Standardize rem to match web [#august-2025-standardize-rem]
 
-In the `metro.config.js`, `inlineRem` is now set to `16` to match web behavior.
+In the `metro.config.js`, `inlineRem` is now set to `16` to match web sizing.
 
 ```diff title="metro.config.js"
 const { getDefaultConfig } = require('expo/metro-config');
@@ -77,25 +88,19 @@ Every component has been refined and standardized for both `default` and `new-yo
 
 ### Blocks [#august-2025-blocks]
 
-- TODO
+Introduced authentication [blocks](/docs/blocks/authentication) to help you quickly integrate authentication into your apps with React Native Reusables.
 
 ### Showcase App [#august-2025-showcase-app]
 
-We launched a new Expo app so you can explore components from your device.
-
-- TODO: add link to app
+<DownloadAppBanner />
 
 ### Redesigned Docs [#august-2025-redesigned-docs]
 
-The docs have been rebuilt from scratch as you can see.
-
-- TODO: Add before and after images
+The docs have been redesigned to be more consistent and easier to use.
 
 ### New GitHub Home [#august-2025-new-github-home]
 
-We moved the repo from my personal account to a dedicated org:
-
-- [@founded-labs](https://github.com/founded-labs)
+We moved the repo from my personal account to a dedicated org [@founded-labs](https://github.com/founded-labs).
 
 This gives the project a long-term home with more room to grow.
 
@@ -151,7 +156,7 @@ Available variants: `default`, `h1` , `h2`, `h3`, `h4`, `p`, `block-quote`, `cod
   your own custom changes.
 </Callout>
 
-<CommandTabs args={["add", "--override", "[...components]"]} />
+<CommandTabs args={["add", "--overwrite", "[...components]"]} />
 
 <span className='sr-only'>
 
