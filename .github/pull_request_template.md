@@ -2,9 +2,12 @@
 
 <!--
 
-# Important Note:
+⚠️ **Important**
 
-Please create a [discussion](https://github.com/founded-labs/react-native-reusables/discussions/categories/ideas) for any new feature proposals **before** submitting a pull request. This helps ensure alignment with project goals and gather community feedback.
+**If you want to propose a new feature:**
+
+1.  Make sure to read the [project scope](https://github.com/founded-labs/react-native-reusables/discussions/229) to confirm your proposal fits within the vision and purpose of `react-native-reusables`.
+2. Before taking any action, please open a [new discussion](https://github.com/founded-labs/react-native-reusables/discussions). This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
 
 -->
 
@@ -18,7 +21,6 @@ Fixes issue #<!-- Add the issue number that this PR fixes, if applicable. -->
 
 <!-- Check the platforms that you have tested this PR on. -->
 
-- [ ] Docs
 - [ ] Web
 - [ ] iOS
 - [ ] Android
@@ -27,8 +29,10 @@ Fixes issue #<!-- Add the issue number that this PR fixes, if applicable. -->
 
 <!-- Specify which apps or packages are affected by this pull request. -->
 
-- [apps/app_x]
-- [packages/package_y]
+- [ ] apps/docs
+- [ ] apps/showcase
+- [ ] apps/cli
+- [ ] packages/registry
 
 ### Screenshots:
 
