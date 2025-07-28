@@ -169,16 +169,14 @@ function TableOfContentFooter() {
         Want to work with us?
       </div>
       <div className="text-muted-foreground">Mention us to your team.</div>
-      <div className="text-muted-foreground">
-        We help companies like yours ship world-class UI/UX.
-      </div>
+      <div className="text-muted-foreground">We help companies ship world-class UI/UX.</div>
       <button
         data-slot="button"
         className="[&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 has-[&gt;svg]:px-2.5 mt-2 inline-flex h-8 w-fit shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 text-sm font-medium outline-none transition-all focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50">
-        Get in touch
+        Learn more
       </button>
       <Link href="/docs/hire-us" className="absolute inset-0">
-        <span className="sr-only">Get in touch</span>
+        <span className="sr-only">Learn more about Founded Labs</span>
       </Link>
     </div>
   );
