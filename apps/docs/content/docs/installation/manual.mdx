@@ -49,7 +49,7 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
       Render the `PortalHost` from [`@rn-primitives/portal`](https://rnprimitives.com/portal) in your root layout. Place it as the last child of your providers. This is where your components that use the `Portal` will be rendered (e.g. `DropdownMenu`, `Tooltip`, `Popover`, etc.).
 
       ```diff title="app/_layout.tsx"
-       <ThemeProvider value={THEMES[colorScheme]}>
+       <ThemeProvider value={NAV_THEME[colorScheme]}>
          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
          <Stack />
       +  <PortalHost />
@@ -103,7 +103,7 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
           --border: 0 0% 89.8%;
           --input: 0 0% 89.8%;
           --ring: 0 0% 63%;
-          --radius: 0.5rem;
+          --radius: 0.625rem;
           --chart-1: 12 76% 61%;
           --chart-2: 173 58% 39%;
           --chart-3: 197 37% 24%;
@@ -216,7 +216,9 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
 
       ```
       3. Add them to your `theme.ts` file
-      ```tsx title="lib/theme.ts"
+      ```ts title="lib/theme.ts"
+      import { DarkTheme, DefaultTheme, type Theme } from '@react-navigation/native';
+
       export const THEME = {
         light: {
           background: 'hsl(0 0% 100%)',
@@ -237,7 +239,7 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
           border: 'hsl(0 0% 89.8%)',
           input: 'hsl(0 0% 89.8%)',
           ring: 'hsl(0 0% 63%)',
-          radius: '0.5rem',
+          radius: '0.625rem',
           chart1: 'hsl(12 76% 61%)',
           chart2: 'hsl(173 58% 39%)',
           chart3: 'hsl(197 37% 24%)',
@@ -263,7 +265,7 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
           border: 'hsl(0 0% 14.9%)',
           input: 'hsl(0 0% 14.9%)',
           ring: 'hsl(300 0% 45%)',
-          radius: '0.5rem',
+          radius: '0.625rem',
           chart1: 'hsl(220 70% 50%)',
           chart2: 'hsl(160 60% 45%)',
           chart3: 'hsl(30 80% 55%)',
@@ -272,25 +274,30 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
         },
       };
 
-      export const NAV_THEME = {
+      export const NAV_THEME: Record<'light' | 'dark', Theme> = {
         light: {
-          background: THEME.light.background,
-          border: THEME.light.border,
-          card: THEME.light.card,
-          notification: THEME.light.destructive,
-          primary: THEME.light.primary,
-          text: THEME.light.foreground,
+          ...DefaultTheme,
+          colors: {
+            background: THEME.light.background,
+            border: THEME.light.border,
+            card: THEME.light.card,
+            notification: THEME.light.destructive,
+            primary: THEME.light.primary,
+            text: THEME.light.foreground,
+          },
         },
         dark: {
-          background: THEME.dark.background,
-          border: THEME.dark.border,
-          card: THEME.dark.card,
-          notification: THEME.dark.destructive,
-          primary: THEME.dark.primary,
-          text: THEME.dark.foreground,
+          ...DarkTheme,
+          colors: {
+            background: THEME.dark.background,
+            border: THEME.dark.border,
+            card: THEME.dark.card,
+            notification: THEME.dark.destructive,
+            primary: THEME.dark.primary,
+            text: THEME.dark.foreground,
+          },
         },
       };
-
       ```
       <div className='text-fd-muted-foreground'>
         For more details, see the [Customization](/docs/customization) page.
@@ -315,7 +322,7 @@ Run `init` to start a new Expo project, or follow the manual steps to set up an 
       ```json title="components.json"
       {
         "$schema": "https://ui.shadcn.com/schema.json",
-        "style": "default",
+        "style": "new-york",
         "rsc": false,
         "tsx": true,
         "tailwind": {
