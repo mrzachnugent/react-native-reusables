@@ -4,7 +4,7 @@ import { source } from '@docs/lib/source';
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
 
-const SIDEBAR_PROPS = { className: '[&>div]:pt-3', defaultOpenLevel: 1 };
+const SIDEBAR_PROPS = { className: '[&>div]:pt-3' };
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
