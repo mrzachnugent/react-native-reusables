@@ -61,6 +61,12 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       favicon: './assets/images/favicon.png',
     },
     plugins: [
+      [
+        'expo-dev-client',
+        {
+          launchMode: 'most-recent',
+        },
+      ],
       'expo-router',
       [
         'expo-font',
