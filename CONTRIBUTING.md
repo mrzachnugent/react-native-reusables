@@ -4,12 +4,12 @@ Thank you for your interest in contributing to `react-native-reusables`! We welc
 
 ## How to Contribute
 
-> **IMPORTANT**
+> ⚠️ **Important**
 >
-> **If you want to propose a new feature:**
+> If you want to propose a new feature:
 >
 > 1.  Make sure to read the [project scope](https://github.com/founded-labs/react-native-reusables/discussions/229) to confirm your proposal fits within the vision and purpose of `react-native-reusables`.
-> 2.  Please open a [new discussion](https://github.com/founded-labs/react-native-reusables/discussions) before taking any action. This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
+> 2.  Before taking any action, please open a [new discussion](https://github.com/founded-labs/react-native-reusables/discussions). This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
 
 <br />
 
@@ -19,10 +19,10 @@ Thank you for your interest in contributing to `react-native-reusables`! We welc
    git clone https://github.com/your-username/react-native-reusables.git
    cd react-native-reusables
    ```
-3. Create a new branch for your feature or bug fix:
+3. Create a new branch:
 
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b your-username/your-feature-name
    ```
 
 4. Make your changes and ensure that your code adheres to the existing coding standards.
@@ -35,7 +35,7 @@ git commit -m "Add your commit message here"
 6. Push your changes to your forked repository:
 
    ```bash
-   git push origin feature/your-feature-name
+   git push origin your-username/your-feature-name
    ```
 
 7. Open a pull request (PR) against the main branch of the original repository.
