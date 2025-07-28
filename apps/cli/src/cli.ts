@@ -1,4 +1,4 @@
-import { all, cwd, overwrite, path, summary, yes } from "@cli/contexts/cli-options.js"
+import { all, cwd, overwrite, path, summary, template, yes } from "@cli/contexts/cli-options.js"
 import * as Add from "@cli/services/commands/add.js"
 import * as Doctor from "@cli/services/commands/doctor.js"
 import * as Init from "@cli/services/commands/init.js"
@@ -17,7 +17,7 @@ const DoctorCommand = Command.make("doctor", { cwd, summary, yes })
   .pipe(Command.withDescription("Check your project setup and diagnose issues"))
   .pipe(Command.withHandler(Doctor.make))
 
-const InitCommand = Command.make("init", { cwd })
+const InitCommand = Command.make("init", { cwd, template })
   .pipe(Command.withDescription("Initialize a new React Native project with reusables"))
   .pipe(Command.withHandler(Init.make))
 
@@ -48,7 +48,7 @@ const Cli = Command.make("react-native-reusables/cli", { cwd })
         } else if (choice === "doctor") {
           yield* Doctor.make({ cwd: options.cwd, summary: false, yes: false })
         } else if (choice === "init") {
-          yield* Init.make({ cwd: options.cwd })
+          yield* Init.make({ cwd: options.cwd, template: "" })
         }
       })
     )
