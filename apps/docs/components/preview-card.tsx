@@ -1,9 +1,6 @@
 'use client';
 
-import { type SelectProps } from '@radix-ui/react-select';
-import * as React from 'react';
-
-import { Button } from '@docs/components/ui/button';
+import { RnrIcon } from '@docs/components/icons/rnr-icon';
 import {
   Select,
   SelectContent,
@@ -11,7 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@docs/components/ui/select';
+import { type SelectProps } from '@radix-ui/react-select';
 import { useReactiveGetCookie, useReactiveSetCookie } from 'cookies-next/client';
+import { useParams } from 'next/navigation';
+import { QRCodeSVG } from 'qrcode.react';
+import * as React from 'react';
 
 const PLATFORMS = [
   { name: 'web', label: 'Web' },
@@ -34,6 +35,9 @@ type PreviewCardProps = {
 const DEFAULT_STYLE_RADIUS = { '--radius': '0.5rem' } as React.CSSProperties;
 
 export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps) {
+  const { width } = useWindowSize();
+  const isDark = useIsDarkMode();
+  const params = useParams<{ slug: string[] }>();
   const getCookie = useReactiveGetCookie();
   const setCookie = useReactiveSetCookie();
   const platform = getCookie('platform') ?? 'web';
@@ -46,28 +50,53 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
     setCookie('style', value);
   }
 
-  function selectWebPreview() {
-    onPlatformChange('web');
-  }
+  const component = params.slug.at(-1);
 
   return (
-    <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-      <div className="flex items-center justify-between">
-        <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} />
-        <PlatformSwitcher onValueChange={onPlatformChange} defaultValue="web" value={platform} />
+    <>
+      <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
+        <div className="flex items-center justify-between">
+          {platform === 'web' || width < 640 ? (
+            <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} />
+          ) : (
+            <div />
+          )}
+          <PlatformSwitcher onValueChange={onPlatformChange} defaultValue="web" value={platform} />
+        </div>
+        <div
+          style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
+          className="flex flex-1 flex-col items-center justify-center py-6">
+          {platform === 'native' && width >= 640 ? (
+            <div className="flex max-w-sm flex-col items-center gap-6 p-4">
+              <QRCodeSVG
+                value={`https://reactnativereusables.com/showcase/links/${component}`}
+                bgColor={isDark ? 'black' : 'white'}
+                fgColor={isDark ? 'white' : 'black'}
+                size={230}
+                level="H"
+              />
+              <p className="text-center font-mono text-sm">Scan to preview.</p>
+            </div>
+          ) : style === 'default' ? (
+            webPreview
+          ) : (
+            webNewYorkPreview
+          )}
+        </div>
       </div>
-      <div
-        style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
-        className="flex flex-1 flex-col items-center justify-center py-6">
-        {platform === 'native' ? (
-          <ComingSoon selectWebPreview={selectWebPreview} />
-        ) : style === 'default' ? (
-          webPreview
-        ) : (
-          webNewYorkPreview
-        )}
-      </div>
-    </div>
+      <a
+        href={`https://reactnativereusables.com/showcase/links/${component}`}
+        target="_blank"
+        className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-3 rounded-xl p-3 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden [&_svg]:shrink-0">
+        <div className="dark:border-border/0 border-border/30 flex items-center justify-center rounded-lg border bg-black p-2.5 shadow-md">
+          <RnrIcon className="size-8 text-white" pathClassName="stroke-1" />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <p className="leading-none">Tap to preview in the app</p>
+          <p className="text-xl font-semibold leading-none">React Native Reusables</p>
+        </div>
+      </a>
+    </>
   );
 }
 
@@ -80,7 +109,7 @@ function PlatformSwitcher(props: SelectProps) {
 
   return (
     <Select {...props}>
-      <SelectTrigger className="h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs [&_svg]:h-4 [&_svg]:w-4">
+      <SelectTrigger className="hidden h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs sm:flex [&_svg]:h-4 [&_svg]:w-4">
         <span className="text-muted-foreground flex-1 pr-1">Platform:</span>
         {!isClient ? (
           <span className="opacity-50">
@@ -138,28 +167,66 @@ function StyleSwitcher(props: SelectProps) {
   );
 }
 
-function ComingSoon({ selectWebPreview }: { selectWebPreview: () => void }) {
-  return (
-    <div className="max-w-sm space-y-1 p-4 text-center">
-      <div className="flex justify-center">
-        <p className="text-lg">Coming soon</p>
-        <span className="pt-1 text-[0.5rem]">TM</span>
-      </div>
-      <p className="text-fd-muted-foreground pb-4 text-sm">
-        We&apos;re working on it. In the meantime, you can check out the web preview.
-      </p>
-
-      <Button
-        variant="secondary"
-        size="sm"
-        className="border-border/50 border text-xs"
-        onClick={selectWebPreview}>
-        View Web Preview
-      </Button>
-    </div>
-  );
-}
-
 function preventDefault(e: Event) {
   e.preventDefault();
+}
+
+type WindowSize = {
+  width: number;
+  height: number;
+};
+
+function useWindowSize(): WindowSize {
+  const [size, setSize] = React.useState<WindowSize>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  React.useEffect(() => {
+    function handleResize() {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return size;
+}
+
+function useIsDarkMode(): boolean {
+  const [isDark, setIsDark] = React.useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  React.useEffect(() => {
+    const htmlEl = document.documentElement;
+
+    const updateDarkMode = () => {
+      setIsDark(htmlEl.classList.contains('dark'));
+    };
+
+    updateDarkMode();
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          updateDarkMode();
+        }
+      }
+    });
+
+    observer.observe(htmlEl, { attributes: true, attributeFilter: ['class'] });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return isDark;
 }
