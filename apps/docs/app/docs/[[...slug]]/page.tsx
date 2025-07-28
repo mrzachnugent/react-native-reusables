@@ -164,7 +164,7 @@ function Footer({ url }: { url: string }) {
 
 function TableOfContentFooter() {
   return (
-    <div className="bg-card dark:bg-fd-muted border-border/50 dark:border-border/0 text-fd-foreground/80 animate-in fade-in-0 group relative mt-12 flex flex-col gap-2 rounded-lg border p-6 text-sm duration-300">
+    <div className="bg-card dark:bg-fd-muted border-border/50 dark:border-border/0 text-fd-foreground/80 group relative mt-12 flex flex-col gap-2 rounded-lg border p-6 text-sm">
       <div className="text-balance text-base font-semibold leading-tight group-hover:underline">
         Want to work with us?
       </div>
