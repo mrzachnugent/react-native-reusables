@@ -48,6 +48,10 @@ const config = getDefaultConfig(__dirname);
 + module.exports = withNativeWind(config, { input: './global.css', inlineRem: 16 });
 ```
 
+### Enhanced iOS portal rendering with FullWindowOverlay [#august-2025-fullwindowoverlay-ios]
+
+All portal content on iOS is now wrapped with `FullWindowOverlay` from `react-native-screens` to improve rendering and ensure seamless integration with native navigation.
+
 ### New CLI - rewritten with Effect + shadcn [#august-2025-new-cli-rewritten-with-effect-shadcn]
 
 The CLI has been rebuilt from the ground up with [`effect`](https://effect.website) and the [`shadcn`](https://ui.shadcn.com/docs/cli) engine under the hood for the add command.
