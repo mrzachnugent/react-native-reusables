@@ -1,13 +1,13 @@
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-const MANAGERS = ['pnpm', 'npm', 'yarn', 'bun'] as const;
+const MANAGERS = ['npm', 'bun', 'pnpm', 'yarn'] as const;
 
 const COMMAND: Record<(typeof MANAGERS)[number], string[]> = {
-  pnpm: ['pnpm', 'dlx'],
   npm: ['npx'],
-  yarn: ['npx'],
   bun: ['bunx', '--bun'],
+  pnpm: ['pnpm', 'dlx'],
+  yarn: ['yarn'],
 };
 
 export function CommandTabs({ args }: { args: string[] }) {
