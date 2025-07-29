@@ -8,7 +8,7 @@ import alertNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/alert
 import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { PreviewCard } from "@docs/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
 import { AlertPreview } from "@docs/components/default-previews";
 import { AlertPreview as AlertNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
@@ -16,12 +16,12 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <div className="h-5"/>
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div>
@@ -30,8 +30,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
       webPreview={<AlertPreview />}
       webNewYorkPreview={<AlertNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -52,21 +52,21 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 
 ## Installation
 
-<SectionTabs defaultValue="cli">
-  <SectionTabsList>
-    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
-    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="cli">
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger id="cli" value="cli">CLI</TabsTrigger>
+    <TabsTrigger id="manual" value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
      <CommandTabs args={["add", "alert"]}/>
-  </SectionTabsContent>
-  <SectionTabsContent value="manual">
+  </TabsContent>
+  <TabsContent value="manual">
     <Steps>
       <Step>
  
@@ -109,8 +109,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
 
       </Step>
     </Steps>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 ### Usage
 
