@@ -1,9 +1,117 @@
 ---
 title: Sign in
+description: Sign in with email, password, or social providers
 ---
 
-import { Callout } from '@docs/components/callout';
+import { BlockPreviewCard } from '@docs/components/preview-card';
+import { AccordionPreview as TODOAccordionPreview } from "@docs/components/default-previews";
+import { AccordionPreview as TODOAccordionNewYorkPreview } from "@docs/components/new-york-previews";
+import { ExternalLinks } from "@docs/components/external-links";
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                            
+import { CommandTabs } from "@docs/components/command-tabs";
+import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
-<Callout type='warn' title='Coming soon'>
-  This feature is coming soon.
-</Callout>
+<ExternalLinks links={[{ title: 'Clerk docs', url: 'https://dub.sh/sE9y0lH' }]} />
+
+<div className="h-6" />
+
+<BlockPreviewCard webPreview={<TODOAccordionPreview />} webNewYorkPreview={<TODOAccordionNewYorkPreview />} />
+
+
+## Installation
+
+<AuthBlockTabs>
+  <AuthBlockTabsCliContent integration="none">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "sign-in"]}/>
+      </Step>
+      <Step>
+        **All set!**
+
+        You can now use the `SignIn` block in your app.
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+  <AuthBlockTabsCliContent integration="clerk">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "clerk-sign-in"]}/>
+      </Step>
+      <Step>
+        **If you haven't already**
+
+        Follow Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to , configure your app to use Clerk.
+        
+      </Step>
+      <Step>
+        **All set!**
+
+        You can use the `ClerkSignIn` block in your app.
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+
+  <AuthBlockTabsManualContent integration="none">
+
+    
+  <Steps>
+    <Step>
+
+    {/* TODO:  */}
+    **Add the following components to your project.**
+
+    - [Button](/docs/components/button#installation)
+    - etc.
+    
+    </Step>
+    <Step>
+
+      **Copy and paste the following code into your project.**
+
+      ```json doc-gen:file
+      {
+        "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
+        "codeblock": {
+          "lang": "tsx",
+          "meta": "title=\"@/components/ui/text.tsx\""
+        }
+      }
+      ```
+
+      ```json doc-gen:file
+      {
+        "file": "./node_modules/@rnr/registry/src/new-york/components/ui/icon.tsx",
+        "codeblock": {
+          "lang": "tsx",
+          "meta": "title=\"@/components/ui/icon.tsx\""
+        }
+      }
+      ```
+
+      ```json doc-gen:file
+      {
+        "file": "./node_modules/@rnr/registry/src/new-york/components/ui/accordion.tsx",
+        "codeblock": {
+          "lang": "tsx",
+          "meta": "title=\"@/components/ui/accordion.tsx\""
+        }
+      }
+      ```
+
+    </Step>
+    <Step>
+
+      **Update the import paths to match your project setup.**
+
+    </Step>
+  </Steps>
+  </AuthBlockTabsManualContent>
+  <AuthBlockTabsManualContent integration="clerk">
+
+    **TODO: Manual**
+
+    Integration: clerk
+    
+  </AuthBlockTabsManualContent>
+</AuthBlockTabs>
