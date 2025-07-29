@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export function PortalInfoAlert() {
   return (
-    <Callout title="Portal Setup Required">
+    <Callout type="warn" title="Portal Setup Required">
       A{' '}
       <Link
         href="/docs/installation/manual#add-the-portal-host-to-your-root-layout"
