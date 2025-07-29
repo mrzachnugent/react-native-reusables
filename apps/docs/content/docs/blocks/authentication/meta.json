@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "sign-in",
+    "sign-up",
+    "user-menu",
+    "verify-email",
+    "reset-password",
+    "forgot-password",
+    "social-connections"
+  ]
+}
