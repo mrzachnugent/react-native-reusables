@@ -100,6 +100,27 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
   );
 }
 
+export function BlockPreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps) {
+  const getCookie = useReactiveGetCookie();
+  const setCookie = useReactiveSetCookie();
+  const style = getCookie('style') ?? 'new-york';
+
+  function onStyleChange(value: Style) {
+    setCookie('style', value);
+  }
+
+  return (
+    <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
+      <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} />
+      <div
+        style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
+        className="flex flex-1 flex-col items-center justify-center py-6">
+        {style === 'default' ? webPreview : webNewYorkPreview}
+      </div>
+    </div>
+  );
+}
+
 function PlatformSwitcher(props: SelectProps) {
   const [isClient, setIsClient] = React.useState(false);
 
@@ -160,6 +181,47 @@ function StyleSwitcher(props: SelectProps) {
         {STYLES.map((style) => (
           <SelectItem key={style.name} value={style.name} className="text-xs">
             {style.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
+
+const INTEGRATIONS = [
+  { name: 'none', label: 'None' },
+  { name: 'clerk', label: 'Clerk' },
+] as const;
+
+type Integration = (typeof INTEGRATIONS)[number]['name'];
+
+function AuthIntegrationSelect(props: SelectProps) {
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return (
+    <Select {...props}>
+      <SelectTrigger className="flex h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs [&_svg]:h-4 [&_svg]:w-4">
+        <span className="text-muted-foreground flex-1 pr-1">Integration:</span>
+        {!isClient ? (
+          <span className="opacity-50">
+            {
+              INTEGRATIONS.find((integration) =>
+                integration.name === props.value ? props.value : props.defaultValue
+              )?.label
+            }
+          </span>
+        ) : (
+          <SelectValue placeholder="Select integration" />
+        )}
+      </SelectTrigger>
+      <SelectContent onCloseAutoFocus={preventDefault}>
+        {INTEGRATIONS.map((integration) => (
+          <SelectItem key={integration.name} value={integration.name} className="text-xs">
+            {integration.label}
           </SelectItem>
         ))}
       </SelectContent>
