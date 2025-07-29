@@ -25,7 +25,7 @@ import { CommandTabs } from "@docs/components/command-tabs";
 import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
-import { SectionTabs, SectionTabsContent, SectionTabsList, SectionTabsTrigger } from "@docs/components/section-tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
 import { ButtonPreview, ButtonDestructivePreview, ButtonOutlinePreview, ButtonSecondaryPreview, ButtonGhostPreview, ButtonLinkPreview, ButtonIconPreview, ButtonWithIconPreview, ButtonLoadingPreview } from "@docs/components/default-previews";
 import { ButtonPreview as ButtonNewYorkPreview, ButtonDestructivePreview as ButtonDestructiveNewYorkPreview, ButtonOutlinePreview as ButtonOutlineNewYorkPreview, ButtonSecondaryPreview as ButtonSecondaryNewYorkPreview, ButtonGhostPreview as ButtonGhostNewYorkPreview, ButtonLinkPreview as ButtonLinkNewYorkPreview, ButtonIconPreview as ButtonIconNewYorkPreview, ButtonWithIconPreview as ButtonWithIconNewYorkPreview, ButtonLoadingPreview as ButtonLoadingNewYorkPreview } from "@docs/components/new-york-previews";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
@@ -33,19 +33,19 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <div className="h-5"/>
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonPreview} 
       webPreview={<ButtonPreview />}
       webNewYorkPreview={<ButtonNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -66,21 +66,21 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 
 ## Installation
 
-<SectionTabs defaultValue="cli">
-  <SectionTabsList>
-    <SectionTabsTrigger id="cli" value="cli">CLI</SectionTabsTrigger>
-    <SectionTabsTrigger id="manual" value="manual">Manual</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="cli">
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger id="cli" value="cli">CLI</TabsTrigger>
+    <TabsTrigger id="manual" value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
      <CommandTabs args={["add", "button"]}/>
-  </SectionTabsContent>
-  <SectionTabsContent value="manual">
+  </TabsContent>
+  <TabsContent value="manual">
     <Steps> 
       <Step>
  
@@ -118,8 +118,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
       </Step>
     </Steps>
 
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 ### Usage
 
@@ -163,15 +163,15 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
 
 #### Primary
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />} webNewYorkPreview={<ButtonNewYorkPreview />} />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
   <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -192,26 +192,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Secondary
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonSecondaryPreview} 
       webPreview={<ButtonSecondaryPreview />}
       webNewYorkPreview={<ButtonSecondaryNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -232,26 +232,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Destructive
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonDestructivePreview} 
       webPreview={<ButtonDestructivePreview />}
       webNewYorkPreview={<ButtonDestructiveNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -272,26 +272,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Outline
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonOutlinePreview} 
       webPreview={<ButtonOutlinePreview />}
       webNewYorkPreview={<ButtonOutlineNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -312,26 +312,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Ghost
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonGhostPreview} 
       webPreview={<ButtonGhostPreview />}
       webNewYorkPreview={<ButtonGhostNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -352,26 +352,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Link
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonLinkPreview} 
       webPreview={<ButtonLinkPreview />}
       webNewYorkPreview={<ButtonLinkNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -392,26 +392,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Icon
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonIconPreview} 
       webPreview={<ButtonIconPreview />}
       webNewYorkPreview={<ButtonIconNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -432,26 +432,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### With Icon
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonWithIconPreview} 
       webPreview={<ButtonWithIconPreview />}
       webNewYorkPreview={<ButtonWithIconNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -472,26 +472,26 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
 
 <div className="h-5"/>
 
 #### Loading
 
-<SectionTabs defaultValue="preview">
-  <SectionTabsList>
-    <SectionTabsTrigger value="preview">Preview</SectionTabsTrigger>
-    <SectionTabsTrigger value="code">Code</SectionTabsTrigger>
-  </SectionTabsList>
-  <SectionTabsContent value="preview">
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
     <PreviewCard 
       copyContent={buttonLoadingPreview} 
       webPreview={<ButtonLoadingPreview />}
       webNewYorkPreview={<ButtonLoadingNewYorkPreview />}
     />
-  </SectionTabsContent>
-  <SectionTabsContent value="code">
+  </TabsContent>
+  <TabsContent value="code">
     <ShowIfStyle style="default">
     ```json doc-gen:file
     {
@@ -512,5 +512,5 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     }
     ```
     </ShowIfStyle>
-  </SectionTabsContent>
-</SectionTabs>
+  </TabsContent>
+</Tabs>
