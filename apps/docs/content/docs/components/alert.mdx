@@ -3,14 +3,10 @@ title: Alert
 description: Displays a callout for user attention.
 ---
 
-import alertPreview from "!!raw-loader!@/registry/default/examples/alert";
-import alertNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/alert";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { AlertPreview } from "@docs/components/default-previews";
-import { AlertPreview as AlertNewYorkPreview } from "@docs/components/new-york-previews";
+import { AlertPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -25,33 +21,17 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div>
-    <PreviewCard 
-      copyContent={alertPreview} 
-      webPreview={<AlertPreview />}
-      webNewYorkPreview={<AlertNewYorkPreview />}
-    />
+    <PreviewCard preview={<AlertPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/alert.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/alert.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/alert.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -71,6 +51,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
       <Step>
  
         **Copy and paste the following code into your project.**
+
+        <ShowIfStyle style="new-york">
 
         ```json doc-gen:file
         {
@@ -101,6 +83,42 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/icon.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/icon.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/alert.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/alert.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
       </Step>
       <Step>

@@ -3,16 +3,12 @@ title: Hover Card
 description: For sighted users to preview content available behind a link.
 ---
 
-import hoverCardPreview from "!!raw-loader!@/registry/default/examples/hover-card";
-import hoverCardNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/hover-card";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PortalInfoAlert } from '@docs/components/portal-info-alert';
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { HoverCardPreview } from "@docs/components/default-previews";
-import { HoverCardPreview as HoverCardNewYorkPreview } from "@docs/components/new-york-previews";
+import { HoverCardPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -31,33 +27,20 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={hoverCardPreview} 
-      webPreview={<HoverCardPreview />}
-      webNewYorkPreview={<HoverCardNewYorkPreview />}
-    />
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
+    <PreviewCard preview={<HoverCardPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/hover-card.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/hover-card.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/hover-card.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -87,6 +70,7 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
 
         ```json doc-gen:file
         {
@@ -107,7 +91,38 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/hover-card.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/hover-card.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
+      </Step>
+      <Step>
+
+        **Update the import paths to match your project setup.**
+
       </Step>
     </Steps>
 

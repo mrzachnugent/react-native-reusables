@@ -3,15 +3,11 @@ title: Avatar
 description: An image element with a fallback for representing the user.
 ---
 
-import avatarPreview from "!!raw-loader!@/registry/default/examples/avatar";
-import avatarNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/avatar";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { AvatarPreview } from "@docs/components/default-previews";
-import { AvatarPreview as AvatarNewYorkPreview } from "@docs/components/new-york-previews";
+import { AvatarPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -33,33 +29,17 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div> 
-    <PreviewCard 
-      copyContent={avatarPreview} 
-      webPreview={<AvatarPreview />}
-      webNewYorkPreview={<AvatarNewYorkPreview />}
-    />
+    <PreviewCard preview={<AvatarPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/avatar.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/avatar.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/avatar.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -89,6 +69,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
+
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/avatar.tsx",
@@ -98,7 +80,28 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/avatar.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/avatar.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
+      </Step>
+      <Step>
+
+        **Update the import paths to match your project setup.**
+
       </Step>
     </Steps>
 

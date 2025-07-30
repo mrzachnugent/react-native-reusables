@@ -3,15 +3,11 @@ title: Textarea
 description: Displays a form textarea or a component that looks like a textarea.
 ---
 
-import textareaPreview from "!!raw-loader!@/registry/default/examples/textarea";
-import textareaNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/textarea";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { TextareaPreview } from "@docs/components/default-previews";
-import { TextareaPreview as TextareaNewYorkPreview } from "@docs/components/new-york-previews";
+import { TextareaPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -30,33 +26,20 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={textareaPreview} 
-      webPreview={<TextareaPreview />}
-      webNewYorkPreview={<TextareaNewYorkPreview />}
-    />
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
+    <PreviewCard preview={<TextareaPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/textarea.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/textarea.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/textarea.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -77,7 +60,7 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
-
+        <ShowIfStyle style="new-york">
 
         ```json doc-gen:file
         {
@@ -88,7 +71,28 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/textarea.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/textarea.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
+      </Step>
+      <Step>
+
+        **Update the import paths to match your project setup.**
+
       </Step>
     </Steps>
 

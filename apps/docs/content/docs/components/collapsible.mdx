@@ -3,15 +3,11 @@ title: Collapsible
 description: A control that allows the user to toggle between checked and not checked.
 ---
 
-import collapsiblePreview from "!!raw-loader!@/registry/default/examples/collapsible";
-import collapsibleNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/collapsible";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { CollapsiblePreview } from "@docs/components/default-previews";
-import { CollapsiblePreview as CollapsibleNewYorkPreview } from "@docs/components/new-york-previews";
+import { CollapsiblePreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -30,33 +26,20 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={collapsiblePreview} 
-      webPreview={<CollapsiblePreview />}
-      webNewYorkPreview={<CollapsibleNewYorkPreview />}
-    />
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
+    <PreviewCard preview={<CollapsiblePreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/collapsible.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/collapsible.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/collapsible.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -86,6 +69,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
+
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/collapsible.tsx",
@@ -95,7 +80,28 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/collapsible.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/collapsible.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
+      </Step>
+      <Step>
+
+        **Update the import paths to match your project setup.**
+
       </Step>
     </Steps>
 

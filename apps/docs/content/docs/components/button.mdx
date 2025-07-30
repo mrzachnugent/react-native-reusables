@@ -3,31 +3,11 @@ title: Button
 description: Displays a button or a component that looks like a button.
 ---
 
-import buttonPreview from "!!raw-loader!@/registry/default/examples/button/button-primary";
-import buttonNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-primary";
-import buttonDestructivePreview from "!!raw-loader!@/registry/default/examples/button/button-destructive";
-import buttonDestructiveNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-destructive";
-import buttonOutlinePreview from "!!raw-loader!@/registry/default/examples/button/button-outline";
-import buttonOutlineNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-outline";
-import buttonSecondaryPreview from "!!raw-loader!@/registry/default/examples/button/button-secondary";
-import buttonSecondaryNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-secondary";
-import buttonGhostPreview from "!!raw-loader!@/registry/default/examples/button/button-ghost";
-import buttonGhostNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-ghost";
-import buttonLinkPreview from "!!raw-loader!@/registry/default/examples/button/button-link";
-import buttonLinkNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-link";
-import buttonIconPreview from "!!raw-loader!@/registry/default/examples/button/button-icon";
-import buttonIconNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-icon";
-import buttonWithIconPreview from "!!raw-loader!@/registry/default/examples/button/button-with-icon";
-import buttonWithIconNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-with-icon";
-import buttonLoadingPreview from "!!raw-loader!@/registry/default/examples/button/button-loading";
-import buttonLoadingNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/button/button-loading";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { ButtonPreview, ButtonDestructivePreview, ButtonOutlinePreview, ButtonSecondaryPreview, ButtonGhostPreview, ButtonLinkPreview, ButtonIconPreview, ButtonWithIconPreview, ButtonLoadingPreview } from "@docs/components/default-previews";
-import { ButtonPreview as ButtonNewYorkPreview, ButtonDestructivePreview as ButtonDestructiveNewYorkPreview, ButtonOutlinePreview as ButtonOutlineNewYorkPreview, ButtonSecondaryPreview as ButtonSecondaryNewYorkPreview, ButtonGhostPreview as ButtonGhostNewYorkPreview, ButtonLinkPreview as ButtonLinkNewYorkPreview, ButtonIconPreview as ButtonIconNewYorkPreview, ButtonWithIconPreview as ButtonWithIconNewYorkPreview, ButtonLoadingPreview as ButtonLoadingNewYorkPreview } from "@docs/components/new-york-previews";
+import { ButtonPreview, ButtonDestructivePreview, ButtonOutlinePreview, ButtonSecondaryPreview, ButtonGhostPreview, ButtonLinkPreview, ButtonIconPreview, ButtonWithIconPreview, ButtonLoadingPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -39,33 +19,20 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonPreview} 
-      webPreview={<ButtonPreview />}
-      webNewYorkPreview={<ButtonNewYorkPreview />}
-    />
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
+    <PreviewCard preview={<ButtonPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-primary.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-primary.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-primary.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -95,6 +62,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
+
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
@@ -114,7 +83,38 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/button.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/button.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
+      </Step>
+      <Step>
+
+        **Update the import paths to match your project setup.**
+
       </Step>
     </Steps>
 
@@ -169,29 +169,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard copyContent={buttonPreview} webPreview={<ButtonPreview />} webNewYorkPreview={<ButtonNewYorkPreview />} />
+    <PreviewCard preview={<ButtonPreview />} />
   </TabsContent>
   <TabsContent value="code">
-  <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-primary.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-primary.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-primary.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -205,33 +193,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonSecondaryPreview} 
-      webPreview={<ButtonSecondaryPreview />}
-      webNewYorkPreview={<ButtonSecondaryNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonSecondaryPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-secondary.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-secondary.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-secondary.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -245,33 +217,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonDestructivePreview} 
-      webPreview={<ButtonDestructivePreview />}
-      webNewYorkPreview={<ButtonDestructiveNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonDestructivePreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-destructive.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-destructive.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-destructive.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -285,33 +241,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonOutlinePreview} 
-      webPreview={<ButtonOutlinePreview />}
-      webNewYorkPreview={<ButtonOutlineNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonOutlinePreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-outline.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-outline.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-outline.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -325,33 +265,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonGhostPreview} 
-      webPreview={<ButtonGhostPreview />}
-      webNewYorkPreview={<ButtonGhostNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonGhostPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-ghost.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-ghost.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-ghost.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -365,33 +289,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonLinkPreview} 
-      webPreview={<ButtonLinkPreview />}
-      webNewYorkPreview={<ButtonLinkNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonLinkPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-link.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-link.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-link.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -405,33 +313,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonIconPreview} 
-      webPreview={<ButtonIconPreview />}
-      webNewYorkPreview={<ButtonIconNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonIconPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-icon.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-icon.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-icon.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -445,33 +337,17 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonWithIconPreview} 
-      webPreview={<ButtonWithIconPreview />}
-      webNewYorkPreview={<ButtonWithIconNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonWithIconPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-with-icon.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-with-icon.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-with-icon.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -485,32 +361,16 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
-    <PreviewCard 
-      copyContent={buttonLoadingPreview} 
-      webPreview={<ButtonLoadingPreview />}
-      webNewYorkPreview={<ButtonLoadingNewYorkPreview />}
-    />
+    <PreviewCard preview={<ButtonLoadingPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/button/button-loading.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/button/button-loading.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/button/button-loading.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>

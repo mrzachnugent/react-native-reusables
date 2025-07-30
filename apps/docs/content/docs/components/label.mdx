@@ -3,15 +3,11 @@ title: Label
 description: Renders an accessible label associated with controls.
 ---
 
-import labelPreview from "!!raw-loader!@/registry/default/examples/label";
-import labelNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/label";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { LabelPreview } from "@docs/components/default-previews";
-import { LabelPreview as LabelNewYorkPreview } from "@docs/components/new-york-previews";
+import { LabelPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -23,33 +19,22 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
     <PreviewCard
-      copyContent={labelPreview}
-      webPreview={<LabelPreview />}
-      webNewYorkPreview={<LabelNewYorkPreview />}
+      preview={<LabelPreview />}
     />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/label.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/label.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/label.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -79,6 +64,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
+
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/label.tsx",
@@ -88,6 +75,22 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/label.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/label.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
       </Step>
       <Step>

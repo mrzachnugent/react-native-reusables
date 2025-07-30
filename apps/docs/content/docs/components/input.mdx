@@ -3,15 +3,11 @@ title: Input
 description: Displays a form input field or a component that looks like an input field.
 ---
 
-import inputPreview from "!!raw-loader!@/registry/default/examples/input";
-import inputNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/input";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { InputPreview } from "@docs/components/default-previews";
-import { InputPreview as InputNewYorkPreview } from "@docs/components/new-york-previews";
+import { InputPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -23,41 +19,26 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview">
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
     <PreviewCard
-      copyContent={inputPreview}
-      webPreview={
+      preview={
         <div className='w-full max-w-80'>
           <InputPreview />
-        </div>
-      }
-      webNewYorkPreview={
-        <div className='w-full max-w-80'>
-          <InputNewYorkPreview />
         </div>
       }
     />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/input.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/input.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/input.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -78,6 +59,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
+
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/input.tsx",
@@ -87,6 +70,22 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/input.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/input.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
       </Step>
       <Step>
