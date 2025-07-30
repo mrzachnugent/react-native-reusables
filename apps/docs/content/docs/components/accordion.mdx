@@ -8,7 +8,7 @@ import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
 import { AccordionPreview } from "@docs/components/examples";
-import { Step, Steps } from 'fumadocs-ui/components/steps';           
+import { Step, Steps } from 'fumadocs-ui/components/steps';             
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
@@ -32,26 +32,14 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <PreviewCard preview={<AccordionPreview />}  />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/accordion.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/accordion.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     } 
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/accordion.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    } 
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
