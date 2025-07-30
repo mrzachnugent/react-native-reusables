@@ -1,4 +1,4 @@
-import { TooltipPreview } from '@showcase/components/styles/examples';
+import { TooltipPreview } from '@/registry/examples/tooltip';
 import * as React from 'react';
 import { View } from 'react-native';
 

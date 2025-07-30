@@ -1,4 +1,4 @@
-import { TabsPreview } from '@showcase/components/styles/examples';
+import { TabsPreview } from '@/registry/examples/tabs';
 import { View } from 'react-native';
 
 export default function TabsScreen() {

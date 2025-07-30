@@ -1,4 +1,6 @@
-import { Button, Icon, Text } from '@showcase/components/styles/ui';
+import { Button } from '@/registry/ui/button';
+import { Icon } from '@/registry/ui/icon';
+import { Text } from '@/registry/ui/text';
 import { router } from 'expo-router';
 import * as Updates from 'expo-updates';
 import { SettingsIcon } from 'lucide-react-native';

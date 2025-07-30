@@ -1,4 +1,4 @@
-import { AlertPreview } from '@showcase/components/styles/examples';
+import { AlertPreview } from '@/registry/examples/alert';
 import { View } from 'react-native';
 
 export default function AlertScreen() {

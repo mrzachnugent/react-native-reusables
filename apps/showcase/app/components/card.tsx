@@ -1,4 +1,4 @@
-import { CardPreview } from '@showcase/components/styles/examples';
+import { CardPreview } from '@/registry/examples/card';
 import { KeyboardAwareScrollView, KeyboardGestureArea } from 'react-native-keyboard-controller';
 
 export default function CardScreen() {

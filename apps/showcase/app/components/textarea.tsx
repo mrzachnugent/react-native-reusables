@@ -1,4 +1,4 @@
-import { TextareaPreview } from '@showcase/components/styles/examples';
+import { TextareaPreview } from '@/registry/examples/textarea';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView, KeyboardGestureArea } from 'react-native-keyboard-controller';
 

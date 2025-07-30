@@ -9,7 +9,7 @@ import {
   ButtonPreview,
   ButtonSecondaryPreview,
   ButtonWithIconPreview,
-} from '@showcase/components/styles/examples';
+} from '@/registry/examples/button';
 import * as React from 'react';
 
 const buttonPreviews = [

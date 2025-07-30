@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { AvatarPreview } from '@showcase/components/styles/examples';
+import { AvatarPreview } from '@/registry/examples/avatar';
 
 export default function AvatarScreen() {
   return (

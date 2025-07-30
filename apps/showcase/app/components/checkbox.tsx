@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { CheckboxPreview } from '@showcase/components/styles/examples';
+import { CheckboxPreview } from '@/registry/examples/checkbox';
 
 export default function CheckboxScreen() {
   return (

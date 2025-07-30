@@ -1,4 +1,4 @@
-import { MenubarPreview } from '@showcase/components/styles/examples';
+import { MenubarPreview } from '@/registry/examples/menubar';
 import * as React from 'react';
 import { View } from 'react-native';
 

@@ -1,4 +1,4 @@
-import { PopoverPreview } from '@showcase/components/styles/examples';
+import { PopoverPreview } from '@/registry/examples/popover';
 import * as React from 'react';
 import { View } from 'react-native';
 
