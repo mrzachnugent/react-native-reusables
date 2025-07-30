@@ -1,4 +1,4 @@
-import { SwitchPreview } from '@showcase/components/styles/examples';
+import { SwitchPreview } from '@/registry/examples/switch';
 import * as React from 'react';
 import { View } from 'react-native';
 

@@ -1,4 +1,4 @@
-import { InputPreview } from '@showcase/components/styles/examples';
+import { InputPreview } from '@/registry/examples/input';
 import * as React from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView, KeyboardGestureArea } from 'react-native-keyboard-controller';

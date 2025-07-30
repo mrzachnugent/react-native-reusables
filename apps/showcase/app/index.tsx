@@ -1,7 +1,10 @@
 import { cn } from '@/registry/new-york/lib/utils';
+import { Button } from '@/registry/ui/button';
+import { Icon } from '@/registry/ui/icon';
+import { Input } from '@/registry/ui/input';
+import { Text } from '@/registry/ui/text';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
-import { Button, Icon, Input, Text } from '@showcase/components/styles/ui';
 import { COMPONENTS } from '@showcase/lib/constants';
 import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';

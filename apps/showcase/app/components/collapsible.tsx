@@ -1,4 +1,4 @@
-import { CollapsiblePreview } from '@showcase/components/styles/examples';
+import { CollapsiblePreview } from '@/registry/examples/collapsible';
 import * as React from 'react';
 import { View } from 'react-native';
 

@@ -1,4 +1,4 @@
-import { RadioGroupPreview } from '@showcase/components/styles/examples';
+import { RadioGroupPreview } from '@/registry/examples/radio-group';
 import * as React from 'react';
 import { View } from 'react-native';
 

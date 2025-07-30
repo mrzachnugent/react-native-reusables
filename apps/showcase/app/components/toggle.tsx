@@ -1,4 +1,4 @@
-import { TogglePreview } from '@showcase/components/styles/examples';
+import { TogglePreview } from '@/registry/examples/toggle';
 import { View } from 'react-native';
 
 export default function ToggleScreen() {

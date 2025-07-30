@@ -1,9 +1,5 @@
+import { TextCascadePreview, TextPreview, TextTypographyPreview } from '@/registry/examples/text';
 import { PreviewCarousel } from '@showcase/components/preview-carousel';
-import {
-  TextCascadePreview,
-  TextPreview,
-  TextTypographyPreview,
-} from '@showcase/components/styles/examples';
 
 const textPreviews = [
   { name: 'Default', component: TextPreview },

@@ -1,4 +1,4 @@
-import { LabelPreview } from '@showcase/components/styles/examples';
+import { LabelPreview } from '@/registry/examples/label';
 import * as React from 'react';
 import { View } from 'react-native';
 

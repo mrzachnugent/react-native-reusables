@@ -1,5 +1,5 @@
 import { PreviewCarousel } from '@showcase/components/preview-carousel';
-import { ScrollableSelectPreview, SelectPreview } from '@showcase/components/styles/examples';
+import { ScrollableSelectPreview, SelectPreview } from '@/registry/examples/select';
 import * as React from 'react';
 
 const selectPreviews = [

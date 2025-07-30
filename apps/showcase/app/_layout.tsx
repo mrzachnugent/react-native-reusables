@@ -1,12 +1,12 @@
 import '../global.css';
 
+import { Text } from '@/registry/ui/text';
 import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
-import { StyleProvider, useStyle } from '@showcase/components/styles/style-provider';
-import { Text } from '@showcase/components/styles/ui';
 import { ThemeToggle } from '@showcase/components/theme-toggle';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
+import { StyleProvider, useStyle } from '@showcase/lib/style-provider';
 import { NAV_THEME } from '@showcase/lib/theme';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -101,14 +101,20 @@ const newYorkRadius = vars({
   '--radius': '10px', // 0.625rem
 });
 
+const STYLE = {
+  default: {
+    flex: 1,
+    ...defaultRadius,
+  },
+  'new-york': {
+    flex: 1,
+    ...newYorkRadius,
+  },
+};
+
 function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {
   const { style } = useStyle();
-  return (
-    <View
-      style={style === 'default' ? { flex: 1, ...defaultRadius } : { flex: 1, ...newYorkRadius }}>
-      {children}
-    </View>
-  );
+  return <View style={STYLE[style]}>{children}</View>;
 }
 
 function toOptions(name: string) {

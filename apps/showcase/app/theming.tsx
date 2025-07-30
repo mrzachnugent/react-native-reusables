@@ -1,5 +1,7 @@
-import { useStyle } from '@showcase/components/styles/style-provider';
-import { Checkbox, Label, Text } from '@showcase/components/styles/ui';
+import { Checkbox } from '@/registry/ui/checkbox';
+import { Label } from '@/registry/ui/label';
+import { Text } from '@/registry/ui/text';
+import { useStyle } from '@showcase/lib/style-provider';
 import { cn } from '@showcase/lib/utils';
 import * as Haptics from 'expo-haptics';
 import { Platform, View } from 'react-native';
