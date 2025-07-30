@@ -1,6 +1,6 @@
 'use client';
 
-import { useReactiveGetCookie } from 'cookies-next/client';
+import { useStyle } from '@docs/lib/style-provider';
 import * as React from 'react';
 
 export type Style = 'default' | 'new-york';
@@ -11,8 +11,7 @@ export type ShowIfStyleProps = {
 };
 
 export function ShowIfStyle({ style: styleProp, children }: ShowIfStyleProps) {
-  const getCookie = useReactiveGetCookie();
-  const style = getCookie('style') ?? 'default';
+  const { style } = useStyle();
 
   if (styleProp !== style) {
     return null;
