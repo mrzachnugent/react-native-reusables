@@ -1,5 +1,3 @@
-'use client';
-
 import { Platform } from 'react-native';
 import Animated from 'react-native-reanimated';
 

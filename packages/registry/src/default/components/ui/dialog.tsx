@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/default/components/ui/icon';
 import { NativeOnlyAnimatedView } from '@/registry/default/components/ui/native-only-animated-view';
 import { cn } from '@/registry/default/lib/utils';

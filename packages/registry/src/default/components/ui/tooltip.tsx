@@ -1,5 +1,3 @@
-'use client';
-
 import { NativeOnlyAnimatedView } from '@/registry/default/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/registry/default/components/ui/text';
 import { cn } from '@/registry/default/lib/utils';

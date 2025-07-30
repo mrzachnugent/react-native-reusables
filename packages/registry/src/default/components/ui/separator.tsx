@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as SeparatorPrimitive from '@rn-primitives/separator';
 import * as React from 'react';

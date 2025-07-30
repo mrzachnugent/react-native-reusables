@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/new-york/components/ui/icon';
 import { Text, TextClassContext } from '@/registry/new-york/components/ui/text';
 import { cn } from '@/registry/new-york/lib/utils';

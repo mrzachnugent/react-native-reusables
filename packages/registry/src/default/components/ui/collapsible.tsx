@@ -1,5 +1,3 @@
-'use client';
-
 import * as CollapsiblePrimitive from '@rn-primitives/collapsible';
 
 const Collapsible = CollapsiblePrimitive.Root;

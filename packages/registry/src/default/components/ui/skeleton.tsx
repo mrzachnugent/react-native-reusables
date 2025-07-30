@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as React from 'react';
 import { View } from 'react-native';

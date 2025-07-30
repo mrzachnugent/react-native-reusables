@@ -1,5 +1,3 @@
-'use client';
-
 import { TextClassContext } from '@/registry/default/components/ui/text';
 import { cn } from '@/registry/default/lib/utils';
 import * as Slot from '@rn-primitives/slot';

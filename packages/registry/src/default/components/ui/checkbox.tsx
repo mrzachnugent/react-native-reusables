@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/default/components/ui/icon';
 import { cn } from '@/registry/default/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';

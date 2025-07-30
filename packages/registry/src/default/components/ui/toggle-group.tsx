@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/default/components/ui/icon';
 import { TextClassContext } from '@/registry/default/components/ui/text';
 import { toggleVariants } from '@/registry/default/components/ui/toggle';

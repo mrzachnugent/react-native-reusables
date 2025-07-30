@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { Platform } from 'react-native';

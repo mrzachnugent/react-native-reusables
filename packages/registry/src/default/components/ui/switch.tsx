@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as SwitchPrimitives from '@rn-primitives/switch';
 import * as React from 'react';

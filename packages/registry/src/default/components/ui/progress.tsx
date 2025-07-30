@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as ProgressPrimitive from '@rn-primitives/progress';
 import * as React from 'react';

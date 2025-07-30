@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/new-york/components/ui/icon';
 import { cn } from '@/registry/new-york/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';

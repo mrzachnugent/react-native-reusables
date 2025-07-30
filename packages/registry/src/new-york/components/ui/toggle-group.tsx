@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/new-york/components/ui/icon';
 import { TextClassContext } from '@/registry/new-york/components/ui/text';
 import { toggleVariants } from '@/registry/new-york/components/ui/toggle';

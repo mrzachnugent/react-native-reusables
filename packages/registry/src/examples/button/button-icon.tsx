@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/registry/ui/button';
 import { Icon } from '@/registry/ui/icon';
 import { ChevronRight } from 'lucide-react-native';
