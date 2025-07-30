@@ -1,7 +1,9 @@
 export function AppStoreButton() {
-  // TODO: Add link to app store
   return (
-    <a href="#" className="rounded-md">
+    <a
+      target="_blank"
+      href="https://apps.apple.com/ca/app/react-native-reusables/id6748838250"
+      className="rounded-md">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         id="livetype"
