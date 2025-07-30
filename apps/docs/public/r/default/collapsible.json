@@ -9,7 +9,7 @@
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/default/components/ui/collapsible.tsx",
-      "content": "'use client';\n\nimport * as CollapsiblePrimitive from '@rn-primitives/collapsible';\n\nconst Collapsible = CollapsiblePrimitive.Root;\n\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nconst CollapsibleContent = CollapsiblePrimitive.Content;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "content": "import * as CollapsiblePrimitive from '@rn-primitives/collapsible';\n\nconst Collapsible = CollapsiblePrimitive.Root;\n\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nconst CollapsibleContent = CollapsiblePrimitive.Content;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
       "type": "registry:ui"
     }
   ]
