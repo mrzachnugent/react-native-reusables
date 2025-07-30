@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@docs/components/ui/select';
+import { useStyle } from '@docs/lib/style-provider';
 import { type SelectProps } from '@radix-ui/react-select';
 import { useReactiveGetCookie, useReactiveSetCookie } from 'cookies-next/client';
 import { useParams } from 'next/navigation';
@@ -25,29 +26,24 @@ const STYLES = [
 ] as const;
 
 type Platform = (typeof PLATFORMS)[number]['name'];
-type Style = (typeof STYLES)[number]['name'];
 
 type PreviewCardProps = {
-  webPreview: React.ReactNode;
-  webNewYorkPreview?: React.ReactNode;
+  preview: React.ReactNode;
 };
 
 const DEFAULT_STYLE_RADIUS = { '--radius': '0.5rem' } as React.CSSProperties;
 
-export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps) {
+export function PreviewCard({ preview }: PreviewCardProps) {
   const { width } = useWindowSize();
   const isDark = useIsDarkMode();
   const params = useParams<{ slug: string[] }>();
   const getCookie = useReactiveGetCookie();
   const setCookie = useReactiveSetCookie();
   const platform = getCookie('platform') ?? 'web';
-  const style = getCookie('style') ?? 'new-york';
+  const { style, setStyle } = useStyle();
 
   function onPlatformChange(value: Platform) {
     setCookie('platform', value);
-  }
-  function onStyleChange(value: Style) {
-    setCookie('style', value);
   }
 
   const component = params.slug.at(-1);
@@ -57,7 +53,7 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
       <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
         <div className="flex items-center justify-between">
           {platform === 'web' || width < 640 ? (
-            <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} />
+            <StyleSwitcher onValueChange={setStyle} defaultValue="default" value={style} />
           ) : (
             <div />
           )}
@@ -77,10 +73,8 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
               />
               <p className="text-center font-mono text-sm">Scan to preview.</p>
             </div>
-          ) : style === 'default' ? (
-            webPreview
           ) : (
-            webNewYorkPreview
+            preview
           )}
         </div>
       </div>
@@ -100,22 +94,16 @@ export function PreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps)
   );
 }
 
-export function BlockPreviewCard({ webPreview, webNewYorkPreview }: PreviewCardProps) {
-  const getCookie = useReactiveGetCookie();
-  const setCookie = useReactiveSetCookie();
-  const style = getCookie('style') ?? 'new-york';
-
-  function onStyleChange(value: Style) {
-    setCookie('style', value);
-  }
+export function BlockPreviewCard({ preview }: PreviewCardProps) {
+  const { style, setStyle } = useStyle();
 
   return (
     <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-      <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} />
+      <StyleSwitcher onValueChange={setStyle} defaultValue="new-york" value={style} />
       <div
         style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
         className="flex flex-1 flex-col items-center justify-center py-6">
-        {style === 'default' ? webPreview : webNewYorkPreview}
+        {preview}
       </div>
     </div>
   );
@@ -181,47 +169,6 @@ function StyleSwitcher(props: SelectProps) {
         {STYLES.map((style) => (
           <SelectItem key={style.name} value={style.name} className="text-xs">
             {style.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
-
-const INTEGRATIONS = [
-  { name: 'none', label: 'None' },
-  { name: 'clerk', label: 'Clerk' },
-] as const;
-
-type Integration = (typeof INTEGRATIONS)[number]['name'];
-
-function AuthIntegrationSelect(props: SelectProps) {
-  const [isClient, setIsClient] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return (
-    <Select {...props}>
-      <SelectTrigger className="flex h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs [&_svg]:h-4 [&_svg]:w-4">
-        <span className="text-muted-foreground flex-1 pr-1">Integration:</span>
-        {!isClient ? (
-          <span className="opacity-50">
-            {
-              INTEGRATIONS.find((integration) =>
-                integration.name === props.value ? props.value : props.defaultValue
-              )?.label
-            }
-          </span>
-        ) : (
-          <SelectValue placeholder="Select integration" />
-        )}
-      </SelectTrigger>
-      <SelectContent onCloseAutoFocus={preventDefault}>
-        {INTEGRATIONS.map((integration) => (
-          <SelectItem key={integration.name} value={integration.name} className="text-xs">
-            {integration.label}
           </SelectItem>
         ))}
       </SelectContent>
