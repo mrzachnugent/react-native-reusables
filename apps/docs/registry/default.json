@@ -475,7 +475,8 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/default/text.json",
-        "https://reactnativereusables.com/r/default/icon.json"
+        "https://reactnativereusables.com/r/default/icon.json",
+        "https://reactnativereusables.com/r/default/toggle.json"
       ],
       "dependencies": ["@rn-primitives/toggle-group"]
     },

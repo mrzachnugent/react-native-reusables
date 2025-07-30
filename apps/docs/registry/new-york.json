@@ -475,7 +475,8 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/text.json",
-        "https://reactnativereusables.com/r/new-york/icon.json"
+        "https://reactnativereusables.com/r/new-york/icon.json",
+        "https://reactnativereusables.com/r/new-york/toggle.json"
       ],
       "dependencies": ["@rn-primitives/toggle-group"]
     },

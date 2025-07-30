@@ -475,7 +475,8 @@
       ],
       "registryDependencies": [
         "http://localhost:3000/r/new-york/text.json",
-        "http://localhost:3000/r/new-york/icon.json"
+        "http://localhost:3000/r/new-york/icon.json",
+        "http://localhost:3000/r/new-york/toggle.json"
       ],
       "dependencies": ["@rn-primitives/toggle-group"]
     },
