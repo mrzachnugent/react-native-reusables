@@ -98,11 +98,13 @@ export function BlockPreviewCard({ preview }: PreviewCardProps) {
   const { style, setStyle } = useStyle();
 
   return (
-    <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-      <StyleSwitcher onValueChange={setStyle} defaultValue="new-york" value={style} />
+    <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border">
+      <div className="absolute -top-14 right-0 pt-4 sm:relative sm:top-auto sm:justify-start sm:px-4">
+        <StyleSwitcher onValueChange={setStyle} defaultValue="new-york" value={style} />
+      </div>
       <div
         style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
-        className="flex flex-1 flex-col items-center justify-center py-6">
+        className="flex flex-1 flex-col items-center justify-center py-6 sm:px-4 sm:py-8">
         {preview}
       </div>
     </div>
