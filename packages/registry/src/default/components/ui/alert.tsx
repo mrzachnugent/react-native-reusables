@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@/registry/default/components/ui/icon';
 import { Text, TextClassContext } from '@/registry/default/components/ui/text';
 import { cn } from '@/registry/default/lib/utils';

@@ -1,5 +1,3 @@
-'use client';
-
 import { buttonTextVariants, buttonVariants } from '@/registry/new-york/components/ui/button';
 import { NativeOnlyAnimatedView } from '@/registry/new-york/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/registry/new-york/components/ui/text';

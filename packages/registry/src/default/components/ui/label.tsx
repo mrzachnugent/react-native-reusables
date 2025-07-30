@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as LabelPrimitive from '@rn-primitives/label';
 import * as React from 'react';

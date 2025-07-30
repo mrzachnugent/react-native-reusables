@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/registry/ui/button';
 import { Icon } from '@/registry/ui/icon';
 import { Text } from '@/registry/ui/text';

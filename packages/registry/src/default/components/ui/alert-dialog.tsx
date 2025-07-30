@@ -1,5 +1,3 @@
-'use client';
-
 import { buttonTextVariants, buttonVariants } from '@/registry/default/components/ui/button';
 import { NativeOnlyAnimatedView } from '@/registry/default/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/registry/default/components/ui/text';

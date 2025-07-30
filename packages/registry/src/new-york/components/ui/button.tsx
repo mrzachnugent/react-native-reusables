@@ -1,5 +1,3 @@
-'use client';
-
 import { TextClassContext } from '@/registry/new-york/components/ui/text';
 import { cn } from '@/registry/new-york/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';

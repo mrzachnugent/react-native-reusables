@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/registry/default/lib/utils';
 import * as AvatarPrimitive from '@rn-primitives/avatar';
 import * as React from 'react';
