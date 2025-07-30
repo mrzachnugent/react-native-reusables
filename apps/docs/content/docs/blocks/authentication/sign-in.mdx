@@ -4,18 +4,21 @@ description: Sign in with email, password, or social providers
 ---
 
 import { BlockPreviewCard } from '@docs/components/preview-card';
-import { AccordionPreview as TODOAccordionPreview } from "@docs/components/default-previews";
-import { AccordionPreview as TODOAccordionNewYorkPreview } from "@docs/components/new-york-previews";
+import { AccordionPreview as TODOAccordionPreview } from "@docs/components/examples";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                            
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                 
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
 <ExternalLinks links={[{ title: 'Clerk docs', url: 'https://dub.sh/sE9y0lH' }]} />
 
-<div className="h-6" />
+<div className="h-5" />
 
-<BlockPreviewCard webPreview={<TODOAccordionPreview />} webNewYorkPreview={<TODOAccordionNewYorkPreview />} />
+<div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+  ## Preview
+</div>
+    
+<BlockPreviewCard preview={<TODOAccordionPreview />} />
 
 
 ## Installation
@@ -41,7 +44,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
       <Step>
         **If you haven't already**
 
-        Follow Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to , configure your app to use Clerk.
+        Follow Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to configure your app to use Clerk.
         
       </Step>
       <Step>

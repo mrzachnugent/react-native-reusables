@@ -56,5 +56,8 @@ export function fileGenerator(): DocGenerator {
 }
 
 function fixImports(value: string) {
-  return value.replaceAll('@/registry/new-york/', '@/').replaceAll('@/registry/default/', '@/');
+  return value
+    .replaceAll('@/registry/new-york/', '@/')
+    .replaceAll('@/registry/default/', '@/')
+    .replaceAll('@/registry/ui/', '@/components/ui/');
 }

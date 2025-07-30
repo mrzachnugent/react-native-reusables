@@ -3,16 +3,12 @@ title: Accordion
 description: A vertically stacked set of interactive headings that each reveal a section of content.
 ---
 
-import accordionPreview from "!!raw-loader!@/registry/default/examples/accordion";
-import accordionNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/accordion";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { AccordionPreview } from "@docs/components/default-previews";
-import { AccordionPreview as AccordionNewYorkPreview } from "@docs/components/new-york-previews";
-import { Step, Steps } from 'fumadocs-ui/components/steps';        
+import { AccordionPreview } from "@docs/components/examples";
+import { Step, Steps } from 'fumadocs-ui/components/steps';           
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
@@ -33,7 +29,7 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div>
-    <PreviewCard copyContent={accordionPreview} webPreview={<AccordionPreview />} webNewYorkPreview={<AccordionNewYorkPreview />} />
+    <PreviewCard preview={<AccordionPreview />}  />
   </TabsContent>
   <TabsContent value="code">
     <ShowIfStyle style="default">
@@ -120,19 +116,55 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
-        ```json doc-gen:file
-        {
-          "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
-          "codeblock": {
-            "lang": "tsx",
-            "meta": "title=\"@/components/ui/text.tsx\""
+        <ShowIfStyle style="new-york">
+
+          ```json doc-gen:file
+          {
+            "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
+            "codeblock": {
+              "lang": "tsx",
+              "meta": "title=\"@/components/ui/text.tsx\""
+            }
           }
-        }
-        ```
+          ```
+
+          ```json doc-gen:file
+          {
+            "file": "./node_modules/@rnr/registry/src/new-york/components/ui/icon.tsx",
+            "codeblock": {
+              "lang": "tsx",
+              "meta": "title=\"@/components/ui/icon.tsx\""
+            }
+          }
+          ```
+          
+          ```json doc-gen:file
+          {
+            "file": "./node_modules/@rnr/registry/src/new-york/components/ui/accordion.tsx",
+            "codeblock": {
+              "lang": "tsx",
+              "meta": "title=\"@/components/ui/accordion.tsx\""
+            }
+          }
+          ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+          ```json doc-gen:file
+          {
+            "file": "./node_modules/@rnr/registry/src/default/components/ui/text.tsx",
+            "codeblock": {
+              "lang": "tsx",
+              "meta": "title=\"@/components/ui/text.tsx\""
+            }
+          }
+          ```        
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/registry/src/new-york/components/ui/icon.tsx",
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/icon.tsx",
           "codeblock": {
             "lang": "tsx",
             "meta": "title=\"@/components/ui/icon.tsx\""
@@ -142,14 +174,16 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/registry/src/new-york/components/ui/accordion.tsx",
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/accordion.tsx",
           "codeblock": {
             "lang": "tsx",
             "meta": "title=\"@/components/ui/accordion.tsx\""
           }
         }
         ```
- 
+
+        </ShowIfStyle>
+
       </Step>
       <Step>
 

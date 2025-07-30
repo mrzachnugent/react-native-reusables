@@ -3,15 +3,11 @@ title: Aspect Ratio
 description: Displays content within a desired ratio.
 ---
 
-import aspectRatioPreview from "!!raw-loader!@/registry/default/examples/aspect-ratio";
-import aspectRatioNewYorkPreview from "!!raw-loader!@/registry/new-york/examples/aspect-ratio";
 import { CommandTabs } from "@docs/components/command-tabs";
-import { CopyButton } from "@docs/components/copy-button";
 import { ExternalLinks } from "@docs/components/external-links";
 import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
-import { AspectRatioPreview } from "@docs/components/default-previews";
-import { AspectRatioPreview as AspectRatioNewYorkPreview } from "@docs/components/new-york-previews";
+import { AspectRatioPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { ShowIfStyle } from "@docs/components/show-if-style";
 
@@ -33,33 +29,17 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
     <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
       ## Preview
     </div> 
-    <PreviewCard 
-      copyContent={aspectRatioPreview} 
-      webPreview={<AspectRatioPreview />}
-      webNewYorkPreview={<AspectRatioNewYorkPreview />}
-    />
+    <PreviewCard preview={<AspectRatioPreview />} />
   </TabsContent>
   <TabsContent value="code">
-    <ShowIfStyle style="default">
     ```json doc-gen:file
     {
-      "file": "./node_modules/@rnr/registry/src/default/examples/aspect-ratio.tsx",
+      "file": "./node_modules/@rnr/registry/src/examples/aspect-ratio.tsx",
       "codeblock": {
         "lang": "tsx"
       }
     }
     ```
-    </ShowIfStyle>
-    <ShowIfStyle style="new-york">
-    ```json doc-gen:file
-    {
-      "file": "./node_modules/@rnr/registry/src/new-york/examples/aspect-ratio.tsx",
-      "codeblock": {
-        "lang": "tsx"
-      }
-    }
-    ```
-    </ShowIfStyle>
   </TabsContent>
 </Tabs>
 
@@ -89,6 +69,8 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
+        <ShowIfStyle style="new-york">
+
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/aspect-ratio.tsx",
@@ -98,6 +80,22 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
           }
         }
         ```
+
+        </ShowIfStyle>
+
+        <ShowIfStyle style="default">
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/default/components/ui/aspect-ratio.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/aspect-ratio.tsx\""
+          }
+        }
+        ```
+
+        </ShowIfStyle>
  
       </Step>
     </Steps>
