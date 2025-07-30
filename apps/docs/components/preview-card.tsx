@@ -154,7 +154,7 @@ function PlatformSwitcher(props: SelectProps) {
     </Select>
   );
 }
-function StyleSwitcher(props: SelectProps) {
+export function StyleSwitcher(props: SelectProps) {
   const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {

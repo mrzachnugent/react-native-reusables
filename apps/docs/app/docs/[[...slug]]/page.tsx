@@ -86,7 +86,7 @@ function NeighbourButtons({ url }: { url: string }) {
   );
 }
 
-function Footer({ url }: { url: string }) {
+export function Footer({ url }: { url: string }) {
   const neighbours = findNeighbour(source.pageTree, url);
 
   const isManualInstallation = url === '/docs/installation/manual';
