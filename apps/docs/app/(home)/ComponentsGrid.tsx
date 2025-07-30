@@ -90,11 +90,12 @@ export default function ComponentsGrid() {
           <div className="py-0.25 cursor-pointer rounded-sm border bg-white px-1.5 shadow dark:bg-neutral-800">
             Web
           </div>
+          {/* // TODO: link to Showcase popup */}
           <div className="cursor-pointer">Native</div>
         </div>
       </div>
 
-      {/* TODO: add light mode hide with dark: */}
+      {/* // TODO: add light mode hide with dark: */}
       <Image
         src={`${style === 'default' ? '/mobile-component-previews/default_dark.png' : '/mobile-component-previews/newyork_dark.png'}`}
         alt="Components Grid"
@@ -104,7 +105,7 @@ export default function ComponentsGrid() {
       />
 
       <div className="dark:from-fd-background dark:to-fd-accent/70 to-fd-accent relative flex w-full flex-wrap overflow-clip rounded-lg border border-dashed bg-gradient-to-bl from-white max-md:hidden">
-        {/* TODO: adjust for md-to-xl breakpoint, some stuff wraps ugly */}
+        {/* // TODO: adjust for md-to-xl breakpoint, some stuff wraps ugly */}
         <div className="flex w-full flex-wrap items-center border-b">
           <div className="border-r p-4">
             {style === 'default' ? <HoverCardPreview /> : <HoverCardNewYorkPreview />}
