@@ -1,12 +1,12 @@
 ---
-title: Social connections
-description: A set of buttons for authenticating through social providers.
+title: Sign in form
+description: A form for signing in using email and password or social providers.
 ---
 
 import { BlockPreviewCard } from '@docs/components/preview-card';
-import { SocialConnections } from "@docs/components/blocks";
+import { SignInForm } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                         
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                               
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
@@ -18,7 +18,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   ## Preview
 </div>
     
-<BlockPreviewCard preview={<div className="w-full max-w-sm px-8"><SocialConnections /></div>} />
+<BlockPreviewCard preview={<div className="w-full max-w-sm"><SignInForm /></div>} />
 
 
 ## Installation
@@ -27,24 +27,27 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   <AuthBlockTabsCliContent integration="none">
     <Steps>
       <Step>
-        <CommandTabs args={["add", "social-connections"]}/>
+        <CommandTabs args={["add", "sign-in-form"]}/>
       </Step>
       <Step>
         **All set!**
 
-        You can import `SocialConnections` in your app.
+        You can import `SignInForm` in your app.
 
         ```tsx
-        import { SocialConnections } from '@/components/social-connections';
-        import { View } from 'react-native';
+        import { SignInForm } from '@/components/sign-in-form';
+        import { ScrollView, View } from 'react-native';
 
-        export default function SocialConnectionsScreen() {
+        export default function SignInScreen() {
           return (
-            <View className='flex-1 items-center justify-center p-8'>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerClassName="sm:flex-1 items-center justify-center p-4 py-8 sm:py-4 sm:p-6 mt-safe"
+              keyboardDismissMode="interactive">
               <View className="w-full max-w-sm">
-                <SocialConnections />
+                <SignInForm />
               </View>
-            </View>
+            </ScrollView>
           );
         }
         ```
@@ -54,7 +57,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   <AuthBlockTabsCliContent integration="clerk">
     <Steps>
       <Step>
-        <CommandTabs args={["add", "clerk-social-connections"]}/>
+        <CommandTabs args={["add", "clerk-sign-in-form"]}/>
       </Step>
       <Step>
         **If you haven't already**
@@ -65,19 +68,22 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
       <Step>
         **All set!**
 
-        You can import `ClerkSocialConnections` in your app.
+        You can import `ClerkSignInForm` in your app.
 
         ```tsx
-        import { ClerkSocialConnections } from '@/components/clerk-social-connections';
-        import { View } from 'react-native';
+        import { ClerkSignInForm } from '@/components/clerk-sign-in-form';
+        import { ScrollView, View } from 'react-native';
 
-        export default function SocialConnectionsScreen() {
+        export default function SignInScreen() {
           return (
-            <View className='flex-1 items-center justify-center p-8'>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerClassName="sm:flex-1 items-center justify-center p-4 py-8 sm:py-4 sm:p-6 mt-safe"
+              keyboardDismissMode="interactive">
               <View className="w-full max-w-sm">
-                <ClerkSocialConnections />
+                <ClerkSignInForm />
               </View>
-            </View>
+            </ScrollView>
           );
         }
         ```
@@ -89,9 +95,15 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
 
     <Steps>
       <Step>
-        **If missing, add the following component:**
+        **If missing, add the following block and/or components:**
 
+        - [`SocialConnections`](/docs/blocks/authentication/social-connections)
         - [`Button`](/docs/components/button)
+        - [`Card`](/docs/components/card)
+        - [`Input`](/docs/components/input)
+        - [`Label`](/docs/components/label)
+        - [`Separator`](/docs/components/separator)
+        - [`Text`](/docs/components/text)
 
       </Step>
 
@@ -101,10 +113,10 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/registry/src/blocks/social-connections.tsx",
+          "file": "./node_modules/@rnr/registry/src/blocks/sign-in-form.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"@/components/social-connections.tsx\""
+            "meta": "title=\"@/components/sign-in-form.tsx\""
           }
         }
         ```
