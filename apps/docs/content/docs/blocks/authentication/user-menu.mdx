@@ -1,9 +1,71 @@
 ---
 title: User menu
+description: A popover menu presenting options and actions for the current user.
 ---
 
-import { Callout } from '@docs/components/callout';
+import { BlockPreviewCard } from '@docs/components/preview-card';
+import { UserMenu } from "@docs/components/blocks";
+import { ExternalLinks } from "@docs/components/external-links";
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                  
+import { CommandTabs } from "@docs/components/command-tabs";
+import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
-<Callout type='warn' title='Coming soon'>
-  This feature is coming soon.
-</Callout>
+<ExternalLinks links={[{ title: 'Clerk docs', url: 'https://dub.sh/sE9y0lH' }]} />
+
+<div className="h-5" />
+
+<div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+  ## Preview
+</div>
+    
+<BlockPreviewCard preview={<UserMenu />} />
+
+
+## Installation
+
+<AuthBlockTabs>
+  <AuthBlockTabsCliContent integration="none">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "user-menu"]}/>
+      </Step>
+      <Step>
+        **All set!**
+
+        You can now use the `UserMenu` block in your app.
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+  <AuthBlockTabsCliContent integration="clerk">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "clerk-user-menu"]}/>
+      </Step>
+      <Step>
+        **If you haven't already**
+
+        Follow Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to configure your app to use Clerk.
+        
+      </Step>
+      <Step>
+        **All set!**
+
+        You can use the `ClerkUserMenu` block in your app.
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+
+  <AuthBlockTabsManualContent integration="none">
+
+    **TODO: Manual**
+
+    Integration: none
+  </AuthBlockTabsManualContent>
+  <AuthBlockTabsManualContent integration="clerk">
+
+    **TODO: Manual**
+
+    Integration: clerk
+    
+  </AuthBlockTabsManualContent>
+</AuthBlockTabs>

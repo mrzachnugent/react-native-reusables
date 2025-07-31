@@ -1,9 +1,71 @@
 ---
 title: Verify email
+description: A form for verifying an email address with an OTP sent via email.
 ---
 
-import { Callout } from '@docs/components/callout';
+import { BlockPreviewCard } from '@docs/components/preview-card';
+import { VerifyEmail } from "@docs/components/blocks";
+import { ExternalLinks } from "@docs/components/external-links";
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                
+import { CommandTabs } from "@docs/components/command-tabs";
+import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
-<Callout type='warn' title='Coming soon'>
-  This feature is coming soon.
-</Callout>
+<ExternalLinks links={[{ title: 'Clerk docs', url: 'https://dub.sh/sE9y0lH' }]} />
+
+<div className="h-5" />
+
+<div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+  ## Preview
+</div>
+    
+<BlockPreviewCard preview={<div className="w-full max-w-sm"><VerifyEmail /></div>} />
+
+
+## Installation
+
+<AuthBlockTabs>
+  <AuthBlockTabsCliContent integration="none">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "verify-email"]}/>
+      </Step>
+      <Step>
+        **All set!**
+
+        You can now use the `VerifyEmail` block in your app.
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+  <AuthBlockTabsCliContent integration="clerk">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "clerk-verify-email"]}/>
+      </Step>
+      <Step>
+        **If you haven't already**
+
+        Follow Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to configure your app to use Clerk.
+        
+      </Step>
+      <Step>
+        **All set!**
+
+        You can use the `ClerkVerifyEmail` block in your app.
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+
+  <AuthBlockTabsManualContent integration="none">
+
+    **TODO: Manual**
+
+    Integration: none
+  </AuthBlockTabsManualContent>
+  <AuthBlockTabsManualContent integration="clerk">
+
+    **TODO: Manual**
+
+    Integration: clerk
+    
+  </AuthBlockTabsManualContent>
+</AuthBlockTabs>
