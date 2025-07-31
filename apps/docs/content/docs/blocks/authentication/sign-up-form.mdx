@@ -1,10 +1,10 @@
 ---
-title: User menu
-description: A popover menu presenting options and actions for the current user.
+title: Sign up form
+description: A form for creating an account with email and password or social providers.
 ---
 
 import { BlockPreviewCard } from '@docs/components/preview-card';
-import { UserMenu } from "@docs/components/blocks";
+import { SignUpForm } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
 import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                     
 import { CommandTabs } from "@docs/components/command-tabs";
@@ -18,7 +18,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   ## Preview
 </div>
     
-<BlockPreviewCard preview={<UserMenu />} />
+<BlockPreviewCard preview={<div className="w-full max-w-sm"><SignUpForm /></div>} />
 
 
 ## Installation
@@ -27,22 +27,27 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   <AuthBlockTabsCliContent integration="none">
     <Steps>
       <Step>
-        <CommandTabs args={["add", "user-menu"]}/>
+        <CommandTabs args={["add", "sign-up-form"]}/>
       </Step>
       <Step>
         **All set!**
 
-        You can import `UserMenu` in your app.
+        You can import `SignUpForm` in your app.
 
         ```tsx
-        import { UserMenu } from '@/components/user-menu';
-        import { View } from 'react-native';
+        import { SignUpForm } from '@/components/sign-up-form';
+        import { ScrollView, View } from 'react-native';
 
-        export default function UserMenuScreen() {
+        export default function SignUpScreen() {
           return (
-            <View className='flex-1 items-center justify-center'>
-              <UserMenu />
-            </View>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerClassName="sm:flex-1 items-center justify-center p-4 py-8 sm:py-4 sm:p-6 mt-safe"
+              keyboardDismissMode="interactive">
+              <View className="w-full max-w-sm">
+                <SignUpForm />
+              </View>
+            </ScrollView>
           );
         }
         ```
@@ -52,7 +57,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   <AuthBlockTabsCliContent integration="clerk">
     <Steps>
       <Step>
-        <CommandTabs args={["add", "clerk-user-menu"]}/>
+        <CommandTabs args={["add", "clerk-sign-up-form"]}/>
       </Step>
       <Step>
         **If you haven't already**
@@ -63,17 +68,22 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
       <Step>
         **All set!**
 
-        You can import `ClerkUserMenu` in your app.
+        You can import `ClerkSignUpForm` in your app.
 
         ```tsx
-        import { ClerkUserMenu } from '@/components/clerk-user-menu';
-        import { View } from 'react-native';
+        import { ClerkSignUpForm } from '@/components/clerk-sign-up-form';
+        import { ScrollView, View } from 'react-native';
 
-        export default function UserMenuScreen() {
+        export default function SignUpScreen() {
           return (
-            <View className='flex-1 items-center justify-center'>
-              <ClerkUserMenu />
-            </View>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerClassName="sm:flex-1 items-center justify-center p-4 py-8 sm:py-4 sm:p-6 mt-safe"
+              keyboardDismissMode="interactive">
+              <View className="w-full max-w-sm">
+                <ClerkSignUpForm />
+              </View>
+            </ScrollView>
           );
         }
         ```
@@ -85,11 +95,14 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
 
     <Steps>
       <Step>
-        **If missing, add the following components:**
+        **If missing, add the following block and/or components:**
 
-        - [`Avatar`](/docs/components/avatar)
+        - [`SocialConnections`](/docs/blocks/authentication/social-connections)
         - [`Button`](/docs/components/button)
-        - [`Popover`](/docs/components/popover)
+        - [`Card`](/docs/components/card)
+        - [`Input`](/docs/components/input)
+        - [`Label`](/docs/components/label)
+        - [`Separator`](/docs/components/separator)
         - [`Text`](/docs/components/text)
 
       </Step>
@@ -100,10 +113,10 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
 
         ```json doc-gen:file
         {
-          "file": "./node_modules/@rnr/registry/src/blocks/user-menu.tsx",
+          "file": "./node_modules/@rnr/registry/src/blocks/sign-up-form.tsx",
           "codeblock": {
             "lang": "tsx",
-            "meta": "title=\"@/components/user-menu.tsx\""
+            "meta": "title=\"@/components/sign-up-form.tsx\""
           }
         }
         ```
