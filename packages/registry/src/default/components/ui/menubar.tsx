@@ -3,6 +3,7 @@ import { NativeOnlyAnimatedView } from '@/registry/default/components/ui/native-
 import { TextClassContext } from '@/registry/default/components/ui/text';
 import { cn } from '@/registry/default/lib/utils';
 import * as MenubarPrimitive from '@rn-primitives/menubar';
+import { Portal } from '@rn-primitives/portal';
 import { Check, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react-native';
 import * as React from 'react';
 import {
@@ -38,20 +39,23 @@ function Menubar({
 }: MenubarPrimitive.RootProps & {
   ref?: React.RefObject<MenubarPrimitive.RootRef | null>;
 }) {
+  const id = React.useId();
   const [value, setValue] = React.useState<string | undefined>(undefined);
+
+  function closeMenu() {
+    if (onValueChangeProp) {
+      onValueChangeProp(undefined);
+      return;
+    }
+    setValue(undefined);
+  }
+
   return (
     <>
       {Platform.OS !== 'web' && (value || valueProp) ? (
-        <Pressable
-          onPress={() => {
-            if (onValueChangeProp) {
-              onValueChangeProp(undefined);
-              return;
-            }
-            setValue(undefined);
-          }}
-          style={StyleSheet.absoluteFill}
-        />
+        <Portal name={`menubar-overlay-${id}`}>
+          <Pressable onPress={closeMenu} style={StyleSheet.absoluteFill} />
+        </Portal>
       ) : null}
       <MenubarPrimitive.Root
         className={cn(
