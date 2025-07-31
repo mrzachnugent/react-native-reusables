@@ -99,7 +99,7 @@ export function BlockPreviewCard({ preview }: PreviewCardProps) {
 
   return (
     <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border">
-      <div className="absolute -top-14 right-0 pt-4 sm:relative sm:top-auto sm:justify-start sm:px-4">
+      <div className="absolute -top-[3.25rem] right-0 pt-4 sm:relative sm:top-auto sm:justify-start sm:px-4">
         <StyleSwitcher onValueChange={setStyle} defaultValue="new-york" value={style} />
       </div>
       <div

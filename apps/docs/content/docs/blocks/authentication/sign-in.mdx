@@ -1,12 +1,12 @@
 ---
 title: Sign in
-description: Sign in with email, password, or social providers
+description: A form for signing in using email and password or social providers.
 ---
 
 import { BlockPreviewCard } from '@docs/components/preview-card';
-import { AccordionPreview as TODOAccordionPreview } from "@docs/components/examples";
+import { SignIn } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                                 
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                             
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
@@ -18,7 +18,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   ## Preview
 </div>
     
-<BlockPreviewCard preview={<TODOAccordionPreview />} />
+<BlockPreviewCard preview={<div className="w-full max-w-sm"><SignIn /></div>} />
 
 
 ## Installation
@@ -57,58 +57,9 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
 
   <AuthBlockTabsManualContent integration="none">
 
-    
-  <Steps>
-    <Step>
+    **TODO: Manual**
 
-    {/* TODO:  */}
-    **Add the following components to your project.**
-
-    - [Button](/docs/components/button#installation)
-    - etc.
-    
-    </Step>
-    <Step>
-
-      **Copy and paste the following code into your project.**
-
-      ```json doc-gen:file
-      {
-        "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
-        "codeblock": {
-          "lang": "tsx",
-          "meta": "title=\"@/components/ui/text.tsx\""
-        }
-      }
-      ```
-
-      ```json doc-gen:file
-      {
-        "file": "./node_modules/@rnr/registry/src/new-york/components/ui/icon.tsx",
-        "codeblock": {
-          "lang": "tsx",
-          "meta": "title=\"@/components/ui/icon.tsx\""
-        }
-      }
-      ```
-
-      ```json doc-gen:file
-      {
-        "file": "./node_modules/@rnr/registry/src/new-york/components/ui/accordion.tsx",
-        "codeblock": {
-          "lang": "tsx",
-          "meta": "title=\"@/components/ui/accordion.tsx\""
-        }
-      }
-      ```
-
-    </Step>
-    <Step>
-
-      **Update the import paths to match your project setup.**
-
-    </Step>
-  </Steps>
+    Integration: none
   </AuthBlockTabsManualContent>
   <AuthBlockTabsManualContent integration="clerk">
 
