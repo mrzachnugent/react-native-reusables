@@ -6,7 +6,7 @@ import { Text } from '@/registry/ui/text';
 import * as React from 'react';
 import { TextInput, View } from 'react-native';
 
-export function ResetPassword() {
+export function ResetPasswordForm() {
   const codeInputRef = React.useRef<TextInput>(null);
 
   function onPasswordSubmitEditing() {
