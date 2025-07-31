@@ -59,5 +59,6 @@ function fixImports(value: string) {
   return value
     .replaceAll('@/registry/new-york/', '@/')
     .replaceAll('@/registry/default/', '@/')
-    .replaceAll('@/registry/ui/', '@/components/ui/');
+    .replaceAll('@/registry/ui/', '@/components/ui/')
+    .replaceAll('@/registry/blocks/', '@/components/');
 }
