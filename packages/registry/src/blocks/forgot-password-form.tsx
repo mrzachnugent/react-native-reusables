@@ -3,12 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/reg
 import { Input } from '@/registry/ui/input';
 import { Label } from '@/registry/ui/label';
 import { Text } from '@/registry/ui/text';
-import * as React from 'react';
 import { View } from 'react-native';
 
-export function ForgotPassword() {
-  const [email, setEmail] = React.useState('');
-
+export function ForgotPasswordForm() {
   return (
     <View className="gap-6">
       <Card className="border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5">
@@ -24,12 +21,10 @@ export function ForgotPassword() {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                defaultValue={email}
                 placeholder="m@example.com"
                 keyboardType="email-address"
                 autoComplete="email"
                 autoCapitalize="none"
-                onChangeText={setEmail}
                 returnKeyType="send"
               />
             </View>

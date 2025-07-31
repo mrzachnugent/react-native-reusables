@@ -10,7 +10,7 @@ const RESEND_CODE_INTERVAL_SECONDS = 30;
 
 const TABULAR_NUMBERS_STYLE: TextStyle = { fontVariant: ['tabular-nums'] };
 
-export function VerifyEmail() {
+export function VerifyEmailForm() {
   const countdown = useCountdown(RESEND_CODE_INTERVAL_SECONDS);
 
   return (

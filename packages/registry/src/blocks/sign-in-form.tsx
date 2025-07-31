@@ -8,7 +8,7 @@ import { Text } from '@/registry/ui/text';
 import * as React from 'react';
 import { Pressable, type TextInput, View } from 'react-native';
 
-export function SignIn() {
+export function SignInForm() {
   const passwordInputRef = React.useRef<TextInput>(null);
 
   function onEmailSubmitEditing() {
