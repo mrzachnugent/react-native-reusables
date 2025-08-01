@@ -1,7 +1,7 @@
 import { cn } from '@/registry/new-york/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/registry/ui/avatar';
 import { Button } from '@/registry/ui/button';
-import { Icon } from '@/registry/ui/icon';
+import { Icon } from '@/registry/default/components/ui/icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/registry/ui/popover';
 import { Text } from '@/registry/ui/text';
 import type { TriggerRef } from '@rn-primitives/popover';
