@@ -1,27 +1,23 @@
-import { cn } from '@/registry/new-york/lib/utils';
+import { Icon } from '@/registry/default/components/ui/icon';
 import { Avatar, AvatarFallback, AvatarImage } from '@/registry/ui/avatar';
 import { Button } from '@/registry/ui/button';
-import { Icon } from '@/registry/default/components/ui/icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/registry/ui/popover';
 import { Text } from '@/registry/ui/text';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import type { TriggerRef } from '@rn-primitives/popover';
 import { LogOutIcon, PlusIcon, SettingsIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
 
-const USER = {
-  fullName: 'Zach Nugent',
-  initials: 'ZN',
-  imgSrc: { uri: 'https://github.com/mrzachnugent.png' },
-  username: 'mrzachnugent',
-};
-
 export function UserMenu() {
+  const { user } = useUser();
+  const { signOut } = useAuth();
   const popoverTriggerRef = React.useRef<TriggerRef>(null);
 
   async function onSignOut() {
     popoverTriggerRef.current?.close();
-    // TODO: Sign out and navigate to sign in screen
+    await signOut();
+    // TODO: If your app does not use `Stack.Protected`, navigate to your sign-in screen
   }
 
   return (
@@ -31,15 +27,17 @@ export function UserMenu() {
           <UserAvatar />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="center" side="bottom" className="w-80 p-0">
+      <PopoverContent align="end" side="bottom" className="w-80 p-0">
         <View className="border-border gap-3 border-b p-3">
           <View className="flex-row items-center gap-3">
             <UserAvatar className="size-10" />
             <View className="flex-1">
-              <Text className="font-medium leading-5">{USER.fullName}</Text>
-              {USER.fullName?.length ? (
+              <Text className="font-medium leading-5">
+                {user?.fullName || user?.emailAddresses[0]?.emailAddress}
+              </Text>
+              {user?.fullName?.length ? (
                 <Text className="text-muted-foreground text-sm font-normal leading-4">
-                  {USER.username}
+                  {user?.username || user?.emailAddresses[0]?.emailAddress}
                 </Text>
               ) : null}
             </View>
@@ -79,12 +77,25 @@ export function UserMenu() {
   );
 }
 
-function UserAvatar({ className, ...props }: Omit<React.ComponentProps<typeof Avatar>, 'alt'>) {
+function UserAvatar(props: Omit<React.ComponentProps<typeof Avatar>, 'alt'>) {
+  const { user } = useUser();
+
+  const { initials, imageSource, userName } = React.useMemo(() => {
+    const userName = user?.fullName || user?.emailAddresses[0]?.emailAddress || 'Unknown';
+    const initials = userName
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+
+    const imageSource = user?.imageUrl ? { uri: user.imageUrl } : undefined;
+    return { initials, imageSource, userName };
+  }, [user?.imageUrl, user?.fullName, user?.emailAddresses[0]?.emailAddress]);
+
   return (
-    <Avatar alt={`${USER.fullName}'s avatar`} className={cn('size-8', className)} {...props}>
-      <AvatarImage source={USER.imgSrc} />
+    <Avatar alt={`${userName}'s avatar`} {...props}>
+      <AvatarImage source={imageSource} />
       <AvatarFallback>
-        <Text>{USER.initials}</Text>
+        <Text>{initials}</Text>
       </AvatarFallback>
     </Avatar>
   );

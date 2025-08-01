@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/reg
 import { Input } from '@/registry/ui/input';
 import { Label } from '@/registry/ui/label';
 import { Text } from '@/registry/ui/text';
+import { useSignUp } from '@clerk/clerk-expo';
 import * as React from 'react';
 import { type TextStyle, View } from 'react-native';
 
@@ -11,10 +12,55 @@ const RESEND_CODE_INTERVAL_SECONDS = 30;
 const TABULAR_NUMBERS_STYLE: TextStyle = { fontVariant: ['tabular-nums'] };
 
 export function VerifyEmailForm() {
+  const { signUp, setActive, isLoaded } = useSignUp();
+  const [code, setCode] = React.useState('');
+  const [error, setError] = React.useState('');
   const { countdown, restartCountdown } = useCountdown(RESEND_CODE_INTERVAL_SECONDS);
 
-  function onSubmit() {
-    // TODO: Submit form and navigate to protected screen if successful
+  async function onSubmit() {
+    if (!isLoaded) return;
+
+    try {
+      // Use the code the user provided to attempt verification
+      const signUpAttempt = await signUp.attemptEmailAddressVerification({
+        code,
+      });
+
+      // If verification was completed, set the session to active
+      // and redirect the user
+      if (signUpAttempt.status === 'complete') {
+        await setActive({ session: signUpAttempt.createdSessionId });
+        // TODO: Redirect authenticated users to your protected screen
+        return;
+      }
+      // TODO: Handle other statuses
+      // If the status is not complete, check why. User may need to
+      // complete further steps.
+      console.error(JSON.stringify(signUpAttempt, null, 2));
+    } catch (err) {
+      // See https://go.clerk.com/mRUDrIe for more info on error handling
+      if (err instanceof Error) {
+        setError(err.message);
+        return;
+      }
+      console.error(JSON.stringify(err, null, 2));
+    }
+  }
+
+  async function onResendCode() {
+    if (!isLoaded) return;
+
+    try {
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+      restartCountdown();
+    } catch (err) {
+      // See https://go.clerk.com/mRUDrIe for more info on error handling
+      if (err instanceof Error) {
+        setError(err.message);
+        return;
+      }
+      console.error(JSON.stringify(err, null, 2));
+    }
   }
 
   return (
@@ -33,20 +79,17 @@ export function VerifyEmailForm() {
               <Input
                 id="code"
                 autoCapitalize="none"
+                onChangeText={setCode}
                 returnKeyType="send"
                 keyboardType="numeric"
                 autoComplete="sms-otp"
                 textContentType="oneTimeCode"
                 onSubmitEditing={onSubmit}
               />
-              <Button
-                variant="link"
-                size="sm"
-                disabled={countdown > 0}
-                onPress={() => {
-                  // TODO: Resend code
-                  restartCountdown();
-                }}>
+              {!error ? null : (
+                <Text className="text-destructive text-sm font-medium">{error}</Text>
+              )}
+              <Button variant="link" size="sm" disabled={countdown > 0} onPress={onResendCode}>
                 <Text className="text-center text-xs">
                   Didn&apos;t receive the code? Resend{' '}
                   {countdown > 0 ? (

@@ -15,6 +15,7 @@
     ]
   },
   "dependencies": {
+    "@clerk/clerk-expo": "^2.14.14",
     "@rn-primitives/accordion": "~1.2.0",
     "@rn-primitives/alert-dialog": "~1.2.0",
     "@rn-primitives/aspect-ratio": "~1.2.0",

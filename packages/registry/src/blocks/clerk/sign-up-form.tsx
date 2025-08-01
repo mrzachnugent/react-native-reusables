@@ -5,18 +5,46 @@ import { Input } from '@/registry/ui/input';
 import { Label } from '@/registry/ui/label';
 import { Separator } from '@/registry/ui/separator';
 import { Text } from '@/registry/ui/text';
+import { useSignUp } from '@clerk/clerk-expo';
 import * as React from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 
 export function SignUpForm() {
+  const { signUp, isLoaded } = useSignUp();
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const passwordInputRef = React.useRef<TextInput>(null);
+  const [error, setError] = React.useState<{ email?: string; password?: string }>({});
+
+  async function onSubmit() {
+    if (!isLoaded) return;
+
+    // Start sign-up process using email and password provided
+    try {
+      await signUp.create({
+        emailAddress: email,
+        password,
+      });
+
+      // Send user an email with verification code
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+
+      // TODO: Navigate to verify email screen to capture OTP code
+    } catch (err) {
+      // See https://go.clerk.com/mRUDrIe for more info on error handling
+      if (err instanceof Error) {
+        const isEmailMessage =
+          err.message.toLowerCase().includes('identifier') ||
+          err.message.toLowerCase().includes('email');
+        setError(isEmailMessage ? { email: err.message } : { password: err.message });
+        return;
+      }
+      console.error(JSON.stringify(err, null, 2));
+    }
+  }
 
   function onEmailSubmitEditing() {
     passwordInputRef.current?.focus();
-  }
-
-  function onSubmit() {
-    // TODO: Submit form and navigate to protected screen if successful
   }
 
   return (
@@ -38,10 +66,14 @@ export function SignUpForm() {
                 keyboardType="email-address"
                 autoComplete="email"
                 autoCapitalize="none"
+                onChangeText={setEmail}
                 onSubmitEditing={onEmailSubmitEditing}
                 returnKeyType="next"
                 submitBehavior="submit"
               />
+              {error.email ? (
+                <Text className="text-destructive text-sm font-medium">{error.email}</Text>
+              ) : null}
             </View>
             <View className="gap-1.5">
               <View className="flex-row items-center">
@@ -51,9 +83,13 @@ export function SignUpForm() {
                 ref={passwordInputRef}
                 id="password"
                 secureTextEntry
+                onChangeText={setPassword}
                 returnKeyType="send"
                 onSubmitEditing={onSubmit}
               />
+              {error.password ? (
+                <Text className="text-destructive text-sm font-medium">{error.password}</Text>
+              ) : null}
             </View>
             <Button className="w-full" onPress={onSubmit}>
               <Text>Continue</Text>

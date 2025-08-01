@@ -3,12 +3,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/reg
 import { Input } from '@/registry/ui/input';
 import { Label } from '@/registry/ui/label';
 import { Text } from '@/registry/ui/text';
+import { useSignIn } from '@clerk/clerk-expo';
+import * as React from 'react';
 import { View } from 'react-native';
 
 export function ForgotPasswordForm() {
-  function onSubmit() {
-    // TODO: Submit form and navigate to reset password screen if successful
-  }
+  const [email, setEmail] = React.useState('');
+  const { signIn, isLoaded } = useSignIn();
+  const [error, setError] = React.useState<{ email?: string; password?: string }>({});
+
+  const onSubmit = async () => {
+    if (!email) {
+      setError({ email: 'Email is required' });
+      return;
+    }
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      await signIn.create({
+        strategy: 'reset_password_email_code',
+        identifier: email,
+      });
+
+      // TODO: Navigate to reset password screen
+    } catch (err) {
+      // See https://go.clerk.com/mRUDrIe for more info on error handling
+      if (err instanceof Error) {
+        setError({ email: err.message });
+        return;
+      }
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
 
   return (
     <View className="gap-6">
@@ -25,13 +53,18 @@ export function ForgotPasswordForm() {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
+                defaultValue={email}
                 placeholder="m@example.com"
                 keyboardType="email-address"
                 autoComplete="email"
                 autoCapitalize="none"
-                returnKeyType="send"
+                onChangeText={setEmail}
                 onSubmitEditing={onSubmit}
+                returnKeyType="send"
               />
+              {error.email ? (
+                <Text className="text-destructive text-sm font-medium">{error.email}</Text>
+              ) : null}
             </View>
             <Button className="w-full" onPress={onSubmit}>
               <Text>Reset your password</Text>
