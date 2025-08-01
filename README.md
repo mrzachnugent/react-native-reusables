@@ -10,7 +10,7 @@ Visit https://reactnativereusables.com/docs to view the documentation.
 
 ## Community Resources
 
-See [COMMUNITY_RESOURCES.md](./COMMUNITY_RESOURCES.md) for community-maintained components, libraries, and templates.
+See the [community resources](./COMMUNITY_RESOURCES.md) for community-maintained components, libraries, and templates.
 
 ## Contributing
 
