@@ -36,7 +36,7 @@ export function AuthIntegrationSelect(props: SelectProps) {
   return (
     <Select {...props} defaultValue="none" value={integration} onValueChange={onIntegrationChange}>
       <Button asChild variant="outline">
-        <SelectTrigger className="w-fit dark:bg-neutral-600/30">
+        <SelectTrigger className="dark:bg-muted dark:hover:bg-muted/80 dark:border-muted-foreground/15 w-fit">
           <span className="text-muted-foreground flex-1 pr-1">Integration:</span>
           {!isClient ? (
             <span className="opacity-50">
