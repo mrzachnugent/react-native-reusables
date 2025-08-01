@@ -6,7 +6,7 @@ description: A set of buttons for authenticating through social providers.
 import { BlockPreviewCard } from '@docs/components/preview-card';
 import { SocialConnections } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                                
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                                  
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 import { Callout } from '@docs/components/callout';
@@ -134,9 +134,60 @@ import { Callout } from '@docs/components/callout';
   </AuthBlockTabsManualContent>
   <AuthBlockTabsManualContent integration="clerk">
 
-    **TODO: Manual**
+    <Steps>
+      <Step>
 
-    Integration: clerk
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install expo-auth-session expo-web-browser
+        ```
+
+      </Step>
+      <Step>
+        **If you haven't already**
+
+        - Install the Clerk package:
+
+        ```bash
+        npx expo install @clerk/clerk-expo
+        ```
+
+        - Follow steps 2-4 of Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to configure your app for Clerk.
+        
+      </Step>
+
+      <Step>
+        **If missing, add the following component:**
+
+        - [`Button`](/docs/components/button)
+
+      </Step>
+
+      <Step>
+
+        **Copy and paste the following code into your project.**
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/blocks/clerk/social-connections.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/social-connections.tsx\""
+          }
+        }
+        ```
+
+      </Step>
+      
+      <Step>
+
+        **Adjust for your project setup.**
+
+        Update the import paths to match your project structure, and address any `// TODO:` comments by adding the app-specific logic they describe.
+
+      </Step>
+    </Steps>
     
   </AuthBlockTabsManualContent>
 </AuthBlockTabs>
