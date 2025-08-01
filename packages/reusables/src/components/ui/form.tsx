@@ -16,27 +16,27 @@ import {
 } from 'react-hook-form';
 import { type TextInput, View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
+import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
+import { X } from '../../lib/icons/X';
+import { cn } from '../../lib/utils';
 import {
   BottomSheet,
   BottomSheetCloseTrigger,
   BottomSheetContent,
   BottomSheetOpenTrigger,
   BottomSheetView,
-} from '../../components/deprecated-ui/bottom-sheet';
-import { Calendar } from '../../components/deprecated-ui/calendar';
-import { Combobox, type ComboboxOption } from '../../components/deprecated-ui/combobox';
-import { Button, buttonTextVariants } from '../../components/ui/button';
-import { Checkbox } from '../../components/ui/checkbox';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { RadioGroup } from '../../components/ui/radio-group';
-import { type Option, Select } from '../../components/ui/select';
-import { Switch } from '../../components/ui/switch';
-import { Textarea } from '../../components/ui/textarea';
-import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
-import { X } from '../../lib/icons/X';
-import { cn } from '../../lib/utils';
+} from '../deprecated-ui/bottom-sheet';
+import { Calendar } from '../deprecated-ui/calendar';
+import { Combobox, type ComboboxOption } from '../deprecated-ui/combobox';
+import { Button, buttonTextVariants } from './button';
+import { Checkbox } from './checkbox';
+import { Input } from './input';
+import { Label } from './label';
+import { RadioGroup } from './radio-group';
+import { type Option, Select } from './select';
+import { Switch } from './switch';
 import { Text } from './text';
+import { Textarea } from './textarea';
 
 const Form = FormProvider;
 
@@ -349,6 +349,7 @@ function FormCheckbox({
 
 FormCheckbox.displayName = 'FormCheckbox';
 
+// TODO: recommend commenting this out until DatePicker is migrated
 function FormDatePicker({
   ref,
   label,
@@ -480,7 +481,7 @@ function FormRadioGroup({
 
 FormRadioGroup.displayName = 'FormRadioGroup';
 
-// commented out until Combobox is implemented
+// TODO: recommend commenting this out until Combobox is migrated
 type FormComboboxProps = FormItemProps<typeof Combobox, ComboboxOption | null> &
   React.RefAttributes<View>;
 
@@ -658,7 +659,7 @@ function FormMultiCheckbox<T extends FieldValues = FieldValues>({
             key={item.id}
             control={control}
             name={name as FieldPath<T>}
-            render={({ field: {value: fieldValue = [] as string[], ...field} }) => (
+            render={({ field: { value: fieldValue = [] as string[], ...field } }) => (
               <FormItem className='flex-row gap-2 items-start' key={item.id}>
                 <Checkbox
                   aria-labelledby={formItemNativeID}
