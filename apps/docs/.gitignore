@@ -28,4 +28,7 @@ yarn-error.log*
 .vercel
 next-env.d.ts
 
+# local registry
 public/local
+registry/default.local.json
+registry/new-york.local.json

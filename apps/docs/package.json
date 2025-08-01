@@ -12,6 +12,7 @@
     "registry:build:default:local": "shadcn build ./registry/default.local.json --output ./public/local/r/default",
     "registry:build:new-york": "shadcn build ./registry/new-york.json --output ./public/r/new-york",
     "registry:build:new-york:local": "shadcn build ./registry/new-york.local.json --output ./public/local/r/new-york",
+    "registry:generate:local": "node ./scripts/generate-local-registry.js",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
