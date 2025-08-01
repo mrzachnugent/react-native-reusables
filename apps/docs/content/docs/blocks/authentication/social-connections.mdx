@@ -6,9 +6,10 @@ description: A set of buttons for authenticating through social providers.
 import { BlockPreviewCard } from '@docs/components/preview-card';
 import { SocialConnections } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                              
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                                
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
+import { Callout } from '@docs/components/callout';
 
 <ExternalLinks links={[{ title: 'Clerk docs', url: 'https://go.clerk.com/Q1MKAz0' }]} />
 
@@ -48,6 +49,11 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
           );
         }
         ```
+
+        <Callout type="info">
+          This block includes `// TODO:` comments where app-specific logic is required.
+        </Callout>
+        
       </Step>
     </Steps>
   </AuthBlockTabsCliContent>
@@ -81,6 +87,11 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
           );
         }
         ```
+
+        <Callout type="info">
+          This block includes `// TODO:` comments where app-specific logic is required.
+        </Callout>
+        
       </Step>
     </Steps>
   </AuthBlockTabsCliContent>
@@ -113,7 +124,9 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
       
       <Step>
 
-        **Update the import paths to match your project setup.**
+        **Adjust for your project setup.**
+
+        Update the import paths to match your project structure, and address any `// TODO:` comments by adding the app-specific logic they describe.
 
       </Step>
     </Steps>
