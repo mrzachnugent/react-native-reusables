@@ -6,7 +6,7 @@ description: A popover menu presenting options and actions for the current user.
 import { BlockPreviewCard } from '@docs/components/preview-card';
 import { UserMenu } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                     
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                         
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
@@ -52,7 +52,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   <AuthBlockTabsCliContent integration="clerk">
     <Steps>
       <Step>
-        <CommandTabs args={["add", "clerk-user-menu"]}/>
+        <CommandTabs args={["add", "user-menu-clerk"]}/>
       </Step>
       <Step>
         **If you haven't already**
@@ -63,16 +63,16 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
       <Step>
         **All set!**
 
-        You can import `ClerkUserMenu` in your app.
+        You can import `UserMenu` in your app.
 
         ```tsx
-        import { ClerkUserMenu } from '@/components/clerk-user-menu';
+        import { UserMenu } from '@/components/user-menu';
         import { View } from 'react-native';
 
         export default function UserMenuScreen() {
           return (
             <View className='flex-1 items-center justify-center'>
-              <ClerkUserMenu />
+              <UserMenu />
             </View>
           );
         }
