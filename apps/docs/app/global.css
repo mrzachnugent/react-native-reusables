@@ -75,3 +75,29 @@
     @apply scroll-mt-20;
   }
 }
+
+.bg-grid-print {
+  background-image:
+    radial-gradient(circle at 0px 0px, rgb(119, 119, 119) 1.5px, rgba(0, 0, 0, 0) 0px),
+    radial-gradient(circle at 100% 100%, rgb(119, 119, 119) 1.5px, rgba(0, 0, 0, 0) 0px);
+  background-size: 20px 20px;
+  background-position:
+    0px 0px,
+    10px 10px;
+}
+
+.bg-grid-dots {
+  background-image: radial-gradient(
+    circle at 0px 0px,
+    rgb(119, 119, 119) 1.5px,
+    rgba(0, 0, 0, 0) 0px
+  );
+  background-size: 20px 20px;
+}
+
+.bg-grid-lines {
+  background-image:
+    linear-gradient(90deg, rgba(119, 119, 119, 0.5) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(119, 119, 119, 0.5) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
