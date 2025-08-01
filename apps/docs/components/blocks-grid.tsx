@@ -2,13 +2,13 @@ import { Button } from '@docs/components/ui/button';
 import Link from 'next/link';
 
 const BLOCKS = [
-  { title: 'Sign in', href: '/docs/blocks/authentication/sign-in' },
-  { title: 'Sign up', href: '/docs/blocks/authentication/sign-up' },
-  { title: 'Forgot password', href: '/docs/blocks/authentication/forgot-password' },
-  { title: 'Reset password', href: '/docs/blocks/authentication/reset-password' },
-  { title: 'Verify email', href: '/docs/blocks/authentication/verify-email' },
-  { title: 'User menu', href: '/docs/blocks/authentication/user-menu' },
+  { title: 'Sign in form', href: '/docs/blocks/authentication/sign-in-form' },
+  { title: 'Sign up form', href: '/docs/blocks/authentication/sign-up-form' },
+  { title: 'Verify email form', href: '/docs/blocks/authentication/verify-email-form' },
+  { title: 'Reset password form', href: '/docs/blocks/authentication/reset-password-form' },
+  { title: 'Forgot password form', href: '/docs/blocks/authentication/forgot-password-form' },
   { title: 'Social connections', href: '/docs/blocks/authentication/social-connections' },
+  { title: 'User menu', href: '/docs/blocks/authentication/user-menu' },
 ];
 
 export function BlocksGrid() {
