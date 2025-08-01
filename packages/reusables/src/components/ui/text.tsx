@@ -9,8 +9,7 @@ function Text({
   className,
   asChild = false,
   ...props
-}: React.ComponentProps<typeof RNText> & {
-  ref?: React.RefObject<RNText>;
+}: React.CustomComponentPropsWithRef<typeof RNText> & {
   asChild?: boolean;
 }) {
   const textClass = React.useContext(TextClassContext);

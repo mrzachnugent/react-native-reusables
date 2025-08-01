@@ -1,5 +1,5 @@
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import * as React from 'react';
+import type * as React from 'react';
 import { Platform } from 'react-native';
 import { Check } from '../../lib/icons/Check';
 import { cn } from '../../lib/utils';
@@ -7,9 +7,7 @@ import { cn } from '../../lib/utils';
 function Checkbox({
   className,
   ...props
-}: CheckboxPrimitive.RootProps & {
-  ref?: React.RefObject<CheckboxPrimitive.RootRef>;
-}) {
+}: CheckboxPrimitive.RootProps & React.RefAttributes<CheckboxPrimitive.RootRef>) {
   return (
     <CheckboxPrimitive.Root
       className={cn(

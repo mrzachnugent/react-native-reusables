@@ -1,5 +1,5 @@
 import * as LabelPrimitive from '@rn-primitives/label';
-import * as React from 'react';
+import type * as React from 'react';
 import { cn } from '../../lib/utils';
 
 function Label({
@@ -9,9 +9,7 @@ function Label({
   onPressIn,
   onPressOut,
   ...props
-}: LabelPrimitive.TextProps & {
-  ref?: React.RefObject<LabelPrimitive.TextRef>;
-}) {
+}: React.CustomComponentPropsWithRef<typeof LabelPrimitive.Text>) {
   return (
     <LabelPrimitive.Root
       className='web:cursor-default'

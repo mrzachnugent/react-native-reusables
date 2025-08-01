@@ -195,6 +195,21 @@ export const COMPONENTS = [
     ],
   },
   {
+    name: 'form',
+    dependencies: ['button', 'checkbox', 'input', 'label', 'radio-group', 'select', 'switch', 'textarea', 'text'],
+    icons: ['Calendar', 'X'],
+    npmPackages: [],
+    paths: [
+      {
+        from: './node_modules/@rnr/reusables/src/components/ui/form.tsx',
+        to: {
+          folder: 'ui',
+          file: 'form.tsx',
+        },
+      },
+    ],
+  },
+  {
     name: 'hover-card',
     dependencies: [],
     icons: [],
