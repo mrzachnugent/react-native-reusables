@@ -6,7 +6,7 @@ description: A set of buttons for authenticating through social providers.
 import { BlockPreviewCard } from '@docs/components/preview-card';
 import { SocialConnections } from "@docs/components/blocks";
 import { ExternalLinks } from "@docs/components/external-links";
-import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                         
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                             
 import { CommandTabs } from "@docs/components/command-tabs";
 import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
 
@@ -54,7 +54,7 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
   <AuthBlockTabsCliContent integration="clerk">
     <Steps>
       <Step>
-        <CommandTabs args={["add", "clerk-social-connections"]}/>
+        <CommandTabs args={["add", "social-connections-clerk"]}/>
       </Step>
       <Step>
         **If you haven't already**
@@ -65,17 +65,17 @@ import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } fr
       <Step>
         **All set!**
 
-        You can import `ClerkSocialConnections` in your app.
+        You can import `SocialConnections` in your app.
 
         ```tsx
-        import { ClerkSocialConnections } from '@/components/clerk-social-connections';
+        import { SocialConnections } from '@/components/social-connections';
         import { View } from 'react-native';
 
         export default function SocialConnectionsScreen() {
           return (
             <View className='flex-1 items-center justify-center p-8'>
               <View className="w-full max-w-sm">
-                <ClerkSocialConnections />
+                <SocialConnections />
               </View>
             </View>
           );
