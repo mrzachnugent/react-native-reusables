@@ -497,6 +497,143 @@
         "https://reactnativereusables.com/r/default/native-only-animated-view.json"
       ],
       "dependencies": ["@rn-primitives/tooltip"]
+    },
+    {
+      "name": "sign-in-form",
+      "type": "registry:component",
+      "title": "Sign In Form",
+      "description": "A form for signing in using email and password or social providers.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/sign-in-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/default/button.json",
+        "https://reactnativereusables.com/r/default/card.json",
+        "https://reactnativereusables.com/r/default/input.json",
+        "https://reactnativereusables.com/r/default/label.json",
+        "https://reactnativereusables.com/r/default/separator.json",
+        "https://reactnativereusables.com/r/default/social-connections.json",
+        "https://reactnativereusables.com/r/default/text.json"
+      ]
+    },
+    {
+      "name": "sign-up-form",
+      "type": "registry:component",
+      "title": "Sign Up Form",
+      "description": "A form for creating an account with email and password or social providers.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/sign-up-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/default/button.json",
+        "https://reactnativereusables.com/r/default/card.json",
+        "https://reactnativereusables.com/r/default/input.json",
+        "https://reactnativereusables.com/r/default/label.json",
+        "https://reactnativereusables.com/r/default/separator.json",
+        "https://reactnativereusables.com/r/default/social-connections.json",
+        "https://reactnativereusables.com/r/default/text.json"
+      ]
+    },
+    {
+      "name": "forgot-password-form",
+      "type": "registry:component",
+      "title": "Forgot Password Form",
+      "description": "A form that sends a password reset OTP to the user's email address.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/forgot-password-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/default/button.json",
+        "https://reactnativereusables.com/r/default/card.json",
+        "https://reactnativereusables.com/r/default/input.json",
+        "https://reactnativereusables.com/r/default/label.json",
+        "https://reactnativereusables.com/r/default/text.json"
+      ]
+    },
+    {
+      "name": "reset-password-form",
+      "type": "registry:component",
+      "title": "Reset Password Form",
+      "description": "A form for resetting a password with an OTP sent via email.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/reset-password-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/default/button.json",
+        "https://reactnativereusables.com/r/default/card.json",
+        "https://reactnativereusables.com/r/default/input.json",
+        "https://reactnativereusables.com/r/default/label.json",
+        "https://reactnativereusables.com/r/default/text.json"
+      ]
+    },
+    {
+      "name": "verify-email-form",
+      "type": "registry:component",
+      "title": "Verify Email Form",
+      "description": "A form for verifying an email address with an OTP sent via email.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/verify-email-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/default/button.json",
+        "https://reactnativereusables.com/r/default/card.json",
+        "https://reactnativereusables.com/r/default/input.json",
+        "https://reactnativereusables.com/r/default/label.json",
+        "https://reactnativereusables.com/r/default/text.json"
+      ]
+    },
+    {
+      "name": "user-menu",
+      "type": "registry:component",
+      "title": "User Menu",
+      "description": "A popover menu presenting options and actions for the current user.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/user-menu.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/default/avatar.json",
+        "https://reactnativereusables.com/r/default/button.json",
+        "https://reactnativereusables.com/r/default/popover.json",
+        "https://reactnativereusables.com/r/default/text.json"
+      ]
+    },
+    {
+      "name": "social-connections",
+      "type": "registry:component",
+      "title": "Social Connections",
+      "description": "A set of buttons for authenticating through social providers.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/social-connections.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": ["https://reactnativereusables.com/r/default/button.json"]
     }
   ]
 }
