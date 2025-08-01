@@ -184,7 +184,7 @@ class RequiredFilesChecker extends Effect.Service<RequiredFilesChecker>()("Requi
           missingIncludes.push({ ...include, fileName: customFileChecks.css.name })
         }
 
-        // Check NativeWind env file
+        // Check Nativewind env file
         if (componentJson.tsx !== false) {
           const nativewindEnvContent = yield* fs
             .readFileString(path.join(options.cwd, PROJECT_MANIFEST.nativewindEnvFile))
