@@ -1,9 +1,8 @@
 # Community Resources
 
-This document lists community-created components, libraries, and templates that extend React Native Reusables and fill in missing shadcn/ui elements.  
-Contributions are welcome! Submit a PR to add your resource.
+Community-created components, libraries, and templates that extend React Native Reusables and fill in missing shadcn/ui elements.
 
----
+_Contributions are welcome! Submit a PR to add your resource._
 
 ## Components & Libraries
 
