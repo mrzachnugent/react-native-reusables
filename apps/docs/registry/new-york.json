@@ -634,6 +634,150 @@
         }
       ],
       "registryDependencies": ["https://reactnativereusables.com/r/new-york/button.json"]
+    },
+    {
+      "name": "sign-in-form-clerk",
+      "type": "registry:component",
+      "title": "Sign In Form (Clerk)",
+      "description": "A form for signing in using email and password or social providers with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/sign-in-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/card.json",
+        "https://reactnativereusables.com/r/new-york/input.json",
+        "https://reactnativereusables.com/r/new-york/label.json",
+        "https://reactnativereusables.com/r/new-york/separator.json",
+        "https://reactnativereusables.com/r/new-york/social-connections-clerk.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
+      ]
+    },
+    {
+      "name": "sign-up-form-clerk",
+      "type": "registry:component",
+      "title": "Sign Up Form (Clerk)",
+      "description": "A form for creating an account with email and password or social providers with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/sign-up-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/card.json",
+        "https://reactnativereusables.com/r/new-york/input.json",
+        "https://reactnativereusables.com/r/new-york/label.json",
+        "https://reactnativereusables.com/r/new-york/separator.json",
+        "https://reactnativereusables.com/r/new-york/social-connections-clerk.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
+      ]
+    },
+    {
+      "name": "forgot-password-form-clerk",
+      "type": "registry:component",
+      "title": "Forgot Password Form (Clerk)",
+      "description": "A form that sends a password reset OTP to the user's email address with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/forgot-password-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/card.json",
+        "https://reactnativereusables.com/r/new-york/input.json",
+        "https://reactnativereusables.com/r/new-york/label.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
+      ]
+    },
+    {
+      "name": "reset-password-form-clerk",
+      "type": "registry:component",
+      "title": "Reset Password Form (Clerk)",
+      "description": "A form for resetting a password with an OTP sent via email with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/reset-password-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/card.json",
+        "https://reactnativereusables.com/r/new-york/input.json",
+        "https://reactnativereusables.com/r/new-york/label.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
+      ]
+    },
+    {
+      "name": "verify-email-form-clerk",
+      "type": "registry:component",
+      "title": "Verify Email Form (Clerk)",
+      "description": "A form for verifying an email address with an OTP sent via email with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/verify-email-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/card.json",
+        "https://reactnativereusables.com/r/new-york/input.json",
+        "https://reactnativereusables.com/r/new-york/label.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
+      ]
+    },
+    {
+      "name": "user-menu-clerk",
+      "type": "registry:component",
+      "title": "User Menu (Clerk)",
+      "description": "A popover menu presenting options and actions for the current user with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/user-menu.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/avatar.json",
+        "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/popover.json",
+        "https://reactnativereusables.com/r/new-york/text.json"
+      ]
+    },
+    {
+      "name": "social-connections-clerk",
+      "type": "registry:component",
+      "title": "Social Connections (Clerk)",
+      "description": "A set of buttons for authenticating through social providers with Clerk integration.",
+      "author": "@mrzachnugent",
+      "files": [
+        {
+          "path": "./node_modules/@rnr/registry/src/blocks/clerk/social-connections.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["@clerk/clerk-expo", "expo-auth-session", "expo-web-browser"],
+      "registryDependencies": ["https://reactnativereusables.com/r/new-york/button.json"]
     }
   ]
 }
