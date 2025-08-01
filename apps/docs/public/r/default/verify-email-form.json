@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "verify-email-form",
+  "type": "registry:component",
+  "title": "Verify Email Form",
+  "author": "@mrzachnugent",
+  "description": "A form for verifying an email address with an OTP sent via email.",
+  "registryDependencies": [
+    "https://reactnativereusables.com/r/default/button.json",
+    "https://reactnativereusables.com/r/default/card.json",
+    "https://reactnativereusables.com/r/default/input.json",
+    "https://reactnativereusables.com/r/default/label.json",
+    "https://reactnativereusables.com/r/default/text.json"
+  ],
+  "files": [
+    {
+      "path": "./node_modules/@rnr/registry/src/blocks/verify-email-form.tsx",
+      "content": "import { Button } from '@/registry/ui/button';\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/ui/card';\nimport { Input } from '@/registry/ui/input';\nimport { Label } from '@/registry/ui/label';\nimport { Text } from '@/registry/ui/text';\nimport * as React from 'react';\nimport { type TextStyle, View } from 'react-native';\n\nconst RESEND_CODE_INTERVAL_SECONDS = 30;\n\nconst TABULAR_NUMBERS_STYLE: TextStyle = { fontVariant: ['tabular-nums'] };\n\nexport function VerifyEmailForm() {\n  const countdown = useCountdown(RESEND_CODE_INTERVAL_SECONDS);\n\n  return (\n    <View className=\"gap-6\">\n      <Card className=\"border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5\">\n        <CardHeader>\n          <CardTitle className=\"text-center text-xl sm:text-left\">Verify your email</CardTitle>\n          <CardDescription className=\"text-center sm:text-left\">\n            Enter the verification code sent to m@example.com\n          </CardDescription>\n        </CardHeader>\n        <CardContent className=\"gap-6\">\n          <View className=\"gap-6\">\n            <View className=\"gap-1.5\">\n              <Label htmlFor=\"code\">Verification code</Label>\n              <Input\n                id=\"code\"\n                autoCapitalize=\"none\"\n                returnKeyType=\"send\"\n                keyboardType=\"numeric\"\n                autoComplete=\"sms-otp\"\n                textContentType=\"oneTimeCode\"\n              />\n              <Button variant=\"link\" size=\"sm\" disabled={countdown > 0}>\n                <Text className=\"text-center text-xs\">\n                  Didn&apos;t receive the code? Resend{' '}\n                  {countdown > 0 ? (\n                    <Text className=\"text-xs\" style={TABULAR_NUMBERS_STYLE}>\n                      ({countdown})\n                    </Text>\n                  ) : null}\n                </Text>\n              </Button>\n            </View>\n            <View className=\"gap-3\">\n              <Button className=\"w-full\">\n                <Text>Continue</Text>\n              </Button>\n              <Button variant=\"link\" className=\"mx-auto\">\n                <Text>Cancel</Text>\n              </Button>\n            </View>\n          </View>\n        </CardContent>\n      </Card>\n    </View>\n  );\n}\n\nfunction useCountdown(seconds = 30) {\n  const [countdown, setCountdown] = React.useState(seconds);\n\n  React.useEffect(() => {\n    const interval = setInterval(() => {\n      setCountdown((prev) => {\n        if (prev <= 1) {\n          clearInterval(interval);\n        }\n        return prev - 1;\n      });\n    }, 1000);\n\n    return () => {\n      clearInterval(interval);\n    };\n  }, []);\n\n  return countdown;\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}
