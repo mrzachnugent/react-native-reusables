@@ -50,6 +50,25 @@ const config = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
+  async redirects() {
+    return [
+      {
+        source: '/getting-started/introduction',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/getting-started/initial-setup',
+        destination: '/docs/installation',
+        permanent: true,
+      },
+      {
+        source: '/components/:slug',
+        destination: '/docs/components/:slug',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withMDX(withExpo(config));
