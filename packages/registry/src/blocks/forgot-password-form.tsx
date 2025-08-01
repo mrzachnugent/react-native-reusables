@@ -6,6 +6,10 @@ import { Text } from '@/registry/ui/text';
 import { View } from 'react-native';
 
 export function ForgotPasswordForm() {
+  function onSubmit() {
+    // TODO: Submit form and navigate to reset password screen if successful
+  }
+
   return (
     <View className="gap-6">
       <Card className="border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5">
@@ -26,13 +30,12 @@ export function ForgotPasswordForm() {
                 autoComplete="email"
                 autoCapitalize="none"
                 returnKeyType="send"
+                onSubmitEditing={onSubmit}
               />
             </View>
-            <View className="gap-3">
-              <Button className="w-full">
-                <Text>Reset your password</Text>
-              </Button>
-            </View>
+            <Button className="w-full" onPress={onSubmit}>
+              <Text>Reset your password</Text>
+            </Button>
           </View>
         </CardContent>
       </Card>
