@@ -10,8 +10,7 @@ Visit https://reactnativereusables.com/docs to view the documentation.
 
 ## Community Resources
 
-A growing list of community-maintained components, libraries, and templates that build on React Native Reusables and fill in missing shadcn/ui components.  
-See [COMMUNITY_RESOURCES.md](./COMMUNITY_RESOURCES.md) for details.
+See [COMMUNITY_RESOURCES.md](./COMMUNITY_RESOURCES.md) for community-maintained components, libraries, and templates.
 
 ## Contributing
 
