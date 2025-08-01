@@ -20,9 +20,10 @@ function AlertDialogOverlay({
   className,
   children,
   ...props
-}: Omit<AlertDialogPrimitive.OverlayProps, 'asChild'> & {
-  ref?: React.RefObject<AlertDialogPrimitive.OverlayRef | null>;
-}) {
+}: Omit<AlertDialogPrimitive.OverlayProps, 'asChild'> &
+  React.RefAttributes<AlertDialogPrimitive.OverlayRef> & {
+    children?: React.ReactNode;
+  }) {
   return (
     <FullWindowOverlay>
       <AlertDialogPrimitive.Overlay
@@ -48,10 +49,10 @@ function AlertDialogContent({
   className,
   portalHost,
   ...props
-}: AlertDialogPrimitive.ContentProps & {
-  ref?: React.RefObject<AlertDialogPrimitive.ContentRef | null>;
-  portalHost?: string;
-}) {
+}: AlertDialogPrimitive.ContentProps &
+  React.RefAttributes<AlertDialogPrimitive.ContentRef> & {
+    portalHost?: string;
+  }) {
   return (
     <AlertDialogPortal hostName={portalHost}>
       <AlertDialogOverlay>
@@ -90,9 +91,7 @@ function AlertDialogFooter({ className, ...props }: ViewProps) {
 function AlertDialogTitle({
   className,
   ...props
-}: AlertDialogPrimitive.TitleProps & {
-  ref?: React.RefObject<AlertDialogPrimitive.TitleRef | null>;
-}) {
+}: AlertDialogPrimitive.TitleProps & React.RefAttributes<AlertDialogPrimitive.TitleRef>) {
   return (
     <AlertDialogPrimitive.Title
       className={cn('text-foreground text-lg font-semibold', className)}
@@ -104,9 +103,8 @@ function AlertDialogTitle({
 function AlertDialogDescription({
   className,
   ...props
-}: AlertDialogPrimitive.DescriptionProps & {
-  ref?: React.RefObject<AlertDialogPrimitive.DescriptionRef | null>;
-}) {
+}: AlertDialogPrimitive.DescriptionProps &
+  React.RefAttributes<AlertDialogPrimitive.DescriptionRef>) {
   return (
     <AlertDialogPrimitive.Description
       className={cn('text-muted-foreground text-sm', className)}
@@ -118,9 +116,7 @@ function AlertDialogDescription({
 function AlertDialogAction({
   className,
   ...props
-}: AlertDialogPrimitive.ActionProps & {
-  ref?: React.RefObject<AlertDialogPrimitive.ActionRef | null>;
-}) {
+}: AlertDialogPrimitive.ActionProps & React.RefAttributes<AlertDialogPrimitive.ActionRef>) {
   return (
     <TextClassContext.Provider value={buttonTextVariants({ className })}>
       <AlertDialogPrimitive.Action className={cn(buttonVariants(), className)} {...props} />
@@ -131,9 +127,7 @@ function AlertDialogAction({
 function AlertDialogCancel({
   className,
   ...props
-}: AlertDialogPrimitive.CancelProps & {
-  ref?: React.RefObject<AlertDialogPrimitive.CancelRef | null>;
-}) {
+}: AlertDialogPrimitive.CancelProps & React.RefAttributes<AlertDialogPrimitive.CancelRef>) {
   return (
     <TextClassContext.Provider value={buttonTextVariants({ className, variant: 'outline' })}>
       <AlertDialogPrimitive.Cancel

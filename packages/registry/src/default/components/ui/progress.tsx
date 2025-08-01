@@ -1,6 +1,5 @@
 import { cn } from '@/registry/default/lib/utils';
 import * as ProgressPrimitive from '@rn-primitives/progress';
-import * as React from 'react';
 import { Platform, View } from 'react-native';
 import Animated, {
   Extrapolation,
@@ -15,10 +14,10 @@ function Progress({
   value,
   indicatorClassName,
   ...props
-}: ProgressPrimitive.RootProps & {
-  ref?: React.RefObject<ProgressPrimitive.RootRef | null>;
-  indicatorClassName?: string;
-}) {
+}: ProgressPrimitive.RootProps &
+  React.RefAttributes<ProgressPrimitive.RootRef> & {
+    indicatorClassName?: string;
+  }) {
   return (
     <ProgressPrimitive.Root
       className={cn('bg-secondary relative h-4 w-full overflow-hidden rounded-full', className)}

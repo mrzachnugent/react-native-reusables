@@ -1,13 +1,10 @@
 import { cn } from '@/registry/default/lib/utils';
 import * as AvatarPrimitive from '@rn-primitives/avatar';
-import * as React from 'react';
 
 function Avatar({
   className,
   ...props
-}: AvatarPrimitive.RootProps & {
-  ref?: React.RefObject<AvatarPrimitive.RootRef | null>;
-}) {
+}: AvatarPrimitive.RootProps & React.RefAttributes<AvatarPrimitive.RootRef>) {
   return (
     <AvatarPrimitive.Root
       className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
@@ -19,9 +16,7 @@ function Avatar({
 function AvatarImage({
   className,
   ...props
-}: AvatarPrimitive.ImageProps & {
-  ref?: React.RefObject<AvatarPrimitive.ImageRef | null>;
-}) {
+}: AvatarPrimitive.ImageProps & React.RefAttributes<AvatarPrimitive.ImageRef>) {
   return (
     <AvatarPrimitive.Image className={cn('aspect-square h-full w-full', className)} {...props} />
   );
@@ -30,9 +25,7 @@ function AvatarImage({
 function AvatarFallback({
   className,
   ...props
-}: AvatarPrimitive.FallbackProps & {
-  ref?: React.RefObject<AvatarPrimitive.FallbackRef | null>;
-}) {
+}: AvatarPrimitive.FallbackProps & React.RefAttributes<AvatarPrimitive.FallbackRef>) {
   return (
     <AvatarPrimitive.Fallback
       className={cn(

@@ -1,5 +1,4 @@
 import { cn } from '@/registry/new-york/lib/utils';
-import * as React from 'react';
 import { Platform, TextInput, type TextInputProps } from 'react-native';
 
 function Textarea({
@@ -8,9 +7,7 @@ function Textarea({
   numberOfLines = Platform.select({ web: 2, native: 8 }), // On web, numberOfLines also determines initial height. On native, it determines the maximum height.
   placeholderClassName,
   ...props
-}: TextInputProps & {
-  ref?: React.RefObject<TextInput | null>;
-}) {
+}: TextInputProps & React.RefAttributes<TextInput>) {
   return (
     <TextInput
       className={cn(
