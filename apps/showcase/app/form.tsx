@@ -12,6 +12,7 @@ import {
   FormDatePicker,
   FormField,
   FormInput,
+  FormMultiCheckbox,
   FormRadioGroup,
   FormSelect,
   FormSwitch,
@@ -52,6 +53,29 @@ const frameworks = [
   },
 ];
 
+const platforms = [
+  {
+    id: 'web',
+    label: 'Web',
+  },
+  {
+    id: 'ios',
+    label: 'iOS',
+  },
+  {
+    id: 'android',
+    label: 'Android',
+  },
+  {
+    id: 'desktop',
+    label: 'Desktop',
+  },
+  {
+    id: 'visionOS',
+    label: 'VisionOS',
+  },
+];
+
 const emails = [
   { value: 'tom@cruise.com', label: 'tom@cruise.com' },
   { value: 'napoleon@dynamite.com', label: 'napoleon@dynamite.com' },
@@ -80,6 +104,9 @@ const formSchema = z.object({
       invalid_type_error: 'Please select a framework.',
     }
   ),
+  platforms: z.array(z.string()).refine((value) => value.some((v) => v), {
+    message: 'Please select at least one platform.',
+  }),
   favoriteEmail: z.object(
     { value: z.string(), label: z.string() },
     {
@@ -108,13 +135,15 @@ const formSchema = z.object({
   }),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 // TODO: refactor to use UI components
 
 export default function FormScreen() {
   const scrollRef = React.useRef<ScrollView>(null);
   const insets = useSafeAreaInsets();
   const [selectTriggerWidth, setSelectTriggerWidth] = React.useState(0);
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -122,6 +151,8 @@ export default function FormScreen() {
       about: '',
       enableNotifications: false,
       tos: false,
+      accountType: 'staff',
+      platforms: ['web'],
     },
   });
 
@@ -132,7 +163,7 @@ export default function FormScreen() {
     right: 12,
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormValues) {
     Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
       {
         text: 'OK',
@@ -197,7 +228,6 @@ export default function FormScreen() {
           <FormField
             control={form.control}
             name='accountType'
-            defaultValue='staff'
             render={({ field }) => {
               function onLabelPress(label: 'staff' | 'admin' | 'owner') {
                 return () => {
@@ -238,6 +268,19 @@ export default function FormScreen() {
                 description='More important than your skills.'
                 items={frameworks}
                 {...field}
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='platforms'
+            render={() => (
+              <FormMultiCheckbox
+                label='Platforms you develop on'
+                items={platforms}
+                description='Select all that apply.'
+                control={form.control}
+                name='platforms'
               />
             )}
           />

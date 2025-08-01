@@ -5,18 +5,14 @@ import { cn } from '../../lib/utils';
 function RadioGroup({
   className,
   ...props
-}: RadioGroupPrimitive.RootProps & {
-  ref?: React.RefObject<RadioGroupPrimitive.RootRef>;
-}) {
+}: RadioGroupPrimitive.RootProps & React.RefAttributes<RadioGroupPrimitive.RootRef>) {
   return <RadioGroupPrimitive.Root className={cn('web:grid gap-2', className)} {...props} />;
 }
 
 function RadioGroupItem({
   className,
   ...props
-}: RadioGroupPrimitive.ItemProps & {
-  ref?: React.RefObject<RadioGroupPrimitive.ItemRef>;
-}) {
+}: RadioGroupPrimitive.ItemProps & React.RefAttributes<RadioGroupPrimitive.ItemRef>) {
   return (
     <RadioGroupPrimitive.Item
       className={cn(

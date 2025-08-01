@@ -2,6 +2,7 @@ import { Ui } from '@rnr/reusables';
 export const {
   Form,
   FormCheckbox,
+  FormMultiCheckbox,
   FormCombobox,
   FormDatePicker,
   FormDescription,

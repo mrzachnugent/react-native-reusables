@@ -1,5 +1,5 @@
 import * as SwitchPrimitives from '@rn-primitives/switch';
-import * as React from 'react';
+import type * as React from 'react';
 import { Platform } from 'react-native';
 import Animated, {
   interpolateColor,
@@ -13,9 +13,7 @@ import { cn } from '../../lib/utils';
 function SwitchWeb({
   className,
   ...props
-}: SwitchPrimitives.RootProps & {
-  ref?: React.RefObject<SwitchPrimitives.RootRef>;
-}) {
+}: SwitchPrimitives.RootProps & React.RefAttributes<SwitchPrimitives.RootRef>) {
   return (
     <SwitchPrimitives.Root
       className={cn(
@@ -50,9 +48,7 @@ const RGB_COLORS = {
 function SwitchNative({
   className,
   ...props
-}: SwitchPrimitives.RootProps & {
-  ref?: React.RefObject<SwitchPrimitives.RootRef>;
-}) {
+}: SwitchPrimitives.RootProps & React.RefAttributes<SwitchPrimitives.RootRef>) {
   const { colorScheme } = useColorScheme();
   const translateX = useDerivedValue(() => (props.checked ? 18 : 0));
   const animatedRootStyle = useAnimatedStyle(() => {

@@ -4,15 +4,17 @@
 
 import * as React from 'react';
 import {
+  type Control,
   Controller,
-  ControllerProps,
-  FieldPath,
-  FieldValues,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
   FormProvider,
-  Noop,
+  type Noop,
   useFormContext,
+  useFormState,
 } from 'react-hook-form';
-import { View } from 'react-native';
+import { type TextInput, View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
 import {
   BottomSheet,
@@ -22,13 +24,13 @@ import {
   BottomSheetView,
 } from '../../components/deprecated-ui/bottom-sheet';
 import { Calendar } from '../../components/deprecated-ui/calendar';
-import { Combobox, ComboboxOption } from '../../components/deprecated-ui/combobox';
+import { Combobox, type ComboboxOption } from '../../components/deprecated-ui/combobox';
 import { Button, buttonTextVariants } from '../../components/ui/button';
 import { Checkbox } from '../../components/ui/checkbox';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { RadioGroup } from '../../components/ui/radio-group';
-import { Select, type Option } from '../../components/ui/select';
+import { type Option, Select } from '../../components/ui/select';
 import { Switch } from '../../components/ui/switch';
 import { Textarea } from '../../components/ui/textarea';
 import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
@@ -63,8 +65,8 @@ const FormField = <
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);
   const itemContext = React.useContext(FormItemContext);
-  const { getFieldState, formState, handleSubmit } = useFormContext();
-
+  const { getFieldState } = useFormContext();
+  const formState = useFormState({ name: fieldContext.name });
   const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
@@ -79,7 +81,6 @@ const useFormField = () => {
     formItemNativeID: `${nativeID}-form-item`,
     formDescriptionNativeID: `${nativeID}-form-item-description`,
     formMessageNativeID: `${nativeID}-form-item-message`,
-    handleSubmit,
     ...fieldState,
   };
 };
@@ -90,10 +91,7 @@ type FormItemContextValue = {
 
 const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
 
-const FormItem = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
->(({ className, ...props }, ref) => {
+function FormItem({ ref, className, ...props }: React.CustomComponentPropsWithRef<typeof View>) {
   const nativeID = React.useId();
 
   return (
@@ -101,15 +99,15 @@ const FormItem = React.forwardRef<
       <View ref={ref} className={cn('space-y-2', className)} {...props} />
     </FormItemContext.Provider>
   );
-});
+}
 FormItem.displayName = 'FormItem';
 
-const FormLabel = React.forwardRef<
-  React.ElementRef<typeof Label>,
-  Omit<React.ComponentPropsWithoutRef<typeof Label>, 'children'> & {
-    children: string;
-  }
->(({ className, nativeID: _nativeID, ...props }, ref) => {
+function FormLabel({
+  ref,
+  className,
+  nativeID: _nativeID,
+  ...props
+}: React.CustomComponentPropsWithRef<typeof Label>) {
   const { error, formItemNativeID } = useFormField();
 
   return (
@@ -120,13 +118,14 @@ const FormLabel = React.forwardRef<
       {...props}
     />
   );
-});
+}
 FormLabel.displayName = 'FormLabel';
 
-const FormDescription = React.forwardRef<
-  React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
+function FormDescription({
+  ref,
+  className,
+  ...props
+}: React.CustomComponentPropsWithRef<typeof Text>) {
   const { formDescriptionNativeID } = useFormField();
 
   return (
@@ -137,13 +136,15 @@ const FormDescription = React.forwardRef<
       {...props}
     />
   );
-});
+}
 FormDescription.displayName = 'FormDescription';
 
-const FormMessage = React.forwardRef<
-  React.ElementRef<typeof Animated.Text>,
-  React.ComponentPropsWithoutRef<typeof Animated.Text>
->(({ className, children, ...props }, ref) => {
+function FormMessage({
+  ref,
+  className,
+  children,
+  ...props
+}: React.CustomComponentPropsWithRef<typeof Animated.Text>) {
   const { error, formMessageNativeID } = useFormField();
   const body = error ? String(error?.message) : children;
 
@@ -163,7 +164,7 @@ const FormMessage = React.forwardRef<
       {body}
     </Animated.Text>
   );
-});
+}
 FormMessage.displayName = 'FormMessage';
 
 type Override<T, U> = Omit<T, keyof U> & U;
@@ -176,19 +177,22 @@ interface FormFieldFieldProps<T> {
   disabled?: boolean;
 }
 
-type FormItemProps<T extends React.ElementType<any>, U> = Override<
-  React.ComponentPropsWithoutRef<T>,
+type FormItemProps<T extends React.ComponentType<any>, U> = Override<
+  React.CustomComponentPropsWithRef<T>,
   FormFieldFieldProps<U>
 > & {
   label?: string;
   description?: string;
 };
 
-const FormInput = React.forwardRef<
-  React.ElementRef<typeof Input>,
-  FormItemProps<typeof Input, string>
->(({ label, description, onChange, ...props }, ref) => {
-  const inputRef = React.useRef<React.ComponentRef<typeof Input>>(null);
+function FormInput({
+  ref,
+  label,
+  description,
+  onChange,
+  ...props
+}: FormItemProps<typeof Input, string>) {
+  const inputRef = React.useRef<TextInput>(null);
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   React.useImperativeHandle(
@@ -199,7 +203,7 @@ const FormInput = React.forwardRef<
       }
       return inputRef.current;
     },
-    [inputRef.current]
+    []
   );
 
   function handleOnLabelPress() {
@@ -237,15 +241,18 @@ const FormInput = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormInput.displayName = 'FormInput';
 
-const FormTextarea = React.forwardRef<
-  React.ElementRef<typeof Textarea>,
-  FormItemProps<typeof Textarea, string>
->(({ label, description, onChange, ...props }, ref) => {
-  const textareaRef = React.useRef<React.ComponentRef<typeof Textarea>>(null);
+function FormTextarea({
+  ref,
+  label,
+  description,
+  onChange,
+  ...props
+}: FormItemProps<typeof Textarea, string>) {
+  const textareaRef = React.useRef<TextInput>(null);
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   React.useImperativeHandle(
@@ -256,7 +263,7 @@ const FormTextarea = React.forwardRef<
       }
       return textareaRef.current;
     },
-    [textareaRef.current]
+    []
   );
 
   function handleOnLabelPress() {
@@ -294,14 +301,18 @@ const FormTextarea = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormTextarea.displayName = 'FormTextarea';
 
-const FormCheckbox = React.forwardRef<
-  React.ElementRef<typeof Checkbox>,
-  Omit<FormItemProps<typeof Checkbox, boolean>, 'checked' | 'onCheckedChange'>
->(({ label, description, value, onChange, ...props }, ref) => {
+function FormCheckbox({
+  ref,
+  label,
+  description,
+  value,
+  onChange,
+  ...props
+}: Omit<FormItemProps<typeof Checkbox, boolean>, 'checked' | 'onCheckedChange'>) {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   function handleOnLabelPress() {
@@ -334,14 +345,18 @@ const FormCheckbox = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormCheckbox.displayName = 'FormCheckbox';
 
-const FormDatePicker = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  FormItemProps<typeof Calendar, string>
->(({ label, description, value, onChange, ...props }, ref) => {
+function FormDatePicker({
+  ref,
+  label,
+  description,
+  value,
+  onChange,
+  ...props
+}: FormItemProps<typeof Calendar, string> & React.RefAttributes<View>) {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   return (
@@ -405,8 +420,8 @@ const FormDatePicker = React.forwardRef<
                   selected: true,
                 },
               }}
-              current={value} // opens calendar on selected date
               {...props}
+              current={value} // opens calendar on selected date
             />
             <View className={'pb-2 pt-4'}>
               <BottomSheetCloseTrigger asChild>
@@ -422,14 +437,20 @@ const FormDatePicker = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormDatePicker.displayName = 'FormDatePicker';
 
-const FormRadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroup>,
-  Omit<FormItemProps<typeof RadioGroup, string>, 'onValueChange'>
->(({ label, description, value, onChange, ...props }, ref) => {
+type FormRadioGroupProps = Omit<FormItemProps<typeof RadioGroup, string>, 'onValueChange'>;
+
+function FormRadioGroup({
+  ref,
+  label,
+  description,
+  value,
+  onChange,
+  ...props
+}: FormRadioGroupProps) {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   return (
@@ -455,14 +476,15 @@ const FormRadioGroup = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormRadioGroup.displayName = 'FormRadioGroup';
 
-const FormCombobox = React.forwardRef<
-  React.ElementRef<typeof Combobox>,
-  FormItemProps<typeof Combobox, ComboboxOption | null>
->(({ label, description, value, onChange, ...props }, ref) => {
+// commented out until Combobox is implemented
+type FormComboboxProps = FormItemProps<typeof Combobox, ComboboxOption | null> &
+  React.RefAttributes<View>;
+
+function FormCombobox({ ref, label, description, value, onChange, ...props }: FormComboboxProps) {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   return (
@@ -486,7 +508,7 @@ const FormCombobox = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormCombobox.displayName = 'FormCombobox';
 
@@ -508,10 +530,14 @@ FormCombobox.displayName = 'FormCombobox';
       </SelectGroup>
     </SelectContent>
  */
-const FormSelect = React.forwardRef<
-  React.ElementRef<typeof Select>,
-  Omit<FormItemProps<typeof Select, Partial<Option>>, 'open' | 'onOpenChange' | 'onValueChange'>
->(({ label, description, onChange, value, ...props }, ref) => {
+function FormSelect({
+  ref,
+  label,
+  description,
+  onChange,
+  value,
+  ...props
+}: Omit<FormItemProps<typeof Select, Partial<Option>>, 'open' | 'onOpenChange' | 'onValueChange'>) {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
   return (
@@ -534,14 +560,18 @@ const FormSelect = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormSelect.displayName = 'FormSelect';
 
-const FormSwitch = React.forwardRef<
-  React.ElementRef<typeof Switch>,
-  Omit<FormItemProps<typeof Switch, boolean>, 'checked' | 'onCheckedChange'>
->(({ label, description, value, onChange, ...props }, ref) => {
+function FormSwitch({
+  ref,
+  label,
+  description,
+  value,
+  onChange,
+  ...props
+}: Omit<FormItemProps<typeof Switch, boolean>, 'checked' | 'onCheckedChange'>) {
   const switchRef = React.useRef<React.ComponentRef<typeof Switch>>(null);
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
 
@@ -553,7 +583,7 @@ const FormSwitch = React.forwardRef<
       }
       return switchRef.current;
     },
-    [switchRef.current]
+    []
   );
 
   function handleOnLabelPress() {
@@ -586,13 +616,96 @@ const FormSwitch = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+}
 
 FormSwitch.displayName = 'FormSwitch';
+
+type FormMultiCheckboxProps<T extends FieldValues = FieldValues> = Omit<
+  FormItemProps<typeof Checkbox, string[]>,
+  'checked' | 'onCheckedChange' | 'ref' | 'onBlur' | 'onChange' | 'value'
+> & {
+  items: {
+    label: string;
+    id: string;
+  }[];
+  control: Control<T, FieldPath<T>>;
+};
+
+// bonus component: FormMultiCheckbox
+// implemented following shadcn/ui Checkbox form code example
+// https://ui.shadcn.com/docs/components/checkbox#form
+function FormMultiCheckbox<T extends FieldValues = FieldValues>({
+  label,
+  description,
+  items,
+  control,
+  name,
+  ...props
+}: FormMultiCheckboxProps<T>) {
+  const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
+
+  return (
+    <FormItem className='px-1'>
+      <View className='flex-col items-start'>
+        {!!label && (
+          <FormLabel className='pb-0' nativeID={formItemNativeID}>
+            {label}
+          </FormLabel>
+        )}
+        {!!description && <FormDescription className='pt-0 pb-4'>{description}</FormDescription>}
+        {items.map((item) => (
+          <FormField
+            key={item.id}
+            control={control}
+            name={name as FieldPath<T>}
+            render={({ field: {value: fieldValue = [] as string[], ...field} }) => (
+              <FormItem className='flex-row gap-2 items-start' key={item.id}>
+                <Checkbox
+                  aria-labelledby={formItemNativeID}
+                  aria-describedby={
+                    !error
+                      ? `${formDescriptionNativeID}`
+                      : `${formDescriptionNativeID} ${formMessageNativeID}`
+                  }
+                  aria-invalid={!!error}
+                  onCheckedChange={(checked) => {
+                    return checked
+                      ? field.onChange([...fieldValue, item.id])
+                      : field.onChange(fieldValue.filter((v: string) => v !== item.id));
+                  }}
+                  checked={fieldValue.includes(item.id)}
+                  {...props}
+                />
+                {!!item.label && (
+                  <FormLabel
+                    className='pb-0'
+                    nativeID={formItemNativeID}
+                    onPress={() => {
+                      if (fieldValue.includes(item.id)) {
+                        field.onChange?.(fieldValue.filter((v: string) => v !== item.id));
+                      } else {
+                        field.onChange?.([...fieldValue, item.id]);
+                      }
+                    }}
+                  >
+                    {item.label}
+                  </FormLabel>
+                )}
+              </FormItem>
+            )}
+          />
+        ))}
+      </View>
+      <FormMessage />
+    </FormItem>
+  );
+}
+FormMultiCheckbox.displayName = 'FormMultiCheckbox';
 
 export {
   Form,
   FormCheckbox,
+  FormMultiCheckbox,
   FormCombobox,
   FormDatePicker,
   FormDescription,
