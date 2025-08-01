@@ -11,7 +11,11 @@ const RESEND_CODE_INTERVAL_SECONDS = 30;
 const TABULAR_NUMBERS_STYLE: TextStyle = { fontVariant: ['tabular-nums'] };
 
 export function VerifyEmailForm() {
-  const countdown = useCountdown(RESEND_CODE_INTERVAL_SECONDS);
+  const { countdown, restartCountdown } = useCountdown(RESEND_CODE_INTERVAL_SECONDS);
+
+  function onSubmit() {
+    // TODO: Submit form and navigate to protected screen if successful
+  }
 
   return (
     <View className="gap-6">
@@ -33,8 +37,16 @@ export function VerifyEmailForm() {
                 keyboardType="numeric"
                 autoComplete="sms-otp"
                 textContentType="oneTimeCode"
+                onSubmitEditing={onSubmit}
               />
-              <Button variant="link" size="sm" disabled={countdown > 0}>
+              <Button
+                variant="link"
+                size="sm"
+                disabled={countdown > 0}
+                onPress={() => {
+                  // TODO: Resend code
+                  restartCountdown();
+                }}>
                 <Text className="text-center text-xs">
                   Didn&apos;t receive the code? Resend{' '}
                   {countdown > 0 ? (
@@ -46,10 +58,15 @@ export function VerifyEmailForm() {
               </Button>
             </View>
             <View className="gap-3">
-              <Button className="w-full">
+              <Button className="w-full" onPress={onSubmit}>
                 <Text>Continue</Text>
               </Button>
-              <Button variant="link" className="mx-auto">
+              <Button
+                variant="link"
+                className="mx-auto"
+                onPress={() => {
+                  // TODO: Navigate to sign up screen
+                }}>
                 <Text>Cancel</Text>
               </Button>
             </View>
@@ -62,21 +79,38 @@ export function VerifyEmailForm() {
 
 function useCountdown(seconds = 30) {
   const [countdown, setCountdown] = React.useState(seconds);
+  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
+  const startCountdown = React.useCallback(() => {
+    setCountdown(seconds);
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
-          clearInterval(interval);
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
+          return 0;
         }
         return prev - 1;
       });
     }, 1000);
+  }, [seconds]);
+
+  React.useEffect(() => {
+    startCountdown();
 
     return () => {
-      clearInterval(interval);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
-  }, []);
+  }, [startCountdown]);
 
-  return countdown;
+  return { countdown, restartCountdown: startCountdown };
 }

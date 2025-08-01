@@ -15,6 +15,10 @@ export function SignUpForm() {
     passwordInputRef.current?.focus();
   }
 
+  function onSubmit() {
+    // TODO: Submit form and navigate to protected screen if successful
+  }
+
   return (
     <View className="gap-6">
       <Card className="border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5">
@@ -43,17 +47,24 @@ export function SignUpForm() {
               <View className="flex-row items-center">
                 <Label htmlFor="password">Password</Label>
               </View>
-              <Input ref={passwordInputRef} id="password" secureTextEntry returnKeyType="send" />
+              <Input
+                ref={passwordInputRef}
+                id="password"
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={onSubmit}
+              />
             </View>
-            <View className="gap-3">
-              <Button className="w-full">
-                <Text>Continue</Text>
-              </Button>
-            </View>
+            <Button className="w-full" onPress={onSubmit}>
+              <Text>Continue</Text>
+            </Button>
           </View>
           <Text className="text-center text-sm">
             Already have an account?{' '}
-            <Pressable>
+            <Pressable
+              onPress={() => {
+                // TODO: Navigate to sign in screen
+              }}>
               <Text className="text-sm underline underline-offset-4">Sign in</Text>
             </Pressable>
           </Text>

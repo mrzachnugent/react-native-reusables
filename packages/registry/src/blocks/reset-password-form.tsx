@@ -13,6 +13,10 @@ export function ResetPasswordForm() {
     codeInputRef.current?.focus();
   }
 
+  function onSubmit() {
+    // TODO: Submit form and navigate to protected screen if successful
+  }
+
   return (
     <View className="gap-6">
       <Card className="border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5">
@@ -45,13 +49,12 @@ export function ResetPasswordForm() {
                 keyboardType="numeric"
                 autoComplete="sms-otp"
                 textContentType="oneTimeCode"
+                onSubmitEditing={onSubmit}
               />
             </View>
-            <View className="gap-3">
-              <Button className="w-full">
-                <Text>Reset Password</Text>
-              </Button>
-            </View>
+            <Button className="w-full" onPress={onSubmit}>
+              <Text>Reset Password</Text>
+            </Button>
           </View>
         </CardContent>
       </Card>
