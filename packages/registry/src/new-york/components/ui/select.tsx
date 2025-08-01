@@ -20,10 +20,10 @@ function SelectValue({
   ref,
   className,
   ...props
-}: SelectPrimitive.ValueProps & {
-  ref?: React.RefObject<SelectPrimitive.ValueRef | null>;
-  className?: string;
-}) {
+}: SelectPrimitive.ValueProps &
+  React.RefAttributes<SelectPrimitive.ValueRef> & {
+    className?: string;
+  }) {
   const { value } = SelectPrimitive.useRootContext();
   return (
     <SelectPrimitive.Value
@@ -44,11 +44,11 @@ function SelectTrigger({
   children,
   size = 'default',
   ...props
-}: SelectPrimitive.TriggerProps & {
-  ref?: React.RefObject<SelectPrimitive.TriggerRef | null>;
-  children?: React.ReactNode;
-  size?: 'default' | 'sm';
-}) {
+}: SelectPrimitive.TriggerProps &
+  React.RefAttributes<SelectPrimitive.TriggerRef> & {
+    children?: React.ReactNode;
+    size?: 'default' | 'sm';
+  }) {
   return (
     <SelectPrimitive.Trigger
       ref={ref}
@@ -76,11 +76,11 @@ function SelectContent({
   position = 'popper',
   portalHost,
   ...props
-}: SelectPrimitive.ContentProps & {
-  ref?: React.RefObject<SelectPrimitive.ContentRef | null>;
-  className?: string;
-  portalHost?: string;
-}) {
+}: SelectPrimitive.ContentProps &
+  React.RefAttributes<SelectPrimitive.ContentRef> & {
+    className?: string;
+    portalHost?: string;
+  }) {
   return (
     <SelectPrimitive.Portal hostName={portalHost}>
       <FullWindowOverlay>
@@ -136,9 +136,7 @@ function SelectContent({
 function SelectLabel({
   className,
   ...props
-}: SelectPrimitive.LabelProps & {
-  ref?: React.RefObject<SelectPrimitive.LabelRef | null>;
-}) {
+}: SelectPrimitive.LabelProps & React.RefAttributes<SelectPrimitive.LabelRef>) {
   return (
     <SelectPrimitive.Label
       className={cn('text-muted-foreground px-2 py-2 text-xs sm:py-1.5', className)}
@@ -151,9 +149,7 @@ function SelectItem({
   className,
   children,
   ...props
-}: SelectPrimitive.ItemProps & {
-  ref?: React.RefObject<SelectPrimitive.ItemRef | null>;
-}) {
+}: SelectPrimitive.ItemProps & React.RefAttributes<SelectPrimitive.ItemRef>) {
   return (
     <SelectPrimitive.Item
       className={cn(
@@ -178,9 +174,7 @@ function SelectItem({
 function SelectSeparator({
   className,
   ...props
-}: SelectPrimitive.SeparatorProps & {
-  ref?: React.RefObject<SelectPrimitive.SeparatorRef | null>;
-}) {
+}: SelectPrimitive.SeparatorProps & React.RefAttributes<SelectPrimitive.SeparatorRef>) {
   return (
     <SelectPrimitive.Separator
       className={cn(

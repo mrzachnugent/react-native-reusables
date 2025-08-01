@@ -5,18 +5,14 @@ import { Platform } from 'react-native';
 function RadioGroup({
   className,
   ...props
-}: RadioGroupPrimitive.RootProps & {
-  ref?: React.RefObject<RadioGroupPrimitive.RootRef | null>;
-}) {
+}: RadioGroupPrimitive.RootProps & React.RefAttributes<RadioGroupPrimitive.RootRef>) {
   return <RadioGroupPrimitive.Root className={cn('gap-3', className)} {...props} />;
 }
 
 function RadioGroupItem({
   className,
   ...props
-}: RadioGroupPrimitive.ItemProps & {
-  ref?: React.RefObject<RadioGroupPrimitive.ItemRef | null>;
-}) {
+}: RadioGroupPrimitive.ItemProps & React.RefAttributes<RadioGroupPrimitive.ItemRef>) {
   return (
     <RadioGroupPrimitive.Item
       className={cn(

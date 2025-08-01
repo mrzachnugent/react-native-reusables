@@ -2,7 +2,6 @@ import { Icon } from '@/registry/default/components/ui/icon';
 import { cn } from '@/registry/default/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { Check } from 'lucide-react-native';
-import * as React from 'react';
 import { Platform } from 'react-native';
 
 const DEFAULT_HIT_SLOP = 24;
@@ -13,12 +12,12 @@ function Checkbox({
   indicatorClassName,
   iconClassName,
   ...props
-}: CheckboxPrimitive.RootProps & {
-  checkedClassName?: string;
-  indicatorClassName?: string;
-  iconClassName?: string;
-  ref?: React.RefObject<CheckboxPrimitive.RootRef | null>;
-}) {
+}: CheckboxPrimitive.RootProps &
+  React.RefAttributes<CheckboxPrimitive.RootRef> & {
+    checkedClassName?: string;
+    indicatorClassName?: string;
+    iconClassName?: string;
+  }) {
   return (
     <CheckboxPrimitive.Root
       className={cn(

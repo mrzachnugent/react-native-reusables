@@ -3,7 +3,6 @@ import { TextClassContext } from '@/registry/default/components/ui/text';
 import { cn } from '@/registry/default/lib/utils';
 import * as AccordionPrimitive from '@rn-primitives/accordion';
 import { ChevronDown } from 'lucide-react-native';
-import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import Animated, {
   FadeOutUp,
@@ -17,9 +16,8 @@ import Animated, {
 function Accordion({
   children,
   ...props
-}: Omit<AccordionPrimitive.RootProps, 'asChild'> & {
-  ref?: React.RefObject<AccordionPrimitive.RootRef | null>;
-}) {
+}: Omit<AccordionPrimitive.RootProps, 'asChild'> &
+  React.RefAttributes<AccordionPrimitive.RootRef>) {
   return (
     <LayoutAnimationConfig skipEntering>
       <AccordionPrimitive.Root
@@ -36,9 +34,7 @@ function AccordionItem({
   className,
   value,
   ...props
-}: AccordionPrimitive.ItemProps & {
-  ref?: React.RefObject<AccordionPrimitive.ItemRef | null>;
-}) {
+}: AccordionPrimitive.ItemProps & React.RefAttributes<AccordionPrimitive.ItemRef>) {
   return (
     <AccordionPrimitive.Item
       className={cn('border-border border-b', className)}
@@ -62,8 +58,7 @@ function AccordionTrigger({
   ...props
 }: AccordionPrimitive.TriggerProps & {
   children?: React.ReactNode;
-  ref?: React.RefObject<AccordionPrimitive.TriggerRef | null>;
-}) {
+} & React.RefAttributes<AccordionPrimitive.TriggerRef>) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
 
   const progress = useDerivedValue(
@@ -117,9 +112,7 @@ function AccordionContent({
   className,
   children,
   ...props
-}: AccordionPrimitive.ContentProps & {
-  ref?: React.RefObject<AccordionPrimitive.ContentRef | null>;
-}) {
+}: AccordionPrimitive.ContentProps & React.RefAttributes<AccordionPrimitive.ContentRef>) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
   return (
     <TextClassContext.Provider value="text-sm">
