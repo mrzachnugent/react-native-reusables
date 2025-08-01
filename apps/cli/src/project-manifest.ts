@@ -113,7 +113,7 @@ const DEPRECATED_FROM_LIB = [
     includes: [
       {
         content: ["useColorScheme"],
-        message: "lib/useColorScheme is deprecated. Use NativeWind's color scheme hook instead.",
+        message: "lib/useColorScheme is deprecated. Use Nativewind's color scheme hook instead.",
         docs: "https://www.nativewind.dev/docs/api/use-color-scheme"
       }
     ]
