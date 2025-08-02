@@ -18,8 +18,9 @@ function Skeleton({
 
   React.useEffect(() => {
     sv.value = withRepeat(
-      withSequence(withTiming(0.5, { duration }), withTiming(1, { duration })),
-      -1
+      withTiming(0.5, { duration }),
+      -1,
+      true
     );
   }, []);
 
