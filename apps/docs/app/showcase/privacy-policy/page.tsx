@@ -37,7 +37,7 @@ export default function Page() {
       <h2>5. Contact</h2>
       <p>
         If you have any questions about this Privacy Policy or the App, please contact us at:
-        mrzachnugent@gmail.com
+        hello@foundedlabs.com
       </p>
     </div>
   );
