@@ -22,7 +22,7 @@ export default function Page() {
           </a>
           .
         </li>
-        <li>Reach out directly by email at: mrzachnugent@gmail.com</li>
+        <li>Reach out directly by email at: hello@foundedlabs.com</li>
       </ul>
       <h2>2. Response Time</h2>
       <p>
@@ -37,7 +37,7 @@ export default function Page() {
       <h2>4. Contact</h2>
       <p>
         For any additional assistance, contact: <br />
-        mrzachnugent@gmail.com
+        hello@foundedlabs.com
       </p>
     </div>
   );
