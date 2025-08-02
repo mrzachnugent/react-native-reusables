@@ -40,7 +40,7 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
   },
-  // TODO:
+  // TODO(zach)
   eslint: {
     ignoreDuringBuilds: true,
   },
