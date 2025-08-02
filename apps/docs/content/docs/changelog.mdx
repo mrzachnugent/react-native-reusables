@@ -136,9 +136,9 @@ Available variants: `default`, `h1` , `h2`, `h3`, `h4`, `p`, `block-quote`, `cod
 
 ### Deprecated [#august-2025-deprecated]
 
-- `lib/constants.ts`: now using the `theme.ts` file.
+- `lib/constants.ts`: now using the [`theme.ts`](/docs/customization#themets) file.
 
-- `lib/useColorScheme.ts`: now using the hook directly from `nativewind`
+- `lib/useColorScheme.ts`: now using the hook directly from [`nativewind`](https://www.nativewind.dev/docs/api/use-color-scheme)
 
 - `lib/icons`: deprecated in favor of the new [`Icon`](#august-2025-new-icon-component) component.
 
@@ -149,7 +149,7 @@ Available variants: `default`, `h1` , `h2`, `h3`, `h4`, `p`, `block-quote`, `cod
 
 <CommandTabs args={["doctor"]} />
 
-2. Update your components by running the `add` command with `--override` and list the components from your project:
+2. Update your components by running the `add` command with `--overwrite` and list the components from your project:
 
 <Callout type="warn">
   Make sure you commit your changes before running the add command and use the diff view to see what's changed and to keep
