@@ -60,6 +60,6 @@ By contributing to this project, you agree that your contributions will be licen
 
 ## Contact
 
-If you have any questions or need further assistance, feel free to contact us at nugentzn@gmail.com.
+If you have any questions or need further assistance, feel free to contact us at hello@foundedlabs.com.
 
 **We appreciate your contributions and look forward to working with you!**
