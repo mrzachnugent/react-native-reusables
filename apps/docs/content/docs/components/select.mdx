@@ -10,7 +10,6 @@ import { PreviewCard } from "@docs/components/preview-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
 import { SelectPreview, ScrollableSelectPreview } from "@docs/components/examples";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
-import { ShowIfStyle } from "@docs/components/show-if-style";
 
 <ExternalLinks
   links={[
@@ -70,8 +69,6 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
  
         **Copy and paste the following code into your project.**
 
-        <ShowIfStyle style="new-york">
-
         ```json doc-gen:file
         {
           "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
@@ -102,42 +99,6 @@ import { ShowIfStyle } from "@docs/components/show-if-style";
         }
         ```
 
-        </ShowIfStyle>
-
-        <ShowIfStyle style="default">
-
-        ```json doc-gen:file
-        {
-          "file": "./node_modules/@rnr/registry/src/default/components/ui/text.tsx",
-          "codeblock": {
-            "lang": "tsx",
-            "meta": "title=\"@/components/ui/text.tsx\""
-          }
-        }
-        ```
-
-        ```json doc-gen:file
-        {
-          "file": "./node_modules/@rnr/registry/src/default/components/ui/icon.tsx",
-          "codeblock": {
-            "lang": "tsx",
-            "meta": "title=\"@/components/ui/icon.tsx\""
-          }
-        }
-        ```
-
-        ```json doc-gen:file
-        {
-          "file": "./node_modules/@rnr/registry/src/default/components/ui/select.tsx",
-          "codeblock": {
-            "lang": "tsx",
-            "meta": "title=\"@/components/ui/select.tsx\""
-          }
-        }
-        ```
-
-        </ShowIfStyle>
- 
       </Step>
       <Step>
 
