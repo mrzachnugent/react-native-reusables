@@ -81,23 +81,6 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
           return yield* Effect.fail(new Error("Unable to continue without a valid components.json file."))
         }
 
-        const style = options.yes
-          ? exists
-            ? "default"
-            : "new-york"
-          : yield* Prompt.select({
-              message: "Which style would you like to use?",
-              choices: exists
-                ? [
-                    { title: "default", value: "default" },
-                    { title: "new-york", value: "new-york" }
-                  ]
-                : ([
-                    { title: "new-york", value: "new-york" },
-                    { title: "default", value: "default" }
-                  ] as const)
-            })
-
         const baseColor = options.yes
           ? "neutral"
           : yield* Prompt.select({
@@ -191,7 +174,7 @@ class ProjectConfig extends Effect.Service<ProjectConfig>()("ProjectConfig", {
 
         const newComponentJson = yield* Schema.encode(componentJsonSchema)({
           $schema: "https://ui.shadcn.com/schema.json",
-          style,
+          style: "new-york",
           aliases,
           rsc: false,
           tsx: true,
