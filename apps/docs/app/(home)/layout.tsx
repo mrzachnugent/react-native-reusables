@@ -18,6 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <SkipNavigationButton />
       <HomeLayout
         githubUrl="https://github.com/founded-labs/react-native-reusables"
+        className="dark:from-fd-background dark:to-fd-background from-fd-accent bg-gradient-to-b to-white"
         nav={{
           title: (
             <div className="hover:bg-fd-accent -ml-0.5 flex size-8 items-center justify-center rounded-md transition-colors duration-200">

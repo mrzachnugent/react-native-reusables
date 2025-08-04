@@ -2,13 +2,18 @@ import { Badge } from '@docs/components/ui/badge';
 import { Button } from '@docs/components/ui/button';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
+import ComponentsGrid from './ComponentsGrid';
+import BlocksSection from './BlockSection';
+import TemplatesSection from './TemplatesSection';
+import { Footer } from '../docs/[[...slug]]/page';
 
 export default function HomePage() {
   return (
     <main
       id="nd-page"
       className="max-w-fd-container mx-auto flex w-full flex-col items-center gap-4">
-      <div className="container flex flex-col items-center gap-2 py-8 text-center md:py-16 lg:py-20 xl:gap-4">
+      <div className="container relative z-0 flex flex-col items-center gap-2 py-8 text-center md:pt-16 lg:pt-20 xl:gap-4">
+        <div className="bg-grid-print pointer-events-none absolute inset-0 -bottom-16 z-[-1] bg-white opacity-60 [mask-image:radial-gradient(ellipse_50%_100%_at_50%_100%,red,#0000)] dark:bg-neutral-800" />
         <div className="h-6">
           <Badge
             variant="outline"
@@ -36,6 +41,10 @@ export default function HomePage() {
           </Button>
         </div>
       </div>
+      <ComponentsGrid />
+      {/* <BlocksSection /> */}
+      {/* <TemplatesSection /> */}
+      <Footer url="/" />
     </main>
   );
 }

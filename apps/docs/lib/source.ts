@@ -3,6 +3,7 @@ import { loader } from 'fumadocs-core/source';
 import { createMDXSource } from 'fumadocs-mdx';
 import { icons } from 'lucide-react';
 import { createElement } from 'react';
+import FoundedLabsIcon from './FoundedLabsIcon';
 
 export const source = loader({
   baseUrl: '/docs',
@@ -12,8 +13,7 @@ export const source = loader({
       return;
     }
     if (icon === 'FoundedLabs') {
-      // TODO: add Founded Labs logo for work with us section
-      return createElement(icons['Handshake']);
+      return createElement(FoundedLabsIcon);
     }
 
     if (icon in icons) return createElement(icons[icon as keyof typeof icons]);
