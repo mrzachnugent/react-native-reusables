@@ -1,4 +1,4 @@
-import { Effect, Layer, pipe, Schema } from "effect"
+import { Effect, Layer } from "effect"
 import { CliOptions } from "@cli/contexts/cli-options.js"
 import { Doctor } from "@cli/services/commands/doctor.js"
 import { ProjectConfig } from "../project-config.js"
@@ -25,11 +25,7 @@ class Add extends Effect.Service<Add>()("Add", {
         Effect.gen(function* () {
           yield* Effect.logDebug(`Add options: ${JSON.stringify(options, null, 2)}`)
 
-          const componentJson = yield* projectConfig.getComponentJson()
-          const style = yield* pipe(
-            componentJson.style,
-            Schema.decodeUnknown(Schema.Union(Schema.Literal("default"), Schema.Literal("new-york")))
-          )
+          yield* projectConfig.getComponentJson() // ensure components.json config is valid and prompt if not
 
           const components = options.all ? PROJECT_MANIFEST.components : (options.args?.components ?? [])
 
@@ -54,10 +50,22 @@ class Add extends Effect.Service<Add>()("Add", {
 
           const baseUrl =
             process.env.NODE_ENV === "development"
-              ? "http://localhost:3000/local/r"
-              : "https://reactnativereusables.com/r"
+              ? "http://localhost:3000/local/r/new-york"
+              : "https://reactnativereusables.com/r/new-york"
 
-          const componentUrls = components.map((component) => `${baseUrl}/${style}/${component}.json`)
+          const manifestComponentsSet = new Set(
+            PROJECT_MANIFEST.components.map((component) => component.toLocaleLowerCase())
+          )
+
+          const componentUrls = components.map((component) => {
+            const lowerCaseComponent = component.toLocaleLowerCase()
+
+            if (manifestComponentsSet.has(lowerCaseComponent)) {
+              return `${baseUrl}/${lowerCaseComponent}.json`
+            }
+
+            return component
+          })
 
           const shadcnOptions = toShadcnOptions(options)
 
