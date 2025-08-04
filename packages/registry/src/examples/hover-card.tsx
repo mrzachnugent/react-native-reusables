@@ -1,7 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/registry/ui/avatar';
-import { Button } from '@/registry/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/registry/ui/hover-card';
-import { Text } from '@/registry/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@/registry/new-york/components/ui/avatar';
+import { Button } from '@/registry/new-york/components/ui/button';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/registry/new-york/components/ui/hover-card';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

@@ -1,9 +1,11 @@
 'use client';
 
-import { useReactiveGetCookie } from 'cookies-next/client';
+import {
+  AuthIntegrationSelect,
+  useAuthIntegration,
+} from '@docs/components/auth-integration-select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@docs/components/ui/tabs';
 import * as React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { AuthIntegrationSelect } from './auth-integration-select';
 
 export function AuthBlockTabs({ children }: React.PropsWithChildren) {
   return (
@@ -17,7 +19,7 @@ export function AuthBlockTabs({ children }: React.PropsWithChildren) {
             Manual
           </TabsTrigger>
         </TabsList>
-        <AuthIntegrationSelect />
+        <AuthIntegrationSelect className="mt-px" />
       </div>
       {children}
     </Tabs>
@@ -31,8 +33,7 @@ type ContentProps = {
 };
 
 export function AuthBlockTabsCliContent({ children, integration: integrationProp }: ContentProps) {
-  const getCookie = useReactiveGetCookie();
-  const integration = getCookie('auth-integration') ?? 'none';
+  const [integration] = useAuthIntegration();
 
   if (integration !== integrationProp) {
     return null;
@@ -44,8 +45,7 @@ export function AuthBlockTabsManualContent({
   children,
   integration: integrationProp,
 }: ContentProps) {
-  const getCookie = useReactiveGetCookie();
-  const integration = getCookie('auth-integration') ?? 'none';
+  const [integration] = useAuthIntegration();
 
   if (integration !== integrationProp) {
     return null;

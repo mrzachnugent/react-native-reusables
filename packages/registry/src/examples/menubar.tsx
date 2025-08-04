@@ -12,8 +12,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '@/registry/ui/menubar';
-import { Text } from '@/registry/ui/text';
+} from '@/registry/new-york/components/ui/menubar';
+import { Text } from '@/registry/new-york/components/ui/text';
 import * as React from 'react';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

@@ -164,17 +164,17 @@ function Footer({ url }: { url: string }) {
 
 function TableOfContentFooter() {
   return (
-    <div className="bg-card dark:bg-fd-muted border-border/50 dark:border-border/0 text-fd-foreground/80 group relative mt-12 flex flex-col gap-2 rounded-lg border p-6 text-sm">
+    <div className="bg-card dark:bg-fd-muted border-border/70 dark:border-border/0 text-fd-foreground/80 group relative mt-12 flex flex-col gap-2 rounded-lg border p-6 text-sm">
       <div className="text-balance text-base font-semibold leading-tight group-hover:underline">
         Want to work with us?
       </div>
-      <div className="text-muted-foreground">Mention us to your team.</div>
-      <div className="text-muted-foreground">We help companies ship world-class UI/UX.</div>
-      <button
-        data-slot="button"
-        className="[&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 has-[&gt;svg]:px-2.5 mt-2 inline-flex h-8 w-fit shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 text-sm font-medium outline-none transition-all focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50">
+      <div className="">Mention us to your team.</div>
+      <div className="text-muted-foreground pb-2">We help companies ship world-class UI/UX.</div>
+      <Button
+        size="sm"
+        className="from-primary to-primary/75 group-hover:to-primary/80 w-fit bg-transparent bg-gradient-to-br">
         Learn more
-      </button>
+      </Button>
       <Link href="/docs/hire-us" className="absolute inset-0">
         <span className="sr-only">Learn more about Founded Labs</span>
       </Link>

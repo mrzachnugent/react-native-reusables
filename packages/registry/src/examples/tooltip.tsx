@@ -1,6 +1,6 @@
-import { Button } from '@/registry/ui/button';
-import { Text } from '@/registry/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/ui/tooltip';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/registry/new-york/components/ui/tooltip';
 import { Platform } from 'react-native';
 
 export function TooltipPreview() {

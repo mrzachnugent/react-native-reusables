@@ -2,7 +2,6 @@ import './global.css';
 
 import { CookiesProvider } from '@docs/components/cookies-provider';
 import { SafeAreaProvider } from '@docs/components/safe-area-provider';
-import { StyleProvider } from '@docs/lib/style-provider';
 import { cn } from '@docs/lib/utils';
 import { Analytics } from '@vercel/analytics/next';
 import { SearchLink } from 'fumadocs-ui/components/dialog/search';
@@ -38,12 +37,10 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <body className="flex min-h-svh flex-col">
         <CookiesProvider>
           <SafeAreaProvider>
-            <StyleProvider>
-              <RootProvider search={SEARCH_OPTIONS}>
-                {children}
-                <Analytics />
-              </RootProvider>
-            </StyleProvider>
+            <RootProvider search={SEARCH_OPTIONS}>
+              {children}
+              <Analytics />
+            </RootProvider>
           </SafeAreaProvider>
         </CookiesProvider>
       </body>

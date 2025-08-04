@@ -12,8 +12,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '@/registry/ui/context-menu';
-import { Text } from '@/registry/ui/text';
+} from '@/registry/new-york/components/ui/context-menu';
+import { Text } from '@/registry/new-york/components/ui/text';
 import * as Haptics from 'expo-haptics';
 import * as React from 'react';
 import { Platform } from 'react-native';

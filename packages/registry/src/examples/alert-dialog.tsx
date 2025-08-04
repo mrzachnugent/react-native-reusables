@@ -8,9 +8,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/registry/ui/alert-dialog';
-import { Button } from '@/registry/ui/button';
-import { Text } from '@/registry/ui/text';
+} from '@/registry/new-york/components/ui/alert-dialog';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Text } from '@/registry/new-york/components/ui/text';
 
 export function AlertDialogPreview() {
   return (

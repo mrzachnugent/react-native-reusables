@@ -1,7 +1,7 @@
-import { Checkbox } from '@/registry/ui/checkbox';
-import { Label } from '@/registry/ui/label';
-import { Text } from '@/registry/ui/text';
-import { cn } from '@/registry/default/lib/utils';
+import { Checkbox } from '@/registry/new-york/components/ui/checkbox';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { cn } from '@/registry/new-york/lib/utils';
 import * as Haptics from 'expo-haptics';
 import * as React from 'react';
 import { Platform, View } from 'react-native';

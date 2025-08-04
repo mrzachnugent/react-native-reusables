@@ -1,4 +1,4 @@
-import { Skeleton } from '@/registry/ui/skeleton';
+import { Skeleton } from '@/registry/new-york/components/ui/skeleton';
 import { View } from 'react-native';
 
 export function SkeletonPreview() {

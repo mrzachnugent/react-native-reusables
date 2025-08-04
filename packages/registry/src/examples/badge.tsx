@@ -1,6 +1,6 @@
-import { Badge } from '@/registry/ui/badge';
-import { Icon } from '@/registry/ui/icon';
-import { Text } from '@/registry/ui/text';
+import { Badge } from '@/registry/new-york/components/ui/badge';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { BadgeCheckIcon } from 'lucide-react-native';
 import { View } from 'react-native';
 

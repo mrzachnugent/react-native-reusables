@@ -1,11 +1,9 @@
-import { Button } from '@/registry/ui/button';
-import { Icon } from '@/registry/ui/icon';
-import { Text } from '@/registry/ui/text';
-import { router } from 'expo-router';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Text } from '@/registry/new-york/components/ui/text';
+import { ThemeToggle } from '@showcase/components/theme-toggle';
 import * as Updates from 'expo-updates';
-import { SettingsIcon } from 'lucide-react-native';
 import * as React from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 export function HeaderRightView() {
   const { isUpdateAvailable, isUpdatePending, isDownloading } = Updates.useUpdates();
@@ -19,10 +17,6 @@ export function HeaderRightView() {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  function goToTheming() {
-    router.push('/theming');
   }
 
   if (isUpdateAvailable) {
@@ -41,11 +35,5 @@ export function HeaderRightView() {
     );
   }
 
-  return (
-    <Pressable onPress={goToTheming} className="active:opacity-70">
-      <View className="web:pr-5 items-start justify-center py-2.5 pl-8 pr-1">
-        <Icon as={SettingsIcon} className="text-foreground/90 size-6" />
-      </View>
-    </Pressable>
-  );
+  return <ThemeToggle />;
 }

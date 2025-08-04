@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/registry/ui/avatar';
-import { Text } from '@/registry/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@/registry/new-york/components/ui/avatar';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { View } from 'react-native';
 
 export function AvatarPreview() {

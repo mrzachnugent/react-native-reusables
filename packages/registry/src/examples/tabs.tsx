@@ -1,4 +1,4 @@
-import { Button } from '@/registry/ui/button';
+import { Button } from '@/registry/new-york/components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/registry/ui/card';
-import { Input } from '@/registry/ui/input';
-import { Label } from '@/registry/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/ui/tabs';
-import { Text } from '@/registry/ui/text';
+} from '@/registry/new-york/components/ui/card';
+import { Input } from '@/registry/new-york/components/ui/input';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/new-york/components/ui/tabs';
+import { Text } from '@/registry/new-york/components/ui/text';
 import * as React from 'react';
 import { View } from 'react-native';
 

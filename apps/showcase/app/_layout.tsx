@@ -1,19 +1,16 @@
 import '../global.css';
 
-import { Text } from '@/registry/ui/text';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
-import { ThemeToggle } from '@showcase/components/theme-toggle';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
-import { StyleProvider, useStyle } from '@showcase/lib/style-provider';
 import { NAV_THEME } from '@showcase/lib/theme';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useColorScheme, vars } from 'nativewind';
+import { useColorScheme } from 'nativewind';
 import * as React from 'react';
-import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
@@ -45,76 +42,39 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={NAV_THEME[colorScheme]}>
-      <StyleProvider>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-        <GestureHandlerRootView
-          style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
-          <KeyboardProvider>
-            <StyleBorderRadiusProvider>
-              <Stack
-                screenOptions={{
-                  headerBackTitle: 'Back',
-                  headerTitle(props) {
-                    return (
-                      <Text className="ios:font-medium android:mt-1.5 text-xl">
-                        {toOptions(props.children.split('/').pop())}
-                      </Text>
-                    );
-                  },
-                  headerRight: () => <HeaderRightView />,
-                }}>
-                <Stack.Screen
-                  name="index"
-                  options={{
-                    headerLargeTitle: true,
-                    headerTitle: 'Showcase',
-                    headerLargeTitleShadowVisible: false,
-                    headerLargeStyle: {
-                      backgroundColor: colorScheme === 'dark' ? 'hsl(0 0% 3.9%)' : 'hsl(0 0% 100%)',
-                    },
-                  }}
-                />
-
-                <Stack.Screen
-                  name="theming"
-                  options={{
-                    presentation: 'modal',
-                    title: 'Theming',
-                    headerRight: () => <ThemeToggle />,
-                  }}
-                />
-              </Stack>
-            </StyleBorderRadiusProvider>
-            <PortalHost />
-          </KeyboardProvider>
-        </GestureHandlerRootView>
-      </StyleProvider>
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      <GestureHandlerRootView
+        style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
+        <KeyboardProvider>
+          <Stack
+            screenOptions={{
+              headerBackTitle: 'Back',
+              headerTitle(props) {
+                return (
+                  <Text className="ios:font-medium android:mt-1.5 text-xl">
+                    {toOptions(props.children.split('/').pop())}
+                  </Text>
+                );
+              },
+              headerRight: () => <HeaderRightView />,
+            }}>
+            <Stack.Screen
+              name="index"
+              options={{
+                headerLargeTitle: true,
+                headerTitle: 'Showcase',
+                headerLargeTitleShadowVisible: false,
+                headerLargeStyle: {
+                  backgroundColor: colorScheme === 'dark' ? 'hsl(0 0% 3.9%)' : 'hsl(0 0% 100%)',
+                },
+              }}
+            />
+          </Stack>
+          <PortalHost />
+        </KeyboardProvider>
+      </GestureHandlerRootView>
     </ThemeProvider>
   );
-}
-
-const defaultRadius = vars({
-  '--radius': '8px', // 0.5rem
-});
-
-const newYorkRadius = vars({
-  '--radius': '10px', // 0.625rem
-});
-
-const STYLE = {
-  default: {
-    flex: 1,
-    ...defaultRadius,
-  },
-  'new-york': {
-    flex: 1,
-    ...newYorkRadius,
-  },
-};
-
-function StyleBorderRadiusProvider({ children }: { children: React.ReactNode }) {
-  const { style } = useStyle();
-  return <View style={STYLE[style]}>{children}</View>;
 }
 
 function toOptions(name: string) {
