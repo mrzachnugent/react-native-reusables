@@ -8,6 +8,7 @@
   "registryDependencies": [
     "https://reactnativereusables.com/r/new-york/avatar.json",
     "https://reactnativereusables.com/r/new-york/button.json",
+    "https://reactnativereusables.com/r/new-york/icon.json",
     "https://reactnativereusables.com/r/new-york/popover.json",
     "https://reactnativereusables.com/r/new-york/text.json"
   ],
