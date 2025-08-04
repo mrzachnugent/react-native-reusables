@@ -21,7 +21,7 @@ export function PreviewCard({ preview }: PreviewCardProps) {
   return (
     <>
       <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-        <div className="absolute -top-11 right-0 mt-px flex items-center justify-end">
+        <div className="absolute -top-11 right-0 mt-px hidden items-center justify-end sm:flex">
           <PlatformSelect />
         </div>
         <div className="flex flex-1 flex-col items-center justify-center">
@@ -44,13 +44,13 @@ export function PreviewCard({ preview }: PreviewCardProps) {
       <a
         href={`https://reactnativereusables.com/showcase/links/${component}`}
         target="_blank"
-        className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-3 rounded-xl p-3 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden [&_svg]:shrink-0">
-        <div className="dark:border-border/0 border-border/30 flex items-center justify-center rounded-lg border bg-black p-2.5 shadow-md">
-          <RnrIcon className="size-8 text-white" pathClassName="stroke-1" />
+        className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0">
+        <div className="bg-primary flex items-center justify-center rounded-lg p-1 shadow-md dark:bg-black dark:p-2">
+          <RnrIcon className="size-11 text-white dark:size-10" pathClassName="stroke-1" />
         </div>
-        <div className="flex flex-col gap-0.5">
+        <div className="flex flex-col gap-1">
           <p className="leading-none">Tap to preview in the app</p>
-          <p className="text-xl font-semibold leading-none">React Native Reusables</p>
+          <p className="text-[1.3rem] font-semibold leading-none">React Native Reusables</p>
         </div>
       </a>
     </>
