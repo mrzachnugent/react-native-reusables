@@ -1,8 +1,8 @@
 import { cn } from '@/registry/new-york/lib/utils';
-import { Button } from '@/registry/ui/button';
-import { Icon } from '@/registry/ui/icon';
-import { Input } from '@/registry/ui/input';
-import { Text } from '@/registry/ui/text';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Input } from '@/registry/new-york/components/ui/input';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { COMPONENTS } from '@showcase/lib/constants';
@@ -44,7 +44,7 @@ export default function ComponentsScreen() {
           },
         })}
         contentInsetAdjustmentBehavior="automatic"
-        contentContainerClassName="px-4 pb-safe"
+        contentContainerClassName="px-4 pb-2"
         estimatedItemSize={49}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
@@ -78,7 +78,7 @@ export default function ComponentsScreen() {
             </Button>
           </Link>
         )}
-        ListFooterComponent={<View className="android:h-2" />}
+        ListFooterComponent={<View className="android:pb-safe" />}
       />
     </View>
   );

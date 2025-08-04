@@ -1,8 +1,14 @@
-import { Button } from '@/registry/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/ui/card';
-import { Input } from '@/registry/ui/input';
-import { Label } from '@/registry/ui/label';
-import { Text } from '@/registry/ui/text';
+import { Button } from '@/registry/new-york/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/registry/new-york/components/ui/card';
+import { Input } from '@/registry/new-york/components/ui/input';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { Text } from '@/registry/new-york/components/ui/text';
 import * as React from 'react';
 import { type TextStyle, View } from 'react-native';
 
@@ -19,7 +25,7 @@ export function VerifyEmailForm() {
 
   return (
     <View className="gap-6">
-      <Card className="border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5">
+      <Card className="border-border/0 sm:border-border pb-4 shadow-none sm:shadow-sm sm:shadow-black/5">
         <CardHeader>
           <CardTitle className="text-center text-xl sm:text-left">Verify your email</CardTitle>
           <CardDescription className="text-center sm:text-left">

@@ -1,67 +1,30 @@
 'use client';
 
 import { RnrIcon } from '@docs/components/icons/rnr-icon';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@docs/components/ui/select';
-import { useStyle } from '@docs/lib/style-provider';
-import { type SelectProps } from '@radix-ui/react-select';
-import { useReactiveGetCookie, useReactiveSetCookie } from 'cookies-next/client';
+import { PlatformSelect, usePlatform } from '@docs/components/platform-select';
 import { useParams } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
 import * as React from 'react';
-
-const PLATFORMS = [
-  { name: 'web', label: 'Web' },
-  { name: 'native', label: 'Native' },
-] as const;
-
-const STYLES = [
-  { name: 'new-york', label: 'New York' },
-  { name: 'default', label: 'Default' },
-] as const;
-
-type Platform = (typeof PLATFORMS)[number]['name'];
 
 type PreviewCardProps = {
   preview: React.ReactNode;
 };
 
-const DEFAULT_STYLE_RADIUS = { '--radius': '0.5rem' } as React.CSSProperties;
-
 export function PreviewCard({ preview }: PreviewCardProps) {
   const { width } = useWindowSize();
   const isDark = useIsDarkMode();
   const params = useParams<{ slug: string[] }>();
-  const getCookie = useReactiveGetCookie();
-  const setCookie = useReactiveSetCookie();
-  const platform = getCookie('platform') ?? 'web';
-  const { style, setStyle } = useStyle();
-
-  function onPlatformChange(value: Platform) {
-    setCookie('platform', value);
-  }
+  const [platform] = usePlatform();
 
   const component = params.slug.at(-1);
 
   return (
     <>
       <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-        <div className="flex items-center justify-between">
-          {platform === 'web' || width < 640 ? (
-            <StyleSwitcher onValueChange={setStyle} defaultValue="default" value={style} />
-          ) : (
-            <div />
-          )}
-          <PlatformSwitcher onValueChange={onPlatformChange} defaultValue="web" value={platform} />
+        <div className="absolute -top-11 right-0 mt-px flex items-center justify-end">
+          <PlatformSelect />
         </div>
-        <div
-          style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
-          className="flex flex-1 flex-col items-center justify-center py-6">
+        <div className="flex flex-1 flex-col items-center justify-center">
           {platform === 'native' && width >= 640 ? (
             <div className="flex max-w-sm flex-col items-center gap-6 p-4">
               <QRCodeSVG
@@ -95,91 +58,13 @@ export function PreviewCard({ preview }: PreviewCardProps) {
 }
 
 export function BlockPreviewCard({ preview }: PreviewCardProps) {
-  const { style, setStyle } = useStyle();
-
   return (
     <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border">
-      <div className="absolute -top-[3.25rem] right-0 pt-4 sm:relative sm:top-auto sm:justify-start sm:px-4">
-        <StyleSwitcher onValueChange={setStyle} defaultValue="new-york" value={style} />
-      </div>
-      <div
-        style={style === 'default' ? DEFAULT_STYLE_RADIUS : undefined}
-        className="flex flex-1 flex-col items-center justify-center py-6 sm:px-4 sm:py-8">
+      <div className="flex flex-1 flex-col items-center justify-center py-6 sm:px-4 sm:py-8">
         {preview}
       </div>
     </div>
   );
-}
-
-function PlatformSwitcher(props: SelectProps) {
-  const [isClient, setIsClient] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return (
-    <Select {...props}>
-      <SelectTrigger className="hidden h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs sm:flex [&_svg]:h-4 [&_svg]:w-4">
-        <span className="text-muted-foreground flex-1 pr-1">Platform:</span>
-        {!isClient ? (
-          <span className="opacity-50">
-            {
-              PLATFORMS.find((platform) =>
-                platform.name === props.value ? props.value : props.defaultValue
-              )?.label
-            }
-          </span>
-        ) : (
-          <SelectValue placeholder="Select platform" />
-        )}
-      </SelectTrigger>
-      <SelectContent onCloseAutoFocus={preventDefault}>
-        {PLATFORMS.map((platform) => (
-          <SelectItem key={platform.name} value={platform.name} className="text-xs">
-            {platform.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
-function StyleSwitcher(props: SelectProps) {
-  const [isClient, setIsClient] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return (
-    <Select {...props}>
-      <SelectTrigger className="h-7 w-fit gap-1 pl-2.5 pr-1.5 text-xs [&_svg]:h-4 [&_svg]:w-4">
-        <span className="text-muted-foreground flex-1 pr-1">Style:</span>
-        {!isClient ? (
-          <span className="opacity-50">
-            {
-              STYLES.find((style) =>
-                style.name === props.value ? props.value : props.defaultValue
-              )?.label
-            }
-          </span>
-        ) : (
-          <SelectValue placeholder="Select style" />
-        )}
-      </SelectTrigger>
-      <SelectContent onCloseAutoFocus={preventDefault}>
-        {STYLES.map((style) => (
-          <SelectItem key={style.name} value={style.name} className="text-xs">
-            {style.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
-
-function preventDefault(e: Event) {
-  e.preventDefault();
 }
 
 type WindowSize = {

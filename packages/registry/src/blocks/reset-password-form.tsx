@@ -1,8 +1,14 @@
-import { Button } from '@/registry/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/ui/card';
-import { Input } from '@/registry/ui/input';
-import { Label } from '@/registry/ui/label';
-import { Text } from '@/registry/ui/text';
+import { Button } from '@/registry/new-york/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/registry/new-york/components/ui/card';
+import { Input } from '@/registry/new-york/components/ui/input';
+import { Label } from '@/registry/new-york/components/ui/label';
+import { Text } from '@/registry/new-york/components/ui/text';
 import * as React from 'react';
 import { TextInput, View } from 'react-native';
 

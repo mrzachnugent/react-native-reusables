@@ -1,8 +1,8 @@
-import { Icon } from '@/registry/default/components/ui/icon';
-import { Avatar, AvatarFallback, AvatarImage } from '@/registry/ui/avatar';
-import { Button } from '@/registry/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/registry/ui/popover';
-import { Text } from '@/registry/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@/registry/new-york/components/ui/avatar';
+import { Button } from '@/registry/new-york/components/ui/button';
+import { Icon } from '@/registry/new-york/components/ui/icon';
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/new-york/components/ui/popover';
+import { Text } from '@/registry/new-york/components/ui/text';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import type { TriggerRef } from '@rn-primitives/popover';
 import { LogOutIcon, PlusIcon, SettingsIcon } from 'lucide-react-native';
