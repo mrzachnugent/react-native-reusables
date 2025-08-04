@@ -52,6 +52,7 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",
         "https://reactnativereusables.com/r/new-york/text.json"
       ],
       "dependencies": ["@rn-primitives/alert-dialog"]
@@ -170,6 +171,7 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",
         "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/context-menu"]
@@ -188,6 +190,7 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",
         "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/dialog"]
@@ -206,6 +209,7 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",
         "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/dropdown-menu"]
@@ -222,7 +226,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
+      "registryDependencies": [
+        "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json"
+      ],
       "dependencies": ["@rn-primitives/hover-card"]
     },
     {
@@ -279,6 +286,7 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",
         "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/menubar"]
@@ -356,6 +364,7 @@
       ],
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/text.json",
+        "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",
         "https://reactnativereusables.com/r/new-york/icon.json"
       ],
       "dependencies": ["@rn-primitives/select"]
@@ -617,6 +626,7 @@
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/avatar.json",
         "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/icon.json",
         "https://reactnativereusables.com/r/new-york/popover.json",
         "https://reactnativereusables.com/r/new-york/text.json"
       ]
@@ -760,6 +770,7 @@
       "registryDependencies": [
         "https://reactnativereusables.com/r/new-york/avatar.json",
         "https://reactnativereusables.com/r/new-york/button.json",
+        "https://reactnativereusables.com/r/new-york/icon.json",
         "https://reactnativereusables.com/r/new-york/popover.json",
         "https://reactnativereusables.com/r/new-york/text.json"
       ]
