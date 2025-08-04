@@ -53,18 +53,9 @@ class Add extends Effect.Service<Add>()("Add", {
               ? "http://localhost:3000/local/r/new-york"
               : "https://reactnativereusables.com/r/new-york"
 
-          const manifestComponentsSet = new Set(
-            PROJECT_MANIFEST.components.map((component) => component.toLocaleLowerCase())
-          )
-
           const componentUrls = components.map((component) => {
             const lowerCaseComponent = component.toLocaleLowerCase()
-
-            if (manifestComponentsSet.has(lowerCaseComponent)) {
-              return `${baseUrl}/${lowerCaseComponent}.json`
-            }
-
-            return component
+            return lowerCaseComponent.startsWith("http") ? lowerCaseComponent : `${baseUrl}/${lowerCaseComponent}.json`
           })
 
           const shadcnOptions = toShadcnOptions(options)
