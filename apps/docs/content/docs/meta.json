@@ -9,14 +9,12 @@
     "!installation",
     "!customization",
     "!cli",
-    "!hire-us",
     "!changelog",
     "[BookOpen][Introduction](/docs)",
     "[FolderDown][Installation](/docs/installation)",
     "[FileSliders][Customization](/docs/customization)",
     "[SquareTerminal][CLI](/docs/cli)",
     "[GitMerge][Changelog](/docs/changelog)",
-    "[FoundedLabs][Hire us](/docs/hire-us)",
     "------",
     "!/blocks",
     "---Blocks---",
@@ -25,6 +23,9 @@
     "---Components---",
     "!/components",
     ".../components",
-    "..."
+    "...",
+    "------",
+    "---About us---",
+    "[FoundedLabs][Founded Labs](https://foundedlabs.com)"
   ]
 }

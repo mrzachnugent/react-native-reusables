@@ -175,7 +175,7 @@ function TableOfContentFooter() {
         className="from-primary to-primary/75 group-hover:to-primary/80 w-fit bg-transparent bg-gradient-to-br">
         Learn more
       </Button>
-      <Link href="/docs/hire-us" className="absolute inset-0">
+      <Link href="https://foundedlabs.com" target="_blank" className="absolute inset-0">
         <span className="sr-only">Learn more about Founded Labs</span>
       </Link>
     </div>
