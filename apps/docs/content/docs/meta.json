@@ -9,14 +9,12 @@
     "!installation",
     "!customization",
     "!cli",
-    "!registry",
     "!changelog",
     "!hire-us",
     "[BookOpen][Introduction](/docs)",
     "[FolderDown][Installation](/docs/installation)",
     "[FileSliders][Customization](/docs/customization)",
     "[SquareTerminal][CLI](/docs/cli)",
-    "[ListTree][Registry](/docs/registry)",
     "[GitMerge][Changelog](/docs/changelog)",
     "[FoundedLabs][Hire us](/docs/hire-us)",
     "------",
@@ -27,6 +25,10 @@
     "---Components---",
     "!/components",
     ".../components",
+    "------",
+    "---Registry---",
+    "!registry",
+    ".../registry",
     "..."
   ]
 }

@@ -2,7 +2,7 @@ import { RnrIcon } from '@docs/components/icons/rnr-icon';
 import { SkipNavigationButton } from '@docs/components/skip-navigation-button';
 import { Button } from '@docs/components/ui/button';
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
@@ -59,6 +59,18 @@ export default function Layout({ children }: { children: ReactNode }) {
                 asChild
                 className="hover:bg-fd-accent dark:hover:bg-fd-accent -ml-1.5 justify-start sm:ml-0 sm:justify-center">
                 <Link href="/docs/components/accordion">Components</Link>
+              </Button>
+            ),
+          },
+          {
+            type: 'custom',
+            children: (
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="hover:bg-fd-accent dark:hover:bg-fd-accent -ml-1.5 justify-start sm:ml-0 sm:justify-center">
+                <Link href="/docs/registry">Registry</Link>
               </Button>
             ),
           },
