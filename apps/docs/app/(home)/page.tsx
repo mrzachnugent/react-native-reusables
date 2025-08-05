@@ -12,8 +12,11 @@ export default function HomePage() {
         <div className="h-6">
           <Badge
             variant="outline"
-            className="bg-card dark:bg-secondary border-border/70 gap-1 pr-2 font-normal shadow-sm">
-            Download the showcase app <ArrowRightIcon className="size-3" />
+            asChild
+            className="bg-card dark:bg-secondary border-border/75 gap-1 rounded-full pr-2 font-normal">
+            <Link href="/docs/blocks/authentication">
+              New Authentication Blocks <ArrowRightIcon className="size-3" />
+            </Link>
           </Badge>
         </div>
         <h1 className="text-primary/90 leading-tighter max-w-3xl text-balance text-4xl font-semibold tracking-tight lg:leading-[1.1] xl:max-w-7xl xl:text-5xl xl:font-medium xl:tracking-tighter">
