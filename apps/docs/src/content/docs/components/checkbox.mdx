@@ -11,10 +11,8 @@ import { LinkButton } from '@/components/react/LinkButton';
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import importedCode from '@rnr/reusables/components/ui/checkbox?raw';
 
-<LinkButton href="https://rn-primitives.vercel.app/checkbox">
-  Checkbox Primitive
-</LinkButton>
-<LinkButton target="_blank" href="https://rnr-showcase.vercel.app/checkbox">
+<LinkButton href='https://rn-primitives.vercel.app/checkbox'>Checkbox Primitive</LinkButton>
+<LinkButton target='_blank' href='https://rnr-showcase.vercel.app/checkbox'>
   Demo
 </LinkButton>
 
@@ -23,6 +21,7 @@ import importedCode from '@rnr/reusables/components/ui/checkbox?raw';
 A box that is a checked (ticked) indicator when activated.
 
 ### Installation
+
 <Tabs>
   <TabItem label='CLI'> 
     ```bash
@@ -40,28 +39,138 @@ A box that is a checked (ticked) indicator when activated.
 
 
     <Code code={importedCode} lang="tsx" title="~/components/ui/checkbox.tsx" />
+
   </TabItem>
 </Tabs>
 ### Usage
 
 ```tsx
+import * as React from 'react';
 import { Checkbox } from '~/components/ui/checkbox';
 
 function Example() {
-  const [checked, setChecked] = React.useState(false); 
-  return (
-     <Checkbox checked={checked} onCheckedChange={setChecked} />
-  );
+  const [checked, setChecked] = React.useState(false);
+  return <Checkbox checked={checked} onCheckedChange={setChecked} />;
 }
 ```
+
 ## Props
 
 ### Checkbox
 
-Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props
+Extends [`Pressable`](https://reactnative.dev/docs/pressable#props) props.
 
-|       Prop        |            Type            |     Note     |
-| :---------------: | :------------------------: | :----------: |
-|     checked\*     |          boolean           |              |
-| onCheckedChange\* | (checked: boolean) => void |              |
-|     disabled      |          boolean           | _(optional)_ |
+| Prop                     | Type                                  | Default                     | Notes                                                |
+| ------------------------ | ------------------------------------- | --------------------------- | ---------------------------------------------------- |
+| `checked` **\***         | `boolean`                             | —                           | Controlled state.                                    |
+| `onCheckedChange` **\*** | `(checked: boolean) => void`          | —                           | Change handler.                                      |
+| `disabled`               | `boolean`                             | `false`                     | Disables interactions.                               |
+| `className`              | `string`                              | —                           | Base classes always applied (shape/size/etc.).       |
+| `checkedClassName`       | `string`                              | `bg-primary border-primary` | Added **only** when checked.                         |
+| `uncheckedClassName`     | `string`                              | `border-primary`            | Added **only** when not checked.                     |
+| `indicatorClassName`     | `string`                              | —                           | Container for the icon (fills the box).              |
+| `iconClassName`          | `string`                              | —                           | Applied to the default icon always.                  |
+| `iconCheckedClassName`   | `string`                              | `text-primary-foreground`   | Extra classes for the default icon when checked.     |
+| `iconUncheckedClassName` | `string`                              | —                           | Extra classes for the default icon when not checked. |
+| `renderIcon`             | `({ checked: boolean }) => ReactNode` | default check icon          | Render a custom icon; overrides `icon*ClassName`.    |
+
+**Theme defaults** (when you don’t pass overrides):
+
+- Unchecked border: `border-primary`
+- Checked: `bg-primary border-primary`
+- Checked icon: `text-primary-foreground`
+
+---
+
+## Customizing styles (no presets)
+
+Use state-aware class props to color only when checked (and keep defaults otherwise).
+
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  // base shape/size
+  className='native:rounded-none web:rounded-none'
+  // applied only when checked
+  checkedClassName='bg-emerald-600 border-emerald-600 native:bg-emerald-600 native:border-emerald-600'
+  // applied only when NOT checked
+  uncheckedClassName='border-zinc-400'
+  // default icon color when checked
+  iconCheckedClassName='text-white'
+/>
+```
+
+**Web-only selectors:** you can also do:
+
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  className='data-[state=checked]:bg-red-500 data-[state=checked]:border-red-500'
+/>
+```
+
+> React Native doesn’t support `data-*` selectors—prefer `checkedClassName` on native.
+
+---
+
+## Custom icon with `renderIcon`
+
+When you supply `renderIcon`, you fully control the icon node.
+
+```tsx
+import { Platform, View } from 'react-native';
+import { Check } from '~/lib/icons/Check';
+
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  checkedClassName='bg-blue-600 border-blue-600 native:bg-blue-600 native:border-blue-600'
+  renderIcon={({ checked }) =>
+    checked ? (
+      <Check size={14} strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5} className='text-white' />
+    ) : null
+  }
+/>;
+```
+
+Show a subtle dot when unchecked:
+
+```tsx
+renderIcon={({ checked }) =>
+  checked ? (
+    <Check size={12} className="text-white" />
+  ) : (
+    <View className="h-1.5 w-1.5 rounded-[2] bg-zinc-400" />
+  )
+}
+```
+
+---
+
+## Examples
+
+**Square, red when checked**
+
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  className='native:rounded-none web:rounded-none'
+  checkedClassName='bg-red-500 border-red-500 native:bg-red-500 native:border-red-500'
+  iconCheckedClassName='text-white'
+/>
+```
+
+**Subtle unchecked, bold checked**
+
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  uncheckedClassName='border-zinc-400'
+  checkedClassName='bg-emerald-600 border-emerald-600 native:bg-emerald-600 native:border-emerald-600'
+  iconCheckedClassName='text-white'
+/>
+```

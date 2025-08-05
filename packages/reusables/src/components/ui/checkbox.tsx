@@ -14,7 +14,6 @@ export interface CheckboxProps extends CheckboxPrimitive.RootProps {
   renderIcon?: (opts: { checked: boolean }) => React.ReactNode;
 }
 
-/** Internal implementation (normal function). */
 function CheckboxImpl(
   {
     className,
@@ -74,7 +73,6 @@ function CheckboxImpl(
   );
 }
 
-/** Make a forwardRef component… */
 const ForwardedCheckbox = React.forwardRef<CheckboxPrimitive.RootRef, CheckboxProps>(CheckboxImpl);
 ForwardedCheckbox.displayName = 'Checkbox';
 export function Checkbox(props: CheckboxProps) {
