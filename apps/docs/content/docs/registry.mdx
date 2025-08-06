@@ -1,0 +1,183 @@
+---
+title: Registry
+description: Run your own code registry.
+---
+
+import { Callout } from '@docs/components/callout';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import Image from 'next/image';
+
+You can use the `shadcn` CLI to run your own code registry. Running your own registry allows you to distribute your custom components, hooks, pages, config, rules and other files to any project.
+
+<figure className="flex flex-col gap-4">
+  <Image
+    src="/images/registry-light.png"
+    width="1432"
+    height="960"
+    alt="Registry"
+    className="mt-6 w-full overflow-hidden rounded-lg border dark:hidden"
+  />
+  <Image
+    src="/images/registry-dark.png"
+    width="1432"
+    height="960"
+    alt="Registry"
+    className="mt-6 hidden w-full overflow-hidden rounded-lg border shadow-sm dark:block"
+  />
+  <figcaption className="text-center text-sm text-gray-500">
+    A distribution system for code
+  </figcaption>
+</figure>
+
+## Requirements
+
+You are free to design and host your custom registry as you see fit. The only requirement is that your registry items must be valid JSON files that conform to the `shadcn` [registry-item schema specification](https://ui.shadcn.com/docs/registry/registry-item-json).
+
+If you'd like to see an example of a registry, we have a [react-native-reusables registry template](https://github.com/gabimoncha/rnr-registry-template) as a starting point. We have already configured it for you as a monorepo, with docs and a showcase app, and an example component which uses `react-native-reusables` as dependencies.
+
+## Getting started
+
+This guide will walk you through the process of setting up your own component registry.
+
+It assumes you already have a project with components and would like to turn it into a registry.
+
+
+## registry.json
+
+The `registry.json` file is only required if you're using the `shadcn` CLI to build your registry.
+
+If you're using a different build system, you can skip this step as long as your build system produces valid JSON files that conform to the `shadcn` [registry-item schema specification](https://ui.shadcn.com/docs/registry/registry-item-json).
+
+<Steps>
+
+
+### Create your component
+
+Add your first component. Here's an example of a simple `<HelloWorld />` component:
+
+```tsx title="registry/hello-world/hello-world.tsx"
+import { Text } from "react-native"
+
+export function HelloWorld() {
+  return (
+    <Text>Hello World</Text>
+  )
+}
+```
+
+<Callout className="mt-6">
+  **Note:** This example places the component in the `registry`
+  directory. You can place it anywhere in your project as long as you set the
+  correct path in the `registry.json` file and you follow the `registry/[NAME]`
+  directory structure.
+</Callout>
+
+```txt
+registry
+└── hello-world
+    └── hello-world.tsx
+```
+
+### Add your component to the registry
+
+To add your component to the registry, you need to add your component definition to `registry.json`.
+
+```json title="registry.json"
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "acme",
+  "homepage": "https://acme.com",
+  "items": [
+    {
+      "name": "hello-world",
+      "type": "registry:component",
+      "title": "Hello World",
+      "description": "A simple hello world component.",
+      "files": [
+        {
+          "path": "registry/hello-world/hello-world.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
+```
+
+You define your registry item by adding a `name`, `type`, `title`, `description` and `files`.
+
+For every file you add, you must specify the `path` and `type` of the file. The `path` is the relative path to the file from the root of your project. The `type` is the type of the file.
+
+You can read more about the registry item schema and file types in the `shadcn` [registry item schema docs](https://ui.shadcn.com/docs/registry/registry-item-json).
+
+</Steps>
+
+## Build your registry
+
+<Steps>
+
+### Install the shadcn CLI
+
+Note: the `build` command is currently only available in the `shadcn@canary` version of the CLI.
+
+```bash
+npm install shadcn@canary
+```
+
+### Add a build script
+
+Add a `registry` script to your `package.json` file.
+
+```json title="package.json"
+{
+  "scripts": {
+    "registry": "shadcn build"
+  }
+}
+```
+
+### Run the build script
+
+Run the build script to generate the registry JSON files.
+
+```bash
+npm run registry
+```
+
+<Callout className="mt-6">
+**Note:** By default, the script will look for `registry.json` and generate the registry JSON files in `public/r`
+
+e.g `public/r/hello-world.json`.
+
+You can change the output directory by passing the `--output` option.
+
+See the `shadcn` [build command](https://ui.shadcn.com/docs/cli#build) for more information.
+
+</Callout>
+
+</Steps>
+
+## Publish your registry
+
+To make your registry available to other developers, you can publish it by deploying your project to a public URL.
+
+<Callout className="mt-6">
+
+**Notes:** Your files need to be served at `https://<your-domain>/r/[NAME].json`
+
+eg. `http://<your-domain>/r/hello-world.json`.
+</Callout>
+
+
+
+## Install using the CLI
+
+To install a registry item using the `shadcn` CLI, use the `add` command followed by the URL of the registry item.
+
+```bash
+npx @react-native-reusables/cli add https://<your-domain>/r/hello-world.json
+```
+
+## Additional resources
+
+For more info about adding auth, guidelines, FAQs, other examples and json schemas you can check the following `shadcn` registry documentation pages: https://ui.shadcn.com/docs/registry
