@@ -62,18 +62,6 @@ export default function Layout({ children }: { children: ReactNode }) {
               </Button>
             ),
           },
-          {
-            type: 'custom',
-            children: (
-              <Button
-                variant="ghost"
-                size="sm"
-                asChild
-                className="hover:bg-fd-accent dark:hover:bg-fd-accent -ml-1.5 justify-start sm:ml-0 sm:justify-center">
-                <Link href="/docs/registry">Registry</Link>
-              </Button>
-            ),
-          },
         ]}>
         {children}
       </HomeLayout>

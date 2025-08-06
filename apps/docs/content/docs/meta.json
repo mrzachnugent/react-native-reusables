@@ -10,7 +10,6 @@
     "!customization",
     "!cli",
     "!changelog",
-    "!hire-us",
     "[BookOpen][Introduction](/docs)",
     "[FolderDown][Installation](/docs/installation)",
     "[FileSliders][Customization](/docs/customization)",
@@ -27,8 +26,7 @@
     "...",
     "------",
     "---Registry---",
-    "!registry",
-    ".../registry",
+    "create-your-registry",
     "------",
     "---About us---",
     "[FoundedLabs][Founded Labs](https://foundedlabs.com)"

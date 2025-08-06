@@ -24,8 +24,10 @@ const SEARCH_OPTIONS = {
     ['Installation', '/docs/installation'],
     ['Customization', '/docs/customization'],
     ['CLI', '/docs/cli'],
-    ['Registry', '/docs/registry'],
     ['Changelog', '/docs/changelog'],
+    ['Components', '/docs/components/accordion'],
+    ['Blocks', '/docs/blocks/authentication'],
+    ['Create Your Registry', '/docs/create-your-registry'],
   ] satisfies SearchLink[],
 };
 
