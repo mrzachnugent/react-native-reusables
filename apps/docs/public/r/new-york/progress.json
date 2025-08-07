@@ -5,7 +5,9 @@
   "title": "Progress",
   "author": "@mrzachnugent",
   "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  "dependencies": ["@rn-primitives/progress"],
+  "dependencies": [
+    "@rn-primitives/progress"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/progress.tsx",

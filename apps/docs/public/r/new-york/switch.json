@@ -5,7 +5,9 @@
   "title": "Switch",
   "author": "@mrzachnugent",
   "description": "A control that allows the user to toggle between checked and not checked.",
-  "dependencies": ["@rn-primitives/switch"],
+  "dependencies": [
+    "@rn-primitives/switch"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/switch.tsx",

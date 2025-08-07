@@ -5,7 +5,9 @@
   "title": "Collapsible",
   "author": "@mrzachnugent",
   "description": "A control that allows the user to toggle between checked and not checked.",
-  "dependencies": ["@rn-primitives/collapsible"],
+  "dependencies": [
+    "@rn-primitives/collapsible"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/collapsible.tsx",

@@ -5,7 +5,9 @@
   "title": "Accordion",
   "author": "@mrzachnugent",
   "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
-  "dependencies": ["@rn-primitives/accordion"],
+  "dependencies": [
+    "@rn-primitives/accordion"
+  ],
   "registryDependencies": [
     "https://reactnativereusables.com/r/new-york/text.json",
     "https://reactnativereusables.com/r/new-york/icon.json"

@@ -5,7 +5,9 @@
   "title": "Aspect Ratio",
   "author": "@mrzachnugent",
   "description": "Displays content within a desired ratio.",
-  "dependencies": ["@rn-primitives/aspect-ratio"],
+  "dependencies": [
+    "@rn-primitives/aspect-ratio"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/aspect-ratio.tsx",

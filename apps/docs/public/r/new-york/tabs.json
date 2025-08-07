@@ -5,8 +5,12 @@
   "title": "Tabs",
   "author": "@mrzachnugent",
   "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  "dependencies": ["@rn-primitives/tabs"],
-  "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
+  "dependencies": [
+    "@rn-primitives/tabs"
+  ],
+  "registryDependencies": [
+    "https://reactnativereusables.com/r/new-york/text.json"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/tabs.tsx",

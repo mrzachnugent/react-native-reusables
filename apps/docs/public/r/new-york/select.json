@@ -5,7 +5,9 @@
   "title": "Select",
   "author": "@mrzachnugent",
   "description": "Displays a list of options for the user to pick from—triggered by a button.",
-  "dependencies": ["@rn-primitives/select"],
+  "dependencies": [
+    "@rn-primitives/select"
+  ],
   "registryDependencies": [
     "https://reactnativereusables.com/r/new-york/text.json",
     "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",

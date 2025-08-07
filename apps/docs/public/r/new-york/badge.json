@@ -5,8 +5,12 @@
   "title": "Badge",
   "author": "@mrzachnugent",
   "description": "Displays a badge or a component that looks like a badge.",
-  "dependencies": ["@rn-primitives/slot"],
-  "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
+  "dependencies": [
+    "@rn-primitives/slot"
+  ],
+  "registryDependencies": [
+    "https://reactnativereusables.com/r/new-york/text.json"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/badge.tsx",

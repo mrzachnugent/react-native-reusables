@@ -5,7 +5,9 @@
   "title": "Hover Card",
   "author": "@mrzachnugent",
   "description": "For sighted users to preview content available behind a link.",
-  "dependencies": ["@rn-primitives/hover-card"],
+  "dependencies": [
+    "@rn-primitives/hover-card"
+  ],
   "registryDependencies": [
     "https://reactnativereusables.com/r/new-york/text.json",
     "https://reactnativereusables.com/r/new-york/native-only-animated-view.json"

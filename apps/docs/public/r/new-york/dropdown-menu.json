@@ -5,7 +5,9 @@
   "title": "Dropdown Menu",
   "author": "@mrzachnugent",
   "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
-  "dependencies": ["@rn-primitives/dropdown-menu"],
+  "dependencies": [
+    "@rn-primitives/dropdown-menu"
+  ],
   "registryDependencies": [
     "https://reactnativereusables.com/r/new-york/text.json",
     "https://reactnativereusables.com/r/new-york/native-only-animated-view.json",

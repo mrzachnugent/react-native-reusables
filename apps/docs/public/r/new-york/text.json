@@ -5,7 +5,9 @@
   "title": "Text",
   "author": "@mrzachnugent",
   "description": "A component for displaying text.",
-  "dependencies": ["@rn-primitives/slot"],
+  "dependencies": [
+    "@rn-primitives/slot"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",

@@ -5,7 +5,9 @@
   "title": "Avatar",
   "author": "@mrzachnugent",
   "description": "An image element with a fallback for representing the user.",
-  "dependencies": ["@rn-primitives/avatar"],
+  "dependencies": [
+    "@rn-primitives/avatar"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/avatar.tsx",

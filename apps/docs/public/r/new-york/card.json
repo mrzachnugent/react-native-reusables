@@ -5,7 +5,9 @@
   "title": "Card",
   "author": "@mrzachnugent",
   "description": "Displays a card with header, content, and footer.",
-  "registryDependencies": ["https://reactnativereusables.com/r/new-york/text.json"],
+  "registryDependencies": [
+    "https://reactnativereusables.com/r/new-york/text.json"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/card.tsx",

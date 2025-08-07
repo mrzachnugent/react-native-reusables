@@ -5,7 +5,9 @@
   "title": "Label",
   "author": "@mrzachnugent",
   "description": "Renders an accessible label associated with controls.",
-  "dependencies": ["@rn-primitives/label"],
+  "dependencies": [
+    "@rn-primitives/label"
+  ],
   "files": [
     {
       "path": "./node_modules/@rnr/registry/src/new-york/components/ui/label.tsx",

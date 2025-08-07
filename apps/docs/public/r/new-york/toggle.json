@@ -5,7 +5,9 @@
   "title": "Toggle",
   "author": "@mrzachnugent",
   "description": "A two-state button that can be either on or off.",
-  "dependencies": ["@rn-primitives/toggle"],
+  "dependencies": [
+    "@rn-primitives/toggle"
+  ],
   "registryDependencies": [
     "https://reactnativereusables.com/r/new-york/text.json",
     "https://reactnativereusables.com/r/new-york/icon.json"
