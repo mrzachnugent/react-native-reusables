@@ -1,0 +1,177 @@
+---
+title: Changelog
+description: Latest updates and announcements.
+---
+
+import { Callout } from '@docs/components/callout';
+import { CommandTabs } from '@docs/components/command-tabs';
+import { VercelOssBadge } from '@docs/components/vercel-oss-badge';
+import { ClerkLogo } from '@docs/components/clerk-logo';
+import { DownloadAppBanner } from '@docs/components/download-app-banner';
+
+## August 2025 - Total Rewrite
+
+New CLI. New docs. New registry. New showcase app. New sponsors.
+
+
+### Now part of the Vercel OSS Program [#august-2025-vercel-oss]
+
+<VercelOssBadge />
+
+React Native Reusables is now part of the [Vercel OSS Program](https://vercel.com/oss), which supports its continued growth and development.
+
+### Sponsored Blocks by Clerk [#august-2025-clerk]
+
+<a href="https://go.clerk.com/gjgxNgT" target="_blank" className="block w-fit">
+  <ClerkLogo />
+</a>
+
+React Native Reusables now features a [template](https://github.com/founded-labs/react-native-reusables-templates/tree/main/clerk-auth) and sponsored [blocks](/docs/blocks/authentication) from [Clerk](https://go.clerk.com/gjgxNgT), helping you quickly integrate authentication into your apps with React Native Reusables.
+
+
+### First React Native shadcn registry _(probably)_ [#august-2025-first-react-native-shadcn-registry]
+
+You can now use `npx shadcn@latest` with our registries.
+
+React Native Reusables now follows the shadcn/ui **new-york** style, providing a consistent and familiar design system for your apps.
+
+To make the experience even smoother, we built a thin wrapper around the CLI.
+
+- No need to copy long registry URLs
+
+- You can use `--all` to install everything at once
+
+- If you skip the component name, you'll get a multi-select prompt
+
+
+<CommandTabs args={["add"]} />
+
+<span className="text-sm">For more details, see the [add options](/docs/cli#add).</span> 
+
+Same power, tailored for React Native Reusables.
+
+### Standardize rem to match web [#august-2025-standardize-rem]
+
+In the `metro.config.js`, `inlineRem` is now set to `16` to match web sizing.
+
+```diff title="metro.config.js"
+const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname);
+
+- module.exports = withNativeWind(config, { input: './global.css' });
++ module.exports = withNativeWind(config, { input: './global.css', inlineRem: 16 });
+```
+
+### Enhanced iOS portal rendering with FullWindowOverlay [#august-2025-fullwindowoverlay-ios]
+
+All portal content on iOS is now wrapped with `FullWindowOverlay` from `react-native-screens` to improve rendering and ensure seamless integration with native navigation.
+
+### New CLI - rewritten with Effect + shadcn [#august-2025-new-cli-rewritten-with-effect-shadcn]
+
+The CLI has been rebuilt from the ground up with [`effect`](https://effect.website) and the [`shadcn`](https://ui.shadcn.com/docs/cli) engine under the hood for the add command.
+
+Features:
+
+- `doctor` command to diagnose and fix certain config/setup issues
+
+- Registry-aware component scaffolding
+
+- Stronger foundation for future updates
+
+<CommandTabs args={["doctor"]} />
+
+<span className="text-sm">For more details, see the [doctor command](/docs/cli#doctor).</span> 
+
+### Improved component architecture [#august-2025-improved-component-architecture]
+
+Every component has been refined and standardized.
+
+- Improved platform-specific logic
+
+- Easier to override and customize
+
+
+### Blocks [#august-2025-blocks]
+
+Introduced authentication [blocks](/docs/blocks/authentication) to help you quickly integrate authentication into your apps with React Native Reusables.
+
+### Showcase App [#august-2025-showcase-app]
+
+<DownloadAppBanner />
+
+### Redesigned Docs [#august-2025-redesigned-docs]
+
+The docs have been redesigned to be more consistent and easier to use.
+
+### New GitHub Home [#august-2025-new-github-home]
+
+We moved the repo from my personal account to a dedicated org [@founded-labs](https://github.com/founded-labs).
+
+This gives the project a long-term home with more room to grow.
+
+### New Icon component [#august-2025-new-icon-component]
+
+A single icon component to replace all icons from the deprecated `/lib/icons` directory.
+
+**Install the new icon component with the CLI**
+
+<CommandTabs args={["add", "icon"]} />
+
+
+```tsx
+// Example usage
+import { Icon } from '@/components/ui/icon';
+import { HeartIcon } from 'lucide-react-native';
+
+<Icon as={HeartIcon} className="size-4 text-red-500" />
+
+```
+
+### Text variants [#august-2025-text-variants]
+
+The `Text` component now includes built-in typography variants, so you no longer need to use the deprecated `Typography` components like `<Typography.H1>`.
+
+Use the variant prop like this:
+
+```tsx
+<Text variant="h1">Title</Text>
+```
+
+Available variants: `default`, `h1` , `h2`, `h3`, `h4`, `p`, `block-quote`, `code`, `lead`, `large`, `small`, and `muted`.
+
+### Deprecated [#august-2025-deprecated]
+
+- `lib/constants.ts`: now using the [`theme.ts`](/docs/customization#themets) file.
+
+- `lib/useColorScheme.ts`: now using the hook directly from [`nativewind`](https://www.nativewind.dev/docs/api/use-color-scheme)
+
+- `lib/icons`: deprecated in favor of the new [`Icon`](#august-2025-new-icon-component) component.
+
+- `components/ui/typography.tsx`: deprecated in favor of the new [`variant`](#august-2025-text-variants) prop on the `Text` component.
+
+### Upgrade Notes [#august-2025-upgrade-notes]
+1. Run the `doctor` command to diagnose. Then, follow the instructions to get your project up to date:
+
+<CommandTabs args={["doctor"]} />
+
+2. Update your components by running the `add` command with `--overwrite` and list the components from your project:
+
+<Callout type="warn">
+  Make sure you commit your changes before running the add command and use the diff view to see what's changed and to keep
+  your own custom changes.
+</Callout>
+
+<CommandTabs args={["add", "--overwrite", "[...components]"]} />
+
+<span className='sr-only'>
+
+#### Thank you [#august-2025-thanks]
+
+</span>
+
+<br />
+
+Thank you to everyone who has been using React Native Reusables, sharing feedback, and contributing.
+Your support means a lot and is truly appreciated.

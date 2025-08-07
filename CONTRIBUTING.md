@@ -1,15 +1,15 @@
-# Contributing to [react-native-reusables](https://github.com/mrzachnugent/react-native-reusables)
+# Contributing to React Native Reusables
 
 Thank you for your interest in contributing to `react-native-reusables`! We welcome contributions from the community to improve and enhance this project. Before getting started, please take a moment to review the following guidelines.
 
 ## How to Contribute
 
-> **IMPORTANT**
+> ⚠️ **Important**
 >
-> **If you want to propose a new feature:**
+> If you want to propose a new feature:
 >
-> 1.  Make sure to read the [project scope](https://github.com/mrzachnugent/react-native-reusables/discussions/229) to confirm your proposal fits within the vision and purpose of `react-native-reusables`.
-> 2.  Please open a [new discussion](https://github.com/mrzachnugent/react-native-reusables/discussions) before taking any action. This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
+> 1.  Make sure to read the [project scope](https://github.com/founded-labs/react-native-reusables/discussions/229) to confirm your proposal fits within the vision and purpose of `react-native-reusables`.
+> 2.  Before taking any action, please open a [new discussion](https://github.com/founded-labs/react-native-reusables/discussions). This allows us to collaborate, gather feedback, and ensure alignment with the project's goals.
 
 <br />
 
@@ -19,10 +19,10 @@ Thank you for your interest in contributing to `react-native-reusables`! We welc
    git clone https://github.com/your-username/react-native-reusables.git
    cd react-native-reusables
    ```
-3. Create a new branch for your feature or bug fix:
+3. Create a new branch:
 
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b your-username/your-feature-name
    ```
 
 4. Make your changes and ensure that your code adheres to the existing coding standards.
@@ -35,7 +35,7 @@ git commit -m "Add your commit message here"
 6. Push your changes to your forked repository:
 
    ```bash
-   git push origin feature/your-feature-name
+   git push origin your-username/your-feature-name
    ```
 
 7. Open a pull request (PR) against the main branch of the original repository.
@@ -48,18 +48,18 @@ Please follow the coding style and guidelines used in the project. If there are 
 
 ## Issue Tracker
 
-Check the [issue tracker](https://github.com/mrzachnugent/react-native-reusables/issues) for existing issues or open a new issue to discuss and coordinate your contribution with the maintainers.
+Check the [issue tracker](https://github.com/founded-labs/react-native-reusables/issues) for existing issues or open a new issue to discuss and coordinate your contribution with the maintainers.
 
 ## Code of Conduct
 
-Please review and adhere to our [Code of Conduct](https://github.com/mrzachnugent/react-native-reusables/blob/main/CODE_OF_CONDUCT.md). Be respectful and considerate towards others.
+Please review and adhere to our [Code of Conduct](https://github.com/founded-labs/react-native-reusables/blob/main/CODE_OF_CONDUCT.md). Be respectful and considerate towards others.
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/mrzachnugent/react-native-reusables/blob/main/LICENSE) file of this repository.
+By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/founded-labs/react-native-reusables/blob/main/LICENSE) file of this repository.
 
 ## Contact
 
-If you have any questions or need further assistance, feel free to contact us at nugentzn@gmail.com.
+If you have any questions or need further assistance, feel free to contact us at hello@foundedlabs.com.
 
 **We appreciate your contributions and look forward to working with you!**

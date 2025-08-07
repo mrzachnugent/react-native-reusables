@@ -1,0 +1,95 @@
+---
+title: CLI
+description: Use the CLI to add components and more
+---
+
+import { Callout } from '@docs/components/callout';
+import { CommandTabs } from '@docs/components/command-tabs';
+
+## init
+
+Use `init` to scaffold a new Expo project using a template.
+
+<CommandTabs args={["init"]} />
+
+### Options
+
+```bash
+Usage: react-native-reusables init [options]
+
+Initialize a new Expo project with React Native Reusables
+
+Options:
+  -c, --cwd <cwd>               the working directory. defaults to the current directory.
+  -t, --template <template>     the template to use.
+  -h, --help                    display help for command
+```
+
+<Callout title="Available templates">
+
+- [minimal](https://github.com/founded-labs/react-native-reusables-templates/tree/main/minimal#minimal-template)
+- [clerk-auth](https://github.com/founded-labs/react-native-reusables-templates/tree/main/clerk-auth#clerk-auth-template)
+
+</Callout>
+
+## add
+
+
+Use `add` to add React Native Reusables components to your project.
+
+<CommandTabs args={["add", "[components]"]} />
+
+
+### Options
+
+```bash
+Usage: react-native-reusables add [options] [...components]
+
+Add React Native Reusables components to your project
+
+Arguments:
+  components         name of components to add
+
+Options:
+  -c, --cwd <cwd>        the working directory. defaults to the current directory.
+  -y, --yes              skip confirmation prompt
+  -o, --overwrite        force overwrite of existing files
+  -a, --all              add all components
+  -p  --path <path>      path to the component
+  -h, --help             display help for command
+```
+
+<Callout type="info">
+  Uses the [shadcn](https://ui.shadcn.com/docs/cli#add) CLI under the hood.
+</Callout>
+
+
+## doctor
+
+Use `doctor` to check if everything is set up correctly.
+
+<CommandTabs args={["doctor"]} />
+
+### Options
+
+```bash
+Usage: react-native-reusables doctor [options]
+
+Check your project setup and diagnose issues
+
+Options:
+  -c, --cwd <cwd>        the working directory. defaults to the current directory.
+  -s, --summary          show summary only
+  -y, --yes              skip confirmation prompt
+  -h, --help             display help for command
+```
+
+<div className="h-2" />
+
+<Callout type="info" title="Debugging">
+
+    If you're having issues, you can run any command with the initial `--log-level all` flag to get more information and create a [bug report](https://github.com/founded-labs/react-native-reusables/issues).
+
+    <CommandTabs args={["--log-level all", "[command]", "[options]", "[...args]"]} />
+
+</Callout>

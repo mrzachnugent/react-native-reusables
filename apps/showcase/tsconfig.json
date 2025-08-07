@@ -3,8 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": [
+      "@showcase/*": [
         "./*"
+      ],
+      "@/registry/*": [
+        "../../packages/registry/src/*"
       ]
     },
     "jsx": "react-native",

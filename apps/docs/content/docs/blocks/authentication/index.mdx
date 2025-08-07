@@ -1,0 +1,38 @@
+---
+title: Authentication
+description: Copy and paste or add them with the CLI.
+---
+
+import { Callout } from "@docs/components/callout"
+import { BlocksGrid } from "@docs/components/blocks-grid"
+import { CommandTabs } from "@docs/components/command-tabs"
+import { ClerkLogo } from "@docs/components/clerk-logo"
+
+## Blocks
+
+<BlocksGrid />
+
+<div className="h-16"/>
+
+<div className='hidden'>
+## Clerk
+</div>
+
+<a href="https://go.clerk.com/gjgxNgT" target="_blank" className='block w-fit'>
+<ClerkLogo />
+</a>
+<span className="text-fd-muted-foreground block h-12 pt-3">Optional integration.</span>
+
+Select **Clerk** from the integration menu to get blocks built with Clerk authentication logic.
+
+After adding your first block, follow the [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to complete the setup.
+
+<div className="h-1"/>
+
+<Callout title="Starting a new project?">
+
+Start a new project with all Clerk authentication blocks pre-configured using the [clerk-auth](https://github.com/founded-labs/react-native-reusables-templates/tree/main/clerk-auth#clerk-auth-template) template.
+
+<CommandTabs args={["init", "-t", "clerk-auth"]} />
+
+</Callout>

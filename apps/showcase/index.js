@@ -1,5 +1,3 @@
-import './global.css';
-
 import { registerRootComponent } from 'expo';
 import { ExpoRoot } from 'expo-router';
 
