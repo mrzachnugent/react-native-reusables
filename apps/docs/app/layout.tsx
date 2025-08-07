@@ -21,13 +21,10 @@ const fontMono = Geist_Mono({
 
 const SEARCH_OPTIONS = {
   links: [
-    ['Installation', '/docs/installation'],
-    ['Customization', '/docs/customization'],
-    ['CLI', '/docs/cli'],
-    ['Changelog', '/docs/changelog'],
-    ['Components', '/docs/components/accordion'],
+    ['Docs', '/docs/installation'],
     ['Blocks', '/docs/blocks/authentication'],
-    ['Create Your Registry', '/docs/create-your-registry'],
+    ['Components', '/docs/components/accordion'],
+    ['Changelog', '/docs/changelog'],
   ] satisfies SearchLink[],
 };
 
