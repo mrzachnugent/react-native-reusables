@@ -10,7 +10,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     version: '0.0.2',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
-    scheme: SLUG,
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     runtimeVersion: {
@@ -26,6 +25,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     assetBundlePatterns: ['**/*'],
     ios: {
+      scheme: SLUG,
       supportsTablet: true,
       bundleIdentifier: 'com.reactnativereusables.app',
       associatedDomains: ['applinks:reactnativereusables.com'],
@@ -34,12 +34,13 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       },
     },
     android: {
+      scheme: `${SLUG}android`,
       edgeToEdgeEnabled: true,
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#0A0A0A',
       },
-      package: 'com.reactnativereusables.app',
+      package: 'com.reactnativereusables.android',
       intentFilters: [
         {
           action: 'VIEW',
