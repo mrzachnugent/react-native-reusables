@@ -5,7 +5,7 @@ import { findNeighbour } from 'fumadocs-core/server';
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page';
-import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -174,8 +174,9 @@ function TableOfContentFooter() {
       <div className="text-muted-foreground pb-2">We help companies ship world-class UI/UX.</div>
       <Button
         size="sm"
-        className="from-primary to-primary/75 group-hover:to-primary/80 w-fit bg-transparent bg-gradient-to-br">
+        className="from-primary to-primary/75 group-hover:to-primary/80 relative w-fit bg-transparent bg-gradient-to-br duration-300 group-hover:pr-8">
         Learn more
+        <ChevronRight className="absolute right-2 top-1/2 -translate-x-1 -translate-y-1/2 scale-y-0 opacity-0 duration-300 group-hover:translate-x-0 group-hover:scale-y-100 group-hover:opacity-100" />
       </Button>
       <Link href="https://foundedlabs.com" target="_blank" className="absolute inset-0">
         <span className="sr-only">Learn more about Founded Labs</span>
@@ -209,7 +210,7 @@ function FoundedLabsLogo({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M60.959 10.0586C67.7645 16.608 72 25.809 72 36C72 55.8822 55.8822 72 36 72C29.0893 72 22.6347 70.0505 17.1523 66.6748C22.3873 68.4072 28.3726 66.8204 32.0146 62.2598C32.131 62.1141 32.2498 61.9652 32.3701 61.8145C37.6242 55.2343 35.3325 44.4927 37.3457 36.3164C39.1367 29.0433 46.4846 24.5989 53.7578 26.3896C54.63 26.6044 55.4613 26.8995 56.2461 27.2646C57.7227 27.9517 59.5618 27.7619 60.5781 26.4893C64.4722 21.6122 64.4576 14.8744 60.959 10.0586ZM36 0C42.9823 4.07255e-07 49.4989 1.99012 55.0176 5.43066C49.6089 3.26535 43.2037 4.77614 39.3809 9.56348C39.2647 9.70901 39.1466 9.85727 39.0264 10.0078C33.7721 16.5881 36.0659 27.3294 34.0527 35.5059C32.2619 42.7792 24.914 47.2244 17.6406 45.4336C16.7675 45.2186 15.935 44.9232 15.1494 44.5576C13.6727 43.8704 11.8339 44.0603 10.8174 45.333C7.25637 49.793 6.96447 55.8098 9.61621 60.4893C3.65007 54.0645 5.51757e-07 45.4592 0 36C0 16.1178 16.1178 0 36 0Z"
+        d="M68.9864 21.5847C72.7676 30.2399 73.1596 40.3614 69.2597 49.7766C61.6511 68.1454 40.5922 76.8683 22.2234 69.2597C15.8387 66.6151 10.6215 62.3439 6.84829 57.1271C11.0218 60.731 17.1587 61.5555 22.2688 58.7357C22.4321 58.6457 22.5988 58.5535 22.7677 58.4604C30.1399 54.3917 32.1333 43.5908 37.1222 36.8073C41.5602 30.7732 50.0495 29.4791 56.0838 33.9168C56.8074 34.449 57.4625 35.0398 58.0478 35.6774C59.1491 36.8773 60.9209 37.4057 62.3468 36.6189C67.8108 33.6033 70.3758 27.3727 68.9864 21.5847ZM49.7766 2.74035C56.2274 5.41236 61.4863 9.74477 65.2683 15.0353C61.1 10.965 54.6042 9.90967 49.2403 12.8696C49.0773 12.9596 48.9114 13.0514 48.7428 13.1445C41.3703 17.2132 39.379 28.0146 34.3901 34.7983C29.9521 40.8327 21.4625 42.1276 15.4281 37.6897C14.7037 37.157 14.0475 36.5654 13.4617 35.927C12.3604 34.727 10.5888 34.1988 9.1627 34.9856C4.16601 37.7433 1.59379 43.1904 2.25292 48.5285C-0.800437 40.3097 -0.879535 30.9625 2.74033 22.2234C10.3489 3.8546 31.4078 -4.86826 49.7766 2.74035Z"
         fill="currentColor"
       />
     </svg>
