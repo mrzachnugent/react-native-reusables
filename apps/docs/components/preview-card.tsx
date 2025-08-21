@@ -95,7 +95,7 @@ function useWindowSize(): WindowSize {
   return size;
 }
 
-function useIsDarkMode(): boolean {
+export function useIsDarkMode(): boolean {
   const [isDark, setIsDark] = React.useState(() =>
     document.documentElement.classList.contains('dark')
   );

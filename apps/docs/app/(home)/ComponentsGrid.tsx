@@ -31,34 +31,61 @@ import {
   ToggleGroupPreview,
   TooltipPreview,
 } from '@docs/components/examples';
+import { useIsDarkMode } from '@docs/components/preview-card';
 import Image from 'next/image';
+import { QRCodeSVG } from 'qrcode.react';
+import { useState } from 'react';
 
 export default function ComponentsGrid() {
+  const isDark = useIsDarkMode();
+  const [nativePreview, setNativePreview] = useState(false);
+
   return (
     <div className="flex flex-col gap-4 max-2xl:px-4">
       <div className="flex w-full justify-between">
-        {/* <StyleSwitcher onValueChange={onStyleChange} defaultValue="default" value={style} /> */}
-        <div className="bg-fd-background flex items-center gap-1 rounded-md border px-2.5 py-0.5 text-xs">
+        <div className="bg-fd-background flex items-center gap-1 rounded-md border pl-2.5 pr-0.5 py-0.5 text-xs relative">
           <span className="text-muted-foreground">Platform:</span>{' '}
-          <div className="py-0.25 cursor-pointer rounded-sm border bg-white px-1.5 shadow dark:bg-neutral-800">
+          <button
+            className={`py-0.25 px-1.5 cursor-pointer rounded-sm border duration-150 ${!nativePreview ? 'bg-white shadow dark:bg-neutral-800' : 'border-transparent'}`}
+            onClick={()=> setNativePreview(false)}
+          >
             Web
-          </div>
-          {/* // TODO: link to Showcase popup */}
-          <div className="cursor-pointer">Native</div>
+          </button>
+          <button
+            className={`py-0.25 px-1.5 cursor-pointer rounded-sm border duration-150 ${nativePreview ? 'bg-white shadow dark:bg-neutral-800' : 'border-transparent'}`}
+            onClick={() => setNativePreview(true)}
+          >
+            Native
+          </button>
+          <div className={`absolute left-0 shadow-xl z-20 top-10 border-r border-b flex max-w-sm flex-col items-center gap-6 p-4 dark:bg-black rounded-lg border-dashed bg-white duration-300 ${nativePreview ? 'opacity-100 translate-y-0 blur-0' : 'blur-md opacity-0 pointer-events-none -translate-y-2'}`}>
+              <QRCodeSVG
+                value="https://reactnativereusables.com/showcase/links/home-screen"
+                bgColor={isDark ? 'black' : 'white'}
+                fgColor={isDark ? 'white' : 'black'}
+                size={230}
+                level="H"
+              />
+              <p className="text-center font-mono text-sm">Scan to preview.</p>
+            </div>
         </div>
       </div>
 
-      {/* // TODO: add light mode hide with dark: */}
       <Image
         src="/mobile-component-previews/default_dark.png"
         alt="Components Grid"
         width={2520}
         height={1704}
-        className="rounded-lg md:hidden"
+        className="rounded-lg md:hidden hidden max-md:dark:block"
+      />
+      <Image
+        src="/mobile-component-previews/default_light.png"
+        alt="Components Grid"
+        width={2520}
+        height={1704}
+        className="rounded-lg md:hidden dark:hidden"
       />
 
       <div className="dark:from-fd-background dark:to-fd-accent/70 to-fd-accent relative flex w-full flex-wrap overflow-clip rounded-lg border border-dashed bg-gradient-to-bl from-white max-md:hidden">
-        {/* // TODO: adjust for md-to-xl breakpoint, some stuff wraps ugly */}
         <div className="flex w-full flex-wrap items-center border-b">
           <div className="border-r p-4">
             <HoverCardPreview />
@@ -93,13 +120,10 @@ export default function ComponentsGrid() {
             <div className="relative border-t p-4">
               <AlertPreview />
             </div>
-            {/* <div className="col-span-2 border-t p-4">
-            <AspectRatioPreview /> 
-          </div> */}
           </div>
           <div className="w-full border-r xl:w-[400px]">
             {/* <div className="flex w-full justify-center p-4 py-10">
-            <ContextMenuPreview /> 
+              <ContextMenuPreview /> 
             </div> */}
             <div className="p-5">
               <BadgePreview />
