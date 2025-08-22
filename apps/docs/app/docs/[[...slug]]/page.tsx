@@ -22,7 +22,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
       full={page.data.full}
       breadcrumb={{ enabled: false }}
       tableOfContent={{
-        footer: shouldShowTableOfContentFooter(page.data.title) ? <TableOfContentFooter /> : null,
+        footer: <TableOfContentFooter />,
       }}
       footer={{
         component: <Footer url={page.url} />,
@@ -185,12 +185,6 @@ function TableOfContentFooter() {
       </Link>
     </div>
   );
-}
-
-const PAGE_TITLES_TO_NOT_SHOW_FOOTER = ['Installation', 'Hire us'];
-
-function shouldShowTableOfContentFooter(title: string) {
-  return !PAGE_TITLES_TO_NOT_SHOW_FOOTER.includes(title);
 }
 
 export async function generateStaticParams() {
