@@ -1,15 +1,15 @@
 [
-    {
-      "relation": [
-        "delegate_permission/common.handle_all_urls",
-        "delegate_permission/common.get_login_creds"
-      ],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.reactnativereusables.app",
-        "sha256_cert_fingerprints": [
-          "F7:0C:7B:38:A3:7F:9E:F0:85:5F:44:DF:54:F1:85:17:22:86:2D:F5:F5:ED:BF:34:C1:BD:03:6E:5C:51:CA:BB"
-        ]
-      }
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.reactnativereusables.android",
+      "sha256_cert_fingerprints": [
+        "48:D9:BD:31:EA:96:A2:18:06:B7:FD:5B:2E:C0:3B:B4:54:75:E1:BC:04:CE:54:E3:4B:84:3D:18:31:8C:14:AA"
+      ]
     }
-  ]
+  }
+]

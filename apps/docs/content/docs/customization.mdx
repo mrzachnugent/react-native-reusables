@@ -1,0 +1,53 @@
+---
+title: Customization
+description: How to customize your project
+---
+
+React Native Reusables uses a theme system based on Tailwind CSS v3 and shadcn/ui. There are four files involved:
+
+- `components.json` - used by the CLI to scaffold components with the correct paths and style  
+- `global.css` - defines your light and dark themes using CSS variables  
+- `tailwind.config.ts` - connects Tailwind classes to your CSS variables  
+- `theme.ts` - mirrors those variables in TypeScript and includes the navigation theme  
+
+
+## `components.json`
+
+This works like [shadcn/ui's components.json](https://ui.shadcn.com/docs/components-json). It tells the CLI where to place files. You can leave it alone unless you're changing paths or switching styles.
+
+## `global.css`
+
+Defines your theme using CSS variables under `:root` and `.dark:root` (for dark mode). Tailwind classes like `bg-background` and `text-foreground` use these variables.
+
+You can choose a custom theme from [shadcn/ui themes](https://ui.shadcn.com/themes), but make sure to:
+
+- Use the Tailwind v3 version (CSS variables)
+- Replace `.dark` with `.dark:root` for compatibility with Nativewind
+
+See the [full list of CSS variables](https://ui.shadcn.com/docs/theming#list-of-variables) in the shadcn/ui documentation.
+
+## `tailwind.config.ts`
+
+Connects Tailwind utility classes (like `bg-card`, `text-muted`) to the CSS variables defined in `global.css`, while also configuring the dark mode selector, plugins, and animations.
+
+## `theme.ts`
+
+Exports the same colors from `global.css` as a TypeScript object, so you can use them in logic, inline styles, or animations. Also includes `NAV_THEME` for the `ThemeProvider` in `_layout.tsx`.
+
+If you update a CSS variable, update `theme.ts` as well.
+
+
+
+<div className='text-sm *:text-muted-foreground *:font-normal py-2 *:leading-7'>
+
+<div className='-mb-1.5 *:text-foreground'>
+  <span className='font-medium'>Tip</span>:  After updating CSS variables in `global.css`, use this prompt to sync `theme.ts`:
+</div>
+
+> Read CSS variables under `:root` and `.dark:root` in `global.css`.
+> Update the `light` and `dark` entries in the `THEME` object in `theme.ts` to match these values in HSL format.
+> Keep all keys and `NAV_THEME` unchanged.
+> Add new variables if missing; comment stale ones if no matching CSS variable exists.
+> Maintain the original formatting and key order.
+
+</div>

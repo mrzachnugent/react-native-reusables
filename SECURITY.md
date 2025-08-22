@@ -9,7 +9,7 @@ Please follow these guidelines when reporting security issues:
 ### Responsible Disclosure
 
 1. **Do not create public issues for security-related concerns.**
-2. Email us at [nugentzn@gmail.com](mailto:nugentzn@gmail.com) with details about the issue.
+2. Email us at [hello@foundedlabs.com](mailto:hello@foundedlabs.com) with details about the issue.
 3. Allow us a reasonable amount of time to address the issue before disclosing it publicly.
 
 ### Information to Include
@@ -30,6 +30,6 @@ Security updates and notices related to this repository will be communicated thr
 
 ## Support
 
-If you have any questions or need further assistance, you can reach out to us at [nugentzn@gmail.com](mailto:nugentzn@gmail.com).
+If you have any questions or need further assistance, you can reach out to us at [hello@foundedlabs.com](mailto:hello@foundedlabs.com).
 
 Thank you for helping us keep this repository secure!

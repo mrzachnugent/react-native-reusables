@@ -1,0 +1,155 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+---
+
+import { CommandTabs } from "@docs/components/command-tabs";
+import { ExternalLinks } from "@docs/components/external-links";
+import { PortalInfoAlert } from '@docs/components/portal-info-alert';
+import { PreviewCard } from "@docs/components/preview-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@docs/components/ui/tabs";
+import { MenubarPreview } from "@docs/components/examples";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<ExternalLinks
+  links={[
+    { title: 'Docs', url: 'https://rnprimitives.com/menubar/' },
+    { title: 'API Reference', url: 'https://rnprimitives.com/menubar/#props' },
+  ]}
+/>
+
+<div className="h-5"/>
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+      ## Preview
+    </div>
+    <PreviewCard preview={<MenubarPreview />} />
+  </TabsContent>
+  <TabsContent value="code">
+    ```json doc-gen:file
+    {
+      "file": "./node_modules/@rnr/registry/src/examples/menubar.tsx",
+      "codeblock": {
+        "lang": "tsx"
+      }
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger id="cli" value="cli">CLI</TabsTrigger>
+    <TabsTrigger id="manual" value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+     <CommandTabs args={["add", "menubar"]}/>
+  </TabsContent>
+  <TabsContent value="manual">
+    <Steps> 
+      <Step>
+ 
+        **Install the following dependency:**
+
+        ```
+        npx expo install @rn-primitives/menubar
+        ```
+
+      </Step>
+      <Step>
+ 
+        **Copy and paste the following code into your project.**
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/new-york/components/ui/text.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/text.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/new-york/components/ui/icon.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/icon.tsx\""
+          }
+        }
+        ```
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/new-york/components/ui/menubar.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/ui/menubar.tsx\""
+          }
+        }
+        ```
+
+      </Step>
+      <Step>
+
+        **Update the import paths to match your project setup.**
+
+      </Step>
+    </Steps>
+
+  </TabsContent>
+</Tabs>
+
+### Usage
+
+<PortalInfoAlert />
+
+```tsx
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
+import { Text } from '@/components/ui/text';
+
+```
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <Text>New Tab</Text> <MenubarShortcut>⌘T</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>New Window</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Share</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Print</Text>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```

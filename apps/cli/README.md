@@ -1,63 +1,96 @@
 # React Native Reusables CLI
 
-> Please follow [the initial setup steps](https://rnr-docs.vercel.app/getting-started/initial-setup/) before using
+A command-line toolkit to streamline the integration, setup, and maintenance of reusable React Native components in your projects.
 
-A CLI to add [react-native-reusables](https://rnr-docs.vercel.app/getting-started/introduction/) components to your project. When components depend on other components, they will also be added to your project.
+## Features
 
-## How to use
+- **Add**: Quickly add reusable React Native components to your project, with style and path options.
+- **Doctor**: Diagnose your project for missing files, misconfigurations, and required dependencies. Optionally auto-install missing dependencies.
+- **Init**: Bootstrap a new React Native project pre-configured for reusables, or inspect/repair an existing setup.
 
-Use the following command _(with optional arugments and flags)_:
+## Getting Started
 
-```bash
-npx @react-native-reusables/cli@latest add
+### Installation
+
+You can run the CLI directly with your favorite package manager:
+
+```sh
+npx @react-native-reusables/cli@latest <command>
+pnpm dlx @react-native-reusables/cli@latest <command>
+yarn dlx @react-native-reusables/cli@latest <command>
+bunx --bun @react-native-reusables/cli@latest <command>
 ```
 
-### Arguments
+## Commands
 
-If you do not add arguments, you will be prompted to select the `ui` components you would like to add to your project.
+---
 
-#### UI Components
+### `@react-native-reusables/cli@latest add [options] [components...]`
 
-- `accordion`
-- `alert`
-- `alert-dialog`
-- `aspect-ratio`
-- `avatar`
-- `badge`
-- `button`
-- `card`
-- `checkbox`
-- `collapsible`
-- `context-menu`
-- `dialog`
-- `dropdown-menu`
-- `hover-card`
-- `input`
-- `label`
-- `menubar`
-- `navigation-menu`
-- `popover`
-- `radio-group`
-- `select`
-- `separator`
-- `skeleton`
-- `switch`
-- `table`
-- `tabs`
-- `text`
-- `textarea`
-- `toggle`
-- `toggle-group`
-- `tooltip`
-- `typography`
+Add one or more React Native components to your project.
 
-### Flags
+| Argument   | Description                                                                   |
+| ---------- | ----------------------------------------------------------------------------- |
+| components | Name of component(s) to add. (e.g. `button`, `input`, `card`, `avatar`, etc.) |
 
-- `-o` or `--overwrite`: Overwrite existing files. Default to `false`
-- `-c <cmd>` or `--cwd <cwd>`: The working directory. Defaults to the current directory.
+| Option              | Description                          | Default         |
+| ------------------- | ------------------------------------ | --------------- |
+| `-y, --yes`         | Skip confirmation prompts.           | false           |
+| `-o, --overwrite`   | Overwrite existing files.            | false           |
+| `-c, --cwd <cwd>`   | The working directory.               | . (current dir) |
+| `-a, --all`         | Add all available components.        | false           |
+| `-p, --path <path>` | The path to add the component(s) to. |                 |
+| `-h, --help`        | Display help for command.            |                 |
 
-```mdx
-This project uses code from shadcn.
-The code is licensed under the MIT License.
-https://github.com/shadcn-ui/ui
-```
+---
+
+### `rnr doctor [options]`
+
+Check your project setup and diagnose issues.
+
+| Option            | Description                                            | Default         |
+| ----------------- | ------------------------------------------------------ | --------------- |
+| `-y, --yes`       | Skip confirmation prompts for installing dependencies. | false           |
+| `-c, --cwd <cwd>` | The working directory.                                 | . (current dir) |
+| `--summary`       | Output a summary only.                                 | false           |
+| `-h, --help`      | Display help for command.                              |                 |
+
+---
+
+### `rnr init [options]`
+
+Initialize a new React Native project with reusables.
+
+| Option            | Description               | Default         |
+| ----------------- | ------------------------- | --------------- |
+| `-c, --cwd <cwd>` | The working directory.    | . (current dir) |
+| `-h, --help`      | Display help for command. |                 |
+
+---
+
+## Development
+
+### Scripts
+
+- `pnpm build` – Build the CLI for production.
+- `pnpm dev` – Run the CLI in development mode.
+
+> **Note:** If you are developing locally and want to use the `add` command in development mode, you must have the `apps/docs` app running. Start it from the root with:
+>
+> ```sh
+> pnpm dev:docs
+> ```
+>
+> This serves the component registry required for local development.
+
+### Structure
+
+- `src/cli.ts` – Main CLI entrypoint and command definitions.
+- `src/bin.ts` – Node boot-strapper.
+- `src/services/commands/` – Command implementations (`add`, `doctor`, `init`).
+- `src/contexts/` – CLI option/context definitions.
+- `src/utils/` – Utility functions.
+
+## Contributing
+
+See the [main repo README](../../README.md) for guidelines.

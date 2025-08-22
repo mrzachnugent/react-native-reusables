@@ -1,0 +1,356 @@
+---
+title: Installation
+description: Getting Started with React Native Reusables
+---
+
+import { Button } from '@docs/components/ui/button';
+import Link from 'next/link';
+import { SquareTerminalIcon, WrenchIcon } from 'lucide-react';
+import { InstallationTabs } from '@docs/components/installation-tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { CommandTabs } from '@docs/components/command-tabs';
+
+## Create project
+
+Run `init` to start a new Expo project, or follow the manual steps to set up an existing one.
+
+<div className="h-4" />
+
+<InstallationTabs value="manual">
+
+  <Steps>
+    <Step>
+      ### Set up Nativewind 
+      Follow the official installation guide to add [Nativewind](https://www.nativewind.dev/docs/getting-started/installation) to your project.
+    </Step>
+    <Step>
+      ### Update the default inlined `rem` value
+      Change the default `rem` value by setting `inlineRem` in your `metro.config.js`
+      ```diff title="metro.config.js"
+      const { getDefaultConfig } = require('expo/metro-config');
+      const { withNativeWind } = require('nativewind/metro');
+
+      const config = getDefaultConfig(__dirname);
+
+      - module.exports = withNativeWind(config, { input: './global.css' });
+      + module.exports = withNativeWind(config, { input: './global.css', inlineRem: 16 });
+      ```
+    </Step>
+    <Step>
+      ### Add dependencies
+      Add the following dependencies to your project:
+
+      ```
+      npx expo install tailwindcss-animate class-variance-authority clsx tailwind-merge @rn-primitives/portal
+      ```
+    </Step>
+    <Step>
+      ### Add the Portal Host to your root layout
+      Render the `PortalHost` from [`@rn-primitives/portal`](https://rnprimitives.com/portal) in your root layout. Place it as the last child of your providers. This is where your components that use the `Portal` will be rendered (e.g. `DropdownMenu`, `Tooltip`, `Popover`, etc.).
+
+      ```diff title="app/_layout.tsx"
+       <ThemeProvider value={NAV_THEME[colorScheme]}>
+         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+         <Stack />
+      +  <PortalHost />
+       </ThemeProvider>
+      ```
+    </Step>
+    <Step>
+      ### Configure path aliases
+      Configure the path aliases in your `tsconfig.json` file.
+
+      ```json title="tsconfig.json"
+      {
+        "compilerOptions": {
+          "baseUrl": ".",
+          "paths": {
+            "@/*": ["./*"]
+          }
+        }
+      }
+      ```
+
+      `@` is a commonly used alias, but you're free to choose a different one.
+      
+    </Step>
+    <Step>
+      ### Configure your styles
+      There are 3 steps:
+      1. Add the CSS variables to your CSS file
+      ```css title="global.css"
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      @layer base {
+        :root {
+          --background: 0 0% 100%;
+          --foreground: 0 0% 3.9%;
+          --card: 0 0% 100%;
+          --card-foreground: 0 0% 3.9%;
+          --popover: 0 0% 100%;
+          --popover-foreground: 0 0% 3.9%;
+          --primary: 0 0% 9%;
+          --primary-foreground: 0 0% 98%;
+          --secondary: 0 0% 96.1%;
+          --secondary-foreground: 0 0% 9%;
+          --muted: 0 0% 96.1%;
+          --muted-foreground: 0 0% 45.1%;
+          --accent: 0 0% 96.1%;
+          --accent-foreground: 0 0% 9%;
+          --destructive: 0 84.2% 60.2%;
+          --border: 0 0% 89.8%;
+          --input: 0 0% 89.8%;
+          --ring: 0 0% 63%;
+          --radius: 0.625rem;
+          --chart-1: 12 76% 61%;
+          --chart-2: 173 58% 39%;
+          --chart-3: 197 37% 24%;
+          --chart-4: 43 74% 66%;
+          --chart-5: 27 87% 67%;
+        }
+
+        .dark:root {
+          --background: 0 0% 3.9%;
+          --foreground: 0 0% 98%;
+          --card: 0 0% 3.9%;
+          --card-foreground: 0 0% 98%;
+          --popover: 0 0% 3.9%;
+          --popover-foreground: 0 0% 98%;
+          --primary: 0 0% 98%;
+          --primary-foreground: 0 0% 9%;
+          --secondary: 0 0% 14.9%;
+          --secondary-foreground: 0 0% 98%;
+          --muted: 0 0% 14.9%;
+          --muted-foreground: 0 0% 63.9%;
+          --accent: 0 0% 14.9%;
+          --accent-foreground: 0 0% 98%;
+          --destructive: 0 70.9% 59.4%;
+          --border: 0 0% 14.9%;
+          --input: 0 0% 14.9%;
+          --ring: 300 0% 45%;
+          --chart-1: 220 70% 50%;
+          --chart-2: 160 60% 45%;
+          --chart-3: 30 80% 55%;
+          --chart-4: 280 65% 60%;
+          --chart-5: 340 75% 55%;
+        }
+      }
+      ```
+      2. Add them to your `tailwind.config.js` file
+      ```js title="tailwind.config.js"
+      const { hairlineWidth } = require('nativewind/theme');
+
+      /** @type {import('tailwindcss').Config} */
+      module.exports = {
+        darkMode: 'class',
+        content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+        presets: [require('nativewind/preset')],
+        theme: {
+          extend: {
+            colors: {
+              border: 'hsl(var(--border))',
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+              background: 'hsl(var(--background))',
+              foreground: 'hsl(var(--foreground))',
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                foreground: 'hsl(var(--primary-foreground))',
+              },
+              secondary: {
+                DEFAULT: 'hsl(var(--secondary))',
+                foreground: 'hsl(var(--secondary-foreground))',
+              },
+              destructive: {
+                DEFAULT: 'hsl(var(--destructive))',
+                foreground: 'hsl(var(--destructive-foreground))',
+              },
+              muted: {
+                DEFAULT: 'hsl(var(--muted))',
+                foreground: 'hsl(var(--muted-foreground))',
+              },
+              accent: {
+                DEFAULT: 'hsl(var(--accent))',
+                foreground: 'hsl(var(--accent-foreground))',
+              },
+              popover: {
+                DEFAULT: 'hsl(var(--popover))',
+                foreground: 'hsl(var(--popover-foreground))',
+              },
+              card: {
+                DEFAULT: 'hsl(var(--card))',
+                foreground: 'hsl(var(--card-foreground))',
+              },
+            },
+            borderRadius: {
+              lg: 'var(--radius)',
+              md: 'calc(var(--radius) - 2px)',
+              sm: 'calc(var(--radius) - 4px)',
+            },
+            borderWidth: {
+              hairline: hairlineWidth(),
+            },
+            keyframes: {
+              'accordion-down': {
+                from: { height: '0' },
+                to: { height: 'var(--radix-accordion-content-height)' },
+              },
+              'accordion-up': {
+                from: { height: 'var(--radix-accordion-content-height)' },
+                to: { height: '0' },
+              },
+            },
+            animation: {
+              'accordion-down': 'accordion-down 0.2s ease-out',
+              'accordion-up': 'accordion-up 0.2s ease-out',
+            },
+          },
+        },
+        future: {
+          hoverOnlyWhenSupported: true,
+        },
+        plugins: [require('tailwindcss-animate')],
+      };
+
+      ```
+      3. Add them to your `theme.ts` file
+      ```ts title="lib/theme.ts"
+      import { DarkTheme, DefaultTheme, type Theme } from '@react-navigation/native';
+
+      export const THEME = {
+        light: {
+          background: 'hsl(0 0% 100%)',
+          foreground: 'hsl(0 0% 3.9%)',
+          card: 'hsl(0 0% 100%)',
+          cardForeground: 'hsl(0 0% 3.9%)',
+          popover: 'hsl(0 0% 100%)',
+          popoverForeground: 'hsl(0 0% 3.9%)',
+          primary: 'hsl(0 0% 9%)',
+          primaryForeground: 'hsl(0 0% 98%)',
+          secondary: 'hsl(0 0% 96.1%)',
+          secondaryForeground: 'hsl(0 0% 9%)',
+          muted: 'hsl(0 0% 96.1%)',
+          mutedForeground: 'hsl(0 0% 45.1%)',
+          accent: 'hsl(0 0% 96.1%)',
+          accentForeground: 'hsl(0 0% 9%)',
+          destructive: 'hsl(0 84.2% 60.2%)',
+          border: 'hsl(0 0% 89.8%)',
+          input: 'hsl(0 0% 89.8%)',
+          ring: 'hsl(0 0% 63%)',
+          radius: '0.625rem',
+          chart1: 'hsl(12 76% 61%)',
+          chart2: 'hsl(173 58% 39%)',
+          chart3: 'hsl(197 37% 24%)',
+          chart4: 'hsl(43 74% 66%)',
+          chart5: 'hsl(27 87% 67%)',
+        },
+        dark: {
+          background: 'hsl(0 0% 3.9%)',
+          foreground: 'hsl(0 0% 98%)',
+          card: 'hsl(0 0% 3.9%)',
+          cardForeground: 'hsl(0 0% 98%)',
+          popover: 'hsl(0 0% 3.9%)',
+          popoverForeground: 'hsl(0 0% 98%)',
+          primary: 'hsl(0 0% 98%)',
+          primaryForeground: 'hsl(0 0% 9%)',
+          secondary: 'hsl(0 0% 14.9%)',
+          secondaryForeground: 'hsl(0 0% 98%)',
+          muted: 'hsl(0 0% 14.9%)',
+          mutedForeground: 'hsl(0 0% 63.9%)',
+          accent: 'hsl(0 0% 14.9%)',
+          accentForeground: 'hsl(0 0% 98%)',
+          destructive: 'hsl(0 70.9% 59.4%)',
+          border: 'hsl(0 0% 14.9%)',
+          input: 'hsl(0 0% 14.9%)',
+          ring: 'hsl(300 0% 45%)',
+          radius: '0.625rem',
+          chart1: 'hsl(220 70% 50%)',
+          chart2: 'hsl(160 60% 45%)',
+          chart3: 'hsl(30 80% 55%)',
+          chart4: 'hsl(280 65% 60%)',
+          chart5: 'hsl(340 75% 55%)',
+        },
+      };
+
+      export const NAV_THEME: Record<'light' | 'dark', Theme> = {
+        light: {
+          ...DefaultTheme,
+          colors: {
+            background: THEME.light.background,
+            border: THEME.light.border,
+            card: THEME.light.card,
+            notification: THEME.light.destructive,
+            primary: THEME.light.primary,
+            text: THEME.light.foreground,
+          },
+        },
+        dark: {
+          ...DarkTheme,
+          colors: {
+            background: THEME.dark.background,
+            border: THEME.dark.border,
+            card: THEME.dark.card,
+            notification: THEME.dark.destructive,
+            primary: THEME.dark.primary,
+            text: THEME.dark.foreground,
+          },
+        },
+      };
+      ```
+      <div className='text-fd-muted-foreground'>
+        For more details, see the [Customization](/docs/customization) page.
+      </div>
+
+    </Step>
+    <Step>
+      ### Add a cn helper
+
+      ```tsx title="lib/utils.ts"
+      import { clsx, type ClassValue } from "clsx"
+      import { twMerge } from "tailwind-merge"
+
+      export function cn(...inputs: ClassValue[]) {
+        return twMerge(clsx(inputs))
+      }
+      ```
+    </Step>
+    <Step>
+      ### Create a `components.json` file
+
+      ```json title="components.json"
+      {
+        "$schema": "https://ui.shadcn.com/schema.json",
+        "style": "new-york",
+        "rsc": false,
+        "tsx": true,
+        "tailwind": {
+          "config": "tailwind.config.js",
+          "css": "global.css",
+          "baseColor": "neutral",
+          "cssVariables": true
+        },
+        "aliases": {
+          "components": "@/components",
+          "utils": "@/lib/utils",
+          "ui": "@/components/ui",
+          "lib": "@/lib",
+          "hooks": "@/hooks"
+        }
+      }
+      ```
+    </Step>
+    <Step>
+      ### All set.
+      You're ready to start adding components to your app. You can run the `doctor` command to check if everything's set up correctly.
+
+      <CommandTabs args={["doctor"]} />
+
+      <div className='text-fd-muted-foreground'>
+        For more details, see the [doctor options](/docs/cli#doctor) page.
+      </div>
+    </Step>
+  </Steps>
+
+</InstallationTabs>

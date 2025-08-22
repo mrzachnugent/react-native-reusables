@@ -1,0 +1,62 @@
+---
+title: Create Your Own Registry
+description: Host a registry and allow others to add your code to their projects.
+---
+
+import { Callout } from '@docs/components/callout';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import Image from 'next/image';
+import { CommandTabs } from '@docs/components/command-tabs';
+
+<figure className="flex flex-col">
+  <Image
+    src="/images/registry-light.png"
+    width="1432"
+    height="960"
+    alt="Registry"
+    className="w-full overflow-hidden rounded-lg border dark:hidden"
+  />
+  <Image
+    src="/images/registry-dark.png"
+    width="1432"
+    height="960"
+    alt="Registry"
+    className="hidden w-full overflow-hidden rounded-lg border shadow-sm dark:block"
+  />
+  <figcaption className="text-center text-sm text-gray-500">
+    A distribution system for code by shadcn
+  </figcaption>
+</figure>
+
+
+## Getting started
+
+To create your own registry, follow the official shadcn/ui [registry guide](https://ui.shadcn.com/docs/registry).
+
+<Callout type="info" title="Community template">
+  Kickstart your React Native Reusables registry using the [rnr-registry-template](https://github.com/gabimoncha/rnr-registry-template) by [@gabimoncha](https://github.com/gabimoncha).
+</Callout>
+
+<div className="h-5" />
+
+## Using React Native Reusables with your registry
+
+To use React Native Reusables in your registry, add them as `registryDependencies` in your [`registry-item.json`](https://ui.shadcn.com/docs/registry/registry-item-json) files.
+
+Instead of using short names like in the shadcn/ui registry, use the full URL of the React Native Reusables registry item:
+
+```
+http://reactnativereusables.com/r/new-york/<COMPONENT_NAME>.json
+```
+
+Replace `<COMPONENT_NAME>` with the component you want to install.
+
+<div className="h-5" />
+
+## Using the CLI
+
+Once your registry is up and running, you can install components using the `add` command and the full URL of the registry item.
+
+You can use either `shadcn` or `@react-native-reusables/cli`.
+
+<CommandTabs args={["add", "http://localhost:3000/r/hello-world.json"]} />

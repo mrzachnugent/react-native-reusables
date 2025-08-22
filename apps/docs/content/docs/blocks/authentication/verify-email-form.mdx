@@ -1,0 +1,191 @@
+---
+title: Verify email form
+description: A form for verifying an email address with an OTP sent via email.
+---
+
+import { BlockPreviewCard } from '@docs/components/preview-card';
+import { VerifyEmailForm } from "@docs/components/blocks";
+import { ExternalLinks } from "@docs/components/external-links";
+import { Step, Steps } from 'fumadocs-ui/components/steps';                                                                                 
+import { CommandTabs } from "@docs/components/command-tabs";
+import { AuthBlockTabs, AuthBlockTabsCliContent, AuthBlockTabsManualContent } from '@docs/components/auth-block-tabs';
+import { Callout } from '@docs/components/callout';
+
+<ExternalLinks links={[{ title: 'Clerk docs', url: 'https://go.clerk.com/Q1MKAz0' }]} />
+
+<div className="h-5" />
+
+<div id="preview" className='*:hidden scroll-m-20' aria-hidden>
+  ## Preview
+</div>
+    
+<BlockPreviewCard preview={<div className="w-full max-w-sm"><VerifyEmailForm /></div>} />
+
+
+## Installation
+
+<AuthBlockTabs>
+  <AuthBlockTabsCliContent integration="none">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "verify-email-form"]}/>
+      </Step>
+      <Step>
+        **All set!**
+
+        You can import `VerifyEmailForm` in your app.
+
+        ```tsx
+        import { VerifyEmailForm } from '@/components/verify-email-form';
+        import { ScrollView, View } from 'react-native';
+
+        export default function VerifyEmailScreen() {
+          return (
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerClassName="sm:flex-1 items-center justify-center p-4 py-8 sm:py-4 sm:p-6 mt-safe"
+              keyboardDismissMode="interactive">
+              <View className="w-full max-w-sm">
+                <VerifyEmailForm />
+              </View>
+            </ScrollView>
+          );
+        }
+        ``` 
+
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+  <AuthBlockTabsCliContent integration="clerk">
+    <Steps>
+      <Step>
+        <CommandTabs args={["add", "verify-email-form-clerk"]}/>
+      </Step>
+      <Step>
+        **If you haven't already**
+
+        Follow steps 2-4 of Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to configure your app for Clerk.
+        
+      </Step>
+      <Step>
+        **All set!**
+
+        You can import `VerifyEmailForm` in your app.
+
+        ```tsx
+        import { VerifyEmailForm } from '@/components/verify-email-form';
+        import { ScrollView, View } from 'react-native';
+
+        export default function VerifyEmailScreen() {
+          return (
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerClassName="sm:flex-1 items-center justify-center p-4 py-8 sm:py-4 sm:p-6 mt-safe"
+              keyboardDismissMode="interactive">
+              <View className="w-full max-w-sm">
+                <VerifyEmailForm />
+              </View>
+            </ScrollView>
+          );
+        }
+        ```
+
+      </Step>
+    </Steps>
+  </AuthBlockTabsCliContent>
+
+  <AuthBlockTabsManualContent integration="none">
+
+    <Steps>
+      <Step>
+        **If missing, add the following components:**
+
+        - [`Button`](/docs/components/button)
+        - [`Card`](/docs/components/card)
+        - [`Input`](/docs/components/input)
+        - [`Label`](/docs/components/label)
+        - [`Text`](/docs/components/text)
+
+      </Step>
+
+      <Step>
+
+        **Copy and paste the following code into your project.**
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/blocks/verify-email-form.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/verify-email-form.tsx\""
+          }
+        }
+        ```
+
+      </Step>
+      
+      <Step>
+
+        **Adjust for your project setup.**
+
+        Update the import paths to match your project structure, and address any `// TODO:` comments by adding the app-specific logic they describe.
+
+      </Step>
+    </Steps>
+
+  </AuthBlockTabsManualContent>
+  <AuthBlockTabsManualContent integration="clerk">
+
+    <Steps>
+      <Step>
+        **If you haven't already**
+
+        - Install the Clerk package:
+
+        ```bash
+        npx expo install @clerk/clerk-expo
+        ```
+
+        - Follow steps 2-4 of Clerk's [Expo quick start](https://go.clerk.com/8e6CCee#set-your-clerk-api-keys) to configure your app for Clerk.
+        
+      </Step>
+
+      <Step>
+        **If missing, add the following components:**
+
+        - [`Button`](/docs/components/button)
+        - [`Card`](/docs/components/card)
+        - [`Input`](/docs/components/input)
+        - [`Label`](/docs/components/label)
+        - [`Text`](/docs/components/text)
+
+
+      </Step>
+
+      <Step>
+
+        **Copy and paste the following code into your project.**
+
+        ```json doc-gen:file
+        {
+          "file": "./node_modules/@rnr/registry/src/blocks/clerk/verify-email-form.tsx",
+          "codeblock": {
+            "lang": "tsx",
+            "meta": "title=\"@/components/verify-email-form.tsx\""
+          }
+        }
+        ```
+
+      </Step>
+      
+      <Step>
+
+        **Adjust for your project setup.**
+
+        Update the import paths to match your project structure, and address any `// TODO:` comments by adding the app-specific logic they describe.
+
+      </Step>
+    </Steps>
+    
+  </AuthBlockTabsManualContent>
+</AuthBlockTabs>

@@ -1,12 +1,9 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup"
 
 export default defineConfig({
+  entry: ["src/bin.ts"],
   clean: true,
-  dts: true,
-  entry: ['src/index.ts'],
-  format: ['esm'],
-  sourcemap: true,
-  minify: true,
-  target: 'esnext',
-  outDir: 'dist',
-});
+  publicDir: true,
+  treeshake: "smallest",
+  external: ["@parcel/watcher"]
+})
