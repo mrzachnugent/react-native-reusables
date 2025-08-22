@@ -102,7 +102,7 @@ export default function ComponentsGrid() {
           <div className="border-r p-4">
             <ToggleGroupPreview />
           </div>
-          <div className="ml-auto flex justify-center border-r p-4">
+          <div className="ml-auto flex justify-center xl:border-r p-4 max-[857px]:hidden">
             <ButtonPreview />
           </div>
           <div className="p-4 max-xl:hidden">
@@ -110,7 +110,7 @@ export default function ComponentsGrid() {
           </div>
         </div>
         <div className="flex max-xl:flex-col max-lg:flex-1">
-          <div className="border-r xl:flex-1">
+          <div className="border-r xl:flex-1 lg:w-[572.5px]">
             <div className="relative p-4">
               <CheckboxPreview />
             </div>
@@ -125,25 +125,25 @@ export default function ComponentsGrid() {
             {/* <div className="flex w-full justify-center p-4 py-10">
               <ContextMenuPreview /> 
             </div> */}
-            <div className="p-5">
+            <div className="p-5 max-lg:hidden">
               <BadgePreview />
             </div>
-            <div className="border-t p-4">
+            <div className="border-t p-4 max-xl:hidden">
               <CollapsiblePreview />
             </div>
             <div className="border-t p-4">
               <TabsPreview />
             </div>
-            <div className="border-t p-5">
+            <div className="border-t p-5 max-xl:hidden">
               <SwitchPreview />
             </div>
-            <div className="border-t p-5">
+            <div className="border-t p-5 max-xl:hidden">
               <RadioGroupPreview />
             </div>
           </div>
         </div>
         <div className="w-full flex-1">
-          <div className="flex w-full justify-end p-4 xl:hidden">
+          <div className="flex w-full justify-end p-4 xl:hidden border-b">
             <AvatarPreview />
           </div>
           <div className="p-4">
@@ -176,6 +176,22 @@ export default function ComponentsGrid() {
           </div>
           <div className="border-t p-4">
             <DropdownMenuPreview />
+          </div>
+
+          <div className="border-t p-5 max-xl:block hidden">
+            <SwitchPreview />
+          </div>
+          <div className="border-t p-5 max-xl:block hidden">
+            <RadioGroupPreview />
+          </div>
+          <div className="border-t p-4 max-xl:block hidden">
+            <CollapsiblePreview />
+          </div>
+          <div className="p-5 max-lg:block hidden">
+            <BadgePreview />
+          </div>
+          <div className="ml-auto justify-center border-t p-4 max-[857px]:flex hidden">
+            <ButtonPreview />
           </div>
         </div>
       </div>
