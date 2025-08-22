@@ -1,8 +1,8 @@
 'use client';
 import {
   AccordionPreview,
-  AlertPreview,
   AlertDialogPreview,
+  AlertPreview,
   AspectRatioPreview,
   AvatarPreview,
   BadgePreview,
@@ -10,7 +10,6 @@ import {
   // CardPreview,
   CheckboxPreview,
   CollapsiblePreview,
-  ContextMenuPreview,
   DialogPreview,
   DropdownMenuPreview,
   HoverCardPreview,
@@ -34,48 +33,48 @@ import {
 import { useIsDarkMode } from '@docs/components/preview-card';
 import Image from 'next/image';
 import { QRCodeSVG } from 'qrcode.react';
-import { useState } from 'react';
+import * as React from 'react';
 
 export default function ComponentsGrid() {
   const isDark = useIsDarkMode();
-  const [nativePreview, setNativePreview] = useState(false);
+  const [nativePreview, setNativePreview] = React.useState(false);
 
   return (
     <div className="flex flex-col gap-4 max-2xl:px-4">
-      <div className="flex w-full justify-between">
-        <div className="bg-fd-background flex items-center gap-1 rounded-md border pl-2.5 pr-0.5 py-0.5 text-xs relative">
+      <div className="hidden w-fit sm:block">
+        <div className="bg-fd-background relative flex items-center gap-1 rounded-md border py-0.5 pl-2.5 pr-0.5 text-xs">
           <span className="text-muted-foreground">Platform:</span>{' '}
           <button
-            className={`py-0.25 px-1.5 cursor-pointer rounded-sm border duration-150 ${!nativePreview ? 'bg-white shadow dark:bg-neutral-800' : 'border-transparent'}`}
-            onClick={()=> setNativePreview(false)}
-          >
+            className={`cursor-pointer rounded-sm border px-1.5 py-1 duration-150 ${!nativePreview ? 'bg-white shadow dark:bg-neutral-800' : 'hover:bg-fd-accent/70 border-transparent'}`}
+            onClick={() => setNativePreview(false)}>
             Web
           </button>
           <button
-            className={`py-0.25 px-1.5 cursor-pointer rounded-sm border duration-150 ${nativePreview ? 'bg-white shadow dark:bg-neutral-800' : 'border-transparent'}`}
-            onClick={() => setNativePreview(true)}
-          >
+            className={`cursor-pointer rounded-sm border px-1.5 py-1 duration-150 ${nativePreview ? 'bg-white shadow dark:bg-neutral-800' : 'hover:bg-fd-accent/70 border-transparent'}`}
+            onClick={() => setNativePreview(true)}>
             Native
           </button>
-          <div className={`absolute left-0 shadow-xl z-20 top-10 border-r border-b flex max-w-sm flex-col items-center gap-6 p-4 dark:bg-black rounded-lg border-dashed bg-white duration-300 ${nativePreview ? 'opacity-100 translate-y-0 blur-0' : 'blur-md opacity-0 pointer-events-none -translate-y-2'}`}>
-              <QRCodeSVG
-                value="https://reactnativereusables.com/showcase/links/home-screen"
-                bgColor={isDark ? 'black' : 'white'}
-                fgColor={isDark ? 'white' : 'black'}
-                size={230}
-                level="H"
-              />
-              <p className="text-center font-mono text-sm">Scan to preview.</p>
-            </div>
+          <div
+            className={`absolute left-0 top-10 z-20 flex max-w-sm flex-col items-center gap-6 rounded-lg border-b border-r border-dashed bg-white p-4 shadow-xl duration-100 dark:bg-black ${nativePreview ? 'translate-y-0 opacity-100 blur-0' : 'pointer-events-none -translate-y-2 opacity-0 blur-md'}`}>
+            <QRCodeSVG
+              value="https://reactnativereusables.com/showcase/links/home-screen"
+              bgColor={isDark ? 'black' : 'white'}
+              fgColor={isDark ? 'white' : 'black'}
+              size={230}
+              level="H"
+            />
+            <p className="text-center font-mono text-sm">Scan to preview.</p>
+          </div>
         </div>
       </div>
+      <div className="sm:hidden" />
 
       <Image
         src="/mobile-component-previews/default_dark.png"
         alt="Components Grid"
         width={2520}
         height={1704}
-        className="rounded-lg md:hidden hidden max-md:dark:block"
+        className="hidden rounded-lg md:hidden max-md:dark:block"
       />
       <Image
         src="/mobile-component-previews/default_light.png"
@@ -102,7 +101,7 @@ export default function ComponentsGrid() {
           <div className="border-r p-4">
             <ToggleGroupPreview />
           </div>
-          <div className="ml-auto flex justify-center xl:border-r p-4 max-[857px]:hidden">
+          <div className="ml-auto flex justify-center p-4 max-[857px]:hidden xl:border-r">
             <ButtonPreview />
           </div>
           <div className="p-4 max-xl:hidden">
@@ -110,7 +109,7 @@ export default function ComponentsGrid() {
           </div>
         </div>
         <div className="flex max-xl:flex-col max-lg:flex-1">
-          <div className="border-r xl:flex-1 lg:w-[572.5px]">
+          <div className="border-r lg:w-[572.5px] xl:flex-1">
             <div className="relative p-4">
               <CheckboxPreview />
             </div>
@@ -143,7 +142,7 @@ export default function ComponentsGrid() {
           </div>
         </div>
         <div className="w-full flex-1">
-          <div className="flex w-full justify-end p-4 xl:hidden border-b">
+          <div className="flex w-full justify-end border-b p-4 xl:hidden">
             <AvatarPreview />
           </div>
           <div className="p-4">
@@ -178,19 +177,19 @@ export default function ComponentsGrid() {
             <DropdownMenuPreview />
           </div>
 
-          <div className="border-t p-5 max-xl:block hidden">
+          <div className="hidden border-t p-5 max-xl:block">
             <SwitchPreview />
           </div>
-          <div className="border-t p-5 max-xl:block hidden">
+          <div className="hidden border-t p-5 max-xl:block">
             <RadioGroupPreview />
           </div>
-          <div className="border-t p-4 max-xl:block hidden">
+          <div className="hidden border-t p-4 max-xl:block">
             <CollapsiblePreview />
           </div>
-          <div className="p-5 max-lg:block hidden">
+          <div className="hidden p-5 max-lg:block">
             <BadgePreview />
           </div>
-          <div className="ml-auto justify-center border-t p-4 max-[857px]:flex hidden">
+          <div className="ml-auto hidden justify-center border-t p-4 max-[857px]:flex">
             <ButtonPreview />
           </div>
         </div>
