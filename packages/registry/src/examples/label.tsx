@@ -15,14 +15,14 @@ export function LabelPreview() {
   return (
     <View className="flex-row items-center gap-2">
       <Checkbox
-        aria-labelledby="terms"
-        id="terms"
+        aria-labelledby="terms-checkbox"
+        id="terms-checkbox"
         checked={checked}
         onCheckedChange={onCheckedChange}
       />
       <Label
-        nativeID="terms"
-        htmlFor="terms"
+        nativeID="terms-checkbox"
+        htmlFor="terms-checkbox"
         onPress={Platform.select({
           native: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
