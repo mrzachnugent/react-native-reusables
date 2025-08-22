@@ -7,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/registry/new-york/components/ui/select';
+import type { TriggerRef } from '@rn-primitives/select';
+import * as React from 'react';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -19,6 +21,7 @@ const fruits = [
 ];
 
 export function SelectPreview() {
+  const ref = React.useRef<TriggerRef>(null);
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -27,9 +30,14 @@ export function SelectPreview() {
     right: 12,
   };
 
+  // Workaround for rn-primitives/select not opening on mobile
+  function onTouchStart() {
+    ref.current?.open();
+  }
+
   return (
     <Select>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger ref={ref} className="w-[180px]" onTouchStart={onTouchStart}>
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
       <SelectContent insets={contentInsets} className="w-[180px]">
