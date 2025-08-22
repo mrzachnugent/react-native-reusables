@@ -5,7 +5,7 @@ import { findNeighbour } from 'fumadocs-core/server';
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page';
-import { ArrowLeftIcon, ArrowRightIcon, ChevronRight } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -77,7 +77,11 @@ function NeighbourButtons({ url }: { url: string }) {
       ) : null}
       {neighbours.next || isManualInstallation ? (
         <Button variant="outline" size="icon" className="border-border/70 size-8" asChild>
-          <Link href={neighbours.next?.url || '/docs/customization'}>
+          <Link
+            href={neighbours.next?.url || '/docs/customization'}
+            target={
+              neighbours.next?.url.startsWith('https://foundedlabs.com') ? '_blank' : undefined
+            }>
             <ArrowRightIcon />
           </Link>
         </Button>
@@ -164,9 +168,7 @@ export function Footer({ url }: { url: string }) {
 
 function TableOfContentFooter() {
   return (
-    <div className="bg-card dark:bg-fd-muted border-border/50 dark:border-border/0 text-fd-foreground/80 group relative mt-12 flex flex-col gap-2 overflow-clip rounded-lg border p-6 text-sm">
-      <div className="bg-fd-foreground/10 dark:bg-fd-foreground/20 border-fd-foreground absolute left-8 top-8 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed [mask-image:radial-gradient(circle_at_center,red,transparent)]" />
-      <FoundedLabsLogo className="mb-4 size-12" />
+    <div className="bg-card dark:bg-fd-muted border-border/50 text-fd-foreground/80 group relative mt-12 flex flex-col gap-2 overflow-clip rounded-lg border p-6 text-sm">
       <div className="text-balance text-base font-semibold leading-tight group-hover:underline">
         Want to work with us?
       </div>
@@ -174,9 +176,9 @@ function TableOfContentFooter() {
       <div className="text-muted-foreground pb-2">We help companies ship world-class UI/UX.</div>
       <Button
         size="sm"
-        className="from-primary to-primary/75 group-hover:to-primary/80 relative w-fit bg-transparent bg-gradient-to-br duration-300 group-hover:pr-8">
+        className="from-primary to-primary/75 group-hover:to-primary/80 relative w-fit bg-transparent bg-gradient-to-br duration-150 group-hover:pr-8">
         Learn more
-        <ChevronRight className="absolute right-2 top-1/2 -translate-x-1 -translate-y-1/2 scale-y-0 opacity-0 duration-300 group-hover:translate-x-0 group-hover:scale-y-100 group-hover:opacity-100" />
+        <ExternalLinkIcon className="absolute right-2 top-1/2 size-3.5 -translate-x-1 -translate-y-1/2 scale-y-0 opacity-0 duration-100 group-hover:translate-x-0 group-hover:scale-y-100 group-hover:opacity-100" />
       </Button>
       <Link href="https://foundedlabs.com" target="_blank" className="absolute inset-0">
         <span className="sr-only">Learn more about Founded Labs</span>
@@ -204,15 +206,4 @@ export async function generateMetadata(props: { params: Promise<{ slug?: string[
     title: page.data.title,
     description: page.data.description,
   };
-}
-
-function FoundedLabsLogo({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M68.9864 21.5847C72.7676 30.2399 73.1596 40.3614 69.2597 49.7766C61.6511 68.1454 40.5922 76.8683 22.2234 69.2597C15.8387 66.6151 10.6215 62.3439 6.84829 57.1271C11.0218 60.731 17.1587 61.5555 22.2688 58.7357C22.4321 58.6457 22.5988 58.5535 22.7677 58.4604C30.1399 54.3917 32.1333 43.5908 37.1222 36.8073C41.5602 30.7732 50.0495 29.4791 56.0838 33.9168C56.8074 34.449 57.4625 35.0398 58.0478 35.6774C59.1491 36.8773 60.9209 37.4057 62.3468 36.6189C67.8108 33.6033 70.3758 27.3727 68.9864 21.5847ZM49.7766 2.74035C56.2274 5.41236 61.4863 9.74477 65.2683 15.0353C61.1 10.965 54.6042 9.90967 49.2403 12.8696C49.0773 12.9596 48.9114 13.0514 48.7428 13.1445C41.3703 17.2132 39.379 28.0146 34.3901 34.7983C29.9521 40.8327 21.4625 42.1276 15.4281 37.6897C14.7037 37.157 14.0475 36.5654 13.4617 35.927C12.3604 34.727 10.5888 34.1988 9.1627 34.9856C4.16601 37.7433 1.59379 43.1904 2.25292 48.5285C-0.800437 40.3097 -0.879535 30.9625 2.74033 22.2234C10.3489 3.8546 31.4078 -4.86826 49.7766 2.74035Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
 }
