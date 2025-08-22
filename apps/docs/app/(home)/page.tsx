@@ -10,7 +10,7 @@ export default function HomePage() {
     <div className="flex flex-1 flex-col">
       <main
         id="nd-page"
-        className="max-w-fd-container mx-auto flex w-full flex-1 flex-col items-center gap-4">
+        className="max-w-fd-container mx-auto flex w-full flex-1 flex-col items-center gap-4 pt-4 md:pt-0">
         <div className="container relative z-0 flex flex-col items-center gap-2 py-8 text-center md:pt-16 lg:pt-20 xl:gap-4">
           <div className="bg-grid-print pointer-events-none absolute inset-0 -bottom-16 z-[-1] bg-white opacity-60 [mask-image:radial-gradient(ellipse_50%_100%_at_50%_100%,red,#0000)] dark:bg-neutral-800" />
           <div className="h-6">
